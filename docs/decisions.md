@@ -30,3 +30,16 @@ false by 2024; the split keeps the catalog honest over time.
 Each weakness entry carries both `description` (what good looks like) and
 `failure_looks_like` (concrete symptoms). The second is what makes an entry
 testable and what an agent needs to decide whether it applies.
+
+## 2026-09-03 — Renamed Weakness to Capability; claims get a 1-10 score
+The entity is now named neutrally because several entries (secure-coding,
+goal-conflict-safety) are behavioral/safety properties, not pure cognitive
+weaknesses, and because it lets the catalog note that humans share some of
+these gaps too (e.g. digit arithmetic) rather than implying AI is uniquely
+bad. Claims replace the negative-only `severity` enum with a `score`
+(1-10, 1=weak_performance_looks_like, 10=strong_performance_looks_like) —
+this also makes evidence `stance` (supports/counters) redundant, since a
+claim's score plus its date already shows the trend directly, so evidence
+is now a plain citation with no stance. No fixed rubric for the rungs
+between 1 and 10 yet; deferred until real disagreement between scores
+shows it's needed.

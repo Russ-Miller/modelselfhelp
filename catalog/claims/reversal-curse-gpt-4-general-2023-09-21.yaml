@@ -1,14 +1,13 @@
 id: reversal-curse-gpt-4-general-2023-09-21
-weakness: reversal-curse
+capability: reversal-curse
 model: gpt
 version: gpt-4
 context: general
 observed_on: 2023-09-21
-severity: minor
+score: 6
 status: open
 evidence:
   - paper: arxiv-2309-12288
-    stance: supports
     strength: controlled
     note: >-
       Named a celebrity's parent correctly far more often than it could name

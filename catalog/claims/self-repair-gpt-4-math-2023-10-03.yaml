@@ -1,14 +1,13 @@
 id: self-repair-gpt-4-math-2023-10-03
-weakness: self-repair
+capability: self-repair
 model: gpt
 version: gpt-4
 context: math
 observed_on: 2023-10-03
-severity: moderate
+score: 4
 status: open
 evidence:
   - paper: arxiv-2310-01798
-    stance: supports
     strength: controlled
     note: >-
       Asking the model to review and revise its own reasoning answers, with no

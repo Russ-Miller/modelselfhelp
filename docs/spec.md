@@ -1,27 +1,29 @@
 # modelselfhelp — product and data specification
 
-Version 0.1, 2026-09-02. This document is the source of truth for the seed
+Version 0.2, 2026-09-03. This document is the source of truth for the seed
 phase. Change it in the same pull request as the code that changes behavior.
 
 ## 1. Purpose
 
 A one-stop exchange where humans and AI agents can:
 
-1. Look up known weaknesses of AI models, scoped to a model version and a
-   usage context, not just "models in general".
-2. See the evidence: papers and benchmarks that show the weakness, and papers
-   and results that counter or narrow it.
-3. Find techniques that mitigate a weakness, with pointers to runnable code
+1. Look up known capabilities of AI models — things AI, and often humans,
+   are good or bad at — scoped to a model version and a usage context, not
+   just "models in general".
+2. See the evidence: papers and benchmarks that measure the capability.
+3. Find techniques that improve a capability, with pointers to runnable code
    in a git repository.
-4. Contribute: add evidence for or against a claim, add techniques, and
-   record new claims, with provenance for every contribution.
-5. Ask programmatically, so an agent can query "what am I weak at in this
-   context, and what should I do about it" at runtime.
+4. Contribute: add evidence, add techniques, and record new claims about
+   how a specific model performs, with provenance for every contribution.
+5. Ask programmatically, so an agent can query "how am I rated on this
+   capability in this context, and what should I do about it" at runtime.
 
 Analogy for pitching: CWE for model capabilities and behavior. CWE names
 stable weakness patterns and links mitigations; CVE records each concrete
-instance. Here, a Weakness is the pattern and a Claim is the instance.
-Scope is broader than security: reasoning, knowledge, behavior, reliability,
+instance. Here, a Capability is the pattern (named neutrally, since a
+capability can be a strength or a weakness depending on the model and
+context) and a Claim is the instance: one model's score on it. Scope is
+broader than security: reasoning, knowledge, behavior, reliability,
 security and evaluation.
 
 ## 2. First users
@@ -37,31 +39,34 @@ Five content entities live in `catalog/` as YAML, one file per record.
 Account entities live in Postgres (milestone 4). Every content record has an
 `id` slug that is permanent once merged.
 
-### Weakness  (`catalog/weaknesses/<id>.yaml`)
-The stable, named pattern. Timeless by design.
+### Capability  (`catalog/capabilities/<id>.yaml`)
+The stable, named pattern — a neutral axis a model can score well or badly
+on, not an assumed weakness. Timeless by design.
 
 | field | type | notes |
 |---|---|---|
 | id | slug | permanent |
 | label | string | plain-English name, a few words |
 | summary | string | one sentence |
-| description | string | what good behavior looks like |
-| failure_looks_like | string | concrete symptoms, the testable part |
+| description | string | what the capability is, in general |
+| strong_performance_looks_like | string | concrete anchor near the top of the scale |
+| weak_performance_looks_like | string | concrete anchor near the bottom of the scale |
 | group | slug | top-level taxonomy group, see §4 |
-| parent | slug? | optional parent weakness, for variants |
+| parent | slug? | optional parent capability, for variants |
 | aliases | string[] | other names used in the literature |
 | contexts | slug[] | usage contexts where it is most often observed, see §5 |
-| evidence | Evidence[] | paper refs with stance, see below |
-| techniques | slug[] | techniques that address it |
+| evidence | Evidence[] | foundational or definitional paper refs, see below |
+| techniques | slug[] | techniques that improve it |
 | status | enum | `proposed`, `accepted`, `disputed`, `retired` |
-| related | slug[] | other weaknesses |
+| related | slug[] | other capabilities |
 
-Evidence entry (inline inside a weakness or claim):
+Evidence entry (inline inside a capability or claim): a plain citation, not
+a scored judgment — the claim's `score` carries the direction and
+magnitude, so evidence just backs it up.
 
 | field | type | notes |
 |---|---|---|
 | paper | slug | must exist in `catalog/papers/` |
-| stance | enum | `supports` or `counters` |
 | note | string | one or two sentences on what the paper shows |
 | strength | enum | `anecdotal`, `benchmark`, `controlled`, `survey` |
 
@@ -76,34 +81,39 @@ Fields: `id`, `title`, `authors` (string[]), `year`, `arxiv_id?`, `url`,
 ### Technique  (`catalog/techniques/<id>.yaml`)
 A mitigation. Should point at runnable code.
 
-Fields: `id`, `label`, `summary`, `description`, `addresses` (weakness
+Fields: `id`, `label`, `summary`, `description`, `addresses` (capability
 slugs), `kind` (enum: `prompting`, `retrieval`, `tooling`, `training`,
 `decoding`, `architecture`, `process`), `papers` (paper slugs),
 `repos` (list of `{url, note, verified_on?}`), `contexts` (slugs),
-`caveats` (string), `status` (same enum as weakness).
+`caveats` (string), `status` (same enum as capability).
 
 ### Model  (`catalog/models/<id>.yaml`)
 A model family with versions. Fields: `id`, `label`, `vendor`,
 `versions` (list of `{id, label, released?}`), `url?`.
 
 ### Claim  (`catalog/claims/<id>.yaml`)
-One weakness × one model version × one context × one date. Claims rot and
-are expected to be superseded.
+One capability × one model version × one context × one date: how well that
+model actually performs, on a 1-10 scale. Claims rot and are expected to
+be superseded as models change.
 
 | field | type | notes |
 |---|---|---|
-| id | slug | `<weakness>-<version>-<context>-<yyyy-mm-dd>`, single hyphens throughout |
-| weakness | slug | |
+| id | slug | `<capability>-<version>-<context>-<yyyy-mm-dd>`, single hyphens throughout |
+| capability | slug | |
 | model | slug | model id |
 | version | slug | version id within the model |
 | context | slug | see §5 |
 | observed_on | date | |
-| severity | enum | `minor`, `moderate`, `major`, `blocking` |
+| score | integer | 1-10; 1 = weak_performance_looks_like, 10 = strong_performance_looks_like |
 | status | enum | `open`, `mitigated`, `resolved`, `disputed`, `superseded` |
 | superseded_by | slug? | later claim |
 | evidence | Evidence[] | same shape as above; may also cite benchmark runs |
-| notes | string | |
+| notes | string | justify the score, especially anything between the two anchors |
 | submitted_by | string | provenance: `human:<handle>` or `agent:<handle>` |
+
+No fixed rubric exists yet for the rungs between 1 and 10 — a contributor
+justifies the number in `notes`. Revisit if scores start disagreeing across
+similar claims.
 
 ### Contribution provenance
 Every record carries `submitted_by` and, once accounts exist, the API
@@ -136,11 +146,11 @@ Initial: `general`, `coding-agent`, `chat-assistant`, `rag-qa`,
 
 `npm run validate` (part of `npm test`) checks:
 - every YAML file against its JSON Schema in `catalog/schema/`;
-- referential integrity: every paper, technique, weakness, model, version,
+- referential integrity: every paper, technique, capability, model, version,
   group and context referenced exists;
 - id equals filename; slugs are kebab-case; no duplicate ids;
-- every weakness has at least one `supports` evidence entry;
-- every claim's `observed_on` is a valid date not in the future.
+- every claim's `score` is an integer 1-10 and `observed_on` is a valid
+  date not in the future.
 
 `npm run verify-papers` fetches titles from the arXiv API for every paper
 with an `arxiv_id` and fails on mismatch (normalized, case-insensitive).
@@ -149,7 +159,7 @@ with an `arxiv_id` and fails on mismatch (normalized, case-insensitive).
 
 Routes:
 - `/` overview: groups, counts, recently added
-- `/weaknesses`, `/weaknesses/[id]`
+- `/capabilities`, `/capabilities/[id]`
 - `/techniques`, `/techniques/[id]`
 - `/papers/[id]`
 - `/models`, `/models/[id]` per-model view of claims by version and context
@@ -163,17 +173,17 @@ through the normal PR flow. No database needed for reads in the seed phase.
 REST, JSON, versioned under `/api/v1`. Reads are public and rate-limited;
 a token raises the limit. Writes require a token with `write` scope.
 
-- `GET /api/v1/weaknesses?group=&context=&q=`
-- `GET /api/v1/weaknesses/{id}`
+- `GET /api/v1/capabilities?group=&context=&q=`
+- `GET /api/v1/capabilities/{id}`
 - `GET /api/v1/techniques?addresses=`
 - `GET /api/v1/models/{id}/claims?version=&context=&status=`
 - `GET /api/v1/advise?model=&version=&context=` — the agent self-awareness
   call: open claims for that model/version/context plus the techniques that
-  address them, ordered by severity.
+  address them, ordered by ascending score (lowest, i.e. weakest, first).
 - `POST /api/v1/claims`, `POST /api/v1/evidence`, `POST /api/v1/techniques`
   (milestone 4) — create as `proposed`; a maintainer promotes via PR.
 
-MCP server exposes the same as tools: `list_weaknesses`, `get_weakness`,
+MCP server exposes the same as tools: `list_capabilities`, `get_capability`,
 `advise`, `find_techniques`, `submit_evidence`, `submit_claim`.
 Transport: streamable HTTP at `/api/mcp`, sharing the REST handlers.
 
@@ -194,10 +204,10 @@ Python, in `pipeline/`. Runs on a schedule in GitHub Actions.
    cs.LG, cs.SE, cs.CR from the OAI-PMH bulk feed. Never full text at this
    stage.
 2. Cheap filter: category plus keyword list from the taxonomy.
-3. Embed abstracts; cluster against existing weakness descriptions.
+3. Embed abstracts; cluster against existing capability descriptions.
 4. Send only candidates to a small model via the Batch API with a cached
-   system prompt: does this paper show a weakness, counter one, or propose
-   a technique, and which slugs.
+   system prompt: does this paper measure a capability, propose a
+   technique that improves one, or neither, and which slugs.
 5. Write candidates to a review queue (`pipeline/queue/*.yaml`); a human
    or maintainer agent promotes to the catalog by PR.
 Cost is measured on a one-month sample before scaling to three years.

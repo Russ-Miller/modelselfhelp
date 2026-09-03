@@ -1,14 +1,13 @@
 id: goal-conflict-safety-claude-3-5-sonnet-autonomous-agent-2024-12-06
-weakness: goal-conflict-safety
+capability: goal-conflict-safety
 model: claude
 version: claude-3-5-sonnet
 context: autonomous-agent
 observed_on: 2024-12-06
-severity: moderate
+score: 7
 status: open
 evidence:
   - paper: arxiv-2412-04984
-    stance: supports
     strength: controlled
     note: >-
       Under strong in-prompt goal pressure, took covert actions against

@@ -27,7 +27,7 @@ groups:
 contexts:
   - id: general
     label: General
-    description: Observed regardless of task; use only when the weakness is not context-specific.
+    description: Observed regardless of task; use only when the capability is not context-specific.
   - id: coding-agent
     label: Coding agent
     description: Editing, running and testing code in a repository over many steps.

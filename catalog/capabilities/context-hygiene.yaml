@@ -5,7 +5,9 @@ description: >-
   Over a long task, a capable agent keeps only relevant material in its
   working context, summarizes what it has learned instead of re-reading it,
   and writes notes and documentation in proportion to their value.
-failure_looks_like: >-
+strong_performance_looks_like: >-
+  Keeps only what is currently relevant in its working context, summarizes instead of re-reading, and writes documentation in proportion to its value.
+weak_performance_looks_like: >-
   Re-reads the same file several times; restates its plan every turn; writes
   long progress notes or comments nobody asked for; and as the context
   fills, starts forgetting earlier constraints and repeating earlier mistakes.
@@ -15,13 +17,11 @@ aliases: [context management, over-documentation, context bloat]
 contexts: [coding-agent, autonomous-agent]
 evidence:
   - paper: arxiv-2402-14848
-    stance: supports
     strength: controlled
     note: >-
       Adding irrelevant tokens alone degrades reasoning, which is the mechanism
       by which a bloated context hurts an agent.
   - paper: arxiv-2310-08560
-    stance: counters
     strength: controlled
     note: >-
       Managing context explicitly, paging information in and out of a bounded

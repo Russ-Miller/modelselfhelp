@@ -4,13 +4,13 @@ import fs from "node:fs";
 import path from "node:path";
 import YAML from "yaml";
 
-export type Stance = "supports" | "counters";
 export type Strength = "anecdotal" | "benchmark" | "controlled" | "survey";
 export type RecordStatus = "proposed" | "accepted" | "disputed" | "retired";
 
-export interface Evidence { paper: string; stance: Stance; note: string; strength?: Strength }
-export interface Weakness {
-  id: string; label: string; summary: string; description: string; failure_looks_like: string;
+export interface Evidence { paper: string; note: string; strength?: Strength }
+export interface Capability {
+  id: string; label: string; summary: string; description: string;
+  strong_performance_looks_like: string; weak_performance_looks_like: string;
   group: string; parent?: string; aliases?: string[]; contexts: string[]; evidence: Evidence[];
   techniques?: string[]; related?: string[]; status: RecordStatus; submitted_by: string;
 }
@@ -27,8 +27,8 @@ export interface Technique {
 export interface ModelVersion { id: string; label: string; released?: string }
 export interface Model { id: string; label: string; vendor: string; url?: string; versions: ModelVersion[] }
 export interface Claim {
-  id: string; weakness: string; model: string; version: string; context: string; observed_on: string;
-  severity: "minor" | "moderate" | "major" | "blocking";
+  id: string; capability: string; model: string; version: string; context: string; observed_on: string;
+  score: number;
   status: "open" | "mitigated" | "resolved" | "disputed" | "superseded";
   superseded_by?: string; evidence: Evidence[]; notes?: string; submitted_by: string;
 }
@@ -37,7 +37,7 @@ export interface Taxonomy { groups: TaxonomyEntry[]; contexts: TaxonomyEntry[] }
 
 export interface Catalog {
   taxonomy: Taxonomy;
-  weaknesses: Weakness[]; papers: Paper[]; techniques: Technique[]; models: Model[]; claims: Claim[];
+  capabilities: Capability[]; papers: Paper[]; techniques: Technique[]; models: Model[]; claims: Claim[];
 }
 
 const CATALOG_DIR = path.join(process.cwd(), "catalog");
@@ -57,7 +57,7 @@ export function loadCatalog(): Catalog {
   if (cache) return cache;
   cache = {
     taxonomy: YAML.parse(fs.readFileSync(path.join(CATALOG_DIR, "taxonomy.yaml"), "utf8")) as Taxonomy,
-    weaknesses: readDir<Weakness>("weaknesses"),
+    capabilities: readDir<Capability>("capabilities"),
     papers: readDir<Paper>("papers"),
     techniques: readDir<Technique>("techniques"),
     models: readDir<Model>("models"),
@@ -66,21 +66,21 @@ export function loadCatalog(): Catalog {
   return cache;
 }
 
-export const getWeaknesses = () => loadCatalog().weaknesses;
-export const getWeakness = (id: string) => loadCatalog().weaknesses.find((w) => w.id === id);
+export const getCapabilities = () => loadCatalog().capabilities;
+export const getCapability = (id: string) => loadCatalog().capabilities.find((c) => c.id === id);
 export const getTechniques = () => loadCatalog().techniques;
 export const getTechnique = (id: string) => loadCatalog().techniques.find((t) => t.id === id);
 export const getPaper = (id: string) => loadCatalog().papers.find((p) => p.id === id);
 export const getModel = (id: string) => loadCatalog().models.find((m) => m.id === id);
 export const getGroup = (id: string) => loadCatalog().taxonomy.groups.find((g) => g.id === id);
 export const getContext = (id: string) => loadCatalog().taxonomy.contexts.find((c) => c.id === id);
-export const techniquesFor = (weaknessId: string) => loadCatalog().techniques.filter((t) => t.addresses.includes(weaknessId));
-export const claimsFor = (weaknessId: string) => loadCatalog().claims.filter((c) => c.weakness === weaknessId);
+export const techniquesFor = (capabilityId: string) => loadCatalog().techniques.filter((t) => t.addresses.includes(capabilityId));
+export const claimsFor = (capabilityId: string) => loadCatalog().claims.filter((c) => c.capability === capabilityId);
 
-/** Weaknesses grouped by taxonomy group, in taxonomy order. */
-export function weaknessesByGroup(): { group: TaxonomyEntry; weaknesses: Weakness[] }[] {
-  const { taxonomy, weaknesses } = loadCatalog();
+/** Capabilities grouped by taxonomy group, in taxonomy order. */
+export function capabilitiesByGroup(): { group: TaxonomyEntry; capabilities: Capability[] }[] {
+  const { taxonomy, capabilities } = loadCatalog();
   return taxonomy.groups
-    .map((group) => ({ group, weaknesses: weaknesses.filter((w) => w.group === group.id) }))
-    .filter((g) => g.weaknesses.length > 0);
+    .map((group) => ({ group, capabilities: capabilities.filter((c) => c.group === group.id) }))
+    .filter((g) => g.capabilities.length > 0);
 }

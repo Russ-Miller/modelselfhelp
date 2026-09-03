@@ -5,7 +5,9 @@ description: >-
   A capable model maintains an accurate picture of the current state of
   what it is working on, updating it after every action, so that later
   decisions rest on what is true now rather than what was true earlier.
-failure_looks_like: >-
+strong_performance_looks_like: >-
+  Maintains an accurate, continuously updated picture of the current state of files, variables, or an environment across a long sequence of actions.
+weak_performance_looks_like: >-
   Edits a file based on a version it already changed; reports a variable's
   old value after an update; plans a route from a map it has partially
   misremembered; or asserts a step is done that it never completed.
@@ -14,13 +16,11 @@ aliases: [entity tracking, world-model consistency, stale state]
 contexts: [coding-agent, autonomous-agent, data-analysis]
 evidence:
   - paper: arxiv-2305-02363
-    stance: supports
     strength: controlled
     note: >-
       Only models with substantial code pretraining track entity state through
       a sequence of operations, and all degrade as the sequence lengthens.
   - paper: arxiv-2406-03689
-    stance: supports
     strength: controlled
     note: >-
       Models that predict next steps well can still hold an incoherent implicit

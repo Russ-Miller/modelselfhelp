@@ -5,7 +5,9 @@ description: >-
   A capable model states only what it has grounds for, marks uncertainty,
   distinguishes what it recalls from what it infers, and declines to invent
   specifics such as names, numbers, quotes, or citations.
-failure_looks_like: >-
+strong_performance_looks_like: >-
+  States only what it has grounds for, flags uncertainty, and never invents specific names, numbers, quotes, or citations.
+weak_performance_looks_like: >-
   Invents a paper, URL, or court case; gives a precise number with no
   source; produces a biography with plausible but wrong dates; or, in
   long-form answers, mixes a majority of true statements with a steady
@@ -15,37 +17,31 @@ aliases: [confabulation, fabrication, factual error]
 contexts: [general, chat-assistant, rag-qa]
 evidence:
   - paper: arxiv-2311-05232
-    stance: supports
     strength: survey
     note: >-
       Surveys causes, kinds, and detection of hallucination across data,
       training, and inference, and finds no complete solution.
   - paper: arxiv-2305-14251
-    stance: supports
     strength: benchmark
     note: >-
       Long-form biographies from strong models contain a substantial share of
       unsupported atomic facts, rising for less well-known subjects.
   - paper: arxiv-2211-08411
-    stance: supports
     strength: controlled
     note: >-
       Accuracy on a fact scales with how many pretraining documents mention it,
       so long-tail facts are systematically unreliable.
   - paper: arxiv-2109-07958
-    stance: supports
     strength: benchmark
     note: >-
       Models reproduce common human misconceptions, and larger models were not
       more truthful on this benchmark.
   - paper: arxiv-2005-11401
-    stance: counters
     strength: controlled
     note: >-
       Grounding generation in retrieved documents improves factual accuracy on
       knowledge-intensive tasks.
   - paper: arxiv-2403-18802
-    stance: counters
     strength: benchmark
     note: >-
       Decomposing long answers into atomic facts and checking each with search

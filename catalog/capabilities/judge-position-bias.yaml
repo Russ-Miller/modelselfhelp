@@ -5,7 +5,9 @@ description: >-
   When scoring or ranking candidate answers, a capable judge gives the same
   verdict regardless of the order of candidates, their length, or which
   model produced them, and agrees with careful human raters.
-failure_looks_like: >-
+strong_performance_looks_like: >-
+  Gives the same verdict regardless of candidate order or length, and does not favor its own model family.
+weak_performance_looks_like: >-
   Flips its verdict when the two candidates are swapped; prefers the longer
   answer even when it adds nothing; and rates outputs from its own model
   family higher.
@@ -14,13 +16,11 @@ aliases: [LLM-as-judge bias, position bias, verbosity bias, self-enhancement bia
 contexts: [llm-as-judge]
 evidence:
   - paper: arxiv-2306-05685
-    stance: supports
     strength: controlled
     note: >-
       Identifies position, verbosity, and self-enhancement biases in strong
       judges, while also showing high agreement with humans once mitigated.
   - paper: arxiv-2305-17926
-    stance: supports
     strength: controlled
     note: >-
       Swapping candidate order alone can flip the judge's preference, so an

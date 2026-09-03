@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getTechniques, getWeakness } from "@/lib/catalog";
+import { getTechniques, getCapability } from "@/lib/catalog";
 
 export const metadata = { title: "Techniques" };
 
@@ -13,7 +13,7 @@ export default function TechniquesPage() {
             <Link href={`/techniques/${t.id}`} className="font-medium hover:underline">{t.label}</Link>
             <span className="ml-2 text-xs text-neutral-500">{t.kind}{t.repos?.length ? " · has code" : ""}{t.status !== "accepted" ? ` · ${t.status}` : ""}</span>
             <p className="text-neutral-600 dark:text-neutral-400">{t.summary}</p>
-            <p className="text-xs text-neutral-500">Addresses: {t.addresses.map((a) => getWeakness(a)?.label ?? a).join(", ")}</p>
+            <p className="text-xs text-neutral-500">Addresses: {t.addresses.map((a) => getCapability(a)?.label ?? a).join(", ")}</p>
           </li>
         ))}
       </ul>

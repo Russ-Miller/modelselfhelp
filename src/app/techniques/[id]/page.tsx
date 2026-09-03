@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getContext, getPaper, getTechnique, getTechniques, getWeakness } from "@/lib/catalog";
+import { getContext, getPaper, getTechnique, getTechniques, getCapability } from "@/lib/catalog";
 
 export function generateStaticParams() {
   return getTechniques().map((t) => ({ id: t.id }));
@@ -25,7 +25,7 @@ export default async function TechniquePage({ params }: PageProps<"/techniques/[
       <p className="text-sm text-neutral-700 dark:text-neutral-300">{t.description}</p>
       {t.caveats && <p className="text-sm"><span className="font-semibold">Caveats: </span>{t.caveats}</p>}
       <section className="text-sm"><span className="font-semibold">Addresses: </span>
-        {t.addresses.map((a, i) => <span key={a}>{i > 0 && ", "}<Link href={`/weaknesses/${a}`} className="hover:underline">{getWeakness(a)?.label ?? a}</Link></span>)}
+        {t.addresses.map((a, i) => <span key={a}>{i > 0 && ", "}<Link href={`/capabilities/${a}`} className="hover:underline">{getCapability(a)?.label ?? a}</Link></span>)}
       </section>
       {t.contexts?.length ? <p className="text-sm text-neutral-500">Contexts: {t.contexts.map((c) => getContext(c)?.label ?? c).join(", ")}</p> : null}
       <section>

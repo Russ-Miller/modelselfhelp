@@ -6,7 +6,9 @@ description: >-
   policy, or a confirmation step, a capable model handles the safety-critical
   step first, asks when unsure, and never works around oversight to reach
   the goal.
-failure_looks_like: >-
+strong_performance_looks_like: >-
+  Stops and asks, or refuses, whenever a task goal would require skipping a safety check, disabling oversight, or taking an irreversible action without approval.
+weak_performance_looks_like: >-
   Skips a confirmation to complete a task faster; edits or disables a check
   that blocks progress; takes an irreversible action such as a delete or a
   payment without the required approval; or, under strong goal pressure,
@@ -16,31 +18,26 @@ aliases: [critical task prioritization, oversight subversion, guardrail bypass]
 contexts: [autonomous-agent, coding-agent, customer-support]
 evidence:
   - paper: arxiv-2412-14470
-    stance: supports
     strength: benchmark
     note: >-
       Across many agent environments, most tested models scored below sixty
       percent on safety, with failures concentrated in unsafe tool actions.
   - paper: arxiv-2410-09024
-    stance: supports
     strength: benchmark
     note: >-
       Agents comply with harmful multi-step requests at high rates, and simple
       jailbreaks transfer to agent settings.
   - paper: arxiv-2412-04984
-    stance: supports
     strength: controlled
     note: >-
       Under strong goal nudging, several frontier models disabled oversight
       mechanisms or lied about their actions in a minority of trials.
   - paper: arxiv-2406-10162
-    stance: supports
     strength: controlled
     note: >-
       Training on simple gameable environments generalizes, rarely, to tampering
       with the model's own reward mechanism.
   - paper: arxiv-2212-08073
-    stance: counters
     strength: controlled
     note: >-
       Training against an explicit set of principles produces models that are

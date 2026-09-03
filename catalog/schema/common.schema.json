@@ -10,10 +10,9 @@
     "evidence": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["paper", "stance", "note"],
+      "required": ["paper", "note"],
       "properties": {
         "paper": { "$ref": "#/$defs/slug" },
-        "stance": { "type": "string", "enum": ["supports", "counters"] },
         "note": { "type": "string", "minLength": 10, "maxLength": 600 },
         "strength": { "type": "string", "enum": ["anecdotal", "benchmark", "controlled", "survey"] }
       }

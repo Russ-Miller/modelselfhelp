@@ -6,7 +6,9 @@ description: >-
   trace, or a verifier result to diagnose what went wrong and converge on a
   fix in a few iterations. It distinguishes a real error from a spurious one
   and does not make unrelated changes.
-failure_looks_like: >-
+strong_performance_looks_like: >-
+  Diagnoses the real cause of a failure from a concrete signal like a test or error message, and converges on a correct fix within one or two tries.
+weak_performance_looks_like: >-
   Re-submits the same wrong patch with cosmetic changes; loops between two
   wrong answers; "fixes" a correct answer into a wrong one when asked to
   review it; or thrashes across unrelated files while the actual bug stays.
@@ -15,25 +17,21 @@ aliases: [self-correction, iterative refinement, self-critique]
 contexts: [coding-agent, math, autonomous-agent]
 evidence:
   - paper: arxiv-2310-01798
-    stance: supports
     strength: controlled
     note: >-
       Intrinsic self-correction, where the model critiques and revises with no
       external feedback, does not improve reasoning accuracy and often degrades it.
   - paper: arxiv-2310-06770
-    stance: supports
     strength: benchmark
     note: >-
       On real GitHub issues, models in 2023 resolved only a few percent of
       tasks even with tests available.
   - paper: arxiv-2303-17651
-    stance: counters
     strength: controlled
     note: >-
       Iterative self-feedback improves outputs on several generation tasks,
       though later work attributes much of the gain to oracle-style signals.
   - paper: arxiv-2303-11366
-    stance: counters
     strength: benchmark
     note: >-
       Reflecting on failures in words and retrying, with an environment signal,

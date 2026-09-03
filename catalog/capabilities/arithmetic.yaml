@@ -5,7 +5,9 @@ description: >-
   A capable model performs multi-digit addition and multiplication, counts
   characters and items, and manipulates digits reliably regardless of how
   the numbers happen to be tokenized or how often they appeared in training.
-failure_looks_like: >-
+strong_performance_looks_like: >-
+  Performs multi-digit arithmetic and counting exactly, regardless of digit length, formatting, or how common the specific numbers are.
+weak_performance_looks_like: >-
   Wrong carries in long additions; multiplication accuracy that collapses
   beyond a few digits; miscounted letters in a word; answers that are
   correct for frequent numbers and wrong for rare ones; and accuracy that
@@ -15,37 +17,31 @@ aliases: [numerical reasoning, token-level math, counting]
 contexts: [math, data-analysis, general]
 evidence:
   - paper: arxiv-2305-18654
-    stance: supports
     strength: controlled
     note: >-
       Multi-digit multiplication accuracy falls to near zero as problem size
       grows, and models rely on pattern matching rather than a learned algorithm.
   - paper: arxiv-2402-14903
-    stance: supports
     strength: controlled
     note: >-
       Arithmetic accuracy in frontier models depends strongly on how digits are
       chunked into tokens; a different digit grouping changes error rates.
   - paper: arxiv-2202-07206
-    stance: supports
     strength: controlled
     note: >-
       Few-shot arithmetic accuracy correlates with how often the specific
       numbers appear in pretraining data, evidence of memorization.
   - paper: arxiv-2110-14168
-    stance: supports
     strength: benchmark
     note: >-
       Introduced grade-school math word problems on which 2021 models made
       frequent arithmetic slips, motivating verifier training.
   - paper: arxiv-2211-10435
-    stance: counters
     strength: benchmark
     note: >-
       Offloading the computation to generated code and an interpreter removes
       most arithmetic errors on math word problems.
   - paper: arxiv-2405-17399
-    stance: counters
     strength: controlled
     note: >-
       Position embeddings that encode digit place let small transformers add

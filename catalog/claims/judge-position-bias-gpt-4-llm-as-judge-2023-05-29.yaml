@@ -1,20 +1,18 @@
 id: judge-position-bias-gpt-4-llm-as-judge-2023-05-29
-weakness: judge-position-bias
+capability: judge-position-bias
 model: gpt
 version: gpt-4
 context: llm-as-judge
 observed_on: 2023-05-29
-severity: major
+score: 3
 status: mitigated
 evidence:
   - paper: arxiv-2305-17926
-    stance: supports
     strength: controlled
     note: >-
       Preference between two candidate answers could be flipped by swapping
       their order.
   - paper: arxiv-2306-05685
-    stance: counters
     strength: controlled
     note: >-
       With position swapping and other mitigations the judge agreed with human

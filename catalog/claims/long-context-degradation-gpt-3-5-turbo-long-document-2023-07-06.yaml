@@ -1,14 +1,13 @@
 id: long-context-degradation-gpt-3-5-turbo-long-document-2023-07-06
-weakness: long-context-degradation
+capability: long-context-degradation
 model: gpt
 version: gpt-3-5-turbo
 context: long-document
 observed_on: 2023-07-06
-severity: major
+score: 4
 status: open
 evidence:
   - paper: arxiv-2307-03172
-    stance: supports
     strength: controlled
     note: >-
       Multi-document QA accuracy fell by more than twenty points when the

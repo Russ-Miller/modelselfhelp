@@ -1,14 +1,13 @@
 id: secure-coding-gpt-4-coding-agent-2024-06-12
-weakness: secure-coding
+capability: secure-coding
 model: gpt
 version: gpt-4
 context: coding-agent
 observed_on: 2024-06-12
-severity: moderate
+score: 7
 status: open
 evidence:
   - paper: arxiv-2406-10279
-    stance: supports
     strength: controlled
     note: >-
       Recommended non-existent Python and JavaScript packages in a few percent
