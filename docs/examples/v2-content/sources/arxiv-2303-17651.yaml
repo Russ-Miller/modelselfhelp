@@ -1,0 +1,14 @@
+id: arxiv-2303-17651
+kind: paper
+title: "Self-Refine: Iterative Refinement with Self-Feedback"
+authors: ["Aman Madaan", "Niket Tandon", "Prakhar Gupta", "Skyler Hallinan", "Luyu Gao", "et al."]
+year: 2023
+arxiv_id: "2303.17651"
+url: https://arxiv.org/abs/2303.17651
+summary: >-
+  Iterative self-feedback improves outputs on several generation tasks;
+  later work (see arxiv-2310-01798) argues much of the measured gain
+  traces back to oracle-like stopping criteria and task selection rather
+  than the self-feedback step alone — worth weighing when reading this
+  result.
+tags: [self-correction, prompting]

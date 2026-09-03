@@ -1,0 +1,39 @@
+id: self-feedback-improves-generation-quality
+capability: self-repair
+statement: >-
+  Prompting a model to generate its own feedback on a draft output and
+  revise accordingly improves quality on open-ended generation tasks
+  (dialogue, code, review-writing) over a single-shot attempt.
+tags: [reasoning]
+kind: mechanism
+backing_strength: single-paper
+observed_on:
+  era: "2023, GPT-3.5/GPT-4 class"
+sources:
+  - source: arxiv-2303-17651
+    stance: supports
+    note: >-
+      Iterative self-feedback and refinement improved outputs across
+      several generation tasks in the original evaluation.
+  - source: arxiv-2310-01798
+    stance: contests
+    note: >-
+      Re-examines self-feedback-style claims and argues the measured gains
+      often trace back to how the comparison was set up (e.g. oracle-like
+      stopping, or the revision prompt leaking task-specific hints) rather
+      than the self-feedback step itself doing real work.
+contested: true
+disagreement_axis:
+  description: >-
+    Likely how rigorously the baseline (no-revision) condition was set up
+    and evaluated, and possibly task family — open-ended generation tasks
+    (where "better" is fuzzier and easier to nudge with a second pass) vs.
+    the more checkable reasoning benchmarks in the contesting paper. I
+    haven't reconciled the two papers' exact experimental setups myself.
+  is_guess: true
+status: active
+last_checked_at: 2026-09-03
+notes: >-
+  This is the pair I'd most want to actually dig into further — the
+  disagreement axis above is a first guess, not a verified reconciliation.
+submitted_by: human:Russ-Miller

@@ -1,0 +1,31 @@
+id: grounded-reflection-improves-multistep-tasks
+capability: self-repair
+statement: >-
+  When a model gets a real environment signal after acting — a test
+  result, a tool error, a task-success indicator — reflecting on that
+  signal in words and retrying substantially improves success rates on
+  multi-step coding and decision-making tasks over a single attempt.
+tags: [agentic, coding-agent]
+kind: mechanism
+backing_strength: single-paper
+observed_on:
+  era: "2023, GPT-3.5/GPT-4 class agents"
+  task_type: coding-agent
+sources:
+  - source: arxiv-2303-11366
+    stance: supports
+    note: >-
+      Verbal reflection on an environment signal (test output, action
+      outcome), fed back in as context for a retry, raised pass rates on
+      coding and decision-making benchmarks substantially over one-shot
+      attempts.
+contested: false
+status: active
+last_checked_at: 2026-09-03
+notes: >-
+  Worth weighing against how modest real-world resolution rates stayed on
+  repository-scale coding tasks even with test feedback available in the
+  same era (2023 models resolved only a few percent of real GitHub issues
+  in SWE-bench) — the mechanism is real, but its magnitude on toy or
+  narrow benchmarks likely overstates what it does on messier real tasks.
+submitted_by: human:Russ-Miller

@@ -1,273 +1,302 @@
 # modelselfhelp — product and data specification
 
-Version 0.2, 2026-09-03. This document is the source of truth for the seed
-phase. Change it in the same pull request as the code that changes behavior.
+Version 0.3, 2026-09-03. This document is the source of truth. Change it in
+the same pull request as the code that changes behavior.
+
+**Status note (2026-09-03):** this version is a substantial rewrite — see
+`docs/decisions.md`, "Personal-study reframe," for why. The live catalog
+under `catalog/` and the deployed site still reflect the *previous* model
+(Weakness→Capability with a 1-10 score) as of this writing. A worked
+example of the new model lives under `docs/examples/` pending review;
+`catalog/` itself gets migrated in the next pass. If the two disagree,
+this document describes where the project is headed, not necessarily
+what's live right now — check `catalog/schema/` directly to see which
+schema is actually in force.
 
 ## 1. Purpose
 
-A one-stop exchange where humans and AI agents can:
+This is primarily a personal study tool: a place to organize what I
+actually understand about LLM capabilities as I learn it — "the
+neuroscience of LLMs." Curiosity-driven, not built to a spec for a
+hypothetical audience. The reasoning: the most useful tools were usually
+built because their creator wanted such a tool for themselves; build the
+version that's genuinely useful to me, and it will serve others better
+than one designed for an imagined user from day one.
 
-1. Look up known capabilities of AI models — things AI, and often humans,
-   are good or bad at — scoped to a model version and a usage context, not
-   just "models in general".
-2. See the evidence: papers and benchmarks that measure the capability.
-3. Find techniques that improve a capability, with pointers to runnable code
-   in a git repository.
-4. Contribute: add evidence, add techniques, record new claims about how a
-   specific model performs, and request a new capability be added when
-   nothing existing covers a gap — with provenance for every contribution.
-5. Ask programmatically, so an agent can query "how am I rated on this
-   capability in this context, and what should I do about it" at runtime.
-6. Curate: a small admin group keeps the catalog correct directly — editing
-   or removing a capability without waiting on a pull request — while
-   everyone else's contributions still land as `proposed` for review.
+Two things follow from that:
 
-Analogy for pitching: CWE for model capabilities and behavior. CWE names
-stable weakness patterns and links mitigations; CVE records each concrete
-instance. Here, a Capability is the pattern (named neutrally, since a
-capability can be a strength or a weakness depending on the model and
-context) and a Claim is the instance: one model's score on it. Scope is
-broader than security: reasoning, knowledge, behavior, reliability,
-security and evaluation.
+1. **v1 optimizes for one reader: me, thinking.** Progressive disclosure
+   (capability → claims → backing detail), honest epistemic status on
+   every claim, and structure that makes it easy to revise my own mind —
+   not conversion funnels or contributor onboarding.
+2. **Everyone else is a hoped-for second-order benefit, not the design
+   target** — first other humans curious about the same questions, and
+   only after that, agentic systems that might use this as an input. Both
+   are welcome, neither drives v1 decisions. Concretely: the earlier
+   contributor-platform design (accounts, admin CRUD, capability requests,
+   an MCP server framed around "what should I as an agent do") is real
+   and stays documented (§9), but it's explicitly a later phase, not v1.
 
-## 2. First users
+## 2. What changed from the first draft, and why
 
-Agent developers first, researchers second. The differentiating feature is
-the machine-readable API and MCP server, so that is built before discussion
-features. Human contribution goes through pull requests during the seed
-phase and through the site once accounts exist (milestone 4).
+The project's first pass (through 2026-09-02) modeled this as "CWE for
+model capabilities" — a contribution platform for agent developers, with
+capabilities scored 1-10 per model version. That framing is retired for
+v1. Specifics:
 
-## 3. Entity model
+- **No numeric score.** A repository that optimizes toward an eval score
+  Goodharts, and the degradation is invisible from inside the loop.
+  Quantitative capability numbers also aren't portable — they're
+  entangled with model version, decoding configuration, and benchmark
+  quirks in ways a bare "6/10" hides. Qualitative claims with visible
+  provenance are more honest about their own epistemic status.
+- **The Claim, not the score, is the unit of content.** A claim is a
+  directional statement with its scope condition attached: "chain-of-
+  thought degrades performance on tasks where verbalization disrupts an
+  otherwise intuitive judgment," never "CoT is sometimes bad." A claim
+  written without its scope gets misapplied later — that's the failure
+  mode this format exists to prevent.
+- **Sources are first-class; claims reference them, not the reverse.** If
+  a claim owned its citations directly with no independent source record,
+  one flawed paper backing six claims would be six things to find and fix
+  later instead of one. My own observations are sources too, under the
+  same schema as papers — otherwise a parallel, less-rigorous personal-
+  notes system develops, and I'd end up biased toward whichever is easier
+  to write into.
+- **Ongoing re-evaluation, not one-time cataloging.** The system should
+  keep looking for evidence that supports or contests existing claims, not
+  just discover new capabilities once. See §6.
+- **Contested claims need real structure**, not a boolean. See §5, Claim.
+- **Durable and perishable knowledge are structurally separated.**
+  Mechanism-level findings (why a phenomenon happens) tend to survive
+  model generations; model-specific performance observations don't. Claims
+  carry a `kind` for exactly this reason — see §5.
+- **Taxonomy is a view, not the primary structure.** Folk categories like
+  "reasoning" or "instruction following" probably carve the space badly,
+  and re-carving should be a re-tagging exercise, not a migration.
 
-Five content entities live in `catalog/` as YAML, one file per record.
-Account entities live in Postgres (milestone 4). Every content record has an
-`id` slug that is permanent once merged.
+## 3. First users
+
+Me, first. If this becomes useful to other curious humans reading the
+site, or later to agents via an API, that's a genuine but secondary goal —
+see §9 for what that later phase could look like and why it's deferred.
+
+## 4. Entity model
+
+Content entities live in `catalog/` as YAML, one file per record. Every
+content record has an `id` slug that's permanent once merged.
 
 ### Capability  (`catalog/capabilities/<id>.yaml`)
-The stable, named pattern — a neutral axis a model can score well or badly
-on, not an assumed weakness. Timeless by design.
+A topic — a named area of interest that groups claims for progressive
+disclosure. Not scored; the capability page's job is to list its claims,
+not to render a verdict.
 
 | field | type | notes |
 |---|---|---|
 | id | slug | permanent |
-| label | string | plain-English name, a few words |
-| summary | string | one sentence |
-| description | string | what the capability is, in general |
-| strong_performance_looks_like | string | concrete anchor near the top of the scale |
-| weak_performance_looks_like | string | concrete anchor near the bottom of the scale |
-| group | slug | top-level taxonomy group, see §4 |
+| label | string | plain-English name |
+| summary | string | one sentence — what this topic is about |
+| description | string | a paragraph of context; what's interesting about this area |
+| tags | slug[] | soft, freely re-assignable labels — see §7. Not a single required parent group. |
 | parent | slug? | optional parent capability, for variants |
-| aliases | string[] | other names used in the literature |
-| contexts | slug[] | usage contexts where it is most often observed, see §5 |
-| evidence | Evidence[] | foundational or definitional paper refs, see below |
-| techniques | slug[] | techniques that improve it |
-| status | enum | `proposed`, `accepted`, `disputed`, `retired` |
-| related | slug[] | other capabilities |
-
-Evidence entry (inline inside a capability or claim): a plain citation, not
-a scored judgment — the claim's `score` carries the direction and
-magnitude, so evidence just backs it up.
-
-| field | type | notes |
-|---|---|---|
-| paper | slug | must exist in `catalog/papers/` |
-| note | string | one or two sentences on what the paper shows |
-| strength | enum | `anecdotal`, `benchmark`, `controlled`, `survey` |
-
-### Paper  (`catalog/papers/<id>.yaml`)
-A citable source. Id is `arxiv-<number>` for arXiv papers, otherwise a
-slug. Titles of arXiv papers are verified against the arXiv API by
-`npm run verify-papers`.
-
-Fields: `id`, `title`, `authors` (string[]), `year`, `arxiv_id?`, `url`,
-`venue?`, `abstract?`, `tags` (string[]), `code_url?`.
-
-### Technique  (`catalog/techniques/<id>.yaml`)
-A mitigation. Should point at runnable code.
-
-Fields: `id`, `label`, `summary`, `description`, `addresses` (capability
-slugs), `kind` (enum: `prompting`, `retrieval`, `tooling`, `training`,
-`decoding`, `architecture`, `process`), `papers` (paper slugs),
-`repos` (list of `{url, note, verified_on?}`), `contexts` (slugs),
-`caveats` (string), `status` (same enum as capability).
-
-### Model  (`catalog/models/<id>.yaml`)
-A model family with versions. Fields: `id`, `label`, `vendor`,
-`versions` (list of `{id, label, released?}`), `url?`.
+| aliases | string[]? | other names used in the literature |
+| techniques | slug[]? | techniques relevant to this capability |
+| related | slug[]? | other capabilities |
+| status | enum | `active` (currently tracked) or `parked` (noted, not being actively studied) |
+| submitted_by | string | provenance, see §8 |
 
 ### Claim  (`catalog/claims/<id>.yaml`)
-One capability × one model version × one context × one date: how well that
-model actually performs, on a 1-10 scale. Claims rot and are expected to
-be superseded as models change.
+The primary content unit: a directional, scoped statement, not a data
+point. The `id` is a slug derived from the statement itself (e.g.
+`self-repair-needs-external-signal`), not from a model/version/date
+combination the way the old Claim id was.
 
 | field | type | notes |
 |---|---|---|
-| id | slug | `<capability>-<version>-<context>-<yyyy-mm-dd>`, single hyphens throughout |
-| capability | slug | |
-| model | slug | model id |
-| version | slug | version id within the model |
-| context | slug | see §5 |
-| observed_on | date | |
-| score | integer | 1-10; 1 = weak_performance_looks_like, 10 = strong_performance_looks_like |
-| status | enum | `open`, `mitigated`, `resolved`, `disputed`, `superseded` |
-| superseded_by | slug? | later claim |
-| evidence | Evidence[] | same shape as above; may also cite benchmark runs |
-| notes | string | justify the score, especially anything between the two anchors |
-| submitted_by | string | provenance: `human:<handle>` or `agent:<handle>` |
+| id | slug | derived from the statement |
+| capability | slug | the Capability this claim sits under |
+| statement | string | the directional, scoped claim itself — see §2 |
+| tags | slug[]? | additional soft labels beyond the capability's own |
+| kind | enum | `mechanism` (durable — why something happens) or `observation` (perishable — how a specific model/era performs). See §5. |
+| backing_strength | enum | `single-paper`, `replicated`, `mechanism-reasoning`, or `own-observation` — categorical, not a score. What kind of support this claim has, overall. |
+| observed_on | object? | loose, categorical, not a hard link: `{ model?: slug, era?: string, task_type?: slug }`. Most meaningful for `kind: observation`; often absent for `kind: mechanism`. `model` optionally references `catalog/models/`; `task_type` optionally references a context in `catalog/taxonomy.yaml`. |
+| sources | SourceLink[] | see below, minItems 1 |
+| contested | boolean | default false — see §5 |
+| disagreement_axis | object? | required in spirit (not enforced by schema) when `contested: true` — see §5 |
+| status | enum | `active`, `superseded`, or `retired` |
+| superseded_by | slug? | a later claim |
+| last_checked_at | date | when this claim was last checked against new evidence |
+| last_new_evidence_at | date? | when new evidence was last actually found, if ever |
+| notes | string? | free-form |
+| submitted_by | string | provenance, see §8 |
 
-No fixed rubric exists yet for the rungs between 1 and 10 — a contributor
-justifies the number in `notes`. Revisit if scores start disagreeing across
-similar claims.
-
-### Contribution provenance
-Every record carries `submitted_by` and, once accounts exist, the API
-stamps `submitted_by` from the token. Format: `human:<github-login>` or
-`agent:<agent-name>@<owner-login>`; agents also record `agent_model`.
-
-### Capability requests (milestone 4)
-Requesting a brand-new capability is lighter-weight than authoring one: a
-requester shouldn't have to write strong/weak anchors or find evidence just
-to say "there's a gap here." A request is a separate, small record — not a
-`catalog/capabilities/*.yaml` file — so the git-backed catalog stays made
-only of fully-formed, evidence-backed entries.
+**SourceLink** (an entry in `sources`):
 
 | field | type | notes |
 |---|---|---|
-| id | uuid | |
-| label | string | proposed name |
-| rationale | string | why it matters, why nothing existing covers it |
-| suggested_group | slug? | best-guess taxonomy group |
-| links | string[]? | freeform URLs — a paper, an issue, an incident writeup |
-| requested_by | string | provenance, same format as `submitted_by` |
-| status | enum | `pending`, `accepted`, `declined`, `duplicate` |
-| created_at | datetime | |
+| source | slug | must exist in `catalog/sources/` |
+| stance | enum | `supports` or `contests` |
+| note | string | what specifically this source shows for *this* claim |
 
-An admin reviews pending requests. Accepting one means authoring the real
-Capability record (using the request as a starting point) via admin CRUD,
-below; declining or marking a duplicate just closes it out with a reason.
+### Source  (`catalog/sources/<id>.yaml`)
+A citable thing a claim can point to — a published paper or my own
+observation, same schema either way, distinguished only by `kind`. This
+is the "first-class, claims reference it" object from §2: fix a source
+once here, not once per claim that cites it.
 
-## 4. Taxonomy (top-level groups)
+| field | type | notes |
+|---|---|---|
+| id | slug | `arxiv-<number>` for arXiv papers; a descriptive slug otherwise |
+| kind | enum | `paper` or `observation` (room to extend later — a blog post, a benchmark release) |
+| title | string | for an observation, a short description of what was noticed |
+| authors | string[]? | required in spirit for `paper`, N/A for `observation` |
+| year | integer? | |
+| date | date? | more precise than `year`; natural for an observation |
+| arxiv_id | string? | `paper` only |
+| url | string? | an observation may have none |
+| venue | string? | |
+| summary | string? | the abstract for a paper; the actual content for an observation |
+| tags | string[]? | |
+| code_url | string? | |
 
-Defined in `catalog/taxonomy.yaml`. Groups are deliberately broad so the
-breadth of scope is obvious at a glance.
+### Model  (`catalog/models/<id>.yaml`)
+Unchanged in shape from the previous draft: a model family with versions
+(`id`, `label`, `vendor`, `versions: [{id, label, released?}]`, `url?`).
+Kept as loose reference vocabulary — a claim's `observed_on.model` may
+point here, but nothing requires it to, and there's no exact
+version+date+context triple a claim must supply the way the old
+score-bearing Claim did.
 
-| group | covers |
-|---|---|
-| reasoning | arithmetic, logic, planning, compositional generalization |
-| knowledge | factual recall, verification, long-tail facts, temporal facts |
-| context | long-context use, state tracking, memory within and across sessions |
-| behavior | sycophancy, over-refusal, instruction following, calibration |
-| agentic | tool use, procedure following, self-repair, goal conflicts |
-| security | prompt injection, insecure code, package hallucination |
-| evaluation | judge biases, benchmark contamination, self-evaluation |
+### Technique  (`catalog/techniques/<id>.yaml`)
+Mostly unchanged: `id`, `label`, `summary`, `description`, `addresses`
+(capability slugs), `kind` (`prompting`/`retrieval`/`tooling`/`training`/
+`decoding`/`architecture`/`process`), `sources` (source slugs — renamed
+from `papers`), `repos` (`{url, note, verified_on?}`), `contexts`,
+`caveats`, `status`, `submitted_by`.
 
-## 5. Usage contexts
+### Contribution provenance (§8)
+Every record still carries `submitted_by`, format `human:<handle>` or
+`agent:<agent-name>@<owner-login>`. Kept even though I'm the only author
+right now — cheap to keep, and it means the format doesn't have to be
+retrofitted if this ever does get other contributors.
 
-A closed list in `catalog/taxonomy.yaml`, extended by pull request.
-Initial: `general`, `coding-agent`, `chat-assistant`, `rag-qa`,
-`data-analysis`, `math`, `multilingual`, `long-document`, `llm-as-judge`,
-`autonomous-agent`, `customer-support`.
+## 5. Kind, backing strength, and contested claims
 
-## 6. Validation
+**`kind`: mechanism vs. observation.** A mechanism claim explains *why* —
+context poisoning, why self-consistency helps on some task shapes — and
+tends to survive model generations. An observation claim describes how a
+specific model or era performs, and is expected to rot as models change.
+Keeping them structurally distinct (not just tag-filtered) matters so
+perishable content doesn't quietly contaminate my sense of what I
+actually, durably know.
 
-`npm run validate` (part of `npm test`) checks:
-- every YAML file against its JSON Schema in `catalog/schema/`;
-- referential integrity: every paper, technique, capability, model, version,
-  group and context referenced exists;
-- id equals filename; slugs are kebab-case; no duplicate ids;
-- every claim's `score` is an integer 1-10 and `observed_on` is a valid
-  date not in the future.
+**`backing_strength` categories**, roughly weakest to strongest as a
+*kind* of support, not a numeric scale:
+- `own-observation` — I noticed this; not yet checked against literature.
+- `single-paper` — one paper reports it; not independently replicated.
+- `replicated` — more than one independent source reports the same
+  pattern.
+- `mechanism-reasoning` — supported by an architectural or theoretical
+  argument for *why* it should be true, not (only) an empirical count.
 
-`npm run verify-papers` fetches titles from the arXiv API for every paper
-with an `arxiv_id` and fails on mismatch (normalized, case-insensitive).
+**Contested claims.** A bare `contested: true` gets ignored — it carries
+no information about what to do with the disagreement. Instead:
+- `sources` already carries `stance: supports | contests` per entry, so a
+  contested claim simply has sources on both sides, each with a `note`
+  explaining what that source actually shows.
+- `disagreement_axis` records the *suspected* reason the sources disagree
+  — model scale, task family, how the technique was operationalized, what
+  counted as success — as free text, plus an explicit `is_guess: boolean`
+  so a real explanation is never confused with a guess dressed up as one.
 
-## 7. Site (milestone 2)
+## 6. Ongoing re-evaluation (schema and views for v1; automation is later)
 
-Routes:
-- `/` overview: groups, counts, recently added
-- `/capabilities`, `/capabilities/[id]`
-- `/techniques`, `/techniques/[id]`
-- `/papers/[id]`
-- `/models`, `/models/[id]` per-model view of claims by version and context
-- `/search` full-text over label, summary, description, aliases
+For v1: add the fields and site views this needs. The actual "scour the
+internet daily" job is a later-phase engineering effort (real cost and
+API decisions), same as the arXiv pipeline in the first draft was gated
+on a key and a measured cost before scaling. What v1 does add:
 
-Rendered server-side from the catalog at build time; catalog changes deploy
-through the normal PR flow. No database needed for reads in the seed phase.
+- `last_checked_at` and `last_new_evidence_at` on every claim.
+- A **recent activity** view: claims with new supporting or contesting
+  evidence recently, most-recent first.
+- A **sources** view, separate from claims — browse everything cited,
+  independent of which claims reference it.
+- A **stale** view: claims whose `last_checked_at` is 14+ days old,
+  worth a manual re-check even absent an automated sweep — evidence from
+  an earlier model generation often just becomes settled, considered
+  wrong, or irrelevant, and a claim nobody's revisited in two weeks is a
+  reasonable place to look first.
 
-## 8. API and MCP (milestone 3)
+## 7. Taxonomy as a view
 
-REST, JSON, versioned under `/api/v1`. Reads are public and rate-limited;
-a token raises the limit. Writes require a token with `write` scope.
+`catalog/taxonomy.yaml` still holds a starter vocabulary (groups like
+reasoning/knowledge/context/behavior/agentic/security/evaluation, and
+contexts like coding-agent/math/chat-assistant), but it's now a *soft*,
+freely re-assignable set of tags, not a rigid single-parent group a
+capability or claim must belong to. Expect to re-carve this at least
+twice as real content accumulates; because claims (and capabilities) are
+the primary objects and tags are just labels on them, re-carving is a
+re-tagging exercise, not a migration.
 
-- `GET /api/v1/capabilities?group=&context=&q=`
-- `GET /api/v1/capabilities/{id}`
-- `GET /api/v1/techniques?addresses=`
-- `GET /api/v1/models/{id}/claims?version=&context=&status=`
-- `GET /api/v1/advise?model=&version=&context=` — the agent self-awareness
-  call: open claims for that model/version/context plus the techniques that
-  address them, ordered by ascending score (lowest, i.e. weakest, first).
-- `POST /api/v1/claims`, `POST /api/v1/evidence`, `POST /api/v1/techniques`
-  (milestone 4) — create as `proposed`; an admin promotes or a maintainer
-  does via PR.
-- `POST /api/v1/capability-requests` (milestone 4) — any signed-in caller;
-  see §3 Capability requests.
-- `POST /api/v1/capabilities`, `PATCH /api/v1/capabilities/{id}`,
-  `DELETE /api/v1/capabilities/{id}` (milestone 4, admin only) — direct
-  create/edit/delete on the catalog, no PR round-trip. How an admin write
-  reaches the git-backed catalog (commit via the GitHub API on the admin's
-  behalf, vs. moving capabilities to a database at that point) is an open
-  technical question, deferred to when this is actually built — see
-  decision log, "git as the database... revisit when PR volume outgrows
-  review."
+## 8. Site (progressive disclosure)
 
-MCP server exposes the same as tools: `list_capabilities`, `get_capability`,
-`advise`, `find_techniques`, `submit_evidence`, `submit_claim`,
-`request_capability`.
-Transport: streamable HTTP at `/api/mcp`, sharing the REST handlers.
+- `/` — recent activity first (§6), then browse by capability.
+- `/capabilities`, `/capabilities/[id]` — a capability page lists its
+  claims (statement + kind + backing_strength badge), click through to a
+  claim for full source detail.
+- `/claims/[id]` — the claim's statement, its sources (supports/contests,
+  with notes), `disagreement_axis` if contested, `last_checked_at`.
+- `/sources`, `/sources/[id]` — browse everything cited, independent of
+  claims; a source page lists which claims reference it.
+- `/recent` — the recent-activity view from §6.
+- `/stale` — the 14-day staleness view from §6.
+- `/techniques`, `/techniques/[id]` — mostly unchanged from the first
+  draft.
 
-## 9. Accounts and tokens (milestone 4)
+Rendered server-side from the catalog at build time, as before. No
+database needed for reads.
 
-- Login: GitHub OAuth via Auth.js. Account record: github login, display
-  name, `is_admin` (boolean, default false), created_at.
-- Tokens: hashed at rest, scopes `read` and `write`, fields `kind`
-  (`human` or `agent`), `agent_name?`, `agent_model?`, `last_used_at`.
-- No agent detection by heuristics. Agents identify themselves by token and
-  get higher rate limits and attribution in return.
-- Rate limits: anonymous low, token higher; enforced per IP or per token.
-- `is_admin` is a single flag — not a roles/permissions system. It gates
-  the capability CRUD endpoints in §8; everything else a `write` token can
-  already do, an admin can also do, just without landing as `proposed`.
-- Bootstrap admin ("Captain of the Ship"): granted by GitHub login, not
-  email or a pre-seeded account row. `ADMIN_GITHUB_LOGINS` is an env var
-  holding a small comma-separated allowlist of GitHub logins (starts with
-  just `Russ-Miller`). On every login, the auth callback checks the
-  session's GitHub login against that list and upserts `is_admin=true` on
-  the account if it matches — so admin status attaches whenever that
-  person first logs in, with no dependency on database seeding order and
-  no assumption that any particular email is verified or visible on their
-  GitHub account (GitHub OAuth only returns an email at all if the account
-  exposes one; login is the one thing always returned). Once `is_admin` is
-  set this way, granting it to anyone else past the bootstrap list goes
-  back to editing the row directly — still no admin UI for that in the
-  seed phase.
+## 9. Later phase: agent-facing API, accounts, admin (not v1)
 
-## 10. Ingestion pipeline (milestone 5)
+Everything below was designed in the first draft and stays documented
+because the design thinking is real, but none of it is v1 scope per §1.
+Build it if and when the personal-study version is solid and actually
+wants agent/contributor traffic.
 
-Python, in `pipeline/`. Runs on a schedule in GitHub Actions.
-1. Pull arXiv metadata (title, abstract, categories) for cs.CL, cs.AI,
-   cs.LG, cs.SE, cs.CR from the OAI-PMH bulk feed. Never full text at this
-   stage.
-2. Cheap filter: category plus keyword list from the taxonomy.
-3. Embed abstracts; cluster against existing capability descriptions.
-4. Send only candidates to a small model via the Batch API with a cached
-   system prompt: does this paper measure a capability, propose a
-   technique that improves one, or neither, and which slugs.
-5. Write candidates to a review queue (`pipeline/queue/*.yaml`); a human
-   or maintainer agent promotes to the catalog by PR.
-Cost is measured on a one-month sample before scaling to three years.
+- **Read API and MCP** (`/api/v1/*`, streamable HTTP MCP at `/api/mcp`):
+  `list_capabilities`, `get_capability`, an `advise` call, etc. When this
+  phase happens, agent-facing output should be framed as symptom →
+  intervention — actions to take — never as a property of the model
+  ("this model is bad at X"), since the latter reads to an agent as
+  permission to give up rather than something to act on.
+- **Accounts and tokens**: GitHub OAuth via Auth.js, `is_admin` boolean
+  flag, tokens scoped `read`/`write` with `kind` (`human`/`agent`). No
+  agent detection by heuristics — a token earns higher limits and
+  attribution.
+- **Bootstrap admin ("Captain of the Ship")**: `ADMIN_GITHUB_LOGINS` env
+  var allowlist (starts with `Russ-Miller`), checked at login time, not
+  tied to email — GitHub OAuth doesn't guarantee an email comes back.
+- **Capability requests**: a lightweight record (label, rationale, links,
+  status) separate from the git-backed catalog, so a casual suggestion
+  doesn't need evidence up front; an admin turns an accepted one into a
+  real Capability.
+- **Admin CRUD**: direct create/edit/delete on capabilities, bypassing the
+  `proposed` review state. Open technical question if this ever gets
+  built: does an admin write commit to git (keeping git as the catalog's
+  source of truth) or does the catalog move to a database at that point?
+- **Importance claims**: `(capability, context)`-scoped, evidence-backed
+  salience rating, considered as an alternative to raw up/down voting —
+  see decision log, 2026-09-03.
+- **Prediction-before-test** as an entry type: record an expectation
+  before checking it, since memory quietly edits priors to match outcomes
+  after the fact — also later phase, not because it's a bad idea, but
+  because it's a refinement once there's already a body of claims to
+  predict against.
 
-## 11. Non-goals for the seed phase
+## 10. Non-goals
 
-Billing, organizations, private content, file hosting, voting, comment
-threads, detecting unidentified agents, and any roles/permissions system
-beyond the single `is_admin` flag.
+Billing, organizations, private content, file hosting, raw up/down
+voting, comment threads, detecting unidentified agents, any
+roles/permissions system beyond a single `is_admin` flag if that phase
+happens, and — for v1 specifically — the entire contributor-platform
+surface in §9.

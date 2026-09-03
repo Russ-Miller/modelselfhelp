@@ -90,3 +90,62 @@ always returned and needs no extra scope, so `ADMIN_GITHUB_LOGINS` (an
 env var allowlist, starting with `Russ-Miller`) is checked at login time
 and upserts `is_admin=true` on match — live, not a pre-seeded row, so it
 doesn't depend on seeding order relative to first login.
+
+## 2026-09-03 — Personal-study reframe (major, ~180 degrees on scoring)
+The project's purpose was reframed from "CWE for AI model capabilities,
+agent-developer-first SaaS" to primarily a personal study tool — curiosity
+-driven, "the neuroscience of LLMs," built for the author's own thinking
+first. Other humans and eventually agents are hoped-for second-order
+beneficiaries, not the v1 design target; the reasoning (the user's own):
+the most useful tools were usually built because their creator wanted one
+for themselves.
+
+Consequences, each reversing or substantially revising an earlier
+decision in this log:
+- **Score retired.** The 1-10 capability score (2026-09-02 entry) is
+  dropped for v1: scoring invites Goodharting invisibly from inside the
+  loop, and quantitative numbers aren't portable across model version,
+  decoding config, or benchmark quirks. Replaced by qualitative,
+  directional claims with visible provenance.
+- **Claim redefined.** A Claim is no longer a (capability, model,
+  version, context, date) performance data point — it's a directional,
+  scoped statement ("X degrades on tasks where Y"), the primary content
+  unit. Capability becomes a topic page that lists claims (progressive
+  disclosure), not a scored thing.
+- **Sources, not Evidence-on-the-claim.** Renamed Paper → Source,
+  generalized to cover the author's own observations under the same
+  schema (so a lower-rigor parallel notes system doesn't develop). Claims
+  reference sources; a source fixed once fixes every claim citing it.
+- **Contested claims get structure**: both-side sourced citations plus a
+  suspected disagreement axis (model scale, task family, operationalization,
+  success criterion), explicitly flagged when it's a guess — not a bare
+  boolean.
+- **Durable vs. perishable is now a schema field** (`kind`:
+  mechanism/observation), not just a tag, so perishable model-specific
+  findings can't quietly contaminate durable mechanism-level knowledge.
+- **Taxonomy demoted to a view.** The rigid single `group` field becomes
+  soft, re-assignable `tags` — folk categories like "reasoning" probably
+  carve the space badly and are expected to be re-carved at least twice.
+- **Ongoing re-evaluation designed in** (schema + views only for v1):
+  `last_checked_at`/`last_new_evidence_at` on claims, a recent-activity
+  view, a sources view, and a 14-day staleness view. The actual daily
+  internet-scouring automation is explicitly later-phase, gated on real
+  engineering and API-cost decisions — same posture as the original arXiv
+  pipeline.
+- **The entire contributor-platform surface** (accounts, admin CRUD,
+  capability requests, bootstrap-admin-by-GitHub-login, the agent-facing
+  MCP/advise API) is preserved in spec.md §9 as later-phase design, not
+  deleted — the thinking behind it is still sound, just not v1 priority.
+  When it happens, agent-facing framing must be symptom → intervention,
+  phrased as actions, never as a property of the model.
+- Deferred, explicitly not v1: prediction-before-test as an entry type
+  (record expectations before checking, since memory edits priors to
+  match outcomes).
+
+Execution note: rather than migrate all ~90 existing catalog files
+against a schema that was still being nailed down, this pass rewrote
+spec.md and the schemas and produced one fully worked example
+(self-repair, under docs/examples/) for review before the bulk migration.
+`catalog/` and the deployed site still reflect the pre-reframe model as of
+this entry; `npm test` stays green because nothing under catalog/,
+scripts/, or src/ was touched this round.
