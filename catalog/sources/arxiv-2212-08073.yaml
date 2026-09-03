@@ -1,0 +1,13 @@
+id: arxiv-2212-08073
+kind: paper
+title: "Constitutional AI: Harmlessness from AI Feedback"
+authors:
+  - "Yuntao Bai"
+  - "Saurav Kadavath"
+  - "Sandipan Kundu"
+  - "et al."
+year: 2022
+arxiv_id: "2212.08073"
+url: https://arxiv.org/abs/2212.08073
+tags: [safety, training]
+ingested_at: 2026-09-02

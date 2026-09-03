@@ -1,0 +1,14 @@
+id: arxiv-2305-14251
+kind: paper
+title: "FActScore: Fine-grained Atomic Evaluation of Factual Precision in Long Form Text Generation"
+authors:
+  - "Sewon Min"
+  - "Kalpesh Krishna"
+  - "Xinxi Lyu"
+  - "et al."
+year: 2023
+arxiv_id: "2305.14251"
+url: https://arxiv.org/abs/2305.14251
+tags: [factuality, evaluation]
+code_url: https://github.com/shmsw25/FActScore
+ingested_at: 2026-09-02

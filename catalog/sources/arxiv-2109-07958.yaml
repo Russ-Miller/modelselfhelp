@@ -1,0 +1,13 @@
+id: arxiv-2109-07958
+kind: paper
+title: "TruthfulQA: Measuring How Models Mimic Human Falsehoods"
+authors:
+  - "Stephanie Lin"
+  - "Jacob Hilton"
+  - "Owain Evans"
+year: 2021
+arxiv_id: "2109.07958"
+url: https://arxiv.org/abs/2109.07958
+tags: [truthfulness, benchmark]
+code_url: https://github.com/sylinrl/TruthfulQA
+ingested_at: 2026-09-02

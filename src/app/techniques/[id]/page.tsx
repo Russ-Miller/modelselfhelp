@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getContext, getPaper, getTechnique, getTechniques, getCapability } from "@/lib/catalog";
+import { getSource, getTagLabel, getTechnique, getTechniques, getCapability } from "@/lib/catalog";
 
 export function generateStaticParams() {
   return getTechniques().map((t) => ({ id: t.id }));
@@ -27,7 +27,7 @@ export default async function TechniquePage({ params }: PageProps<"/techniques/[
       <section className="text-sm"><span className="font-semibold">Addresses: </span>
         {t.addresses.map((a, i) => <span key={a}>{i > 0 && ", "}<Link href={`/capabilities/${a}`} className="hover:underline">{getCapability(a)?.label ?? a}</Link></span>)}
       </section>
-      {t.contexts?.length ? <p className="text-sm text-neutral-500">Contexts: {t.contexts.map((c) => getContext(c)?.label ?? c).join(", ")}</p> : null}
+      {t.contexts?.length ? <p className="text-sm text-neutral-500">Contexts: {t.contexts.map(getTagLabel).join(", ")}</p> : null}
       <section>
         <h2 className="mb-2 font-semibold">Code</h2>
         {t.repos?.length ? (
@@ -40,11 +40,11 @@ export default async function TechniquePage({ params }: PageProps<"/techniques/[
           </ul>
         ) : <p className="text-sm text-neutral-500">No repository linked yet. Contribute one.</p>}
       </section>
-      {t.papers?.length ? (
+      {t.sources?.length ? (
         <section>
-          <h2 className="mb-2 font-semibold">Papers</h2>
+          <h2 className="mb-2 font-semibold">Sources</h2>
           <ul className="space-y-1 text-sm">
-            {t.papers.map((pid) => { const p = getPaper(pid); return p ? <li key={pid}><a href={p.url} className="hover:underline">{p.title}</a> <span className="text-neutral-500">({p.year})</span></li> : null; })}
+            {t.sources.map((sid) => { const s = getSource(sid); return s ? <li key={sid}><Link href={`/sources/${sid}`} className="hover:underline">{s.title}</Link> {s.year && <span className="text-neutral-500">({s.year})</span>}</li> : null; })}
           </ul>
         </section>
       ) : null}

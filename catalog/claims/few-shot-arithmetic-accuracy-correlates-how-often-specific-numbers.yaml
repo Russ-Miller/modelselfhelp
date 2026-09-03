@@ -1,0 +1,14 @@
+id: few-shot-arithmetic-accuracy-correlates-how-often-specific-numbers
+capability: arithmetic
+statement: >-
+  Few-shot arithmetic accuracy correlates with how often the specific numbers appear in pretraining data, evidence of memorization.
+kind: mechanism
+backing_strength: single-paper
+sources:
+  - source: arxiv-2202-07206
+    stance: supports
+    note: "Few-shot arithmetic accuracy correlates with how often the specific numbers appear in pretraining data, evidence of memorization."
+contested: false
+status: active
+last_checked_at: 2026-09-03
+submitted_by: human:Russ-Miller

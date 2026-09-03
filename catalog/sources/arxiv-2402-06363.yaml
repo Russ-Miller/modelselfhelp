@@ -1,0 +1,14 @@
+id: arxiv-2402-06363
+kind: paper
+title: "StruQ: Defending Against Prompt Injection with Structured Queries"
+authors:
+  - "Sizhe Chen"
+  - "Julien Piet"
+  - "Chawin Sitawarin"
+  - "David Wagner"
+year: 2024
+arxiv_id: "2402.06363"
+url: https://arxiv.org/abs/2402.06363
+tags: [prompt-injection, training]
+code_url: https://github.com/Sizhe-Chen/StruQ
+ingested_at: 2026-09-02

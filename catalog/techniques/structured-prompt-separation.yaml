@@ -10,7 +10,7 @@ description: >-
   inside it.
 addresses: [prompt-injection]
 kind: training
-papers: [arxiv-2402-06363, arxiv-2404-13208]
+sources: [arxiv-2402-06363, arxiv-2404-13208]
 repos:
   - url: https://github.com/Sizhe-Chen/StruQ
     note: StruQ training and evaluation code.

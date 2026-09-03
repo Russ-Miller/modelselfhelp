@@ -8,7 +8,7 @@ description: >-
   in training.
 addresses: [arithmetic]
 kind: architecture
-papers: [arxiv-2405-17399]
+sources: [arxiv-2405-17399]
 repos:
   - url: https://github.com/mcleish7/arithmetic
     note: Training and evaluation code for abacus embeddings.

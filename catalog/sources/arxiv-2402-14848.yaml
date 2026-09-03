@@ -1,0 +1,12 @@
+id: arxiv-2402-14848
+kind: paper
+title: "Same Task, More Tokens: the Impact of Input Length on the Reasoning Performance of Large Language Models"
+authors:
+  - "Mosh Levy"
+  - "Alon Jacoby"
+  - "Yoav Goldberg"
+year: 2024
+arxiv_id: "2402.14848"
+url: https://arxiv.org/abs/2402.14848
+tags: [long-context, reasoning]
+ingested_at: 2026-09-02

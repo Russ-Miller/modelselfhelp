@@ -1,0 +1,14 @@
+id: five-assistants-trained-human-feedback-consistently-show-sycophancy
+capability: sycophancy
+statement: >-
+  Five assistants trained with human feedback consistently show sycophancy across tasks, and human preference data itself rewards it.
+kind: mechanism
+backing_strength: single-paper
+sources:
+  - source: arxiv-2310-13548
+    stance: supports
+    note: "Five assistants trained with human feedback consistently show sycophancy across tasks, and human preference data itself rewards it."
+contested: false
+status: active
+last_checked_at: 2026-09-03
+submitted_by: human:Russ-Miller

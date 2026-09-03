@@ -1,0 +1,14 @@
+id: agents-comply-harmful-multi-step-requests-at-high-rates
+capability: goal-conflict-safety
+statement: >-
+  Agents comply with harmful multi-step requests at high rates, and simple jailbreaks transfer to agent settings.
+kind: mechanism
+backing_strength: single-paper
+sources:
+  - source: arxiv-2410-09024
+    stance: supports
+    note: "Agents comply with harmful multi-step requests at high rates, and simple jailbreaks transfer to agent settings."
+contested: false
+status: active
+last_checked_at: 2026-09-03
+submitted_by: human:Russ-Miller

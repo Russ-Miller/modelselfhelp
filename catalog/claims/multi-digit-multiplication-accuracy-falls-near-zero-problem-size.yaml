@@ -1,0 +1,14 @@
+id: multi-digit-multiplication-accuracy-falls-near-zero-problem-size
+capability: arithmetic
+statement: >-
+  Multi-digit multiplication accuracy falls to near zero as problem size grows, and models rely on pattern matching rather than a learned algorithm.
+kind: mechanism
+backing_strength: single-paper
+sources:
+  - source: arxiv-2305-18654
+    stance: supports
+    note: "Multi-digit multiplication accuracy falls to near zero as problem size grows, and models rely on pattern matching rather than a learned algorithm."
+contested: false
+status: active
+last_checked_at: 2026-09-03
+submitted_by: human:Russ-Miller

@@ -1,42 +1,11 @@
 id: secure-coding
-label: Writing secure code and dependencies
-summary: Generated code carries known vulnerability patterns, and models suggest packages that do not exist.
+label: "Writing secure code and dependencies"
+summary: "Generated code carries known vulnerability patterns, and models suggest packages that do not exist."
 description: >-
-  A capable coding model avoids well-known vulnerability classes, uses safe
-  defaults, and only imports dependencies that exist and are trustworthy,
-  checking the registry rather than recalling names from memory.
-strong_performance_looks_like: >-
-  Avoids well-known vulnerability patterns by default and only imports dependencies it has confirmed exist in the registry.
-weak_performance_looks_like: >-
-  SQL built by string concatenation; secrets hard-coded; unsafe
-  deserialization; and imports of packages that do not exist, which an
-  attacker can register so the next install pulls malicious code.
-group: security
-aliases: [insecure code generation, package hallucination, slopsquatting]
-contexts: [coding-agent]
-evidence:
-  - paper: arxiv-2108-09293
-    strength: controlled
-    note: >-
-      Roughly forty percent of Copilot completions in security-relevant
-      scenarios were vulnerable.
-  - paper: arxiv-2211-03622
-    strength: controlled
-    note: >-
-      Users with an AI assistant wrote less secure code and were more confident
-      it was secure.
-  - paper: arxiv-2406-10279
-    strength: controlled
-    note: >-
-      Across many models and hundreds of thousands of samples, a substantial
-      share of recommended packages did not exist, and the names repeated,
-      making them exploitable.
-  - paper: arxiv-2312-04724
-    strength: benchmark
-    note: >-
-      Models complied with insecure completions a large fraction of the time,
-      and more capable models were more likely to suggest insecure code.
+  A capable coding model avoids well-known vulnerability classes, uses safe defaults, and only imports dependencies that exist and are trustworthy, checking the registry rather than recalling names from memory.
+tags: [coding-agent, security]
+aliases: ["insecure code generation", "package hallucination", "slopsquatting"]
 techniques: [dependency-existence-check, secure-code-scanning]
 related: [prompt-injection, hallucination]
-status: accepted
+status: active
 submitted_by: human:Russ-Miller

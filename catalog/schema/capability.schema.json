@@ -3,22 +3,18 @@
   "$id": "https://modelselfhelp.dev/schema/capability.schema.json",
   "type": "object",
   "additionalProperties": false,
-  "required": ["id", "label", "summary", "description", "strong_performance_looks_like", "weak_performance_looks_like", "group", "contexts", "evidence", "status", "submitted_by"],
+  "required": ["id", "label", "summary", "description", "status", "submitted_by"],
   "properties": {
     "id": { "$ref": "common.schema.json#/$defs/slug" },
     "label": { "type": "string", "minLength": 3, "maxLength": 60 },
     "summary": { "type": "string", "minLength": 20, "maxLength": 240 },
     "description": { "type": "string", "minLength": 40 },
-    "strong_performance_looks_like": { "type": "string", "minLength": 40 },
-    "weak_performance_looks_like": { "type": "string", "minLength": 40 },
-    "group": { "$ref": "common.schema.json#/$defs/slug" },
+    "tags": { "type": "array", "$ref": "common.schema.json#/$defs/slugList" },
     "parent": { "$ref": "common.schema.json#/$defs/slug" },
     "aliases": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
-    "contexts": { "type": "array", "$ref": "common.schema.json#/$defs/slugList", "minItems": 1 },
-    "evidence": { "type": "array", "items": { "$ref": "common.schema.json#/$defs/evidence" }, "minItems": 1 },
-    "techniques": { "$ref": "common.schema.json#/$defs/slugList" },
-    "related": { "$ref": "common.schema.json#/$defs/slugList" },
-    "status": { "$ref": "common.schema.json#/$defs/status" },
+    "techniques": { "type": "array", "$ref": "common.schema.json#/$defs/slugList" },
+    "related": { "type": "array", "$ref": "common.schema.json#/$defs/slugList" },
+    "status": { "type": "string", "enum": ["active", "parked"] },
     "submitted_by": { "$ref": "common.schema.json#/$defs/provenance" }
   }
 }

@@ -1,0 +1,14 @@
+id: most-models-claiming-long-contexts-fail-well-before
+capability: long-context-degradation
+statement: >-
+  Most models claiming long contexts fail well before their advertised length on synthetic retrieval, tracing and aggregation tasks.
+kind: mechanism
+backing_strength: single-paper
+sources:
+  - source: arxiv-2404-06654
+    stance: supports
+    note: "Most models claiming long contexts fail well before their advertised length on synthetic retrieval, tracing and aggregation tasks."
+contested: false
+status: active
+last_checked_at: 2026-09-03
+submitted_by: human:Russ-Miller

@@ -1,0 +1,13 @@
+id: arxiv-2211-03622
+kind: paper
+title: "Do Users Write More Insecure Code with AI Assistants?"
+authors:
+  - "Neil Perry"
+  - "Megha Srivastava"
+  - "Deepak Kumar"
+  - "Dan Boneh"
+year: 2022
+arxiv_id: "2211.03622"
+url: https://arxiv.org/abs/2211.03622
+tags: [secure-coding, user-study]
+ingested_at: 2026-09-02

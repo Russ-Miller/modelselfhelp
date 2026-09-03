@@ -158,6 +158,7 @@ once here, not once per claim that cites it.
 | summary | string? | the abstract for a paper; the actual content for an observation |
 | tags | string[]? | |
 | code_url | string? | |
+| ingested_at | date | when this source entered the catalog — distinct from `date`/`year`, which is when the source itself was created. Powers the sources view (§8) and the recent-activity view (§6). |
 
 ### Model  (`catalog/models/<id>.yaml`)
 Unchanged in shape from the previous draft: a model family with versions

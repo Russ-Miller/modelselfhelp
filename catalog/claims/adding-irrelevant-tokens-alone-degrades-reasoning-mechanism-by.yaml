@@ -1,0 +1,14 @@
+id: adding-irrelevant-tokens-alone-degrades-reasoning-mechanism-by
+capability: context-hygiene
+statement: >-
+  Adding irrelevant tokens alone degrades reasoning, which is the mechanism by which a bloated context hurts an agent.
+kind: mechanism
+backing_strength: single-paper
+sources:
+  - source: arxiv-2402-14848
+    stance: supports
+    note: "Adding irrelevant tokens alone degrades reasoning, which is the mechanism by which a bloated context hurts an agent."
+contested: false
+status: active
+last_checked_at: 2026-09-03
+submitted_by: human:Russ-Miller

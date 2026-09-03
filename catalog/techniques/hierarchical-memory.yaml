@@ -8,7 +8,7 @@ description: >-
   across sessions of any length.
 addresses: [long-term-memory, context-hygiene]
 kind: architecture
-papers: [arxiv-2310-08560]
+sources: [arxiv-2310-08560]
 repos:
   - url: https://github.com/letta-ai/letta
     note: Letta, formerly MemGPT, the reference implementation.

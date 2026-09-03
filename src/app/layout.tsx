@@ -19,6 +19,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <nav className="mx-auto max-w-5xl px-4 py-3 flex items-center gap-6 text-sm">
             <Link href="/" className="font-semibold tracking-tight">modelselfhelp</Link>
             <Link href="/capabilities" className="hover:underline">Capabilities</Link>
+            <Link href="/claims" className="hover:underline">Claims</Link>
+            <Link href="/sources" className="hover:underline">Sources</Link>
             <Link href="/techniques" className="hover:underline">Techniques</Link>
             <a href="https://github.com/Russ-Miller/modelselfhelp" className="ml-auto hover:underline">GitHub</a>
           </nav>

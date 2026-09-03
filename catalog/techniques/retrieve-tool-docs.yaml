@@ -8,7 +8,7 @@ description: >-
   when APIs change.
 addresses: [tool-use]
 kind: retrieval
-papers: [arxiv-2305-15334]
+sources: [arxiv-2305-15334]
 repos:
   - url: https://github.com/ShishirPatil/gorilla
     note: Gorilla retriever-aware training and API documentation store.

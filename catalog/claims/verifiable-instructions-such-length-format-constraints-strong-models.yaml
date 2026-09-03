@@ -1,0 +1,14 @@
+id: verifiable-instructions-such-length-format-constraints-strong-models
+capability: procedure-following
+statement: >-
+  On verifiable instructions such as length and format constraints, strong models still fail a meaningful share, and failures grow when several constraints apply at once.
+kind: mechanism
+backing_strength: single-paper
+sources:
+  - source: arxiv-2311-07911
+    stance: supports
+    note: "On verifiable instructions such as length and format constraints, strong models still fail a meaningful share, and failures grow when several constraints apply at once."
+contested: false
+status: active
+last_checked_at: 2026-09-03
+submitted_by: human:Russ-Miller

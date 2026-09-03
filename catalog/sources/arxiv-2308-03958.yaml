@@ -1,0 +1,14 @@
+id: arxiv-2308-03958
+kind: paper
+title: "Simple synthetic data reduces sycophancy in large language models"
+authors:
+  - "Jerry Wei"
+  - "Da Huang"
+  - "Yifeng Lu"
+  - "Denny Zhou"
+  - "Quoc V. Le"
+year: 2023
+arxiv_id: "2308.03958"
+url: https://arxiv.org/abs/2308.03958
+tags: [sycophancy, training]
+ingested_at: 2026-09-02

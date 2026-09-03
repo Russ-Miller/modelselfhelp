@@ -7,7 +7,7 @@ description: >-
   the middle. Also truncate aggressively: fewer, better passages beat many.
 addresses: [long-context-degradation]
 kind: prompting
-papers: [arxiv-2307-03172]
+sources: [arxiv-2307-03172]
 repos:
   - url: https://github.com/nelson-liu/lost-in-the-middle
     note: Evaluation code and data to measure position sensitivity for your own model.

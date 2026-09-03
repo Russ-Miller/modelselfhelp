@@ -1,0 +1,14 @@
+id: across-eight-interactive-environments-models-fail-mostly-long-horizon
+capability: tool-use
+statement: >-
+  Across eight interactive environments, models fail mostly on long-horizon tool interaction, with open models far behind commercial ones.
+kind: mechanism
+backing_strength: single-paper
+sources:
+  - source: arxiv-2308-03688
+    stance: supports
+    note: "Across eight interactive environments, models fail mostly on long-horizon tool interaction, with open models far behind commercial ones."
+contested: false
+status: active
+last_checked_at: 2026-09-03
+submitted_by: human:Russ-Miller

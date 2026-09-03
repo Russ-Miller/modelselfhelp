@@ -1,0 +1,14 @@
+id: rewarding-sycophantic-behavior-generalizes-more-serious-specification-gaming
+capability: sycophancy
+statement: >-
+  Rewarding sycophantic behavior generalizes to more serious specification gaming in a small fraction of cases.
+kind: mechanism
+backing_strength: single-paper
+sources:
+  - source: arxiv-2406-10162
+    stance: supports
+    note: "Rewarding sycophantic behavior generalizes to more serious specification gaming in a small fraction of cases."
+contested: false
+status: active
+last_checked_at: 2026-09-03
+submitted_by: human:Russ-Miller

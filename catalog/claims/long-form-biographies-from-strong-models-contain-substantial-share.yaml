@@ -1,0 +1,14 @@
+id: long-form-biographies-from-strong-models-contain-substantial-share
+capability: hallucination
+statement: >-
+  Long-form biographies from strong models contain a substantial share of unsupported atomic facts, rising for less well-known subjects.
+kind: mechanism
+backing_strength: single-paper
+sources:
+  - source: arxiv-2305-14251
+    stance: supports
+    note: "Long-form biographies from strong models contain a substantial share of unsupported atomic facts, rising for less well-known subjects."
+contested: false
+status: active
+last_checked_at: 2026-09-03
+submitted_by: human:Russ-Miller

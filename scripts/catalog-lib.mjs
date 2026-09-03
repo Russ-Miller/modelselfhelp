@@ -5,7 +5,7 @@ import YAML from "yaml";
 
 export const ROOT = path.resolve(new URL("..", import.meta.url).pathname);
 export const CATALOG = path.join(ROOT, "catalog");
-export const KINDS = ["capabilities", "papers", "techniques", "models", "claims"];
+export const KINDS = ["capabilities", "sources", "techniques", "models", "claims"];
 
 export function readYamlDir(dir) {
   const full = path.join(CATALOG, dir);

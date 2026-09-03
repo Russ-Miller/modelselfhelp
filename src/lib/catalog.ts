@@ -1,43 +1,52 @@
-// Read-only access to the YAML catalog for the site and API.
+// Read-only access to the YAML catalog for the site.
 // Loaded once per process at build/request time; the catalog is small.
 import fs from "node:fs";
 import path from "node:path";
 import YAML from "yaml";
 
-export type Strength = "anecdotal" | "benchmark" | "controlled" | "survey";
-export type RecordStatus = "proposed" | "accepted" | "disputed" | "retired";
+export type SourceKind = "paper" | "observation";
+export type Stance = "supports" | "contests";
+export type ClaimKind = "mechanism" | "observation";
+export type BackingStrength = "single-paper" | "replicated" | "mechanism-reasoning" | "own-observation";
+export type CapabilityStatus = "active" | "parked";
+export type ClaimStatus = "active" | "superseded" | "retired";
+export type TechniqueStatus = "proposed" | "accepted" | "disputed" | "retired";
 
-export interface Evidence { paper: string; note: string; strength?: Strength }
+export interface SourceLink { source: string; stance: Stance; note: string }
+export interface DisagreementAxis { description: string; is_guess: boolean }
+export interface ObservedOn { model?: string; era?: string; task_type?: string }
+
 export interface Capability {
   id: string; label: string; summary: string; description: string;
-  strong_performance_looks_like: string; weak_performance_looks_like: string;
-  group: string; parent?: string; aliases?: string[]; contexts: string[]; evidence: Evidence[];
-  techniques?: string[]; related?: string[]; status: RecordStatus; submitted_by: string;
+  tags?: string[]; parent?: string; aliases?: string[]; techniques?: string[]; related?: string[];
+  status: CapabilityStatus; submitted_by: string;
 }
-export interface Paper {
-  id: string; title: string; authors: string[]; year: number; arxiv_id?: string; url: string;
-  venue?: string; abstract?: string; tags?: string[]; code_url?: string;
+export interface Source {
+  id: string; kind: SourceKind; title: string; authors?: string[]; year?: number; date?: string;
+  arxiv_id?: string; url?: string; venue?: string; summary?: string; tags?: string[]; code_url?: string;
+  ingested_at: string;
+}
+export interface Claim {
+  id: string; capability: string; statement: string; tags?: string[];
+  kind: ClaimKind; backing_strength: BackingStrength; observed_on?: ObservedOn;
+  sources: SourceLink[]; contested: boolean; disagreement_axis?: DisagreementAxis;
+  status: ClaimStatus; superseded_by?: string;
+  last_checked_at: string; last_new_evidence_at?: string; notes?: string; submitted_by: string;
 }
 export interface Repo { url: string; note: string; verified_on?: string }
 export interface Technique {
   id: string; label: string; summary: string; description: string; addresses: string[];
   kind: "prompting" | "retrieval" | "tooling" | "training" | "decoding" | "architecture" | "process";
-  papers?: string[]; repos?: Repo[]; contexts?: string[]; caveats?: string; status: RecordStatus; submitted_by: string;
+  sources?: string[]; repos?: Repo[]; contexts?: string[]; caveats?: string; status: TechniqueStatus; submitted_by: string;
 }
 export interface ModelVersion { id: string; label: string; released?: string }
 export interface Model { id: string; label: string; vendor: string; url?: string; versions: ModelVersion[] }
-export interface Claim {
-  id: string; capability: string; model: string; version: string; context: string; observed_on: string;
-  score: number;
-  status: "open" | "mitigated" | "resolved" | "disputed" | "superseded";
-  superseded_by?: string; evidence: Evidence[]; notes?: string; submitted_by: string;
-}
 export interface TaxonomyEntry { id: string; label: string; description: string }
 export interface Taxonomy { groups: TaxonomyEntry[]; contexts: TaxonomyEntry[] }
 
 export interface Catalog {
   taxonomy: Taxonomy;
-  capabilities: Capability[]; papers: Paper[]; techniques: Technique[]; models: Model[]; claims: Claim[];
+  capabilities: Capability[]; claims: Claim[]; sources: Source[]; techniques: Technique[]; models: Model[];
 }
 
 const CATALOG_DIR = path.join(process.cwd(), "catalog");
@@ -58,29 +67,55 @@ export function loadCatalog(): Catalog {
   cache = {
     taxonomy: YAML.parse(fs.readFileSync(path.join(CATALOG_DIR, "taxonomy.yaml"), "utf8")) as Taxonomy,
     capabilities: readDir<Capability>("capabilities"),
-    papers: readDir<Paper>("papers"),
+    claims: readDir<Claim>("claims"),
+    sources: readDir<Source>("sources"),
     techniques: readDir<Technique>("techniques"),
     models: readDir<Model>("models"),
-    claims: readDir<Claim>("claims"),
   };
   return cache;
 }
 
 export const getCapabilities = () => loadCatalog().capabilities;
 export const getCapability = (id: string) => loadCatalog().capabilities.find((c) => c.id === id);
+export const getClaims = () => loadCatalog().claims;
+export const getClaim = (id: string) => loadCatalog().claims.find((c) => c.id === id);
+export const getSources = () => loadCatalog().sources;
+export const getSource = (id: string) => loadCatalog().sources.find((s) => s.id === id);
 export const getTechniques = () => loadCatalog().techniques;
 export const getTechnique = (id: string) => loadCatalog().techniques.find((t) => t.id === id);
-export const getPaper = (id: string) => loadCatalog().papers.find((p) => p.id === id);
 export const getModel = (id: string) => loadCatalog().models.find((m) => m.id === id);
-export const getGroup = (id: string) => loadCatalog().taxonomy.groups.find((g) => g.id === id);
-export const getContext = (id: string) => loadCatalog().taxonomy.contexts.find((c) => c.id === id);
-export const techniquesFor = (capabilityId: string) => loadCatalog().techniques.filter((t) => t.addresses.includes(capabilityId));
-export const claimsFor = (capabilityId: string) => loadCatalog().claims.filter((c) => c.capability === capabilityId);
+export const getTagLabel = (id: string) => {
+  const t = loadCatalog().taxonomy;
+  return t.groups.find((g) => g.id === id)?.label ?? t.contexts.find((c) => c.id === id)?.label ?? id;
+};
 
-/** Capabilities grouped by taxonomy group, in taxonomy order. */
+export const claimsFor = (capabilityId: string) => loadCatalog().claims.filter((c) => c.capability === capabilityId);
+export const techniquesFor = (capabilityId: string) => loadCatalog().techniques.filter((t) => t.addresses.includes(capabilityId));
+
+/** Every claim that cites a given source, alongside the stance that claim's citation carries. */
+export function claimsCiting(sourceId: string): { claim: Claim; stance: Stance }[] {
+  const out: { claim: Claim; stance: Stance }[] = [];
+  for (const claim of loadCatalog().claims) {
+    const link = claim.sources.find((s) => s.source === sourceId);
+    if (link) out.push({ claim, stance: link.stance });
+  }
+  return out;
+}
+
+/** Capabilities grouped by their first tag (loose grouping — tags are soft, see spec §7). */
 export function capabilitiesByGroup(): { group: TaxonomyEntry; capabilities: Capability[] }[] {
   const { taxonomy, capabilities } = loadCatalog();
   return taxonomy.groups
-    .map((group) => ({ group, capabilities: capabilities.filter((c) => c.group === group.id) }))
+    .map((group) => ({ group, capabilities: capabilities.filter((c) => c.tags?.includes(group.id)) }))
     .filter((g) => g.capabilities.length > 0);
+}
+
+/** Claims sorted by most-recently-checked first, for a recent-activity-style view. */
+export function claimsByRecency(): Claim[] {
+  return [...loadCatalog().claims].sort((a, b) => (b.last_checked_at || "").localeCompare(a.last_checked_at || ""));
+}
+
+/** Sources sorted by most-recently-ingested first. */
+export function sourcesByRecency(): Source[] {
+  return [...loadCatalog().sources].sort((a, b) => (b.ingested_at || "").localeCompare(a.ingested_at || ""));
 }

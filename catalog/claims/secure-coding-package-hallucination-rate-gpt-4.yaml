@@ -1,0 +1,25 @@
+id: secure-coding-package-hallucination-rate-gpt-4
+capability: secure-coding
+statement: >-
+  GPT-4 recommended non-existent Python and JavaScript packages in only a
+  small percentage of generations — lower than the open models tested in
+  the same study — but the same hallucinated names recurred often enough
+  across runs to be practically exploitable by an attacker who registers
+  them ahead of time.
+kind: observation
+backing_strength: single-paper
+observed_on:
+  model: gpt
+  era: "2024, GPT-4 class"
+  task_type: coding-agent
+sources:
+  - source: arxiv-2406-10279
+    stance: supports
+    note: >-
+      Across many models and hundreds of thousands of samples, GPT-4 had a
+      lower but still nonzero package-hallucination rate, with repeated
+      package names across runs.
+contested: false
+status: active
+last_checked_at: 2026-09-03
+submitted_by: human:Russ-Miller

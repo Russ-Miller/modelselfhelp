@@ -8,7 +8,7 @@ description: >-
   picks a real package.
 addresses: [secure-coding]
 kind: process
-papers: [arxiv-2406-10279]
+sources: [arxiv-2406-10279]
 contexts: [coding-agent]
 caveats: >-
   Practitioner technique. Newly registered but legitimate packages will be

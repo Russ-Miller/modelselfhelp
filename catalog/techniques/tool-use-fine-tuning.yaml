@@ -8,7 +8,7 @@ description: >-
   APIs.
 addresses: [tool-use]
 kind: training
-papers: [arxiv-2302-04761, arxiv-2307-16789]
+sources: [arxiv-2302-04761, arxiv-2307-16789]
 repos:
   - url: https://github.com/OpenBMB/ToolBench
     note: Data, training recipe and evaluator for multi-tool API use.

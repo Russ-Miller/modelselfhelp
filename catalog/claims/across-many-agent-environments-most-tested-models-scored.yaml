@@ -1,0 +1,14 @@
+id: across-many-agent-environments-most-tested-models-scored
+capability: goal-conflict-safety
+statement: >-
+  Across many agent environments, most tested models scored below sixty percent on safety, with failures concentrated in unsafe tool actions.
+kind: mechanism
+backing_strength: single-paper
+sources:
+  - source: arxiv-2412-14470
+    stance: supports
+    note: "Across many agent environments, most tested models scored below sixty percent on safety, with failures concentrated in unsafe tool actions."
+contested: false
+status: active
+last_checked_at: 2026-09-03
+submitted_by: human:Russ-Miller

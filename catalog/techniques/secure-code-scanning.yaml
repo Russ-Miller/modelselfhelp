@@ -8,7 +8,7 @@ description: >-
   to measure how often a model produces insecure completions.
 addresses: [secure-coding]
 kind: tooling
-papers: [arxiv-2312-04724]
+sources: [arxiv-2312-04724]
 repos:
   - url: https://github.com/meta-llama/PurpleLlama
     note: CyberSecEval insecure-code detector and benchmark.

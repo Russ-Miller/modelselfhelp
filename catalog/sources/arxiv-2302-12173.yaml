@@ -1,0 +1,13 @@
+id: arxiv-2302-12173
+kind: paper
+title: "Not what you've signed up for: Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection"
+authors:
+  - "Kai Greshake"
+  - "Sahar Abdelnabi"
+  - "Shailesh Mishra"
+  - "et al."
+year: 2023
+arxiv_id: "2302.12173"
+url: https://arxiv.org/abs/2302.12173
+tags: [prompt-injection]
+ingested_at: 2026-09-02

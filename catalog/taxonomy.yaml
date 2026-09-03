@@ -1,5 +1,8 @@
-# Top-level groups and usage contexts. Extend by pull request.
-# Group and context ids are permanent once merged.
+# Soft, re-assignable vocabulary — a view over claims and capabilities,
+# not a rigid single-parent taxonomy. `groups` and `contexts` both feed
+# into `tags` on Capability and `tags`/`observed_on.task_type` on Claim.
+# Expect to re-carve this at least twice; ids are permanent once merged,
+# but what they mean and how content is tagged is free to evolve.
 
 groups:
   - id: reasoning

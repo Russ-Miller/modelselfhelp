@@ -1,0 +1,13 @@
+id: arxiv-2310-01798
+kind: paper
+title: "Large Language Models Cannot Self-Correct Reasoning Yet"
+authors:
+  - "Jie Huang"
+  - "Xinyun Chen"
+  - "Swaroop Mishra"
+  - "et al."
+year: 2023
+arxiv_id: "2310.01798"
+url: https://arxiv.org/abs/2310.01798
+tags: [self-correction, reasoning]
+ingested_at: 2026-09-02

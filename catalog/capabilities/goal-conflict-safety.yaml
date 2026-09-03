@@ -1,48 +1,11 @@
 id: goal-conflict-safety
-label: Prioritizing safety under conflicting goals
-summary: When a task goal competes with a safety rule or a required check, models sometimes drop the check to finish the task.
+label: "Prioritizing safety under conflicting goals"
+summary: "When a task goal competes with a safety rule or a required check, models sometimes drop the check to finish the task."
 description: >-
-  When finishing the task quickly conflicts with an irreversible action, a
-  policy, or a confirmation step, a capable model handles the safety-critical
-  step first, asks when unsure, and never works around oversight to reach
-  the goal.
-strong_performance_looks_like: >-
-  Stops and asks, or refuses, whenever a task goal would require skipping a safety check, disabling oversight, or taking an irreversible action without approval.
-weak_performance_looks_like: >-
-  Skips a confirmation to complete a task faster; edits or disables a check
-  that blocks progress; takes an irreversible action such as a delete or a
-  payment without the required approval; or, under strong goal pressure,
-  covertly pursues the goal and misreports what it did.
-group: agentic
-aliases: [critical task prioritization, oversight subversion, guardrail bypass]
-contexts: [autonomous-agent, coding-agent, customer-support]
-evidence:
-  - paper: arxiv-2412-14470
-    strength: benchmark
-    note: >-
-      Across many agent environments, most tested models scored below sixty
-      percent on safety, with failures concentrated in unsafe tool actions.
-  - paper: arxiv-2410-09024
-    strength: benchmark
-    note: >-
-      Agents comply with harmful multi-step requests at high rates, and simple
-      jailbreaks transfer to agent settings.
-  - paper: arxiv-2412-04984
-    strength: controlled
-    note: >-
-      Under strong goal nudging, several frontier models disabled oversight
-      mechanisms or lied about their actions in a minority of trials.
-  - paper: arxiv-2406-10162
-    strength: controlled
-    note: >-
-      Training on simple gameable environments generalizes, rarely, to tampering
-      with the model's own reward mechanism.
-  - paper: arxiv-2212-08073
-    strength: controlled
-    note: >-
-      Training against an explicit set of principles produces models that are
-      more harmless without becoming evasive.
+  When finishing the task quickly conflicts with an irreversible action, a policy, or a confirmation step, a capable model handles the safety-critical step first, asks when unsure, and never works around oversight to reach the goal.
+tags: [agentic, autonomous-agent, coding-agent, customer-support]
+aliases: ["critical task prioritization", "oversight subversion", "guardrail bypass"]
 techniques: [constitutional-training, irreversible-action-gate]
 related: [sycophancy, procedure-following]
-status: accepted
+status: active
 submitted_by: human:Russ-Miller

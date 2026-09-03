@@ -1,0 +1,14 @@
+id: surveys-causes-kinds-detection-hallucination-across-data-training
+capability: hallucination
+statement: >-
+  Surveys causes, kinds, and detection of hallucination across data, training, and inference, and finds no complete solution.
+kind: mechanism
+backing_strength: single-paper
+sources:
+  - source: arxiv-2311-05232
+    stance: supports
+    note: "Surveys causes, kinds, and detection of hallucination across data, training, and inference, and finds no complete solution."
+contested: false
+status: active
+last_checked_at: 2026-09-03
+submitted_by: human:Russ-Miller

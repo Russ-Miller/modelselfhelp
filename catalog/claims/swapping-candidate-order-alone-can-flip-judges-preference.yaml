@@ -1,0 +1,14 @@
+id: swapping-candidate-order-alone-can-flip-judges-preference
+capability: judge-position-bias
+statement: >-
+  Swapping candidate order alone can flip the judge's preference, so an evaluator can be gamed by ordering.
+kind: mechanism
+backing_strength: single-paper
+sources:
+  - source: arxiv-2305-17926
+    stance: supports
+    note: "Swapping candidate order alone can flip the judge's preference, so an evaluator can be gamed by ordering."
+contested: false
+status: active
+last_checked_at: 2026-09-03
+submitted_by: human:Russ-Miller

@@ -1,0 +1,14 @@
+id: grounding-generation-retrieved-documents-improves-factual-accuracy-knowledge-intensive
+capability: hallucination
+statement: >-
+  Grounding generation in retrieved documents improves factual accuracy on knowledge-intensive tasks.
+kind: mechanism
+backing_strength: single-paper
+sources:
+  - source: arxiv-2005-11401
+    stance: supports
+    note: "Grounding generation in retrieved documents improves factual accuracy on knowledge-intensive tasks."
+contested: false
+status: active
+last_checked_at: 2026-09-03
+submitted_by: human:Russ-Miller

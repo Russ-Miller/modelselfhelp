@@ -1,0 +1,14 @@
+id: arxiv-2410-09024
+kind: paper
+title: "AgentHarm: A Benchmark for Measuring Harmfulness of LLM Agents"
+authors:
+  - "Maksym Andriushchenko"
+  - "Alexandra Souly"
+  - "Mateusz Dziemian"
+  - "et al."
+year: 2024
+arxiv_id: "2410.09024"
+url: https://arxiv.org/abs/2410.09024
+tags: [safety, agents, benchmark]
+code_url: https://github.com/UKGovernmentBEIS/inspect_evals
+ingested_at: 2026-09-02

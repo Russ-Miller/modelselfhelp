@@ -1,0 +1,13 @@
+id: arxiv-2412-04984
+kind: paper
+title: "Frontier Models are Capable of In-context Scheming"
+authors:
+  - "Alexander Meinke"
+  - "Bronson Schoen"
+  - "J\u00e9r\u00e9my Scheurer"
+  - "et al."
+year: 2024
+arxiv_id: "2412.04984"
+url: https://arxiv.org/abs/2412.04984
+tags: [safety, agents, scheming]
+ingested_at: 2026-09-02

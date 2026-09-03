@@ -7,7 +7,7 @@ description: >-
   context; the details are archived and retrievable.
 addresses: [long-term-memory]
 kind: prompting
-papers: [arxiv-2308-15022]
+sources: [arxiv-2308-15022]
 contexts: [chat-assistant, customer-support]
 caveats: >-
   Summaries lose detail; pair with retrieval over the archived turns for

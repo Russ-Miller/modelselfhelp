@@ -1,0 +1,24 @@
+id: tool-use-reliability-in-customer-support-gpt-4o
+capability: tool-use
+statement: >-
+  In simulated retail customer-support tasks with real tools and policy
+  documents, GPT-4o — the best performer in the study — still completed
+  well under two-thirds of tasks correctly, and its rate of passing the
+  identical task eight times in a row (a proxy for production reliability)
+  was far lower than its single-attempt success rate.
+kind: observation
+backing_strength: single-paper
+observed_on:
+  model: gpt
+  era: "2024, GPT-4o"
+  task_type: customer-support
+sources:
+  - source: arxiv-2406-12045
+    stance: supports
+    note: >-
+      GPT-4o succeeded on well under two thirds of retail tasks, with a
+      far lower rate of passing the same task eight times in a row.
+contested: false
+status: active
+last_checked_at: 2026-09-03
+submitted_by: human:Russ-Miller

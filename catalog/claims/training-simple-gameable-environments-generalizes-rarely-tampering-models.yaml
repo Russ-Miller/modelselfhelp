@@ -1,0 +1,14 @@
+id: training-simple-gameable-environments-generalizes-rarely-tampering-models
+capability: goal-conflict-safety
+statement: >-
+  Training on simple gameable environments generalizes, rarely, to tampering with the model's own reward mechanism.
+kind: mechanism
+backing_strength: single-paper
+sources:
+  - source: arxiv-2406-10162
+    stance: supports
+    note: "Training on simple gameable environments generalizes, rarely, to tampering with the model's own reward mechanism."
+contested: false
+status: active
+last_checked_at: 2026-09-03
+submitted_by: human:Russ-Miller

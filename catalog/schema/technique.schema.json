@@ -11,7 +11,7 @@
     "description": { "type": "string", "minLength": 40 },
     "addresses": { "type": "array", "$ref": "common.schema.json#/$defs/slugList", "minItems": 1 },
     "kind": { "type": "string", "enum": ["prompting", "retrieval", "tooling", "training", "decoding", "architecture", "process"] },
-    "papers": { "$ref": "common.schema.json#/$defs/slugList" },
+    "sources": { "type": "array", "$ref": "common.schema.json#/$defs/slugList" },
     "repos": {
       "type": "array",
       "items": {
@@ -25,9 +25,9 @@
         }
       }
     },
-    "contexts": { "$ref": "common.schema.json#/$defs/slugList" },
+    "contexts": { "type": "array", "$ref": "common.schema.json#/$defs/slugList" },
     "caveats": { "type": "string" },
-    "status": { "$ref": "common.schema.json#/$defs/status" },
+    "status": { "type": "string", "enum": ["proposed", "accepted", "disputed", "retired"] },
     "submitted_by": { "$ref": "common.schema.json#/$defs/provenance" }
   }
 }

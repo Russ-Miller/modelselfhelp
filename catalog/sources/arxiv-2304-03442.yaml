@@ -1,0 +1,14 @@
+id: arxiv-2304-03442
+kind: paper
+title: "Generative Agents: Interactive Simulacra of Human Behavior"
+authors:
+  - "Joon Sung Park"
+  - "Joseph C. O'Brien"
+  - "Carrie J. Cai"
+  - "et al."
+year: 2023
+arxiv_id: "2304.03442"
+url: https://arxiv.org/abs/2304.03442
+tags: [memory, agents]
+code_url: https://github.com/joonspk-research/generative_agents
+ingested_at: 2026-09-02

@@ -1,0 +1,13 @@
+id: arxiv-2308-15022
+kind: paper
+title: "Recursively Summarizing Enables Long-Term Dialogue Memory in Large Language Models"
+authors:
+  - "Qingyue Wang"
+  - "Liang Ding"
+  - "Yanan Cao"
+  - "et al."
+year: 2023
+arxiv_id: "2308.15022"
+url: https://arxiv.org/abs/2308.15022
+tags: [memory, prompting]
+ingested_at: 2026-09-02

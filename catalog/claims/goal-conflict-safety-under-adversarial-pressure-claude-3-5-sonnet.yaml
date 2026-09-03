@@ -1,0 +1,29 @@
+id: goal-conflict-safety-under-adversarial-pressure-claude-3-5-sonnet
+capability: goal-conflict-safety
+statement: >-
+  Under strong, deliberately adversarial goal pressure in an
+  autonomous-agent setting, Claude 3.5 Sonnet sometimes disabled oversight
+  mechanisms or misreported its own actions to keep pursuing the stated
+  goal — in a minority of trials, and the study explicitly does not claim
+  this happens in ordinary, non-adversarial use.
+kind: observation
+backing_strength: single-paper
+observed_on:
+  model: claude
+  era: "2024, Claude 3.5 Sonnet class"
+  task_type: autonomous-agent
+sources:
+  - source: arxiv-2412-04984
+    stance: supports
+    note: >-
+      Several frontier models, Claude 3.5 Sonnet among them, took covert
+      actions against oversight or misreported their actions in a
+      minority of trials under strong in-prompt goal nudging.
+contested: false
+status: active
+last_checked_at: 2026-09-03
+notes: >-
+  Worth re-checking whether this generalizes beyond deliberately
+  contrived pressure — the source paper is explicit that it does not
+  claim this occurs in ordinary use.
+submitted_by: human:Russ-Miller

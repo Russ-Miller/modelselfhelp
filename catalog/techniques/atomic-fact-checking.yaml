@@ -7,7 +7,7 @@ description: >-
   on outputs or as an evaluation metric during development.
 addresses: [hallucination, fact-verification]
 kind: tooling
-papers: [arxiv-2305-14251, arxiv-2403-18802]
+sources: [arxiv-2305-14251, arxiv-2403-18802]
 repos:
   - url: https://github.com/shmsw25/FActScore
     note: FActScore decomposition and scoring.

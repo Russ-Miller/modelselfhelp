@@ -1,0 +1,14 @@
+id: arxiv-2308-03688
+kind: paper
+title: "AgentBench: Evaluating LLMs as Agents"
+authors:
+  - "Xiao Liu"
+  - "Hao Yu"
+  - "Hanchen Zhang"
+  - "et al."
+year: 2023
+arxiv_id: "2308.03688"
+url: https://arxiv.org/abs/2308.03688
+tags: [agents, benchmark]
+code_url: https://github.com/THUDM/AgentBench
+ingested_at: 2026-09-02

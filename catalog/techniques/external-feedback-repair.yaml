@@ -9,7 +9,7 @@ description: >-
   Bound the number of attempts and stop when the signal stops changing.
 addresses: [self-repair]
 kind: process
-papers: [arxiv-2303-11366, arxiv-2303-17651, arxiv-2310-01798]
+sources: [arxiv-2303-11366, arxiv-2303-17651, arxiv-2310-01798]
 repos:
   - url: https://github.com/noahshinn/reflexion
     note: Reflexion reference implementation for coding and decision tasks.

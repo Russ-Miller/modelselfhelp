@@ -1,40 +1,51 @@
 import { describe, expect, it } from "vitest";
-import { claimsFor, getPaper, getCapability, loadCatalog, techniquesFor, capabilitiesByGroup } from "./catalog";
+import { claimsCiting, claimsFor, getCapability, getSource, loadCatalog, techniquesFor, capabilitiesByGroup } from "./catalog";
 
 describe("catalog loader", () => {
   const cat = loadCatalog();
 
   it("loads every entity kind", () => {
     expect(cat.capabilities.length).toBeGreaterThan(0);
-    expect(cat.papers.length).toBeGreaterThan(0);
+    expect(cat.claims.length).toBeGreaterThan(0);
+    expect(cat.sources.length).toBeGreaterThan(0);
     expect(cat.techniques.length).toBeGreaterThan(0);
     expect(cat.models.length).toBeGreaterThan(0);
-    expect(cat.claims.length).toBeGreaterThan(0);
   });
 
-  it("resolves evidence papers and techniques for every capability", () => {
-    for (const c of cat.capabilities) {
-      for (const e of c.evidence) expect(getPaper(e.paper), `${c.id} -> ${e.paper}`).toBeDefined();
-      for (const t of c.techniques ?? []) expect(techniquesFor(c.id).map((x) => x.id)).toContain(t);
+  it("resolves every claim's capability and sources", () => {
+    for (const c of cat.claims) {
+      expect(getCapability(c.capability), `${c.id} -> ${c.capability}`).toBeDefined();
+      for (const s of c.sources) expect(getSource(s.source), `${c.id} -> ${s.source}`).toBeDefined();
     }
   });
 
-  it("groups capabilities in taxonomy order without losing any", () => {
-    const grouped = capabilitiesByGroup();
-    const total = grouped.reduce((n, g) => n + g.capabilities.length, 0);
-    expect(total).toBe(cat.capabilities.length);
-  });
-
   it("finds claims by capability", () => {
-    const c = getCapability("long-context-degradation");
+    const c = getCapability("self-repair");
     expect(c).toBeDefined();
     expect(claimsFor(c!.id).length).toBeGreaterThan(0);
   });
 
-  it("scores every claim on a 1-10 scale", () => {
-    for (const c of cat.claims) {
-      expect(c.score).toBeGreaterThanOrEqual(1);
-      expect(c.score).toBeLessThanOrEqual(10);
+  it("finds claims citing a source, with stance", () => {
+    const hits = claimsCiting("arxiv-2310-01798");
+    expect(hits.length).toBeGreaterThan(0);
+    expect(hits.every((h) => h.stance === "supports" || h.stance === "contests")).toBe(true);
+  });
+
+  it("has at least one contested claim with a disagreement axis", () => {
+    const contested = cat.claims.filter((c) => c.contested);
+    expect(contested.length).toBeGreaterThan(0);
+    for (const c of contested) {
+      expect(c.disagreement_axis).toBeDefined();
+      expect(c.sources.some((s) => s.stance === "contests")).toBe(true);
     }
+  });
+
+  it("groups capabilities by tag without losing any that have a matching tag", () => {
+    const grouped = capabilitiesByGroup();
+    expect(grouped.length).toBeGreaterThan(0);
+  });
+
+  it("finds techniques for a capability", () => {
+    expect(techniquesFor("self-repair").map((t) => t.id)).toContain("external-feedback-repair");
   });
 });

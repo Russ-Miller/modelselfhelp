@@ -1,0 +1,14 @@
+id: performance-multi-document-qa-highest-when-answer-at-start
+capability: long-context-degradation
+statement: >-
+  Performance on multi-document QA is highest when the answer is at the start or end of the context and drops sharply in the middle.
+kind: mechanism
+backing_strength: single-paper
+sources:
+  - source: arxiv-2307-03172
+    stance: supports
+    note: "Performance on multi-document QA is highest when the answer is at the start or end of the context and drops sharply in the middle."
+contested: false
+status: active
+last_checked_at: 2026-09-03
+submitted_by: human:Russ-Miller

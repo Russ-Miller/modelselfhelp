@@ -1,0 +1,14 @@
+id: training-model-decide-when-retrieve-critique-whether-passages
+capability: fact-verification
+statement: >-
+  Training the model to decide when to retrieve and to critique whether passages support its output improves factuality and citation accuracy.
+kind: mechanism
+backing_strength: single-paper
+sources:
+  - source: arxiv-2310-11511
+    stance: supports
+    note: "Training the model to decide when to retrieve and to critique whether passages support its output improves factuality and citation accuracy."
+contested: false
+status: active
+last_checked_at: 2026-09-03
+submitted_by: human:Russ-Miller

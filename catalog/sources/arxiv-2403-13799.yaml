@@ -1,0 +1,13 @@
+id: arxiv-2403-13799
+kind: paper
+title: "Reverse Training to Nurse the Reversal Curse"
+authors:
+  - "Olga Golovneva"
+  - "Zeyuan Allen-Zhu"
+  - "Jason Weston"
+  - "Sainbayar Sukhbaatar"
+year: 2024
+arxiv_id: "2403.13799"
+url: https://arxiv.org/abs/2403.13799
+tags: [reversal-curse, training]
+ingested_at: 2026-09-02

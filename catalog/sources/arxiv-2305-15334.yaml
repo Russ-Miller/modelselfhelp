@@ -1,0 +1,14 @@
+id: arxiv-2305-15334
+kind: paper
+title: "Gorilla: Large Language Model Connected with Massive APIs"
+authors:
+  - "Shishir G. Patil"
+  - "Tianjun Zhang"
+  - "Xin Wang"
+  - "Joseph E. Gonzalez"
+year: 2023
+arxiv_id: "2305.15334"
+url: https://arxiv.org/abs/2305.15334
+tags: [tool-use, hallucination]
+code_url: https://github.com/ShishirPatil/gorilla
+ingested_at: 2026-09-02

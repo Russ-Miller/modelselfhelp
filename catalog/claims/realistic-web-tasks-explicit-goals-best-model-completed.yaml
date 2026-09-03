@@ -1,0 +1,14 @@
+id: realistic-web-tasks-explicit-goals-best-model-completed
+capability: procedure-following
+statement: >-
+  On realistic web tasks with explicit goals, the best model completed only a small fraction end to end, far below human performance.
+kind: mechanism
+backing_strength: single-paper
+sources:
+  - source: arxiv-2307-13854
+    stance: supports
+    note: "On realistic web tasks with explicit goals, the best model completed only a small fraction end to end, far below human performance."
+contested: false
+status: active
+last_checked_at: 2026-09-03
+submitted_by: human:Russ-Miller

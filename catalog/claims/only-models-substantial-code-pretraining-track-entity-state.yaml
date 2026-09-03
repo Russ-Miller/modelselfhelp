@@ -1,0 +1,14 @@
+id: only-models-substantial-code-pretraining-track-entity-state
+capability: state-tracking
+statement: >-
+  Only models with substantial code pretraining track entity state through a sequence of operations, and all degrade as the sequence lengthens.
+kind: mechanism
+backing_strength: single-paper
+sources:
+  - source: arxiv-2305-02363
+    stance: supports
+    note: "Only models with substantial code pretraining track entity state through a sequence of operations, and all degrade as the sequence lengthens."
+contested: false
+status: active
+last_checked_at: 2026-09-03
+submitted_by: human:Russ-Miller

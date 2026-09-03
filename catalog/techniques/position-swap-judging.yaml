@@ -8,7 +8,7 @@ description: >-
   can be avoided.
 addresses: [judge-position-bias]
 kind: process
-papers: [arxiv-2306-05685, arxiv-2305-17926]
+sources: [arxiv-2306-05685, arxiv-2305-17926]
 repos:
   - url: https://github.com/lm-sys/FastChat
     note: MT-Bench judging code with position swapping.

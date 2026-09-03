@@ -1,0 +1,14 @@
+id: separating-prompt-data-reserved-delimiters-fine-tuning-structure-blocks
+capability: prompt-injection
+statement: >-
+  Separating prompt and data with reserved delimiters and fine-tuning on that structure blocks most injections at little cost to utility.
+kind: mechanism
+backing_strength: single-paper
+sources:
+  - source: arxiv-2402-06363
+    stance: supports
+    note: "Separating prompt and data with reserved delimiters and fine-tuning on that structure blocks most injections at little cost to utility."
+contested: false
+status: active
+last_checked_at: 2026-09-03
+submitted_by: human:Russ-Miller

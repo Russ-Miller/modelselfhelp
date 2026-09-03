@@ -1,52 +1,11 @@
 id: arithmetic
-label: Digit-level arithmetic
-summary: Multi-digit arithmetic, counting, and symbol manipulation fail in ways tied to tokenization and memorization.
+label: "Digit-level arithmetic"
+summary: "Multi-digit arithmetic, counting, and symbol manipulation fail in ways tied to tokenization and memorization."
 description: >-
-  A capable model performs multi-digit addition and multiplication, counts
-  characters and items, and manipulates digits reliably regardless of how
-  the numbers happen to be tokenized or how often they appeared in training.
-strong_performance_looks_like: >-
-  Performs multi-digit arithmetic and counting exactly, regardless of digit length, formatting, or how common the specific numbers are.
-weak_performance_looks_like: >-
-  Wrong carries in long additions; multiplication accuracy that collapses
-  beyond a few digits; miscounted letters in a word; answers that are
-  correct for frequent numbers and wrong for rare ones; and accuracy that
-  changes when the same number is written with different spacing or commas.
-group: reasoning
-aliases: [numerical reasoning, token-level math, counting]
-contexts: [math, data-analysis, general]
-evidence:
-  - paper: arxiv-2305-18654
-    strength: controlled
-    note: >-
-      Multi-digit multiplication accuracy falls to near zero as problem size
-      grows, and models rely on pattern matching rather than a learned algorithm.
-  - paper: arxiv-2402-14903
-    strength: controlled
-    note: >-
-      Arithmetic accuracy in frontier models depends strongly on how digits are
-      chunked into tokens; a different digit grouping changes error rates.
-  - paper: arxiv-2202-07206
-    strength: controlled
-    note: >-
-      Few-shot arithmetic accuracy correlates with how often the specific
-      numbers appear in pretraining data, evidence of memorization.
-  - paper: arxiv-2110-14168
-    strength: benchmark
-    note: >-
-      Introduced grade-school math word problems on which 2021 models made
-      frequent arithmetic slips, motivating verifier training.
-  - paper: arxiv-2211-10435
-    strength: benchmark
-    note: >-
-      Offloading the computation to generated code and an interpreter removes
-      most arithmetic errors on math word problems.
-  - paper: arxiv-2405-17399
-    strength: controlled
-    note: >-
-      Position embeddings that encode digit place let small transformers add
-      100-digit numbers, showing the limit is representational not fundamental.
+  A capable model performs multi-digit addition and multiplication, counts characters and items, and manipulates digits reliably regardless of how the numbers happen to be tokenized or how often they appeared in training.
+tags: [data-analysis, general, math, reasoning]
+aliases: ["numerical reasoning", "token-level math", "counting"]
 techniques: [program-aided-computation, chain-of-thought, digit-position-embeddings]
 related: [state-tracking]
-status: accepted
+status: active
 submitted_by: human:Russ-Miller

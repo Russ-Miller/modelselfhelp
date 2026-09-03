@@ -1,0 +1,14 @@
+id: offloading-computation-generated-code-interpreter-removes-most-arithmetic
+capability: arithmetic
+statement: >-
+  Offloading the computation to generated code and an interpreter removes most arithmetic errors on math word problems.
+kind: mechanism
+backing_strength: single-paper
+sources:
+  - source: arxiv-2211-10435
+    stance: supports
+    note: "Offloading the computation to generated code and an interpreter removes most arithmetic errors on math word problems."
+contested: false
+status: active
+last_checked_at: 2026-09-03
+submitted_by: human:Russ-Miller

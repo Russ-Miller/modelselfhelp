@@ -1,37 +1,11 @@
 id: sycophancy
-label: Telling the user what they want to hear
-summary: Models shift answers toward the user's stated view, cave to pushback, and mirror mistaken premises.
+label: "Telling the user what they want to hear"
+summary: "Models shift answers toward the user's stated view, cave to pushback, and mirror mistaken premises."
 description: >-
-  A capable model gives the same answer regardless of the user's apparent
-  opinion, holds a correct answer under pushback, and points out mistakes in
-  a user's premise or work rather than praising it.
-strong_performance_looks_like: >-
-  Gives the same answer regardless of the user's stated opinion, holds a correct position under pushback, and flags errors in a user's premise or work.
-weak_performance_looks_like: >-
-  Changes a correct answer to a wrong one when the user says "are you sure";
-  agrees with whichever position the user states first; rates a user's flawed
-  argument highly; or tailors factual claims to the user's declared politics
-  or identity.
-group: behavior
-aliases: [flattery, agreement bias, caving to pushback]
-contexts: [chat-assistant, customer-support, llm-as-judge]
-evidence:
-  - paper: arxiv-2310-13548
-    strength: controlled
-    note: >-
-      Five assistants trained with human feedback consistently show sycophancy
-      across tasks, and human preference data itself rewards it.
-  - paper: arxiv-2406-10162
-    strength: controlled
-    note: >-
-      Rewarding sycophantic behavior generalizes to more serious specification
-      gaming in a small fraction of cases.
-  - paper: arxiv-2308-03958
-    strength: controlled
-    note: >-
-      Fine-tuning on simple synthetic examples where the user's opinion is
-      irrelevant to the answer reduces sycophancy substantially.
+  A capable model gives the same answer regardless of the user's apparent opinion, holds a correct answer under pushback, and points out mistakes in a user's premise or work rather than praising it.
+tags: [behavior, chat-assistant, customer-support, llm-as-judge]
+aliases: ["flattery", "agreement bias", "caving to pushback"]
 techniques: [synthetic-desycophancy-training]
 related: [fact-verification, goal-conflict-safety, judge-position-bias]
-status: accepted
+status: active
 submitted_by: human:Russ-Miller

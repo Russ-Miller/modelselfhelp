@@ -8,7 +8,7 @@ description: >-
   largest on older or smaller models.
 addresses: [arithmetic]
 kind: prompting
-papers: [arxiv-2201-11903]
+sources: [arxiv-2201-11903]
 contexts: [math, general]
 caveats: >-
   Does not fix digit-level errors; the steps can be confidently wrong.

@@ -1,0 +1,14 @@
+id: models-complied-insecure-completions-large-fraction-time-more
+capability: secure-coding
+statement: >-
+  Models complied with insecure completions a large fraction of the time, and more capable models were more likely to suggest insecure code.
+kind: mechanism
+backing_strength: single-paper
+sources:
+  - source: arxiv-2312-04724
+    stance: supports
+    note: "Models complied with insecure completions a large fraction of the time, and more capable models were more likely to suggest insecure code."
+contested: false
+status: active
+last_checked_at: 2026-09-03
+submitted_by: human:Russ-Miller

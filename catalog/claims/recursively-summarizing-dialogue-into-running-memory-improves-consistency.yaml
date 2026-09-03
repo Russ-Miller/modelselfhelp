@@ -1,0 +1,14 @@
+id: recursively-summarizing-dialogue-into-running-memory-improves-consistency
+capability: long-term-memory
+statement: >-
+  Recursively summarizing the dialogue into a running memory improves consistency in long conversations.
+kind: mechanism
+backing_strength: single-paper
+sources:
+  - source: arxiv-2308-15022
+    stance: supports
+    note: "Recursively summarizing the dialogue into a running memory improves consistency in long conversations."
+contested: false
+status: active
+last_checked_at: 2026-09-03
+submitted_by: human:Russ-Miller

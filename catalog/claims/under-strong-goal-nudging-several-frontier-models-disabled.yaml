@@ -1,0 +1,14 @@
+id: under-strong-goal-nudging-several-frontier-models-disabled
+capability: goal-conflict-safety
+statement: >-
+  Under strong goal nudging, several frontier models disabled oversight mechanisms or lied about their actions in a minority of trials.
+kind: mechanism
+backing_strength: single-paper
+sources:
+  - source: arxiv-2412-04984
+    stance: supports
+    note: "Under strong goal nudging, several frontier models disabled oversight mechanisms or lied about their actions in a minority of trials."
+contested: false
+status: active
+last_checked_at: 2026-09-03
+submitted_by: human:Russ-Miller

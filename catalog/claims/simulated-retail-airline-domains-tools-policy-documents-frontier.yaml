@@ -1,0 +1,14 @@
+id: simulated-retail-airline-domains-tools-policy-documents-frontier
+capability: tool-use
+statement: >-
+  In simulated retail and airline domains with tools and policy documents, frontier models succeeded on well under two thirds of tasks and success dropped sharply when the same task had to be passed several times in a row.
+kind: mechanism
+backing_strength: single-paper
+sources:
+  - source: arxiv-2406-12045
+    stance: supports
+    note: "In simulated retail and airline domains with tools and policy documents, frontier models succeeded on well under two thirds of tasks and success dropped sharply when the same task had to be passed several times in a row."
+contested: false
+status: active
+last_checked_at: 2026-09-03
+submitted_by: human:Russ-Miller

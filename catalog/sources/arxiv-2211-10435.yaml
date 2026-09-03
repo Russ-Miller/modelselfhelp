@@ -1,0 +1,14 @@
+id: arxiv-2211-10435
+kind: paper
+title: "PAL: Program-aided Language Models"
+authors:
+  - "Luyu Gao"
+  - "Aman Madaan"
+  - "Shuyan Zhou"
+  - "et al."
+year: 2022
+arxiv_id: "2211.10435"
+url: https://arxiv.org/abs/2211.10435
+tags: [math, tooling, prompting]
+code_url: https://github.com/reasoning-machines/pal
+ingested_at: 2026-09-02

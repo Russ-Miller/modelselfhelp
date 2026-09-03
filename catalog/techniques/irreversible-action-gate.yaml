@@ -8,7 +8,7 @@ description: >-
   impossible rather than merely discouraged.
 addresses: [goal-conflict-safety]
 kind: process
-papers: [arxiv-2412-14470]
+sources: [arxiv-2412-14470]
 contexts: [autonomous-agent, coding-agent, customer-support]
 caveats: >-
   Practitioner technique. Adds latency; classify tools carefully or the

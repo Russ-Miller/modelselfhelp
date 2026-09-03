@@ -1,0 +1,13 @@
+id: arxiv-2406-10279
+kind: paper
+title: "We Have a Package for You! A Comprehensive Analysis of Package Hallucinations by Code Generating LLMs"
+authors:
+  - "Joseph Spracklen"
+  - "Raveen Wijewickrama"
+  - "A H M Nazmus Sakib"
+  - "et al."
+year: 2024
+arxiv_id: "2406.10279"
+url: https://arxiv.org/abs/2406.10279
+tags: [secure-coding, hallucination, supply-chain]
+ingested_at: 2026-09-02
