@@ -13,10 +13,14 @@ A one-stop exchange where humans and AI agents can:
 2. See the evidence: papers and benchmarks that measure the capability.
 3. Find techniques that improve a capability, with pointers to runnable code
    in a git repository.
-4. Contribute: add evidence, add techniques, and record new claims about
-   how a specific model performs, with provenance for every contribution.
+4. Contribute: add evidence, add techniques, record new claims about how a
+   specific model performs, and request a new capability be added when
+   nothing existing covers a gap — with provenance for every contribution.
 5. Ask programmatically, so an agent can query "how am I rated on this
    capability in this context, and what should I do about it" at runtime.
+6. Curate: a small admin group keeps the catalog correct directly — editing
+   or removing a capability without waiting on a pull request — while
+   everyone else's contributions still land as `proposed` for review.
 
 Analogy for pitching: CWE for model capabilities and behavior. CWE names
 stable weakness patterns and links mitigations; CVE records each concrete
@@ -120,6 +124,28 @@ Every record carries `submitted_by` and, once accounts exist, the API
 stamps `submitted_by` from the token. Format: `human:<github-login>` or
 `agent:<agent-name>@<owner-login>`; agents also record `agent_model`.
 
+### Capability requests (milestone 4)
+Requesting a brand-new capability is lighter-weight than authoring one: a
+requester shouldn't have to write strong/weak anchors or find evidence just
+to say "there's a gap here." A request is a separate, small record — not a
+`catalog/capabilities/*.yaml` file — so the git-backed catalog stays made
+only of fully-formed, evidence-backed entries.
+
+| field | type | notes |
+|---|---|---|
+| id | uuid | |
+| label | string | proposed name |
+| rationale | string | why it matters, why nothing existing covers it |
+| suggested_group | slug? | best-guess taxonomy group |
+| links | string[]? | freeform URLs — a paper, an issue, an incident writeup |
+| requested_by | string | provenance, same format as `submitted_by` |
+| status | enum | `pending`, `accepted`, `declined`, `duplicate` |
+| created_at | datetime | |
+
+An admin reviews pending requests. Accepting one means authoring the real
+Capability record (using the request as a starting point) via admin CRUD,
+below; declining or marking a duplicate just closes it out with a reason.
+
 ## 4. Taxonomy (top-level groups)
 
 Defined in `catalog/taxonomy.yaml`. Groups are deliberately broad so the
@@ -181,21 +207,38 @@ a token raises the limit. Writes require a token with `write` scope.
   call: open claims for that model/version/context plus the techniques that
   address them, ordered by ascending score (lowest, i.e. weakest, first).
 - `POST /api/v1/claims`, `POST /api/v1/evidence`, `POST /api/v1/techniques`
-  (milestone 4) — create as `proposed`; a maintainer promotes via PR.
+  (milestone 4) — create as `proposed`; an admin promotes or a maintainer
+  does via PR.
+- `POST /api/v1/capability-requests` (milestone 4) — any signed-in caller;
+  see §3 Capability requests.
+- `POST /api/v1/capabilities`, `PATCH /api/v1/capabilities/{id}`,
+  `DELETE /api/v1/capabilities/{id}` (milestone 4, admin only) — direct
+  create/edit/delete on the catalog, no PR round-trip. How an admin write
+  reaches the git-backed catalog (commit via the GitHub API on the admin's
+  behalf, vs. moving capabilities to a database at that point) is an open
+  technical question, deferred to when this is actually built — see
+  decision log, "git as the database... revisit when PR volume outgrows
+  review."
 
 MCP server exposes the same as tools: `list_capabilities`, `get_capability`,
-`advise`, `find_techniques`, `submit_evidence`, `submit_claim`.
+`advise`, `find_techniques`, `submit_evidence`, `submit_claim`,
+`request_capability`.
 Transport: streamable HTTP at `/api/mcp`, sharing the REST handlers.
 
 ## 9. Accounts and tokens (milestone 4)
 
 - Login: GitHub OAuth via Auth.js. Account record: github login, display
-  name, created_at.
+  name, `is_admin` (boolean, default false), created_at.
 - Tokens: hashed at rest, scopes `read` and `write`, fields `kind`
   (`human` or `agent`), `agent_name?`, `agent_model?`, `last_used_at`.
 - No agent detection by heuristics. Agents identify themselves by token and
   get higher rate limits and attribution in return.
 - Rate limits: anonymous low, token higher; enforced per IP or per token.
+- `is_admin` is a single flag, set by editing the row directly (no admin
+  UI to grant it in the seed phase) — not a roles/permissions system. It
+  gates the capability CRUD endpoints in §8; everything else a `write`
+  token can already do, an admin can also do, just without landing as
+  `proposed`.
 
 ## 10. Ingestion pipeline (milestone 5)
 
@@ -215,4 +258,5 @@ Cost is measured on a one-month sample before scaling to three years.
 ## 11. Non-goals for the seed phase
 
 Billing, organizations, private content, file hosting, voting, comment
-threads, and detecting unidentified agents.
+threads, detecting unidentified agents, and any roles/permissions system
+beyond the single `is_admin` flag.

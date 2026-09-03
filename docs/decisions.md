@@ -63,3 +63,20 @@ rubric (see the 2026-09-03 Capability rename entry above) so both
 scales get designed together rather than twice. Raw benchmark numbers (e.g. "82.3% on
 GSM8K") stay in the evidence `note` regardless of scale chosen; the
 score is a legible summary, not a replacement for the underlying figure.
+
+## 2026-09-03 — Capability requests are a separate lightweight record; admin is one boolean flag
+A request to add a new capability doesn't require the requester to write
+strong/weak anchors or find evidence — that would block casual, valuable
+suggestions. So a request is its own small record (label, rationale,
+optional links, status pending/accepted/declined/duplicate), not a
+`catalog/capabilities/*.yaml` stub; the catalog stays made only of
+fully-formed, evidence-backed entries. An admin turns an accepted request
+into a real Capability. Admin access is a single `is_admin` boolean on the
+account, set by hand for now — explicitly not a roles/permissions system;
+that stays a non-goal. Admin write endpoints bypass the `proposed`
+moderation state entirely, formalizing the earlier "maintainer" persona
+into something with real API access rather than only GitHub PR review.
+Open and deliberately unresolved: whether an admin's direct edit commits
+to git (keeping git as the catalog's source of truth) or whether
+capabilities move to a database once this exists — ties into the earlier
+"git as the database... revisit when PR volume outgrows review" decision.
