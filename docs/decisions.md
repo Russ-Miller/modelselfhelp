@@ -43,3 +43,23 @@ claim's score plus its date already shows the trend directly, so evidence
 is now a plain citation with no stance. No fixed rubric for the rungs
 between 1 and 10 yet; deferred until real disagreement between scores
 shows it's needed.
+
+## 2026-09-03 — Importance claims planned, reusing the Claim shape; both stay on a 1-10 scale for now
+Considered up/down voting on capability importance ("does this matter more
+in domain X than Y"), rejected in favor of an evidence-backed Importance
+entry keyed to (capability, context) instead of a raw vote count — a vote
+is trivially gameable and carries no provenance, while reusing the scored,
+cited, provenanced Claim pattern costs little extra and fits the review
+pipeline already planned for milestone 4. Not building this yet; capturing
+the design intent so it isn't lost. Accepted evidence kinds for an
+Importance claim, roughly ranked strongest to weakest: failure-analysis
+papers (quantify how often the capability's failure caused breakage in
+that domain), regulatory/standards documents naming it as critical,
+task-composition studies (share of real tasks in a domain depending on
+it), and practitioner surveys (weaker, self-report). Whether Importance
+should be 1-10 like Performance or a coarser tier (Low/Moderate/
+High/Critical) is still open — deferred alongside the performance-score
+rubric (see the 2026-09-03 Capability rename entry above) so both
+scales get designed together rather than twice. Raw benchmark numbers (e.g. "82.3% on
+GSM8K") stay in the evidence `note` regardless of scale chosen; the
+score is a legible summary, not a replacement for the underlying figure.
