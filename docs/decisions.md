@@ -80,3 +80,13 @@ Open and deliberately unresolved: whether an admin's direct edit commits
 to git (keeping git as the catalog's source of truth) or whether
 capabilities move to a database once this exists — ties into the earlier
 "git as the database... revisit when PR volume outgrows review" decision.
+
+## 2026-09-03 — Bootstrap admin granted by GitHub login, not email
+Considered seeding the first admin ("Captain of the Ship") tied to an
+email address, rejected because GitHub OAuth only returns an email if the
+account exposes one — a private-email setting would silently break the
+match even if that email is verified on the account. GitHub login is
+always returned and needs no extra scope, so `ADMIN_GITHUB_LOGINS` (an
+env var allowlist, starting with `Russ-Miller`) is checked at login time
+and upserts `is_admin=true` on match — live, not a pre-seeded row, so it
+doesn't depend on seeding order relative to first login.

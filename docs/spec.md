@@ -234,11 +234,22 @@ Transport: streamable HTTP at `/api/mcp`, sharing the REST handlers.
 - No agent detection by heuristics. Agents identify themselves by token and
   get higher rate limits and attribution in return.
 - Rate limits: anonymous low, token higher; enforced per IP or per token.
-- `is_admin` is a single flag, set by editing the row directly (no admin
-  UI to grant it in the seed phase) — not a roles/permissions system. It
-  gates the capability CRUD endpoints in §8; everything else a `write`
-  token can already do, an admin can also do, just without landing as
-  `proposed`.
+- `is_admin` is a single flag — not a roles/permissions system. It gates
+  the capability CRUD endpoints in §8; everything else a `write` token can
+  already do, an admin can also do, just without landing as `proposed`.
+- Bootstrap admin ("Captain of the Ship"): granted by GitHub login, not
+  email or a pre-seeded account row. `ADMIN_GITHUB_LOGINS` is an env var
+  holding a small comma-separated allowlist of GitHub logins (starts with
+  just `Russ-Miller`). On every login, the auth callback checks the
+  session's GitHub login against that list and upserts `is_admin=true` on
+  the account if it matches — so admin status attaches whenever that
+  person first logs in, with no dependency on database seeding order and
+  no assumption that any particular email is verified or visible on their
+  GitHub account (GitHub OAuth only returns an email at all if the account
+  exposes one; login is the one thing always returned). Once `is_admin` is
+  set this way, granting it to anyone else past the bootstrap list goes
+  back to editing the row directly — still no admin UI for that in the
+  seed phase.
 
 ## 10. Ingestion pipeline (milestone 5)
 
