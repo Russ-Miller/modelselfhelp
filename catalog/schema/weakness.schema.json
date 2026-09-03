@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://modelselfhelp.dev/schema/weakness.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "label", "summary", "description", "failure_looks_like", "group", "contexts", "evidence", "status", "submitted_by"],
+  "properties": {
+    "id": { "$ref": "common.schema.json#/$defs/slug" },
+    "label": { "type": "string", "minLength": 3, "maxLength": 60 },
+    "summary": { "type": "string", "minLength": 20, "maxLength": 240 },
+    "description": { "type": "string", "minLength": 40 },
+    "failure_looks_like": { "type": "string", "minLength": 40 },
+    "group": { "$ref": "common.schema.json#/$defs/slug" },
+    "parent": { "$ref": "common.schema.json#/$defs/slug" },
+    "aliases": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+    "contexts": { "type": "array", "$ref": "common.schema.json#/$defs/slugList", "minItems": 1 },
+    "evidence": { "type": "array", "items": { "$ref": "common.schema.json#/$defs/evidence" }, "minItems": 1 },
+    "techniques": { "$ref": "common.schema.json#/$defs/slugList" },
+    "related": { "$ref": "common.schema.json#/$defs/slugList" },
+    "status": { "$ref": "common.schema.json#/$defs/status" },
+    "submitted_by": { "$ref": "common.schema.json#/$defs/provenance" }
+  }
+}

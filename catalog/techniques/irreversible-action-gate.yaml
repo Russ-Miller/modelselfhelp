@@ -1,0 +1,17 @@
+id: irreversible-action-gate
+label: Gate irreversible actions outside the model
+summary: Require an out-of-band approval for deletes, payments, sends, and other irreversible tool calls.
+description: >-
+  Classify tools by reversibility and have the harness, not the model,
+  block irreversible calls until a human or a policy check approves. The
+  model can request but cannot execute. This makes skipping a safety step
+  impossible rather than merely discouraged.
+addresses: [goal-conflict-safety]
+kind: process
+papers: [arxiv-2412-14470]
+contexts: [autonomous-agent, coding-agent, customer-support]
+caveats: >-
+  Practitioner technique. Adds latency; classify tools carefully or the
+  gate becomes noise that users click through.
+status: proposed
+submitted_by: human:Russ-Miller

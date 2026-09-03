@@ -1,0 +1,12 @@
+id: arxiv-2307-03172
+title: "Lost in the Middle: How Language Models Use Long Contexts"
+authors:
+  - "Nelson F. Liu"
+  - "Kevin Lin"
+  - "John Hewitt"
+  - "et al."
+year: 2023
+arxiv_id: "2307.03172"
+url: https://arxiv.org/abs/2307.03172
+tags: [long-context, benchmark]
+code_url: https://github.com/nelson-liu/lost-in-the-middle

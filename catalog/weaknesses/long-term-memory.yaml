@@ -1,0 +1,44 @@
+id: long-term-memory
+label: Remembering across sessions
+summary: Assistants fail to recall and apply facts, preferences, and decisions from earlier sessions.
+description: >-
+  A capable assistant carries forward what a user told it and what was
+  decided, notices when a stored fact has changed, and reasons over
+  information spread across many past interactions.
+failure_looks_like: >-
+  Re-asks a settled question; contradicts a preference stated weeks earlier;
+  applies an outdated fact after the user updated it; or cannot answer a
+  question whose pieces are spread across several past sessions.
+group: context
+aliases: [persistent memory, cross-session memory, personalization]
+contexts: [chat-assistant, customer-support, autonomous-agent]
+evidence:
+  - paper: arxiv-2410-10813
+    stance: supports
+    strength: benchmark
+    note: >-
+      Commercial assistants show a large accuracy drop when the relevant
+      information sits in a long interaction history, especially for updates
+      and multi-session reasoning.
+  - paper: arxiv-2310-08560
+    stance: counters
+    strength: controlled
+    note: >-
+      A tiered memory system managed by the model itself sustains recall over
+      conversations far longer than the context window.
+  - paper: arxiv-2308-15022
+    stance: counters
+    strength: controlled
+    note: >-
+      Recursively summarizing the dialogue into a running memory improves
+      consistency in long conversations.
+  - paper: arxiv-2304-03442
+    stance: counters
+    strength: anecdotal
+    note: >-
+      A memory stream with retrieval and reflection lets agents behave
+      consistently over simulated days.
+techniques: [hierarchical-memory, recursive-summarization]
+related: [context-hygiene, state-tracking]
+status: accepted
+submitted_by: human:Russ-Miller

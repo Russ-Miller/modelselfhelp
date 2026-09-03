@@ -1,0 +1,12 @@
+id: arxiv-2406-12045
+title: "\u03c4-bench: A Benchmark for Tool-Agent-User Interaction in Real-World Domains"
+authors:
+  - "Shunyu Yao"
+  - "Noah Shinn"
+  - "Pedram Razavi"
+  - "Karthik Narasimhan"
+year: 2024
+arxiv_id: "2406.12045"
+url: https://arxiv.org/abs/2406.12045
+tags: [tool-use, benchmark, customer-support]
+code_url: https://github.com/sierra-research/tau-bench

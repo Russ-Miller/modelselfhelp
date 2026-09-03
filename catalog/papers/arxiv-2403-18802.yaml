@@ -1,0 +1,12 @@
+id: arxiv-2403-18802
+title: "Long-form factuality in large language models"
+authors:
+  - "Jerry Wei"
+  - "Chengrun Yang"
+  - "Xinying Song"
+  - "et al."
+year: 2024
+arxiv_id: "2403.18802"
+url: https://arxiv.org/abs/2403.18802
+tags: [factuality, evaluation, tooling]
+code_url: https://github.com/google-deepmind/long-form-factuality

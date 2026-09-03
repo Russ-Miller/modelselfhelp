@@ -1,0 +1,21 @@
+id: tool-use-fine-tuning
+label: Fine-tune on tool-call traces
+summary: Train the model on examples of deciding when to call a tool and how to use the result.
+description: >-
+  Generate or collect traces of tool calls with their arguments and
+  results, filter for calls that helped, and fine-tune. Toolformer does this
+  self-supervised for simple tools; ToolBench does it at scale for real
+  APIs.
+addresses: [tool-use]
+kind: training
+papers: [arxiv-2302-04761, arxiv-2307-16789]
+repos:
+  - url: https://github.com/OpenBMB/ToolBench
+    note: Data, training recipe and evaluator for multi-tool API use.
+    verified_on: 2026-09-02
+contexts: [coding-agent, autonomous-agent]
+caveats: >-
+  Requires training access. Gains are largest for open models that start
+  far behind.
+status: accepted
+submitted_by: human:Russ-Miller

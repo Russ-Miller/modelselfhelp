@@ -1,0 +1,39 @@
+id: fact-verification
+label: Checking claims against evidence
+summary: Models accept confident false premises and resolve conflicts between sources by majority or recency rather than by reliability.
+description: >-
+  Given a claim and some evidence, a capable model decides whether the claim
+  is supported, notices when the evidence conflicts with what it believes,
+  and weighs sources by reliability rather than by count, order, or tone.
+failure_looks_like: >-
+  Answers a question that embeds a false premise as if the premise were true;
+  abandons a correct belief when a single retrieved passage disagrees; or
+  sides with whichever source appears most often or last, ignoring
+  provenance.
+group: knowledge
+aliases: [epistemic verification, truth adjudication, knowledge conflict]
+contexts: [rag-qa, chat-assistant, data-analysis]
+evidence:
+  - paper: arxiv-2305-13300
+    stance: supports
+    strength: controlled
+    note: >-
+      Models readily adopt a single counter-memory passage when it is coherent,
+      and when sources conflict they follow the majority and show confirmation
+      bias toward their own beliefs.
+  - paper: arxiv-2109-07958
+    stance: supports
+    strength: benchmark
+    note: >-
+      Models endorse widely held falsehoods, showing weak verification against
+      what they know.
+  - paper: arxiv-2310-11511
+    stance: counters
+    strength: controlled
+    note: >-
+      Training the model to decide when to retrieve and to critique whether
+      passages support its output improves factuality and citation accuracy.
+techniques: [retrieval-augmented-generation, atomic-fact-checking]
+related: [hallucination, sycophancy]
+status: accepted
+submitted_by: human:Russ-Miller

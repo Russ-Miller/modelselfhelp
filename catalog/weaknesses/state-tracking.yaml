@@ -1,0 +1,31 @@
+id: state-tracking
+label: Tracking state through a long task
+summary: Models lose track of the current state of entities, files, or an environment after many steps.
+description: >-
+  A capable model maintains an accurate picture of the current state of
+  what it is working on, updating it after every action, so that later
+  decisions rest on what is true now rather than what was true earlier.
+failure_looks_like: >-
+  Edits a file based on a version it already changed; reports a variable's
+  old value after an update; plans a route from a map it has partially
+  misremembered; or asserts a step is done that it never completed.
+group: context
+aliases: [entity tracking, world-model consistency, stale state]
+contexts: [coding-agent, autonomous-agent, data-analysis]
+evidence:
+  - paper: arxiv-2305-02363
+    stance: supports
+    strength: controlled
+    note: >-
+      Only models with substantial code pretraining track entity state through
+      a sequence of operations, and all degrade as the sequence lengthens.
+  - paper: arxiv-2406-03689
+    stance: supports
+    strength: controlled
+    note: >-
+      Models that predict next steps well can still hold an incoherent implicit
+      world model, which fails when the task deviates from familiar traces.
+techniques: [reread-before-edit]
+related: [self-repair, long-context-degradation]
+status: accepted
+submitted_by: human:Russ-Miller

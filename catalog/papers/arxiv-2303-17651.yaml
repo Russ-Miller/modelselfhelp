@@ -1,0 +1,12 @@
+id: arxiv-2303-17651
+title: "Self-Refine: Iterative Refinement with Self-Feedback"
+authors:
+  - "Aman Madaan"
+  - "Niket Tandon"
+  - "Prakhar Gupta"
+  - "et al."
+year: 2023
+arxiv_id: "2303.17651"
+url: https://arxiv.org/abs/2303.17651
+tags: [self-correction, prompting]
+code_url: https://github.com/madaan/self-refine

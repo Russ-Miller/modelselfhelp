@@ -1,0 +1,38 @@
+id: long-context-degradation
+label: Losing information in long inputs
+summary: Accuracy drops as inputs grow and is worst for information placed in the middle of the context.
+description: >-
+  A capable model uses every part of a long input equally well, up to its
+  advertised context length, and its reasoning does not degrade as
+  irrelevant material is added.
+failure_looks_like: >-
+  Answers correctly when the key fact is near the start or end of the prompt
+  but misses it in the middle; accuracy falls steadily as more documents are
+  added even when the answer is present; or a model advertised at a large
+  context length behaves as if it had a much smaller one.
+group: context
+aliases: [lost in the middle, needle in a haystack, effective context length]
+contexts: [long-document, rag-qa, coding-agent]
+evidence:
+  - paper: arxiv-2307-03172
+    stance: supports
+    strength: controlled
+    note: >-
+      Performance on multi-document QA is highest when the answer is at the
+      start or end of the context and drops sharply in the middle.
+  - paper: arxiv-2404-06654
+    stance: supports
+    strength: benchmark
+    note: >-
+      Most models claiming long contexts fail well before their advertised
+      length on synthetic retrieval, tracing and aggregation tasks.
+  - paper: arxiv-2402-14848
+    stance: supports
+    strength: controlled
+    note: >-
+      Holding the task fixed and only lengthening the input degrades reasoning
+      long before the context limit is reached.
+techniques: [reorder-context-by-relevance]
+related: [context-hygiene, state-tracking]
+status: accepted
+submitted_by: human:Russ-Miller

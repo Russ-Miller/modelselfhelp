@@ -1,0 +1,20 @@
+id: self-repair-gpt-4-math-2023-10-03
+weakness: self-repair
+model: gpt
+version: gpt-4
+context: math
+observed_on: 2023-10-03
+severity: moderate
+status: open
+evidence:
+  - paper: arxiv-2310-01798
+    stance: supports
+    strength: controlled
+    note: >-
+      Asking the model to review and revise its own reasoning answers, with no
+      external feedback, lowered accuracy on GSM8K and CommonSenseQA.
+notes: >-
+  The finding is specific to intrinsic self-correction. With an oracle or a
+  verifier the same model does improve, which is why the mitigation is
+  external feedback rather than more self-review.
+submitted_by: human:Russ-Miller

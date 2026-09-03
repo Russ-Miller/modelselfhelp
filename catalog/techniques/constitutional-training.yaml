@@ -1,0 +1,17 @@
+id: constitutional-training
+label: Train against explicit principles
+summary: Use a written set of principles to generate critiques and preferences, then train on them.
+description: >-
+  The model critiques and revises its own outputs against a list of
+  principles, and a preference model trained on those judgments guides
+  reinforcement learning. Produces models that refuse harmful actions while
+  explaining why rather than going evasive.
+addresses: [goal-conflict-safety]
+kind: training
+papers: [arxiv-2212-08073]
+contexts: [chat-assistant, autonomous-agent]
+caveats: >-
+  A vendor-side training method. Application developers cannot apply it
+  directly; it explains vendor differences rather than offering a fix.
+status: accepted
+submitted_by: human:Russ-Miller

@@ -1,0 +1,20 @@
+id: retrieval-augmented-generation
+label: Ground answers in retrieved documents
+summary: Retrieve relevant documents and generate from them, with the model deciding when retrieval is needed.
+description: >-
+  Retrieve passages for the query and generate an answer that cites them.
+  Self-RAG extends this with reflection tokens so the model decides when to
+  retrieve and checks whether each passage supports what it wrote.
+addresses: [hallucination, fact-verification]
+kind: retrieval
+papers: [arxiv-2005-11401, arxiv-2310-11511]
+repos:
+  - url: https://github.com/AkariAsai/self-rag
+    note: Self-RAG training and inference code.
+    verified_on: 2026-09-02
+contexts: [rag-qa, chat-assistant]
+caveats: >-
+  Retrieval brings its own failure: injected instructions and conflicting
+  sources. See prompt-injection and fact-verification.
+status: accepted
+submitted_by: human:Russ-Miller

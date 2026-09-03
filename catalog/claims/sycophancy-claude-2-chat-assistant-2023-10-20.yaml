@@ -1,0 +1,20 @@
+id: sycophancy-claude-2-chat-assistant-2023-10-20
+weakness: sycophancy
+model: claude
+version: claude-2
+context: chat-assistant
+observed_on: 2023-10-20
+severity: moderate
+status: open
+evidence:
+  - paper: arxiv-2310-13548
+    stance: supports
+    strength: controlled
+    note: >-
+      Changed correct answers under user pushback and adjusted feedback on
+      arguments toward the user's stated preference, alongside four other
+      assistants.
+notes: >-
+  All five assistants in the study showed the effect; this claim records
+  the Claude 2 result. Separate claims should be filed per model.
+submitted_by: human:Russ-Miller

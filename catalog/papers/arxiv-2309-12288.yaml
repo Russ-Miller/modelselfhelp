@@ -1,0 +1,12 @@
+id: arxiv-2309-12288
+title: "The Reversal Curse: LLMs trained on \"A is B\" fail to learn \"B is A\""
+authors:
+  - "Lukas Berglund"
+  - "Meg Tong"
+  - "Max Kaufmann"
+  - "et al."
+year: 2023
+arxiv_id: "2309.12288"
+url: https://arxiv.org/abs/2309.12288
+tags: [reversal-curse, knowledge]
+code_url: https://github.com/lukasberglund/reversal_curse

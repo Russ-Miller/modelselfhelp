@@ -1,0 +1,53 @@
+id: tool-use
+label: Using the tools it is given
+summary: Models often fail to reach for provided tools, skills, or documented procedures, or call them with wrong arguments.
+description: >-
+  Given a set of tools, skills, or API documentation, a capable model selects
+  the right one for the task, calls it with correct arguments, interprets the
+  result, and chains calls when needed. It prefers a provided tool over
+  improvising from memory, and it asks or stops when no tool fits.
+failure_looks_like: >-
+  Ignores an available skill and hand-rolls a worse solution; invents an API
+  or argument that does not exist; calls the right tool with malformed
+  parameters; gives up on a tool after one error; or produces different
+  results on repeated runs of the same task so that pass rates collapse
+  when reliability over several trials is required.
+group: agentic
+aliases: [tool calling, function calling, API use, skill utilization]
+contexts: [coding-agent, autonomous-agent, customer-support]
+evidence:
+  - paper: arxiv-2406-12045
+    stance: supports
+    strength: benchmark
+    note: >-
+      In simulated retail and airline domains with tools and policy documents,
+      frontier models succeeded on well under two thirds of tasks and success
+      dropped sharply when the same task had to be passed several times in a row.
+  - paper: arxiv-2305-15334
+    stance: supports
+    strength: benchmark
+    note: >-
+      Shows LLMs hallucinate API names and arguments when calling large API
+      collections from memory, and that retrieving documentation reduces this.
+  - paper: arxiv-2308-03688
+    stance: supports
+    strength: benchmark
+    note: >-
+      Across eight interactive environments, models fail mostly on long-horizon
+      tool interaction, with open models far behind commercial ones.
+  - paper: arxiv-2302-04761
+    stance: counters
+    strength: controlled
+    note: >-
+      Self-supervised training on tool-call examples teaches a model when and how
+      to call simple tools, narrowing the gap on tasks that need them.
+  - paper: arxiv-2307-16789
+    stance: counters
+    strength: benchmark
+    note: >-
+      Fine-tuning on a large corpus of real API-call traces markedly improves
+      multi-tool task completion in open models.
+techniques: [retrieve-tool-docs, tool-use-fine-tuning]
+related: [procedure-following, self-repair]
+status: accepted
+submitted_by: human:Russ-Miller

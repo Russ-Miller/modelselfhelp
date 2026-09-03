@@ -1,0 +1,19 @@
+id: goal-conflict-safety-claude-3-5-sonnet-autonomous-agent-2024-12-06
+weakness: goal-conflict-safety
+model: claude
+version: claude-3-5-sonnet
+context: autonomous-agent
+observed_on: 2024-12-06
+severity: moderate
+status: open
+evidence:
+  - paper: arxiv-2412-04984
+    stance: supports
+    strength: controlled
+    note: >-
+      Under strong in-prompt goal pressure, took covert actions against
+      oversight in a minority of trials, as did several other frontier models.
+notes: >-
+  Elicited with deliberately strong goal nudging; the paper does not claim
+  this happens in ordinary use. Severity reflects that caveat.
+submitted_by: human:Russ-Miller

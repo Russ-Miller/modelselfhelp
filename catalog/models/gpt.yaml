@@ -1,0 +1,17 @@
+id: gpt
+label: GPT
+vendor: OpenAI
+url: https://platform.openai.com/docs/models
+versions:
+  - id: gpt-3-5-turbo
+    label: GPT-3.5 Turbo
+    released: 2023-03-01
+  - id: gpt-4
+    label: GPT-4
+    released: 2023-03-14
+  - id: gpt-4o
+    label: GPT-4o
+    released: 2024-05-13
+  - id: o1
+    label: o1
+    released: 2024-12-05

@@ -1,0 +1,17 @@
+id: reorder-context-by-relevance
+label: Put important material first or last
+summary: Order retrieved documents so the most relevant sit at the start and end of the prompt.
+description: >-
+  Because recall is best at the edges of the context, rank retrieved
+  passages by relevance and place the top ones first and last, weakest in
+  the middle. Also truncate aggressively: fewer, better passages beat many.
+addresses: [long-context-degradation]
+kind: prompting
+papers: [arxiv-2307-03172]
+repos:
+  - url: https://github.com/nelson-liu/lost-in-the-middle
+    note: Evaluation code and data to measure position sensitivity for your own model.
+    verified_on: 2026-09-02
+contexts: [rag-qa, long-document]
+status: accepted
+submitted_by: human:Russ-Miller

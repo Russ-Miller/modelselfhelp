@@ -1,0 +1,40 @@
+id: procedure-following
+label: Following an unfamiliar procedure
+summary: Models drift from a new multi-step procedure or set of constraints back to familiar routines.
+description: >-
+  When a task comes with explicit instructions, constraints, or a
+  step-by-step workflow the model has not seen in training, a capable model
+  follows it exactly, honors every constraint at once, and does not
+  substitute a familiar but different routine.
+failure_looks_like: >-
+  Skips or reorders steps; satisfies some constraints while silently
+  violating others; follows the format for the first response and drifts in
+  later turns; or completes a superficially similar task instead of the one
+  specified.
+group: agentic
+aliases: [instruction following, constraint adherence, workflow compliance]
+contexts: [coding-agent, autonomous-agent, chat-assistant, customer-support]
+evidence:
+  - paper: arxiv-2311-07911
+    stance: supports
+    strength: benchmark
+    note: >-
+      On verifiable instructions such as length and format constraints, strong
+      models still fail a meaningful share, and failures grow when several
+      constraints apply at once.
+  - paper: arxiv-2307-13854
+    stance: supports
+    strength: benchmark
+    note: >-
+      On realistic web tasks with explicit goals, the best model completed only
+      a small fraction end to end, far below human performance.
+  - paper: arxiv-2406-12045
+    stance: supports
+    strength: benchmark
+    note: >-
+      Many failures come from not following domain policy documents that were
+      provided in the prompt.
+techniques: [checklist-decomposition]
+related: [tool-use, sycophancy]
+status: accepted
+submitted_by: human:Russ-Miller

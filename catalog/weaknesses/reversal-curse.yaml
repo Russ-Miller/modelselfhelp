@@ -1,0 +1,31 @@
+id: reversal-curse
+label: Not generalizing "A is B" to "B is A"
+summary: A model that learned a fact in one direction often cannot recall it when asked in the reverse direction.
+description: >-
+  A capable model that knows a relation between two entities can answer
+  questions about it from either side, without needing to have seen both
+  orderings in training.
+failure_looks_like: >-
+  Answers "who is X's mother" correctly but not "who is Y's child"; recalls
+  a definition from a term but not the term from the definition; and shows
+  near-zero reverse recall after fine-tuning on one-directional facts.
+group: knowledge
+aliases: [directional recall, asymmetric knowledge]
+contexts: [general]
+evidence:
+  - paper: arxiv-2309-12288
+    stance: supports
+    strength: controlled
+    note: >-
+      Models fine-tuned on "A is B" fail to answer "B is A", and GPT-4 recalls
+      celebrity parents far more often than the reverse.
+  - paper: arxiv-2403-13799
+    stance: counters
+    strength: controlled
+    note: >-
+      Training on reversed sequences alongside forward text largely removes the
+      effect.
+techniques: [reverse-training]
+related: [hallucination]
+status: accepted
+submitted_by: human:Russ-Miller

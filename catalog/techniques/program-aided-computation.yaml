@@ -1,0 +1,21 @@
+id: program-aided-computation
+label: Offload arithmetic to code
+summary: Have the model write a short program for the numeric part and run it, instead of computing in text.
+description: >-
+  The model reads the problem and produces code that performs the
+  calculation, then an interpreter executes it. The model does the
+  decomposition it is good at and the interpreter does the arithmetic it is
+  bad at. Works with any tool-calling setup that can run Python.
+addresses: [arithmetic]
+kind: tooling
+papers: [arxiv-2211-10435]
+repos:
+  - url: https://github.com/reasoning-machines/pal
+    note: Reference implementation with prompts and evaluation on math word problems.
+    verified_on: 2026-09-02
+contexts: [math, data-analysis]
+caveats: >-
+  Requires a sandboxed interpreter. Errors move from arithmetic to problem
+  translation, which still needs checking.
+status: accepted
+submitted_by: human:Russ-Miller

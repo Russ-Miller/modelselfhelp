@@ -1,0 +1,18 @@
+id: hierarchical-memory
+label: Tiered memory managed by the model
+summary: Keep a small working context and let the model page facts in and out of external storage.
+description: >-
+  Treat the context window as main memory and an external store as disk.
+  The model uses tools to write durable facts out, search them, and pull
+  them back in when needed. The working context stays small and relevant
+  across sessions of any length.
+addresses: [long-term-memory, context-hygiene]
+kind: architecture
+papers: [arxiv-2310-08560]
+repos:
+  - url: https://github.com/letta-ai/letta
+    note: Letta, formerly MemGPT, the reference implementation.
+    verified_on: 2026-09-02
+contexts: [chat-assistant, autonomous-agent, coding-agent]
+status: accepted
+submitted_by: human:Russ-Miller

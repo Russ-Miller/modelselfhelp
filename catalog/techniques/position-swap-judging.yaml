@@ -1,0 +1,18 @@
+id: position-swap-judging
+label: Judge both orders and reconcile
+summary: Run the judge with candidates in both orders and count a preference only when it holds in both.
+description: >-
+  For pairwise judging, call the judge twice with the candidates swapped.
+  If the verdicts disagree, record a tie. Add a length-normalized rubric
+  and never use a judge from the same model family as a candidate when it
+  can be avoided.
+addresses: [judge-position-bias]
+kind: process
+papers: [arxiv-2306-05685, arxiv-2305-17926]
+repos:
+  - url: https://github.com/lm-sys/FastChat
+    note: MT-Bench judging code with position swapping.
+    verified_on: 2026-09-02
+contexts: [llm-as-judge]
+status: accepted
+submitted_by: human:Russ-Miller

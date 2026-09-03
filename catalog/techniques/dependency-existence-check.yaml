@@ -1,0 +1,17 @@
+id: dependency-existence-check
+label: Verify packages exist before installing
+summary: Check every suggested dependency against the registry and an allowlist before it is installed.
+description: >-
+  Intercept install commands and package additions from the agent. Confirm
+  the package exists, is not newly registered, and matches an allowlist or
+  a lockfile. Reject anything else and feed the rejection back so the model
+  picks a real package.
+addresses: [secure-coding]
+kind: process
+papers: [arxiv-2406-10279]
+contexts: [coding-agent]
+caveats: >-
+  Practitioner technique. Newly registered but legitimate packages will be
+  rejected until allowlisted.
+status: proposed
+submitted_by: human:Russ-Miller
