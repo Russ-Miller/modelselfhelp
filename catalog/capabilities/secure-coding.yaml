@@ -7,6 +7,13 @@ tags: [coding-agent, security]
 aliases: ["insecure code generation", "package hallucination", "slopsquatting"]
 techniques: [dependency-existence-check, secure-code-scanning]
 related: [prompt-injection, hallucination, code-generation]
-match_terms: ["insecure code", "vulnerability", "package hallucination"]
+match_terms: ["insecure code", "package hallucination"]
+discriminator: >-
+  Security properties of code the model writes, and of the dependencies it
+  recommends: injection-prone patterns, hardcoded secrets, unsafe
+  deserialization, and hallucinated or malicious packages. NOT in scope: the
+  general word "vulnerability" used to mean a model weakness or robustness
+  gap, which is ordinary English in this literature and not about generated
+  code.
 status: active
 submitted_by: human:Russ-Miller

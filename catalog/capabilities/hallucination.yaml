@@ -8,5 +8,12 @@ aliases: ["confabulation", "fabrication", "factual error"]
 techniques: [retrieval-augmented-generation, atomic-fact-checking]
 related: [fact-verification, reversal-curse]
 match_terms: ["hallucination", "hallucinate"]
+discriminator: >-
+  Confidently stating things that are not true: invented citations, URLs,
+  numbers, entities, or events, in the absence of a retrieval failure. In
+  scope when the paper measures, explains, or mitigates unsupported
+  generation. NOT in scope when "hallucination" is used loosely for any
+  error, or for perception errors in vision models unless the paper treats
+  them as the same phenomenon.
 status: active
 submitted_by: human:Russ-Miller

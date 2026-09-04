@@ -50,6 +50,10 @@
       },
       "uniqueItems": true
     },
+    "discriminator": {
+      "type": "string",
+      "minLength": 40
+    },
     "techniques": {
       "type": "array",
       "$ref": "common.schema.json#/$defs/slugList"

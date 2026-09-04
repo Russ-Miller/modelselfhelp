@@ -269,3 +269,39 @@ needs a model, not keywords. Topical pre-matching also narrows what stage
 2 has to judge: instead of "is this relevant at all" across every
 candidate, the question becomes "for this paper already matched to
 sycophancy, does it improve, degrade, or measure?"
+
+## 2026-09-04 — Capability discriminators; topical matching tightened
+Two changes to how ingestion candidates get matched to capabilities.
+
+**Matching now weights the title.** A capability term in the title is
+strong evidence the paper is about it; a term buried in an abstract is
+often a passing mention, since a model technical report will name half a
+dozen capabilities it benchmarked without being about any of them. An
+abstract-only match now requires two or more occurrences of the
+capability's vocabulary. Measured effect on a 689-candidate queue:
+matched fell from 214 to 95, and a model technical report that had
+matched two capabilities on single passing mentions correctly dropped
+out, while a genuinely cross-cutting context-management paper kept its
+multiple matches. An earlier, stricter variant (two distinct terms rather
+than two occurrences) over-corrected -- 80 matched and cross-cutting
+signal nearly gone.
+
+Also removed three over-broad match terms found by tracing false
+positives: "vulnerability" from secure-coding (ordinary English in this
+literature), "guardrail" from goal-conflict-safety, and "counting" from
+arithmetic (was catching visual object counting).
+
+**Capabilities carry a `discriminator`.** Optional prose stating the
+inclusion/exclusion boundary, written for whatever decides whether a
+paper is really about the capability -- stage 2 eventually, a human
+reviewer today. Crucially it records known near-misses, since those are
+what a name alone cannot convey: arithmetic excludes visual object
+counting, secure-coding excludes the generic word "vulnerability",
+goal-conflict-safety excludes content moderation and refusal behavior.
+The false positives found while debugging the matcher are exactly the
+material these should capture, so they were seeded from real evidence
+rather than invented.
+
+Editing these through an admin UI remains deferred with the rest of auth
+(spec section 9). Today they are edited as YAML in git, which already has
+authentication and an audit trail.

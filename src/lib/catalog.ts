@@ -19,6 +19,12 @@ export interface ObservedOn { model?: string; era?: string; task_type?: string }
 export interface Capability {
   id: string; label: string; summary: string; description: string;
   tags?: string[]; parent?: string; aliases?: string[]; techniques?: string[]; related?: string[];
+  /** Vocabulary used to topically match ingestion candidates to this capability. */
+  match_terms?: string[];
+  /** Inclusion/exclusion boundary for this capability, including known
+   *  near-misses. Written for a classifier deciding whether a paper is really
+   *  about this capability, and useful to a human reviewer for the same call. */
+  discriminator?: string;
   status: CapabilityStatus; submitted_by: string;
 }
 export interface Source {

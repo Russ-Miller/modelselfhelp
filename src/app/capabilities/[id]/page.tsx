@@ -28,6 +28,16 @@ export default async function CapabilityPage({ params }: PageProps<"/capabilitie
         {c.tags?.length ? <p className="text-sm text-neutral-500">Tags: {c.tags.join(", ")}</p> : null}
       </header>
       <p className="text-sm text-neutral-700 dark:text-neutral-300 max-w-2xl">{c.description}</p>
+      {c.discriminator && (
+        <section className="max-w-2xl rounded border border-neutral-200 bg-neutral-50 p-3 text-sm dark:border-neutral-800 dark:bg-neutral-900/40">
+          <h2 className="mb-1 font-semibold">What counts as this capability</h2>
+          <p className="text-xs text-neutral-500 mb-1.5">
+            Scope boundary used when deciding whether a paper is really about this capability,
+            rather than merely mentioning it.
+          </p>
+          <p className="text-neutral-700 dark:text-neutral-300">{c.discriminator}</p>
+        </section>
+      )}
       <section>
         <h2 className="mb-2 font-semibold">Claims</h2>
         {claims.length === 0 ? <p className="text-sm text-neutral-500">No claims filed yet.</p> : (
