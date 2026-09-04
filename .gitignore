@@ -46,3 +46,7 @@ __pycache__/
 
 # keep the example env file
 !.env.example
+
+# Ingestion review queue: transient triage material, regenerated nightly.
+# The seen-ledger IS committed so dedup survives across machines.
+pipeline/queue/
