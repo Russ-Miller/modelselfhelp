@@ -2,7 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getCapability, getClaim, getClaims, getModel, getSource, getTagLabel, isQuietSource } from "@/lib/catalog";
 import type { SourceLink } from "@/lib/catalog";
-import { CitationBadge, ContestedBadge, KindBadge, StanceBadge, StrengthBadge } from "@/components/badges";
+import { CitationSignal, ContestedBadge, KindBadge, StanceBadge, StrengthBadge } from "@/components/badges";
 
 function SourceItem({ link }: { link: SourceLink }) {
   const src = getSource(link.source);
@@ -13,7 +13,7 @@ function SourceItem({ link }: { link: SourceLink }) {
         {src ? (
           <a href={src.url ?? `#${src.id}`} className="font-medium hover:underline">{src.title}</a>
         ) : link.source}
-        {src && <CitationBadge source={src} />}
+        {src && <CitationSignal source={src} />}
       </div>
       <div className="text-neutral-600 dark:text-neutral-400 ml-1">{link.note}</div>
     </li>

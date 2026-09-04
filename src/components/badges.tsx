@@ -38,27 +38,95 @@ export function ContestedBadge() {
 }
 
 /**
- * Compact citation-activity + age signal for a source: recent citation
- * count, total, and publication year, colored by how actively the field
- * is still citing it. Renders nothing if we haven't checked yet.
+ * scripts/fetch-citations.mjs pages the citations endpoint with limit=1000, so
+ * a *recent* count landing exactly on the cap is a floor, not an exact figure.
+ * The total comes from Semantic Scholar's citationCount scalar and is exact.
  */
-export function CitationBadge({ source }: { source: Source }) {
+const CITATION_FETCH_CAP = 1000;
+
+/** Recent-citation tiers, low to high. Index = number of filled bars. */
+const ACTIVITY_TIERS = [
+  { min: 0, label: "no citations in the last 12 months" },
+  { min: 1, label: "lightly cited in the last 12 months" },
+  { min: 10, label: "steadily cited in the last 12 months" },
+  { min: 50, label: "heavily cited in the last 12 months" },
+  { min: 200, label: "very heavily cited in the last 12 months" },
+];
+
+function activityLevel(recent: number): number {
+  let level = 0;
+  for (let i = 0; i < ACTIVITY_TIERS.length; i++) if (recent >= ACTIVITY_TIERS[i].min) level = i;
+  return level;
+}
+
+const fmtRecent = (n: number) => (n >= CITATION_FETCH_CAP ? `${CITATION_FETCH_CAP}+` : `${n}`);
+
+/**
+ * Citation activity as a 4-bar signal glyph rather than raw numbers — the
+ * list view only needs "is the field still citing this?" at a glance. The
+ * exact counts live in a hover card. Renders nothing if we haven't checked.
+ */
+export function CitationSignal({ source }: { source: Source }) {
   if (!source.citations_checked_at) return null;
   const recent = source.citations_recent_12mo ?? 0;
   const total = source.citations_total ?? 0;
   const year = source.year ?? (source.date ? source.date.slice(0, 4) : undefined);
-  const tone = recent > 0
-    ? "bg-emerald-100 text-emerald-900 dark:bg-emerald-900/40 dark:text-emerald-200"
-    : total > 0
-      ? "bg-neutral-100 text-neutral-600 dark:bg-neutral-800 dark:text-neutral-400"
-      : "bg-neutral-100 text-neutral-500 dark:bg-neutral-800 dark:text-neutral-500";
-  const title = `${total} citation${total === 1 ? "" : "s"} total, ${recent} in the last 12 months` + (year ? `, published ${year}` : "") + ` (checked ${source.citations_checked_at})` + (source.semantic_scholar_id ? " — via Semantic Scholar, click to view" : "");
-  const content = <>{recent}/12mo &middot; {total} total{year ? ` · ${year}` : ""}</>;
+  const level = activityLevel(recent);
+  const active = level > 0;
+  const tone = active ? "text-emerald-600 dark:text-emerald-400" : "text-neutral-400 dark:text-neutral-600";
+
+  const glyph = (
+    <svg viewBox="0 0 22 14" className={`h-3.5 w-[22px] ${tone}`} aria-hidden focusable="false">
+      {[0, 1, 2, 3].map((i) => {
+        const h = 4 + i * 3;
+        return (
+          <rect
+            key={i}
+            x={i * 5.5}
+            y={14 - h}
+            width="3.5"
+            height={h}
+            rx="1"
+            fill="currentColor"
+            opacity={i < level ? 1 : 0.22}
+          />
+        );
+      })}
+    </svg>
+  );
+
+  const label = `${fmtRecent(recent)} citations in the last 12 months, ${total} total`;
+
+  const card = (
+    <span
+      role="tooltip"
+      className="citation-card pointer-events-none absolute left-0 top-full z-20 mt-1 w-max max-w-xs rounded border border-neutral-200 bg-white p-2 text-xs font-normal leading-relaxed text-neutral-700 shadow-lg dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-300"
+    >
+      <span className="block font-medium text-neutral-900 dark:text-neutral-100">{ACTIVITY_TIERS[level].label}</span>
+      <span className="block">{fmtRecent(recent)} in the last 12 months &middot; {total} total</span>
+      {year && <span className="block">published {year}</span>}
+      <span className="block text-neutral-500">checked {source.citations_checked_at}</span>
+      {recent >= CITATION_FETCH_CAP && <span className="block text-neutral-500">count capped at {CITATION_FETCH_CAP} by the fetch</span>}
+      {source.semantic_scholar_id && <span className="block text-neutral-500">click for Semantic Scholar</span>}
+    </span>
+  );
+
+  const wrapper = "citation-signal relative inline-flex items-center align-middle";
   return source.semantic_scholar_id ? (
-    <a href={`https://www.semanticscholar.org/paper/${source.semantic_scholar_id}`} target="_blank" rel="noopener noreferrer" className={`${base} ${tone} hover:underline`} title={title}>
-      {content}
+    <a
+      href={`https://www.semanticscholar.org/paper/${source.semantic_scholar_id}`}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`${wrapper} rounded focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2`}
+      aria-label={`${label}. View on Semantic Scholar.`}
+    >
+      {glyph}
+      {card}
     </a>
   ) : (
-    <span className={`${base} ${tone}`} title={title}>{content}</span>
+    <span className={wrapper} tabIndex={0} aria-label={label}>
+      {glyph}
+      {card}
+    </span>
   );
 }

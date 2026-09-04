@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { getCapability, getClaims, getSource, isQuietSource } from "@/lib/catalog";
 import type { SourceLink } from "@/lib/catalog";
-import { CitationBadge, ContestedBadge, KindBadge, StanceBadge, StrengthBadge } from "@/components/badges";
+import { CitationSignal, ContestedBadge, KindBadge, StanceBadge, StrengthBadge } from "@/components/badges";
 
 export const metadata = { title: "Claims" };
 
@@ -11,7 +11,7 @@ function SourceRow({ link }: { link: SourceLink }) {
     <li className="flex flex-wrap items-center gap-1.5">
       <StanceBadge stance={link.stance} />
       <Link href={`/sources/${link.source}`} className="hover:underline text-neutral-700 dark:text-neutral-300">{src?.title ?? link.source}</Link>
-      {src && <CitationBadge source={src} />}
+      {src && <CitationSignal source={src} />}
     </li>
   );
 }

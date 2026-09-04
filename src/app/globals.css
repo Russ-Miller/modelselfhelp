@@ -24,3 +24,9 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Citation activity hover card. Written as plain CSS rather than Tailwind's
+   group-hover: variant, which was not being generated for this component. */
+.citation-signal .citation-card { display: none; }
+.citation-signal:hover .citation-card,
+.citation-signal:focus-visible .citation-card { display: block; }

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { claimsCiting, getSource, getSources } from "@/lib/catalog";
-import { CitationBadge, StanceBadge } from "@/components/badges";
+import { CitationSignal, StanceBadge } from "@/components/badges";
 
 export function generateStaticParams() {
   return getSources().map((s) => ({ id: s.id }));
@@ -26,7 +26,17 @@ export default async function SourcePage({ params }: PageProps<"/sources/[id]">)
         <p className="text-sm text-neutral-500">
           Created: {s.date ?? s.year ?? "unknown"} &middot; Ingested: {s.ingested_at}
         </p>
-        <div><CitationBadge source={s} /></div>
+        {s.citations_checked_at && (
+          <p className="flex items-center gap-2 text-sm text-neutral-500">
+            <CitationSignal source={s} />
+            <span>
+              {(s.citations_recent_12mo ?? 0) >= 1000 ? "1000+" : (s.citations_recent_12mo ?? 0)} citations in the last 12 months
+              {" · "}
+              {s.citations_total ?? 0} total
+              {" · checked "}{s.citations_checked_at}
+            </span>
+          </p>
+        )}
         {s.url && <a href={s.url} className="text-sm hover:underline">{s.url}</a>}
       </header>
       {s.summary && <p className="text-sm text-neutral-700 dark:text-neutral-300">{s.summary}</p>}
