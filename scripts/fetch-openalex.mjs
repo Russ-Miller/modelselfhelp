@@ -63,6 +63,20 @@ const CAPABILITY_SIGNALS = [
   [/\b(GPT-4|Claude|Llama|Gemini|Mistral|Qwen|frontier model)\b/i, 1, "named-model"],
 ];
 
+// Work that moves a capability forward rather than only measuring it. Without
+// these, technique/architecture papers score near zero purely for not being
+// failure papers -- which would systematically under-rank the "what helps
+// systems improve" half of the index.
+const IMPROVEMENT_SIGNALS = [
+  [/\b(outperform\w*|surpass\w*|state[- ]of[- ]the[- ]art|new SOTA)\b/i, 2, "outperforms"],
+  [/\b(improv\w+|gain\w*|boost\w*|enhanc\w+)\b/i, 1, "improves"],
+  [/\b(we (propose|introduce|present)|our (method|approach|framework))\b/i, 2, "proposes-method"],
+  [/\b(fine[- ]tun\w+|post[- ]train\w+|instruction[- ]tun\w+|distill\w+|RLHF|preference optimization)\b/i, 3, "training-method"],
+  [/\b(architecture|attention mechanism|decoding strateg\w+|inference[- ]time|quantiz\w+)\b/i, 2, "architecture"],
+  [/\b(scal\w+ law|data budget|pre[- ]train\w+|compute[- ]optimal)\b/i, 2, "scaling"],
+  [/\b(mitigat\w+|reduc\w+ (error|hallucinat\w+)|correct\w* )\b/i, 2, "mitigation"],
+];
+
 // Markers of "we applied an LLM inside domain X" rather than capability work.
 const DOMAIN_SIGNALS = [
   [/\b(patient|clinical|hospital|medical|nurs\w+|diagnos\w+|health\w*)\b/i, -3, "clinical"],
@@ -85,12 +99,17 @@ function scoreCandidate(c) {
   for (const [re, weight, label] of CAPABILITY_SIGNALS) {
     if (re.test(haystack)) { score += weight; signals.push(`+${label}`); }
   }
+  for (const [re, weight, label] of IMPROVEMENT_SIGNALS) {
+    if (re.test(haystack)) { score += weight; signals.push(`+${label}`); }
+  }
   for (const [re, weight, label] of DOMAIN_SIGNALS) {
     if (re.test(haystack)) { score += weight; signals.push(`-${label}`); }
   }
   if (c.topic && DOMAIN_TOPICS.test(c.topic)) { score -= 4; signals.push("-domain-topic"); }
-  // Capability research overwhelmingly preprints on arXiv before anywhere else.
-  if (c.arxiv_id) { score += 3; signals.push("+arxiv"); }
+  // Only informative in --all-sources mode. With the arXiv filter on, every
+  // candidate is an arXiv preprint, so this would be a constant offset that
+  // inflates scores while ordering nothing.
+  if (allSources && c.arxiv_id) { score += 3; signals.push("+arxiv"); }
   if (!c.abstract) { score -= 1; signals.push("-no-abstract"); }
   return { score, signals };
 }
@@ -159,6 +178,31 @@ const haveTitles = new Set(catalog.sources.map((s) => normTitle(s.data.title)));
 const seen = fs.existsSync(SEEN_PATH) ? JSON.parse(fs.readFileSync(SEEN_PATH, "utf8")) : { openalex_ids: [] };
 const seenIds = new Set(seen.openalex_ids);
 
+// --rescore: re-rank what is already queued against the current heuristic,
+// without touching the network. Run this after changing the signal tables.
+if (args.includes("--rescore")) {
+  const files = fs.existsSync(QUEUE_DIR) ? fs.readdirSync(QUEUE_DIR).filter((f) => /\.ya?ml$/.test(f)) : [];
+  if (!files.length) { console.log("No queue files to rescore."); process.exit(0); }
+  for (const f of files) {
+    const full = path.join(QUEUE_DIR, f);
+    const parsed = YAML.parse(fs.readFileSync(full, "utf8"));
+    const entries = parsed?.candidates ?? [];
+    let moved = 0;
+    for (const c of entries) {
+      const before = c.score ?? 0;
+      const { score, signals } = scoreCandidate(c);
+      c.score = score;
+      c.signals = signals;
+      if (score !== before) moved++;
+    }
+    const win = parsed?.window ?? { from: f.split("_")[0], to: (f.split("_")[1] ?? "").replace(/\.ya?ml$/, "") };
+    writeQueueFile(full, win, entries, 0);
+    console.log(`${f}: rescored ${entries.length} candidates (${moved} changed)`);
+    for (const c of entries.slice(0, 10)) console.log(`  ${String(c.score).padStart(3)}  ${String(c.title).slice(0, 84)}`);
+  }
+  process.exit(0);
+}
+
 console.log(`Window ${from} .. ${to} — ${QUERIES.length} queries — ${allSources ? "ALL sources" : "arXiv only"}`);
 const found = new Map();   // openalex id -> work
 
@@ -222,14 +266,46 @@ for (const c of candidates) {
   c.signals = signals;
 }
 
-const yamlStr = (s) => JSON.stringify(s ?? "");
+function yamlStr(s) { return JSON.stringify(s ?? ""); }
+
+function writeQueueFile(outPath, win, entries, addedCount) {
+  entries.sort((a, b) => (b.score ?? 0) - (a.score ?? 0) || (a.title ?? "").localeCompare(b.title ?? ""));
+  const lines = [
+    `# OpenAlex candidates, ${win.from} .. ${win.to}`,
+    `# Stage 1 output: NOT reviewed, NOT in the catalog. Triage before promoting.`,
+    `# ${entries.length} candidates (${addedCount} added by the latest run).`,
+    `# Ranked by a free keyword/topic heuristic -- highest score first. The score`,
+    `# only orders the queue; nothing is discarded, since a domain-flavored paper`,
+    `# can still be real capability research.`,
+    `window: { from: ${win.from}, to: ${win.to} }`,
+    `generated_at: ${iso(new Date())}`,
+    `candidates:`,
+  ];
+  for (const c of entries) {
+    lines.push(`  - openalex_id: ${c.openalex_id}`);
+    lines.push(`    score: ${c.score ?? 0}`);
+    if (c.signals?.length) lines.push(`    signals: [${c.signals.join(", ")}]`);
+    lines.push(`    title: ${yamlStr(c.title)}`);
+    lines.push(`    date: ${c.date}`);
+    if (c.arxiv_id) lines.push(`    arxiv_id: "${c.arxiv_id}"`);
+    if (c.doi) lines.push(`    doi: ${c.doi}`);
+    if (c.authors?.length) lines.push(`    authors: [${c.authors.map(yamlStr).join(", ")}]`);
+    if (c.venue) lines.push(`    venue: ${yamlStr(c.venue)}`);
+    if (c.topic) lines.push(`    topic: ${yamlStr(c.topic)}`);
+    lines.push(`    cited_by_count: ${c.cited_by_count ?? 0}`);
+    if (c.abstract) lines.push(`    abstract: ${yamlStr(String(c.abstract).slice(0, 1500))}`);
+  }
+  fs.writeFileSync(outPath, lines.join("\n") + "\n");
+  return entries;
+}
+
 fs.mkdirSync(QUEUE_DIR, { recursive: true });
 const outPath = path.join(QUEUE_DIR, `${from}_${to}.yaml`);
 
 // Re-running a window merges with what is already queued rather than
 // replacing it: OpenAlex is a live index, so a later run legitimately turns
-// up stragglers. Parsing the prior file back (instead of blind appending)
-// keeps the whole queue sorted by score, not just each run's slice.
+// up stragglers. Parsing the prior file back keeps the whole queue sorted by
+// score, not just each run's slice.
 let merged = candidates;
 if (fs.existsSync(outPath)) {
   const prior = YAML.parse(fs.readFileSync(outPath, "utf8"))?.candidates ?? [];
@@ -237,34 +313,7 @@ if (fs.existsSync(outPath)) {
   for (const c of candidates) byId.set(c.openalex_id, c);
   merged = [...byId.values()];
 }
-merged.sort((a, b) => (b.score ?? 0) - (a.score ?? 0) || (a.title ?? "").localeCompare(b.title ?? ""));
-
-const lines = [
-  `# OpenAlex candidates, ${from} .. ${to}`,
-  `# Stage 1 output: NOT reviewed, NOT in the catalog. Triage before promoting.`,
-  `# ${merged.length} candidates (${candidates.length} added by the latest run).`,
-  `# Ranked by a free keyword/topic heuristic -- highest score first. The score`,
-  `# only orders the queue; nothing is discarded, since a domain-flavored paper`,
-  `# can still be real capability research.`,
-  `window: { from: ${from}, to: ${to} }`,
-  `generated_at: ${iso(new Date())}`,
-  `candidates:`,
-];
-for (const c of merged) {
-  lines.push(`  - openalex_id: ${c.openalex_id}`);
-  lines.push(`    score: ${c.score ?? 0}`);
-  if (c.signals?.length) lines.push(`    signals: [${c.signals.join(", ")}]`);
-  lines.push(`    title: ${yamlStr(c.title)}`);
-  lines.push(`    date: ${c.date}`);
-  if (c.arxiv_id) lines.push(`    arxiv_id: "${c.arxiv_id}"`);
-  if (c.doi) lines.push(`    doi: ${c.doi}`);
-  if (c.authors?.length) lines.push(`    authors: [${c.authors.map(yamlStr).join(", ")}]`);
-  if (c.venue) lines.push(`    venue: ${yamlStr(c.venue)}`);
-  if (c.topic) lines.push(`    topic: ${yamlStr(c.topic)}`);
-  lines.push(`    cited_by_count: ${c.cited_by_count ?? 0}`);
-  if (c.abstract) lines.push(`    abstract: ${yamlStr(String(c.abstract).slice(0, 1500))}`);
-}
-fs.writeFileSync(outPath, lines.join("\n") + "\n");
+writeQueueFile(outPath, { from, to }, merged, candidates.length);
 
 for (const c of candidates) seenIds.add(c.openalex_id);
 fs.writeFileSync(SEEN_PATH, JSON.stringify({ openalex_ids: [...seenIds] }, null, 2) + "\n");
