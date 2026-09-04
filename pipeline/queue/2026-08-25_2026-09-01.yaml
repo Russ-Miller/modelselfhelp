@@ -152,6 +152,8 @@ candidates:
       demonstrate that ReAct-based systems outperform baselines due to superior reasoning and tool
       use. Notably, our fine-tuned 8B model surpasses a 70B in-context system. Finally, we present
       an error analysis, impact of scene complexity, and cross-domain generalization.
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7204970284
     score: 22
     signals:
@@ -250,6 +252,8 @@ candidates:
       fine-grained action modeling and information-aware optimization for long-horizon reasoning.
       Our code is anonymous available at
       https://github.com/jiangxinke/Harness-RL/tree/AgenticRAG-R1-Whitebox.
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7206164897
     score: 21
     signals:
@@ -291,6 +295,14 @@ candidates:
       low-rank bias inherent in neural network optimization. Therefore, our findings expose the
       limitations of current post-training paradigms and call for a shift toward alignment
       objectives that preserve cross-cultural plurali'
+    proposal:
+      proposed_id: cultural-perspective-diversity
+      proposed_label: Representing a spread of cultural viewpoints
+      scope_note: Covers whether a model reproduces the internal variation of populations' values and
+        opinions rather than collapsing to a dominant or average stance; excludes factual accuracy
+        about cultures.
+      rationale: The paper shows aligning models to cultural averages flattens the diversity of viewpoints
+        they can express.
   - openalex_id: https://openalex.org/W7204873143
     score: 21
     signals:
@@ -331,6 +343,8 @@ candidates:
       specialization has weakened it while preserving both domain-specific capability and the safety
       of already well-aligned models, outperforming baselines by up to 22.2\\% on safety benchmarks.
       Our code is available at: https://github.com/DecayingSeart/CREST."
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7204485676
     score: 21
     signals:
@@ -369,6 +383,14 @@ candidates:
       knowledge absorption beyond what supervised fine-tuning can achieve. GRIN substantially
       outperforms SFT and mixed-policy RL baselines on the harder question types while matching them
       on basic fact recall."
+    proposal:
+      proposed_id: knowledge-injection-generalization
+      proposed_label: Using newly trained-in facts flexibly
+      scope_note: Covers whether facts added by finetuning or continual updates can be recalled under
+        paraphrase, combined across documents, and used in inference, rather than only regurgitated
+        in training format; excludes retrieval-based grounding.
+      rationale: The paper shows SFT-injected knowledge is memorized verbatim but fails to generalize
+        across paraphrases, multi-source retrieval, and reasoning.
   - openalex_id: https://openalex.org/W7204940517
     score: 21
     signals:
@@ -413,6 +435,8 @@ candidates:
       evaluate answers. Extensive experiments on CommonsenseQA and OpenBookQA datasets demonstrate
       that RACER significantly outperforms state-of-the-art KG-enhanced LLM baselines with an
       average improvement of 5\%, offering robust and highly interpretable reasoning capabilities.
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7204862779
     score: 20
     signals:
@@ -457,6 +481,8 @@ candidates:
       outperform all interleaved CoT baselines by more than 2x on average on CoVA-Bench, though they
       still fall short of strong text-only CoT baselines, highlighting open challenges for future
       work.
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7204453860
     score: 20
     signals:
@@ -492,6 +518,8 @@ candidates:
       test-time setting where ground-truth failure labels are unavailable, DCGC improves full test
       set accuracy by correcting low-consensus upstream outputs, highlighting its utility as a
       verifier-free global correction module for difficult reasoning instances.
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7204485044
     score: 20
     signals:
@@ -585,6 +613,14 @@ candidates:
       model architectures and poor self-improvement capabilities given incorrect priors. Overall,
       our work establishes the challenges of embodied navigation and geospatial reasoning. We
       publicly release our code and the GeoAgent environment: https://geoagent-benchmark.github.io"
+    proposal:
+      proposed_id: image-geolocation
+      proposed_label: Inferring location from imagery
+      scope_note: Covers estimating where a photo or street-level view was taken from visual cues,
+        including when observations must be gathered actively; excludes location inference from text
+        metadata.
+      rationale: The paper benchmarks VLM geolocalization accuracy at country vs. regional granularity in
+        navigable Street View environments.
   - openalex_id: https://openalex.org/W7204904339
     score: 20
     signals:
@@ -624,6 +660,8 @@ candidates:
       Crucially, we demonstrate the importance of targeted evaluation in the adaptation process, as
       an existing Swedish benchmark largely fails to capture the models' in-domain performance
       gains.
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7204542891
     score: 19
     signals:
@@ -664,6 +702,8 @@ candidates:
       in-context learning and achieves performance competitive with or superior to test-time scaling
       methods, while requiring significantly fewer generations and lower token cost. Code available
       at: https://github.com/umwyf/CRITICL"
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7204870300
     score: 19
     signals:
@@ -701,6 +741,14 @@ candidates:
       resisting incongruent updates, with several models correctly identifying a weakening update
       yet failing to revise their conclusion. We believe our work and findings will facilitate
       future research on evaluating language models in defeasible reasoning.
+    proposal:
+      proposed_id: belief-revision
+      proposed_label: Updating beliefs when evidence changes
+      scope_note: Covers defeasible/non-monotonic reasoning where a previously warranted conclusion must
+        be retracted or maintained as new confirming or disconfirming evidence arrives; excludes
+        one-shot checks of a claim against fixed evidence.
+      rationale: DeReLab measures multi-turn belief updating and confirmation bias under formally verified
+        non-monotonic ground truth.
   - openalex_id: https://openalex.org/W7204545904
     score: 19
     signals:
@@ -740,6 +788,14 @@ candidates:
       signals into an interpretable and auditable evaluation process. Experiments show that PRISM
       yields more accurate and stable judgements than traditional holistic judging, providing a more
       reliable framework for persona fidelity evaluation."
+    proposal:
+      proposed_id: persona-consistency
+      proposed_label: Staying in an assigned persona
+      scope_note: Covers whether a model's behavior and style consistently reflect an assigned character
+        or personality across a dialogue, and whether models can judge such fidelity; excludes
+        factual role knowledge.
+      rationale: The paper evaluates persona fidelity in dynamic dialogue and the failure of holistic
+        judges to measure it.
   - openalex_id: https://openalex.org/W7207618905
     score: 19
     signals:
@@ -833,6 +889,14 @@ candidates:
       to enhance models' understanding of procedural errors. It achieves consistent performance
       gains over the selected baselines and attains state-of-the-art results on several metrics
       under comparable settings. Code: https://github.com/z1oong/EgoErrorVQA"
+    proposal:
+      proposed_id: procedural-error-detection
+      proposed_label: Spotting mistakes in observed procedures
+      scope_note: Covers recognizing that an observed multi-step activity (e.g., in egocentric video)
+        deviates from the correct procedure and classifying the error type; excludes the model
+        following a procedure itself.
+      rationale: EgoErrorVQA finds VLMs persistently fail to detect and categorize procedural errors in
+        egocentric video.
   - openalex_id: https://openalex.org/W7206215306
     score: 19
     signals:
@@ -876,6 +940,14 @@ candidates:
       all. Multi-drone commanding amplifies this divide, with small models failing by blindly
       copying a single coordinate across distinct views. Viewed as vision-language-action agents,
       the models' spatial perceptio"
+    proposal:
+      proposed_id: embodied-visual-control
+      proposed_label: Closing the loop from vision to action
+      scope_note: Covers using a model as the controller in an embodied loop—approaching, tracking,
+        searching, and deciding when to stop—from visual observations; excludes passive visual
+        question answering.
+      rationale: DroneCATS places MLLMs directly in a drone control loop and measures approach, tracking,
+        search, and multi-agent commanding.
   - openalex_id: https://openalex.org/W7204586973
     score: 19
     signals:
@@ -917,6 +989,8 @@ candidates:
       approximately 24\% lower latency. Furthermore, it demonstrates superior structural
       generalization, halving the out-of-distribution (OOD) gap of SFT models (from 15.77\% to
       7.80\%) and maintaining robustness on large-scale graphs beyond the training distribution.
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7204848904
     score: 19
     signals:
@@ -962,6 +1036,13 @@ candidates:
       improvements, even surpassing larger open-source models, while evaluations on
       out-of-distribution benchmarks confirm no degradation in general mathematical reasoning
       ability."
+    proposal:
+      proposed_id: counterexample-construction
+      proposed_label: Constructing counterexamples
+      scope_note: Covers whether models can produce concrete examples or counterexamples that test the
+        boundaries of a claim or theorem, not just produce final answers to math problems.
+      rationale: The paper targets example-based mathematical reasoning, specifically counterexample
+        construction, as a distinct underdeveloped ability.
   - openalex_id: https://openalex.org/W7204833823
     score: 19
     signals:
@@ -1002,6 +1083,14 @@ candidates:
       open-source models: leading closed-source models achieve executable translation rates above
       80%, while even the largest open-source models struggle to consistently preserve geometric
       constraints and produce valid formalizations. We"
+    proposal:
+      proposed_id: autoformalization
+      proposed_label: Translating informal statements into formal language
+      scope_note: Covers faithful translation of natural-language math or specifications into a formal/DSL
+        representation checkable by a solver; excludes general code generation and proof search
+        itself.
+      rationale: NL2AGBench evaluates LLMs translating English geometry problems into AlphaGeometry's
+        formal DSL with execution-based verification.
   - openalex_id: https://openalex.org/W7204569399
     score: 19
     signals:
@@ -1040,6 +1129,12 @@ candidates:
       Experimental results on logical reasoning benchmarks demonstrate that our framework
       significantly outperforms state-of-the-art prompting and RAG baselines, delivering higher
       accuracy and verifiable reasoning paths.
+    proposal:
+      proposed_id: deductive-consistency
+      proposed_label: Strict multi-step logical deduction
+      scope_note: Covers rule-based deductive/constraint reasoning where conclusions must follow validly;
+        excludes factual QA and arithmetic.
+      rationale: The paper targets LLM failures at rigorous multi-step logical inference and consistency.
   - openalex_id: https://openalex.org/W7204500056
     score: 18
     signals:
@@ -1081,6 +1176,12 @@ candidates:
       that models remain weak across all diagnostic levels, with especially clear bottlenecks in
       spatial state, interaction binding, and terminal evidence. TacticCheck delivers consistent
       gains across all evaluated models, while still"
+    proposal:
+      proposed_id: multi-agent-tactical-video-reasoning
+      proposed_label: Reasoning about multi-agent interactions in video
+      scope_note: Covers inferring roles, coordination, and causal/tactical structure among multiple
+        agents over spatio-temporal visual input; excludes static scene description.
+      rationale: DoublesEval formalizes and diagnoses multi-agent tactical reasoning failures in VLMs.
   - openalex_id: https://openalex.org/W7204870937
     score: 18
     signals:
@@ -1122,6 +1223,8 @@ candidates:
       final-task correctness, demonstrating the effectiveness of structured multi-agent
       collaboration for reliable RS agents. The code is publicly available at
       https://github.com/IntelliSensing/HiRS-Agent."
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7204606891
     score: 18
     signals:
@@ -1159,6 +1262,12 @@ candidates:
       generation and testing benchmarks show that HypoForge consistently outperforms existing AI
       scientist frameworks and skill-level variants. Further analysis demonstrates the effectiveness
       of the proposed stage-specific skill learning paradigms.
+    proposal:
+      proposed_id: hypothesis-generation
+      proposed_label: Generating and testing scientific hypotheses
+      scope_note: Covers proposing novel, plausible hypotheses and designing/executing tests of them;
+        excludes summarizing literature or generic agent planning.
+      rationale: HypoForge evaluates and improves automated hypothesis generation and testing.
   - openalex_id: https://openalex.org/W7206191163
     score: 18
     signals:
@@ -1197,6 +1306,8 @@ candidates:
       10.0% in retrieval recall and 4.3% in downstream exact match, achieving a superior
       accuracy-efficiency trade-off by fundamentally eliminating the latency bottleneck of global
       traversals. Our source code is available at https://github.com/ZaiizaiZHANG/ISO-RAG.
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7204841551
     score: 18
     signals:
@@ -1288,6 +1399,8 @@ candidates:
       single primitive library serves two benchmarks, so the marginal cost of a new task is 100
       examples of program search and no new finetuning data. Replacing the loss guided search with
       uniform sampling over the same type admissible space at equal"
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7204864594
     score: 18
     signals:
@@ -1329,6 +1442,8 @@ candidates:
       baselines while maintaining competitive in-domain performance. All models reported in this
       work are \href{https://huggingface.co/01Yassine/AudioLLM-Deepfake-Detection}{publicly
       available}.
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7204815970
     score: 17
     signals:
@@ -1363,6 +1478,8 @@ candidates:
       natural-language artifacts, we present a linguistic analysis of how granularity trade-offs,
       semantic drift, and linguistic reward hacking impact alignment reliability, identifying key
       open problems for future research.
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7204879293
     score: 17
     signals:
@@ -1402,6 +1519,8 @@ candidates:
       five reasoning benchmarks with three distinct teacher models, ACTD achieves state-of-the-art
       performance. Moreover, its multi-teacher extension outperforms the strongest single-teacher
       and multi-teacher baselines, further demonstrating the robustness of our method.
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7204948314
     score: 17
     signals:
@@ -1441,6 +1560,8 @@ candidates:
       delivers instant feedback together with syntax highlighting features. Our experimental results
       show that the MCTS-based method achieves a 92% success rate on complex logical prompts while
       surpassing standard zero-shot generation models.
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7204258642
     score: 17
     signals:
@@ -1589,6 +1710,8 @@ candidates:
       mitigation. Our results demonstrate not only state-of-the-art performance on in-domain
       benchmarks but also substantial improvements in cross-domain and cross-lingual
       generalization--areas where encoder-based specialist classifiers often struggle.
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7204940183
     score: 17
     signals:
@@ -1628,6 +1751,8 @@ candidates:
       the encoder baseline. We identify three language clusters--encoder-dominant, partial-coverage,
       and failure-zone; and provide actionable deployment guidelines grounded in transfer learning
       and low-resource NLP principles."
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7207626127
     score: 17
     signals:
@@ -1715,6 +1840,14 @@ candidates:
       PIS further reaches 70.1% Set-F1, where retrospective memory methods stay at most 54.4%. PIS
       sets a new state of the art on this benchmark and enables small models to surpass the
       published large-model scaffold."
+    proposal:
+      proposed_id: prospective-memory
+      proposed_label: Remembering to act later at the right moment
+      scope_note: Covers whether an agent stores a deferred intention and executes it when a triggering
+        cue appears later during other work; excludes plain recall of past facts or tracking current
+        state.
+      rationale: The paper benchmarks agents on deferred-intention execution (PM-Bench), where frontier
+        models score poorly without scaffolding.
   - openalex_id: https://openalex.org/W7204550735
     score: 17
     signals:
@@ -1754,6 +1887,14 @@ candidates:
       F1 over the expected output modalities. Applying MMI to five frontier multimodal models, we
       find that the MPS ranges from only 15.6 (Claude Opus 4.6) to 34.9 (GPT-5.4). Given the low
       availability of returned modalities to even g
+    proposal:
+      proposed_id: cross-modal-integration
+      proposed_label: Combining information across several modalities
+      scope_note: Covers whether a model jointly reasons over and produces output across two or more
+        modalities (text, image, audio, video, documents); excludes single-modality perception
+        accuracy.
+      rationale: MMI evaluates omni models on questions requiring understanding and generating across up
+        to three modalities at once.
   - openalex_id: https://openalex.org/W7204671260
     score: 17
     signals:
@@ -1795,6 +1936,8 @@ candidates:
       GRPO post-training, while the backbone LLM remains frozen. Experiments across reasoning and
       personality benchmarks show that MoRe outperforms single-agent baselines by 2.2% on average,
       and achieves performance on par with MAS while reducing token cost by 20x.
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7206193539
     score: 17
     signals:
@@ -1837,6 +1980,13 @@ candidates:
       stages of the RE process, and that extra budget, persistence, or reasoning effort rescues few
       of them, pointing to a competence limit rather than a resource limit. Regarding memorization,
       while models reproduce picoCTF flags from"
+    proposal:
+      proposed_id: binary-reverse-engineering
+      proposed_label: Reverse-engineering compiled binaries
+      scope_note: Covers analyzing disassembled/decompiled binaries to recover program behavior; excludes
+        source-level code reading and generic CTF exploitation.
+      rationale: Reveree diagnoses where LLM agents fail across stages of binary reverse engineering
+        versus recalling public solutions.
   - openalex_id: https://openalex.org/W7204223725
     score: 17
     signals:
@@ -1877,6 +2027,12 @@ candidates:
       These preliminary findings suggest that LLM reasoning may effectively complement traditional
       static taint analysis, motivating future research on hybrid LLM-enhanced taint analysis
       pipelines."
+    proposal:
+      proposed_id: program-analysis-reasoning
+      proposed_label: Reasoning about data and control flow in code
+      scope_note: Whether a model can trace dataflow/taint, aliasing, and implicit flows through a
+        program; excludes writing code or finding vulnerabilities by pattern matching.
+      rationale: Evaluates LLM agents doing Android taint flow reasoning versus static analyzers.
   - openalex_id: https://openalex.org/W7206172889
     score: 17
     signals:
@@ -1919,6 +2075,8 @@ candidates:
       reward-profile balance and downstream performance over fixed and dynamic weighting baselines;
       it also remains effective with GDPO and PPO, supporting compatibility across RL algorithms.
       Our code is available at https://github.com/yyhappier/AMRP.git."
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7206161142
     score: 17
     signals:
@@ -2007,6 +2165,12 @@ candidates:
       the engineered Qwen-Agent reference. Agents often train on mismatched data and trust narrow
       self-evaluations, so local gains fail to transfer to hidden evaluation and continued search
       and training can erase earlier improvements.
+    proposal:
+      proposed_id: self-directed-improvement
+      proposed_label: Turning a vague goal into its own learning plan
+      scope_note: Covers agents that must operationalize an underspecified capability goal—choosing data,
+        training signals, and evaluations—not optimizing a human-specified metric.
+      rationale: ASPIRE benchmarks vague-goal-driven self-evolution with hidden downstream tasks.
   - openalex_id: https://openalex.org/W7204435811
     score: 16
     signals:
@@ -2047,6 +2211,13 @@ candidates:
       ARI by 12.99 points and V-measure by 11.62 points. These results demonstrate the promise of
       native audio-language models for flexible, perspective-conditioned structure discovery over
       speech collections.
+    proposal:
+      proposed_id: paralinguistic-speech-understanding
+      proposed_label: Understanding speech beyond words
+      scope_note: Covers audio-language models reasoning over acoustic/paralinguistic cues (emotion,
+        speaker traits, prosody) alongside content; excludes plain ASR accuracy.
+      rationale: AudioLens requires partitioning speech by user-specified perspectives using both
+        linguistic and paralinguistic cues.
   - openalex_id: https://openalex.org/W7204435985
     score: 16
     signals:
@@ -2088,6 +2259,13 @@ candidates:
       separately raises success from 1/15 to 7/15 on a Level~1--3 panel. These results identify
       base-model capability, target knowledge, execution feedback, and same-target measurement as
       central to cross-architecture kernel generation.
+    proposal:
+      proposed_id: cross-architecture-code-porting
+      proposed_label: Porting and optimizing performance code across hardware
+      scope_note: Covers translating kernels between hardware programming models and tuning them for
+        speed; excludes generic code generation and language-to-language syntax translation.
+      rationale: FABRICA-Bench measures agents remapping CUDA kernels to a wafer-scale architecture with
+        correctness and performance goals.
   - openalex_id: https://openalex.org/W7204852095
     score: 16
     signals:
@@ -2132,6 +2310,13 @@ candidates:
       and demonstrate that in low-resource settings, focusing reflection on reasoning steps after
       the decisive error step achieves comparable quality to reflecting on the complete failure
       trajectory."
+    proposal:
+      proposed_id: failure-attribution
+      proposed_label: Pinpointing which agent or step caused a failure
+      scope_note: Covers localizing the decisive error in a multi-agent or long trajectory log; distinct
+        from a model fixing its own single answer.
+      rationale: DoCtOR relies on automated attribution of the decisive error agent and step in
+        multi-agent failures.
   - openalex_id: https://openalex.org/W7204577280
     score: 16
     signals:
@@ -2173,6 +2358,8 @@ candidates:
       agentic capability profiles. This demonstrates that process-level evaluation is crucial for
       interpreting the true potential of LLMs and guiding the development of next-generation
       mathematical agents.
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7206210240
     score: 16
     signals:
@@ -2208,6 +2395,13 @@ candidates:
       benchmarks (WOS, Flipkart, LEDGAR), our approach improves Macro F1 by up to 10.0pp over
       retrieval baselines, with smaller models (2B--20B) gaining up to 11.5pp via cross-model
       transfer.
+    proposal:
+      proposed_id: fine-grained-label-discrimination
+      proposed_label: Telling near-identical categories apart
+      scope_note: Covers classification/selection over large taxonomies with many semantically similar
+        options; not general classification accuracy or retrieval quality.
+      rationale: The paper shows LLMs cannot distinguish confusable labels even when both are presented as
+        candidates.
   - openalex_id: https://openalex.org/W7204968160
     score: 16
     signals:
@@ -2409,6 +2603,8 @@ candidates:
       unnecessary comparisons than existing methods. On BIRD-dev, it outperforms the previous
       state-of-the-art selector-based method R^3-SQL by 2.02 execution accuracy points on average
       using the same candidate sets, with 2.92x fewer toke"
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7206164039
     score: 16
     signals:
@@ -2449,6 +2645,14 @@ candidates:
       goals by active visual perception and feedback-driven correction. Experimental results
       demonstrate that existing VLMs face significant challenges in translating semantic knowledge
       into physical execution and maintaining long-horizon state tracking."
+    proposal:
+      proposed_id: interactive-affordance-exploration
+      proposed_label: Figuring out how to operate an unfamiliar device by interacting with it
+      scope_note: Covers grounding visual affordances and hypothesis-test-refine interaction with novel
+        physical/GUI devices without manuals; excludes static visual recognition or documented tool
+        APIs.
+      rationale: VGEBench evaluates VLM agents' ability to operate novel household devices via visually
+        grounded exploration.
   - openalex_id: https://openalex.org/W7206177255
     score: 16
     signals:
@@ -2486,6 +2690,14 @@ candidates:
       is not supported universally; optimized quantized LLMs can win overall, while SLMs remain
       competitive through lower resource demand. Quantization is a systems-level choice rather than
       a monotonic precision- efficiency trade-"
+    proposal:
+      proposed_id: quantization-behavior-retention
+      proposed_label: Keeping behavior after compression
+      scope_note: Covers whether quantized or distilled small models retain the capability and safety
+        behavior of their uncompressed source; excludes pure efficiency benchmarking without
+        behavioral comparison.
+      rationale: The paper compares quantized LLMs and small models on capability and harmful-prompt
+        robustness.
   - openalex_id: https://openalex.org/W7204939093
     score: 16
     signals:
@@ -2525,6 +2737,12 @@ candidates:
       drift and negligible accuracy change. These results suggest conditional activation is a
       promising route toward modular, retention-preserving domain specialization over frozen
       backbones."
+    proposal:
+      proposed_id: catastrophic-forgetting
+      proposed_label: Keeping general skills after domain fine-tuning
+      scope_note: Covers loss of out-of-domain ability when adapting a model to a specialty; excludes
+        ordinary in-domain accuracy gains.
+      rationale: The paper targets domain specialization that preserves out-of-domain retention.
   - openalex_id: https://openalex.org/W7204876383
     score: 16
     signals:
@@ -2561,6 +2779,13 @@ candidates:
       simple lexical overlap and significantly exceed count-preserving permutation baselines. Our
       results show that many apparent zero-shot reasoning deficits are expression failures masking
       intact internal logic, urging a narrower interpretation of benchmark evaluations."
+    proposal:
+      proposed_id: latent-knowledge-readout
+      proposed_label: Expressing what it internally knows
+      scope_note: Covers gaps between information decodable from hidden states and the model's emitted
+        answer or scores; excludes interpretability work with no behavioral capability claim.
+      rationale: The paper shows probes decode correct answers that the model's own sequence scoring fails
+        to output.
   - openalex_id: https://openalex.org/W7204947814
     score: 15
     signals:
@@ -2601,6 +2826,13 @@ candidates:
       remains broadly unsolved. Notably, Ambiguous Framing is the dominant failure mode (37.3% of
       errors) while outright Hallucination accounts for only 11.2%, indicating that models fail less
       by stating falsehoods than by distorting register "
+    proposal:
+      proposed_id: dialect-cultural-competence
+      proposed_label: Handling dialects and local cultural context
+      scope_note: Covers non-standard language varieties and culturally embedded pragmatics; excludes
+        general multilingual translation accuracy.
+      rationale: The benchmark measures Saudi dialectal and cultural competence unmeasured by MSA-centric
+        evaluation.
   - openalex_id: https://openalex.org/W7204844857
     score: 15
     signals:
@@ -2637,6 +2869,8 @@ candidates:
       outperforms prompted chain-of-thought ($-12.0\%$, $p = 0.0013$), while prompted
       chain-of-thought is indistinguishable from standard generation ($-1.3\%$, n.s.). Token
       instrumentation shows extended thinking uses under 1\% o
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7204905369
     score: 15
     signals:
@@ -2673,6 +2907,12 @@ candidates:
       surpassing SFT expert by 1.4-5.5% in domain performance while recovering its
       general-capability drop from 3.4-14.5% to at most 0.5%, with minimal overhead from invoking
       the expert on only one-third of tokens."
+    proposal:
+      proposed_id: catastrophic-forgetting
+      proposed_label: Retaining general ability after fine-tuning
+      scope_note: Covers loss or preservation of prior/general capabilities when a model is adapted to a
+        new domain; excludes in-context drift within a session.
+      rationale: The paper targets degradation of general capabilities caused by domain SFT.
   - openalex_id: https://openalex.org/W7204848126
     score: 15
     signals:
@@ -2711,6 +2951,8 @@ candidates:
       to a fine-tuned LLM and a recurrent neural network baseline. Ablation studies confirm that
       techniques from NLP and computer vision can be transferred effectively to PPM with only a
       10M-parameter backbone, though compo
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7204869549
     score: 15
     signals:
@@ -2852,6 +3094,8 @@ candidates:
       Experiments across multimodal understanding, reasoning, grounding, and hallucination
       benchmarks show that IGFD consistently outperforms existing decoding strategies across the
       majority of benchmarks and diffusion MLLM backbones under identical decoding budgets.
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7206174818
     score: 15
     signals:
@@ -2942,6 +3186,12 @@ candidates:
       rate on the Feynman benchmark and 80.18% accuracy on the LLM-SRBench LSR-Transform task,
       substantially outperforming state-of-the-art genetic programming and neural-symbolic methods
       while maintaining strong out-of-distribution generali"
+    proposal:
+      proposed_id: scientific-equation-discovery
+      proposed_label: Discovering symbolic laws from data
+      scope_note: Whether a model can propose or guide discovery of compact, dimensionally consistent
+        mathematical expressions fitting observational data; excludes generic math word problems.
+      rationale: The paper evaluates LLM guidance in symbolic regression search over physical laws.
   - openalex_id: https://openalex.org/W7206167343
     score: 15
     signals:
@@ -2981,6 +3231,8 @@ candidates:
       recognizability by effectively leveraging positive and negative space. We further demonstrate
       the generalizability of our approach across diverse applications, including controllable image
       and infographic generation."
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7204223387
     score: 15
     signals:
@@ -3069,6 +3321,8 @@ candidates:
       accuracy on multiple multi-image benchmarks, InternVL3.5-8B retains 94.1\% accuracy, and
       LLaVA-OV-7B even exceeds its original baseline performance. Our code is available at
       \href{https://github.com/zry13/AVTP}{this link}.
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7204959726
     score: 15
     signals:
@@ -3108,6 +3362,8 @@ candidates:
       Llama-3.1-8B, compared with their strongest search configuration, at one model invocation per
       question, against a search whose cost grows with the tree; we also lead answer Pass Rate on
       Qwen-2.5-7B."
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7204920307
     score: 15
     signals:
@@ -3205,6 +3461,8 @@ candidates:
       achieving consistent improvements across three multimodal LLM backbones and five benchmarks.
       Finally, we show that our idiolectal paraphrasing is a plug-in module that consistently
       improves both RL and supervised fi
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7204857126
     score: 15
     signals:
@@ -3243,6 +3501,13 @@ candidates:
       Experiments on GUISE and other datasets show that prior methods either intervene too weakly or
       achieve only apparent safety through collapse, while REINS substantially reduces harmful
       responses, markedly improves safe refusals and largely preserves general capabilities.
+    proposal:
+      proposed_id: jailbreak-robustness
+      proposed_label: Refusing harmful requests despite obfuscation
+      scope_note: Covers whether models maintain refusal when harmful intent is wrapped in roleplay,
+        encodings, or other jailbreak framings; excludes instructions injected via retrieved data.
+      rationale: The paper builds a benchmark of harmful prompts with complex wrappers showing refusal
+        behavior fails.
   - openalex_id: https://openalex.org/W7204453404
     score: 15
     signals:
@@ -3280,6 +3545,8 @@ candidates:
       the retrieval, rerank, generation, and traceback stages. In addition, we summarize robustness
       benchmarks and explainability methods for more deeply evaluating and explaining RAG
       robustness."
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7204484264
     score: 15
     signals:
@@ -3379,6 +3646,13 @@ candidates:
       established corpora across five tasks. On this benchmark, TEMPO outperforms Audio Flamingo
       Next and Qwen3-Omni, two state-of-the-art LALMs explicitly trained on timestamped data.
       Experiments confirm that SFT delivers most of these gain"
+    proposal:
+      proposed_id: audio-temporal-grounding
+      proposed_label: Locating events in time within audio
+      scope_note: Whether a model can assign accurate timestamps to sounds, speech, or music events rather
+        than only describing a clip; excludes general audio captioning or classification.
+      rationale: The paper shows audio-language models cannot timestamp events and builds unified
+        timestamping training.
   - openalex_id: https://openalex.org/W7206162202
     score: 15
     signals:
@@ -3417,6 +3691,12 @@ candidates:
       capability after VL training. These negative results underscore the value of screening
       backbones with Sink Strength before VL training and narrow the intervention space toward
       head-selective training-time protection."
+    proposal:
+      proposed_id: multimodal-adaptation-forgetting
+      proposed_label: Keeping text skills after multimodal fine-tuning
+      scope_note: Covers erosion of a base model's language abilities when adapted to new modalities or
+        domains; excludes ordinary fine-tuning accuracy gains.
+      rationale: The paper diagnoses text capability loss in LLMs adapted into VLMs.
   - openalex_id: https://openalex.org/W7204850475
     score: 15
     signals:
@@ -3507,6 +3787,12 @@ candidates:
       navigates the combinatorial space. Extensive experiments demonstrate that while
       state-of-the-art embedding models and static decompose-and-rerank paradigms suffer from
       relational blindness, BundleWeaver achieves substantial performance g
+    proposal:
+      proposed_id: set-level-retrieval
+      proposed_label: Composing coherent sets rather than ranking items
+      scope_note: Whether a model can select a jointly relevant, non-redundant collection of items
+        satisfying set-level constraints, versus scoring each candidate in isolation.
+      rationale: The paper introduces image bundle composition where joint relevance is non-decomposable.
   - openalex_id: https://openalex.org/W7204249921
     score: 14
     signals:
@@ -3546,6 +3832,8 @@ candidates:
       models continue to benefit substantially from Few-Shot and CCoT. Mistral models show mixed
       behavior with persistent gains from CCoT but attenuated benefits from CoT and PoT. Our results
       imply that effective prompting strategies must be adapted per model fa'
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7204449140
     score: 14
     signals:
@@ -3588,6 +3876,8 @@ candidates:
       assessment-specific model training and information enrichment. A user study with security
       experts further demonstrates that the evidence provided by EAVA is useful and practical for
       real-world SV assessment.
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7204908787
     score: 14
     signals:
@@ -3627,6 +3917,8 @@ candidates:
       AutoCRAT (I) uses 13.8-52.7% fewer inference tokens on average than recommended static
       configurations, (II) surpasses recommended static and adaptive baselines by 1.5-4.5% in
       relative accuracy, and (III) enjoys strong cross-backbone transferability.
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7204921395
     score: 14
     signals:
@@ -3668,6 +3960,8 @@ candidates:
       comparators. Over six months with four state-of-the-art LLM agents configured with web search,
       aggregate nowcast accuracy is broadly comparable to the institutional and professional
       benchmarks, with performance varying widely across individ"
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7204900938
     score: 14
     signals:
@@ -3757,6 +4051,13 @@ candidates:
       risk through broad refusal. On Mistral-7B-v0.3, the output- and representation-level patterns
       persist, while DPO degeneracy falls to 10-14%, showing that its severity is model-dependent.
       Together, CopyShield provides cross-level reference b"
+    proposal:
+      proposed_id: training-data-regurgitation
+      proposed_label: Reproducing memorized training text verbatim
+      scope_note: Covers verbatim or near-verbatim emission of copyrighted or private training data and
+        whether models can suppress it without losing utility; excludes generic factual recall.
+      rationale: CopyShield benchmarks literal and non-literal leakage of memorized books under different
+        suppression interventions.
   - openalex_id: https://openalex.org/W7206188245
     score: 14
     signals:
@@ -3796,6 +4097,8 @@ candidates:
       Evolution, a kernel evolution strategy that prioritizes correctness while optimizing
       performance. Finally, through extensive experiments, we demonstrate the effectiveness of
       CUDA-Harness, with further evaluations illustrating generalizatio
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7204573002
     score: 14
     signals:
@@ -3939,6 +4242,13 @@ candidates:
       target-language reasoning beyond random and non-task controls. Our framework reframes some
       cross-lingual reasoning gaps as failures of mechanism elicitation rather than capability
       absence, and offers a causally testable route to feature-mediated tran"
+    proposal:
+      proposed_id: cross-lingual-transfer
+      proposed_label: Performing equally well across languages
+      scope_note: Covers gaps between high- and low-resource languages on semantically identical tasks and
+        whether abilities transfer across languages; excludes translation quality per se.
+      rationale: The paper studies why low-resource languages under-elicit reasoning that the same model
+        performs in high-resource languages.
   - openalex_id: https://openalex.org/W7206168176
     score: 14
     signals:
@@ -3972,6 +4282,13 @@ candidates:
       BASIN consistently shifts $Δ$ positive. More broadly, BASIN suggests structure-aware selection
       as a simple and general approach to improving inference-time reasoning. Code can be found at
       https://github.com/GitHubLuCheng/basin."
+    proposal:
+      proposed_id: solution-diversity
+      proposed_label: Exploring genuinely different solution paths
+      scope_note: Covers mode collapse in sampling and search where repeated attempts retread the same
+        strategy; excludes single-answer accuracy or stylistic variety.
+      rationale: BASIN diagnoses 'reasoning basin collapse' where inference-time search concentrates on
+        near-identical trajectories.
   - openalex_id: https://openalex.org/W7204883522
     score: 14
     signals:
@@ -4007,6 +4324,8 @@ candidates:
       unnecessary refinement. Experiments on NarraCrime and multiple public reasoning benchmarks
       show that EVAR improves both task performance and evidence faithfulness while maintaining
       controllable inference cost."
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7204580349
     score: 14
     signals:
@@ -4046,6 +4365,13 @@ candidates:
       the 350-problem Olympiad dataset, FaithSieve using a GPT-5.4 backbone achieves 81.43% exact
       first-error accuracy, outperforming the direct-judging baseline of 72.29%. Furthermore, on the
       200-problem ProofLoc-University benchm"
+    proposal:
+      proposed_id: proof-verification
+      proposed_label: Checking mathematical proofs step by step
+      scope_note: Covers judging validity of multi-step mathematical arguments and localizing the first
+        flawed step; excludes general answer grading or code correctness.
+      rationale: FaithSieve targets models' inability to reliably detect and localize local logical gaps
+        in natural-language proofs.
   - openalex_id: https://openalex.org/W7206214643
     score: 14
     signals:
@@ -4085,6 +4411,8 @@ candidates:
       combining VLM reasoning with a set of specialized tools and physical simulation, we can
       successfully transform unstructured visual demonstrations into executable, physically
       plausible folding procedures.
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7204948740
     score: 14
     signals:
@@ -4125,6 +4453,8 @@ candidates:
       on four PAD datasets (MSU-MFSD, CASIA-FASD, Replay-Attack, and OULU-NPU) and four MAD datasets
       (FFHQ, FRGC, FRLL, and FERET). Our experiments show that FMs and MLLMs can achieve significant
       performance for PAD and MAD. In ad"
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7206170991
     score: 14
     signals:
@@ -4162,6 +4492,13 @@ candidates:
       quantifies this difference, and qualitative results confirm it. Overall, we identify a gap
       between what models encode and what they use, highlighting a key limitation in current audio
       language models.
+    proposal:
+      proposed_id: paralinguistic-understanding
+      proposed_label: Hearing how something is said
+      scope_note: Covers whether speech/audio models perceive and act on prosody, tone, emotion, and
+        speaker style rather than only transcribed words; excludes pure ASR word accuracy.
+      rationale: The paper traces how speaking-style information is encoded in audio encoders but lost
+        before the model's output.
   - openalex_id: https://openalex.org/W7204526542
     score: 14
     signals:
@@ -4203,6 +4540,8 @@ candidates:
       substantially shallower trajectories. These findings shift CTF evaluation from counting
       recovered flags to verifying demonstrated exploitation and provide a basis for designing
       benchmarks that better isolate the offensive capabilities.
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7206183693
     score: 14
     signals:
@@ -4246,6 +4585,8 @@ candidates:
       fully open and open-weight models with comparable or larger active parameter counts in our
       evaluation. To support transparent and reproducible research, we release the complete
       Instella-MoE model flow, including model weight
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7204568785
     score: 14
     signals:
@@ -4342,6 +4683,14 @@ candidates:
       consistent improvements, with accuracy gains up to 54.1 percentage points under strong
       popularity pressure. The code and data are available
       https://github.com/DataScienceUIBK/PopMCQ"
+    proposal:
+      proposed_id: answer-option-popularity-bias
+      proposed_label: Picking the popular answer choice
+      scope_note: Covers systematic preference for frequent/popular or otherwise superficially attractive
+        answer options in multiple-choice settings, independent of correctness; excludes judging
+        other models' outputs.
+      rationale: The paper shows models choose popular but wrong MCQ options 66% of the time while staying
+        overconfident.
   - openalex_id: https://openalex.org/W7204911830
     score: 14
     signals:
@@ -4382,6 +4731,8 @@ candidates:
       model. The navigation training corpus spans 2K+ scenes and 4K+ hours of embodied navigation
       data. LightNav-ER, the embodied-reasoning checkpoint used to initialize LightNav-0, attains
       the highest complete-set average across 8 embodied-reasoning "
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7204942703
     score: 14
     signals:
@@ -4415,6 +4766,14 @@ candidates:
       universal, language-agnostic feature, and that higher-resource languages such as English,
       despite achieving stronger mathematical reasoning performance, exhibit lower
       solvability-detection faithfulness.
+    proposal:
+      proposed_id: unsolvability-detection
+      proposed_label: Recognizing unanswerable problems
+      scope_note: Covers whether a model detects that a question is unsolvable or underspecified and says
+        so, including whether its stated answer matches its internal belief; excludes ordinary
+        accuracy on solvable problems.
+      rationale: The paper benchmarks solvability detection across languages and finds internal
+        solvability belief is not faithfully expressed.
   - openalex_id: https://openalex.org/W7204576880
     score: 14
     signals:
@@ -4452,6 +4811,8 @@ candidates:
       details. By integrating PACE into Qwen2.5-VL-7B, the model retains 93.8% of its original
       performance while utilizing only 10% of the visual tokens, yielding a 3.1x speedup in time to
       first token (TTFT). Our code is available at https://githu
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7204525742
     score: 14
     signals:
@@ -4533,6 +4894,8 @@ candidates:
       step-level Direct Preference Optimization. Experiments on single and multi-hop QA datasets
       demonstrate that PRO-STEP achieves the best average EM and F1 across five benchmarks. Code,
       models, and training data are publicly available at https://github.com/keemminnke/PRO-Step."
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7204891669
     score: 14
     signals:
@@ -4574,6 +4937,8 @@ candidates:
       outcome determines the update direction and average scale, while PI only redistributes credit
       across actions. Across three agentic benchmarks, TASPO improves over GRPO by 10.6\\% and
       generalizes better to unseen tasks. Further analysis indicates tha"
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7206189225
     score: 14
     signals:
@@ -4656,6 +5021,13 @@ candidates:
       concatenated as an LLM prompt prefix to jointly encode scene-level context and fine-grained
       regional evidence when answering questions. Evaluated on VQAv2, MMBench, POPE, and SEED-Bench,
       ReVA achieves 82.85% mean F1 on POPE, compared "
+    proposal:
+      proposed_id: visual-grounding
+      proposed_label: Grounding answers in specific image regions
+      scope_note: Covers fine-grained region-level and spatial visual understanding and the
+        object/attribute/spatial hallucinations that follow from weak grounding; excludes text-only
+        hallucination.
+      rationale: The paper targets MLLM failures on precise spatial and region-level visual grounding in VQA.
   - openalex_id: https://openalex.org/W7204523901
     score: 14
     signals:
@@ -4693,6 +5065,14 @@ candidates:
       considerations. Evaluated on real-time variants of HM3D-v1, HM3D-v2, and HM3D-OVON, RTNav
       improves the success rate by up to 11% and the Success weighted by Completion Time by up to
       5.1 points over prior work.
+    proposal:
+      proposed_id: real-time-latency-constrained-acting
+      proposed_label: Acting under real-time constraints
+      scope_note: Whether an agent maintains task performance when its own inference latency counts
+        against wall-clock time in a continuously evolving environment; excludes pure
+        inference-speed optimization without task performance framing.
+      rationale: The paper shows zero-shot navigation agents degrade once wall-clock time is charged
+        against the task budget.
   - openalex_id: https://openalex.org/W7204280160
     score: 14
     signals:
@@ -4726,6 +5106,8 @@ candidates:
       quantized graph is fixed. Extensive experiments on vision models and large language models
       demonstrate consistent improvements under various low-bit quantization settings, validating
       the effectiveness of subspace-aligned correction.
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7204523045
     score: 14
     signals:
@@ -4767,6 +5149,8 @@ candidates:
       co-event examples. Experiments on FakeSV and FakeTT show that SRM-FND outperforms strong
       baselines, produces more reliable and interpretable predictions, and delivers noticeable
       improvements in cross-dataset performance."
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7206157734
     score: 14
     signals:
@@ -4800,6 +5184,14 @@ candidates:
       integration without costly human-curated data. Empirically, {\sc Synapse} outperforms existing
       methods by 14.23\%, demonstrating that simulation-based synthetic training leads to robust and
       coherent knowledge insertions.
+    proposal:
+      proposed_id: knowledge-updating
+      proposed_label: Absorbing new or updated knowledge
+      scope_note: Whether a model can integrate post-training facts and events into its parameters and use
+        them consistently, including overriding stale beliefs; excludes retrieval-based grounding at
+        inference time.
+      rationale: The paper builds synthetic future worlds to evaluate inserting and updating knowledge in
+        LLM parameters.
   - openalex_id: https://openalex.org/W7206159767
     score: 14
     signals:
@@ -4889,6 +5281,14 @@ candidates:
       for prompts or final responses, and that current models struggle to accurately extract
       supporting evidence. These findings highlight the need for guardrail models that can reliably
       detect and precisely localize unsafe content across the LRM inference pipeline."
+    proposal:
+      proposed_id: reasoning-trace-safety
+      proposed_label: Detecting unsafe content in reasoning traces
+      scope_note: Covers whether models (as guardrails or as reasoners) flag harmful content that appears
+        in intermediate chain-of-thought rather than only in prompts or final answers; excludes
+        general jailbreak resistance of final outputs.
+      rationale: TRACE annotates safety of prompts, reasoning traces, and responses separately and finds
+        guardrails miss unsafe traces behind safe answers.
   - openalex_id: https://openalex.org/W7206182658
     score: 14
     signals:
@@ -4924,6 +5324,8 @@ candidates:
       demonstrates cold-start-to-mature evolution: the L2 hit rate rises from 0% to 57% within the
       first 100 queries, and the average token cost drops from 198 to 74.7. We also propose an
       automatic Skill extraction mechanism that distills high-frequency traje"
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7204493047
     score: 14
     signals:
@@ -5015,6 +5417,14 @@ candidates:
       discard this signal. Additionally, audio-native models successfully extract these cues
       directly from speech (0.354 to 0.412 vs. 0.325 blind). Code and dataset will be made available
       upon acceptance.
+    proposal:
+      proposed_id: paralinguistic-understanding
+      proposed_label: Hearing how something was said
+      scope_note: Covers use of emotion, prosody, speaker traits, and non-speech vocal events in audio
+        that cannot be recovered from transcripts; excludes plain speech transcription or text-only
+        dialogue memory.
+      rationale: VoiceLongMemEval shows assistants fail on questions whose answers depend on
+        paralinguistic metadata of past conversational turns.
   - openalex_id: https://openalex.org/W7204882862
     score: 13
     signals:
@@ -5053,6 +5463,8 @@ candidates:
       strongest memory-augmented baseline by points on average, and the framework yields equally
       decisive gains on a physical robot. Reliable embodied memory thus depends more on disciplined
       state updates than on memory capacity.
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7204522024
     score: 13
     signals:
@@ -5092,6 +5504,13 @@ candidates:
       redundant signal. This difficulty grows with audio length and falls hardest on perception,
       especially temporal grounding. AudioSpan is available at
       https://huggingface.co/datasets/holvan/AudioSpan."
+    proposal:
+      proposed_id: long-form-audio-comprehension
+      proposed_label: Understanding hours-long audio
+      scope_note: Covers perception, aggregation, and reasoning over audio streams from minutes to hours;
+        excludes short-clip audio classification and text long-context tasks.
+      rationale: AudioSpan shows audio-language models degrade when questions require locating and
+        reasoning over content spread across multi-hour recordings.
   - openalex_id: https://openalex.org/W7204604445
     score: 13
     signals:
@@ -5127,6 +5546,8 @@ candidates:
       gemma-4-31B-it, gemma4:26b, gpt-oss-120b) whose story is in the per-family spread, not the
       aggregate. The benchmark runs are executed using the provided evaluation scripts.
       BekchiAI-Platform is a complementary web-based observability and control layer for de"
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7204875348
     score: 13
     signals:
@@ -5164,6 +5585,14 @@ candidates:
       sometimes adapt correctly to structural changes but often fail to track their logical
       consequences. The results from this automated stress test enable an evaluation of language
       models across different dimensions and help m"
+    proposal:
+      proposed_id: logical-reasoning-robustness
+      proposed_label: Deducing from logical structure, not surface form
+      scope_note: Covers whether conclusions stay stable under label-preserving changes to operators,
+        predicates, or phrasing of formal reasoning problems; excludes general math word-problem
+        accuracy.
+      rationale: The paper generates controlled symbolic edits to first-order logic and CSP problems and
+        finds LLM answers shift with surface variation.
   - openalex_id: https://openalex.org/W7204765693
     score: 13
     signals:
@@ -5201,6 +5630,8 @@ candidates:
       single-heuristic methods on both geo-bench and our synthetically augmented competitive dataset
       geo-bench_comp. Our method also transfers to multiple out-of-distribution datasets, proving
       effective across domains, queries, and document types."
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7204671228
     score: 13
     signals:
@@ -5241,6 +5672,8 @@ candidates:
       architectures, the reconstructed models retain victim-level task accuracy without victim
       queries, labels, or fine-tuning. These findings identify shared rank-one reuse as the root
       cause of the leakage exploited by our attacks. Guided by this insi
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7204959860
     score: 13
     signals:
@@ -5281,6 +5714,13 @@ candidates:
       segmentation dataset annotated with a three-level cognitive taxonomy spanning physical,
       character, and narrative change, where every valid boundary requires a narrative-level shift.
       When used as retrieval units, these narrativ"
+    proposal:
+      proposed_id: long-video-understanding
+      proposed_label: Understanding hours-long video
+      scope_note: Covers models answering story-level questions over long videos requiring temporal
+        segmentation and retrieval across hours; excludes single-image or short-clip understanding.
+      rationale: The paper evaluates MLLM movie understanding limits from sampling and segmentation of
+        long-form video.
   - openalex_id: https://openalex.org/W7206150622
     score: 13
     signals:
@@ -5317,6 +5757,8 @@ candidates:
       redistributes client-specific initializations through a personalized projection and top-$k$
       selection mechanism. Extensive experiments on NLU and NLG benchmarks demonstrate that FedRoRA
       consistently outperforms state-of-the-art methods.
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7204922291
     score: 13
     signals:
@@ -5356,6 +5798,13 @@ candidates:
       that CNY consistently outperforms fixed-context post-training baselines. Furthermore, the
       learned exploration policy transfers to unseen graphs and to a graph-level task not
       encountered during training. Code is available at https://github.com/superallen13/CNY.
+    proposal:
+      proposed_id: graph-structured-reasoning
+      proposed_label: Reasoning over graph-structured data
+      scope_note: Covers reasoning across nodes/edges or relational/tabular structure fed to a language
+        model; excludes plain document QA.
+      rationale: The paper studies LLMs gathering and reasoning over evidence distributed in a
+        text-attributed graph neighborhood.
   - openalex_id: https://openalex.org/W7206155920
     score: 13
     signals:
@@ -5389,6 +5838,8 @@ candidates:
       these negative results and analyze the failure modes, arguing that soft-token fusion requires
       stronger alignment objectives and schema-aware design before it can serve as a reliable route
       to relational prediction."
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7204792292
     score: 13
     signals:
@@ -5428,6 +5879,13 @@ candidates:
       transfer out-of-domain to cultural MCQ and safety classification benchmarks. We release the
       harness, both splits, and judge prompts to support interactive evaluation of cultural
       competency."
+    proposal:
+      proposed_id: cultural-competence
+      proposed_label: Culturally grounded assistance
+      scope_note: Covers whether models infer and respect culture-specific norms and constraints,
+        especially in non-Western and multilingual settings; excludes general multilingual fluency.
+      rationale: The paper benchmarks multi-turn culturally grounded assistance across East/Southeast
+        Asian regions.
   - openalex_id: https://openalex.org/W7204568375
     score: 13
     signals:
@@ -5467,6 +5925,12 @@ candidates:
       and lets us swap in different pretrained VLM planners without fine-tuning, while remaining
       competitive with strong vision-language-action and multi-agent RL baselines on six of seven
       tasks.
+    proposal:
+      proposed_id: embodied-control
+      proposed_label: Turning plans into low-level actions
+      scope_note: Covers grounding language instructions into continuous or high-frequency robot/agent
+        control; excludes software tool-calling agents.
+      rationale: The paper shows VLMs plan well but fail to produce reliable low-level action sequences.
   - openalex_id: https://openalex.org/W7204566408
     score: 13
     signals:
@@ -5503,6 +5967,8 @@ candidates:
       dLLMs show that DARD consistently improves the speed-quality Pareto frontier over recent
       revocable decoding methods, achieving a 2.71$\times$ speedup and a 4.35-point CIDEr score gain
       over Saber on Flickr30K.
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7204951751
     score: 13
     signals:
@@ -5537,6 +6003,8 @@ candidates:
       approach is simple and efficient, does not require additional training resources, and improves
       F1 by 0.8 - 2.0 percentage points on dataset-level average for noise levels between 15% and
       40%, with a maximum improvement of 4.6 percentage points with 24.1% noise on Wikigold."
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7204454298
     score: 13
     signals:
@@ -5575,6 +6043,12 @@ candidates:
       reformulation it accepts. For cases where formal guarantees are not necessary, we introduce
       FLARE-NL, a fast and cheap LLM proxy that matches FLARE's accuracy but produces no
       certificate. These methods enable reliable verification in automated optimization modeling.
+    proposal:
+      proposed_id: formal-theorem-proving
+      proposed_label: Producing machine-checked formal proofs
+      scope_note: Covers writing proofs/formalizations verified by proof assistants like Lean; excludes
+        informal math reasoning and code generation.
+      rationale: FLARE has an LLM agent verify MILP reformulations via Lean-checked proofs.
   - openalex_id: https://openalex.org/W7206179825
     score: 13
     signals:
@@ -5614,6 +6088,12 @@ candidates:
       instruction generation as a general strategy for improving vision-language reasoning in
       scientific domains. To support future research in scientific diagram understanding, we release
       both the SciGram dataset and m
+    proposal:
+      proposed_id: diagram-understanding
+      proposed_label: Reading diagrams and charts
+      scope_note: Interpreting schematic, functional, or relational visuals (scientific diagrams, charts,
+        figures); excludes natural-image recognition.
+      rationale: VLMs struggle with scientific diagrams that convey relational rather than literal content.
   - openalex_id: https://openalex.org/W7204568491
     score: 13
     signals:
@@ -5653,6 +6133,8 @@ candidates:
       verification improves average accuracy by 1.08--27.42 percentage points.G2D also transfers to
       DCLIP, WaffleCLIP, and CuPL, supporting a practical interface between discriminative proposal
       and generative visual reasoning. Code: https://github.com/Harzva/G2D"
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7204862473
     score: 13
     signals:
@@ -5690,6 +6172,8 @@ candidates:
       visual and textual ICL signals are complementary, images give visual patterns to learn and
       see, while instructions give explicit rules and logic. When both of these are provided, the
       quality of context improves, which is noticeable in the "
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7204555720
     score: 13
     signals:
@@ -5729,6 +6213,8 @@ candidates:
       20.9% and OpenAI text-embedding-3-large by 41.0%. KinyaEmbed also achieves the best document
       clustering silhouette score (0.2146) across all evaluated models. All checkpoints, the
       KinyaCOMET filtered pairs, and the Wiki-RW-STS benchmark are publicly available."
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7204244498
     score: 13
     signals:
@@ -5818,6 +6304,12 @@ candidates:
       adopting perspectives beyond one's own. This bidirectional framing, which focuses on both
       expression and perception, enables more nuanced benchmarking of cross-cultural comprehension.
       Our probing of multiple LLMs reveals that while models de"
+    proposal:
+      proposed_id: cultural-knowledge
+      proposed_label: Interpreting culture-specific content
+      scope_note: Whether models grasp implicit cultural norms, references, and humor across cultures;
+        excludes plain multilingual translation quality.
+      rationale: MemeBridge benchmarks bidirectional cultural gaps in meme interpretation.
   - openalex_id: https://openalex.org/W7204447305
     score: 13
     signals:
@@ -5905,6 +6397,12 @@ candidates:
       standard zero-shot classification and image-text retrieval, showing that feature-level
       distillation strengthens both compositional and general vision-language representation
       capability.
+    proposal:
+      proposed_id: visual-compositionality
+      proposed_label: Binding attributes and relations in images
+      scope_note: Whether vision-language models correctly compose attribute-object and relational
+        structure rather than bag-of-words matching; excludes plain object recognition.
+      rationale: The paper targets CLIP's failure on attribute-object and relational compositionality.
   - openalex_id: https://openalex.org/W7204754281
     score: 13
     signals:
@@ -5943,6 +6441,8 @@ candidates:
       {\sysname} achieves an accuracy of 90.06\% without fine-tuning, outperforming state-of-the-art
       baselines and demonstrating strong zero-shot generalization against Android malware concept
       drift.
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7204828317
     score: 13
     signals:
@@ -5973,6 +6473,12 @@ candidates:
       multimodal large language models under multiple input conditions. Our results show that these
       models struggle substantially to understand scores, while facing even greater challenges when
       reasoning about performance audio. The benchmark is available at https://musp.vaclis.net/.
+    proposal:
+      proposed_id: music-understanding
+      proposed_label: Understanding music scores and audio performances
+      scope_note: Covers reasoning over musical notation and performance audio; excludes generic audio
+        transcription or speech tasks.
+      rationale: MuSP-Bench shows frontier multimodal models fail at score-reading and performance reasoning.
   - openalex_id: https://openalex.org/W7204872594
     score: 13
     signals:
@@ -6009,6 +6515,8 @@ candidates:
       struggle with visible-rule application and layout-sensitive inference, while process-compliant
       rationales can accompany incorrect final answers under exact-match evaluation. The code is
       available at https://github.com/gengxuli/OCR-MetaReasoning."
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7204585340
     score: 13
     signals:
@@ -6049,6 +6557,8 @@ candidates:
       order-sensitive multimodal reasoning. Task2 preferences place Gemini 3.1 Pro and GPT-5.5 above
       the open models, while comment context yields only a small and mixed Core4 gain. Code and data
       will be released upon acceptance."
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7204866474
     score: 13
     signals:
@@ -6085,6 +6595,12 @@ candidates:
       honesty metrics degrade substantially due to localized factual constraints. These findings
       expose structural limitations in current alignment approaches, underscoring the necessity of
       human-guided localization for equitable multilingual evaluation."
+    proposal:
+      proposed_id: cultural-alignment-transfer
+      proposed_label: Alignment quality outside English and Western culture
+      scope_note: Covers whether helpfulness/harmlessness/honesty behavior holds in low-resource languages
+        and non-Western cultural contexts; excludes plain multilingual accuracy.
+      rationale: Pak3H shows 3H alignment degrades under culturally contextualized Urdu prompts.
   - openalex_id: https://openalex.org/W7204235493
     score: 13
     signals:
@@ -6121,6 +6637,12 @@ candidates:
       alignment utility. Extensive experiments on standard human preference datasets demonstrate
       that BALIGN strongly preserves foundational capabilities without compromising alignment gains,
       consistently achieving the optimal Pareto frontier with minimal computational overhead."
+    proposal:
+      proposed_id: alignment-tax
+      proposed_label: Retaining general ability after fine-tuning
+      scope_note: Covers catastrophic forgetting/degradation of pre-trained capabilities caused by
+        alignment or further training; excludes inference-time behavior shifts.
+      rationale: The paper studies and mitigates capability loss induced by preference optimization.
   - openalex_id: https://openalex.org/W7204891930
     score: 13
     signals:
@@ -6157,6 +6679,12 @@ candidates:
       we propose Typo-Aware Chain-of-Thought (TACoT), which routes inputs to chain-of-thought
       inference only when the probe detects a likely typo, recovering a substantial portion of the
       CoT accuracy gain at a fraction of the inference cost."
+    proposal:
+      proposed_id: typo-robustness
+      proposed_label: Robustness to misspelled or perturbed input text
+      scope_note: Covers accuracy under character/sub-character typographical noise in input; excludes
+        adversarial semantic prompts.
+      rationale: Korean jamo-level perturbations monotonically degrade model accuracy regardless of scale.
   - openalex_id: https://openalex.org/W7204500164
     score: 13
     signals:
@@ -6192,6 +6720,12 @@ candidates:
       sentiment intensity. Empirical evaluations on story and review generation demonstrate that
       SenseShift achieves stronger sentiment controllability while maintaining text quality and
       robustness to out-of-domain generation compared to larger decoder-based baselines.
+    proposal:
+      proposed_id: controlled-generation
+      proposed_label: Generating text under fine-grained attribute constraints
+      scope_note: Covers satisfying specified style/sentiment/attribute controls at fine granularity
+        during generation; excludes instruction following on task content.
+      rationale: The paper targets models' failure to follow fine-grained sentence-level sentiment control.
   - openalex_id: https://openalex.org/W7204592076
     score: 13
     signals:
@@ -6325,6 +6859,13 @@ candidates:
       overlooked dimension of multimodal understanding: even the strongest model reaches only 58 out
       of 100, and our ablations show that no input modality is sufficient on its own. All code,
       Q&As, and models are publicly available from https://github.com/KaiShinozakiConefrey/Take-85"
+    proposal:
+      proposed_id: communicative-intent-inference
+      proposed_label: Inferring why content was made the way it is
+      scope_note: Covers inferring authorial/directorial intent behind stylistic and compositional choices
+        in media, not recognizing what events occur.
+      rationale: TAKE 85 shows MLLMs describe film events accurately but fail to infer the intent behind
+        lighting, editing, and sound choices.
   - openalex_id: https://openalex.org/W7204478436
     score: 13
     signals:
@@ -6360,6 +6901,8 @@ candidates:
       2026. TAU-Agent achieves scores of 0.6779 on Track 3, 0.3998 on Track 7, and 67.9275 on Track
       8, ranking second, twelfth, and fifth, respectively. Code is available at:
       https://github.com/siri-rouser/TAU-Agent."
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7204541366
     score: 13
     signals:
@@ -6400,6 +6943,8 @@ candidates:
       improves. Without any labels, TTPO matches label-supervised OPSD on five competition-level
       benchmarks, raises Qwen3-1.7B from 38.0% to 45.2% in TTT, yields +25.2% to +36.4% without
       thinking, and shows strong cross-task generalization."
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7207880369
     score: 13
     signals:
@@ -6439,6 +6984,13 @@ candidates:
       ViTAL-X outperforms 7B-parameter models and surpasses baselines trained on 600x more data.
       These results demonstrate that targeted, high-quality temporal alignment provides a highly
       efficient alternative to pure scaling.
+    proposal:
+      proposed_id: video-temporal-reasoning
+      proposed_label: Perceiving order and direction in video
+      scope_note: Covers sensitivity to event order, motion direction, and temporal dynamics in
+        video-language models, not static scene or object recognition.
+      rationale: XTE-Bench shows video-language models are temporally blind and rely on static spatial
+        shortcuts.
   - openalex_id: https://openalex.org/W7204950085
     score: 12
     signals:
@@ -6475,6 +7027,8 @@ candidates:
       best suited to the different roles within our framework. We find that GPT-OSS performs best
       for feasibility assessment, planning, and execution, while Qwen2.5 is best suited to
       identifying mission types from natural language input.
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7204524908
     score: 12
     signals:
@@ -6514,6 +7068,8 @@ candidates:
       to contextual suitability and that model decisions may fail to track or ground themselves in
       decisive contextual visual cues. These findings establish culturally situated,
       evidence-grounded suitability as a distinc"
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7204454032
     score: 12
     signals:
@@ -6605,6 +7161,8 @@ candidates:
       remains fundamentally unsolved, with persistent challenges in variant characters, specialized
       symbols, and hallucination. The dataset is available at
       https://github.com/SCUT-DLVCLab/Ancient_Bench."
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7204942162
     score: 12
     signals:
@@ -6643,6 +7201,13 @@ candidates:
       search by the probed answers' hidden state similarity and perplexity. Experiments on three
       reasoning tasks across two LLMs show that APTS consistently enhances solution diversity,
       demonstrating its effectiveness and robustness.
+    proposal:
+      proposed_id: solution-diversity
+      proposed_label: Producing genuinely different valid solutions
+      scope_note: Covers whether sampling or search yields substantively distinct correct solutions rather
+        than paraphrases of one high-confidence answer; excludes accuracy-only evaluation.
+      rationale: The paper shows LLMs collapse onto a single solution mode and that surface embeddings
+        fail to separate truly distinct reasoning paths.
   - openalex_id: https://openalex.org/W7204909362
     score: 12
     signals:
@@ -6678,6 +7243,13 @@ candidates:
       decoding time while preserving the collaborative quality. Extensive evaluations demonstrate
       that CoVeil consistently improves the privacy-utility trade-off over existing baselines by
       reducing data leakage by up to 87.2%, with minimal accuracy loss.
+    proposal:
+      proposed_id: private-data-leakage
+      proposed_label: Leaking private context data
+      scope_note: Covers whether a model or serving setup exposes private inputs/training data to an
+        outside observer or adversary; not general safety refusals.
+      rationale: The paper audits how collaborative decoding leaks private edge-side context to the cloud
+        model.
   - openalex_id: https://openalex.org/W7206179358
     score: 12
     signals:
@@ -6767,6 +7339,13 @@ candidates:
       becomes increasingly pronounced as $k$ scales up, demonstrating a substantial expansion of
       reasoning coverage. Furthermore, our approach efficiently mitigates entropy collapse without
       requiring additional SFT, intricate reward designs, or complex prompting.
+    proposal:
+      proposed_id: output-diversity
+      proposed_label: Maintaining diverse outputs
+      scope_note: Covers loss of generative diversity/exploration (entropy collapse, pass@k decline) after
+        fine-tuning or RL; not accuracy on a single answer.
+      rationale: The paper targets narrowed reasoning coverage and degraded pass@k caused by entropy
+        collapse in RLVR.
   - openalex_id: https://openalex.org/W7204821718
     score: 12
     signals:
@@ -6806,6 +7385,8 @@ candidates:
       static baselines and the standalone System I configuration remain vulnerable. In contrast,
       System II autonomously synthesizes verified defense capabilities, substantially lowering the
       attack success ra"
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7206167632
     score: 12
     signals:
@@ -6891,6 +7472,13 @@ candidates:
       measuring both target content coverage and out-of-scope suppression. Experiments on two VLM
       backbones show that FoCUS consistently improves controllability and fine-grained caption
       quality without degrading general caption performance."
+    proposal:
+      proposed_id: controllable-generation
+      proposed_label: Steering output to requested attributes
+      scope_note: Covers whether generation reliably follows fine-grained user-specified semantic control
+        (emphasis, style, content focus); not general instruction correctness or accuracy.
+      rationale: The paper shows VLMs cannot reliably steer captions toward requested attributes,
+        relations, or regions.
   - openalex_id: https://openalex.org/W7206179464
     score: 12
     signals:
@@ -6930,6 +7518,8 @@ candidates:
       coaching quality. We deployed the cascaded architecture in production, where 40,000+ managers
       used it over six months, with adoption patterns indicating selective use for difficult
       conversations."
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7204566911
     score: 12
     signals:
@@ -6961,6 +7551,12 @@ candidates:
       benchmarks, CIF outperforms the strongest prior pairwise intervention baseline by up to +3.378
       pp on average across four model backbones, while supporting performance gains for low resource
       languages. The code is available at https://github.com/VRCMF/CIF.git.
+    proposal:
+      proposed_id: multilingual-transfer
+      proposed_label: Performing equally across languages
+      scope_note: Covers uneven performance and knowledge transfer between high- and low-resource
+        languages; not translation quality alone.
+      rationale: The paper addresses uneven multilingual performance and cross-lingual transfer of knowledge.
   - openalex_id: https://openalex.org/W7206151354
     score: 12
     signals:
@@ -6999,6 +7595,13 @@ candidates:
       substantial and consistent deficits in detecting both DIH-T and DIH-M. Notably, this failure
       persists even among the strongest frontier models: they often correctly assess individual
       components in isolation b"
+    proposal:
+      proposed_id: compositional-harm-detection
+      proposed_label: Spotting harm that emerges only from combined parts
+      scope_note: Covers detecting content whose harmfulness arises from relations across segments or
+        modalities rather than any single explicit cue; not single-cue moderation.
+      rationale: The paper documents MLLMs' blind spot for temporally and cross-modally distributed
+        implicit harm in video.
   - openalex_id: https://openalex.org/W7204240978
     score: 12
     signals:
@@ -7033,6 +7636,8 @@ candidates:
       models on both prediction benchmarks, while reducing model calls by 88% and inference cost by
       approximately 80%. The results further suggest that representative behavioral diversity,
       rather than simply maximizing diversity, is important for constructing effective LLM crowds"
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7206218187
     score: 12
     signals:
@@ -7069,6 +7674,14 @@ candidates:
       Experiments demonstrate that our approach significantly improves both motion estimation and
       robust spatial reasoning by utilizing camera dynamics as an effective geometric calibration
       signal.
+    proposal:
+      proposed_id: ego-motion-3d-reasoning
+      proposed_label: Inferring camera motion and metric 3D structure from video
+      scope_note: Covers whether vision-language models recover true ego-motion, scale, and dynamic 3D
+        spatial relations from visual input rather than relying on smooth-trajectory priors;
+        excludes static 2D visual recognition tasks.
+      rationale: The paper documents 'Kinematic Collapse' where VLMs fail at ego-motion perception under
+        large displacements.
   - openalex_id: https://openalex.org/W7204518360
     score: 12
     signals:
@@ -7108,6 +7721,8 @@ candidates:
       performance in defect detection and defect lifecycle state tracking, with performance
       degrading significantly as the number of interaction rounds increases; (2) Defect-sensitive
       performance: LLMs' performance varies subs"
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7204971570
     score: 12
     signals:
@@ -7143,6 +7758,8 @@ candidates:
       ranked by GMTS consistently outperforms entropy-based token selection across three reasoning
       domains and various model sizes, suggesting that GMTS provides a more fine-grained estimate of
       token contribution for RLVR training.
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7204893331
     score: 12
     signals:
@@ -7173,6 +7790,8 @@ candidates:
       inference time to compose prompts up to the level of specialization required for each input.
       Experiments show that HiVe consistently outperforms strong prompt tuning baselines across
       diverse tasks.
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7204246716
     score: 12
     signals:
@@ -7209,6 +7828,13 @@ candidates:
       42.6 on out-of-domain GQA (+7.6 over the best same-backbone inference-time baseline), without
       any visual or tabular training data. Tools written by our 4B models also lifted the
       performance of LFM-2.5-350M and Qwen3-30B-A3B under same reasoning tasks.
+    proposal:
+      proposed_id: tool-creation
+      proposed_label: Building new tools for itself
+      scope_note: Covers whether a model can author reusable tools/APIs from examples that it (or others)
+        can later correctly invoke; excludes merely calling provided tools, which is tool-use.
+      rationale: SMITH trains and evaluates joint tool creation and use, testing whether models write
+        schemas they can actually invoke.
   - openalex_id: https://openalex.org/W7204954826
     score: 12
     signals:
@@ -7248,6 +7874,8 @@ candidates:
       candidate effects with a Context--Effect Verifier (CEV) and balances policy updates across
       effect groups. Experiments on AuctionNet show that LangBP outperforms strong baselines, and
       online A/B tests further demo
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7206191255
     score: 12
     signals:
@@ -7285,6 +7913,8 @@ candidates:
       framework is both effective and efficient: it attains the best average accuracy, exceeding the
       strongest baseline by 2.44 points, while reducing HumanEval inference cost by 31.9% relative
       to that baseline. Code is available at https"
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7204935470
     score: 12
     signals:
@@ -7373,6 +8003,8 @@ candidates:
       base (25.6%). Synthetic preference learning and compact tool distillation act as refinements
       rather than phase transitions (best 4B configuration: 30.8% macro Pass@1). Finally, a
       controlled VDR step-budget ablation shows that extra"
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7204553625
     score: 12
     signals:
@@ -7412,6 +8044,8 @@ candidates:
       training and evaluation. We apply an asymmetric success criterion: correct-answer retention
       must improve without a detected reduction in correct-tool following. SFT and DPO meet this
       criterion on the same two of four instruction-tuned backbon"
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7204534168
     score: 12
     signals:
@@ -7452,6 +8086,8 @@ candidates:
       state-of-the-art baselines across diverse modalities, with average improvements of 10.5% on
       textual-interactive video benchmarks (MMEB-v2-video), 1.1% on audio tasks (MAEB), 83.7% on
       visual-interactive benchmarks (SCaR), and 24.1% on our omni-interactive OmniCHOIR "
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7204259133
     score: 12
     signals:
@@ -7490,6 +8126,14 @@ candidates:
       deployment, but the choice of architecture and quantization method matters more than the bit
       width alone. We discuss what this means for practitioners choosing a model to run on
       constrained hardware."
+    proposal:
+      proposed_id: compression-robustness
+      proposed_label: Keeping behavior after quantization or pruning
+      scope_note: Covers whether quantized, pruned, or distilled models retain the accuracy and behavior
+        of the original, including uneven degradation across languages or tasks; excludes efficiency
+        gains alone.
+      rationale: The paper systematically measures how post-training quantization formats degrade Bangla
+        understanding differently across model families.
   - openalex_id: https://openalex.org/W7204606874
     score: 12
     signals:
@@ -7581,6 +8225,14 @@ candidates:
       when success depends on precise, state-contingent information. Parameter training produces
       substantial gains on some tasks, but also exhibits unstable improvement and severe negative
       transfer on others. These findings show that recognizing successf"
+    proposal:
+      proposed_id: learning-from-experience
+      proposed_label: Improving from its own accumulated experience
+      scope_note: Covers whether a model can test its own behavior in an environment, judge the resulting
+        experience, and use it to perform better later; excludes one-shot correction of a single
+        wrong answer (self-repair).
+      rationale: S3Gym explicitly benchmarks self-testing, self-judging, and self-improvement across
+        interaction episodes.
   - openalex_id: https://openalex.org/W7204264393
     score: 12
     signals:
@@ -7618,6 +8270,8 @@ candidates:
       Remarkably, SAGE with Qwen3.5-9B surpasses much larger monolithic LVLMs on most evaluated
       metrics, highlighting the importance of structured, evidence-grounded inference beyond model
       scaling.
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7204489951
     score: 12
     signals:
@@ -7656,6 +8310,8 @@ candidates:
       layer-selection criteria, and seven zero-shot benchmarks show that SHIFT-LLM consistently
       recovers accuracy lost to depth pruning across most configurations, achieving gains up to
       +15.7 points on Llama-3.1-8B-Instruct while requir
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7204962699
     score: 12
     signals:
@@ -7689,6 +8345,13 @@ candidates:
       itself. Based on these findings, we further propose SwarmExp, a simple yet effective method
       based on experience extraction and experience replay, which consistently improves the
       orchestration performance of large language models.
+    proposal:
+      proposed_id: multi-agent-orchestration
+      proposed_label: Orchestrating other agents
+      scope_note: Covers a model's ability to decompose work, spawn and coordinate sub-agents, and manage
+        cost/efficiency of the resulting process; excludes single-agent tool calling.
+      rationale: SwarmBench evaluates models specifically as dynamic orchestrators of agent swarms on
+        accuracy, cost, and process quality.
   - openalex_id: https://openalex.org/W7204474156
     score: 12
     signals:
@@ -7722,6 +8385,8 @@ candidates:
       novelty judgments from hidden states during the reasoning phase and uses the probed judgments
       to condition the final response. Across strong baselines, TPR improves novelty judgment
       performance by 22.30% and successfully mitigates the prevalent "medium novelty" bias.'
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7204597527
     score: 12
     signals:
@@ -7811,6 +8476,13 @@ candidates:
       from human practice moves the behaviors it names toward the human profile and lifts scores,
       but the effort profile stays agent-shaped: instruction closes only the part of the gap that
       reduces to instructions. We release the corpu"
+    proposal:
+      proposed_id: autonomous-ml-engineering
+      proposed_label: Running an end-to-end ML development loop
+      scope_note: Covers agents iteratively building, evaluating, and revising data/model pipelines over
+        long feedback cycles; excludes one-shot code generation.
+      rationale: TraceML compares human and agent trajectories on Kaggle competitions to locate where
+        agents' iterative ML development diverges from experts.
   - openalex_id: https://openalex.org/W7206206459
     score: 12
     signals:
@@ -7849,6 +8521,8 @@ candidates:
       approximately 50% of alignment steps, it not only enhances safety preference by up to 15.6%,
       but also boosts general preference rates by up to 12.0% compared to the dense baseline,
       demonstrating that selective, high-precision alignment can outperform continuous supervision."
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7206192656
     score: 12
     signals:
@@ -7889,6 +8563,8 @@ candidates:
       focus on enduring challenges that scale synergistically with future model generations. Our
       source codes and results are made publicly available at
       https://github.com/less-lab-uva/What-Survives-the-Next-Model."
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7204249701
     score: 12
     signals:
@@ -7971,6 +8647,14 @@ candidates:
       performance but do not remove these structural effects. These results challenge the view of
       RAG as a universal corrective and highlight the interaction between model knowledge, context
       quality, and entity representation."
+    proposal:
+      proposed_id: knowledge-coverage-disparity
+      proposed_label: Uneven factual knowledge across regions and groups
+      scope_note: Covers systematic gaps in parametric knowledge by geography/language/demographic,
+        including whether retrieval closes them; not general hallucination or bias in generated
+        opinions.
+      rationale: The paper shows factual QA accuracy about firms varies sharply by geography and that
+        retrieval fails to equalize the gap.
   - openalex_id: https://openalex.org/W7206215850
     score: 12
     signals:
@@ -8004,6 +8688,12 @@ candidates:
       early collapse by suppressing output-side sharpness, but their protection weakens at larger
       fine-tuning scales. Overall, safety failure is best understood as a disruption of a low-rank
       output-routing mechanism"
+    proposal:
+      proposed_id: finetuning-alignment-fragility
+      proposed_label: Keeping safety alignment through further fine-tuning
+      scope_note: Covers loss or restoration of refusal behavior after benign or adversarial fine-tuning;
+        excludes jailbreak prompting at inference.
+      rationale: The paper analyzes why refusal behavior collapses after only 100 benign fine-tuning examples.
   - openalex_id: https://openalex.org/W7204837604
     score: 12
     signals:
@@ -8046,6 +8736,8 @@ candidates:
       selects more reliable trajectories to improve student model performance without requiring
       additional computational cost. We evaluate RA-OPD on math and code benchmarks using models
       from the Qwen3 family and the DeepSeek-R1 family. Across se
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7204869867
     score: 12
     signals:
@@ -8083,6 +8775,8 @@ candidates:
       deployment or weights. We evaluate WoE across eight MoE models, demonstrating successful
       watermark detection from suspect text, achieving an average true positive rate of 90.1% at a
       1% false positive rate, reaching up to 94
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7204907919
     score: 11
     signals:
@@ -8113,6 +8807,13 @@ candidates:
       modeling cognitive bounds significantly narrows the simulation gap across multiple LLM
       backbones, demonstrating that enforcing architectural constraints is more effective for
       high-fidelity simulation than simply scaling raw model capabilities.
+    proposal:
+      proposed_id: human-behavior-simulation
+      proposed_label: Simulating humans with realistic limitations
+      scope_note: Covers whether a model role-playing a person or population reproduces realistic error
+        rates, variance, and cognitive limits; excludes persona style imitation alone.
+      rationale: The paper shows persona-prompted LLMs answer near-perfectly instead of matching
+        primary-school students' bounded performance.
   - openalex_id: https://openalex.org/W7204554000
     score: 11
     signals:

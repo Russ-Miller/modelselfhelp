@@ -106,3 +106,24 @@ export function candidateUrl(c: QueueCandidate): string | undefined {
   if (c.arxiv_id) return `https://arxiv.org/abs/${c.arxiv_id}`;
   return c.doi ?? undefined;
 }
+
+export interface CapabilityCandidate {
+  id: string;
+  label: string;
+  scope_note?: string;
+  paper_count?: number;
+  merged_from?: string[];
+  note?: string;
+}
+
+/**
+ * The consolidated shortlist of capabilities the catalog does not yet track,
+ * mined from unmatched ingestion candidates. Suggestions awaiting judgment --
+ * deliberately not part of the catalog.
+ */
+export function capabilityShortlist(): CapabilityCandidate[] {
+  const p = path.join(process.cwd(), "pipeline", "capability-shortlist.yaml");
+  if (!fs.existsSync(p)) return [];
+  const parsed = YAML.parse(fs.readFileSync(p, "utf8"));
+  return (parsed?.recommended ?? []) as CapabilityCandidate[];
+}
