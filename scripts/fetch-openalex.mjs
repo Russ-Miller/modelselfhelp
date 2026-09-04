@@ -92,7 +92,6 @@ const seenIds = new Set(seen.openalex_ids);
 
 console.log(`Window ${from} .. ${to} — ${QUERIES.length} queries`);
 const found = new Map();   // openalex id -> work
-let fetched = 0;
 
 for (const query of QUERIES) {
   let cursor = "*";
@@ -108,7 +107,6 @@ for (const query of QUERIES) {
     const data = await getJson(`https://api.openalex.org/works?${params}`);
     if (!data) break;
     for (const w of data.results ?? []) { found.set(w.id, w); queryCount++; }
-    fetched += (data.results ?? []).length;
     cursor = data.meta?.next_cursor;
     pages++;
     if (!data.results?.length) break;
