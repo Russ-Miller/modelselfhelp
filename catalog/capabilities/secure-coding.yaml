@@ -15,5 +15,6 @@ discriminator: >-
   general word "vulnerability" used to mean a model weakness or robustness
   gap, which is ordinary English in this literature and not about generated
   code.
+modality: [text]
 status: active
 submitted_by: human:Russ-Miller

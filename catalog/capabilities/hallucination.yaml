@@ -6,7 +6,7 @@ description: >-
 tags: [chat-assistant, general, knowledge, rag-qa]
 aliases: ["confabulation", "fabrication", "factual error"]
 techniques: [retrieval-augmented-generation, atomic-fact-checking]
-related: [fact-verification, reversal-curse]
+related: [fact-verification, reversal-curse, visual-grounding]
 match_terms: ["hallucination", "hallucinate"]
 discriminator: >-
   Confidently stating things that are not true: invented citations, URLs,
@@ -15,5 +15,6 @@ discriminator: >-
   generation. NOT in scope when "hallucination" is used loosely for any
   error, or for perception errors in vision models unless the paper treats
   them as the same phenomenon.
+modality: [text]
 status: active
 submitted_by: human:Russ-Miller

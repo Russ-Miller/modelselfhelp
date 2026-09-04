@@ -1,0 +1,19 @@
+id: video-temporal-reasoning
+label: Reasoning about time in video
+summary: Tracking motion, ordering, causality, and change across video frames rather than treating video as isolated stills.
+description: >-
+  A model can describe a single frame well and still fail at what makes video
+  video: what happened before what, how something moved, whether an action
+  completed. This capability is about the temporal dimension specifically —
+  grounding an answer in a span of time rather than a moment.
+tags: [reasoning, context]
+modality: [video]
+discriminator: >-
+  In scope when the difficulty is temporal: event ordering, tracking across
+  frames, before/after reasoning, long-video retrieval where position in time
+  matters. NOT in scope: per-frame recognition that happens to use video as a
+  source of images, or captioning benchmarks where a single keyframe would
+  answer the question.
+match_terms: ["video understanding", "temporal reasoning", "video question answering", "long video", "temporal grounding"]
+status: active
+submitted_by: human:Russ-Miller

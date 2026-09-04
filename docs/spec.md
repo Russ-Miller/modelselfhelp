@@ -155,6 +155,9 @@ not to render a verdict.
 | summary | string | one sentence — what this topic is about |
 | description | string | a paragraph of context; what's interesting about this area |
 | tags | slug[] | soft, freely re-assignable labels — see §7. Not a single required parent group. |
+| modality | enum[]? | `text` / `image` / `audio` / `video` / `action`. Only where the capability is genuinely modality-bound; omit when it cuts across modalities. |
+| match_terms | string[]? | phrases the ingestion keyword matcher looks for — see §6 |
+| discriminator | string? | in-scope / out-of-scope boundary, written for the stage-2 classifier and for me |
 | parent | slug? | optional parent capability, for variants |
 | aliases | string[]? | other names used in the literature |
 | techniques | slug[]? | techniques relevant to this capability |

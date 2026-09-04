@@ -1,0 +1,21 @@
+id: visual-grounding
+label: Grounding answers in the image
+summary: Saying only what the image supports, rather than describing plausible objects that are not there.
+description: >-
+  The vision-side analogue of hallucination, kept separate because the
+  mechanisms and mitigations differ: text hallucination is addressed with
+  retrieval and verification, while visual ungroundedness is about whether
+  the model attends to image evidence at all, or leans on language priors
+  about what usually appears in such a scene.
+tags: [knowledge, behavior]
+modality: [image]
+related: [hallucination]
+discriminator: >-
+  In scope when the paper measures or mitigates a model asserting content the
+  image does not support — object hallucination, invented attributes or
+  relations, answers driven by language priors rather than pixels. NOT in
+  scope: general recognition accuracy, and not text-only hallucination, which
+  belongs to the hallucination capability.
+match_terms: ["object hallucination", "visual hallucination", "visual grounding", "language prior", "vision-language hallucination"]
+status: active
+submitted_by: human:Russ-Miller

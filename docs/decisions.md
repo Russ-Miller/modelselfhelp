@@ -364,3 +364,36 @@ with no published study ("no controlled study isolates its effect"),
 which is a statement about backing strength -- so filing them as claims
 needs either a real source or an own-observation source the user
 actually made, not one fabricated on their behalf.
+
+## 2026-09-04 — Modality is a field, not a split, except where mechanisms differ
+The catalog was implicitly text-only. Rather than declaring that, a
+`modality` field now records where a capability is genuinely bound to one
+— `text | image | audio | video | action`, optional and multi-valued.
+
+Only six of the nineteen existing capabilities got one. Reversal curse,
+arithmetic, code generation, long-context degradation, secure coding and
+hallucination are text-bound by construction. The rest — sycophancy,
+tool-use, prompt injection, state tracking, procedure following — are the
+same capability whatever comes in the input, and tagging them `[text]`
+would have asserted a boundary that isn't there. Absent means
+modality-agnostic, not unknown.
+
+Four capabilities were added from the stage-2b proposals, all of which
+had been blocked on this decision: audio-understanding,
+video-temporal-reasoning, visual-grounding, embodied-control.
+
+The interesting one is visual-grounding. It could have been
+`hallucination` with `modality: [image]`, since the failure looks the
+same — asserting what isn't there. It's separate because the mechanism
+and the mitigations differ: text hallucination is addressed with
+retrieval and verification, while visual ungroundedness is about whether
+the model attends to image evidence at all or falls back on language
+priors about what usually appears in such a scene. Same criterion already
+used for every other split — different mechanism, different capability —
+so a shared surface symptom isn't enough to merge them. They're linked
+via `related` instead.
+
+Likewise embodied-control is not tool-use. A tool call succeeds or
+returns an error; a knocked-over object stays knocked over.
+Irreversibility and continuous partial state are what make it a distinct
+problem.
