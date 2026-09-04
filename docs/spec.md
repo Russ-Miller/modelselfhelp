@@ -37,6 +37,32 @@ Two things follow from that:
    an MCP server framed around "what should I as an agent do") is real
    and stays documented (§9), but it's explicitly a later phase, not v1.
 
+### What this is, versus a paper feed
+
+Worth stating plainly, because the difference drives what gets ingested
+and how it's organized. Feeds like Hugging Face's Daily Papers are a
+crowd-sourced view of what is *new and in vogue* — a genuinely useful
+signal, organized by recency and popularity. That is not what this is.
+
+This is an index of **capabilities**, and of the research that helps
+someone understand, for a given capability:
+
+- what emerging work is making systems **better** at it, and
+- what **holds systems back** — the research that spotlights the
+  weaknesses, kept alongside rather than filtered out as bad news.
+
+The organizing axis is the capability, not the publication date and not
+the upvote count. A five-year-old paper that still explains why something
+fails belongs here; a paper trending today that doesn't change what's
+known about any capability does not. Popularity is a *discovery* signal
+worth using to find candidates (see §6), never the structure itself.
+
+The longer-term thought, still explicitly second-order per the point
+above: an agentic system working to improve itself could consult this
+index for exactly that pairing — what improves a capability, and what
+currently limits it. That possibility shapes nothing about v1 beyond
+keeping the content machine-readable, which git-backed YAML already is.
+
 ## 2. What changed from the first draft, and why
 
 The project's first pass (through 2026-09-02) modeled this as "CWE for
