@@ -1,7 +1,24 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getCapability, getClaim, getClaims, getModel, getSource, getTagLabel } from "@/lib/catalog";
-import { ContestedBadge, KindBadge, StanceBadge, StrengthBadge } from "@/components/badges";
+import { getCapability, getClaim, getClaims, getModel, getSource, getTagLabel, isQuietSource } from "@/lib/catalog";
+import type { SourceLink } from "@/lib/catalog";
+import { CitationBadge, ContestedBadge, KindBadge, StanceBadge, StrengthBadge } from "@/components/badges";
+
+function SourceItem({ link }: { link: SourceLink }) {
+  const src = getSource(link.source);
+  return (
+    <li className="text-sm">
+      <div className="flex flex-wrap items-center gap-2 mb-0.5">
+        <StanceBadge stance={link.stance} />
+        {src ? (
+          <a href={src.url ?? `#${src.id}`} className="font-medium hover:underline">{src.title}</a>
+        ) : link.source}
+        {src && <CitationBadge source={src} />}
+      </div>
+      <div className="text-neutral-600 dark:text-neutral-400 ml-1">{link.note}</div>
+    </li>
+  );
+}
 
 export function generateStaticParams() {
   return getClaims().map((c) => ({ id: c.id }));
@@ -48,22 +65,23 @@ export default async function ClaimPage({ params }: PageProps<"/claims/[id]">) {
 
       <section>
         <h2 className="font-semibold mb-2">Sources</h2>
-        <ul className="space-y-3">
-          {c.sources.map((s) => {
-            const src = getSource(s.source);
-            return (
-              <li key={s.source} className="text-sm">
-                <div className="flex items-center gap-2 mb-0.5">
-                  <StanceBadge stance={s.stance} />
-                  {src ? (
-                    <a href={src.url ?? `#${src.id}`} className="font-medium hover:underline">{src.title}</a>
-                  ) : s.source}
-                </div>
-                <div className="text-neutral-600 dark:text-neutral-400 ml-1">{s.note}</div>
-              </li>
-            );
-          })}
-        </ul>
+        {(() => {
+          const active = c.sources.filter((s) => { const src = getSource(s.source); return !src || !isQuietSource(src); });
+          const quiet = c.sources.filter((s) => { const src = getSource(s.source); return src && isQuietSource(src); });
+          return (
+            <>
+              <ul className="space-y-3">{active.map((s) => <SourceItem key={s.source} link={s} />)}</ul>
+              {quiet.length > 0 && (
+                <details className="mt-3">
+                  <summary className="text-xs text-neutral-500 cursor-pointer hover:text-neutral-700 dark:hover:text-neutral-300">
+                    +{quiet.length} older, quieter source{quiet.length > 1 ? "s" : ""} (no citations in the last 12 months)
+                  </summary>
+                  <ul className="mt-3 space-y-3">{quiet.map((s) => <SourceItem key={s.source} link={s} />)}</ul>
+                </details>
+              )}
+            </>
+          );
+        })()}
       </section>
 
       {c.contested && c.disagreement_axis && (

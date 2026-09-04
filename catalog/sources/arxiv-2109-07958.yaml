@@ -11,3 +11,6 @@ url: https://arxiv.org/abs/2109.07958
 tags: [truthfulness, benchmark]
 code_url: https://github.com/sylinrl/TruthfulQA
 ingested_at: 2026-09-02
+citations_total: 3851
+citations_recent_12mo: 1000
+citations_checked_at: 2026-09-04

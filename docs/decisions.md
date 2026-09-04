@@ -149,3 +149,27 @@ spec.md and the schemas and produced one fully worked example
 `catalog/` and the deployed site still reflect the pre-reframe model as of
 this entry; `npm test` stays green because nothing under catalog/,
 scripts/, or src/ was touched this round.
+
+## 2026-09-03 — Citation recency as a visual signal, not an auto-hide rule
+Added `citations_total`/`citations_recent_12mo`/`citations_checked_at` to
+Source, fetched from Semantic Scholar's free API (`scripts/
+fetch-citations.mjs`, no LLM cost, run by hand). This is a much narrower,
+cheaper check than the daily-scouring re-evaluation pipeline deferred to
+later-phase in spec §6/§9 — one API lookup per paper, not a search/
+discovery job — so it didn't need to wait for that automation.
+
+Considered and declined for now: an LLM call to judge whether newer
+evidence has substantively superseded an older paper. Recent-citation
+count is a proxy for "still discussed," not "still true" — a source can
+stay well-cited while being cited critically — so it's used to prioritize
+what a human looks at, not to auto-decide relevance. A source is only
+ever visually "quiet" (no citations in 12 months, 2+ years old) when
+citation data has actually been checked; unchecked sources are never
+treated as stale by default, since absence of data isn't evidence of
+staleness.
+
+UI: quiet sources are pushed behind a native `<details>` disclosure on
+claim pages ("+N older, quieter sources") rather than hidden outright —
+the links stay, just deprioritized. The Sources index shows all sources
+always, with quiet rows dimmed rather than collapsed, since browsing
+everything is that page's job.

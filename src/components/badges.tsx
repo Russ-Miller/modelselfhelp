@@ -1,4 +1,4 @@
-import type { BackingStrength, ClaimKind, Stance } from "@/lib/catalog";
+import type { BackingStrength, ClaimKind, Source, Stance } from "@/lib/catalog";
 
 const base = "inline-flex items-center gap-1 rounded px-1.5 py-0.5 text-xs font-medium";
 
@@ -35,4 +35,30 @@ export function StrengthBadge({ strength }: { strength: BackingStrength }) {
 
 export function ContestedBadge() {
   return <span className={`${base} bg-amber-100 text-amber-900 dark:bg-amber-900/40 dark:text-amber-200`}>contested</span>;
+}
+
+/**
+ * Compact citation-activity + age signal for a source: recent citation
+ * count, total, and publication year, colored by how actively the field
+ * is still citing it. Renders nothing if we haven't checked yet.
+ */
+export function CitationBadge({ source }: { source: Source }) {
+  if (!source.citations_checked_at) return null;
+  const recent = source.citations_recent_12mo ?? 0;
+  const total = source.citations_total ?? 0;
+  const year = source.year ?? (source.date ? source.date.slice(0, 4) : undefined);
+  const tone = recent > 0
+    ? "bg-emerald-100 text-emerald-900 dark:bg-emerald-900/40 dark:text-emerald-200"
+    : total > 0
+      ? "bg-neutral-100 text-neutral-600 dark:bg-neutral-800 dark:text-neutral-400"
+      : "bg-neutral-100 text-neutral-500 dark:bg-neutral-800 dark:text-neutral-500";
+  const title = `${total} citation${total === 1 ? "" : "s"} total, ${recent} in the last 12 months` + (year ? `, published ${year}` : "") + ` (checked ${source.citations_checked_at})` + (source.semantic_scholar_id ? " — via Semantic Scholar, click to view" : "");
+  const content = <>{recent}/12mo &middot; {total} total{year ? ` · ${year}` : ""}</>;
+  return source.semantic_scholar_id ? (
+    <a href={`https://www.semanticscholar.org/paper/${source.semantic_scholar_id}`} target="_blank" rel="noopener noreferrer" className={`${base} ${tone} hover:underline`} title={title}>
+      {content}
+    </a>
+  ) : (
+    <span className={`${base} ${tone}`} title={title}>{content}</span>
+  );
 }

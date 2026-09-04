@@ -22,7 +22,10 @@ bundled docs in `node_modules/next/dist/docs/` before writing app code.
 - `src/` — Next.js app (site, API routes, MCP endpoint — the MCP/API
   surface is later-phase per spec §9, not v1).
 - `scripts/` — validation and maintenance scripts (`npm run validate`,
-  `npm run verify-papers`).
+  `npm run verify-papers`, `node scripts/fetch-citations.mjs`). The last
+  one is a cheap, narrow citation-recency check (Semantic Scholar, no LLM
+  cost) — not the same thing as the later-phase daily-scouring pipeline
+  in spec §6/§9, and doesn't need to wait for it.
 - `pipeline/` — later-phase automated re-evaluation (spec §6, §9); not
   yet present.
 

@@ -25,6 +25,8 @@ export interface Source {
   id: string; kind: SourceKind; title: string; authors?: string[]; year?: number; date?: string;
   arxiv_id?: string; url?: string; venue?: string; summary?: string; tags?: string[]; code_url?: string;
   ingested_at: string;
+  citations_total?: number; citations_recent_12mo?: number; citations_checked_at?: string;
+  semantic_scholar_id?: string;
 }
 export interface Claim {
   id: string; capability: string; statement: string; tags?: string[];
@@ -118,4 +120,18 @@ export function claimsByRecency(): Claim[] {
 /** Sources sorted by most-recently-ingested first. */
 export function sourcesByRecency(): Source[] {
   return [...loadCatalog().sources].sort((a, b) => (b.ingested_at || "").localeCompare(a.ingested_at || ""));
+}
+
+/**
+ * A source is "quiet" when we've checked its citation activity, it's had
+ * no citations in the last 12 months, and it's at least 2 years old. Only
+ * ever true when citations_checked_at is present — a source we haven't
+ * checked yet is never treated as quiet, since absence of data isn't
+ * evidence of staleness.
+ */
+export function isQuietSource(s: Source): boolean {
+  if (!s.citations_checked_at) return false;
+  const pubYear = s.year ?? (s.date ? Number(s.date.slice(0, 4)) : undefined);
+  const age = pubYear ? new Date().getFullYear() - pubYear : 0;
+  return (s.citations_recent_12mo ?? 0) === 0 && age >= 2;
 }

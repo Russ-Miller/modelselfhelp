@@ -12,3 +12,6 @@ url: https://arxiv.org/abs/2311.07911
 tags: [instruction-following, benchmark]
 code_url: https://github.com/google-research/google-research/tree/master/instruction_following_eval
 ingested_at: 2026-09-02
+citations_total: 1081
+citations_recent_12mo: 625
+citations_checked_at: 2026-09-04

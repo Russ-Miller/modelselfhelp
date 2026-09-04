@@ -17,6 +17,10 @@
     "summary": { "type": "string" },
     "tags": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
     "code_url": { "type": "string", "format": "uri" },
-    "ingested_at": { "$ref": "common.schema.json#/$defs/date" }
+    "ingested_at": { "$ref": "common.schema.json#/$defs/date" },
+    "citations_total": { "type": "integer", "minimum": 0 },
+    "citations_recent_12mo": { "type": "integer", "minimum": 0 },
+    "citations_checked_at": { "$ref": "common.schema.json#/$defs/date" },
+    "semantic_scholar_id": { "type": "string" }
   }
 }

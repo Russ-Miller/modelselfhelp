@@ -12,3 +12,6 @@ url: https://arxiv.org/abs/2310.06770
 tags: [coding, benchmark, agents]
 code_url: https://github.com/SWE-bench/SWE-bench
 ingested_at: 2026-09-02
+citations_total: 3594
+citations_recent_12mo: 1000
+citations_checked_at: 2026-09-04

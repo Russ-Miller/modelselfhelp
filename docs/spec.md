@@ -159,6 +159,10 @@ once here, not once per claim that cites it.
 | tags | string[]? | |
 | code_url | string? | |
 | ingested_at | date | when this source entered the catalog — distinct from `date`/`year`, which is when the source itself was created. Powers the sources view (§8) and the recent-activity view (§6). |
+| citations_total | integer? | `paper` sources only, from Semantic Scholar's `citationCount`. A recency/relevance signal, not a truth signal — a paper can stay well-cited while being cited critically. |
+| citations_recent_12mo | integer? | count of citations with a publication date in the last 365 days, as of `citations_checked_at`. The more useful of the two numbers: total citations conflates "was once important" with "still discussed." |
+| citations_checked_at | date? | when citation data was last fetched (`scripts/fetch-citations.mjs`, run by hand for now — this is a much cheaper, narrower check than the daily-scouring pipeline in §6/§9, and doesn't need to wait for that automation). |
+| semantic_scholar_id | string? | Semantic Scholar's own paper id, captured for free in the same citation-fetch response. Makes the citation badge a link back to Semantic Scholar — attribution for the data, not just decoration. |
 
 ### Model  (`catalog/models/<id>.yaml`)
 Unchanged in shape from the previous draft: a model family with versions

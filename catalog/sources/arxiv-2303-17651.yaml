@@ -12,3 +12,6 @@ url: https://arxiv.org/abs/2303.17651
 tags: [self-correction, prompting]
 code_url: https://github.com/madaan/self-refine
 ingested_at: 2026-09-02
+citations_total: 4530
+citations_recent_12mo: 1000
+citations_checked_at: 2026-09-04

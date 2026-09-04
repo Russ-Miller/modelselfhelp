@@ -12,3 +12,6 @@ url: https://arxiv.org/abs/2308.03688
 tags: [agents, benchmark]
 code_url: https://github.com/THUDM/AgentBench
 ingested_at: 2026-09-02
+citations_total: 1243
+citations_recent_12mo: 797
+citations_checked_at: 2026-09-04
