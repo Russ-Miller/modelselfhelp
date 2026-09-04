@@ -45,6 +45,7 @@ for (const cap of cat.capabilities) {
   for (const r of d.related ?? []) checkRef(cap.file, ids.capabilities, r, "capability");
   if (d.parent) checkRef(cap.file, ids.capabilities, d.parent, "parent capability");
 }
+const addressedBy = new Map(cat.techniques.map((t) => [t.data.id, new Set(t.data.addresses ?? [])]));
 for (const t of cat.techniques) {
   const d = t.data;
   for (const a of d.addresses ?? []) checkRef(t.file, ids.capabilities, a, "capability");
@@ -55,6 +56,13 @@ const today = new Date().toISOString().slice(0, 10);
 for (const c of cat.claims) {
   const d = c.data;
   checkRef(c.file, ids.capabilities, d.capability, "capability");
+  if (d.technique) {
+    checkRef(c.file, ids.techniques, d.technique, "technique");
+    // An efficacy claim asserts a technique moves a capability, so that
+    // technique must actually address the capability the claim sits under.
+    const addresses = addressedBy.get(d.technique);
+    if (addresses && !addresses.has(d.capability)) problem(c.file, `efficacy claim references technique ${d.technique}, which does not list ${d.capability} in addresses`);
+  }
   for (const t of d.tags ?? []) checkRef(c.file, tags, t, "tag");
   for (const s of d.sources) checkRef(c.file, ids.sources, s.source, "source");
   if (d.observed_on?.model) checkRef(c.file, ids.models, d.observed_on.model, "model");
@@ -68,8 +76,7 @@ for (const c of cat.claims) {
   if (!d.contested && hasContest) problem(c.file, "has a contests-stance source but contested is false");
 }
 // technique back-links: a capability listing a technique must be in that technique's `addresses`
-const addressed = new Map(cat.techniques.map((t) => [t.data.id, new Set(t.data.addresses ?? [])]));
-for (const cap of cat.capabilities) for (const t of cap.data.techniques ?? []) if (addressed.has(t) && !addressed.get(t).has(cap.data.id)) problem(cap.file, `technique ${t} does not list ${cap.data.id} in addresses`);
+for (const cap of cat.capabilities) for (const t of cap.data.techniques ?? []) if (addressedBy.has(t) && !addressedBy.get(t).has(cap.data.id)) problem(cap.file, `technique ${t} does not list ${cap.data.id} in addresses`);
 
 const counts = KINDS.map((k) => `${cat[k].length} ${k}`).join(", ");
 if (problems.length) {

@@ -63,6 +63,37 @@ index for exactly that pairing — what improves a capability, and what
 currently limits it. That possibility shapes nothing about v1 beyond
 keeping the content machine-readable, which git-backed YAML already is.
 
+### The lifecycle this is built to track
+
+The core job, stated as a sequence, because each stage needs different
+structure and the last two are the ones most indexes get wrong:
+
+1. **Where systems are weak.** Which capabilities they underperform at —
+   the entry point, and the reason the catalog is organized by capability.
+2. **What holds them back.** The best current understanding of *why* the
+   limitation exists — mechanism, not just a benchmark number. This is
+   the part that actually informs someone trying to fix it, and it is
+   what `kind: mechanism` claims exist to hold. A score tells you a model
+   is bad at something; a mechanism claim tells you what you're up
+   against.
+3. **What overcomes it.** When someone does move a capability forward,
+   this should surface it so the news travels — that's the point of
+   indexing techniques alongside the weaknesses they address.
+4. **Whether it actually held up.** An announced fix may be a false
+   alarm, or — far more often — may work only under conditions nobody
+   stated up front. So an efficacy assertion has to be contestable and
+   scope-bearing in exactly the way any other claim is: sources on both
+   sides, a suspected axis of disagreement, and the *when and where* it
+   helps written into the statement itself.
+
+Stage 4 is why efficacy is modeled as a **Claim**, not as a property of a
+Technique. A Technique record says what the technique *is* and where the
+code lives; a claim referencing it says what it *does*, for which
+capability, under what conditions — and inherits contested/
+disagreement_axis/scope-condition machinery for free. "Technique X fixes
+weakness Y" asserted as a bare field on the technique would be precisely
+the unfalsifiable, un-nuanced statement this format exists to prevent.
+
 ## 2. What changed from the first draft, and why
 
 The project's first pass (through 2026-09-02) modeled this as "CWE for
@@ -142,6 +173,7 @@ combination the way the old Claim id was.
 | id | slug | derived from the statement |
 | capability | slug | the Capability this claim sits under |
 | statement | string | the directional, scoped claim itself — see §2 |
+| technique | slug? | present when this is an **efficacy claim**: an assertion that a technique in `catalog/techniques/` moves the capability, and under what conditions. Makes "X overcomes Y" contestable and scope-bearing like any other claim rather than an unfalsifiable field on the technique — see §1, stage 4. |
 | tags | slug[]? | additional soft labels beyond the capability's own |
 | kind | enum | `mechanism` (durable — why something happens) or `observation` (perishable — how a specific model/era performs). See §5. |
 | backing_strength | enum | `single-paper`, `replicated`, `mechanism-reasoning`, or `own-observation` — categorical, not a score. What kind of support this claim has, overall. |

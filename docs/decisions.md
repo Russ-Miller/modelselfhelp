@@ -187,3 +187,27 @@ source at a time, real delay between requests, resumable, prioritizing
 the oldest `citations_checked_at` first — likely tied to the same
 later-phase automation as the 14-day claim staleness re-check, not a
 naive full re-scan.
+
+## 2026-09-04 — Technique efficacy is a Claim, not a field on the Technique
+The core job is a four-stage lifecycle: where systems are weak, what
+holds them back, what overcomes it, and whether that actually held up.
+Stage 4 is the one most indexes get wrong -- an announced fix may be a
+false alarm, or far more often may work only under conditions nobody
+stated up front.
+
+So efficacy gets modeled as a Claim with a new optional `technique`
+field, not as a property of the Technique record. Technique previously
+could express efficacy only through `status: disputed` plus a free-text
+`caveats` string -- exactly the bare-boolean failure mode already
+rejected for claims on 2026-09-03. Routing efficacy through Claim
+inherits sources-with-stance, disagreement_axis, and scope conditions in
+the statement for free. A Technique record says what the technique is and
+where the code lives; a claim referencing it says what it does, for which
+capability, under what conditions.
+
+Validation enforces that an efficacy claim's technique actually lists the
+claim's capability in its `addresses`, so the two can't drift apart.
+First example filed: external-feedback-repair works only with real
+grounding -- genuinely contested, with Reflexion and the self-correction
+critique paper supporting from opposite directions and Self-Refine
+contesting the scope.

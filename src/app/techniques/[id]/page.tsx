@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getSource, getTagLabel, getTechnique, getTechniques, getCapability } from "@/lib/catalog";
+import { claimsAboutTechnique, getSource, getTagLabel, getTechnique, getTechniques, getCapability } from "@/lib/catalog";
+import { ContestedBadge, KindBadge, StrengthBadge } from "@/components/badges";
 
 export function generateStaticParams() {
   return getTechniques().map((t) => ({ id: t.id }));
@@ -28,6 +29,35 @@ export default async function TechniquePage({ params }: PageProps<"/techniques/[
         {t.addresses.map((a, i) => <span key={a}>{i > 0 && ", "}<Link href={`/capabilities/${a}`} className="hover:underline">{getCapability(a)?.label ?? a}</Link></span>)}
       </section>
       {t.contexts?.length ? <p className="text-sm text-neutral-500">Contexts: {t.contexts.map(getTagLabel).join(", ")}</p> : null}
+      <section>
+        <h2 className="mb-1 font-semibold">Does it work?</h2>
+        <p className="mb-2 text-xs text-neutral-500">
+          Efficacy claims &mdash; what this technique actually moves, under which conditions, and
+          whether that has been contested.
+        </p>
+        {(() => {
+          const efficacy = claimsAboutTechnique(t.id);
+          return efficacy.length === 0 ? (
+            <p className="text-sm text-neutral-500">
+              No efficacy claim filed yet. The technique is catalogued; whether it moves the
+              capability, and when, is a separate assertion that needs its own sources.
+            </p>
+          ) : (
+            <ul className="space-y-2">
+              {efficacy.map((claim) => (
+                <li key={claim.id} className="text-sm">
+                  <div className="mb-0.5 flex flex-wrap items-center gap-2">
+                    <KindBadge kind={claim.kind} />
+                    <StrengthBadge strength={claim.backing_strength} />
+                    {claim.contested && <ContestedBadge />}
+                  </div>
+                  <Link href={`/claims/${claim.id}`} className="hover:underline">{claim.statement}</Link>
+                </li>
+              ))}
+            </ul>
+          );
+        })()}
+      </section>
       <section>
         <h2 className="mb-2 font-semibold">Code</h2>
         {t.repos?.length ? (

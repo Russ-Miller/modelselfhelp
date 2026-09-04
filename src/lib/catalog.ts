@@ -30,6 +30,8 @@ export interface Source {
 }
 export interface Claim {
   id: string; capability: string; statement: string; tags?: string[];
+  /** Set when this claim asserts a technique moves the capability, and under what conditions. */
+  technique?: string;
   kind: ClaimKind; backing_strength: BackingStrength; observed_on?: ObservedOn;
   sources: SourceLink[]; contested: boolean; disagreement_axis?: DisagreementAxis;
   status: ClaimStatus; superseded_by?: string;
@@ -92,6 +94,8 @@ export const getTagLabel = (id: string) => {
 };
 
 export const claimsFor = (capabilityId: string) => loadCatalog().claims.filter((c) => c.capability === capabilityId);
+/** Efficacy claims: assertions that this technique moves some capability. */
+export const claimsAboutTechnique = (techniqueId: string) => loadCatalog().claims.filter((c) => c.technique === techniqueId);
 export const techniquesFor = (capabilityId: string) => loadCatalog().techniques.filter((t) => t.addresses.includes(capabilityId));
 
 /** Every claim that cites a given source, alongside the stance that claim's citation carries. */
