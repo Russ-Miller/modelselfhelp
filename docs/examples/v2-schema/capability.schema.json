@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://modelselfhelp.dev/schema/v2/capability.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "label",
+    "summary",
+    "description",
+    "status",
+    "submitted_by"
+  ],
+  "properties": {
+    "id": {
+      "$ref": "common.schema.json#/$defs/slug"
+    },
+    "label": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 60
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 20,
+      "maxLength": 240
+    },
+    "description": {
+      "type": "string",
+      "minLength": 40
+    },
+    "tags": {
+      "type": "array",
+      "$ref": "common.schema.json#/$defs/slugList"
+    },
+    "parent": {
+      "$ref": "common.schema.json#/$defs/slug"
+    },
+    "aliases": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "match_terms": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "discriminator": {
+      "type": "string",
+      "minLength": 40
+    },
+    "techniques": {
+      "type": "array",
+      "$ref": "common.schema.json#/$defs/slugList"
+    },
+    "related": {
+      "type": "array",
+      "$ref": "common.schema.json#/$defs/slugList"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "parked"
+      ]
+    },
+    "submitted_by": {
+      "$ref": "common.schema.json#/$defs/provenance"
+    }
+  }
+}

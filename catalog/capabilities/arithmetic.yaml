@@ -1,0 +1,20 @@
+id: arithmetic
+label: "Digit-level arithmetic"
+summary: "Multi-digit arithmetic, counting, and symbol manipulation fail in ways tied to tokenization and memorization."
+description: >-
+  A capable model performs multi-digit addition and multiplication, counts characters and items, and manipulates digits reliably regardless of how the numbers happen to be tokenized or how often they appeared in training.
+tags: [data-analysis, general, math, reasoning]
+aliases: ["numerical reasoning", "token-level math"]
+techniques: [program-aided-computation, chain-of-thought, digit-position-embeddings]
+related: [state-tracking]
+match_terms: ["arithmetic", "math word problem", "multi-digit"]
+discriminator: >-
+  Digit-level arithmetic and numeric manipulation in text: multi-digit
+  addition and multiplication, carries, place value, counting characters or
+  items in a text sequence. In scope when the paper studies whether the
+  model computes correctly. NOT in scope: visual object counting in images
+  (that is a perception result), or math word problems where the difficulty
+  is the reasoning chain rather than the calculation -- those belong with
+  reasoning unless the paper isolates the arithmetic step.
+status: active
+submitted_by: human:Russ-Miller

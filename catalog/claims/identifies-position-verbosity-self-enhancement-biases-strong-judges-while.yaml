@@ -1,0 +1,14 @@
+id: identifies-position-verbosity-self-enhancement-biases-strong-judges-while
+capability: judge-position-bias
+statement: >-
+  Identifies position, verbosity, and self-enhancement biases in strong judges, while also showing high agreement with humans once mitigated.
+kind: mechanism
+backing_strength: single-paper
+sources:
+  - source: arxiv-2306-05685
+    stance: supports
+    note: "Identifies position, verbosity, and self-enhancement biases in strong judges, while also showing high agreement with humans once mitigated."
+contested: false
+status: active
+last_checked_at: 2026-09-03
+submitted_by: human:Russ-Miller

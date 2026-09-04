@@ -1,0 +1,14 @@
+id: shows-llms-hallucinate-api-names-arguments-when-calling
+capability: tool-use
+statement: >-
+  Shows LLMs hallucinate API names and arguments when calling large API collections from memory, and that retrieving documentation reduces this.
+kind: mechanism
+backing_strength: single-paper
+sources:
+  - source: arxiv-2305-15334
+    stance: supports
+    note: "Shows LLMs hallucinate API names and arguments when calling large API collections from memory, and that retrieving documentation reduces this."
+contested: false
+status: active
+last_checked_at: 2026-09-03
+submitted_by: human:Russ-Miller

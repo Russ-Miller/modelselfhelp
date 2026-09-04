@@ -1,0 +1,14 @@
+id: training-models-rank-system-user-tool-instructions-by
+capability: prompt-injection
+statement: >-
+  Training models to rank system, user, and tool instructions by privilege improves robustness to injections in tool outputs.
+kind: mechanism
+backing_strength: single-paper
+sources:
+  - source: arxiv-2404-13208
+    stance: supports
+    note: "Training models to rank system, user, and tool instructions by privilege improves robustness to injections in tool outputs."
+contested: false
+status: active
+last_checked_at: 2026-09-03
+submitted_by: human:Russ-Miller

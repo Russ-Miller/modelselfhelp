@@ -1,0 +1,16 @@
+id: forecasting
+label: Predicting future events
+summary: Whether a model can make well-calibrated predictions about events that haven't happened yet, not just recall or verify existing facts.
+description: >-
+  Distinct from fact-verification, which checks claims against existing
+  evidence. Forecasting requires synthesizing current information toward
+  a genuinely uncertain future outcome, and calibration — knowing how
+  confident to be, not just landing on the right answer — is the real
+  test. Genuinely hard to contaminate, since the events haven't happened
+  at training time, which is also what makes it hard to know whether poor
+  performance reflects the event being unpredictable or the model being
+  bad at synthesizing evidence.
+tags: [reasoning, knowledge]
+match_terms: ["forecasting", "forecast", "prediction market", "future events", "calibrated prediction"]
+status: active
+submitted_by: human:Russ-Miller

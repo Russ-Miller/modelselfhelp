@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://modelselfhelp.dev/schema/claim.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "capability",
+    "statement",
+    "kind",
+    "backing_strength",
+    "sources",
+    "contested",
+    "status",
+    "last_checked_at",
+    "submitted_by"
+  ],
+  "properties": {
+    "id": {
+      "$ref": "common.schema.json#/$defs/slug"
+    },
+    "capability": {
+      "$ref": "common.schema.json#/$defs/slug"
+    },
+    "technique": {
+      "$ref": "common.schema.json#/$defs/slug"
+    },
+    "statement": {
+      "type": "string",
+      "minLength": 30
+    },
+    "tags": {
+      "type": "array",
+      "$ref": "common.schema.json#/$defs/slugList"
+    },
+    "kind": {
+      "type": "string",
+      "enum": [
+        "mechanism",
+        "observation"
+      ]
+    },
+    "backing_strength": {
+      "type": "string",
+      "enum": [
+        "single-paper",
+        "replicated",
+        "mechanism-reasoning",
+        "own-observation"
+      ]
+    },
+    "observed_on": {
+      "$ref": "common.schema.json#/$defs/observedOn"
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/$defs/sourceLink"
+      },
+      "minItems": 1
+    },
+    "contested": {
+      "type": "boolean"
+    },
+    "disagreement_axis": {
+      "$ref": "common.schema.json#/$defs/disagreementAxis"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "superseded",
+        "retired"
+      ]
+    },
+    "superseded_by": {
+      "$ref": "common.schema.json#/$defs/slug"
+    },
+    "last_checked_at": {
+      "$ref": "common.schema.json#/$defs/date"
+    },
+    "last_new_evidence_at": {
+      "$ref": "common.schema.json#/$defs/date"
+    },
+    "notes": {
+      "type": "string"
+    },
+    "submitted_by": {
+      "$ref": "common.schema.json#/$defs/provenance"
+    }
+  }
+}

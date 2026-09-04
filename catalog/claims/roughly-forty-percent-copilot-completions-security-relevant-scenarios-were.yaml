@@ -1,0 +1,14 @@
+id: roughly-forty-percent-copilot-completions-security-relevant-scenarios-were
+capability: secure-coding
+statement: >-
+  Roughly forty percent of Copilot completions in security-relevant scenarios were vulnerable.
+kind: mechanism
+backing_strength: single-paper
+sources:
+  - source: arxiv-2108-09293
+    stance: supports
+    note: "Roughly forty percent of Copilot completions in security-relevant scenarios were vulnerable."
+contested: false
+status: active
+last_checked_at: 2026-09-03
+submitted_by: human:Russ-Miller

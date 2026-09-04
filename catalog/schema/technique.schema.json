@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://modelselfhelp.dev/schema/technique.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "label",
+    "summary",
+    "description",
+    "addresses",
+    "kind",
+    "status",
+    "submitted_by"
+  ],
+  "properties": {
+    "id": {
+      "$ref": "common.schema.json#/$defs/slug"
+    },
+    "label": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 60
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 20,
+      "maxLength": 240
+    },
+    "description": {
+      "type": "string",
+      "minLength": 40
+    },
+    "addresses": {
+      "type": "array",
+      "$ref": "common.schema.json#/$defs/slugList",
+      "minItems": 1
+    },
+    "kind": {
+      "type": "string",
+      "enum": [
+        "prompting",
+        "retrieval",
+        "tooling",
+        "training",
+        "decoding",
+        "architecture",
+        "process"
+      ]
+    },
+    "sources": {
+      "type": "array",
+      "$ref": "common.schema.json#/$defs/slugList"
+    },
+    "repos": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "url",
+          "note"
+        ],
+        "properties": {
+          "url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "note": {
+            "type": "string",
+            "minLength": 5
+          },
+          "verified_on": {
+            "$ref": "common.schema.json#/$defs/date"
+          }
+        }
+      }
+    },
+    "contexts": {
+      "type": "array",
+      "$ref": "common.schema.json#/$defs/slugList"
+    },
+    "requires": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "superseded"
+      ]
+    },
+    "submitted_by": {
+      "$ref": "common.schema.json#/$defs/provenance"
+    }
+  }
+}

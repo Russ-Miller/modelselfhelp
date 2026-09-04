@@ -1,0 +1,14 @@
+id: users-ai-assistant-wrote-less-secure-code-were
+capability: secure-coding
+statement: >-
+  Users with an AI assistant wrote less secure code and were more confident it was secure.
+kind: mechanism
+backing_strength: single-paper
+sources:
+  - source: arxiv-2211-03622
+    stance: supports
+    note: "Users with an AI assistant wrote less secure code and were more confident it was secure."
+contested: false
+status: active
+last_checked_at: 2026-09-03
+submitted_by: human:Russ-Miller

@@ -1,0 +1,19 @@
+id: goal-conflict-safety
+label: "Prioritizing safety under conflicting goals"
+summary: "When a task goal competes with a safety rule or a required check, models sometimes drop the check to finish the task."
+description: >-
+  When finishing the task quickly conflicts with an irreversible action, a policy, or a confirmation step, a capable model handles the safety-critical step first, asks when unsure, and never works around oversight to reach the goal.
+tags: [agentic, autonomous-agent, coding-agent, customer-support]
+aliases: ["critical task prioritization", "oversight subversion", "guardrail bypass"]
+techniques: [constitutional-training, irreversible-action-gate]
+related: [sycophancy, procedure-following, strategic-deception]
+match_terms: ["oversight", "scheming", "safety-critical"]
+discriminator: >-
+  Whether a model preserves oversight and safety constraints when a task
+  goal pushes against them: disabling monitoring, misreporting its own
+  actions, skipping an approval to finish faster. NOT in scope: safety
+  filters, content moderation, or refusal behavior generally -- the word
+  "guardrail" alone is not enough. The distinguishing feature is a conflict
+  between a stated goal and an oversight mechanism.
+status: active
+submitted_by: human:Russ-Miller

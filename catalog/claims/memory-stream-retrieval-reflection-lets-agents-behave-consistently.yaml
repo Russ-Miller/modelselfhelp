@@ -1,0 +1,14 @@
+id: memory-stream-retrieval-reflection-lets-agents-behave-consistently
+capability: long-term-memory
+statement: >-
+  A memory stream with retrieval and reflection lets agents behave consistently over simulated days.
+kind: mechanism
+backing_strength: single-paper
+sources:
+  - source: arxiv-2304-03442
+    stance: supports
+    note: "A memory stream with retrieval and reflection lets agents behave consistently over simulated days."
+contested: false
+status: active
+last_checked_at: 2026-09-03
+submitted_by: human:Russ-Miller

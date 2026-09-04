@@ -1,0 +1,14 @@
+id: across-many-models-hundreds-thousands-samples-substantial-share
+capability: secure-coding
+statement: >-
+  Across many models and hundreds of thousands of samples, a substantial share of recommended packages did not exist, and the names repeated, making them exploitable.
+kind: mechanism
+backing_strength: single-paper
+sources:
+  - source: arxiv-2406-10279
+    stance: supports
+    note: "Across many models and hundreds of thousands of samples, a substantial share of recommended packages did not exist, and the names repeated, making them exploitable."
+contested: false
+status: active
+last_checked_at: 2026-09-03
+submitted_by: human:Russ-Miller

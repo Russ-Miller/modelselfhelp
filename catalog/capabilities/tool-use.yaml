@@ -1,0 +1,12 @@
+id: tool-use
+label: "Using the tools it is given"
+summary: "Models often fail to reach for provided tools, skills, or documented procedures, or call them with wrong arguments."
+description: >-
+  Given a set of tools, skills, or API documentation, a capable model selects the right one for the task, calls it with correct arguments, interprets the result, and chains calls when needed. It prefers a provided tool over improvising from memory, and it asks or stops when no tool fits.
+tags: [agentic, autonomous-agent, coding-agent, customer-support]
+aliases: ["tool calling", "function calling", "API use", "skill utilization"]
+techniques: [retrieve-tool-docs, tool-use-fine-tuning]
+related: [procedure-following, self-repair]
+match_terms: ["tool use", "tool-calling", "function calling", "agentic tool"]
+status: active
+submitted_by: human:Russ-Miller

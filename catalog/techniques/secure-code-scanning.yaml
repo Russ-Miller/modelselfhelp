@@ -1,0 +1,18 @@
+id: secure-code-scanning
+label: Scan generated code for insecure patterns
+summary: Run a static insecure-pattern scanner on every generated change before it is accepted.
+description: >-
+  Use a rule-based scanner for known insecure patterns on each diff the
+  agent produces, block the change on a hit, and return the finding to the
+  model so it rewrites. CyberSecEval ships such a scanner and a benchmark
+  to measure how often a model produces insecure completions.
+addresses: [secure-coding]
+kind: tooling
+sources: [arxiv-2312-04724]
+repos:
+  - url: https://github.com/meta-llama/PurpleLlama
+    note: CyberSecEval insecure-code detector and benchmark.
+    verified_on: 2026-09-02
+contexts: [coding-agent]
+status: active
+submitted_by: human:Russ-Miller

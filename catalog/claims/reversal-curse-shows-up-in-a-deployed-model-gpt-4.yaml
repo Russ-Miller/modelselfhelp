@@ -1,0 +1,23 @@
+id: reversal-curse-shows-up-in-a-deployed-model-gpt-4
+capability: reversal-curse
+statement: >-
+  GPT-4 could reliably name a well-known celebrity's parent, but was far
+  less reliable naming the celebrity when given the parent — the same
+  directional-recall asymmetry demonstrated in smaller fine-tuned models,
+  showing up in a deployed model that wasn't fine-tuned for the test.
+kind: observation
+backing_strength: single-paper
+observed_on:
+  model: gpt
+  era: "2023, GPT-4 class"
+  task_type: general
+sources:
+  - source: arxiv-2309-12288
+    stance: supports
+    note: >-
+      GPT-4 named a celebrity's parent correctly far more often than it
+      could name the celebrity when given the parent.
+contested: false
+status: active
+last_checked_at: 2026-09-03
+submitted_by: human:Russ-Miller

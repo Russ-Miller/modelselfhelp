@@ -1,0 +1,14 @@
+id: models-endorse-widely-held-falsehoods-showing-weak-verification
+capability: fact-verification
+statement: >-
+  Models endorse widely held falsehoods, showing weak verification against what they know.
+kind: mechanism
+backing_strength: single-paper
+sources:
+  - source: arxiv-2109-07958
+    stance: supports
+    note: "Models endorse widely held falsehoods, showing weak verification against what they know."
+contested: false
+status: active
+last_checked_at: 2026-09-03
+submitted_by: human:Russ-Miller

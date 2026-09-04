@@ -1,0 +1,18 @@
+id: arxiv-2402-18563
+kind: paper
+title: "Approaching Human-Level Forecasting with Language Models"
+authors:
+  - "Danny Halawi"
+  - "Fred Zhang"
+  - "Chen Yueh-Han"
+  - "Jacob Steinhardt"
+year: 2024
+arxiv_id: "2402.18563"
+url: https://arxiv.org/abs/2402.18563
+summary: >-
+  A retrieval-augmented forecasting system built on GPT-4-class models
+  approaches, and sometimes exceeds, human crowd forecaster accuracy on
+  real prediction-market-style questions dated after the model's training
+  cutoff.
+tags: [forecasting, reasoning]
+ingested_at: 2026-09-04

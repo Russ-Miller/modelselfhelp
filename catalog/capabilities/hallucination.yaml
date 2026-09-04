@@ -1,0 +1,19 @@
+id: hallucination
+label: "Stating false facts confidently"
+summary: "Models generate plausible but false statements, citations, and details, with no signal that they are unsure."
+description: >-
+  A capable model states only what it has grounds for, marks uncertainty, distinguishes what it recalls from what it infers, and declines to invent specifics such as names, numbers, quotes, or citations.
+tags: [chat-assistant, general, knowledge, rag-qa]
+aliases: ["confabulation", "fabrication", "factual error"]
+techniques: [retrieval-augmented-generation, atomic-fact-checking]
+related: [fact-verification, reversal-curse]
+match_terms: ["hallucination", "hallucinate"]
+discriminator: >-
+  Confidently stating things that are not true: invented citations, URLs,
+  numbers, entities, or events, in the absence of a retrieval failure. In
+  scope when the paper measures, explains, or mitigates unsupported
+  generation. NOT in scope when "hallucination" is used loosely for any
+  error, or for perception errors in vision models unless the paper treats
+  them as the same phenomenon.
+status: active
+submitted_by: human:Russ-Miller

@@ -1,0 +1,15 @@
+id: arxiv-2402-14903
+kind: paper
+title: "Tokenization counts: the impact of tokenization on arithmetic in frontier LLMs"
+authors:
+  - "Aaditya K. Singh"
+  - "DJ Strouse"
+year: 2024
+arxiv_id: "2402.14903"
+url: https://arxiv.org/abs/2402.14903
+tags: [arithmetic, tokenization]
+ingested_at: 2026-09-02
+citations_total: 126
+citations_recent_12mo: 44
+citations_checked_at: 2026-09-04
+semantic_scholar_id: 49c45d2a2773c537804c38d69cde67e00fbad6fe

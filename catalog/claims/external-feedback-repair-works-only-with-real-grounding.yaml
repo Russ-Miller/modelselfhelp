@@ -1,0 +1,53 @@
+id: external-feedback-repair-works-only-with-real-grounding
+capability: self-repair
+technique: external-feedback-repair
+statement: >-
+  Reflect-and-retry raises task success when the feedback in the loop is a
+  genuine external signal — a failing test, a compiler error, an
+  environment outcome — but not when the "feedback" is the model's own
+  unaided critique. The grounding, not the reflection step, is what does
+  the work.
+tags: [agentic, coding-agent]
+kind: mechanism
+backing_strength: replicated
+observed_on:
+  era: "2023, GPT-3.5/GPT-4 class"
+sources:
+  - source: arxiv-2303-11366
+    stance: supports
+    note: >-
+      Reflection on a real environment signal (test result, action
+      outcome), fed back for a retry, substantially raised pass rates on
+      coding and decision-making tasks.
+  - source: arxiv-2310-01798
+    stance: supports
+    note: >-
+      The complementary direction: with no external feedback, review-and-
+      revise did not improve reasoning accuracy and often degraded it —
+      isolating grounding as the active ingredient.
+  - source: arxiv-2303-17651
+    stance: contests
+    note: >-
+      Reports that self-generated feedback alone improves outputs across
+      several generation tasks, without requiring an external signal —
+      which is broader efficacy than this claim allows.
+contested: true
+disagreement_axis:
+  description: >-
+    Probably task family and how "improvement" was measured. The
+    contesting result is strongest on open-ended generation, where better
+    is a fuzzy judgment a second pass can nudge; the supporting results
+    are on checkable tasks with a pass/fail signal. A secondary
+    possibility is baseline setup — whether the no-revision comparison got
+    the same inference budget. I have not reconciled the experimental
+    setups myself.
+  is_guess: true
+status: active
+last_checked_at: 2026-09-04
+notes: >-
+  Filed as an efficacy claim rather than as a property of the technique,
+  so the scope condition ("only with real grounding") and the contest are
+  both first-class. Marked replicated because two independent papers
+  converge on grounding being the active ingredient from opposite
+  directions, not because any single result was rerun.
+submitted_by: human:Russ-Miller

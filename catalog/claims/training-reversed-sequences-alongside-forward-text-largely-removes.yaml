@@ -1,0 +1,14 @@
+id: training-reversed-sequences-alongside-forward-text-largely-removes
+capability: reversal-curse
+statement: >-
+  Training on reversed sequences alongside forward text largely removes the effect.
+kind: mechanism
+backing_strength: single-paper
+sources:
+  - source: arxiv-2403-13799
+    stance: supports
+    note: "Training on reversed sequences alongside forward text largely removes the effect."
+contested: false
+status: active
+last_checked_at: 2026-09-03
+submitted_by: human:Russ-Miller

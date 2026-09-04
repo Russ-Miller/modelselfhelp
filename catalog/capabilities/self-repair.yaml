@@ -1,0 +1,17 @@
+id: self-repair
+label: Fixing its own mistakes
+summary: Whether and how a model can diagnose and correct a wrong answer once it's already made.
+description: >-
+  This topic covers self-correction and self-critique behavior: does
+  reviewing or revising an answer make it better or worse, and what turns
+  out to matter is what's driving the revision — the model's own
+  unaided judgment, or a concrete external signal like a failing test.
+  The two are easy to conflate under one banner ("self-correction") and
+  behave very differently, which is exactly the kind of thing a bare
+  "capability score" would have hidden.
+tags: [agentic, coding-agent, math]
+techniques: [external-feedback-repair]
+related: [tool-use, state-tracking, code-generation]
+match_terms: ["self-correction", "self-correct", "self-critique", "self-refine", "iterative refinement", "reflect and retry"]
+status: active
+submitted_by: human:Russ-Miller

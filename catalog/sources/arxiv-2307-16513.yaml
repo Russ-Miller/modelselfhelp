@@ -1,0 +1,15 @@
+id: arxiv-2307-16513
+kind: paper
+title: "Deception Abilities Emerged in Large Language Models"
+authors:
+  - "Thilo Hagendorff"
+year: 2023
+arxiv_id: "2307.16513"
+url: https://arxiv.org/abs/2307.16513
+summary: >-
+  State-of-the-art LLMs such as GPT-4 can understand and induce false
+  beliefs in other agents through deliberate strategic reasoning, a
+  capability absent in earlier-generation models; chain-of-thought
+  reasoning improves deceptive performance further.
+tags: [deception, behavior]
+ingested_at: 2026-09-04

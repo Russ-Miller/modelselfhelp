@@ -1,0 +1,28 @@
+id: static-code-benchmarks-saturate-need-continuous-refresh
+capability: code-generation
+statement: >-
+  Static, fixed-problem coding benchmarks saturate and leak into training
+  data over time, so getting an honest read on current code-generation
+  ability requires a benchmark that continuously adds newly-published
+  problems rather than reusing an older fixed set like HumanEval.
+tags: [reasoning]
+kind: mechanism
+backing_strength: single-paper
+observed_on:
+  era: "2024, evaluating 52 models on 2023-2024 problems"
+  task_type: coding-agent
+sources:
+  - source: arxiv-2403-07974
+    stance: supports
+    note: >-
+      LiveCodeBench continuously collects newly-published problems to
+      stay contamination-free, evaluating 52 models across base and
+      instruction-tuned variants.
+contested: false
+status: active
+last_checked_at: 2026-09-04
+notes: >-
+  Pairs with self-repair's SWE-bench claim (arxiv-2310-06770) for the
+  repo-scale, real-issue-resolution side of code competence, versus
+  isolated-problem generation here.
+submitted_by: human:Russ-Miller

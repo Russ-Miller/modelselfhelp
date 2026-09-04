@@ -1,0 +1,23 @@
+id: long-context-accuracy-drops-in-the-middle-gpt-3-5-turbo
+capability: long-context-degradation
+statement: >-
+  On multi-document question answering with GPT-3.5 Turbo's 16k-context
+  variant, accuracy dropped by more than twenty points when the document
+  containing the answer was moved from the start or end of the context to
+  the middle, with nothing else about the task changed.
+kind: observation
+backing_strength: single-paper
+observed_on:
+  model: gpt
+  era: "2023, GPT-3.5 Turbo (16k context)"
+  task_type: long-document
+sources:
+  - source: arxiv-2307-03172
+    stance: supports
+    note: >-
+      Multi-document QA accuracy is highest with the answer at the start
+      or end of the context and drops sharply in the middle.
+contested: false
+status: active
+last_checked_at: 2026-09-03
+submitted_by: human:Russ-Miller

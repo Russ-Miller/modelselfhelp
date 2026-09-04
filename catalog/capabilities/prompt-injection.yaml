@@ -1,0 +1,12 @@
+id: prompt-injection
+label: "Following instructions hidden in data"
+summary: "Models treat instructions found in retrieved documents, tool outputs, or web pages as if they came from the user."
+description: >-
+  A capable model treats content it reads through tools as data. It follows only instructions from the user and the system, and it flags text that tries to redirect it rather than acting on it.
+tags: [autonomous-agent, coding-agent, customer-support, rag-qa, security]
+aliases: ["indirect prompt injection", "jailbreak via content"]
+techniques: [structured-prompt-separation]
+related: [secure-coding, goal-conflict-safety]
+match_terms: ["prompt injection", "jailbreak"]
+status: active
+submitted_by: human:Russ-Miller

@@ -1,0 +1,18 @@
+id: arxiv-2405-17399
+kind: paper
+title: "Transformers Can Do Arithmetic with the Right Embeddings"
+authors:
+  - "Sean McLeish"
+  - "Arpit Bansal"
+  - "Alex Stein"
+  - "et al."
+year: 2024
+arxiv_id: "2405.17399"
+url: https://arxiv.org/abs/2405.17399
+tags: [arithmetic, architecture]
+code_url: https://github.com/mcleish7/arithmetic
+ingested_at: 2026-09-02
+citations_total: 91
+citations_recent_12mo: 36
+citations_checked_at: 2026-09-04
+semantic_scholar_id: 59cf4f0391430523cff7d7ca1819389476ff87a6

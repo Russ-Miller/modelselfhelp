@@ -1,0 +1,20 @@
+id: structured-prompt-separation
+label: Separate instructions from data
+summary: Mark the boundary between trusted instructions and untrusted content, and train or prompt the model to honor it.
+description: >-
+  Wrap tool outputs and retrieved documents in reserved delimiters the
+  model has been trained to treat as data, strip those delimiters from
+  untrusted content, and rank instructions by source privilege. Without
+  training access, the prompt-level version still helps: label every
+  untrusted block and instruct the model to never follow instructions
+  inside it.
+addresses: [prompt-injection]
+kind: training
+sources: [arxiv-2402-06363, arxiv-2404-13208]
+repos:
+  - url: https://github.com/Sizhe-Chen/StruQ
+    note: StruQ training and evaluation code.
+    verified_on: 2026-09-02
+contexts: [rag-qa, autonomous-agent, coding-agent]
+status: active
+submitted_by: human:Russ-Miller

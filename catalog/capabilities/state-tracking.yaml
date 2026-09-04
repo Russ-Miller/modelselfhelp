@@ -1,0 +1,12 @@
+id: state-tracking
+label: "Tracking state through a long task"
+summary: "Models lose track of the current state of entities, files, or an environment after many steps."
+description: >-
+  A capable model maintains an accurate picture of the current state of what it is working on, updating it after every action, so that later decisions rest on what is true now rather than what was true earlier.
+tags: [autonomous-agent, coding-agent, context, data-analysis]
+aliases: ["entity tracking", "world-model consistency", "stale state"]
+techniques: [reread-before-edit]
+related: [self-repair, long-context-degradation]
+match_terms: ["state tracking", "entity tracking", "world model"]
+status: active
+submitted_by: human:Russ-Miller

@@ -1,0 +1,14 @@
+id: models-fine-tuned-b-fail-answer-b-gpt-4-recalls
+capability: reversal-curse
+statement: >-
+  Models fine-tuned on "A is B" fail to answer "B is A", and GPT-4 recalls celebrity parents far more often than the reverse.
+kind: mechanism
+backing_strength: single-paper
+sources:
+  - source: arxiv-2309-12288
+    stance: supports
+    note: "Models fine-tuned on \"A is B\" fail to answer \"B is A\", and GPT-4 recalls celebrity parents far more often than the reverse."
+contested: false
+status: active
+last_checked_at: 2026-09-03
+submitted_by: human:Russ-Miller

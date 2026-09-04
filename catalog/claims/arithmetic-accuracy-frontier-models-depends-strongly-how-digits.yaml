@@ -1,0 +1,14 @@
+id: arithmetic-accuracy-frontier-models-depends-strongly-how-digits
+capability: arithmetic
+statement: >-
+  Arithmetic accuracy in frontier models depends strongly on how digits are chunked into tokens; a different digit grouping changes error rates.
+kind: mechanism
+backing_strength: single-paper
+sources:
+  - source: arxiv-2402-14903
+    stance: supports
+    note: "Arithmetic accuracy in frontier models depends strongly on how digits are chunked into tokens; a different digit grouping changes error rates."
+contested: false
+status: active
+last_checked_at: 2026-09-03
+submitted_by: human:Russ-Miller

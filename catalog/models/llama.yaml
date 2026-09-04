@@ -1,0 +1,11 @@
+id: llama
+label: Llama
+vendor: Meta
+url: https://www.llama.com/
+versions:
+  - id: llama-2-70b
+    label: Llama 2 70B
+    released: 2023-07-18
+  - id: llama-3-1-405b
+    label: Llama 3.1 405B
+    released: 2024-07-23

@@ -1,0 +1,18 @@
+id: retrieve-tool-docs
+label: Retrieve tool documentation at call time
+summary: Put the exact documentation for candidate tools into the prompt instead of relying on memory.
+description: >-
+  Index tool and API documentation, retrieve the entries relevant to the
+  current step, and include them verbatim before the model chooses a call.
+  This removes invented endpoints and arguments and keeps the model current
+  when APIs change.
+addresses: [tool-use]
+kind: retrieval
+sources: [arxiv-2305-15334]
+repos:
+  - url: https://github.com/ShishirPatil/gorilla
+    note: Gorilla retriever-aware training and API documentation store.
+    verified_on: 2026-09-02
+contexts: [coding-agent, autonomous-agent]
+status: active
+submitted_by: human:Russ-Miller

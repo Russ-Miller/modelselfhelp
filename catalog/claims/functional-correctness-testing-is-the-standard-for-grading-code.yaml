@@ -1,0 +1,24 @@
+id: functional-correctness-testing-is-the-standard-for-grading-code
+capability: code-generation
+statement: >-
+  Grading generated code by whether it actually passes held-out
+  functional tests, rather than by surface similarity to a reference
+  solution, is what makes code generation gradeable at scale — and it's
+  how the field has graded it since the earliest large benchmarks.
+tags: [reasoning]
+kind: mechanism
+backing_strength: single-paper
+observed_on:
+  era: "2021, Codex/GPT-3 class"
+  task_type: coding-agent
+sources:
+  - source: arxiv-2107-03374
+    stance: supports
+    note: >-
+      Introduced HumanEval and the functional-correctness grading
+      methodology (execute against held-out tests) alongside the pass@k
+      estimator, now the field standard.
+contested: false
+status: active
+last_checked_at: 2026-09-04
+submitted_by: human:Russ-Miller

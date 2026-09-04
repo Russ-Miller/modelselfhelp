@@ -1,0 +1,20 @@
+id: atomic-fact-checking
+label: Check long answers fact by fact
+summary: Split a long answer into atomic claims and verify each against search or a corpus.
+description: >-
+  Decompose the output into individual factual claims, retrieve evidence
+  for each, and label each as supported or not. Use it as a post-hoc filter
+  on outputs or as an evaluation metric during development.
+addresses: [hallucination, fact-verification]
+kind: tooling
+sources: [arxiv-2305-14251, arxiv-2403-18802]
+repos:
+  - url: https://github.com/shmsw25/FActScore
+    note: FActScore decomposition and scoring.
+    verified_on: 2026-09-02
+  - url: https://github.com/google-deepmind/long-form-factuality
+    note: SAFE, search-augmented factuality evaluator.
+    verified_on: 2026-09-02
+contexts: [rag-qa, chat-assistant, llm-as-judge]
+status: active
+submitted_by: human:Russ-Miller

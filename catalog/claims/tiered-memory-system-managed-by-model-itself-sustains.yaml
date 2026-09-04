@@ -1,0 +1,14 @@
+id: tiered-memory-system-managed-by-model-itself-sustains
+capability: long-term-memory
+statement: >-
+  A tiered memory system managed by the model itself sustains recall over conversations far longer than the context window.
+kind: mechanism
+backing_strength: single-paper
+sources:
+  - source: arxiv-2310-08560
+    stance: supports
+    note: "A tiered memory system managed by the model itself sustains recall over conversations far longer than the context window."
+contested: false
+status: active
+last_checked_at: 2026-09-03
+submitted_by: human:Russ-Miller

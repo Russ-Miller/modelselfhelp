@@ -1,0 +1,12 @@
+id: arxiv-2303-11366
+kind: paper
+title: "Reflexion: Language Agents with Verbal Reinforcement Learning"
+authors: ["Noah Shinn", "Federico Cassano", "Edward Berman", "Ashwin Gopinath", "Karthik Narasimhan", "Shunyu Yao"]
+year: 2023
+arxiv_id: "2303.11366"
+url: https://arxiv.org/abs/2303.11366
+summary: >-
+  Reflecting in words on a failure and retrying, with a real environment
+  signal (a test result, an action outcome), raises pass rates on coding
+  and decision-making tasks substantially over single-shot attempts.
+tags: [self-correction, agents]

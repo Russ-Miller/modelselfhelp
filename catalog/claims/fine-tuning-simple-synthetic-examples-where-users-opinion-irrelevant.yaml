@@ -1,0 +1,14 @@
+id: fine-tuning-simple-synthetic-examples-where-users-opinion-irrelevant
+capability: sycophancy
+statement: >-
+  Fine-tuning on simple synthetic examples where the user's opinion is irrelevant to the answer reduces sycophancy substantially.
+kind: mechanism
+backing_strength: single-paper
+sources:
+  - source: arxiv-2308-03958
+    stance: supports
+    note: "Fine-tuning on simple synthetic examples where the user's opinion is irrelevant to the answer reduces sycophancy substantially."
+contested: false
+status: active
+last_checked_at: 2026-09-03
+submitted_by: human:Russ-Miller

@@ -1,0 +1,19 @@
+id: secure-coding
+label: "Writing secure code and dependencies"
+summary: "Generated code carries known vulnerability patterns, and models suggest packages that do not exist."
+description: >-
+  A capable coding model avoids well-known vulnerability classes, uses safe defaults, and only imports dependencies that exist and are trustworthy, checking the registry rather than recalling names from memory.
+tags: [coding-agent, security]
+aliases: ["insecure code generation", "package hallucination", "slopsquatting"]
+techniques: [dependency-existence-check, secure-code-scanning]
+related: [prompt-injection, hallucination, code-generation]
+match_terms: ["insecure code", "package hallucination"]
+discriminator: >-
+  Security properties of code the model writes, and of the dependencies it
+  recommends: injection-prone patterns, hardcoded secrets, unsafe
+  deserialization, and hallucinated or malicious packages. NOT in scope: the
+  general word "vulnerability" used to mean a model weakness or robustness
+  gap, which is ordinary English in this literature and not about generated
+  code.
+status: active
+submitted_by: human:Russ-Miller

@@ -1,0 +1,17 @@
+id: arxiv-2302-04761
+kind: paper
+title: "Toolformer: Language Models Can Teach Themselves to Use Tools"
+authors:
+  - "Timo Schick"
+  - "Jane Dwivedi-Yu"
+  - "Roberto Dess\u00ec"
+  - "et al."
+year: 2023
+arxiv_id: "2302.04761"
+url: https://arxiv.org/abs/2302.04761
+tags: [tool-use, training]
+ingested_at: 2026-09-02
+citations_total: 5422
+citations_recent_12mo: 1000
+citations_checked_at: 2026-09-04
+semantic_scholar_id: 53d128ea815bcc0526856eb5a9c42cc977cb36a7

@@ -1,0 +1,12 @@
+id: reversal-curse
+label: "Not generalizing \"A is B\" to \"B is A\""
+summary: "A model that learned a fact in one direction often cannot recall it when asked in the reverse direction."
+description: >-
+  A capable model that knows a relation between two entities can answer questions about it from either side, without needing to have seen both orderings in training.
+tags: [general, knowledge]
+aliases: ["directional recall", "asymmetric knowledge"]
+techniques: [reverse-training]
+related: [hallucination]
+match_terms: ["reversal curse", "directional recall"]
+status: active
+submitted_by: human:Russ-Miller

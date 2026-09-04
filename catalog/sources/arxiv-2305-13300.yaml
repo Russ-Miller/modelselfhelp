@@ -1,0 +1,17 @@
+id: arxiv-2305-13300
+kind: paper
+title: "Adaptive Chameleon or Stubborn Sloth: Revealing the Behavior of Large Language Models in Knowledge Conflicts"
+authors:
+  - "Jian Xie"
+  - "Kai Zhang"
+  - "Jiangjie Chen"
+  - "Renze Lou"
+  - "Yu Su"
+year: 2023
+arxiv_id: "2305.13300"
+url: https://arxiv.org/abs/2305.13300
+tags: [knowledge-conflict, rag]
+ingested_at: 2026-09-02
+citations_total: 382
+citations_recent_12mo: 148
+citations_checked_at: 2026-09-04

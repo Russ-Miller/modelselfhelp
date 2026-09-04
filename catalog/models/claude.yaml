@@ -1,0 +1,14 @@
+id: claude
+label: Claude
+vendor: Anthropic
+url: https://docs.anthropic.com/en/docs/about-claude/models
+versions:
+  - id: claude-2
+    label: Claude 2
+    released: 2023-07-11
+  - id: claude-3-opus
+    label: Claude 3 Opus
+    released: 2024-03-04
+  - id: claude-3-5-sonnet
+    label: Claude 3.5 Sonnet
+    released: 2024-06-20

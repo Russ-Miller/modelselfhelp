@@ -1,0 +1,14 @@
+id: models-readily-adopt-single-counter-memory-passage-when-coherent
+capability: fact-verification
+statement: >-
+  Models readily adopt a single counter-memory passage when it is coherent, and when sources conflict they follow the majority and show confirmation bias toward their own beliefs.
+kind: mechanism
+backing_strength: single-paper
+sources:
+  - source: arxiv-2305-13300
+    stance: supports
+    note: "Models readily adopt a single counter-memory passage when it is coherent, and when sources conflict they follow the majority and show confirmation bias toward their own beliefs."
+contested: false
+status: active
+last_checked_at: 2026-09-03
+submitted_by: human:Russ-Miller

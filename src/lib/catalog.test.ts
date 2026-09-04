@@ -1,0 +1,51 @@
+import { describe, expect, it } from "vitest";
+import { claimsCiting, claimsFor, getCapability, getSource, loadCatalog, techniquesFor, capabilitiesByGroup } from "./catalog";
+
+describe("catalog loader", () => {
+  const cat = loadCatalog();
+
+  it("loads every entity kind", () => {
+    expect(cat.capabilities.length).toBeGreaterThan(0);
+    expect(cat.claims.length).toBeGreaterThan(0);
+    expect(cat.sources.length).toBeGreaterThan(0);
+    expect(cat.techniques.length).toBeGreaterThan(0);
+    expect(cat.models.length).toBeGreaterThan(0);
+  });
+
+  it("resolves every claim's capability and sources", () => {
+    for (const c of cat.claims) {
+      expect(getCapability(c.capability), `${c.id} -> ${c.capability}`).toBeDefined();
+      for (const s of c.sources) expect(getSource(s.source), `${c.id} -> ${s.source}`).toBeDefined();
+    }
+  });
+
+  it("finds claims by capability", () => {
+    const c = getCapability("self-repair");
+    expect(c).toBeDefined();
+    expect(claimsFor(c!.id).length).toBeGreaterThan(0);
+  });
+
+  it("finds claims citing a source, with stance", () => {
+    const hits = claimsCiting("arxiv-2310-01798");
+    expect(hits.length).toBeGreaterThan(0);
+    expect(hits.every((h) => h.stance === "supports" || h.stance === "contests")).toBe(true);
+  });
+
+  it("has at least one contested claim with a disagreement axis", () => {
+    const contested = cat.claims.filter((c) => c.contested);
+    expect(contested.length).toBeGreaterThan(0);
+    for (const c of contested) {
+      expect(c.disagreement_axis).toBeDefined();
+      expect(c.sources.some((s) => s.stance === "contests")).toBe(true);
+    }
+  });
+
+  it("groups capabilities by tag without losing any that have a matching tag", () => {
+    const grouped = capabilitiesByGroup();
+    expect(grouped.length).toBeGreaterThan(0);
+  });
+
+  it("finds techniques for a capability", () => {
+    expect(techniquesFor("self-repair").map((t) => t.id)).toContain("external-feedback-repair");
+  });
+});

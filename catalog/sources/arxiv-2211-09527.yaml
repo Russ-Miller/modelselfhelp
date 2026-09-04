@@ -1,0 +1,15 @@
+id: arxiv-2211-09527
+kind: paper
+title: "Ignore Previous Prompt: Attack Techniques For Language Models"
+authors:
+  - "F\u00e1bio Perez"
+  - "Ian Ribeiro"
+year: 2022
+arxiv_id: "2211.09527"
+url: https://arxiv.org/abs/2211.09527
+tags: [prompt-injection]
+ingested_at: 2026-09-02
+citations_total: 1055
+citations_recent_12mo: 475
+citations_checked_at: 2026-09-04
+semantic_scholar_id: 9716a2876d08fce9d8e5c5ba4d7b1a9af44806d6

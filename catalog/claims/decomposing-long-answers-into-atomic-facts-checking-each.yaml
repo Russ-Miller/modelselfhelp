@@ -1,0 +1,14 @@
+id: decomposing-long-answers-into-atomic-facts-checking-each
+capability: hallucination
+statement: >-
+  Decomposing long answers into atomic facts and checking each with search catches most errors and beats human annotators on cost and agreement.
+kind: mechanism
+backing_strength: single-paper
+sources:
+  - source: arxiv-2403-18802
+    stance: supports
+    note: "Decomposing long answers into atomic facts and checking each with search catches most errors and beats human annotators on cost and agreement."
+contested: false
+status: active
+last_checked_at: 2026-09-03
+submitted_by: human:Russ-Miller

@@ -1,0 +1,16 @@
+id: reverse-training
+label: Train on reversed text
+summary: Include reversed word or entity sequences in pretraining so facts are learned in both directions.
+description: >-
+  Alongside normal text, train on versions where the order of words or of
+  entity spans is reversed. The model then sees "B is A" for every "A is B"
+  and the reversal effect largely disappears.
+addresses: [reversal-curse]
+kind: training
+sources: [arxiv-2403-13799]
+contexts: [general]
+requires: >-
+  A pretraining-time change; for a deployed model, retrieval is the
+  practical workaround.
+status: active
+submitted_by: human:Russ-Miller

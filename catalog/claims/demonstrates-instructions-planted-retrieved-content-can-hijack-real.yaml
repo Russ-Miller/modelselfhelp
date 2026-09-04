@@ -1,0 +1,14 @@
+id: demonstrates-instructions-planted-retrieved-content-can-hijack-real
+capability: prompt-injection
+statement: >-
+  Demonstrates that instructions planted in retrieved content can hijack real LLM-integrated applications for data theft and manipulation.
+kind: mechanism
+backing_strength: single-paper
+sources:
+  - source: arxiv-2302-12173
+    stance: supports
+    note: "Demonstrates that instructions planted in retrieved content can hijack real LLM-integrated applications for data theft and manipulation."
+contested: false
+status: active
+last_checked_at: 2026-09-03
+submitted_by: human:Russ-Miller

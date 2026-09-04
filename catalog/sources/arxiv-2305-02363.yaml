@@ -1,0 +1,15 @@
+id: arxiv-2305-02363
+kind: paper
+title: "Entity Tracking in Language Models"
+authors:
+  - "Najoung Kim"
+  - "Sebastian Schuster"
+year: 2023
+arxiv_id: "2305.02363"
+url: https://arxiv.org/abs/2305.02363
+tags: [state-tracking, reasoning]
+ingested_at: 2026-09-02
+citations_total: 43
+citations_recent_12mo: 14
+citations_checked_at: 2026-09-04
+semantic_scholar_id: 035d7fce7690d61df76d7479d294e697a4319b7a

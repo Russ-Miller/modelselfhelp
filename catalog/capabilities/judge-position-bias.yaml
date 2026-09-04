@@ -1,0 +1,12 @@
+id: judge-position-bias
+label: "Biased when judging other outputs"
+summary: "A model used as a judge favors whichever answer is shown first, longer answers, and its own outputs."
+description: >-
+  When scoring or ranking candidate answers, a capable judge gives the same verdict regardless of the order of candidates, their length, or which model produced them, and agrees with careful human raters.
+tags: [evaluation, llm-as-judge]
+aliases: ["LLM-as-judge bias", "position bias", "verbosity bias", "self-enhancement bias"]
+techniques: [position-swap-judging]
+related: [sycophancy]
+match_terms: ["llm-as-judge", "llm as a judge", "judge model", "position bias"]
+status: active
+submitted_by: human:Russ-Miller

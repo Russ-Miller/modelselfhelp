@@ -1,0 +1,12 @@
+id: sycophancy
+label: "Telling the user what they want to hear"
+summary: "Models shift answers toward the user's stated view, cave to pushback, and mirror mistaken premises."
+description: >-
+  A capable model gives the same answer regardless of the user's apparent opinion, holds a correct answer under pushback, and points out mistakes in a user's premise or work rather than praising it.
+tags: [behavior, chat-assistant, customer-support, llm-as-judge]
+aliases: ["flattery", "agreement bias", "caving to pushback"]
+techniques: [synthetic-desycophancy-training]
+related: [fact-verification, goal-conflict-safety, judge-position-bias]
+match_terms: ["sycophancy", "sycophantic"]
+status: active
+submitted_by: human:Russ-Miller

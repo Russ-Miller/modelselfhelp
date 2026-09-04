@@ -1,0 +1,14 @@
+id: position-embeddings-encode-digit-place-let-small-transformers
+capability: arithmetic
+statement: >-
+  Position embeddings that encode digit place let small transformers add 100-digit numbers, showing the limit is representational not fundamental.
+kind: mechanism
+backing_strength: single-paper
+sources:
+  - source: arxiv-2405-17399
+    stance: supports
+    note: "Position embeddings that encode digit place let small transformers add 100-digit numbers, showing the limit is representational not fundamental."
+contested: false
+status: active
+last_checked_at: 2026-09-03
+submitted_by: human:Russ-Miller

@@ -1,0 +1,16 @@
+id: arxiv-2305-18654
+kind: paper
+title: "Faith and Fate: Limits of Transformers on Compositionality"
+authors:
+  - "Nouha Dziri"
+  - "Ximing Lu"
+  - "Melanie Sclar"
+  - "et al."
+year: 2023
+arxiv_id: "2305.18654"
+url: https://arxiv.org/abs/2305.18654
+tags: [arithmetic, compositionality, reasoning]
+ingested_at: 2026-09-02
+citations_total: 690
+citations_recent_12mo: 229
+citations_checked_at: 2026-09-04

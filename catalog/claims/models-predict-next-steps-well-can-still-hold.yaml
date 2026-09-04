@@ -1,0 +1,14 @@
+id: models-predict-next-steps-well-can-still-hold
+capability: state-tracking
+statement: >-
+  Models that predict next steps well can still hold an incoherent implicit world model, which fails when the task deviates from familiar traces.
+kind: mechanism
+backing_strength: single-paper
+sources:
+  - source: arxiv-2406-03689
+    stance: supports
+    note: "Models that predict next steps well can still hold an incoherent implicit world model, which fails when the task deviates from familiar traces."
+contested: false
+status: active
+last_checked_at: 2026-09-03
+submitted_by: human:Russ-Miller

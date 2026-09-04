@@ -1,0 +1,14 @@
+id: observation-swebench-test-loop
+kind: observation
+title: "PLACEHOLDER — illustrative only, not a real logged observation"
+date: 2026-09-03
+summary: >-
+  THIS IS A TEMPLATE, not a genuine entry: it exists only to show the
+  shape an own-observation source would take (a title, a date, and a
+  summary of what was noticed — no authors, no URL, no arxiv_id). Replace
+  or delete before this becomes a real catalog entry. A real one would
+  read like: "Ran an agent on N SWE-bench-style tasks with no test
+  harness in the loop; on M of them it resubmitted a near-identical patch
+  after being told the change didn't work, with nothing but the raw
+  failure message and no structured signal to react to."
+tags: [self-correction, coding-agent]

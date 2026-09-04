@@ -1,0 +1,29 @@
+id: raw-llm-judges-show-position-bias-gpt-4
+capability: judge-position-bias
+statement: >-
+  As a raw pairwise judge with no order-swap mitigation, GPT-4 can have
+  its verdict flipped simply by swapping which candidate answer is shown
+  first; applying a position-swap protocol restores agreement with
+  careful human raters to close to human-human agreement levels.
+kind: observation
+backing_strength: replicated
+observed_on:
+  model: gpt
+  era: "2023, GPT-4 class"
+  task_type: llm-as-judge
+sources:
+  - source: arxiv-2305-17926
+    stance: supports
+    note: >-
+      Swapping the order of two candidate answers alone could flip GPT-4's
+      preference between them.
+  - source: arxiv-2306-05685
+    stance: supports
+    note: >-
+      Identifies the same position bias (plus verbosity and
+      self-enhancement bias) in strong judges, and shows that mitigating
+      it restores high agreement with human raters.
+contested: false
+status: active
+last_checked_at: 2026-09-03
+submitted_by: human:Russ-Miller

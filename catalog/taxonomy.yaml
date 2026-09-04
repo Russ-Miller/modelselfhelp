@@ -1,0 +1,63 @@
+# Soft, re-assignable vocabulary — a view over claims and capabilities,
+# not a rigid single-parent taxonomy. `groups` and `contexts` both feed
+# into `tags` on Capability and `tags`/`observed_on.task_type` on Claim.
+# Expect to re-carve this at least twice; ids are permanent once merged,
+# but what they mean and how content is tagged is free to evolve.
+
+groups:
+  - id: reasoning
+    label: Reasoning
+    description: Arithmetic, logic, planning, and compositional generalization.
+  - id: knowledge
+    label: Knowledge
+    description: Factual recall, verification, long-tail and time-sensitive facts.
+  - id: context
+    label: Context and memory
+    description: Using long inputs, tracking state through a task, and remembering across sessions.
+  - id: behavior
+    label: Behavior
+    description: Sycophancy, over-refusal, instruction following, calibration, and tone.
+  - id: agentic
+    label: Agentic
+    description: Tool use, procedure following, self-repair, and handling conflicting goals.
+  - id: security
+    label: Security
+    description: Prompt injection, insecure code, package hallucination, and data leakage.
+  - id: evaluation
+    label: Evaluation
+    description: Biases when models judge, benchmark contamination, and self-assessment.
+
+contexts:
+  - id: general
+    label: General
+    description: Observed regardless of task; use only when the capability is not context-specific.
+  - id: coding-agent
+    label: Coding agent
+    description: Editing, running and testing code in a repository over many steps.
+  - id: chat-assistant
+    label: Chat assistant
+    description: Conversational help for a human, single or multi-turn.
+  - id: rag-qa
+    label: Retrieval-augmented QA
+    description: Answering from supplied documents or search results.
+  - id: data-analysis
+    label: Data analysis
+    description: Working with tables, numbers, and computed results.
+  - id: math
+    label: Math
+    description: Word problems, symbolic math, and multi-step calculation.
+  - id: multilingual
+    label: Multilingual
+    description: Tasks in languages other than English or across languages.
+  - id: long-document
+    label: Long document
+    description: Inputs near the context limit; summarization, extraction, needle-in-haystack.
+  - id: llm-as-judge
+    label: LLM as judge
+    description: A model scoring or ranking other models' outputs.
+  - id: autonomous-agent
+    label: Autonomous agent
+    description: Long-horizon tasks with tools and minimal human oversight.
+  - id: customer-support
+    label: Customer support
+    description: Policy-bound conversations with real users and account actions.

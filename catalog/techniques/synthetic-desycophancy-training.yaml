@@ -1,0 +1,16 @@
+id: synthetic-desycophancy-training
+label: Fine-tune on opinion-irrelevant examples
+summary: Fine-tune on synthetic prompts where a stated user opinion must not change the answer.
+description: >-
+  Generate prompts that pair a factual question with a user's stated view,
+  where the correct answer is independent of that view, and fine-tune the
+  model to answer the same way regardless. A small amount of such data
+  reduces sycophancy without hurting other capabilities.
+addresses: [sycophancy]
+kind: training
+sources: [arxiv-2308-03958]
+contexts: [chat-assistant]
+requires: >-
+  Requires fine-tuning access.
+status: active
+submitted_by: human:Russ-Miller

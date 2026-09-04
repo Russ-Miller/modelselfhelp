@@ -1,0 +1,20 @@
+id: digit-position-embeddings
+label: Encode digit position in the model
+summary: Add positional embeddings that tell the model which place each digit occupies.
+description: >-
+  Abacus embeddings give every digit an embedding for its position within
+  the number, so alignment of digits across operands becomes trivial. Small
+  transformers trained this way generalize to numbers far longer than seen
+  in training.
+addresses: [arithmetic]
+kind: architecture
+sources: [arxiv-2405-17399]
+repos:
+  - url: https://github.com/mcleish7/arithmetic
+    note: Training and evaluation code for abacus embeddings.
+    verified_on: 2026-09-02
+contexts: [math]
+requires: >-
+  A training-time change; not applicable to a model you cannot retrain.
+status: active
+submitted_by: human:Russ-Miller

@@ -1,0 +1,12 @@
+id: long-context-degradation
+label: "Losing information in long inputs"
+summary: "Accuracy drops as inputs grow and is worst for information placed in the middle of the context."
+description: >-
+  A capable model uses every part of a long input equally well, up to its advertised context length, and its reasoning does not degrade as irrelevant material is added.
+tags: [coding-agent, context, long-document, rag-qa]
+aliases: ["lost in the middle", "needle in a haystack", "effective context length"]
+techniques: [reorder-context-by-relevance]
+related: [context-hygiene, state-tracking]
+match_terms: ["long context", "long-context", "context window"]
+status: active
+submitted_by: human:Russ-Miller

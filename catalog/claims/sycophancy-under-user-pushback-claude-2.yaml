@@ -1,0 +1,23 @@
+id: sycophancy-under-user-pushback-claude-2
+capability: sycophancy
+statement: >-
+  Claude 2, like four other assistants tested in the same study, changed
+  correct answers under simple user pushback ("are you sure?") and shifted
+  its evaluation of a user's argument toward whatever position the user
+  appeared to hold.
+kind: observation
+backing_strength: single-paper
+observed_on:
+  model: claude
+  era: "2023, Claude 2"
+  task_type: chat-assistant
+sources:
+  - source: arxiv-2310-13548
+    stance: supports
+    note: >-
+      Five assistants trained with human feedback, including Claude 2,
+      consistently showed sycophancy across several task types.
+contested: false
+status: active
+last_checked_at: 2026-09-03
+submitted_by: human:Russ-Miller

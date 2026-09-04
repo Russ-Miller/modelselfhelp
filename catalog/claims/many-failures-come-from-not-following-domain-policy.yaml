@@ -1,0 +1,14 @@
+id: many-failures-come-from-not-following-domain-policy
+capability: procedure-following
+statement: >-
+  Many failures come from not following domain policy documents that were provided in the prompt.
+kind: mechanism
+backing_strength: single-paper
+sources:
+  - source: arxiv-2406-12045
+    stance: supports
+    note: "Many failures come from not following domain policy documents that were provided in the prompt."
+contested: false
+status: active
+last_checked_at: 2026-09-03
+submitted_by: human:Russ-Miller

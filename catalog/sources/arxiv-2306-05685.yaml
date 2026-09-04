@@ -1,0 +1,18 @@
+id: arxiv-2306-05685
+kind: paper
+title: "Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena"
+authors:
+  - "Lianmin Zheng"
+  - "Wei-Lin Chiang"
+  - "Ying Sheng"
+  - "et al."
+year: 2023
+arxiv_id: "2306.05685"
+url: https://arxiv.org/abs/2306.05685
+tags: [llm-as-judge, benchmark]
+code_url: https://github.com/lm-sys/FastChat
+ingested_at: 2026-09-02
+citations_total: 10936
+citations_recent_12mo: 1000
+citations_checked_at: 2026-09-04
+semantic_scholar_id: a0a79dad89857a96f8f71b14238e5237cbfc4787

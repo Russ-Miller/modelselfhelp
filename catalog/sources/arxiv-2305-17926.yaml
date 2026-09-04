@@ -1,0 +1,16 @@
+id: arxiv-2305-17926
+kind: paper
+title: "Large Language Models are not Fair Evaluators"
+authors:
+  - "Peiyi Wang"
+  - "Lei Li"
+  - "Liang Chen"
+  - "et al."
+year: 2023
+arxiv_id: "2305.17926"
+url: https://arxiv.org/abs/2305.17926
+tags: [llm-as-judge, position-bias]
+ingested_at: 2026-09-02
+citations_total: 1242
+citations_recent_12mo: 506
+citations_checked_at: 2026-09-04

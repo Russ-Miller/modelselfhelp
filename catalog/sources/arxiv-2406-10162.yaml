@@ -1,0 +1,17 @@
+id: arxiv-2406-10162
+kind: paper
+title: "Sycophancy to Subterfuge: Investigating Reward-Tampering in Large Language Models"
+authors:
+  - "Carson Denison"
+  - "Monte MacDiarmid"
+  - "Fazl Barez"
+  - "et al."
+year: 2024
+arxiv_id: "2406.10162"
+url: https://arxiv.org/abs/2406.10162
+tags: [safety, reward-hacking]
+ingested_at: 2026-09-02
+citations_total: 158
+citations_recent_12mo: 89
+citations_checked_at: 2026-09-04
+semantic_scholar_id: 8d5bc0b0ddca8740e4bec70231b7f0d12ded3d5d

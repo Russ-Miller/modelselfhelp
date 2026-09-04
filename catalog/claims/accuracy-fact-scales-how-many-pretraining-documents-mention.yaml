@@ -1,0 +1,14 @@
+id: accuracy-fact-scales-how-many-pretraining-documents-mention
+capability: hallucination
+statement: >-
+  Accuracy on a fact scales with how many pretraining documents mention it, so long-tail facts are systematically unreliable.
+kind: mechanism
+backing_strength: single-paper
+sources:
+  - source: arxiv-2211-08411
+    stance: supports
+    note: "Accuracy on a fact scales with how many pretraining documents mention it, so long-tail facts are systematically unreliable."
+contested: false
+status: active
+last_checked_at: 2026-09-03
+submitted_by: human:Russ-Miller

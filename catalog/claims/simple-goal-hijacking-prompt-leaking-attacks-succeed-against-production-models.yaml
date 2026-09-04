@@ -1,0 +1,14 @@
+id: simple-goal-hijacking-prompt-leaking-attacks-succeed-against-production-models
+capability: prompt-injection
+statement: >-
+  Simple goal-hijacking and prompt-leaking attacks succeed against production models with short adversarial strings.
+kind: mechanism
+backing_strength: single-paper
+sources:
+  - source: arxiv-2211-09527
+    stance: supports
+    note: "Simple goal-hijacking and prompt-leaking attacks succeed against production models with short adversarial strings."
+contested: false
+status: active
+last_checked_at: 2026-09-03
+submitted_by: human:Russ-Miller

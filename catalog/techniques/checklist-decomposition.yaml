@@ -1,0 +1,14 @@
+id: checklist-decomposition
+label: Turn the procedure into a checklist
+summary: Convert constraints and steps into an explicit checklist the model must tick off before finishing.
+description: >-
+  Before starting, have the model restate every constraint and step as a
+  numbered checklist. Before finishing, have it walk the list and mark each
+  item as done with evidence. Long instructions become verifiable items,
+  which reduces silent drift on multi-constraint tasks.
+addresses: [procedure-following]
+kind: process
+sources: [arxiv-2311-07911]
+contexts: [coding-agent, autonomous-agent, customer-support]
+status: active
+submitted_by: human:Russ-Miller

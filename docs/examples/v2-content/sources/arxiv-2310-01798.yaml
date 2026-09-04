@@ -1,0 +1,13 @@
+id: arxiv-2310-01798
+kind: paper
+title: "Large Language Models Cannot Self-Correct Reasoning Yet"
+authors: ["Jie Huang", "Xinyun Chen", "Swaroop Mishra", "Huaixiu Steven Zheng", "Adams Wei Yu", "Xinying Song", "Denny Zhou"]
+year: 2023
+arxiv_id: "2310.01798"
+url: https://arxiv.org/abs/2310.01798
+summary: >-
+  Asking a model to review and revise its own reasoning, with no external
+  feedback, does not improve accuracy on reasoning benchmarks and often
+  degrades it — the model's own confidence isn't a reliable proxy for
+  correctness.
+tags: [self-correction, reasoning]

@@ -1,0 +1,14 @@
+id: commercial-assistants-show-large-accuracy-drop-when-relevant
+capability: long-term-memory
+statement: >-
+  Commercial assistants show a large accuracy drop when the relevant information sits in a long interaction history, especially for updates and multi-session reasoning.
+kind: mechanism
+backing_strength: single-paper
+sources:
+  - source: arxiv-2410-10813
+    stance: supports
+    note: "Commercial assistants show a large accuracy drop when the relevant information sits in a long interaction history, especially for updates and multi-session reasoning."
+contested: false
+status: active
+last_checked_at: 2026-09-03
+submitted_by: human:Russ-Miller

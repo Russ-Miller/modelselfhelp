@@ -1,0 +1,12 @@
+id: procedure-following
+label: "Following an unfamiliar procedure"
+summary: "Models drift from a new multi-step procedure or set of constraints back to familiar routines."
+description: >-
+  When a task comes with explicit instructions, constraints, or a step-by-step workflow the model has not seen in training, a capable model follows it exactly, honors every constraint at once, and does not substitute a familiar but different routine.
+tags: [agentic, autonomous-agent, chat-assistant, coding-agent, customer-support]
+aliases: ["instruction following", "constraint adherence", "workflow compliance"]
+techniques: [checklist-decomposition]
+related: [tool-use, sycophancy]
+match_terms: ["instruction following", "instruction-following", "constraint satisfaction"]
+status: active
+submitted_by: human:Russ-Miller

@@ -1,0 +1,16 @@
+id: arxiv-2005-11401
+kind: paper
+title: "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks"
+authors:
+  - "Patrick Lewis"
+  - "Ethan Perez"
+  - "Aleksandra Piktus"
+  - "et al."
+year: 2020
+arxiv_id: "2005.11401"
+url: https://arxiv.org/abs/2005.11401
+tags: [rag, retrieval]
+ingested_at: 2026-09-02
+citations_total: 17840
+citations_recent_12mo: 1000
+citations_checked_at: 2026-09-04

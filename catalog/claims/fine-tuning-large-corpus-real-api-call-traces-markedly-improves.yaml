@@ -1,0 +1,14 @@
+id: fine-tuning-large-corpus-real-api-call-traces-markedly-improves
+capability: tool-use
+statement: >-
+  Fine-tuning on a large corpus of real API-call traces markedly improves multi-tool task completion in open models.
+kind: mechanism
+backing_strength: single-paper
+sources:
+  - source: arxiv-2307-16789
+    stance: supports
+    note: "Fine-tuning on a large corpus of real API-call traces markedly improves multi-tool task completion in open models."
+contested: false
+status: active
+last_checked_at: 2026-09-03
+submitted_by: human:Russ-Miller

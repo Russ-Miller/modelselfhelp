@@ -1,0 +1,13 @@
+id: recursive-summarization
+label: Maintain a running summary
+summary: Periodically fold the conversation into a summary that replaces older turns.
+description: >-
+  Every few turns, have the model update a running summary with new facts
+  and decisions, then drop the raw turns it covers. The summary stays in
+  context; the details are archived and retrievable.
+addresses: [long-term-memory]
+kind: prompting
+sources: [arxiv-2308-15022]
+contexts: [chat-assistant, customer-support]
+status: active
+submitted_by: human:Russ-Miller

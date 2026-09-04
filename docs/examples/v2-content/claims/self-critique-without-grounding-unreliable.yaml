@@ -1,0 +1,27 @@
+id: self-critique-without-grounding-unreliable
+capability: self-repair
+statement: >-
+  Without an external, ground-truth signal — a failing test, a compiler
+  error, a verifier's output — a model's own critique of its reasoning is
+  not a reliable improvement signal, and asking it to review and revise a
+  correct answer often turns it into a wrong one.
+tags: [reasoning, math]
+kind: mechanism
+backing_strength: single-paper
+observed_on:
+  era: "2023, GPT-3.5/GPT-4 class reasoning benchmarks"
+sources:
+  - source: arxiv-2310-01798
+    stance: supports
+    note: >-
+      Intrinsic self-correction (review-and-revise with no external
+      feedback) did not improve accuracy on GSM8K or CommonSenseQA and
+      often degraded it.
+contested: false
+status: active
+last_checked_at: 2026-09-03
+notes: >-
+  Single-paper strength is honest here — this is widely cited and
+  discussed, but I don't yet have an independent replication specifically
+  isolating the no-feedback condition the way this paper does.
+submitted_by: human:Russ-Miller

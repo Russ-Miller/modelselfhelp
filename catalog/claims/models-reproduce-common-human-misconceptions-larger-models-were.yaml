@@ -1,0 +1,14 @@
+id: models-reproduce-common-human-misconceptions-larger-models-were
+capability: hallucination
+statement: >-
+  Models reproduce common human misconceptions, and larger models were not more truthful on this benchmark.
+kind: mechanism
+backing_strength: single-paper
+sources:
+  - source: arxiv-2109-07958
+    stance: supports
+    note: "Models reproduce common human misconceptions, and larger models were not more truthful on this benchmark."
+contested: false
+status: active
+last_checked_at: 2026-09-03
+submitted_by: human:Russ-Miller

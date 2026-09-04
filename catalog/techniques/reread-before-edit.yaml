@@ -1,0 +1,13 @@
+id: reread-before-edit
+label: Re-read before editing
+summary: Force the agent to read the current version of a file immediately before changing it.
+description: >-
+  The harness rejects an edit unless the file was read after its last
+  modification, and edits are expressed as exact-match replacements that
+  fail if the text has changed. Stale state then causes a visible failure
+  instead of a silent bad edit.
+addresses: [state-tracking]
+kind: process
+contexts: [coding-agent]
+status: active
+submitted_by: human:Russ-Miller

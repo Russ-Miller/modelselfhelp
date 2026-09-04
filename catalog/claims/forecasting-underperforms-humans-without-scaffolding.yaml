@@ -1,0 +1,29 @@
+id: forecasting-underperforms-humans-without-scaffolding
+capability: forecasting
+statement: >-
+  Without added retrieval infrastructure, language models underperform
+  human experts at forecasting real-world events from a benchmark of
+  actual forecasting-tournament questions, though accuracy improves with
+  model scale and access to relevant news context.
+tags: [reasoning]
+kind: observation
+backing_strength: single-paper
+observed_on:
+  era: "2022, pre-GPT-4-era models"
+  task_type: general
+sources:
+  - source: arxiv-2206-15474
+    stance: supports
+    note: >-
+      Introduced the Autocast forecasting benchmark; models underperform
+      human experts, but accuracy scales with model size and access to
+      relevant news.
+contested: false
+status: active
+last_checked_at: 2026-09-04
+notes: >-
+  Not contested by the 2024 scaffolded result above — different eras and
+  setups, showing a real progression over time rather than a
+  disagreement. A clean example of why claims need a date and an era, not
+  a single timeless verdict.
+submitted_by: human:Russ-Miller

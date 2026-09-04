@@ -1,0 +1,22 @@
+id: external-feedback-repair
+label: Repair with external feedback
+summary: Give the model a concrete external signal, such as test output, and let it reflect and retry.
+description: >-
+  Instead of asking the model to review its own answer, run the answer
+  against something that can fail: unit tests, a compiler, a verifier, or
+  an environment. Feed the failure back, have the model write a short
+  reflection on what went wrong, and retry with that reflection in context.
+  Bound the number of attempts and stop when the signal stops changing.
+addresses: [self-repair]
+kind: process
+sources: [arxiv-2303-11366, arxiv-2303-17651, arxiv-2310-01798]
+repos:
+  - url: https://github.com/noahshinn/reflexion
+    note: Reflexion reference implementation for coding and decision tasks.
+    verified_on: 2026-09-02
+  - url: https://github.com/madaan/self-refine
+    note: Self-Refine prompts and evaluation harness.
+    verified_on: 2026-09-02
+contexts: [coding-agent, math, autonomous-agent]
+status: active
+submitted_by: human:Russ-Miller

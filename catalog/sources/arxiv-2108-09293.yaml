@@ -1,0 +1,18 @@
+id: arxiv-2108-09293
+kind: paper
+title: "Asleep at the Keyboard? Assessing the Security of GitHub Copilot's Code Contributions"
+authors:
+  - "Hammond Pearce"
+  - "Baleegh Ahmad"
+  - "Benjamin Tan"
+  - "Brendan Dolan-Gavitt"
+  - "Ramesh Karri"
+year: 2021
+arxiv_id: "2108.09293"
+url: https://arxiv.org/abs/2108.09293
+tags: [secure-coding]
+ingested_at: 2026-09-02
+citations_total: 952
+citations_recent_12mo: 413
+citations_checked_at: 2026-09-04
+semantic_scholar_id: 6e5eb6167d9766fbb4d14611d15cf95d7b75fb9d

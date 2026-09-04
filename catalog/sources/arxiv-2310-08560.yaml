@@ -1,0 +1,14 @@
+id: arxiv-2310-08560
+kind: paper
+title: "MemGPT: Towards LLMs as Operating Systems"
+authors:
+  - "Charles Packer"
+  - "Sarah Wooders"
+  - "Kevin Lin"
+  - "et al."
+year: 2023
+arxiv_id: "2310.08560"
+url: https://arxiv.org/abs/2310.08560
+tags: [memory, architecture]
+code_url: https://github.com/letta-ai/letta
+ingested_at: 2026-09-02

@@ -1,0 +1,18 @@
+id: arxiv-2312-04724
+kind: paper
+title: "Purple Llama CyberSecEval: A Secure Coding Benchmark for Language Models"
+authors:
+  - "Manish Bhatt"
+  - "Sahana Chennabasappa"
+  - "Cyrus Nikolaidis"
+  - "et al."
+year: 2023
+arxiv_id: "2312.04724"
+url: https://arxiv.org/abs/2312.04724
+tags: [secure-coding, benchmark]
+code_url: https://github.com/meta-llama/PurpleLlama
+ingested_at: 2026-09-02
+citations_total: 180
+citations_recent_12mo: 73
+citations_checked_at: 2026-09-04
+semantic_scholar_id: ea07b2e1a910defdcac01a47a152b6ad87e02ed4

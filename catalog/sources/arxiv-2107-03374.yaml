@@ -1,0 +1,23 @@
+id: arxiv-2107-03374
+kind: paper
+title: "Evaluating Large Language Models Trained on Code"
+authors:
+  - "Mark Chen"
+  - "Jerry Tworek"
+  - "Heewoo Jun"
+  - "Qiming Yuan"
+  - "et al."
+year: 2021
+arxiv_id: "2107.03374"
+url: https://arxiv.org/abs/2107.03374
+summary: >-
+  Introduces HumanEval and Codex: measures functional correctness of
+  generated code by running held-out tests, rather than surface
+  similarity to a reference solution, establishing that as the standard
+  way to grade code generation.
+tags: [code-generation, reasoning]
+ingested_at: 2026-09-04
+citations_total: 11293
+citations_recent_12mo: 1000
+citations_checked_at: 2026-09-04
+semantic_scholar_id: acbdbf49f9bc3f151b93d9ca9a06009f4f6eb269

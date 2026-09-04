@@ -1,0 +1,28 @@
+id: arxiv-2206-15474
+kind: paper
+title: "Forecasting Future World Events with Neural Networks"
+authors:
+  - "Andy Zou"
+  - "Tristan Xiao"
+  - "Ryan Jia"
+  - "Joe Kwon"
+  - "Mantas Mazeika"
+  - "Richard Li"
+  - "Dawn Song"
+  - "Jacob Steinhardt"
+  - "Owain Evans"
+  - "Dan Hendrycks"
+year: 2022
+arxiv_id: "2206.15474"
+url: https://arxiv.org/abs/2206.15474
+summary: >-
+  Introduces Autocast, a dataset of real forecasting-tournament questions
+  with an accompanying news corpus. Pre-GPT-4-era language models
+  underperform human experts, with accuracy improving with model scale
+  and access to relevant news context.
+tags: [forecasting, reasoning]
+ingested_at: 2026-09-04
+citations_total: 68
+citations_recent_12mo: 33
+citations_checked_at: 2026-09-04
+semantic_scholar_id: 2a85c44afeeeb336c5eafcd4001ccb033d3d1f1c

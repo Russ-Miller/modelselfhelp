@@ -1,0 +1,13 @@
+id: context-hygiene
+label: "Keeping its own context clean"
+summary: "Agents fill their working context with re-read files, restated notes, and excess documentation until quality degrades."
+description: >-
+  Over a long task, a capable agent keeps only relevant material in its working context, summarizes what it has learned instead of re-reading it, and writes notes and documentation in proportion to their value.
+tags: [autonomous-agent, coding-agent, context]
+parent: long-context-degradation
+aliases: ["context management", "over-documentation", "context bloat"]
+techniques: [hierarchical-memory]
+related: [long-context-degradation, long-term-memory]
+match_terms: ["context management", "context bloat", "context pollution"]
+status: active
+submitted_by: human:Russ-Miller

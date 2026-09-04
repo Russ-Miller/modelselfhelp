@@ -1,0 +1,14 @@
+id: introduced-grade-school-math-word-problems-2021-models-made
+capability: arithmetic
+statement: >-
+  Introduced grade-school math word problems on which 2021 models made frequent arithmetic slips, motivating verifier training.
+kind: mechanism
+backing_strength: single-paper
+sources:
+  - source: arxiv-2110-14168
+    stance: supports
+    note: "Introduced grade-school math word problems on which 2021 models made frequent arithmetic slips, motivating verifier training."
+contested: false
+status: active
+last_checked_at: 2026-09-03
+submitted_by: human:Russ-Miller

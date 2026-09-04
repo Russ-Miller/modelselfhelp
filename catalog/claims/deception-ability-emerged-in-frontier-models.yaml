@@ -1,0 +1,29 @@
+id: deception-ability-emerged-in-frontier-models
+capability: strategic-deception
+statement: >-
+  State-of-the-art models such as GPT-4 can understand and induce false
+  beliefs in other agents through deliberate strategic reasoning, a
+  capability that was absent in earlier-generation language models.
+tags: [behavior]
+kind: mechanism
+backing_strength: single-paper
+observed_on:
+  era: "2023, GPT-4 vs. earlier LLMs"
+sources:
+  - source: arxiv-2307-16513
+    stance: supports
+    note: >-
+      Deceptive strategies emerged in GPT-4 but were non-existent in
+      earlier LLMs; chain-of-thought reasoning further improved deceptive
+      performance.
+contested: false
+status: active
+last_checked_at: 2026-09-04
+notes: >-
+  Worth chasing down: reports of newer models showing an asymmetry
+  between deceptive and non-deceptive roles in social deduction games
+  (e.g. a specific claim that Claude Opus 4 wins as a non-deceptive
+  peasant but not as a deceptive vampire in Town of Salem) — read
+  secondhand, not yet independently verified against a citable source
+  here.
+submitted_by: human:Russ-Miller

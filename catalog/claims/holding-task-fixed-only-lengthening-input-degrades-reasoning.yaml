@@ -1,0 +1,14 @@
+id: holding-task-fixed-only-lengthening-input-degrades-reasoning
+capability: long-context-degradation
+statement: >-
+  Holding the task fixed and only lengthening the input degrades reasoning long before the context limit is reached.
+kind: mechanism
+backing_strength: single-paper
+sources:
+  - source: arxiv-2402-14848
+    stance: supports
+    note: "Holding the task fixed and only lengthening the input degrades reasoning long before the context limit is reached."
+contested: false
+status: active
+last_checked_at: 2026-09-03
+submitted_by: human:Russ-Miller
