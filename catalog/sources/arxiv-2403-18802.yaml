@@ -12,3 +12,6 @@ url: https://arxiv.org/abs/2403.18802
 tags: [factuality, evaluation, tooling]
 code_url: https://github.com/google-deepmind/long-form-factuality
 ingested_at: 2026-09-02
+citations_total: 167
+citations_recent_12mo: 75
+citations_checked_at: 2026-09-04
