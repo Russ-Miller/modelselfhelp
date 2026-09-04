@@ -234,11 +234,29 @@ version+date+context triple a claim must supply the way the old
 score-bearing Claim did.
 
 ### Technique  (`catalog/techniques/<id>.yaml`)
-Mostly unchanged: `id`, `label`, `summary`, `description`, `addresses`
-(capability slugs), `kind` (`prompting`/`retrieval`/`tooling`/`training`/
-`decoding`/`architecture`/`process`), `sources` (source slugs — renamed
-from `papers`), `repos` (`{url, note, verified_on?}`), `contexts`,
-`caveats`, `status`, `submitted_by`.
+`id`, `label`, `summary`, `description`, `addresses` (capability slugs),
+`kind` (`prompting`/`retrieval`/`tooling`/`training`/`decoding`/
+`architecture`/`process`), `sources` (source slugs — renamed from
+`papers`), `repos` (`{url, note, verified_on?}`), `contexts`, `requires`,
+`evidence_search?`, `status`, `submitted_by`.
+
+A Technique describes *what it is*, never whether it works — that is a
+Claim carrying `technique`. Two fields exist to keep that boundary from
+eroding:
+
+- **`requires`** is prerequisites and applicability ("needs fine-tuning
+  access", "needs a sandboxed interpreter"). It replaced `caveats`, which
+  had been mixing prerequisites with unsourced efficacy assertions.
+- **`evidence_search`** (`{searched_on, note, nearest_miss?}`) records
+  having *looked* for efficacy evidence and come up empty. Each
+  `nearest_miss` is `{source? | title? | url?, why_it_does_not_fit}`.
+  This is what makes an absence usable: "searched, still open, and here
+  is the nearest paper and why it isn't support" is a research brief,
+  where a technique with no claims and no search is only an unchecked box
+  in *this* catalog and says nothing about the literature. The two states
+  must never be displayed as the same thing — see §7.
+
+`status` is `active`/`superseded`: record lifecycle, not a verdict.
 
 ### Contribution provenance (§8)
 Every record still carries `submitted_by`, format `human:<handle>` or
@@ -315,6 +333,31 @@ capability or claim must belong to. Expect to re-carve this at least
 twice as real content accumulates; because claims (and capabilities) are
 the primary objects and tags are just labels on them, re-carving is a
 re-tagging exercise, not a migration.
+
+### Open questions (`/open-questions`)
+A derived view, not stored state: techniques in the catalog that no claim
+measures. It exists because the gap *is* content — a technique in wide use
+with nothing behind it is the most actionable thing here — but it is only
+useful if it distinguishes three states that look identical in a bare
+count:
+
+1. **Searched, still open.** `evidence_search` is present. Someone looked,
+   found nothing that isolates the technique, and wrote down what they
+   looked for and which near-miss paper failed to support it and why. This
+   is the section that is genuinely about the literature.
+2. **Not yet searched.** No claims, no search. Evidence about *this
+   catalog* only. Advertising these as unstudied would be the same
+   unfalsifiable move as the old `status: accepted` — an assertion nobody
+   can check — just inverted.
+3. **Argued, not measured.** Every efficacy claim rests on
+   `mechanism-reasoning`: believed for a structural reason, never
+   quantified. A weaker opening than silence, and the easiest to mistake
+   for settled.
+
+The ordering is deliberate and so is the labelling. Collapsing 1 and 2
+into "no research exists" would manufacture research opportunities out of
+gaps in my own reading, which is precisely the failure this project is
+supposed to make visible.
 
 ## 8. Site (progressive disclosure)
 

@@ -11,3 +11,24 @@ kind: process
 contexts: [coding-agent]
 status: active
 submitted_by: human:Russ-Miller
+evidence_search:
+  searched_on: 2026-09-04
+  note: >-
+    Looked for a controlled study isolating the harness rule itself:
+    rejecting an edit unless the file was read after its last modification,
+    with exact-match replacement so a changed file fails loudly. Found
+    nothing that separates this from the surrounding agent scaffold. The
+    adjacent literature is about context efficiency and repository
+    exploration, which is a different intervention — it changes what the
+    agent reads, not whether a stale read can be acted on. The measurable
+    question is narrow and cheap to run: rate of silently wrong edits with
+    and without the read-recency precondition, on the same task set.
+  nearest_miss:
+    - title: "FastContext: Training Efficient Repository Explorer for Coding Agents"
+      url: https://arxiv.org/abs/2606.14066
+      why_it_does_not_fit: >-
+        Deploys a separate exploration subagent to cut token spend and keep
+        the solver's context clean, and reports end-to-end resolution gains.
+        It never isolates stale-read edits, and its intervention is about
+        what gets read rather than about refusing to act on an outdated
+        read. Citing it here would look like support without being any.

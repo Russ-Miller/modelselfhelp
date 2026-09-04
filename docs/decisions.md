@@ -397,3 +397,36 @@ Likewise embodied-control is not tool-use. A tool call succeeds or
 returns an error; a knocked-over object stays knocked over.
 Irreversibility and continuous partial state are what make it a distinct
 problem.
+
+## 2026-09-04 — An unbacked technique is a research brief, but only if someone looked
+Clearing the efficacy backlog left one technique — `reread-before-edit` —
+with no supporting study, and a supplied citation (FastContext) that was
+a real paper on an adjacent subject and would have read as support
+without being any. Rejecting it raised the better question: a technique
+nobody has measured is an opportunity, and the app should say so.
+
+The trap is that "no efficacy claim" has three causes that look identical
+in the data. Genuinely unstudied. Studied, but I haven't found it. Or
+argued from mechanism and never quantified. Only the first is a research
+opportunity, and a count of zero cannot tell them apart — so a view that
+lumped them would assert "nobody has researched this" with nothing behind
+it. That is the same unfalsifiable move as the `status: accepted` field
+this catalog already deleted, run in reverse.
+
+What makes the absence real is recording the search. New optional
+`evidence_search` on Technique: `searched_on`, a `note` saying what was
+looked for, and `nearest_miss` entries pairing a paper with why it does
+not fit. `reread-before-edit` now carries the FastContext dead end and a
+sketch of the experiment that would settle it — rate of silently wrong
+edits with and without the read-recency precondition, same task set.
+
+`/open-questions` derives the rest: 1 searched-and-open, 9 not yet
+searched, 3 argued-not-measured. Nothing new is stored for sections 2 and
+3; they fall out of claims that already exist. The section headings carry
+the distinction rather than a tooltip, because the whole value of the
+page is that the three states are not the same claim.
+
+This also gives the gamification idea from docs/reputation-notes.md a
+unit that resists gaming: an open question with a documented search
+behind it is something a person can actually close, and closing one is
+checkable in a way that "contributed a citation" is not.

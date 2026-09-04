@@ -38,10 +38,41 @@ export default async function TechniquePage({ params }: PageProps<"/techniques/[
         {(() => {
           const efficacy = claimsAboutTechnique(t.id);
           return efficacy.length === 0 ? (
-            <p className="text-sm text-neutral-500">
-              No efficacy claim filed yet. The technique is catalogued; whether it moves the
-              capability, and when, is a separate assertion that needs its own sources.
-            </p>
+            <div className="space-y-3">
+              <p className="text-sm text-neutral-500">
+                No efficacy claim filed yet. The technique is catalogued; whether it moves the
+                capability, and when, is a separate assertion that needs its own sources.
+              </p>
+              {t.evidence_search ? (
+                <div className="space-y-2 border-l-2 border-neutral-300 pl-3 dark:border-neutral-700">
+                  <div className="text-xs font-medium uppercase tracking-wide text-neutral-500">
+                    Searched, still open
+                  </div>
+                  <p className="text-sm text-neutral-700 dark:text-neutral-300">{t.evidence_search.note}</p>
+                  {t.evidence_search.nearest_miss?.map((m, i) => {
+                    const ms = m.source ? getSource(m.source) : undefined;
+                    const title = ms?.title ?? m.title ?? m.source;
+                    const href = ms ? `/sources/${ms.id}` : m.url;
+                    return (
+                      <div key={i} className="text-sm">
+                        <div className="text-xs font-medium uppercase tracking-wide text-neutral-500">Nearest miss</div>
+                        {href ? <a href={href} className="hover:underline">{title}</a> : <span>{title}</span>}
+                        <p className="text-neutral-600 dark:text-neutral-400">{m.why_it_does_not_fit}</p>
+                      </div>
+                    );
+                  })}
+                  <p className="text-xs text-neutral-500">
+                    searched {t.evidence_search.searched_on} &middot;{" "}
+                    <Link href="/open-questions" className="hover:underline">see open questions</Link>
+                  </p>
+                </div>
+              ) : (
+                <p className="text-xs text-neutral-500">
+                  No search recorded either, so this says nothing about the literature &mdash; only
+                  that nobody has looked here yet.
+                </p>
+              )}
+            </div>
           ) : (
             <ul className="space-y-2">
               {efficacy.map((claim) => (

@@ -52,12 +52,18 @@ export interface Claim {
   last_checked_at: string; last_new_evidence_at?: string; notes?: string; submitted_by: string;
 }
 export interface Repo { url: string; note: string; verified_on?: string }
+export interface NearestMiss { source?: string; title?: string; url?: string; why_it_does_not_fit: string }
+/** A record of having looked for efficacy evidence and come up empty. Absent
+ *  means nobody has looked -- a different state from a documented dead end,
+ *  and the whole point of the distinction. */
+export interface EvidenceSearch { searched_on: string; note: string; nearest_miss?: NearestMiss[] }
 export interface Technique {
   id: string; label: string; summary: string; description: string; addresses: string[];
   kind: "prompting" | "retrieval" | "tooling" | "training" | "decoding" | "architecture" | "process";
   sources?: string[]; repos?: Repo[]; contexts?: string[];
   /** Prerequisites and applicability -- what you need to use it. Never efficacy. */
   requires?: string;
+  evidence_search?: EvidenceSearch;
   status: TechniqueStatus; submitted_by: string;
 }
 export interface ModelVersion { id: string; label: string; released?: string }
@@ -171,4 +177,32 @@ export function isQuietSource(s: Source): boolean {
   const pubYear = s.year ?? (s.date ? Number(s.date.slice(0, 4)) : undefined);
   const age = pubYear ? new Date().getFullYear() - pubYear : 0;
   return (s.citations_recent_12mo ?? 0) === 0 && age >= 2;
+}
+
+/**
+ * Techniques with no efficacy claim behind them, split by whether anyone has
+ * actually looked. The distinction is the point: an empty cell can mean the
+ * literature is silent or only that this catalog is. A documented search is a
+ * negative result with provenance and reads as a research brief; no search is
+ * just an unchecked box, and the view must not advertise the second as the
+ * first.
+ */
+export type OpenKind = "searched" | "unsearched" | "asserted-not-measured";
+export interface OpenQuestion { technique: Technique; kind: OpenKind; claims: Claim[] }
+
+export function openQuestions(): OpenQuestion[] {
+  const rank: Record<OpenKind, number> = { searched: 0, unsearched: 1, "asserted-not-measured": 2 };
+  const out: OpenQuestion[] = [];
+  for (const technique of loadCatalog().techniques) {
+    if (technique.status !== "active") continue;
+    const claims = claimsAboutTechnique(technique.id);
+    if (claims.length === 0) {
+      out.push({ technique, kind: technique.evidence_search ? "searched" : "unsearched", claims });
+    } else if (claims.every((c) => c.backing_strength === "mechanism-reasoning")) {
+      // Believed for a structural reason, never measured. A weaker opening
+      // than silence, but still an opening.
+      out.push({ technique, kind: "asserted-not-measured", claims });
+    }
+  }
+  return out.sort((a, b) => rank[a.kind] - rank[b.kind] || a.technique.label.localeCompare(b.technique.label));
 }
