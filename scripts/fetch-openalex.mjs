@@ -231,10 +231,8 @@ const outPath = path.join(QUEUE_DIR, `${from}_${to}.yaml`);
 // up stragglers. Parsing the prior file back (instead of blind appending)
 // keeps the whole queue sorted by score, not just each run's slice.
 let merged = candidates;
-let priorCount = 0;
 if (fs.existsSync(outPath)) {
   const prior = YAML.parse(fs.readFileSync(outPath, "utf8"))?.candidates ?? [];
-  priorCount = prior.length;
   const byId = new Map(prior.map((c) => [c.openalex_id, c]));
   for (const c of candidates) byId.set(c.openalex_id, c);
   merged = [...byId.values()];
