@@ -12,3 +12,7 @@ url: https://arxiv.org/abs/2305.14251
 tags: [factuality, evaluation]
 code_url: https://github.com/shmsw25/FActScore
 ingested_at: 2026-09-02
+citations_total: 1643
+citations_recent_12mo: 697
+citations_checked_at: 2026-09-04
+semantic_scholar_id: bd5deadc58ee45b5e004378ba1d54a96bc947b4a

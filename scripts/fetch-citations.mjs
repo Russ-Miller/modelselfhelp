@@ -12,11 +12,11 @@ const oneYearAgo = new Date(TODAY);
 oneYearAgo.setDate(oneYearAgo.getDate() - 365);
 const todayStr = TODAY.toISOString().slice(0, 10);
 
-async function fetchJson(url, attempts = 6) {
+async function fetchJson(url, attempts = 8) {
   for (let i = 1; i <= attempts; i++) {
     const res = await fetch(url, { headers: { "User-Agent": UA } });
     if (res.ok) return res.json();
-    if (res.status === 429) { console.error(`  429, retrying in ${8 * i}s`); await sleep(8000 * i); continue; }
+    if (res.status === 429) { console.error(`  429, retrying in ${12 * i}s`); await sleep(12000 * i); continue; }
     console.error(`  HTTP ${res.status} for ${url}`);
     return null;
   }
@@ -24,7 +24,7 @@ async function fetchJson(url, attempts = 6) {
   return null;
 }
 
-const sources = loadCatalog().sources.filter((s) => s.data.kind === "paper" && s.data.arxiv_id);
+const sources = loadCatalog().sources.filter((s) => s.data.kind === "paper" && s.data.arxiv_id && !s.data.citations_checked_at);
 console.log(`Checking ${sources.length} paper sources...`);
 
 let updated = 0;
@@ -33,9 +33,9 @@ for (const rec of sources) {
   console.log(`${rec.data.id} (arXiv:${id})`);
 
   const total = await fetchJson(`https://api.semanticscholar.org/graph/v1/paper/ArXiv:${id}?fields=citationCount,paperId`);
-  await sleep(4000);
+  await sleep(6000);
   const recent = await fetchJson(`https://api.semanticscholar.org/graph/v1/paper/ArXiv:${id}/citations?fields=publicationDate&limit=1000`);
-  await sleep(4000);
+  await sleep(6000);
 
   if (total == null || recent == null) { console.error(`  skipped (fetch failed)`); continue; }
 

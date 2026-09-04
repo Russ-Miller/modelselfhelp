@@ -12,3 +12,7 @@ url: https://arxiv.org/abs/2110.14168
 tags: [math, benchmark]
 code_url: https://github.com/openai/grade-school-math
 ingested_at: 2026-09-02
+citations_total: 10385
+citations_recent_12mo: 1000
+citations_checked_at: 2026-09-04
+semantic_scholar_id: d6045d2ccc9c09ca1671348de86d07da6bc28eea
