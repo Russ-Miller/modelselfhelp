@@ -173,3 +173,17 @@ claim pages ("+N older, quieter sources") rather than hidden outright —
 the links stay, just deprioritized. The Sources index shows all sources
 always, with quiet rows dimmed rather than collapsed, since browsing
 everything is that page's job.
+
+## 2026-09-04 — Citation refresh deferred; must be slow and incremental when built
+Noted, not built: citation data on Source will go stale like claims do,
+and re-evaluating a claim should eventually include re-checking its
+sources' citation activity. When this is built, it cannot be a
+straightforward re-run of `fetch-citations.mjs` on everything — the
+initial fetch already showed this network hits Semantic Scholar's rate
+limit hard (many papers needed 6-8 retries with minutes of backoff
+each, across three separate runs to get from 0 to 57 of 60 sources
+checked). The refresh needs to run as a slow background process, one
+source at a time, real delay between requests, resumable, prioritizing
+the oldest `citations_checked_at` first — likely tied to the same
+later-phase automation as the 14-day claim staleness re-check, not a
+naive full re-scan.

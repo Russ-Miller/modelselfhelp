@@ -232,6 +232,18 @@ on a key and a measured cost before scaling. What v1 does add:
   wrong, or irrelevant, and a claim nobody's revisited in two weeks is a
   reasonable place to look first.
 
+**Deferred, noted so it isn't lost:** `citations_total`/
+`citations_recent_12mo` on Source (added 2026-09-03) will go stale the
+same way claims do, and re-checking a claim should eventually mean
+re-checking the citation data of the sources it cites too. `scripts/
+fetch-citations.mjs` is run by hand today; refreshing it will need to run
+as a slow, incremental background process — one source at a time with
+real delay between requests, resumable, checking the oldest
+`citations_checked_at` first — specifically to avoid re-triggering the
+Semantic Scholar rate limiting this network hit hard doing the initial
+fetch (multiple runs, several papers took 6-8 retries with minutes of
+backoff each). Not building this now.
+
 ## 7. Taxonomy as a view
 
 `catalog/taxonomy.yaml` still holds a starter vocabulary (groups like
