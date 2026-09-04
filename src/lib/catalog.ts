@@ -14,7 +14,13 @@ export type ClaimStatus = "active" | "superseded" | "retired";
  *  Efficacy lives in claims that reference the technique. */
 export type TechniqueStatus = "active" | "superseded";
 
-export interface SourceLink { source: string; stance: Stance; note: string }
+export interface SourceLink {
+  source: string; stance: Stance; note: string;
+  /** Who added this citation and when. Optional, but the only record of the
+   *  single most creditworthy act in the index: adding a contesting source to
+   *  a claim someone else made. See docs/reputation-notes.md. */
+  submitted_by?: string; added_at?: string;
+}
 export interface DisagreementAxis { description: string; is_guess: boolean }
 export interface ObservedOn { model?: string; era?: string; task_type?: string }
 
