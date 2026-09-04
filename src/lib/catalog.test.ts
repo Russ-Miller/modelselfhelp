@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { claimsCiting, claimsFor, getCapability, getSource, getTechnique, loadCatalog, openQuestions, techniquesFor, capabilitiesByGroup } from "./catalog";
+import { claimsCiting, claimsFor, getCapability, getSource, getTechnique, loadCatalog, claimActivity, openQuestions, techniquesFor, unmitigatedCapabilities, capabilitiesByGroup } from "./catalog";
 
 describe("catalog loader", () => {
   const cat = loadCatalog();
@@ -74,5 +74,28 @@ describe("catalog loader", () => {
     expect(ids.has("irreversible-action-gate")).toBe(false);
     expect(ids.has("reread-before-edit")).toBe(true);
     expect(getTechnique("reread-before-edit")?.evidence_search?.nearest_miss?.length).toBeGreaterThan(0);
+  });
+
+  it("reports claim evidence activity from the liveliest source, not a total", () => {
+    const claim = cat.claims.find((c) => c.sources.length > 1 && c.sources.every((s) => getSource(s.source)?.citations_checked_at));
+    expect(claim, "expected a multi-source claim with checked citations").toBeDefined();
+    const a = claimActivity(claim!)!;
+    expect(a.maxRecent).toBe(Math.max(...a.checked.map((s) => s.citations_recent_12mo ?? 0)));
+    // Unchecked sources are excluded rather than counted as zero -- no data is
+    // not the same as no citations.
+    expect(a.checked.every((s) => s.citations_checked_at)).toBe(true);
+  });
+
+  it("lists a capability as unmitigated only when no technique for it has a measured claim", () => {
+    const measured = new Set(["single-paper", "replicated", "own-observation"]);
+    for (const u of unmitigatedCapabilities()) {
+      expect(u.claims.length).toBeGreaterThan(0);
+      for (const t of u.techniques) {
+        expect(cat.claims.filter((c) => c.technique === t.id).some((c) => measured.has(c.backing_strength))).toBe(false);
+      }
+      expect(u.kind).toBe(u.techniques.length === 0 ? "no-technique" : "none-measured");
+    }
+    // A capability with a measured mitigation must not appear.
+    expect(unmitigatedCapabilities().map((u) => u.capability.id)).not.toContain("prompt-injection");
   });
 });

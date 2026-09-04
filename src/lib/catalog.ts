@@ -198,11 +198,64 @@ export function openQuestions(): OpenQuestion[] {
     const claims = claimsAboutTechnique(technique.id);
     if (claims.length === 0) {
       out.push({ technique, kind: technique.evidence_search ? "searched" : "unsearched", claims });
-    } else if (claims.every((c) => c.backing_strength === "mechanism-reasoning")) {
+    } else if (!claims.some(isMeasured)) {
       // Believed for a structural reason, never measured. A weaker opening
       // than silence, but still an opening.
       out.push({ technique, kind: "asserted-not-measured", claims });
     }
   }
   return out.sort((a, b) => rank[a.kind] - rank[b.kind] || a.technique.label.localeCompare(b.technique.label));
+}
+
+/** Backing strengths where somebody actually measured the effect, as opposed
+ *  to arguing it from how the technique works. */
+const MEASURED: BackingStrength[] = ["single-paper", "replicated", "own-observation"];
+const isMeasured = (c: Claim) => MEASURED.includes(c.backing_strength);
+
+/**
+ * Aggregate citation activity for the sources a claim rests on. Uses the
+ * liveliest source rather than a total: one paper the field is still citing
+ * means the evidence base is live, and summing across papers would invent a
+ * figure nobody reported. Only counts sources whose citations have been
+ * checked -- unchecked is not the same as quiet.
+ */
+export interface ClaimActivity { checked: Source[]; unchecked: number; maxRecent: number; allQuiet: boolean }
+export function claimActivity(claim: Claim): ClaimActivity | null {
+  const sources = claim.sources.map((s) => getSource(s.source)).filter((s): s is Source => !!s);
+  const checked = sources.filter((s) => s.citations_checked_at);
+  if (checked.length === 0) return null;
+  return {
+    checked: [...checked].sort((a, b) => (b.citations_recent_12mo ?? 0) - (a.citations_recent_12mo ?? 0)),
+    unchecked: sources.length - checked.length,
+    maxRecent: Math.max(...checked.map((s) => s.citations_recent_12mo ?? 0)),
+    allQuiet: checked.every(isQuietSource),
+  };
+}
+
+/**
+ * Capabilities where a problem is documented but nothing is known to fix it.
+ * The counterpart to openQuestions(): that view asks whether a technique
+ * works, this one asks whether anything works at all. Split the same way,
+ * because "no technique catalogued" and "techniques catalogued, none measured"
+ * are different invitations.
+ */
+export type UnmitigatedKind = "no-technique" | "none-measured";
+export interface Unmitigated { capability: Capability; kind: UnmitigatedKind; claims: Claim[]; techniques: Technique[] }
+
+export function unmitigatedCapabilities(): Unmitigated[] {
+  const out: Unmitigated[] = [];
+  for (const capability of loadCatalog().capabilities) {
+    if (capability.status !== "active") continue;
+    const claims = claimsFor(capability.id);
+    if (claims.length === 0) continue; // no documented problem yet, so nothing to mitigate
+    const techniques = techniquesFor(capability.id).filter((t) => t.status === "active");
+    if (techniques.some((t) => claimsAboutTechnique(t.id).some(isMeasured))) continue;
+    out.push({
+      capability,
+      kind: techniques.length === 0 ? "no-technique" : "none-measured",
+      claims,
+      techniques,
+    });
+  }
+  return out.sort((a, b) => b.claims.length - a.claims.length || a.capability.label.localeCompare(b.capability.label));
 }

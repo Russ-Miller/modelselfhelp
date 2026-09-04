@@ -430,3 +430,37 @@ This also gives the gamification idea from docs/reputation-notes.md a
 unit that resists gaming: an open question with a documented search
 behind it is something a person can actually close, and closing one is
 checkable in a way that "contributed a citation" is not.
+
+## 2026-09-04 — Asking the open question in the other direction
+Three additions, one theme: the catalog knows more about its own gaps
+than it was showing.
+
+**Evidence activity per claim.** The sources list already showed citation
+recency per paper; a claim rests on several. Aggregated as the *max*
+across its sources, not the sum — one paper the field is still citing
+means the evidence base is live, and adding counts across papers would
+report a number no one measured. Sources never fetched are excluded
+rather than counted as zero, and a claim with none checked says so
+explicitly. A blank cell reads as "no citations"; it actually meant "not
+looked up", and those are different.
+
+**Contested-only filtering** on the capability and claim lists. Done with
+a `data-contested` attribute per row and one CSS rule, so the pages stay
+fully static and the filter ships no second copy of the data.
+
+**Capabilities with no measured mitigation** on /open-questions. The
+existing sections ask "does this technique work"; this asks "does
+anything work". A capability qualifies when claims establish the problem
+and no technique addressing it has an efficacy claim with measured
+backing. Split the same way as the technique sections, because
+`no-technique` and `none-measured` invite different work: the second is a
+citation away from closing, the first would be new knowledge. Currently 3
+and 7, against 9 capabilities that do have a measured fix — a ratio worth
+watching, since it is the closest thing here to a map of what is actually
+unsolved.
+
+Reusing one `isMeasured` predicate across both views matters more than it
+looks. It means "measured" cannot drift between the two pages, and it
+puts real weight on the mechanism-reasoning backing strength: a claim
+filed that way deliberately does not count as a fix, which is why filing
+those honestly earlier today paid off immediately.

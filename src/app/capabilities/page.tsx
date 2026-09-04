@@ -1,20 +1,23 @@
 import Link from "next/link";
 import { getCapabilities, claimsFor } from "@/lib/catalog";
 import { capabilityShortlist } from "@/lib/queue";
+import { ContestedFilter } from "@/components/contested-filter";
 
 export const metadata = { title: "Capabilities" };
 
 export default function CapabilitiesPage() {
   const shortlist = capabilityShortlist();
+  const disputed = getCapabilities().filter((c) => claimsFor(c.id).some((x) => x.contested)).length;
   return (
     <div className="space-y-4">
       <h1 className="text-2xl font-semibold">Capabilities</h1>
       <p className="text-sm text-neutral-500">Topics, not scores &mdash; each lists the claims filed under it.</p>
+      <ContestedFilter count={disputed} noun="capabilities">
       <table className="w-full text-sm">
         <thead className="text-left text-neutral-500"><tr><th className="py-1">Capability</th><th>Tags</th><th>Claims</th><th>Contested</th><th>Status</th></tr></thead>
         <tbody>
           {getCapabilities().map((c) => (
-            <tr key={c.id} className="border-t border-neutral-200 dark:border-neutral-800 align-top">
+            <tr key={c.id} data-contested={claimsFor(c.id).some((x) => x.contested)} className="border-t border-neutral-200 dark:border-neutral-800 align-top">
               <td className="py-2"><Link href={`/capabilities/${c.id}`} className="font-medium hover:underline">{c.label}</Link>
                 <div className="text-neutral-600 dark:text-neutral-400">{c.summary}</div></td>
               <td className="py-2">{(c.tags ?? []).join(", ")}</td>
@@ -32,6 +35,7 @@ export default function CapabilitiesPage() {
           ))}
         </tbody>
       </table>
+      </ContestedFilter>
 
       {shortlist.length > 0 && (
         <section className="space-y-2 pt-6">

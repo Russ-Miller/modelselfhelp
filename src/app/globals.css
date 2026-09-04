@@ -30,3 +30,11 @@ body {
 .citation-signal .citation-card { display: none; }
 .citation-signal:hover .citation-card,
 .citation-signal:focus-visible .citation-card { display: block; }
+
+/* Contested-only filter (src/components/contested-filter.tsx). The list is
+   server-rendered and static; the toggle only flips the wrapper attribute, so
+   filtering costs no client-side copy of the data. Kept here rather than as a
+   Tailwind variant because it crosses a component boundary. */
+[data-filter="contested"] [data-contested="false"] {
+  display: none;
+}

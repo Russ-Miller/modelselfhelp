@@ -2,6 +2,7 @@ import Link from "next/link";
 import { getCapability, getClaims, getSource, isQuietSource } from "@/lib/catalog";
 import type { SourceLink } from "@/lib/catalog";
 import { CitationSignal, ContestedBadge, KindBadge, StanceBadge, StrengthBadge } from "@/components/badges";
+import { ContestedFilter } from "@/components/contested-filter";
 
 export const metadata = { title: "Claims" };
 
@@ -34,13 +35,14 @@ export default function ClaimsPage() {
         {contestedCount} of {claims.length} are contested, sorted first &mdash;{" "}
         <Link href="/contested" className="hover:underline">see them with incoming challenges</Link>.
       </p>
+      <ContestedFilter count={contestedCount} noun="claims">
       <ul className="space-y-4">
         {claims.map((c) => {
           const cap = getCapability(c.capability);
           const active = c.sources.filter((s) => { const src = getSource(s.source); return !src || !isQuietSource(src); });
           const quiet = c.sources.filter((s) => { const src = getSource(s.source); return src && isQuietSource(src); });
           return (
-            <li key={c.id} className="rounded border border-neutral-200 dark:border-neutral-800 p-4">
+            <li key={c.id} data-contested={c.contested} className="rounded border border-neutral-200 dark:border-neutral-800 p-4">
               <div className="flex flex-wrap items-center gap-2 mb-2">
                 <KindBadge kind={c.kind} />
                 <StrengthBadge strength={c.backing_strength} />
@@ -69,6 +71,7 @@ export default function ClaimsPage() {
           );
         })}
       </ul>
+      </ContestedFilter>
     </div>
   );
 }

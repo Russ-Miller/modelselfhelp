@@ -359,6 +359,29 @@ into "no research exists" would manufacture research opportunities out of
 gaps in my own reading, which is precisely the failure this project is
 supposed to make visible.
 
+The page also runs the question the other way. The three states above ask
+whether a given *technique* works; a fourth section asks whether anything
+does — capabilities carrying claims that establish a problem, where no
+technique addressing them has an efficacy claim anybody measured. Split
+again by strength: `no-technique` (nothing is even proposed) versus
+`none-measured` (something is written down, nobody checked it). The
+second is a citation away from closing; the first would be new knowledge.
+
+### Contested-only filtering
+The capability and claim lists carry a client-side "only contested"
+toggle. Rows are server-rendered with `data-contested`, and the toggle
+flips a `data-filter` attribute on the wrapper that a rule in
+`globals.css` keys off. The list stays fully static and no copy of the
+data is shipped for the filter to work over.
+
+### Evidence activity on a claim
+A claim's status row shows aggregate citation activity across the sources
+it rests on, using the *liveliest* source rather than a total — summing
+citation counts across papers would produce a figure nobody reported.
+Sources whose citations have not been fetched are excluded and counted
+separately, and a claim with no checked sources says "not checked yet"
+rather than rendering blank, since a blank reads as "no activity".
+
 ## 8. Site (progressive disclosure)
 
 - `/` — recent activity first (§6), then browse by capability.
