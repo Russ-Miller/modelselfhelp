@@ -41,8 +41,8 @@ export default async function SourcePage({ params }: PageProps<"/sources/[id]">)
       </header>
       {s.summary && <p className="text-sm text-neutral-700 dark:text-neutral-300">{s.summary}</p>}
       <section>
-        <h2 className="font-semibold mb-1">Claims citing this source</h2>
-        <p className="mb-2 text-xs text-neutral-500">Claims in this catalog that lean on it, and whether as support or counterpoint.</p>
+        <h2 className="font-semibold mb-1">Referenced by</h2>
+        <p className="mb-2 text-xs text-neutral-500">Claims in this catalog that draw on this source, and whether as support or counterpoint.</p>
         {citing.length === 0 ? <p className="text-sm text-neutral-500">No claims cite this yet.</p> : (
           <ul className="space-y-2">
             {citing.map(({ claim, stance }) => (

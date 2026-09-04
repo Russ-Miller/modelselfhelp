@@ -14,9 +14,9 @@ export default function SourcesPage() {
         the catalog, most recent first. <strong className="font-medium text-neutral-600 dark:text-neutral-400">Activity</strong> is
         how much the wider field has cited the source in the last 12 months &mdash; hover for exact
         counts; a paper can stay well-cited overall while recent activity has moved past it.{" "}
-        <strong className="font-medium text-neutral-600 dark:text-neutral-400">Cited in</strong> is
-        the other direction: which claims <em>in this catalog</em> cite the source, and whether they
-        lean on it as support or as a counterpoint.
+        <strong className="font-medium text-neutral-600 dark:text-neutral-400">Referenced by</strong> is
+        the other direction: which claims <em>in this catalog</em> draw on the source, and whether
+        they lean on it as support or as a counterpoint.
       </p>
       <table className="w-full text-sm">
         <thead className="text-left text-neutral-500">
@@ -25,7 +25,7 @@ export default function SourcesPage() {
             <th className="py-1 pr-4 whitespace-nowrap">Created</th>
             <th className="py-1 pr-4 whitespace-nowrap">Ingested</th>
             <th className="py-1 pr-4 whitespace-nowrap">Activity</th>
-            <th className="py-1">Cited in</th>
+            <th className="py-1">Referenced by</th>
           </tr>
         </thead>
         <tbody>
