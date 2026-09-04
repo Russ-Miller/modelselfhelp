@@ -31,6 +31,7 @@ jobs:
     permissions:
       contents: write         # to commit the refreshed queue
     env:
+      STATE_BRANCH: pipeline-state
       # secrets are not reliably available in a step-level `if`, so resolve
       # their presence once here and gate on these instead.
       HAS_ANTHROPIC_KEY: ${{ secrets.ANTHROPIC_API_KEY != '' }}
@@ -40,6 +41,19 @@ jobs:
       - uses: actions/setup-node@v4
         with: { node-version: 22, cache: npm }
       - run: npm ci
+
+      # Pipeline state (queue + seen-ledger) lives on its own branch, not main:
+      # main's ruleset requires the `test` check, which a direct bot push cannot
+      # satisfy, and github-actions[bot] is not offered as a bypass actor. Using
+      # a side branch keeps main's protection fully intact.
+      - name: Restore pipeline state
+        run: |
+          if git fetch origin "$STATE_BRANCH" 2>/dev/null; then
+            git checkout "origin/$STATE_BRANCH" -- pipeline/ || true
+            echo "Restored pipeline/ from $STATE_BRANCH"
+          else
+            echo "No $STATE_BRANCH yet — first run, starting from the committed state."
+          fi
 
       # Stage 1 — free. Trailing window plus the seen-ledger is self-healing
       # against OpenAlex's arXiv indexing lag.
@@ -67,21 +81,6 @@ jobs:
       - name: Validate
         run: npm run validate
 
-      - name: Commit refreshed queue
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add pipeline/
-          if git diff --staged --quiet; then
-            echo "No queue changes."
-            exit 0
-          fi
-          printf '%s\n\n%s\n' \
-            "Nightly ingestion: refresh review queue" \
-            "Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>" > /tmp/msg
-          git commit -F /tmp/msg
-          git push
-
       # Vercel's GitHub integration never linked for this repo, so a push does
       # not trigger a build. Deploy explicitly with the CLI instead, which
       # uploads the directory and needs no git connection.
@@ -92,3 +91,22 @@ jobs:
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
         run: npx --yes vercel@latest --prod --yes --token "$VERCEL_TOKEN"
+
+      - name: Persist pipeline state
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add pipeline/
+          if git diff --staged --quiet; then
+            echo "No pipeline changes to persist."
+            exit 0
+          fi
+          # Commit onto the state branch rather than main. Force-push is safe
+          # here: this branch is bot-owned state that nothing builds from, and
+          # the current contents are the state -- not a history anyone reads.
+          git checkout -B "$STATE_BRANCH"
+          printf '%s\n\n%s\n' \
+            "Nightly ingestion: refresh review queue" \
+            "Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>" > /tmp/msg
+          git commit -F /tmp/msg
+          git push -f origin "$STATE_BRANCH"
