@@ -10,6 +10,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204846388
     score: 25
     signals: [+benchmark, +evaluation, +capability, +limitation, +failure, +reasoning, +improves, +proposes-method, +training-method, +architecture, +mitigation]
+    capabilities: [arithmetic]
     title: "From Documents to Reasoning: A Validated Synthetic Data Pipeline and Semantic-Aware Fine-Tuning for Financial Numerical Reasoning"
     date: 2026-08-28
     arxiv_id: "2608.27919"
@@ -22,6 +23,7 @@ candidates:
   - openalex_id: https://openalex.org/W7206210601
     score: 22
     signals: [+benchmark, +failure, +contamination, +technique, +agentic, +outperforms, +improves, +proposes-method, +architecture, +mitigation]
+    capabilities: [long-context-degradation]
     title: "Compile, Don't Memorize: A Context Compilation Architecture (CCA) for In-Context Learning"
     date: 2026-09-01
     arxiv_id: "2609.00759"
@@ -34,6 +36,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204895443
     score: 22
     signals: [+failure, +hallucination, +reasoning, +robustness, +technique, +agentic, +outperforms, +improves, +proposes-method, +training-method]
+    capabilities: [hallucination, tool-use]
     title: "Learning to Reason and Use Tools through Unsupervised Fine-Tuning in Task-Oriented Dialog Systems"
     date: 2026-08-31
     arxiv_id: "2608.30426"
@@ -46,6 +49,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204970284
     score: 22
     signals: [+benchmark, +evaluation, +limitation, +failure, +reasoning, +agentic, +named-model, +outperforms, +improves, +proposes-method, +mitigation]
+    capabilities: [self-repair]
     title: "LOCI: A Locator-Critic with Refinement Loop"
     date: 2026-08-31
     arxiv_id: "2608.30959"
@@ -106,6 +110,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204940517
     score: 21
     signals: [+evaluation, +capability, +failure, +hallucination, +reasoning, +analysis, +agentic, +outperforms, +improves, +proposes-method, +mitigation, -education]
+    capabilities: [hallucination]
     title: "RACER: Reinforced Agent Collaboration for Explainable Reasoning on Knowledge Graphs"
     date: 2026-08-29
     arxiv_id: "2608.29263"
@@ -118,6 +123,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204862779
     score: 20
     signals: [+benchmark, +evaluation, +limitation, +reasoning, +technique, +agentic, +outperforms, +improves, +proposes-method, +training-method, +mitigation, -education]
+    capabilities: [self-repair]
     title: "CoVA-SFT: A Large-Scale Dataset for Chain of Visual Abstractions"
     date: 2026-08-29
     arxiv_id: "2608.28958"
@@ -142,6 +148,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204485044
     score: 20
     signals: [+benchmark, +evaluation, +capability, +hallucination, +reasoning, +robustness, +named-model, +improves, +proposes-method, +mitigation]
+    capabilities: [hallucination, secure-coding]
     title: "From Passive Response to Proactive Correction: Enhancing LLM Robustness Against Input Fact Perturbations"
     date: 2026-08-26
     arxiv_id: "2608.25894"
@@ -166,6 +173,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204904339
     score: 20
     signals: [+benchmark, +evaluation, +limitation, +failure, +finding, +improves, +training-method, +scaling, +mitigation]
+    capabilities: [procedure-following]
     title: "Reading the News: Adapting Large Language Models to Swedish Journalism Through Continued Pre-Training"
     date: 2026-08-31
     arxiv_id: "2608.30609"
@@ -202,6 +210,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204545904
     score: 19
     signals: [+evaluation, +limitation, +failure, +hallucination, +reasoning, +analysis, +agentic, +proposes-method]
+    capabilities: [hallucination]
     title: "Do LLMs Understand Personality? Rethinking Persona Fidelity Evaluation through Structured Behavioral Inference"
     date: 2026-08-27
     arxiv_id: "2608.26674"
@@ -214,6 +223,7 @@ candidates:
   - openalex_id: https://openalex.org/W7207618905
     score: 19
     signals: [+benchmark, +evaluation, +capability, +hallucination, +reasoning, +finding, +improves, +architecture, +mitigation]
+    capabilities: [hallucination]
     title: "Does Playing it Safe Count as Faithfulness? Reassessing LVLM Hallucination Mitigation Methods"
     date: 2026-09-01
     arxiv_id: "2609.01888"
@@ -286,6 +296,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204569399
     score: 19
     signals: [+benchmark, +failure, +hallucination, +reasoning, +technique, +outperforms, +proposes-method, +architecture]
+    capabilities: [hallucination]
     title: "SymbolLKG: Towards Verifiable Logical Reasoning via Logical Knowledge Graph and Symbolic Solvers"
     date: 2026-08-27
     arxiv_id: "2608.26836"
@@ -332,6 +343,7 @@ candidates:
   - openalex_id: https://openalex.org/W7206191163
     score: 18
     signals: [+benchmark, +failure, +hallucination, +reasoning, +outperforms, +improves, +proposes-method, +mitigation]
+    capabilities: [hallucination]
     title: "ISO-RAG: Isoperimetric Noise Control for Retrieval-Augmented Generation"
     date: 2026-09-01
     arxiv_id: "2609.00513"
@@ -344,6 +356,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204841551
     score: 18
     signals: [+benchmark, +evaluation, +failure, +reasoning, +analysis, +agentic, +proposes-method, +mitigation]
+    capabilities: [goal-conflict-safety, long-context-degradation]
     title: "LongGuard: Mechanistic Analysis and Training-Free Mitigation of Long-Context Failure in Safety Guardrails"
     date: 2026-08-27
     arxiv_id: "2608.27580"
@@ -404,6 +417,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204948314
     score: 17
     signals: [+evaluation, +capability, +hallucination, +reasoning, +agentic, +named-model, +outperforms, +improves, +proposes-method]
+    capabilities: [code-generation, hallucination]
     title: "Development of an Autonomous AI Coding Agent using Monte Carlo Tree Search (MCTS) and Gemini LLM Frameworks"
     date: 2026-08-29
     arxiv_id: "2608.29096"
@@ -416,6 +430,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204258642
     score: 17
     signals: [+benchmark, +evaluation, +capability, +hallucination, +reasoning, +improves, +proposes-method, +mitigation]
+    capabilities: [fact-verification, hallucination]
     title: "FARCA: Fact-Aligned Reliability-Aware Credit Assignment for Reinforcement Learning with Factual Supervision"
     date: 2026-08-25
     arxiv_id: "2608.24350"
@@ -428,6 +443,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204903270
     score: 17
     signals: [+benchmark, +evaluation, +limitation, +failure, +hallucination, +reasoning, +named-model, +outperforms, +proposes-method, -clinical]
+    capabilities: [arithmetic, hallucination]
     title: "Fine-Grained Multi Image Object Hallucination Benchmark"
     date: 2026-08-31
     arxiv_id: "2608.30653"
@@ -464,6 +480,7 @@ candidates:
   - openalex_id: https://openalex.org/W7207626127
     score: 17
     signals: [+benchmark, +capability, +reasoning, +agentic, +named-model, +outperforms, +proposes-method, +architecture]
+    capabilities: [tool-use]
     title: "Harness Engineering in LLM Tool Use via Agent-Native Reusable Tool Primitives"
     date: 2026-09-01
     arxiv_id: "2609.01736"
@@ -476,6 +493,7 @@ candidates:
   - openalex_id: https://openalex.org/W7206203603
     score: 17
     signals: [+benchmark, +failure, +reasoning, +agentic, +outperforms, +proposes-method, +training-method]
+    capabilities: [state-tracking]
     title: "Making Prospective Memory SLM-Shaped: Typed Intention Stores for Small-Model Agents"
     date: 2026-09-01
     arxiv_id: "2609.01272"
@@ -511,6 +529,7 @@ candidates:
   - openalex_id: https://openalex.org/W7206193539
     score: 17
     signals: [+evaluation, +capability, +failure, +reasoning, +contamination, +finding, +technique, +agentic, +proposes-method, -clinical]
+    capabilities: [secure-coding]
     title: "Reveree: Diagnosing LLM Reverse-Engineering Agents"
     date: 2026-09-01
     arxiv_id: "2609.01185"
@@ -547,6 +566,7 @@ candidates:
   - openalex_id: https://openalex.org/W7206161142
     score: 17
     signals: [+evaluation, +capability, +limitation, +failure, +agentic, +outperforms, +improves, +mitigation]
+    capabilities: [code-generation]
     title: "WiseSpec: Requirements-Driven Agents for Code Generation"
     date: 2026-09-01
     arxiv_id: "2609.00568"
@@ -631,6 +651,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204968160
     score: 16
     signals: [+failure, +hallucination, +improves, +proposes-method, +training-method, +architecture, +mitigation]
+    capabilities: [hallucination]
     title: "Hallucination Mitigation for Large Vision-Language Models via Implicit Feature Stabilization"
     date: 2026-08-30
     arxiv_id: "2608.29924"
@@ -643,6 +664,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204765869
     score: 16
     signals: [+benchmark, +evaluation, +reasoning, +finding, +agentic, +improves, +training-method, +mitigation]
+    capabilities: [arithmetic, tool-use]
     title: "Learning to Use Tools: Reinforcement Learning for Tool-Integrated Mathematical Reasoning"
     date: 2026-08-28
     arxiv_id: "2608.28447"
@@ -655,6 +677,7 @@ candidates:
   - openalex_id: https://openalex.org/W7206192795
     score: 16
     signals: [+benchmark, +evaluation, +limitation, +hallucination, +reasoning, +robustness, +improves, +architecture, +mitigation, -industry]
+    capabilities: [hallucination]
     title: "NeuroGraph: An AI Graph-Driven Neuro-Symbolic Framework for Explainable Threat Reasoning in Advanced Manufacturing"
     date: 2026-09-01
     arxiv_id: "2609.00604"
@@ -679,6 +702,7 @@ candidates:
   - openalex_id: https://openalex.org/W7206164039
     score: 16
     signals: [+benchmark, +evaluation, +capability, +failure, +reasoning, +robustness, +proposes-method]
+    capabilities: [state-tracking]
     title: "Towards Generalizable Visually Grounded Exploration of Household Devices"
     date: 2026-09-01
     arxiv_id: "2609.00845"
@@ -703,6 +727,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204939093
     score: 16
     signals: [+benchmark, +evaluation, +capability, +reasoning, +analysis, +improves, +proposes-method, +training-method, -legal]
+    capabilities: [code-generation]
     title: "When to Adapt: Conditional Memory Adapters for Retention-Preserving Domain Specialization"
     date: 2026-08-29
     arxiv_id: "2608.29327"
@@ -727,6 +752,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204947814
     score: 15
     signals: [+benchmark, +evaluation, +failure, +hallucination, +named-model, +outperforms, +proposes-method]
+    capabilities: [hallucination]
     title: "Beyond Fluency: A Rubric-Based Benchmark for Evaluating Saudi Dialect and Cultural Competence in Large Language Models"
     date: 2026-08-30
     arxiv_id: "2608.29990"
@@ -739,6 +765,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204844857
     score: 15
     signals: [+benchmark, +evaluation, +failure, +reasoning, +technique, +outperforms, +proposes-method]
+    capabilities: [secure-coding]
     title: "Compared to What? A Human-Anchored Security Benchmark for LLM-Generated Infrastructure-as-Code"
     date: 2026-08-28
     arxiv_id: "2608.28021"
@@ -763,6 +790,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204848126
     score: 15
     signals: [+evaluation, +reasoning, +analysis, +proposes-method, +training-method, +architecture, +scaling]
+    capabilities: [forecasting]
     title: "D-TAIA: Domain-Aware LLM Adaptation for Multi-Task Predictive Process Monitoring"
     date: 2026-08-28
     arxiv_id: "2608.28236"
@@ -775,6 +803,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204869549
     score: 15
     signals: [+benchmark, +evaluation, +capability, +failure, +finding, +named-model, +improves, +proposes-method, +mitigation, -clinical]
+    capabilities: [code-generation]
     title: "DSEffi-Bench: Demystifying Large Language Models' Capability in Efficient Data Science Code Generation"
     date: 2026-08-31
     arxiv_id: "2608.30248"
@@ -787,6 +816,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204790800
     score: 15
     signals: [+benchmark, +failure, +hallucination, +proposes-method, +architecture, +mitigation]
+    capabilities: [hallucination]
     title: "Dynamic Alignment Compensation for Hallucination Mitigation in Large Vision-Language Models"
     date: 2026-08-28
     arxiv_id: "2608.28058"
@@ -799,6 +829,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204554529
     score: 15
     signals: [+benchmark, +hallucination, +reasoning, +outperforms, +improves, +proposes-method, +architecture]
+    capabilities: [hallucination]
     title: "Information-Guided Frontier Decoding: Contextual Utility-Driven Commitment in dMLLMs"
     date: 2026-08-27
     arxiv_id: "2608.26641"
@@ -811,6 +842,7 @@ candidates:
   - openalex_id: https://openalex.org/W7206174818
     score: 15
     signals: [+benchmark, +evaluation, +failure, +reasoning, +agentic, +outperforms, +proposes-method]
+    capabilities: [fact-verification]
     title: "InSight: A Benchmark for Agentic Claim Verification in Interactive Visualizations"
     date: 2026-09-01
     arxiv_id: "2609.01383"
@@ -823,6 +855,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204477603
     score: 15
     signals: [+benchmark, +evaluation, +failure, +robustness, +outperforms, +proposes-method, +mitigation]
+    capabilities: [self-repair]
     title: "InsightSR: Refining Symbolic Regression Search Spaces via Parallel Semantic and Structural LLM Guidance"
     date: 2026-08-26
     arxiv_id: "2608.25291"
@@ -847,6 +880,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204223387
     score: 15
     signals: [+benchmark, +evaluation, +capability, +analysis, +improves, +proposes-method, +architecture]
+    capabilities: [forecasting]
     title: "MoTE: Mixture of Task Experts for Multi-Task Video Understanding"
     date: 2026-08-25
     arxiv_id: "2608.24763"
@@ -871,6 +905,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204959726
     score: 15
     signals: [+failure, +reasoning, +finding, +agentic, +named-model, +outperforms, +improves, +mitigation]
+    capabilities: [tool-use]
     title: "One Policy Is Enough: Single-Agent Reinforcement Learning Outperforms Tree Search for Chemistry Tool Learning"
     date: 2026-08-31
     arxiv_id: "2608.30952"
@@ -883,6 +918,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204920307
     score: 15
     signals: [+benchmark, +evaluation, +capability, +contamination, +agentic, +named-model, +proposes-method]
+    capabilities: [prompt-injection]
     title: "Reachability-Based Capability Confinement for LLM Agents under Indirect Prompt Injection"
     date: 2026-08-30
     arxiv_id: "2608.30041"
@@ -919,6 +955,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204453404
     score: 15
     signals: [+benchmark, +evaluation, +hallucination, +contamination, +robustness, +improves, +mitigation]
+    capabilities: [hallucination]
     title: "Retrieved But Not Reliable: A Survey on Attacks, and Defenses in Retrieval-Augmented Generation"
     date: 2026-08-25
     arxiv_id: "2608.24977"
@@ -931,6 +968,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204484264
     score: 15
     signals: [+benchmark, +evaluation, +capability, +failure, +outperforms, +improves, +proposes-method]
+    capabilities: [procedure-following]
     title: "SciMIF: Understanding Multimodal Instruction Following in Scientific Domains"
     date: 2026-08-26
     arxiv_id: "2608.25973"
@@ -955,6 +993,7 @@ candidates:
   - openalex_id: https://openalex.org/W7206162202
     score: 15
     signals: [+evaluation, +capability, +failure, +reasoning, +finding, +technique, +proposes-method, +training-method, -clinical]
+    capabilities: [procedure-following]
     title: "Text Capability Loss in Vision-Language Adaptation: An Attention-Sink Diagnosis"
     date: 2026-09-01
     arxiv_id: "2609.00746"
@@ -967,6 +1006,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204850475
     score: 15
     signals: [+evaluation, +robustness, +analysis, +finding, +agentic, +training-method, +mitigation]
+    capabilities: [tool-use]
     title: "The Calls are Coming from Inside the Model: Investigating Probe-based Detection of Tool-Calling Errors in LLMs"
     date: 2026-08-27
     arxiv_id: "2608.27750"
@@ -991,6 +1031,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204249921
     score: 14
     signals: [+evaluation, +reasoning, +finding, +technique, +named-model, +improves, +training-method, +mitigation]
+    capabilities: [code-generation, procedure-following]
     title: "Aging of Prompt Engineering Techniques Across LLM Versions"
     date: 2026-08-25
     arxiv_id: "2608.24641"
@@ -1003,6 +1044,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204449140
     score: 14
     signals: [+evaluation, +reasoning, +analysis, +outperforms, +improves, +proposes-method, +training-method]
+    capabilities: [secure-coding]
     title: "Answer Is Cheap, Show Me the Evidence! Augmenting Automated Vulnerability Assessment with Evidence"
     date: 2026-08-26
     arxiv_id: "2608.25905"
@@ -1039,6 +1081,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204900938
     score: 14
     signals: [+benchmark, +evaluation, +capability, +finding, +agentic, +improves, +proposes-method]
+    capabilities: [long-context-degradation]
     title: "CateKV: On Sequential Consistency for Long-Context LLM Inference Acceleration"
     date: 2026-08-31
     arxiv_id: "2608.30295"
@@ -1063,6 +1106,7 @@ candidates:
   - openalex_id: https://openalex.org/W7206188245
     score: 14
     signals: [+evaluation, +capability, +robustness, +finding, +agentic, +proposes-method, +mitigation]
+    capabilities: [code-generation]
     title: "CUDA-Harness: Harnessing Agentic CUDA Kernel Generation and Optimization from Natural Language"
     date: 2026-08-30
     arxiv_id: "2609.00058"
@@ -1075,6 +1119,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204573002
     score: 14
     signals: [+benchmark, +evaluation, +failure, +reasoning, +agentic, +improves, +architecture]
+    capabilities: [tool-use]
     title: "Don't Overthink, Don't Underthink: Toward Adaptive Reasoning in Agentic AI"
     date: 2026-08-26
     arxiv_id: "2608.26442"
@@ -1087,6 +1132,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204945324
     score: 14
     signals: [+benchmark, +evaluation, +capability, +agentic, +named-model, +proposes-method, +mitigation]
+    capabilities: [prompt-injection]
     title: "ECLIPSE: Self-Evolving Stealthy Prompt Injection Attack against Long-Horizon Agentic Systems"
     date: 2026-08-31
     arxiv_id: "2608.30441"
@@ -1183,6 +1229,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204526542
     score: 14
     signals: [+benchmark, +evaluation, +capability, +contamination, +agentic, +proposes-method]
+    capabilities: [arithmetic]
     title: "How Do LLM Agents Actually Get the Flag? Trace-Level Provenance for Agentic Offensive Security Evaluation"
     date: 2026-08-26
     arxiv_id: "2608.26237"
@@ -1195,6 +1242,7 @@ candidates:
   - openalex_id: https://openalex.org/W7206183693
     score: 14
     signals: [+benchmark, +evaluation, +reasoning, +agentic, +outperforms, +proposes-method, +training-method, +scaling, -education]
+    capabilities: [long-context-degradation, procedure-following]
     title: "Instella-MoE Technical Report"
     date: 2026-09-01
     arxiv_id: "2609.00791"
@@ -1207,6 +1255,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204568785
     score: 14
     signals: [+benchmark, +evaluation, +hallucination, +agentic, +proposes-method, +training-method]
+    capabilities: [hallucination, strategic-deception]
     title: "Knowledge-Verified Emergent Deception in LLM Agents Under Conflicting Incentives"
     date: 2026-08-26
     arxiv_id: "2608.26372"
@@ -1219,6 +1268,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204863744
     score: 14
     signals: [+benchmark, +evaluation, +improves, +proposes-method, +training-method, +architecture, +mitigation]
+    capabilities: [secure-coding]
     title: "Large Language Models Systematically Favor Popular Options: Evidence and Mitigation Across MCQs"
     date: 2026-08-29
     arxiv_id: "2608.29257"
@@ -1231,6 +1281,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204911830
     score: 14
     signals: [+capability, +reasoning, +robustness, +proposes-method, +training-method, +architecture]
+    capabilities: [procedure-following]
     title: "LightNav-0: Eliciting VLM Spatial Intelligence for Generalist Embodied Navigation"
     date: 2026-08-31
     arxiv_id: "2608.30935"
@@ -1267,6 +1318,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204525742
     score: 14
     signals: [+benchmark, +evaluation, +failure, +hallucination, +proposes-method, +mitigation]
+    capabilities: [hallucination]
     title: "Prediction of Prediction (PoP): Inter-Layer Activation Fusion for Single-Pass Hallucination Detection in Large Language Models"
     date: 2026-08-27
     arxiv_id: "2608.27165"
@@ -1303,6 +1355,7 @@ candidates:
   - openalex_id: https://openalex.org/W7206189225
     score: 14
     signals: [+benchmark, +evaluation, +hallucination, +analysis, +proposes-method, +mitigation]
+    capabilities: [hallucination]
     title: "Reliability Challenges in Diffusion Vision-Language Models"
     date: 2026-09-01
     arxiv_id: "2609.01318"
@@ -1315,6 +1368,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204884492
     score: 14
     signals: [+evaluation, +limitation, +failure, +hallucination, +reasoning, +proposes-method]
+    capabilities: [hallucination]
     title: "ReVA: A Region-Aware Visual Assistant for Visually Grounded Question Answering"
     date: 2026-08-27
     arxiv_id: "2608.28707"
@@ -1375,6 +1429,7 @@ candidates:
   - openalex_id: https://openalex.org/W7206159767
     score: 14
     signals: [+capability, +limitation, +failure, +reasoning, +finding, +improves]
+    capabilities: [state-tracking]
     title: "Towards a Belief-Based World Model for LLM Agents"
     date: 2026-08-31
     arxiv_id: "2609.00455"
@@ -1387,6 +1442,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204247754
     score: 14
     signals: [+benchmark, +evaluation, +limitation, +failure, +reasoning, +proposes-method]
+    capabilities: [goal-conflict-safety]
     title: "TRACE: An Evidence-Grounded Benchmark for Safety Evaluation of Large Reasoning Models"
     date: 2026-08-25
     arxiv_id: "2608.24232"
@@ -1399,6 +1455,7 @@ candidates:
   - openalex_id: https://openalex.org/W7206182658
     score: 14
     signals: [+capability, +reasoning, +robustness, +agentic, +proposes-method, +training-method]
+    capabilities: [tool-use]
     title: "TRIAGE: Three-level Routing and Intelligent Agent Guidance for Efficient Execution"
     date: 2026-09-01
     arxiv_id: "2609.01428"
@@ -1411,6 +1468,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204493047
     score: 14
     signals: [+benchmark, +capability, +limitation, +failure, +agentic, +improves, +proposes-method, -clinical]
+    capabilities: [long-term-memory, procedure-following]
     title: "VISA: Agentic Self-Evolving Data Synthesis for Multimodal Instruction Following"
     date: 2026-08-26
     arxiv_id: "2608.26013"
@@ -1435,6 +1493,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204882862
     score: 13
     signals: [+benchmark, +failure, +agentic, +outperforms, +improves, +proposes-method]
+    capabilities: [arithmetic]
     title: "AGM: Achievement-Grounded Memory for Closed-Loop Agents with Frozen VLA Policies"
     date: 2026-08-30
     arxiv_id: "2608.29537"
@@ -1459,6 +1518,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204604445
     score: 13
     signals: [+benchmark, +evaluation, +hallucination, +agentic, +proposes-method, +mitigation]
+    capabilities: [arithmetic, hallucination]
     title: "BekchiAI: Measuring, Observing, and Controlling LLM Agents in One Click"
     date: 2026-08-27
     arxiv_id: "2608.26867"
@@ -1471,6 +1531,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204875348
     score: 13
     signals: [+evaluation, +capability, +failure, +reasoning, +proposes-method, +mitigation]
+    capabilities: [procedure-following]
     title: "Beyond Surface Forms: Symbolic Edits as a Test for Logical Reasoning with LLMs"
     date: 2026-08-31
     arxiv_id: "2608.30256"
@@ -1495,6 +1556,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204671228
     score: 13
     signals: [+evaluation, +contamination, +finding, +proposes-method, +training-method, +mitigation]
+    capabilities: [arithmetic]
     title: "Beyond Vector Hiding: Breaking and Mitigating Shared-Direction Weight Obfuscation in TEE-Offloaded Large Language Models"
     date: 2026-08-27
     arxiv_id: "2608.26651"
@@ -1518,6 +1580,7 @@ candidates:
   - openalex_id: https://openalex.org/W7206150622
     score: 13
     signals: [+benchmark, +failure, +outperforms, +proposes-method, +training-method]
+    capabilities: [long-term-memory]
     title: "Breaking the Structural Identity: Personalized Federated LoRA Fine-tuning under Rank Heterogeneity"
     date: 2026-09-01
     arxiv_id: "2609.00632"
@@ -1662,6 +1725,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204244498
     score: 13
     signals: [+benchmark, +hallucination, +outperforms, +proposes-method, +training-method]
+    capabilities: [hallucination]
     title: "Lost in Speech: Trilingual Spoken Hallucination Detection Across Audio and Transcripts"
     date: 2026-08-25
     arxiv_id: "2608.24707"
@@ -1686,6 +1750,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204447305
     score: 13
     signals: [+benchmark, +failure, +outperforms, +training-method, +mitigation]
+    capabilities: [sycophancy]
     title: "Mitigating LLM sycophancy with RL-based fine-tuning: Bayesian Truth Serum approach"
     date: 2026-08-26
     arxiv_id: "2608.25267"
@@ -1710,6 +1775,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204754281
     score: 13
     signals: [+reasoning, +robustness, +agentic, +outperforms, +proposes-method, +training-method]
+    capabilities: [strategic-deception]
     title: "Moirae: A Multimodal Agent Collaborative Framework for Dynamic Android Malware Detection"
     date: 2026-08-28
     arxiv_id: "2608.27994"
@@ -1758,6 +1824,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204866474
     score: 13
     signals: [+benchmark, +evaluation, +limitation, +failure, +improves, +proposes-method]
+    capabilities: [goal-conflict-safety]
     title: "Pak3H: Evaluating the Cost of Cultural Mismatch in LLM Alignment with a Human-Contextualized Urdu Benchmark"
     date: 2026-08-30
     arxiv_id: "2608.30065"
@@ -1782,6 +1849,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204891930
     score: 13
     signals: [+benchmark, +evaluation, +robustness, +technique, +improves, +proposes-method, +mitigation]
+    capabilities: [secure-coding]
     title: "Quantifying and Mitigating Korean Jamo-Level Typographical Vulnerabilities in Large Language Models"
     date: 2026-08-31
     arxiv_id: "2608.30229"
@@ -1805,6 +1873,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204592076
     score: 13
     signals: [+evaluation, +limitation, +hallucination, +technique, +outperforms, +proposes-method]
+    capabilities: [forecasting, hallucination]
     title: "STEP: State-Aware Task Estimation and Planning with Multi-Modal LLMs for Human-Robot Collaboration"
     date: 2026-08-27
     arxiv_id: "2608.27225"
@@ -1817,6 +1886,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204881394
     score: 13
     signals: [+capability, +hallucination, +named-model, +improves, +training-method, +mitigation]
+    capabilities: [hallucination]
     title: "Stick to What You Know: A Study of Knowledge-Aligned Supervised Fine-Tuning"
     date: 2026-08-31
     arxiv_id: "2608.30987"
@@ -1900,6 +1970,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204454032
     score: 12
     signals: [+benchmark, +evaluation, +failure, +hallucination, +reasoning, +improves, +proposes-method, -education]
+    capabilities: [forecasting, hallucination]
     title: "AFDBench: A Reasoning-First AI Scientist for NationalWeather Service Forecast Discussions"
     date: 2026-08-25
     arxiv_id: "2608.24954"
@@ -1912,6 +1983,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204523221
     score: 12
     signals: [+benchmark, +evaluation, +capability, +hallucination, +proposes-method]
+    capabilities: [hallucination]
     title: "Ancient-Bench: A Comprehensive Multi-millennial, Multi-medium, and Multi-script Benchmark for Ancient Chinese Artifact Text Recognition"
     date: 2026-08-27
     arxiv_id: "2608.27169"
@@ -1948,6 +2020,7 @@ candidates:
   - openalex_id: https://openalex.org/W7206179358
     score: 12
     signals: [+benchmark, +hallucination, +finding, +outperforms, +proposes-method, +training-method, -clinical]
+    capabilities: [hallucination]
     title: "Beyond Language Priors: Diagnosing and Fixing Visual-Origin Hallucinations in Multimodal LLM"
     date: 2026-08-31
     arxiv_id: "2609.00231"
@@ -1972,6 +2045,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204821718
     score: 12
     signals: [+benchmark, +capability, +agentic, +outperforms, +proposes-method]
+    capabilities: [prompt-injection]
     title: "CAITLYN: Can LLM Agents Autonomously Synthesize Defenses against Emerging Injection Attacks?"
     date: 2026-08-28
     arxiv_id: "2608.27990"
@@ -1984,6 +2058,7 @@ candidates:
   - openalex_id: https://openalex.org/W7206167632
     score: 12
     signals: [+benchmark, +evaluation, +failure, +hallucination, +proposes-method]
+    capabilities: [hallucination]
     title: "CHARM: Character Hallucination for Multicultural Role Play Benchmark"
     date: 2026-09-01
     arxiv_id: "2609.01352"
@@ -2068,6 +2143,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204518360
     score: 12
     signals: [+benchmark, +capability, +failure, +improves, +proposes-method]
+    capabilities: [state-tracking]
     title: "From Static to Dynamic: Benchmarking Real-World Code Review with MCR-Bench"
     date: 2026-08-27
     arxiv_id: "2608.27442"
@@ -2104,6 +2180,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204246716
     score: 12
     signals: [+evaluation, +failure, +reasoning, +agentic, +proposes-method, +architecture]
+    capabilities: [tool-use]
     title: "Joint Optimization of Tool Creation and Use for Large Language Model Agents"
     date: 2026-08-25
     arxiv_id: "2608.24571"
@@ -2140,6 +2217,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204935470
     score: 12
     signals: [+evaluation, +capability, +hallucination, +improves, +proposes-method, +mitigation]
+    capabilities: [hallucination]
     title: "Likelihood-Constrained Acoustic Reranking for Training-Free Hallucination Mitigation in LLM-Based ASR"
     date: 2026-08-31
     arxiv_id: "2608.30776"
@@ -2152,6 +2230,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204883267
     score: 12
     signals: [+failure, +analysis, +agentic, +named-model, +training-method]
+    capabilities: [tool-use]
     title: "LiteSearch-VL: Small Multimodal Search Agents via Trajectory Distillation and Synthetic Step-DPO"
     date: 2026-08-29
     arxiv_id: "2608.29357"
@@ -2176,6 +2255,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204534168
     score: 12
     signals: [+benchmark, +evaluation, +capability, +outperforms, +improves, +proposes-method]
+    capabilities: [procedure-following]
     title: "Omni-Interactive Universal Embedder"
     date: 2026-08-27
     arxiv_id: "2608.27044"
@@ -2200,6 +2280,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204606874
     score: 12
     signals: [+evaluation, +limitation, +reasoning, +proposes-method, +architecture, +mitigation]
+    capabilities: [strategic-deception]
     title: "ReliableRAG: Combating Misinformation in Retrieval-Augmented Generation via Reliability-Guided Reasoning Chains"
     date: 2026-08-26
     arxiv_id: "2608.25487"
@@ -2271,6 +2352,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204597527
     score: 12
     signals: [+evaluation, +hallucination, +reasoning, +agentic, +outperforms, +proposes-method]
+    capabilities: [hallucination]
     title: "Thinking on Shots: Consistent Multi-Shot Video Editing with Agentic Reasoning"
     date: 2026-08-27
     arxiv_id: "2608.26809"
@@ -2295,6 +2377,7 @@ candidates:
   - openalex_id: https://openalex.org/W7206206459
     score: 12
     signals: [+benchmark, +reasoning, +outperforms, +improves, +proposes-method, +architecture]
+    capabilities: [goal-conflict-safety]
     title: "Trust Your Guide Only When Certain: Uncertainty-Aware Sparse Alignment at Inference Time"
     date: 2026-09-01
     arxiv_id: "2609.00624"
@@ -2307,6 +2390,7 @@ candidates:
   - openalex_id: https://openalex.org/W7206192656
     score: 12
     signals: [+benchmark, +evaluation, +capability, +finding, +named-model, +outperforms]
+    capabilities: [code-generation, self-repair]
     title: "What Survives the Next Model? Benchmarking LLM-Based Techniques Against Single-Prompts"
     date: 2026-08-31
     arxiv_id: "2609.00468"
@@ -2319,6 +2403,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204249701
     score: 12
     signals: [+hallucination, +robustness, +finding, +outperforms, +improves, +architecture]
+    capabilities: [code-generation, hallucination]
     title: "When Do Supervised UQ Ensembles Improve LLM Hallucination Detection? A Robustness Study"
     date: 2026-08-25
     arxiv_id: "2608.24492"
@@ -2331,6 +2416,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204484926
     score: 12
     signals: [+benchmark, +evaluation, +failure, +finding, +improves, +mitigation]
+    capabilities: [hallucination]
     title: "When RAG Fails to Equalize: Geo-bias in Factual Question Answering over Public Companies"
     date: 2026-08-26
     arxiv_id: "2608.25717"
@@ -2403,6 +2489,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204894465
     score: 11
     signals: [+benchmark, +robustness, +improves, +proposes-method, +training-method]
+    capabilities: [state-tracking]
     title: "AnyWorld: Factorized Egocentric World Models for Cross-Embodiment Generalization"
     date: 2026-08-29
     arxiv_id: "2608.29242"
@@ -2487,6 +2574,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204910548
     score: 11
     signals: [+benchmark, +evaluation, +finding, +agentic, +outperforms, +training-method, -legal]
+    capabilities: [long-context-degradation]
     title: "Cloud and On-Premises Deployment of Uzbek Legal RAG via Targeted Retriever Fine-Tuning"
     date: 2026-08-29
     arxiv_id: "2608.29284"
@@ -2523,6 +2611,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204942450
     score: 11
     signals: [+reasoning, +analysis, +technique, +proposes-method, +architecture]
+    capabilities: [arithmetic]
     title: "Detecting Hidden Chain-of-Thought in Large Language Models with Linguistic, Behavioral, and Mechanistic Indicators"
     date: 2026-08-30
     arxiv_id: "2608.29956"
@@ -2547,6 +2636,7 @@ candidates:
   - openalex_id: https://openalex.org/W7206174262
     score: 11
     signals: [+benchmark, +evaluation, +robustness, +agentic, +named-model, +proposes-method]
+    capabilities: [self-repair]
     title: "EdiTikZ: Scientific Figure Editing from Revision Trajectories"
     date: 2026-09-01
     arxiv_id: "2609.01409"
@@ -2559,6 +2649,7 @@ candidates:
   - openalex_id: https://openalex.org/W7206214269
     score: 11
     signals: [+benchmark, +evaluation, +reasoning, +outperforms, +improves, +proposes-method]
+    capabilities: [long-context-degradation]
     title: "EGT-KG: Evidence-Grounded Typed KG Retrieval for Practical Scientific QA with Small Language Models"
     date: 2026-08-31
     arxiv_id: "2609.00479"
@@ -2594,6 +2685,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204946956
     score: 11
     signals: [+evaluation, +capability, +failure, +agentic, +proposes-method]
+    capabilities: [forecasting]
     title: "Forward-Deployed Full-Stack Engineering for Autonomous Cloud MLOps"
     date: 2026-08-30
     arxiv_id: "2608.29615"
@@ -2666,6 +2758,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204865889
     score: 11
     signals: [+evaluation, +hallucination, +reasoning, +proposes-method, +training-method]
+    capabilities: [hallucination]
     title: "ImageEval 2026: Culturally Grounded Arabic Multimodal Evaluation"
     date: 2026-08-31
     arxiv_id: "2608.30475"
@@ -2750,6 +2843,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204960688
     score: 11
     signals: [+benchmark, +evaluation, +failure, +robustness, +proposes-method]
+    capabilities: [forecasting, long-context-degradation]
     title: "LLMODE: Aligning ODEs with LLMs via Gated Token Injection for Irregular Spatio-Temporal Forecasting"
     date: 2026-08-30
     arxiv_id: "2608.29640"
@@ -2798,6 +2892,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204887919
     score: 11
     signals: [+evaluation, +capability, +hallucination, +reasoning, +agentic]
+    capabilities: [hallucination]
     title: "Perceive to Hypothesize, Verify to Ground: An Agentic Reasoning Framework for Open-World Geo-Localization"
     date: 2026-08-30
     arxiv_id: "2608.29880"
@@ -2834,6 +2929,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204226153
     score: 11
     signals: [+benchmark, +evaluation, +outperforms, +improves, +proposes-method, +mitigation]
+    capabilities: [code-generation]
     title: "Rubrics as Visual-Repair Context for Self-Evolving UI-to-Code Generation"
     date: 2026-08-25
     arxiv_id: "2608.24138"
@@ -2846,6 +2942,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204843739
     score: 11
     signals: [+reasoning, +finding, +agentic, +outperforms, +training-method]
+    capabilities: [long-context-degradation]
     title: "Sliding-window beats linear attention"
     date: 2026-08-28
     arxiv_id: "2608.28444"
@@ -2870,6 +2967,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204595194
     score: 11
     signals: [+hallucination, +outperforms, +improves, +proposes-method, +training-method]
+    capabilities: [hallucination]
     title: "STAR : Sentence Translation Alignment Rate for Document-to-Document Machine Translation"
     date: 2026-08-27
     arxiv_id: "2608.27161"
@@ -2906,6 +3004,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204908635
     score: 11
     signals: [+benchmark, +evaluation, +failure, +agentic, +architecture]
+    capabilities: [tool-use]
     title: "Towards a Systems Foundation for Agentic Skills: Architecture, Lifecycle, and Security"
     date: 2026-08-30
     arxiv_id: "2608.29596"
@@ -2918,6 +3017,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204556672
     score: 11
     signals: [+benchmark, +limitation, +improves, +proposes-method, +mitigation]
+    capabilities: [code-generation]
     title: "Unsaid, Unsafe? Implicit Security Obligations in LLM-Based RTL Code Generation"
     date: 2026-08-27
     arxiv_id: "2608.26588"
@@ -2954,6 +3054,7 @@ candidates:
   - openalex_id: https://openalex.org/W7206217716
     score: 11
     signals: [+benchmark, +evaluation, +failure, +reasoning, +proposes-method]
+    capabilities: [long-term-memory]
     title: "VIBE-Bench: Evaluating Personalized Large Language Models When Profiles Don't Mean Preferences"
     date: 2026-09-01
     arxiv_id: "2609.00921"
@@ -2966,6 +3067,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204273820
     score: 11
     signals: [+evaluation, +capability, +reasoning, +agentic, +improves, +proposes-method]
+    capabilities: [prompt-injection, tool-use]
     title: "What Guides the Agent? Adjudicating Unauthorized Behavior via Localizing Behavior-Guiding Instructions"
     date: 2026-08-25
     arxiv_id: "2608.24022"
@@ -3026,6 +3128,7 @@ candidates:
   - openalex_id: https://openalex.org/W7206177108
     score: 10
     signals: [+benchmark, +evaluation, +failure, +agentic, +outperforms, +proposes-method, -clinical]
+    capabilities: [tool-use]
     title: "Calibration is the Bottleneck: An Action-Class Diagnostic of Multi-Turn Tool-Calling"
     date: 2026-09-01
     arxiv_id: "2609.00949"
@@ -3038,6 +3141,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204881801
     score: 10
     signals: [+benchmark, +failure, +agentic, +outperforms, +improves, +training-method, -domain-topic]
+    capabilities: [tool-use]
     title: "CAST: Critique-Aware Supervision for Training Reliable Long-Horizon Tool-Calling Agents"
     date: 2026-08-31
     arxiv_id: "2608.30147"
@@ -3050,6 +3154,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204897317
     score: 10
     signals: [+benchmark, +reasoning, +improves, +proposes-method, +mitigation]
+    capabilities: [forecasting]
     title: "CoMPASS: Collaborative Molecular Property Prediction via Adaptive Small-Large Model Synergy"
     date: 2026-08-31
     arxiv_id: "2608.30674"
@@ -3074,6 +3179,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204931061
     score: 10
     signals: [+failure, +reasoning, +agentic, +improves, +proposes-method]
+    capabilities: [long-context-degradation]
     title: "Detect Before You Attribute: Cascade Failure Attribution for Multi-Agent Systems"
     date: 2026-08-30
     arxiv_id: "2608.29646"
@@ -3134,6 +3240,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204876131
     score: 10
     signals: [+capability, +improves, +proposes-method, +architecture, +mitigation]
+    capabilities: [arithmetic]
     title: "Event-Driven Language Models with Sparse Neural Activity for Neuromorphic Hardware"
     date: 2026-08-31
     arxiv_id: "2608.30439"
@@ -3170,6 +3277,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204476344
     score: 10
     signals: [+benchmark, +evaluation, +capability, +named-model, +proposes-method]
+    capabilities: [secure-coding]
     title: "FuzzingBrain-Bench V1: Evaluating Open-Ended Bug Discovery by LLMs"
     date: 2026-08-25
     arxiv_id: "2608.25158"
@@ -3182,6 +3290,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204471668
     score: 10
     signals: [+reasoning, +robustness, +finding, +agentic, +proposes-method]
+    capabilities: [secure-coding]
     title: "Groundhog Bit-Flip Attack: Seeding Infinite Generation Loops in Mixture-of-Experts LLMs through Bit Flips"
     date: 2026-08-26
     arxiv_id: "2608.25276"
@@ -3194,6 +3303,7 @@ candidates:
   - openalex_id: https://openalex.org/W7206189803
     score: 10
     signals: [+benchmark, +finding, +improves, +proposes-method, +architecture]
+    capabilities: [arithmetic]
     title: "HBQ: Hierarchical Scaling Block Quantization with Hardware-Efficiency-Aware Design for Accurate LLM Inference"
     date: 2026-08-31
     arxiv_id: "2609.00450"
@@ -3218,6 +3328,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204945022
     score: 10
     signals: [+benchmark, +evaluation, +reasoning, +outperforms, +proposes-method]
+    capabilities: [goal-conflict-safety]
     title: "Inter-3D VQA: A Roadside Multimodal Benchmark for 3D Spatiotemporally Grounded Visual Question Answering"
     date: 2026-08-28
     arxiv_id: "2608.28762"
@@ -3230,6 +3341,7 @@ candidates:
   - openalex_id: https://openalex.org/W7206166400
     score: 10
     signals: [+benchmark, +failure, +hallucination, +named-model]
+    capabilities: [hallucination]
     title: "LLMPEDIA: Browsing, Verifying, and Comparing the Parametric Encyclopedic Knowledge of LLMs"
     date: 2026-09-01
     arxiv_id: "2609.01182"
@@ -3326,6 +3438,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204551261
     score: 10
     signals: [+reasoning, +technique, +outperforms, +improves, +training-method]
+    capabilities: [self-repair]
     title: "Performance Foundations of Parallel & Distributed Reasoning Language Models"
     date: 2026-08-27
     arxiv_id: "2608.27046"
@@ -3350,6 +3463,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204594192
     score: 10
     signals: [+failure, +reasoning, +agentic, +improves, +proposes-method]
+    capabilities: [code-generation]
     title: "ProgRouter: Online Progress-Guided Orchestration for Multi-Agent LLM Workflows under Quality-Cost Tradeoffs"
     date: 2026-08-26
     arxiv_id: "2608.25992"
@@ -3362,6 +3476,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204252462
     score: 10
     signals: [+evaluation, +capability, +finding, +agentic, +architecture]
+    capabilities: [long-context-degradation]
     title: "Reading Is Not Using: Retrieval, Judgment, and the Design of AI Financial Research Workflows"
     date: 2026-08-25
     arxiv_id: "2608.24842"
@@ -3386,6 +3501,7 @@ candidates:
   - openalex_id: https://openalex.org/W7206212011
     score: 10
     signals: [+benchmark, +evaluation, +capability, +agentic, +proposes-method, +mitigation, -clinical]
+    capabilities: [tool-use]
     title: "RestoreBench: Can AI Agents Restore Power Flow Convergence?"
     date: 2026-08-31
     arxiv_id: "2609.00384"
@@ -3398,6 +3514,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204544724
     score: 10
     signals: [+benchmark, +outperforms, +improves, +proposes-method, +architecture]
+    capabilities: [forecasting]
     title: "SAGE: Variate-Wise Semantic Augmentation for Vision-Language Time Series Forecasting"
     date: 2026-08-27
     arxiv_id: "2608.26829"
@@ -3434,6 +3551,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204898177
     score: 10
     signals: [+benchmark, +evaluation, +agentic, +named-model, +improves, +proposes-method, +training-method, -clinical]
+    capabilities: [prompt-injection]
     title: "SIR: Self-improving Red-teaming for Compute Use Agents"
     date: 2026-08-31
     arxiv_id: "2608.30207"
@@ -3470,6 +3588,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204449683
     score: 10
     signals: [+failure, +hallucination, +analysis, +proposes-method, +architecture, -clinical]
+    capabilities: [hallucination]
     title: "Targeting the Attention Heads Behind Object Hallucination in LLaVA"
     date: 2026-08-25
     arxiv_id: "2608.24966"
@@ -3482,6 +3601,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204892924
     score: 10
     signals: [+benchmark, +reasoning, +improves, +proposes-method, +mitigation]
+    capabilities: [self-repair]
     title: "Think, Look, and Revise: Inconsistency-Aware Visual Self-Correction in MLLMs"
     date: 2026-08-29
     arxiv_id: "2608.29374"
@@ -3506,6 +3626,7 @@ candidates:
   - openalex_id: https://openalex.org/W7206196466
     score: 10
     signals: [+benchmark, +evaluation, +limitation, +robustness, +proposes-method, +mitigation, -clinical]
+    capabilities: [prompt-injection]
     title: "Validity-Aware Jailbreak Evaluation for Large Language Models"
     date: 2026-08-31
     arxiv_id: "2609.00498"
@@ -3530,6 +3651,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204916145
     score: 10
     signals: [+benchmark, +evaluation, +hallucination, +improves, +proposes-method]
+    capabilities: [hallucination]
     title: "VisER: Visual Evidence and Reliance for Object Hallucination Detection in LVLMs"
     date: 2026-08-31
     arxiv_id: "2608.30480"
@@ -3566,6 +3688,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204479773
     score: 10
     signals: [+limitation, +robustness, +analysis, +proposes-method]
+    capabilities: [secure-coding]
     title: "When Pruning Meets Interpretability: Preserving Sparse Autoencoder Robustness in LLMs"
     date: 2026-08-26
     arxiv_id: "2608.25941"
@@ -3602,6 +3725,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204813251
     score: 10
     signals: [+evaluation, +hallucination, +agentic, +proposes-method, +mitigation]
+    capabilities: [hallucination]
     title: "xTRUCE: A Provably Safe Arbiter for Multi-xApp Conflict Mitigation in Agentic O-RAN"
     date: 2026-08-28
     arxiv_id: "2608.28532"
@@ -3626,6 +3750,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204465052
     score: 9
     signals: [+failure, +robustness, +agentic, +proposes-method]
+    capabilities: [prompt-injection]
     title: "A Self-Evolving Multi-Agent Framework Defense against LLM Jailbreak Attacks"
     date: 2026-08-26
     arxiv_id: "2608.26008"
@@ -3638,6 +3763,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204947200
     score: 9
     signals: [+benchmark, +evaluation, +agentic, +improves, +proposes-method]
+    capabilities: [long-context-degradation]
     title: "A.X K2 Technical Report"
     date: 2026-08-31
     arxiv_id: "2608.30181"
@@ -3650,6 +3776,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204230781
     score: 9
     signals: [+benchmark, +agentic, +proposes-method, +mitigation]
+    capabilities: [procedure-following, self-repair]
     title: "ACE: A Self-Correcting Agentic Canvas Editor for Multi-Slide Presentation Automation"
     date: 2026-08-25
     arxiv_id: "2608.24103"
@@ -3674,6 +3801,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204896465
     score: 9
     signals: [+benchmark, +agentic, +outperforms, +proposes-method]
+    capabilities: [hallucination, long-term-memory]
     title: "Agent Zero Memory: Provenance-Aware Long-Term Memory for LLM Agents"
     date: 2026-08-30
     arxiv_id: "2608.29606"
@@ -3710,6 +3838,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204934747
     score: 9
     signals: [+evaluation, +capability, +agentic, +improves, +proposes-method, +training-method, -clinical]
+    capabilities: [tool-use]
     title: "ATLAS: Dual-Horizon Diagnostic Evaluation for Industrial Tool-Use Agents"
     date: 2026-08-31
     arxiv_id: "2608.30685"
@@ -3734,6 +3863,7 @@ candidates:
   - openalex_id: https://openalex.org/W7206151984
     score: 9
     signals: [+benchmark, +evaluation, +limitation, +hallucination, +proposes-method, -clinical]
+    capabilities: [hallucination]
     title: "Benchmarking Vision-Language Models for Automated Pathology Diagnosis and Report Generation"
     date: 2026-09-01
     arxiv_id: "2609.00866"
@@ -3769,6 +3899,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204789282
     score: 9
     signals: [+limitation, +analysis, +named-model, +proposes-method]
+    capabilities: [prompt-injection, secure-coding]
     title: "Circuit Discovery Helps Detect LLM Jailbreaking: A Mechanistic Interpretability Study"
     date: 2026-08-27
     arxiv_id: "2608.27504"
@@ -3829,6 +3960,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204894189
     score: 9
     signals: [+benchmark, +failure, +hallucination]
+    capabilities: [hallucination]
     title: "Detecting and Repairing Hallucinations in Retrieval-Augmented Generation"
     date: 2026-08-29
     arxiv_id: "2608.29307"
@@ -3949,6 +4081,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204927892
     score: 9
     signals: [+benchmark, +evaluation, +proposes-method, +training-method]
+    capabilities: [long-term-memory, sycophancy]
     title: "How Identity and Opinion Shape Political Sycophancy in LLMs"
     date: 2026-08-29
     arxiv_id: "2608.29198"
@@ -3985,6 +4118,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204604140
     score: 9
     signals: [+evaluation, +capability, +reasoning, +training-method]
+    capabilities: [tool-use]
     title: "Knowing When Not to Reuse: Conditional Experience Transfer in Autonomous LLM Post-Training"
     date: 2026-08-27
     arxiv_id: "2608.26730"
@@ -4033,6 +4167,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204923356
     score: 9
     signals: [+benchmark, +evaluation, +hallucination, +reasoning, +robustness, +proposes-method, +mitigation, -clinical, -industry]
+    capabilities: [hallucination]
     title: "Partition-Aware Unlearning for Removing Spurious Correlations in Large Vision-Language Models"
     date: 2026-08-30
     arxiv_id: "2608.29996"
@@ -4105,6 +4240,7 @@ candidates:
   - openalex_id: https://openalex.org/W7206200761
     score: 9
     signals: [+hallucination, +improves, +proposes-method, +training-method]
+    capabilities: [hallucination]
     title: "SFAD: Speculative Factuality-Aware Decoding"
     date: 2026-09-01
     arxiv_id: "2609.00796"
@@ -4141,6 +4277,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204910495
     score: 9
     signals: [+evaluation, +hallucination, +proposes-method, +training-method]
+    capabilities: [hallucination]
     title: "SpanCalib-VLM: Calibrated Hallucination Span Detection in Vision-Language Models"
     date: 2026-08-30
     arxiv_id: "2608.29974"
@@ -4153,6 +4290,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204573683
     score: 9
     signals: [+evaluation, +analysis, +finding, +improves, +architecture]
+    capabilities: [sycophancy]
     title: "Sycophancy Suppression Can Impair Rational Updating: Anti-Sycophancy Should Preserve the Ability to Update"
     date: 2026-08-27
     arxiv_id: "2608.26511"
@@ -4165,6 +4303,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204818503
     score: 9
     signals: [+hallucination, +analysis, +outperforms, +improves]
+    capabilities: [hallucination]
     title: "SymboLLM-FE: LLM-Accelerated Symbolic Regression for Automated Feature Engineering on Tabular Data"
     date: 2026-08-28
     arxiv_id: "2608.28408"
@@ -4201,6 +4340,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204533269
     score: 9
     signals: [+benchmark, +evaluation, +reasoning, +improves, +proposes-method]
+    capabilities: [code-generation, procedure-following]
     title: "The Reasoning Tax: Token Economics of LLM Reasoning Across Task Types and Deployment Contexts"
     date: 2026-08-26
     arxiv_id: "2608.26235"
@@ -4237,6 +4377,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204900746
     score: 9
     signals: [+capability, +reasoning, +finding, +outperforms]
+    capabilities: [long-term-memory]
     title: "Toward Latent Language Model Skills Steering and Optimization: An Empirical Study"
     date: 2026-08-29
     arxiv_id: "2608.29459"
@@ -4285,6 +4426,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204250733
     score: 9
     signals: [+reasoning, +agentic, +outperforms, +improves, +proposes-method]
+    capabilities: [long-context-degradation]
     title: "VisCache: Visual KV Cache Pruning for Efficient Vision Large Language Model Inference"
     date: 2026-08-25
     arxiv_id: "2608.24063"
@@ -4309,6 +4451,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204442410
     score: 9
     signals: [+benchmark, +evaluation, +named-model, +outperforms, +proposes-method]
+    capabilities: [code-generation]
     title: "XREPOTEST: Benchmarking Multilingual Repository-Level Unit Test Generation for Large Language Models"
     date: 2026-08-26
     arxiv_id: "2608.25939"
@@ -4369,6 +4512,7 @@ candidates:
   - openalex_id: https://openalex.org/W7206189144
     score: 8
     signals: [+evaluation, +capability, +reasoning, +agentic, +improves, +proposes-method, -clinical]
+    capabilities: [self-repair]
     title: "AutoXRD: Autonomous LLM Agents and Comprehensive Evaluation for Powder Diffraction Analysis"
     date: 2026-08-30
     arxiv_id: "2609.00070"
@@ -4477,6 +4621,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204908540
     score: 8
     signals: [+benchmark, +capability, +robustness, +improves, +proposes-method, -industry]
+    capabilities: [procedure-following]
     title: "Cross-Relational Preference Learning for Better LLM Instruction Following"
     date: 2026-08-29
     arxiv_id: "2608.29352"
@@ -4549,6 +4694,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204932666
     score: 8
     signals: [+hallucination, +improves, +proposes-method, +mitigation]
+    capabilities: [hallucination]
     title: "EviAnchor: Mitigating Hallucinations in Large Vision-Language Models via Regional Visual Evidence Compensation"
     date: 2026-08-29
     arxiv_id: "2608.29092"
@@ -4609,6 +4755,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204906695
     score: 8
     signals: [+evaluation, +reasoning, +robustness, +improves, +proposes-method]
+    capabilities: [procedure-following]
     title: "GUIDE: Guiding Internal Evidence with Language Instructions"
     date: 2026-08-31
     arxiv_id: "2608.30712"
@@ -4657,6 +4804,7 @@ candidates:
   - openalex_id: https://openalex.org/W7206171393
     score: 8
     signals: [+benchmark, +evaluation, +robustness, +analysis, +finding, -clinical]
+    capabilities: [hallucination]
     title: "Investigating Linear Probe Robustness to Linguistic Register, Medical Specialty, and Corpus Shifts in Medical QA"
     date: 2026-09-01
     arxiv_id: "2609.01361"
@@ -4693,6 +4841,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204882795
     score: 8
     signals: [+limitation, +improves, +proposes-method, +architecture]
+    capabilities: [long-context-degradation]
     title: "LoGo: Token-Level Dynamic Local-Global Attention"
     date: 2026-08-30
     arxiv_id: "2608.29539"
@@ -4705,6 +4854,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204759488
     score: 8
     signals: [+benchmark, +evaluation, +agentic, +outperforms]
+    capabilities: [long-context-degradation, prompt-injection]
     title: "LongPIBench: A Long-Context Benchmark for Prompt Injection"
     date: 2026-08-28
     arxiv_id: "2608.28411"
@@ -4765,6 +4915,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204452208
     score: 8
     signals: [+hallucination, +improves, +proposes-method, +mitigation]
+    capabilities: [hallucination]
     title: "Multi-Granularity Context-Enhanced RAG over Multimodal Knowledge Graphs"
     date: 2026-08-26
     arxiv_id: "2608.25986"
@@ -4801,6 +4952,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204820128
     score: 8
     signals: [+evaluation, +capability, +limitation, +improves]
+    capabilities: [self-repair]
     title: "Operationalizing Regulations into Code: A Model to Enhance Governance and Compliance in LLM Selection for Software Engineering"
     date: 2026-08-27
     arxiv_id: "2608.27703"
@@ -4825,6 +4977,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204562740
     score: 8
     signals: [+capability, +limitation, +reasoning, +improves, +proposes-method, +training-method, -clinical, -education]
+    capabilities: [procedure-following]
     title: "Preserving General Capabilities during Domain Specialization with Uncertainty-Calibrated MOPD"
     date: 2026-08-27
     arxiv_id: "2608.26735"
@@ -4897,6 +5050,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204855727
     score: 8
     signals: [+evaluation, +failure, +agentic, +proposes-method]
+    capabilities: [prompt-injection]
     title: "ROPE: Routed Origin Policy Enforcement against Indirect Prompt Injection"
     date: 2026-08-27
     arxiv_id: "2608.27496"
@@ -4909,6 +5063,7 @@ candidates:
   - openalex_id: https://openalex.org/W7207791791
     score: 8
     signals: [+evaluation, +reasoning, +finding, +agentic, +improves]
+    capabilities: [long-context-degradation]
     title: "Scaling Inference Prefill with High-Radix Photonic Interconnects"
     date: 2026-09-01
     arxiv_id: "2609.01821"
@@ -4945,6 +5100,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204232495
     score: 8
     signals: [+benchmark, +outperforms, +improves, +proposes-method]
+    capabilities: [arithmetic]
     title: "SonarLLM: A Native Sonar--Optical Multimodal Large Language Model for Underwater Perception"
     date: 2026-08-25
     arxiv_id: "2608.24325"
@@ -4981,6 +5137,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204874720
     score: 8
     signals: [+evaluation, +failure, +agentic, +proposes-method]
+    capabilities: [long-context-degradation]
     title: "Tail-Replay: Escaping the Curse of Linear Attention in Prefix Caching for Hybrid LLMs"
     date: 2026-08-31
     arxiv_id: "2608.30310"
@@ -5029,6 +5186,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204606863
     score: 8
     signals: [+benchmark, +evaluation, +capability, +proposes-method, +mitigation, -industry]
+    capabilities: [procedure-following]
     title: "Video-IFBench: Evaluating Instruction Following of Multimodal LLMs in Video Understanding Scenarios"
     date: 2026-08-26
     arxiv_id: "2608.25529"
@@ -5112,6 +5270,7 @@ candidates:
   - openalex_id: https://openalex.org/W7207655053
     score: 7
     signals: [+hallucination, +reasoning, +agentic]
+    capabilities: [hallucination]
     title: "Agents That Model Agents: Five Principles Toward a Theory of Mind for 6G Networks"
     date: 2026-09-01
     arxiv_id: "2609.01779"
@@ -5136,6 +5295,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204482759
     score: 7
     signals: [+evaluation, +hallucination, +reasoning, +technique, +mitigation, -industry]
+    capabilities: [hallucination, secure-coding]
     title: "AI Slop and Hallucinations in Vulnerability Assessment: A Survey on Reasoning Failures and Trustworthy Mitigation"
     date: 2026-08-26
     arxiv_id: "2608.25667"
@@ -5364,6 +5524,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204912660
     score: 7
     signals: [+benchmark, +evaluation, +finding, +named-model, +improves, +proposes-method, -clinical]
+    capabilities: [goal-conflict-safety]
     title: "Guardrail-Agnostic Societal Bias Evaluation in Large Vision-Language Models"
     date: 2026-08-30
     arxiv_id: "2608.29590"
@@ -5400,6 +5561,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204939550
     score: 7
     signals: [+evaluation, +analysis, +outperforms, +improves]
+    capabilities: [forecasting]
     title: "Integrating adaptive human behavior into epidemic models with large language models"
     date: 2026-08-30
     arxiv_id: "2608.29535"
@@ -5424,6 +5586,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204880161
     score: 7
     signals: [+limitation, +proposes-method, +mitigation]
+    capabilities: [strategic-deception]
     title: "MMMMM: A Unified Taxonomy for Investigating the Mechanisms of Multilingual MultiModal Misinformation"
     date: 2026-08-30
     arxiv_id: "2608.29681"
@@ -5436,6 +5599,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204222750
     score: 7
     signals: [+benchmark, +evaluation, +capability, +reasoning, +improves, -industry]
+    capabilities: [arithmetic, fact-verification]
     title: "PARTAB: Partition-Aware Reasoning with Structured Evidence for Scalable Table Understanding"
     date: 2026-08-25
     arxiv_id: "2608.24082"
@@ -5448,6 +5612,7 @@ candidates:
   - openalex_id: https://openalex.org/W7206164852
     score: 7
     signals: [+benchmark, +evaluation, +agentic, +improves, +proposes-method, -legal]
+    capabilities: [long-context-degradation]
     title: "Polish ModernBERT: The Long and Short of Polish Language Understanding"
     date: 2026-09-01
     arxiv_id: "2609.01379"
@@ -5556,6 +5721,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204896979
     score: 7
     signals: [+failure, +finding, +training-method, +mitigation, -education]
+    capabilities: [sycophancy]
     title: "Sycophantic Agreement Transfers with Neutral Data via Contrastive Preference Optimization"
     date: 2026-08-31
     arxiv_id: "2608.31079"
@@ -5580,6 +5746,7 @@ candidates:
   - openalex_id: https://openalex.org/W7206159517
     score: 7
     signals: [+hallucination, +training-method, +scaling, +mitigation, -clinical]
+    capabilities: [hallucination]
     title: "The Privacy-Hallucination Tradeoff in Differentially Private Language Models"
     date: 2026-08-31
     arxiv_id: "2609.00492"
@@ -5592,6 +5759,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204950843
     score: 7
     signals: [+benchmark, +evaluation, +analysis]
+    capabilities: [prompt-injection]
     title: "The Safety Relay in Roleplay Jailbreaks: A Component-Resolved Causal Analysis of Harm Recognition and Refusal"
     date: 2026-08-31
     arxiv_id: "2608.30585"
@@ -5724,6 +5892,7 @@ candidates:
   - openalex_id: https://openalex.org/W7206194344
     score: 6
     signals: [+evaluation, +analysis, +proposes-method]
+    capabilities: [judge-position-bias]
     title: "Autoresearch for Marketplace Catalogs: From Legacy Forms to AI-Native Matching"
     date: 2026-08-31
     arxiv_id: "2609.00274"
@@ -5736,6 +5905,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204590719
     score: 6
     signals: [+benchmark, +evaluation, +agentic]
+    capabilities: [tool-use]
     title: "Benchmarking AI Agents for Hardware Design Automation via MCP Tool Calling"
     date: 2026-08-25
     arxiv_id: "2608.26199"
@@ -5796,6 +5966,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204779959
     score: 6
     signals: [+limitation, +reasoning, +agentic, +proposes-method, -education]
+    capabilities: [context-hygiene, long-context-degradation, long-term-memory]
     title: "ContextPilot: Teaching Agents for Proactive Context Management via Fine-grained RL"
     date: 2026-08-28
     arxiv_id: "2608.28476"
@@ -5808,6 +5979,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204826271
     score: 6
     signals: [+evaluation, +capability, +outperforms]
+    capabilities: [goal-conflict-safety]
     title: "Cross-Session Decomposition Attacks: Scaling Risk and Intent-Aligned Retrieval Defense"
     date: 2026-08-28
     arxiv_id: "2608.27945"
@@ -5844,6 +6016,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204264401
     score: 6
     signals: [+evaluation, +capability, +reasoning, +robustness, +agentic, +improves, +proposes-method, -clinical, -domain-topic]
+    capabilities: [tool-use]
     title: "EviDx: Evidence-Aware Active Diagnosis with Scaffolded LLM Agents"
     date: 2026-08-25
     arxiv_id: "2608.24570"
@@ -5987,6 +6160,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204455435
     score: 6
     signals: [+benchmark, +evaluation, +limitation, +proposes-method, -clinical]
+    capabilities: [prompt-injection, secure-coding]
     title: "MMJailBench: A Factorized Benchmark for Disentangling Multimodal Jailbreak Vulnerabilities"
     date: 2026-08-26
     arxiv_id: "2608.25490"
@@ -6011,6 +6185,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204488860
     score: 6
     signals: [+evaluation, +hallucination, +outperforms]
+    capabilities: [hallucination]
     title: "Overview of SHROOM-Visions 2026: A Shared Task on Hallucination Detection in Large Vision-Language Models"
     date: 2026-08-26
     arxiv_id: "2608.25662"
@@ -6035,6 +6210,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204225509
     score: 6
     signals: [+evaluation, +reasoning, +agentic, +improves, +proposes-method, -case-study]
+    capabilities: [goal-conflict-safety]
     title: "PinSieve: Production Selective VLM Serving and a Governed Memory Flywheel for Enterprise Content-Quality Triage"
     date: 2026-08-25
     arxiv_id: "2608.24040"
@@ -6047,6 +6223,7 @@ candidates:
   - openalex_id: https://openalex.org/W7206150682
     score: 6
     signals: [+evaluation, +limitation, +scaling]
+    capabilities: [code-generation]
     title: "Predicting Program Exit Code with LLMs and Programming Language Semantics"
     date: 2026-09-01
     arxiv_id: "2609.00579"
@@ -6059,6 +6236,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204549550
     score: 6
     signals: [+limitation, +hallucination]
+    capabilities: [hallucination]
     title: "pro-team at LLMs4OL 2026 Tasks Flagship and Reuse: Retrieval-Augmented Generation and Vocabulary-Constrained Filtering for Ontology Learning"
     date: 2026-08-27
     arxiv_id: "2608.27101"
@@ -6118,6 +6296,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204561548
     score: 6
     signals: [+evaluation, +failure, +proposes-method]
+    capabilities: [forecasting]
     title: "Reservoir: A Large-Scale Simulated Dataset for Training and Evaluating Epidemiological Models"
     date: 2026-08-27
     arxiv_id: "2608.27408"
@@ -6154,6 +6333,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204880572
     score: 6
     signals: [+evaluation, +failure, +proposes-method]
+    capabilities: [procedure-following]
     title: "SemTrace: Source-Grounded Semantic Signatures for Tracing LLM Exposure to Protected Documents"
     date: 2026-08-30
     arxiv_id: "2608.29575"
@@ -6358,6 +6538,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204606853
     score: 5
     signals: [+evaluation, +finding, +mitigation]
+    capabilities: [self-repair]
     title: "Anchoring Bias in LLM-as-a-Judge Systems: Prior Scores Compromise Evaluation Independence"
     date: 2026-08-26
     arxiv_id: "2608.25869"
@@ -6621,6 +6802,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204563734
     score: 5
     signals: [+failure, +reasoning, +improves, +proposes-method, -industry]
+    capabilities: [arithmetic]
     title: "Neuro-symbolic PRM: Enhancing Scientific Reasoning via Structured Traces and Symbolic Verification"
     date: 2026-08-26
     arxiv_id: "2608.26329"
@@ -6669,6 +6851,7 @@ candidates:
   - openalex_id: https://openalex.org/W7206171768
     score: 5
     signals: [+benchmark, +evaluation, +hallucination, +analysis, +proposes-method, -clinical, -domain-topic]
+    capabilities: [hallucination]
     title: "RadMatch: Auditable Radiology Report Evaluation via Finding-Level Matching"
     date: 2026-09-01
     arxiv_id: "2609.01470"
@@ -6693,6 +6876,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204565985
     score: 5
     signals: [+benchmark, +robustness]
+    capabilities: [arithmetic]
     title: "Retrieval Heads Meet Vision: Uncovering How VLMs Locate and Extract Visual Information"
     date: 2026-08-27
     arxiv_id: "2608.27417"
@@ -6765,6 +6949,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204966572
     score: 5
     signals: [+benchmark, +hallucination, +proposes-method, -clinical]
+    capabilities: [goal-conflict-safety, hallucination]
     title: "SingProbe Technical Report"
     date: 2026-08-31
     arxiv_id: "2608.30703"
@@ -6968,6 +7153,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204469149
     score: 4
     signals: [+evaluation, +improves, +proposes-method]
+    capabilities: [secure-coding]
     title: "Are LLM-Enhanced GNNs Privacy-Safe?"
     date: 2026-08-26
     arxiv_id: "2608.25727"
@@ -6980,6 +7166,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204896879
     score: 4
     signals: [+evaluation, +improves, +proposes-method]
+    capabilities: [goal-conflict-safety]
     title: "BiG-SURE - Bipartite Graph for Semantic Uncertainty and Reliability Estimation of LLMs"
     date: 2026-08-31
     arxiv_id: "2608.30646"
@@ -6992,6 +7179,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204877328
     score: 4
     signals: [+evaluation, +agentic, +improves]
+    capabilities: [long-context-degradation]
     title: "CHIPSMORE: Compute-in-Interconnect and -Memory Chiplets for Multi-Mode Multi-Request LLM Inference Acceleration"
     date: 2026-08-31
     arxiv_id: "2608.30509"
@@ -7040,6 +7228,7 @@ candidates:
   - openalex_id: https://openalex.org/W7206176109
     score: 4
     signals: [+failure, +named-model, +improves, +proposes-method, -clinical]
+    capabilities: [sycophancy]
     title: "Do Multimodal LLMs See Before They Read? Diagnosing Contextual Sycophancy"
     date: 2026-08-30
     arxiv_id: "2609.00067"
@@ -7232,6 +7421,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204540585
     score: 4
     signals: [+evaluation, +failure]
+    capabilities: [prompt-injection]
     title: "NeuronFuzz: Safety Neuron Guided Fuzzing for LLM Safety Evaluation"
     date: 2026-08-26
     arxiv_id: "2608.26222"
@@ -7244,6 +7434,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204889606
     score: 4
     signals: [+hallucination, +reasoning, +outperforms, -industry]
+    capabilities: [context-hygiene, hallucination]
     title: "POLYFLOW: A Neuro-Symbolic Framework for Static Cross-Language Information Flow Analysis"
     date: 2026-08-30
     arxiv_id: "2608.29808"
@@ -7315,6 +7506,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204228316
     score: 4
     signals: [+failure, +reasoning, +finding, -industry]
+    capabilities: [arithmetic]
     title: "The Shadow Price of Intelligence: Quality Degradation in LLM Inference as a Supply Chain Problem"
     date: 2026-08-25
     arxiv_id: "2608.23986"
@@ -7327,6 +7519,7 @@ candidates:
   - openalex_id: https://openalex.org/W7206156286
     score: 4
     signals: [+evaluation, +agentic, +improves]
+    capabilities: [arithmetic, goal-conflict-safety]
     title: "When Guardrails Look Effective: Construct Validity Failures in LLM Agent Commerce Evaluation"
     date: 2026-09-01
     arxiv_id: "2609.01519"
@@ -7398,6 +7591,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204823529
     score: 3
     signals: [+evaluation, +named-model, +improves]
+    capabilities: [arithmetic]
     title: "Characterization of Request and Token Energy Costs for LLM Inference Workloads on GPU Platforms"
     date: 2026-08-28
     arxiv_id: "2608.28044"
@@ -7434,6 +7628,7 @@ candidates:
   - openalex_id: https://openalex.org/W7206169067
     score: 3
     signals: [+evaluation, +agentic, +improves, +proposes-method, -clinical]
+    capabilities: [judge-position-bias]
     title: "EDGE: Error Dependency Graph-Guided Multi-Error Attribution in Multi-Agent LLM Systems"
     date: 2026-09-01
     arxiv_id: "2609.01360"
@@ -7470,6 +7665,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204927616
     score: 3
     signals: [+evaluation, +limitation, +improves, +proposes-method, -domain-topic]
+    capabilities: [long-term-memory, sycophancy]
     title: "Evaluating the Hidden Costs of Personalization in Large Language Models"
     date: 2026-08-28
     arxiv_id: "2608.28833"
@@ -7482,6 +7678,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204962517
     score: 3
     signals: [+evaluation, +capability, +robustness, -education]
+    capabilities: [code-generation]
     title: "Evaluating Tiny Recursive Models Across Training for Code Generation"
     date: 2026-08-29
     arxiv_id: "2608.29376"
@@ -7518,6 +7715,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204559754
     score: 3
     signals: [+evaluation, +proposes-method]
+    capabilities: [arithmetic]
     title: "PredVLA: Predictive Sensorimotor Modeling for Sub-Million-Parameter Robot Manipulation"
     date: 2026-08-27
     arxiv_id: "2608.26673"
@@ -7578,6 +7776,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204894076
     score: 3
     signals: [+evaluation, +limitation, +agentic, +improves, +proposes-method, +architecture, +mitigation, -clinical, -industry, -domain-topic]
+    capabilities: [code-generation]
     title: "Towards Fully Automated Medical Imaging Code Generation via Validation-based Context Engineering"
     date: 2026-08-29
     arxiv_id: "2608.29016"
@@ -7614,6 +7813,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204870275
     score: 3
     signals: [+evaluation, +analysis, +proposes-method, -clinical]
+    capabilities: [long-term-memory]
     title: "When Errors Become Memories: Causal Pathway Tracing in Multi-Turn Memory-Augmented LLMs"
     date: 2026-08-31
     arxiv_id: "2608.30198"
@@ -7638,6 +7838,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204889210
     score: 2
     signals: [+evaluation, +hallucination, +analysis, +proposes-method, -clinical, -domain-topic]
+    capabilities: [hallucination]
     title: "Automatic Conversion of NICE Guidelines to an Executable Computational Model Using Large Language Models"
     date: 2026-08-30
     arxiv_id: "2608.30022"
@@ -7686,6 +7887,7 @@ candidates:
   - openalex_id: https://openalex.org/W7206205820
     score: 2
     signals: [+benchmark, +evaluation, +proposes-method, -domain-topic]
+    capabilities: [secure-coding]
     title: "SDARE-Bench: Evaluating Large Language Models on Conversational Stigma Detection and Response in Dyadic and Group Dialogue"
     date: 2026-09-01
     arxiv_id: "2609.01548"
@@ -7746,6 +7948,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204943433
     score: 2
     signals: [+evaluation, +failure, +hallucination, +proposes-method, -industry, -domain-topic]
+    capabilities: [hallucination]
     title: "Validating FKG.in: Soundness Assessment in LLM-Augmented Indian Food Knowledge"
     date: 2026-08-29
     arxiv_id: "2608.29249"
@@ -7770,6 +7973,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204528475
     score: 2
     signals: [+benchmark, +agentic, +proposes-method, -education, -recsys]
+    capabilities: [long-term-memory]
     title: "When Memory Takes Gradients: Collaborative Vector Memory for Agentic Recommender Systems"
     date: 2026-08-27
     arxiv_id: "2608.26895"
@@ -7830,6 +8034,7 @@ candidates:
   - openalex_id: https://openalex.org/W7206152558
     score: 1
     signals: [+benchmark, +evaluation, +named-model, +improves, +proposes-method, -clinical, -domain-topic]
+    capabilities: [forecasting]
     title: "Can Large Language Models Forecast What Researchers Study Next?"
     date: 2026-09-01
     arxiv_id: "2609.00747"
@@ -7878,6 +8083,7 @@ candidates:
   - openalex_id: https://openalex.org/W7207803844
     score: 1
     signals: [+benchmark, +agentic, -domain-topic]
+    capabilities: [long-context-degradation, tool-use]
     title: "How Fast Do Agents Rot? An Empirical Study of Long-Horizon Degradation in LLM Agents for Production Decision-Making"
     date: 2026-08-31
     arxiv_id: "2609.01660"
@@ -7938,6 +8144,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204884484
     score: 1
     signals: [+evaluation, +improves, +architecture, -industry]
+    capabilities: [goal-conflict-safety]
     title: "Spec2Twin-Chain: Orchestrating Bi-Level Optimization with LLMs for Blockchain Digital Twin Construction"
     date: 2026-08-30
     arxiv_id: "2608.30050"
@@ -8009,6 +8216,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204244319
     score: 0
     signals: [+evaluation, +failure, +outperforms, +improves, -clinical, -domain-topic]
+    capabilities: [self-repair]
     title: "DRRG: A Discrete Diffusion Framework for Radiology Report Generation"
     date: 2026-08-25
     arxiv_id: "2608.24105"
@@ -8057,6 +8265,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204899501
     score: 0
     signals: [+evaluation, +robustness, +improves, -domain-topic]
+    capabilities: [forecasting]
     title: "Hybrid Semantic Context-Enhanced Ensemble Learning for Wind Power Ramp-Event Forecasting and Uncertainty-Aware Evaluation"
     date: 2026-08-29
     arxiv_id: "2608.29024"
@@ -8069,6 +8278,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204849414
     score: -1
     signals: [+evaluation, +hallucination, +agentic, -clinical, -domain-topic]
+    capabilities: [hallucination]
     title: "Automated Analysis Framework for Multilingual Climate-Health Literature Based on Multi-Agent Large Language Model"
     date: 2026-08-28
     arxiv_id: "2608.27998"
@@ -8177,6 +8387,7 @@ candidates:
   - openalex_id: https://openalex.org/W7207764905
     score: -2
     signals: [+evaluation, +hallucination, +improves, -clinical, -domain-topic]
+    capabilities: [hallucination]
     title: "Enhancing Clinical Decision Support and Differential Diagnosis with Knowledge Graphs, and Retrieval Augmented Generation in Generative AI"
     date: 2026-08-31
     arxiv_id: "2609.01653"
@@ -8201,6 +8412,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204873381
     score: -2
     signals: [+evaluation, +named-model, -domain-topic]
+    capabilities: [secure-coding]
     title: "Whose Assessment of Distress? Community Perspectives and LLM Alignment on Well-Being Posts"
     date: 2026-08-29
     arxiv_id: "2608.29446"
@@ -8213,6 +8425,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204235272
     score: -3
     signals: [+improves, +training-method, -clinical, -domain-topic]
+    capabilities: [sycophancy]
     title: "An Echo Chamber of One: Should AI Psychosis Be a Distinct Clinical Entity?"
     date: 2026-08-25
     arxiv_id: "2608.23937"
@@ -8237,6 +8450,7 @@ candidates:
   - openalex_id: https://openalex.org/W7204560899
     score: -4
     signals: [+evaluation, +architecture, -clinical, -domain-topic]
+    capabilities: [goal-conflict-safety]
     title: "LAAF: A Layered Accountability Architecture Framework for LLM Applications"
     date: 2026-08-27
     arxiv_id: "2608.27102"

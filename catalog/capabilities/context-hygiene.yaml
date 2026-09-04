@@ -8,5 +8,6 @@ parent: long-context-degradation
 aliases: ["context management", "over-documentation", "context bloat"]
 techniques: [hierarchical-memory]
 related: [long-context-degradation, long-term-memory]
+match_terms: ["context management", "context bloat", "context pollution"]
 status: active
 submitted_by: human:Russ-Miller

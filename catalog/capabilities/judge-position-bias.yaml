@@ -7,5 +7,6 @@ tags: [evaluation, llm-as-judge]
 aliases: ["LLM-as-judge bias", "position bias", "verbosity bias", "self-enhancement bias"]
 techniques: [position-swap-judging]
 related: [sycophancy]
+match_terms: ["llm-as-judge", "llm as a judge", "judge model", "position bias"]
 status: active
 submitted_by: human:Russ-Miller

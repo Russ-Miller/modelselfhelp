@@ -1,4 +1,6 @@
-import { candidateUrl, loadQueue } from "@/lib/queue";
+import Link from "next/link";
+import { getCapability } from "@/lib/catalog";
+import { candidateUrl, groupByCapability, loadQueue, type QueueCandidate } from "@/lib/queue";
 
 export const metadata = { title: "Review queue" };
 
@@ -11,21 +13,62 @@ function ScorePill({ score }: { score: number }) {
   return <span className={`inline-flex min-w-8 justify-center rounded px-1.5 py-0.5 text-xs font-medium tabular-nums ${tone}`}>{score}</span>;
 }
 
+function Candidate({ c }: { c: QueueCandidate }) {
+  const url = candidateUrl(c);
+  return (
+    <li className="rounded border border-neutral-200 p-3 dark:border-neutral-800">
+      <div className="flex items-start gap-3">
+        <ScorePill score={c.score ?? 0} />
+        <div className="min-w-0 flex-1">
+          {url ? (
+            <a href={url} target="_blank" rel="noopener noreferrer" className="font-medium hover:underline">{c.title}</a>
+          ) : (
+            <span className="font-medium">{c.title}</span>
+          )}
+          <div className="mt-0.5 text-xs text-neutral-500">
+            {c.date}
+            {c.authors?.length ? ` · ${c.authors[0]}${c.authors.length > 1 ? " et al." : ""}` : ""}
+            {c.arxiv_id ? ` · arXiv:${c.arxiv_id}` : ""}
+          </div>
+          {c.capabilities && c.capabilities.length > 1 ? (
+            <div className="mt-1 text-xs text-neutral-500">
+              also: {c.capabilities.map((id) => getCapability(id)?.label ?? id).join(", ")}
+            </div>
+          ) : null}
+          {c.abstract ? (
+            <details className="mt-1.5">
+              <summary className="cursor-pointer text-xs text-neutral-500 hover:text-neutral-700 dark:hover:text-neutral-300">Abstract</summary>
+              <p className="mt-1 text-sm leading-relaxed text-neutral-700 dark:text-neutral-300">{c.abstract}</p>
+            </details>
+          ) : null}
+        </div>
+      </div>
+    </li>
+  );
+}
+
 export default function QueuePage() {
   const { candidates, windows, generatedAt } = loadQueue();
+  const { groups, unmatched } = groupByCapability(candidates);
+  const matchedCount = candidates.length - unmatched.length;
 
   return (
-    <div className="space-y-5">
+    <div className="space-y-6">
       <div className="space-y-2">
         <h1 className="text-2xl font-semibold">Review queue</h1>
         <p className="max-w-3xl text-sm text-neutral-500">
-          Stage-1 ingestion candidates from OpenAlex, filtered to arXiv and ranked by a free
-          keyword heuristic. <strong className="font-medium text-neutral-600 dark:text-neutral-400">Nothing
-          here is in the catalog</strong> &mdash; these are unreviewed papers awaiting triage, and
-          the score only orders the list. A low score is not a rejection.
+          Stage-1 ingestion candidates from OpenAlex, filtered to arXiv and grouped by the capability
+          they concern. <strong className="font-medium text-neutral-600 dark:text-neutral-400">Nothing
+          here is in the catalog</strong> &mdash; these are unreviewed papers awaiting triage.
+        </p>
+        <p className="max-w-3xl text-sm text-neutral-500">
+          Grouping is <em>topical only</em>: it says what a paper is about, not whether it improves a
+          capability, degrades it, or merely measures it. Reading that direction out of an abstract
+          is the judgment stage 2 exists to make, and it is what turns a candidate into a claim.
         </p>
         <p className="text-xs text-neutral-500">
-          {candidates.length} candidates · window{windows.length > 1 ? "s" : ""} {windows.join(", ")}
+          {candidates.length} candidates · {matchedCount} matched to a capability · {unmatched.length} unmatched
+          {" · window"}{windows.length > 1 ? "s" : ""} {windows.join(", ")}
           {generatedAt ? ` · generated ${generatedAt}` : ""}
         </p>
       </div>
@@ -35,40 +78,35 @@ export default function QueuePage() {
           Queue is empty. Run <code className="font-mono">node scripts/fetch-openalex.mjs</code> to populate it.
         </p>
       ) : (
-        <ul className="space-y-3">
-          {candidates.map((c) => {
-            const url = candidateUrl(c);
+        <>
+          {groups.map(({ id, items }) => {
+            const cap = getCapability(id);
             return (
-              <li key={c.openalex_id} className="rounded border border-neutral-200 p-3 dark:border-neutral-800">
-                <div className="flex items-start gap-3">
-                  <ScorePill score={c.score ?? 0} />
-                  <div className="min-w-0 flex-1">
-                    {url ? (
-                      <a href={url} target="_blank" rel="noopener noreferrer" className="font-medium hover:underline">{c.title}</a>
-                    ) : (
-                      <span className="font-medium">{c.title}</span>
-                    )}
-                    <div className="mt-0.5 text-xs text-neutral-500">
-                      {c.date}
-                      {c.authors?.length ? ` · ${c.authors[0]}${c.authors.length > 1 ? " et al." : ""}` : ""}
-                      {c.arxiv_id ? ` · arXiv:${c.arxiv_id}` : ""}
-                      {c.topic ? ` · ${c.topic}` : ""}
-                    </div>
-                    {c.signals?.length ? (
-                      <div className="mt-1 font-mono text-[11px] text-neutral-400 dark:text-neutral-600">{c.signals.join(" ")}</div>
-                    ) : null}
-                    {c.abstract ? (
-                      <details className="mt-1.5">
-                        <summary className="cursor-pointer text-xs text-neutral-500 hover:text-neutral-700 dark:hover:text-neutral-300">Abstract</summary>
-                        <p className="mt-1 text-sm leading-relaxed text-neutral-700 dark:text-neutral-300">{c.abstract}</p>
-                      </details>
-                    ) : null}
-                  </div>
-                </div>
-              </li>
+              <section key={id} className="space-y-2">
+                <h2 className="flex items-baseline gap-2 border-b border-neutral-200 pb-1 text-lg font-semibold dark:border-neutral-800">
+                  <Link href={`/capabilities/${id}`} className="hover:underline">{cap?.label ?? id}</Link>
+                  <span className="text-sm font-normal text-neutral-500">{items.length}</span>
+                </h2>
+                <ul className="space-y-2">
+                  {items.map((c) => <Candidate key={`${id}-${c.openalex_id}`} c={c} />)}
+                </ul>
+              </section>
             );
           })}
-        </ul>
+
+          <section className="space-y-2">
+            <h2 className="border-b border-neutral-200 pb-1 text-lg font-semibold dark:border-neutral-800">
+              Unmatched <span className="text-sm font-normal text-neutral-500">{unmatched.length}</span>
+            </h2>
+            <p className="max-w-3xl text-sm text-neutral-500">
+              Nothing in these matched a capability the catalog tracks. Mostly noise, but this is
+              also where a capability worth adding would first show up.
+            </p>
+            <ul className="space-y-2">
+              {unmatched.map((c) => <Candidate key={c.openalex_id} c={c} />)}
+            </ul>
+          </section>
+        </>
       )}
     </div>
   );

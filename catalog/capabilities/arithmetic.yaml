@@ -7,5 +7,6 @@ tags: [data-analysis, general, math, reasoning]
 aliases: ["numerical reasoning", "token-level math", "counting"]
 techniques: [program-aided-computation, chain-of-thought, digit-position-embeddings]
 related: [state-tracking]
+match_terms: ["arithmetic", "math word problem", "multi-digit"]
 status: active
 submitted_by: human:Russ-Miller

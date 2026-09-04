@@ -92,6 +92,30 @@ const DOMAIN_SIGNALS = [
 
 const DOMAIN_TOPICS = /health|medic|clinic|educat|translat|marketing|agricultur|tourism|nurs|dental|legal|finance|energy|construction/i;
 
+// Topical match: which catalogued capabilities does this paper concern?
+// Vocabulary comes from the capability records themselves (id, aliases,
+// match_terms) so it stays with the content rather than drifting in code.
+// This answers "what is it about", NOT "does it improve or degrade the
+// capability" -- that direction is the semantic call stage 2 exists to make.
+const CAPABILITY_TERMS = loadCatalog().capabilities.map((rec) => {
+  const d = rec.data;
+  const terms = new Set([
+    d.id.replace(/-/g, " "),
+    ...(d.aliases ?? []),
+    ...(d.match_terms ?? []),
+  ].map((t) => String(t).toLowerCase()).filter((t) => t.length > 3));
+  return { id: d.id, label: d.label, terms: [...terms] };
+});
+
+function matchCapabilities(c) {
+  const haystack = `${c.title} ${c.abstract ?? ""}`.toLowerCase();
+  const hits = [];
+  for (const cap of CAPABILITY_TERMS) {
+    if (cap.terms.some((t) => haystack.includes(t))) hits.push(cap.id);
+  }
+  return hits;
+}
+
 function scoreCandidate(c) {
   const haystack = `${c.title} ${c.abstract ?? ""}`;
   let score = 0;
@@ -193,11 +217,13 @@ if (args.includes("--rescore")) {
       const { score, signals } = scoreCandidate(c);
       c.score = score;
       c.signals = signals;
+      c.capabilities = matchCapabilities(c);
       if (score !== before) moved++;
     }
     const win = parsed?.window ?? { from: f.split("_")[0], to: (f.split("_")[1] ?? "").replace(/\.ya?ml$/, "") };
     writeQueueFile(full, win, entries, 0);
-    console.log(`${f}: rescored ${entries.length} candidates (${moved} changed)`);
+    const matched = entries.filter((c) => c.capabilities?.length).length;
+    console.log(`${f}: rescored ${entries.length} candidates (${moved} changed), ${matched} matched to a capability`);
     for (const c of entries.slice(0, 10)) console.log(`  ${String(c.score).padStart(3)}  ${String(c.title).slice(0, 84)}`);
   }
   process.exit(0);
@@ -264,6 +290,7 @@ for (const c of candidates) {
   const { score, signals } = scoreCandidate(c);
   c.score = score;
   c.signals = signals;
+  c.capabilities = matchCapabilities(c);
 }
 
 function yamlStr(s) { return JSON.stringify(s ?? ""); }
@@ -285,6 +312,7 @@ function writeQueueFile(outPath, win, entries, addedCount) {
     lines.push(`  - openalex_id: ${c.openalex_id}`);
     lines.push(`    score: ${c.score ?? 0}`);
     if (c.signals?.length) lines.push(`    signals: [${c.signals.join(", ")}]`);
+    if (c.capabilities?.length) lines.push(`    capabilities: [${c.capabilities.join(", ")}]`);
     lines.push(`    title: ${yamlStr(c.title)}`);
     lines.push(`    date: ${c.date}`);
     if (c.arxiv_id) lines.push(`    arxiv_id: "${c.arxiv_id}"`);

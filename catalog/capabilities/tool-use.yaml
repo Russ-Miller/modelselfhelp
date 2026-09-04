@@ -7,5 +7,6 @@ tags: [agentic, autonomous-agent, coding-agent, customer-support]
 aliases: ["tool calling", "function calling", "API use", "skill utilization"]
 techniques: [retrieve-tool-docs, tool-use-fine-tuning]
 related: [procedure-following, self-repair]
+match_terms: ["tool use", "tool-calling", "function calling", "agentic tool"]
 status: active
 submitted_by: human:Russ-Miller

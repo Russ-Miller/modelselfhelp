@@ -7,5 +7,6 @@ tags: [chat-assistant, general, knowledge, rag-qa]
 aliases: ["confabulation", "fabrication", "factual error"]
 techniques: [retrieval-augmented-generation, atomic-fact-checking]
 related: [fact-verification, reversal-curse]
+match_terms: ["hallucination", "hallucinate"]
 status: active
 submitted_by: human:Russ-Miller

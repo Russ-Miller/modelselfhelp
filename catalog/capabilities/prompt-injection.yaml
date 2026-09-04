@@ -7,5 +7,6 @@ tags: [autonomous-agent, coding-agent, customer-support, rag-qa, security]
 aliases: ["indirect prompt injection", "jailbreak via content"]
 techniques: [structured-prompt-separation]
 related: [secure-coding, goal-conflict-safety]
+match_terms: ["prompt injection", "jailbreak"]
 status: active
 submitted_by: human:Russ-Miller

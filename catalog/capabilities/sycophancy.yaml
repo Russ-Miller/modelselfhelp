@@ -7,5 +7,6 @@ tags: [behavior, chat-assistant, customer-support, llm-as-judge]
 aliases: ["flattery", "agreement bias", "caving to pushback"]
 techniques: [synthetic-desycophancy-training]
 related: [fact-verification, goal-conflict-safety, judge-position-bias]
+match_terms: ["sycophancy", "sycophantic"]
 status: active
 submitted_by: human:Russ-Miller

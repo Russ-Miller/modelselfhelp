@@ -7,5 +7,6 @@ tags: [chat-assistant, data-analysis, knowledge, rag-qa]
 aliases: ["epistemic verification", "truth adjudication", "knowledge conflict"]
 techniques: [retrieval-augmented-generation, atomic-fact-checking]
 related: [hallucination, sycophancy]
+match_terms: ["fact verification", "fact-checking", "claim verification", "knowledge conflict"]
 status: active
 submitted_by: human:Russ-Miller

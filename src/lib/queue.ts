@@ -18,6 +18,9 @@ export interface QueueCandidate {
   topic?: string;
   cited_by_count?: number;
   abstract?: string;
+  /** Catalogued capabilities this paper is ABOUT. Topical only -- says nothing
+   *  about whether the paper improves, degrades, or merely measures them. */
+  capabilities?: string[];
   /** Which queue file this came from, e.g. "2026-08-25_2026-09-01". */
   window: string;
 }
@@ -39,6 +42,27 @@ export function loadQueue(): { candidates: QueueCandidate[]; windows: string[]; 
   }
   candidates.sort((a, b) => (b.score ?? 0) - (a.score ?? 0) || (a.title ?? "").localeCompare(b.title ?? ""));
   return { candidates, windows, generatedAt };
+}
+
+/**
+ * Group candidates by the capability they concern, largest group first, with
+ * unmatched candidates last -- those are the ones suggesting a capability the
+ * catalog does not track yet.
+ */
+export function groupByCapability(candidates: QueueCandidate[]) {
+  const groups = new Map<string, QueueCandidate[]>();
+  const unmatched: QueueCandidate[] = [];
+  for (const c of candidates) {
+    if (!c.capabilities?.length) { unmatched.push(c); continue; }
+    for (const cap of c.capabilities) {
+      if (!groups.has(cap)) groups.set(cap, []);
+      groups.get(cap)!.push(c);
+    }
+  }
+  const ordered = [...groups.entries()]
+    .map(([id, items]) => ({ id, items: items.sort((a, b) => (b.score ?? 0) - (a.score ?? 0)) }))
+    .sort((a, b) => b.items.length - a.items.length);
+  return { groups: ordered, unmatched: unmatched.sort((a, b) => (b.score ?? 0) - (a.score ?? 0)) };
 }
 
 /** External link for a candidate: arXiv abstract page when we have an id, else the DOI. */

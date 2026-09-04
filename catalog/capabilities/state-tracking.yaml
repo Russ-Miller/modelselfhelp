@@ -7,5 +7,6 @@ tags: [autonomous-agent, coding-agent, context, data-analysis]
 aliases: ["entity tracking", "world-model consistency", "stale state"]
 techniques: [reread-before-edit]
 related: [self-repair, long-context-degradation]
+match_terms: ["state tracking", "entity tracking", "world model"]
 status: active
 submitted_by: human:Russ-Miller

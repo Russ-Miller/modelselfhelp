@@ -244,3 +244,28 @@ Remaining problem is volume, not precision: about 98 arXiv candidates a
 day are genuinely on-topic. That is simply the publication rate of the
 field. Stage 2 classification, if built, is therefore about choosing
 which of these deserve a claim, not about filtering out garbage.
+
+## 2026-09-04 — Queue grouped by capability; direction deferred to stage 2
+The heuristic score turned out to screen rather than rank. Sampling the
+queue showed the negative (domain) signals do the real work, while the
+positive ones pile up on nearly everything: once the arXiv filter and
+domain penalties remove the junk, what remains is a flat field of
+genuinely relevant capability research. Papers at the median scored as
+well as the top -- a mitigation-with-side-effect paper on sycophancy,
+directly on-catalog, sat mid-queue under a pile of higher scores.
+
+So the queue is now grouped by which capability a paper concerns, matched
+against vocabulary carried on the capability records themselves (id,
+aliases, and a new optional match_terms field) rather than hardcoded in
+the crawler. 214 of 689 candidates matched. Score is retained but
+demoted to ordering within a group.
+
+The matching is deliberately topical only: it answers what a paper is
+about, never whether the paper improves a capability, degrades it, or
+merely measures it. That direction is the eventual goal -- it is what
+distinguishes a mechanism claim from an efficacy claim, and a supporting
+efficacy claim from a contesting one -- but reading it out of an abstract
+needs a model, not keywords. Topical pre-matching also narrows what stage
+2 has to judge: instead of "is this relevant at all" across every
+candidate, the question becomes "for this paper already matched to
+sycophancy, does it improve, degrade, or measure?"

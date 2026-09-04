@@ -7,5 +7,6 @@ tags: [coding-agent, context, long-document, rag-qa]
 aliases: ["lost in the middle", "needle in a haystack", "effective context length"]
 techniques: [reorder-context-by-relevance]
 related: [context-hygiene, state-tracking]
+match_terms: ["long context", "long-context", "context window"]
 status: active
 submitted_by: human:Russ-Miller

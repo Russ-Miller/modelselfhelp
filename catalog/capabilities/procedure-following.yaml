@@ -7,5 +7,6 @@ tags: [agentic, autonomous-agent, chat-assistant, coding-agent, customer-support
 aliases: ["instruction following", "constraint adherence", "workflow compliance"]
 techniques: [checklist-decomposition]
 related: [tool-use, sycophancy]
+match_terms: ["instruction following", "instruction-following", "constraint satisfaction"]
 status: active
 submitted_by: human:Russ-Miller
