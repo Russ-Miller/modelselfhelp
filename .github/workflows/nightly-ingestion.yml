@@ -1,0 +1,94 @@
+name: nightly-ingestion
+
+# Fetch new papers, match them to capabilities, judge direction against held
+# claims, and commit the result so the deployed queue is fresh each morning.
+#
+# Stages 2 and 2b cost money (Anthropic API). They run only when the secret is
+# present, so a fork or a repo without the key still gets a working stage-1
+# crawl rather than a failing job.
+on:
+  schedule:
+    - cron: "0 9 * * *"     # 09:00 UTC — early morning US, after arXiv's daily feed
+  workflow_dispatch:         # and on demand from the Actions tab
+    inputs:
+      days:
+        description: "Trailing window in days"
+        default: "7"
+      classify_limit:
+        description: "Max candidate x capability pairs to classify (cost control)"
+        default: "60"
+      propose_limit:
+        description: "Max unmatched papers to mine for new capabilities"
+        default: "80"
+
+concurrency:
+  group: nightly-ingestion
+  cancel-in-progress: false   # never interrupt a run mid-spend
+
+jobs:
+  ingest:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write         # to commit the refreshed queue
+    env:
+      # secrets are not reliably available in a step-level `if`, so resolve
+      # their presence once here and gate on these instead.
+      HAS_ANTHROPIC_KEY: ${{ secrets.ANTHROPIC_API_KEY != '' }}
+      HAS_VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN != '' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm }
+      - run: npm ci
+
+      # Stage 1 — free. Trailing window plus the seen-ledger is self-healing
+      # against OpenAlex's arXiv indexing lag.
+      - name: Fetch candidates (OpenAlex)
+        run: node scripts/fetch-openalex.mjs --days "${{ inputs.days || '7' }}"
+
+      # Stage 2 — judges direction and contradiction for newly matched papers.
+      - name: Classify direction
+        if: env.HAS_ANTHROPIC_KEY == 'true'
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: node scripts/classify-candidates.mjs --limit "${{ inputs.classify_limit || '60' }}"
+
+      # Stage 2b — mines the unmatched pile for capabilities not yet tracked.
+      - name: Propose new capabilities
+        if: env.HAS_ANTHROPIC_KEY == 'true'
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          node scripts/propose-capabilities.mjs --limit "${{ inputs.propose_limit || '80' }}"
+          node scripts/propose-capabilities.mjs --consolidate
+
+      # The catalog itself is never written by this job — only the queue and
+      # the ledger. Validation guards against a malformed write reaching main.
+      - name: Validate
+        run: npm run validate
+
+      - name: Commit refreshed queue
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add pipeline/
+          if git diff --staged --quiet; then
+            echo "No queue changes."
+            exit 0
+          fi
+          printf '%s\n\n%s\n' \
+            "Nightly ingestion: refresh review queue" \
+            "Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>" > /tmp/msg
+          git commit -F /tmp/msg
+          git push
+
+      # Vercel's GitHub integration never linked for this repo, so a push does
+      # not trigger a build. Deploy explicitly with the CLI instead, which
+      # uploads the directory and needs no git connection.
+      - name: Deploy to Vercel
+        if: env.HAS_VERCEL_TOKEN == 'true'
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+        run: npx --yes vercel@latest --prod --yes --token "$VERCEL_TOKEN"
