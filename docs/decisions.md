@@ -211,3 +211,36 @@ First example filed: external-feedback-repair works only with real
 grounding -- genuinely contested, with Reflexion and the self-correction
 critique paper supporting from opposite directions and Self-Refine
 contesting the scope.
+
+## 2026-09-04 — Nightly ingestion: filter to arXiv, use a trailing window
+Stage 1 of ingestion pulls from OpenAlex into pipeline/queue/, never into
+catalog/. Two findings from measuring it, both of which changed the
+design:
+
+**Filter to the arXiv source.** Unfiltered, a recent window is dominated
+by journal domain-application work -- LLMs applied to air traffic
+control, pediatrics, nutrition estimation, hospitality marketing -- plus
+Zenodo/bioRxiv/Preprints.org noise. Precision was roughly 10-15 percent
+and a free keyword heuristic only lifted it to maybe 30. Restricting to
+OpenAlex's arXiv source id took the top of the queue to essentially all
+genuine capability research. Deduplication also got easier: the
+duplicate-record rate fell from about 20 percent to 1 percent, since the
+journal/Zenodo layer is where the duplicates live. `--all-sources`
+disables the filter when a wider sweep is wanted.
+
+**Use a trailing window, not yesterday.** OpenAlex ingests arXiv with a
+lag of several days; a 1-day window returned zero arXiv works while the
+same query over a two-week window returned 1261. So the default window is
+the trailing 7 days. Combined with the committed seen-ledger this is
+self-healing: a paper is picked up whenever it finally lands in the
+index, and is never surfaced twice.
+
+The keyword heuristic is kept, but demoted -- it now orders the queue
+rather than rescuing precision, and it never discards, since a
+domain-flavored paper (a clinical reasoning benchmark, say) can still be
+real capability research.
+
+Remaining problem is volume, not precision: about 98 arXiv candidates a
+day are genuinely on-topic. That is simply the publication rate of the
+field. Stage 2 classification, if built, is therefore about choosing
+which of these deserve a claim, not about filtering out garbage.
