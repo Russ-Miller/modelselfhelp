@@ -14,8 +14,7 @@ repos:
     note: Data, training recipe and evaluator for multi-tool API use.
     verified_on: 2026-09-02
 contexts: [coding-agent, autonomous-agent]
-caveats: >-
-  Requires training access. Gains are largest for open models that start
-  far behind.
-status: accepted
+requires: >-
+  Requires training access.
+status: active
 submitted_by: human:Russ-Miller

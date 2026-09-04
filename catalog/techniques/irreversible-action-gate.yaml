@@ -10,8 +10,8 @@ addresses: [goal-conflict-safety]
 kind: process
 sources: [arxiv-2412-14470]
 contexts: [autonomous-agent, coding-agent, customer-support]
-caveats: >-
-  Practitioner technique. Adds latency; classify tools carefully or the
-  gate becomes noise that users click through.
-status: proposed
+requires: >-
+  Adds latency to every gated call, and requires classifying tools by
+  reversibility up front.
+status: active
 submitted_by: human:Russ-Miller

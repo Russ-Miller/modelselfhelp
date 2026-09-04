@@ -19,12 +19,12 @@ export default async function TechniquePage({ params }: PageProps<"/techniques/[
   return (
     <article className="space-y-6">
       <header className="space-y-2">
-        <div className="text-sm text-neutral-500">{t.kind} · <code className="font-mono">{t.id}</code> · {t.status}</div>
+        <div className="text-sm text-neutral-500">{t.kind} · <code className="font-mono">{t.id}</code>{t.status === "superseded" ? " · superseded" : ""}</div>
         <h1 className="text-3xl font-semibold tracking-tight">{t.label}</h1>
         <p className="text-lg text-neutral-700 dark:text-neutral-300">{t.summary}</p>
       </header>
       <p className="text-sm text-neutral-700 dark:text-neutral-300">{t.description}</p>
-      {t.caveats && <p className="text-sm"><span className="font-semibold">Caveats: </span>{t.caveats}</p>}
+      {t.requires && <p className="text-sm"><span className="font-semibold">Requires: </span>{t.requires}</p>}
       <section className="text-sm"><span className="font-semibold">Addresses: </span>
         {t.addresses.map((a, i) => <span key={a}>{i > 0 && ", "}<Link href={`/capabilities/${a}`} className="hover:underline">{getCapability(a)?.label ?? a}</Link></span>)}
       </section>

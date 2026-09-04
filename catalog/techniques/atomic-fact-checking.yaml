@@ -16,5 +16,5 @@ repos:
     note: SAFE, search-augmented factuality evaluator.
     verified_on: 2026-09-02
 contexts: [rag-qa, chat-assistant, llm-as-judge]
-status: accepted
+status: active
 submitted_by: human:Russ-Miller

@@ -9,8 +9,8 @@ addresses: [reversal-curse]
 kind: training
 sources: [arxiv-2403-13799]
 contexts: [general]
-caveats: >-
-  Pretraining-time change; for a deployed model, retrieval is the practical
-  workaround.
-status: accepted
+requires: >-
+  A pretraining-time change; for a deployed model, retrieval is the
+  practical workaround.
+status: active
 submitted_by: human:Russ-Miller

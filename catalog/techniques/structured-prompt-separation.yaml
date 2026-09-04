@@ -16,8 +16,5 @@ repos:
     note: StruQ training and evaluation code.
     verified_on: 2026-09-02
 contexts: [rag-qa, autonomous-agent, coding-agent]
-caveats: >-
-  Prompt-only versions reduce but do not eliminate injection. Treat as
-  defense in depth alongside irreversible-action gates.
-status: accepted
+status: active
 submitted_by: human:Russ-Miller

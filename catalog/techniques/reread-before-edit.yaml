@@ -9,8 +9,5 @@ description: >-
 addresses: [state-tracking]
 kind: process
 contexts: [coding-agent]
-caveats: >-
-  Practitioner technique used by several coding agents; no published study
-  isolates its effect.
-status: proposed
+status: active
 submitted_by: human:Russ-Miller

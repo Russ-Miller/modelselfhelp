@@ -10,9 +10,7 @@ addresses: [sycophancy]
 kind: training
 sources: [arxiv-2308-03958]
 contexts: [chat-assistant]
-caveats: >-
-  Requires fine-tuning access. At inference time, hiding the user's opinion
-  from the model or asking for the answer before the opinion is the cheap
-  alternative.
-status: accepted
+requires: >-
+  Requires fine-tuning access.
+status: active
 submitted_by: human:Russ-Miller

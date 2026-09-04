@@ -10,8 +10,9 @@ addresses: [goal-conflict-safety]
 kind: training
 sources: [arxiv-2212-08073]
 contexts: [chat-assistant, autonomous-agent]
-caveats: >-
-  A vendor-side training method. Application developers cannot apply it
-  directly; it explains vendor differences rather than offering a fix.
-status: accepted
+requires: >-
+  A vendor-side training method: application developers cannot apply it
+  directly, so it explains differences between vendors rather than being
+  something you deploy.
+status: active
 submitted_by: human:Russ-Miller

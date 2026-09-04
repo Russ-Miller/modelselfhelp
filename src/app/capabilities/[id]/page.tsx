@@ -62,7 +62,7 @@ export default async function CapabilityPage({ params }: PageProps<"/capabilitie
             {techniques.map((t) => (
               <li key={t.id} className="text-sm">
                 <Link href={`/techniques/${t.id}`} className="font-medium hover:underline">{t.label}</Link>
-                <span className="ml-2 text-xs text-neutral-500">{t.kind}{t.status !== "accepted" ? ` · ${t.status}` : ""}</span>
+                <span className="ml-2 text-xs text-neutral-500">{t.kind}{t.status === "superseded" ? " · superseded" : ""}</span>
                 <div className="text-neutral-600 dark:text-neutral-400">{t.summary}</div>
               </li>
             ))}

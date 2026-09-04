@@ -14,8 +14,7 @@ repos:
     note: Reference implementation with prompts and evaluation on math word problems.
     verified_on: 2026-09-02
 contexts: [math, data-analysis]
-caveats: >-
-  Requires a sandboxed interpreter. Errors move from arithmetic to problem
-  translation, which still needs checking.
-status: accepted
+requires: >-
+  Requires a sandboxed interpreter.
+status: active
 submitted_by: human:Russ-Miller

@@ -14,7 +14,7 @@ repos:
     note: Training and evaluation code for abacus embeddings.
     verified_on: 2026-09-02
 contexts: [math]
-caveats: >-
+requires: >-
   A training-time change; not applicable to a model you cannot retrain.
-status: accepted
+status: active
 submitted_by: human:Russ-Miller

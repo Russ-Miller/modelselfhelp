@@ -14,5 +14,5 @@ repos:
     note: Gorilla retriever-aware training and API documentation store.
     verified_on: 2026-09-02
 contexts: [coding-agent, autonomous-agent]
-status: accepted
+status: active
 submitted_by: human:Russ-Miller

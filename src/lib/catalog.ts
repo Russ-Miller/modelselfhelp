@@ -10,7 +10,9 @@ export type ClaimKind = "mechanism" | "observation";
 export type BackingStrength = "single-paper" | "replicated" | "mechanism-reasoning" | "own-observation";
 export type CapabilityStatus = "active" | "parked";
 export type ClaimStatus = "active" | "superseded" | "retired";
-export type TechniqueStatus = "proposed" | "accepted" | "disputed" | "retired";
+/** Record lifecycle, deliberately NOT a verdict on whether the technique works.
+ *  Efficacy lives in claims that reference the technique. */
+export type TechniqueStatus = "active" | "superseded";
 
 export interface SourceLink { source: string; stance: Stance; note: string }
 export interface DisagreementAxis { description: string; is_guess: boolean }
@@ -47,7 +49,10 @@ export interface Repo { url: string; note: string; verified_on?: string }
 export interface Technique {
   id: string; label: string; summary: string; description: string; addresses: string[];
   kind: "prompting" | "retrieval" | "tooling" | "training" | "decoding" | "architecture" | "process";
-  sources?: string[]; repos?: Repo[]; contexts?: string[]; caveats?: string; status: TechniqueStatus; submitted_by: string;
+  sources?: string[]; repos?: Repo[]; contexts?: string[];
+  /** Prerequisites and applicability -- what you need to use it. Never efficacy. */
+  requires?: string;
+  status: TechniqueStatus; submitted_by: string;
 }
 export interface ModelVersion { id: string; label: string; released?: string }
 export interface Model { id: string; label: string; vendor: string; url?: string; versions: ModelVersion[] }

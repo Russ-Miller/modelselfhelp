@@ -10,7 +10,5 @@ addresses: [procedure-following]
 kind: process
 sources: [arxiv-2311-07911]
 contexts: [coding-agent, autonomous-agent, customer-support]
-caveats: >-
-  Practitioner technique; no controlled study yet. Submit results.
-status: proposed
+status: active
 submitted_by: human:Russ-Miller

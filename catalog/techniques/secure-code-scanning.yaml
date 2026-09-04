@@ -14,5 +14,5 @@ repos:
     note: CyberSecEval insecure-code detector and benchmark.
     verified_on: 2026-09-02
 contexts: [coding-agent]
-status: accepted
+status: active
 submitted_by: human:Russ-Miller

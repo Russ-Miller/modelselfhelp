@@ -339,3 +339,28 @@ A /contested view collects it all: incoming challenges from the queue,
 and contested claims already in the catalog with their axis of
 disagreement. Capability and claim lists carry contested counts, and
 claims sort contested-first.
+
+## 2026-09-04 — Technique carries what it is; Claim carries whether it works
+The split was only half-implemented. Two fields on Technique were still
+making efficacy assertions:
+
+`status` had values accepted/proposed/disputed/retired. Seventeen
+techniques were "accepted", which asserts the technique works -- with no
+source, no scope, and no way to contest it. Exactly the unfalsifiable
+property the design rejects. Replaced with active/superseded, describing
+the record's lifecycle rather than any verdict.
+
+`caveats` (on 15 of 21) mixed two different things. "Requires
+fine-tuning access" is a prerequisite -- part of what the technique is.
+"Without a real external signal the loop tends to make answers worse" is
+a scoped directional claim about when it fails, which belongs in a claim
+with sources. Split by hand: prerequisites became a new `requires` field,
+and the twelve efficacy statements moved to
+docs/technique-efficacy-backlog.md rather than being deleted or
+invented into claims without sources.
+
+Parking them was the honest option. Several were practitioner knowledge
+with no published study ("no controlled study isolates its effect"),
+which is a statement about backing strength -- so filing them as claims
+needs either a real source or an own-observation source the user
+actually made, not one fabricated on their behalf.

@@ -10,8 +10,5 @@ addresses: [arithmetic]
 kind: prompting
 sources: [arxiv-2201-11903]
 contexts: [math, general]
-caveats: >-
-  Does not fix digit-level errors; the steps can be confidently wrong.
-  Combine with code execution for exact arithmetic.
-status: accepted
+status: active
 submitted_by: human:Russ-Miller

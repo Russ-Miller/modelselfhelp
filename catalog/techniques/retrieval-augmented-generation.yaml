@@ -13,8 +13,5 @@ repos:
     note: Self-RAG training and inference code.
     verified_on: 2026-09-02
 contexts: [rag-qa, chat-assistant]
-caveats: >-
-  Retrieval brings its own failure: injected instructions and conflicting
-  sources. See prompt-injection and fact-verification.
-status: accepted
+status: active
 submitted_by: human:Russ-Miller

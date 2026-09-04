@@ -18,8 +18,5 @@ repos:
     note: Self-Refine prompts and evaluation harness.
     verified_on: 2026-09-02
 contexts: [coding-agent, math, autonomous-agent]
-caveats: >-
-  Without a real external signal the loop tends to make answers worse.
-  Do not confuse a model's own critique with feedback.
-status: accepted
+status: active
 submitted_by: human:Russ-Miller

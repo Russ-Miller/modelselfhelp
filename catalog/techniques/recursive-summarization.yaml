@@ -9,8 +9,5 @@ addresses: [long-term-memory]
 kind: prompting
 sources: [arxiv-2308-15022]
 contexts: [chat-assistant, customer-support]
-caveats: >-
-  Summaries lose detail; pair with retrieval over the archived turns for
-  questions that need specifics.
-status: accepted
+status: active
 submitted_by: human:Russ-Miller

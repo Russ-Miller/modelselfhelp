@@ -14,5 +14,5 @@ repos:
     note: Letta, formerly MemGPT, the reference implementation.
     verified_on: 2026-09-02
 contexts: [chat-assistant, autonomous-agent, coding-agent]
-status: accepted
+status: active
 submitted_by: human:Russ-Miller

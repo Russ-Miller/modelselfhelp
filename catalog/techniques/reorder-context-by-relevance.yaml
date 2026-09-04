@@ -13,5 +13,5 @@ repos:
     note: Evaluation code and data to measure position sensitivity for your own model.
     verified_on: 2026-09-02
 contexts: [rag-qa, long-document]
-status: accepted
+status: active
 submitted_by: human:Russ-Miller
