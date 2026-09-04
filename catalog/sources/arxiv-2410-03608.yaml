@@ -1,0 +1,23 @@
+id: arxiv-2410-03608
+kind: paper
+title: "TICKing All the Boxes: Generated Checklists Improve LLM Evaluation and Generation"
+authors:
+  - "Jonathan Cook"
+  - "Tim Rocktäschel"
+  - "Jakob Foerster"
+  - "Dennis Aumiller"
+  - "Alex Wang"
+year: 2024
+date: 2024-10-04
+arxiv_id: "2410.03608"
+url: https://arxiv.org/abs/2410.03608
+tags: [evaluation, prompting, instruction-following]
+summary: >-
+  TICK has an LLM decompose an instruction into instruction-specific
+  YES/NO checklist items and evaluates responses against them, raising
+  exact agreement with human preference judgements from 46.4% to 52.2%
+  over direct scoring. STICK applies the same checklists to the model's
+  own output for self-refinement (+7.8% absolute on LiveBench reasoning)
+  and Best-of-N selection (+6.3% on WildBench). Giving the generated
+  checklists to human annotators also raised inter-annotator agreement.
+ingested_at: 2026-09-04

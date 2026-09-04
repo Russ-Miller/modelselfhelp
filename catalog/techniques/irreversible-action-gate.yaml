@@ -8,7 +8,7 @@ description: >-
   impossible rather than merely discouraged.
 addresses: [goal-conflict-safety]
 kind: process
-sources: [arxiv-2412-14470]
+sources: [arxiv-2412-14470, arxiv-2607-14166]
 contexts: [autonomous-agent, coding-agent, customer-support]
 requires: >-
   Adds latency to every gated call, and requires classifying tools by

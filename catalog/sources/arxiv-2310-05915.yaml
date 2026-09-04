@@ -1,0 +1,22 @@
+id: arxiv-2310-05915
+kind: paper
+title: "FireAct: Toward Language Agent Fine-tuning"
+authors:
+  - "Baian Chen"
+  - "Chang Shu"
+  - "Ehsan Shareghi"
+  - "Nigel Collier"
+  - "Karthik Narasimhan"
+  - "Shunyu Yao"
+year: 2023
+date: 2023-10-09
+arxiv_id: "2310.05915"
+url: https://arxiv.org/abs/2310.05915
+tags: [tool-use, fine-tuning, agentic]
+summary: >-
+  Fine-tunes backbone LMs on agent trajectories for question answering with
+  a search API. Llama2-7B fine-tuned on 500 GPT-4-generated trajectories
+  gained 77% on HotpotQA. FireAct mixes trajectories from multiple tasks
+  and prompting methods, and finds more diverse fine-tuning data improves
+  agents further.
+ingested_at: 2026-09-04

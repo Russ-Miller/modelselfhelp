@@ -4,21 +4,22 @@
 # they can be filed, which is why they are parked here rather than
 # invented into the catalog.
 #
-# Six of the original twelve have been cleared (2026-09-04). Five were
-# filed as claims against papers already in the catalog; a sixth was
-# already filed. What remains is the set that cannot be cleared from the
-# literature: each is practitioner knowledge, so it becomes an
-# `own-observation` claim only if Russ has actually observed it, and
-# otherwise gets dropped. Nobody should write these on his behalf.
+# Eleven of the original twelve are cleared. One remains.
 
 | technique | statement needing a sourced efficacy claim |
 |---|---|
-| `checklist-decomposition` | Practitioner technique; no controlled study isolates its effect. |
-| `dependency-existence-check` | Practitioner technique; no controlled study isolates its effect. |
-| `irreversible-action-gate` | Practitioner technique; no controlled study isolates its effect. |
 | `reread-before-edit` | Practitioner technique used by several coding agents; no published study isolates its effect. |
-| `synthetic-desycophancy-training` | At inference time, hiding the user's opinion or asking for the answer before the opinion is the cheap alternative. |
-| `tool-use-fine-tuning` | Gains are largest for open models that start far behind. |
+
+The FastContext paper (arXiv 2606.14066) was offered for this one and
+does not fit. It is about separating repository *exploration* from
+solving to save token budget and keep the solver's context clean;
+reread-before-edit is a harness rule that rejects an edit unless the file
+was read after its last modification. Adjacent subject, different
+mechanism, no measurement of stale-state edits. Filing it would have
+been a citation that looks like support and isn't — which is the exact
+failure this catalog exists to make visible. It stays open until either
+a study isolates stale-read edit failures or Russ files it as an
+own-observation.
 
 ## Cleared
 
@@ -30,12 +31,25 @@
 | `retrieval-augmented-generation` | `retrieval-moves-the-trust-boundary-rather-than-removing-it` | replicated |
 | `structured-prompt-separation` | `structured-separation-needs-training-and-reduces-rather-than-eliminates` | replicated |
 | `external-feedback-repair` | `external-feedback-repair-works-only-with-real-grounding` | replicated, contested (filed earlier) |
+| `checklist-decomposition` | `generated-checklists-make-instruction-requirements-individually-checkable` | single-paper |
+| `dependency-existence-check` | `declared-dependencies-are-not-the-set-the-code-needs` | single-paper, observation |
+| `irreversible-action-gate` | `an-approval-gate-holds-only-under-complete-mediation` | single-paper |
+| `tool-use-fine-tuning` | `tool-use-fine-tuning-closes-a-gap-rather-than-extending-a-frontier` | single-paper, observation |
+| `synthetic-desycophancy-training` | `withholding-the-users-opinion-is-the-no-training-alternative` | mechanism-reasoning |
 
-Two of the five were filed as `mechanism-reasoning` rather than
-`single-paper` because the sources establish the setup but do not measure
-the effect: nothing in the catalog quantifies PAL's residual translation
-error rate, and nothing measures how much detail recursive summarization
-loses. Both claims say so in their notes. That is the distinction the
-backing_strength field exists to carry — "this follows from how the
-technique works" is a weaker warrant than "someone measured it," and
-collapsing the two would have been the easy, wrong move.
+Four are `mechanism-reasoning` or scope-limited rather than
+`single-paper`, because the source establishes the setup without
+measuring the effect: nothing quantifies PAL's residual translation-error
+rate, nothing measures how much detail recursive summarization loses,
+nobody has tested answer-before-opinion ordering as a deliberate
+intervention, and FireAct reports a large gain for a weak model without
+ablating starting strength. Each claim says so in its notes. Collapsing
+those into "a paper says so" would have been the easy, wrong move.
+
+Two of the six citations supplied on 2026-09-04 carried titles that did
+not match their arXiv IDs — 2607.14166 is "Stop Means Stop: Measuring and
+Repairing the Enforcement Gap in Agent-Framework Control Primitives"
+(SOUNDGATE is the artifact it proposes, not the title), and 2606.14066 is
+"FastContext: Training Efficient Repository Explorer for Coding Agents".
+Both were checked against the arXiv API before use. `npm run
+verify-papers` exists for exactly this and now covers 64 papers.

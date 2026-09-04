@@ -1,0 +1,32 @@
+id: tool-use-fine-tuning-closes-a-gap-rather-than-extending-a-frontier
+capability: tool-use
+technique: tool-use-fine-tuning
+statement: >-
+  The large reported gains from fine-tuning on tool-call trajectories come
+  from small open models starting far behind — distilling a few hundred
+  trajectories from a stronger model moves them a long way. Whether the
+  same procedure helps a model that is already good at tool use is a
+  separate question this evidence does not answer.
+tags: [agentic, coding-agent]
+kind: observation
+backing_strength: single-paper
+observed_on:
+  era: "2023, Llama2-7B fine-tuned on GPT-4 trajectories"
+sources:
+  - source: arxiv-2310-05915
+    stance: supports
+    note: >-
+      Fine-tuning Llama2-7B on 500 GPT-4-generated agent trajectories gave
+      a 77% HotpotQA improvement, and mixing trajectories from multiple
+      tasks and prompting methods improved agents further.
+contested: false
+status: active
+last_checked_at: 2026-09-04
+notes: >-
+  Deliberately stated as a scope limit rather than as "gains are largest
+  for weak models," which would be a comparative the source does not
+  establish — it reports a large gain for a weak model, which is not the
+  same as measuring the gain shrinking as the baseline rises. If a paper
+  ablates starting strength directly, this claim should be tightened or
+  replaced.
+submitted_by: human:Russ-Miller

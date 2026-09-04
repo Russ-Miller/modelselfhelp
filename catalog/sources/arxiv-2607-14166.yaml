@@ -1,0 +1,22 @@
+id: arxiv-2607-14166
+kind: paper
+title: "Stop Means Stop: Measuring and Repairing the Enforcement Gap in Agent-Framework Control Primitives"
+authors:
+  - "Sajjad Khan"
+year: 2026
+date: 2026-07-15
+arxiv_id: "2607.14166"
+url: https://arxiv.org/abs/2607.14166
+tags: [agentic, safety, approval-gate]
+summary: >-
+  Approval gates, run cancellation and execution timeouts in six widely
+  used agent frameworks imply barrier semantics that none of them deliver.
+  Differential probes isolate a recurring sibling leak — the gate suspends
+  its own branch while a sibling's side effect executes during the pause —
+  in five of six frameworks, plus replay double-execution, cancellation
+  orphans and timeout zombies. Frontier models emit the triggering plan
+  shape at up to 14%; live runs leaked 215 of 1,200. The proposed repair,
+  SOUNDGATE, is an environment-external Rust admission gate enforcing
+  complete mediation, mechanically verified and blocking every measured
+  violation.
+ingested_at: 2026-09-04

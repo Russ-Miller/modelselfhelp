@@ -1,0 +1,36 @@
+id: an-approval-gate-holds-only-under-complete-mediation
+capability: goal-conflict-safety
+technique: irreversible-action-gate
+statement: >-
+  Gating irreversible actions works only if the harness mediates every side
+  effect, not only the branch awaiting approval. Where a gate suspends its
+  own branch while a sibling's effect still executes, the control reads as
+  a barrier and is not one — and the shipped implementations in widely used
+  agent frameworks have this gap rather than it being a misconfiguration.
+tags: [agentic, security]
+kind: mechanism
+backing_strength: single-paper
+observed_on:
+  era: "2026, six open-source agent frameworks"
+sources:
+  - source: arxiv-2607-14166
+    stance: supports
+    note: >-
+      Differential probes found the sibling leak in every framework
+      shipping a pre-execution gate (five of six, across four execution
+      models and two language runtimes), plus replay double-execution,
+      cancellation orphans and timeout zombies. Live models leaked 215 of
+      1,200 runs. An environment-external admission gate enforcing complete
+      mediation blocked every measured violation with no legitimate
+      refusals, which isolates mediation as the property doing the work.
+contested: false
+status: active
+last_checked_at: 2026-09-04
+notes: >-
+  This is the sharpest kind of efficacy claim in the catalog: not "does the
+  technique help" but "does the implementation have the property the
+  technique's value depends on." The mechanism is old — complete mediation
+  is a 1970s access-control requirement — and the finding is that agent
+  frameworks reimplemented gates without it. The framework counts are
+  perishable; the mediation requirement is not.
+submitted_by: human:Russ-Miller

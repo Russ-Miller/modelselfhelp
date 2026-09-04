@@ -8,7 +8,7 @@ description: >-
   which reduces silent drift on multi-constraint tasks.
 addresses: [procedure-following]
 kind: process
-sources: [arxiv-2311-07911]
+sources: [arxiv-2311-07911, arxiv-2410-03608]
 contexts: [coding-agent, autonomous-agent, customer-support]
 status: active
 submitted_by: human:Russ-Miller

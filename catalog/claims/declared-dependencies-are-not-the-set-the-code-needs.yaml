@@ -1,0 +1,38 @@
+id: declared-dependencies-are-not-the-set-the-code-needs
+capability: secure-coding
+technique: dependency-existence-check
+statement: >-
+  Checking that every package an agent names actually exists catches the
+  invented ones but not the missing ones: what agents declare is routinely
+  a fraction of what their code imports at runtime, so generated projects
+  fail in a clean environment even when every declared package is real.
+  Existence is a necessary check, not a sufficient one.
+tags: [security, coding-agent]
+kind: observation
+backing_strength: single-paper
+observed_on:
+  era: "2025, Claude Code / OpenAI Codex / Gemini coding agents"
+sources:
+  - source: arxiv-2512-22387
+    stance: supports
+    note: >-
+      Across 300 generated projects run in a clean environment with only
+      the declared dependencies, 68.3% executed out of the box (Python
+      89.2%, Java 44.0%), and actual runtime dependencies averaged 13.5x
+      the declared set.
+  - source: arxiv-2406-10279
+    stance: supports
+    note: >-
+      The other half of the same surface: packages that do not exist at
+      all, which is what the existence check is aimed at. Together they
+      bound the technique — it addresses one failure mode of two.
+contested: false
+status: active
+last_checked_at: 2026-09-04
+notes: >-
+  Filed as an observation, not a mechanism: the numbers are tied to three
+  specific 2025 agents and will move. The durable part — that a declared
+  manifest and an import graph are different objects — is the reason the
+  check has to compare against what the code actually imports rather than
+  only against the registry.
+submitted_by: human:Russ-Miller
