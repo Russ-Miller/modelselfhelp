@@ -305,3 +305,37 @@ rather than invented.
 Editing these through an admin UI remains deferred with the rest of auth
 (spec section 9). Today they are edited as YAML in git, which already has
 authentication and an audit trail.
+
+## 2026-09-04 — Stage 2: direction classification against held claims
+Built. For each (candidate, matched capability) pair, a model call judges
+whether the paper is genuinely about the capability (using that
+capability's discriminator), whether it improves/degrades/measures it,
+and -- the point of the exercise -- whether it contradicts a claim the
+catalog already holds. Verdicts are written back into the queue file, not
+into catalog/; nothing is promoted without review.
+
+Model is claude-opus-5 at effort low with structured outputs, the system
+prompt cached across the run. Measured on the full queue: 93 pairs for
+$0.88, about $0.0095 each. Cost was never the constraint -- the free
+topical matcher had already cut 689 candidates to 95, which is where the
+7x saving came from.
+
+The prompt is deliberately biased toward conservatism, because a false
+"contradicts" is worse than a missed one: it says discussing the same
+topic is not contradiction, reserves degrades for real evidence of
+regression, and states that an empty claim id beats a wrong one. Result
+on 99 verdicts: 37 improves, 20 measures, 7 degrades, 35 judged not
+actually about the capability they matched -- that last number is the
+keyword matcher's residual false-positive rate, now visible rather than
+silent.
+
+Two genuine challenges surfaced against held claims, both checked by
+hand and sound. The sycophancy one caught a shared-mechanism argument:
+anti-sycophancy training also impairs legitimate belief updating, which
+cuts against the held claim that synthetic-data fine-tuning simply
+reduces sycophancy.
+
+A /contested view collects it all: incoming challenges from the queue,
+and contested claims already in the catalog with their axis of
+disagreement. Capability and claim lists carry contested counts, and
+claims sort contested-first.

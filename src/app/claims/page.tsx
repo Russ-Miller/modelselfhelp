@@ -17,7 +17,11 @@ function SourceRow({ link }: { link: SourceLink }) {
 }
 
 export default function ClaimsPage() {
-  const claims = [...getClaims()].sort((a, b) => a.statement.localeCompare(b.statement));
+  // Contested claims first -- disagreement is the most decision-relevant thing
+  // on this page, and it is otherwise invisible in an alphabetical list.
+  const claims = [...getClaims()].sort((a, b) =>
+    Number(b.contested) - Number(a.contested) || a.statement.localeCompare(b.statement));
+  const contestedCount = claims.filter((c) => c.contested).length;
   return (
     <div className="space-y-4">
       <h1 className="text-2xl font-semibold">Claims</h1>
@@ -25,6 +29,10 @@ export default function ClaimsPage() {
         Directional, scoped statements &mdash; the actual content. Each shows which capability it sits
         under and which sources support or contest it. Sources with no citations in the last 12 months
         and 2+ years old are tucked behind &ldquo;older sources&rdquo;.
+      </p>
+      <p className="text-sm text-neutral-500">
+        {contestedCount} of {claims.length} are contested, sorted first &mdash;{" "}
+        <Link href="/contested" className="hover:underline">see them with incoming challenges</Link>.
       </p>
       <ul className="space-y-4">
         {claims.map((c) => {

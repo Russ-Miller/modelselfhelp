@@ -5,6 +5,21 @@ import fs from "node:fs";
 import path from "node:path";
 import YAML from "yaml";
 
+export type Direction = "improves" | "degrades" | "measures" | "not_applicable";
+
+export interface Verdict {
+  capability: string;
+  about_capability: boolean;
+  direction: Direction;
+  confidence: "high" | "medium" | "low";
+  rationale: string;
+  contradicts_claim_id?: string;
+  supports_claim_id?: string;
+  scope_condition?: string;
+  classified_at?: string;
+  model?: string;
+}
+
 export interface QueueCandidate {
   openalex_id: string;
   score?: number;
@@ -21,6 +36,8 @@ export interface QueueCandidate {
   /** Catalogued capabilities this paper is ABOUT. Topical only -- says nothing
    *  about whether the paper improves, degrades, or merely measures them. */
   capabilities?: string[];
+  /** Stage-2 direction judgments, one per matched capability. */
+  verdicts?: Verdict[];
   /** Which queue file this came from, e.g. "2026-08-25_2026-09-01". */
   window: string;
 }
@@ -42,6 +59,25 @@ export function loadQueue(): { candidates: QueueCandidate[]; windows: string[]; 
   }
   candidates.sort((a, b) => (b.score ?? 0) - (a.score ?? 0) || (a.title ?? "").localeCompare(b.title ?? ""));
   return { candidates, windows, generatedAt };
+}
+
+/**
+ * Incoming candidates whose stage-2 verdict says they contradict a claim the
+ * catalog already holds -- the sharpest signal the queue produces.
+ */
+export function challengers(candidates: QueueCandidate[]): { candidate: QueueCandidate; verdict: Verdict }[] {
+  const out: { candidate: QueueCandidate; verdict: Verdict }[] = [];
+  for (const c of candidates) {
+    for (const v of c.verdicts ?? []) {
+      if (v.contradicts_claim_id) out.push({ candidate: c, verdict: v });
+    }
+  }
+  return out;
+}
+
+/** The stage-2 verdict for a given capability, if one has been made. */
+export function verdictFor(c: QueueCandidate, capabilityId: string): Verdict | undefined {
+  return (c.verdicts ?? []).find((v) => v.capability === capabilityId);
 }
 
 /**

@@ -122,6 +122,22 @@ export function capabilitiesByGroup(): { group: TaxonomyEntry; capabilities: Cap
     .filter((g) => g.capabilities.length > 0);
 }
 
+/** Claims marked contested, i.e. carrying sources on both sides. */
+export const contestedClaims = () => loadCatalog().claims.filter((c) => c.contested);
+
+/** Capabilities that hold at least one contested claim, with those claims. */
+export function capabilitiesWithDispute(): { capability: Capability; claims: Claim[] }[] {
+  const byCapability = new Map<string, Claim[]>();
+  for (const c of contestedClaims()) {
+    if (!byCapability.has(c.capability)) byCapability.set(c.capability, []);
+    byCapability.get(c.capability)!.push(c);
+  }
+  return [...byCapability.entries()]
+    .map(([id, claims]) => ({ capability: getCapability(id)!, claims }))
+    .filter((x) => x.capability)
+    .sort((a, b) => b.claims.length - a.claims.length);
+}
+
 /** Claims sorted by most-recently-checked first, for a recent-activity-style view. */
 export function claimsByRecency(): Claim[] {
   return [...loadCatalog().claims].sort((a, b) => (b.last_checked_at || "").localeCompare(a.last_checked_at || ""));

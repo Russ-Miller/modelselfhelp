@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { getCapability } from "@/lib/catalog";
-import { candidateUrl, groupByCapability, loadQueue, type QueueCandidate } from "@/lib/queue";
+import { candidateUrl, groupByCapability, loadQueue, verdictFor, type Direction, type QueueCandidate } from "@/lib/queue";
 
 export const metadata = { title: "Review queue" };
 
@@ -13,8 +13,16 @@ function ScorePill({ score }: { score: number }) {
   return <span className={`inline-flex min-w-8 justify-center rounded px-1.5 py-0.5 text-xs font-medium tabular-nums ${tone}`}>{score}</span>;
 }
 
-function Candidate({ c }: { c: QueueCandidate }) {
+const DIRECTION_TONE: Record<Direction, string> = {
+  improves: "bg-emerald-100 text-emerald-900 dark:bg-emerald-900/40 dark:text-emerald-200",
+  degrades: "bg-red-100 text-red-900 dark:bg-red-900/40 dark:text-red-200",
+  measures: "bg-sky-100 text-sky-900 dark:bg-sky-900/40 dark:text-sky-200",
+  not_applicable: "bg-neutral-100 text-neutral-500 dark:bg-neutral-800 dark:text-neutral-500",
+};
+
+function Candidate({ c, capabilityId }: { c: QueueCandidate; capabilityId?: string }) {
   const url = candidateUrl(c);
+  const v = capabilityId ? verdictFor(c, capabilityId) : undefined;
   return (
     <li className="rounded border border-neutral-200 p-3 dark:border-neutral-800">
       <div className="flex items-start gap-3">
@@ -30,6 +38,32 @@ function Candidate({ c }: { c: QueueCandidate }) {
             {c.authors?.length ? ` · ${c.authors[0]}${c.authors.length > 1 ? " et al." : ""}` : ""}
             {c.arxiv_id ? ` · arXiv:${c.arxiv_id}` : ""}
           </div>
+          {v && (
+            <div className="mt-1.5 space-y-1">
+              <div className="flex flex-wrap items-center gap-2">
+                <span className={`inline-flex items-center rounded px-1.5 py-0.5 text-xs font-medium ${DIRECTION_TONE[v.direction]}`}>
+                  {v.about_capability ? v.direction : "off-topic"}
+                </span>
+                {v.contradicts_claim_id && (
+                  <Link href={`/claims/${v.contradicts_claim_id}`}
+                    className="inline-flex items-center rounded bg-amber-100 px-1.5 py-0.5 text-xs font-medium text-amber-900 hover:underline dark:bg-amber-900/40 dark:text-amber-200">
+                    contradicts an existing claim
+                  </Link>
+                )}
+                {v.supports_claim_id && (
+                  <Link href={`/claims/${v.supports_claim_id}`}
+                    className="inline-flex items-center rounded px-1.5 py-0.5 text-xs text-neutral-600 hover:underline dark:text-neutral-400">
+                    supports an existing claim
+                  </Link>
+                )}
+                <span className="text-xs text-neutral-500">{v.confidence} confidence</span>
+              </div>
+              <p className="text-sm text-neutral-700 dark:text-neutral-300">{v.rationale}</p>
+              {v.scope_condition && (
+                <p className="text-xs text-neutral-500">Scope: {v.scope_condition}</p>
+              )}
+            </div>
+          )}
           {c.capabilities && c.capabilities.length > 1 ? (
             <div className="mt-1 text-xs text-neutral-500">
               also: {c.capabilities.map((id) => getCapability(id)?.label ?? id).join(", ")}
@@ -88,7 +122,7 @@ export default function QueuePage() {
                   <span className="text-sm font-normal text-neutral-500">{items.length}</span>
                 </h2>
                 <ul className="space-y-2">
-                  {items.map((c) => <Candidate key={`${id}-${c.openalex_id}`} c={c} />)}
+                  {items.map((c) => <Candidate key={`${id}-${c.openalex_id}`} c={c} capabilityId={id} />)}
                 </ul>
               </section>
             );
