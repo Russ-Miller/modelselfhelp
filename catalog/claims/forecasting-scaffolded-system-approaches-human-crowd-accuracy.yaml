@@ -1,0 +1,29 @@
+id: forecasting-scaffolded-system-approaches-human-crowd-accuracy
+capability: forecasting
+statement: >-
+  A retrieval-augmented forecasting system built on a GPT-4-class model —
+  not the base model alone — approaches, and sometimes exceeds, the
+  accuracy of competitive human forecasters on real prediction-market
+  questions dated after the model's training cutoff.
+tags: [reasoning]
+kind: observation
+backing_strength: single-paper
+observed_on:
+  era: "2024, GPT-4 class with retrieval scaffolding"
+  task_type: general
+sources:
+  - source: arxiv-2402-18563
+    stance: supports
+    note: >-
+      Achieved accuracy comparable to, and sometimes exceeding, human
+      crowd forecasts when tested against real forecasting-tournament
+      questions with dates after training cutoff.
+contested: false
+status: active
+last_checked_at: 2026-09-04
+notes: >-
+  Requires real infrastructure (search, retrieval, aggregation) built
+  around the model — not an out-of-the-box capability. Worth reading
+  alongside the earlier, lower-scaffolding result below to see the
+  progression.
+submitted_by: human:Russ-Miller

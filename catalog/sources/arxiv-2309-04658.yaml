@@ -1,0 +1,21 @@
+id: arxiv-2309-04658
+kind: paper
+title: "Exploring Large Language Models for Communication Games: An Empirical Study on Werewolf"
+authors:
+  - "Yuzhuang Xu"
+  - "Shuo Wang"
+  - "Peng Li"
+  - "Fuwen Luo"
+  - "Xiaolong Wang"
+  - "Weidong Liu"
+  - "Yang Liu"
+year: 2023
+arxiv_id: "2309.04658"
+url: https://arxiv.org/abs/2309.04658
+summary: >-
+  Frozen LLMs, using only retrieval over past communications and
+  self-reflection rather than fine-tuning, can play the social deduction
+  game Werewolf competently and show emergent strategic behavior,
+  including deception, without being explicitly trained for it.
+tags: [deception, agentic]
+ingested_at: 2026-09-04

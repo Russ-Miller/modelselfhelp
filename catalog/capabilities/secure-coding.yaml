@@ -6,6 +6,6 @@ description: >-
 tags: [coding-agent, security]
 aliases: ["insecure code generation", "package hallucination", "slopsquatting"]
 techniques: [dependency-existence-check, secure-code-scanning]
-related: [prompt-injection, hallucination]
+related: [prompt-injection, hallucination, code-generation]
 status: active
 submitted_by: human:Russ-Miller

@@ -1,0 +1,16 @@
+id: code-generation
+label: Generating and editing working code
+summary: Whether a model can write correct code from a specification, and go beyond isolated functions to real repository-scale editing and debugging.
+description: >-
+  Distinct from secure-coding, which is specifically about vulnerability
+  patterns and dependency hallucination. This is about raw functional
+  correctness — does the generated code actually pass held-out tests —
+  and, at the harder end, whether a model can navigate and edit an
+  existing codebase rather than writing an isolated function from
+  scratch. Static, fixed-problem benchmarks saturate and leak into
+  training data over time, which is why contamination-resistant,
+  continuously-updated benchmarks matter here more than in most areas.
+tags: [reasoning, agentic]
+related: [secure-coding, self-repair]
+status: active
+submitted_by: human:Russ-Miller

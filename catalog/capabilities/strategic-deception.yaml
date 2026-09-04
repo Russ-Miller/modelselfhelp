@@ -1,0 +1,16 @@
+id: strategic-deception
+label: Strategic deception and detecting it
+summary: Whether a model can deliberately induce false beliefs in others when a task calls for it, and detect deception from others.
+description: >-
+  Cleanly testable in social deduction games (Werewolf, Mafia, Among Us),
+  where deception is the explicit task rather than an unwanted side
+  effect. This is a capability, not the same question as
+  goal-conflict-safety: that capability asks whether a model deceives its
+  own principal against instructions (a safety property); this one asks
+  how skilled the model is at deception when the task legitimately calls
+  for it. Knowing a model is bad at deception is reassuring context for
+  the safety question — the two are worth reading together.
+tags: [behavior]
+related: [goal-conflict-safety]
+status: active
+submitted_by: human:Russ-Miller

@@ -1,0 +1,24 @@
+id: frozen-llms-play-werewolf-competently-via-reflection
+capability: strategic-deception
+statement: >-
+  Frozen LLMs, using only retrieval over past communications and
+  self-reflection rather than fine-tuning, can play the social deduction
+  game Werewolf competently and show emergent strategic behavior,
+  including deception, without being explicitly trained for it.
+tags: [behavior, agentic]
+kind: observation
+backing_strength: single-paper
+observed_on:
+  era: "2023, GPT-3.5/GPT-4 class"
+  task_type: autonomous-agent
+sources:
+  - source: arxiv-2309-04658
+    stance: supports
+    note: >-
+      A tuning-free framework using retrieval and reflection on past
+      communications let frozen LLMs play Werewolf competently, with
+      emergent strategic behavior.
+contested: false
+status: active
+last_checked_at: 2026-09-04
+submitted_by: human:Russ-Miller

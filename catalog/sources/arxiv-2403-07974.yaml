@@ -1,0 +1,25 @@
+id: arxiv-2403-07974
+kind: paper
+title: "LiveCodeBench: Holistic and Contamination Free Evaluation of Large Language Models for Code"
+authors:
+  - "Naman Jain"
+  - "King Han"
+  - "Alex Gu"
+  - "Wen-Ding Li"
+  - "Fanjia Yan"
+  - "Tianjun Zhang"
+  - "Sida Wang"
+  - "Armando Solar-Lezama"
+  - "Koushik Sen"
+  - "Ion Stoica"
+year: 2024
+arxiv_id: "2403.07974"
+url: https://arxiv.org/abs/2403.07974
+summary: >-
+  Continuously collects newly-published coding problems to stay
+  contamination-free, evaluating 52 models; static fixed-problem
+  benchmarks like HumanEval saturate and leak into training data over
+  time, so an honest current read needs a benchmark that keeps adding
+  problems.
+tags: [code-generation, reasoning]
+ingested_at: 2026-09-04

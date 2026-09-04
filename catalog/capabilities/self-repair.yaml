@@ -11,6 +11,6 @@ description: >-
   "capability score" would have hidden.
 tags: [agentic, coding-agent, math]
 techniques: [external-feedback-repair]
-related: [tool-use, state-tracking]
+related: [tool-use, state-tracking, code-generation]
 status: active
 submitted_by: human:Russ-Miller
