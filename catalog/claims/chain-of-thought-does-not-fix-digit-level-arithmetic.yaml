@@ -1,0 +1,53 @@
+id: chain-of-thought-does-not-fix-digit-level-arithmetic
+capability: arithmetic
+technique: chain-of-thought
+statement: >-
+  Writing out reasoning steps improves how a problem is decomposed but does
+  not fix the arithmetic inside a step — the model can decompose correctly
+  and still get the calculation wrong, at the same confident register as
+  when it is right. For exact arithmetic the fix is to move the computation
+  out of the text, not to add more steps.
+tags: [reasoning, math]
+kind: mechanism
+backing_strength: replicated
+observed_on:
+  era: "2022-2024, Codex / GPT-3.5 / GPT-4 / PaLM class"
+sources:
+  - source: arxiv-2211-10435
+    stance: supports
+    note: >-
+      States the separation directly as the motivation for offloading:
+      models "often make logical and arithmetic mistakes in the solution
+      part, even when the problem is decomposed correctly."
+  - source: arxiv-2305-18654
+    stance: supports
+    note: >-
+      Multi-digit multiplication accuracy falls toward zero as operand size
+      grows, with behaviour consistent with pattern matching rather than a
+      learned algorithm — so the failure is below the level the steps
+      operate on.
+  - source: arxiv-2402-14903
+    stance: contests
+    note: >-
+      Finds arithmetic errors follow stereotyped, systematic patterns tied
+      to number tokenization, and that chain-of-thought-inspired prompting
+      can recover performance on left-to-right tokenized inputs — a case
+      where prompting alone does reach the digit level.
+contested: true
+disagreement_axis:
+  description: >-
+    Probably what the prompting is being asked to do. The supporting
+    results have the model perform the arithmetic across steps; the
+    contesting result has prompting re-represent the operands (comma
+    separation, converting between tokenizations) so the model's existing
+    arithmetic circuitry engages. Those are different interventions
+    wearing the same name. I have not tested whether the recovery survives
+    on operand sizes as large as the compositionality work uses.
+  is_guess: true
+status: active
+last_checked_at: 2026-09-04
+notes: >-
+  Filed from the technique-efficacy backlog. Replicated in the sense used
+  elsewhere here — independent papers converging from different
+  directions — not a rerun of any single experiment.
+submitted_by: human:Russ-Miller

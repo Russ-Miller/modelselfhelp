@@ -1,0 +1,41 @@
+id: structured-separation-needs-training-and-reduces-rather-than-eliminates
+capability: prompt-injection
+technique: structured-prompt-separation
+statement: >-
+  Separating instructions from data raises injection resistance
+  substantially, but both published versions get their strength from
+  fine-tuning the model on the separation, and both report improved
+  robustness rather than elimination. Treat it as one layer of defense in
+  depth; the prompt-only variant, without training, has no measured
+  efficacy behind it here.
+tags: [security, autonomous-agent]
+kind: mechanism
+backing_strength: replicated
+observed_on:
+  era: "2024, GPT-3.5 class and open base models"
+sources:
+  - source: arxiv-2402-06363
+    stance: supports
+    note: >-
+      Structured queries need both a secure front-end and "a specially
+      trained LLM" — a base model converted by structured instruction
+      tuning to ignore instructions in the data channel. Reports
+      significantly improved resistance with little utility cost, not
+      immunity.
+  - source: arxiv-2404-13208
+    stance: supports
+    note: >-
+      Instruction hierarchy likewise works through generated training data
+      teaching models to ignore lower-privileged instructions, and reports
+      drastically increased robustness — including to unseen attack types
+      — again as a degree, not a guarantee.
+contested: false
+status: active
+last_checked_at: 2026-09-04
+notes: >-
+  The gap worth being honest about: the technique record describes a
+  prompt-level fallback for people without training access, and neither
+  source evaluates that. So the claim asserts what the papers show
+  (training-based, partial) and marks the untrained variant as unmeasured
+  rather than assuming it inherits the result.
+submitted_by: human:Russ-Miller

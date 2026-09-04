@@ -1,0 +1,39 @@
+id: recursive-summarization-trades-detail-for-continuity
+capability: long-term-memory
+technique: recursive-summarization
+statement: >-
+  A running summary buys continuity across a long conversation at the cost
+  of specifics, because it is lossy compression by construction — so it
+  helps with "what were we doing" and not with "what exactly did I say in
+  turn 40." Keeping the raw turns retrievable alongside the summary covers
+  the second case.
+tags: [context, chat-assistant]
+kind: mechanism
+backing_strength: mechanism-reasoning
+sources:
+  - source: arxiv-2308-15022
+    stance: supports
+    note: >-
+      Reports the continuity half — recursive summarization produces more
+      consistent responses in long conversations — and that the strategy
+      complements retrieval-enhanced models rather than replacing them,
+      which is the pairing this claim recommends.
+  - source: arxiv-2410-10813
+    stance: supports
+    note: >-
+      Separates long-term memory into distinct abilities including
+      information extraction and multi-session reasoning, and finds gains
+      come from indexing and retrieval design (session decomposition for
+      value granularity, fact-augmented key expansion) — i.e. from keeping
+      specifics addressable.
+contested: false
+status: active
+last_checked_at: 2026-09-04
+notes: >-
+  Backing is mechanism-reasoning, not single-paper, and the distinction
+  matters here: neither source measures detail loss from summarization
+  directly. The lossiness is definitional and the complementarity is
+  reported; the quantified version of "how much is lost, and which kinds
+  of detail" is not something I have a source for. Filed from the
+  technique-efficacy backlog with that gap stated rather than papered over.
+submitted_by: human:Russ-Miller
