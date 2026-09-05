@@ -295,3 +295,52 @@ export function claimTags(c: Claim): string {
   if (c.backing_strength === "mechanism-reasoning") tags.push("argued");
   return tags.join(" ");
 }
+
+/**
+ * How a technique's evidence currently stands. Deliberately categorical and
+ * derived rather than a score: a number here would be the same Goodhart trap
+ * the project removed when it deleted eval scoring, and would invite tuning
+ * the catalog to move it. This is a reading of what has been filed, not a
+ * verdict on the technique, and it changes only when evidence changes.
+ *
+ * `narrowed` is the interesting one. It means a contesting source is on file
+ * but the claim was not marked contested -- the usual reason is that the
+ * scope condition absorbed the objection rather than the disagreement staying
+ * open. That is the quiet way a technique gets weaker without anyone saying so.
+ */
+export type Standing = "unmeasured" | "argued" | "supported" | "narrowed" | "contested";
+export interface TechniqueStanding {
+  standing: Standing;
+  claims: Claim[];
+  supporting: number;
+  contesting: number;
+  /** Most recent date any claim about it saw new evidence, or was last checked. */
+  lastMoved?: string;
+}
+
+export function techniqueStanding(techniqueId: string): TechniqueStanding {
+  const claims = claimsAboutTechnique(techniqueId);
+  let supporting = 0, contesting = 0;
+  for (const c of claims) for (const s of c.sources) {
+    if (s.stance === "contests") contesting++; else supporting++;
+  }
+  const dates = claims.map((c) => c.last_new_evidence_at || c.last_checked_at).filter(Boolean).sort();
+  const lastMoved = dates[dates.length - 1];
+
+  const standing: Standing =
+    claims.length === 0 ? "unmeasured"
+      : claims.some((c) => c.contested) ? "contested"
+        : !claims.some(isMeasured) ? "argued"
+          : contesting > 0 ? "narrowed"
+            : "supported";
+
+  return { standing, claims, supporting, contesting, lastMoved };
+}
+
+export const STANDING_LABEL: Record<Standing, string> = {
+  unmeasured: "nothing measured",
+  argued: "argued, not measured",
+  supported: "supported so far",
+  narrowed: "narrowed by later evidence",
+  contested: "contested",
+};

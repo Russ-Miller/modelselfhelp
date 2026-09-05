@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { claimsAboutTechnique, getSource, getTagLabel, getTechnique, getTechniques, getCapability } from "@/lib/catalog";
+import { claimsAboutTechnique, getSource, getTagLabel, getTechnique, getTechniques, getCapability, techniqueStanding, STANDING_LABEL } from "@/lib/catalog";
 import { ContestedBadge, KindBadge, StrengthBadge } from "@/components/badges";
 
 export function generateStaticParams() {
@@ -31,6 +31,28 @@ export default async function TechniquePage({ params }: PageProps<"/techniques/[
       {t.contexts?.length ? <p className="text-sm text-neutral-500">Contexts: {t.contexts.map(getTagLabel).join(", ")}</p> : null}
       <section>
         <h2 className="mb-1 font-semibold">Does it work?</h2>
+        {(() => {
+          const st = techniqueStanding(t.id);
+          const tone: Record<string, string> = {
+            unmeasured: "bg-neutral-100 text-neutral-700 dark:bg-neutral-800 dark:text-neutral-300",
+            argued: "bg-neutral-100 text-neutral-700 dark:bg-neutral-800 dark:text-neutral-300",
+            supported: "bg-emerald-100 text-emerald-900 dark:bg-emerald-900/40 dark:text-emerald-200",
+            narrowed: "bg-amber-100 text-amber-900 dark:bg-amber-900/40 dark:text-amber-200",
+            contested: "bg-amber-100 text-amber-900 dark:bg-amber-900/40 dark:text-amber-200",
+          };
+          return (
+            <p className="mb-2 flex flex-wrap items-center gap-2 text-xs">
+              <span className={`inline-flex items-center rounded px-1.5 py-0.5 font-medium ${tone[st.standing]}`}>
+                {STANDING_LABEL[st.standing]}
+              </span>
+              <span className="text-neutral-500">
+                {st.supporting} supporting &middot; {st.contesting} contesting source
+                {st.supporting + st.contesting === 1 ? "" : "s"}
+                {st.lastMoved ? ` · last moved ${st.lastMoved}` : ""}
+              </span>
+            </p>
+          );
+        })()}
         <p className="mb-2 text-xs text-neutral-500">
           Efficacy claims &mdash; what this technique actually moves, under which conditions, and
           whether that has been contested.
