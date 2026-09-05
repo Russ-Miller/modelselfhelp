@@ -1,21 +1,42 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useSyncExternalStore } from "react";
 
 export interface FilterOption { value: string; label: string; count: number }
 
 /**
  * Segmented filter over a server-rendered list. The list stays fully static:
- * rows carry `data-tags`, this flips `data-filter` on a wrapper, and rules in
+ * rows carry `data-tags`, this sets `data-filter` on a wrapper, and rules in
  * globals.css hide the rows that do not match. Nothing here knows what a row
  * is, and no copy of the data is shipped for the filter to work over.
  *
- * The active filter is mirrored into the query string so a filtered view is
- * linkable -- which is what lets /open-questions point at the same cut of the
- * data inside the Capabilities and Techniques tabs. Read from
- * window.location on mount rather than useSearchParams(), which would force a
- * Suspense boundary on an otherwise static page.
+ * The query string is the single source of truth rather than a mirror of
+ * component state. That makes a filtered view linkable -- which is what lets
+ * /open-questions point at the same cut of the data inside the Capabilities
+ * and Techniques tabs -- and it makes the browser's back button work. It also
+ * avoids reading window during render: useSyncExternalStore's server snapshot
+ * is "all", matching what the static HTML was built with, so hydration agrees.
  */
+const listeners = new Set<() => void>();
+
+function subscribe(onChange: () => void) {
+  listeners.add(onChange);
+  window.addEventListener("popstate", onChange);
+  return () => {
+    listeners.delete(onChange);
+    window.removeEventListener("popstate", onChange);
+  };
+}
+
+/** replaceState does not fire popstate, so our own writes have to say so. */
+function setParam(param: string, value: string) {
+  const url = new URL(window.location.href);
+  if (value === "all") url.searchParams.delete(param);
+  else url.searchParams.set(param, value);
+  window.history.replaceState(null, "", url);
+  for (const l of listeners) l();
+}
+
 export function FilterBar({
   options,
   param = "filter",
@@ -25,20 +46,14 @@ export function FilterBar({
   param?: string;
   children: React.ReactNode;
 }) {
-  const [active, setActive] = useState("all");
-
-  useEffect(() => {
-    const v = new URLSearchParams(window.location.search).get(param);
-    if (v && options.some((o) => o.value === v && o.count > 0)) setActive(v);
-  }, [options, param]);
-
-  function pick(value: string) {
-    setActive(value);
-    const url = new URL(window.location.href);
-    if (value === "all") url.searchParams.delete(param);
-    else url.searchParams.set(param, value);
-    window.history.replaceState(null, "", url);
-  }
+  const read = useCallback(
+    () => new URLSearchParams(window.location.search).get(param) ?? "all",
+    [param],
+  );
+  const fromUrl = useSyncExternalStore(subscribe, read, () => "all");
+  // A stale or hand-edited link naming an empty cut falls back to All rather
+  // than rendering a list with everything hidden.
+  const active = options.some((o) => o.value === fromUrl && o.count > 0) ? fromUrl : "all";
 
   const all: FilterOption[] = [{ value: "all", label: "All", count: 0 }, ...options];
 
@@ -52,7 +67,7 @@ export function FilterBar({
             <button
               key={o.value}
               type="button"
-              onClick={() => pick(o.value)}
+              onClick={() => setParam(param, o.value)}
               disabled={empty}
               aria-pressed={isActive}
               className={[
