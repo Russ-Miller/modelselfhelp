@@ -488,3 +488,29 @@ starts lying to itself.
 Filter state lives in the query string rather than component state alone.
 That is what makes the cross-links work, and it means a filtered view is
 something you can send someone.
+
+## 2026-09-04 — UI voice: explain the gap, don't argue about it
+Russ rewrote the /open-questions copy and the difference is worth naming,
+because it will apply to every page eventually.
+
+The old copy argued with itself. It reached for the project's internal
+reasoning ("the same unfalsifiable move as `status: accepted`, just
+inverted"), used em-dashes to stack clauses, and wrote from "I". That
+reads as a designer defending a decision to another designer.
+
+The new copy explains. Short declarative sentences, one idea each. First
+person plural, because a reader looking at a catalog wants to know what
+*we* found, not what I did. And the distinction that motivated the whole
+page survives in plain words: "If we searched the literature and found
+nothing, that tells us something about the state of the research. If we
+simply haven't investigated a technique yet, that only tells us we haven't
+looked at it."
+
+That is the same argument, and it lands harder without the jargon. The
+rule going forward: the reasoning belongs in docs/decisions.md, the
+consequence belongs in the UI.
+
+Section headings moved the same way — "Techniques catalogued, none
+measured" became "A mitigation exists, but nobody measured it", and
+"Nearest miss" became "Closest paper we found". Applied to the Open
+Questions tab only for now; the other tabs still carry the older voice.
