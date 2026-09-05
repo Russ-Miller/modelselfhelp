@@ -3,24 +3,101 @@
   "$id": "https://modelselfhelp.dev/schema/source.schema.json",
   "type": "object",
   "additionalProperties": false,
-  "required": ["id", "kind", "title", "ingested_at"],
+  "required": [
+    "id",
+    "kind",
+    "title",
+    "ingested_at"
+  ],
   "properties": {
-    "id": { "$ref": "common.schema.json#/$defs/slug" },
-    "kind": { "type": "string", "enum": ["paper", "observation"] },
-    "title": { "type": "string", "minLength": 5 },
-    "authors": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
-    "year": { "type": "integer", "minimum": 1990, "maximum": 2100 },
-    "date": { "$ref": "common.schema.json#/$defs/date" },
-    "arxiv_id": { "type": "string", "pattern": "^\\d{4}\\.\\d{4,5}(v\\d+)?$" },
-    "url": { "type": "string", "format": "uri" },
-    "venue": { "type": "string" },
-    "summary": { "type": "string" },
-    "tags": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
-    "code_url": { "type": "string", "format": "uri" },
-    "ingested_at": { "$ref": "common.schema.json#/$defs/date" },
-    "citations_total": { "type": "integer", "minimum": 0 },
-    "citations_recent_12mo": { "type": "integer", "minimum": 0 },
-    "citations_checked_at": { "$ref": "common.schema.json#/$defs/date" },
-    "semantic_scholar_id": { "type": "string" }
+    "id": {
+      "$ref": "common.schema.json#/$defs/slug"
+    },
+    "kind": {
+      "type": "string",
+      "enum": [
+        "paper",
+        "observation"
+      ]
+    },
+    "title": {
+      "type": "string",
+      "minLength": 5
+    },
+    "authors": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
+    },
+    "year": {
+      "type": "integer",
+      "minimum": 1990,
+      "maximum": 2100
+    },
+    "date": {
+      "$ref": "common.schema.json#/$defs/date"
+    },
+    "arxiv_id": {
+      "type": "string",
+      "pattern": "^\\d{4}\\.\\d{4,5}(v\\d+)?$"
+    },
+    "url": {
+      "type": "string",
+      "format": "uri"
+    },
+    "venue": {
+      "type": "string"
+    },
+    "summary": {
+      "type": "string"
+    },
+    "brief": {
+      "type": "string",
+      "minLength": 120,
+      "description": "A reader-facing digest of the paper in the house summary style (docs/prompts/paper-summary.md): finding first, method, figures, boundary, takeaway. Generated from the abstract by scripts/summarize-sources.mjs and number-checked against it. Distinct from `summary`, which is a one-or-two-sentence factual gloss written by hand."
+    },
+    "brief_generated_at": {
+      "$ref": "common.schema.json#/$defs/date"
+    },
+    "brief_model": {
+      "type": "string"
+    },
+    "brief_unverified_figures": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Numbers that appear in `brief` but not in the source abstract it was generated from. Should normally be empty; a non-empty list means the digest needs a human read before it is trusted."
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "code_url": {
+      "type": "string",
+      "format": "uri"
+    },
+    "ingested_at": {
+      "$ref": "common.schema.json#/$defs/date"
+    },
+    "citations_total": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "citations_recent_12mo": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "citations_checked_at": {
+      "$ref": "common.schema.json#/$defs/date"
+    },
+    "semantic_scholar_id": {
+      "type": "string"
+    }
   }
 }

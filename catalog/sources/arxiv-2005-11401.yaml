@@ -1,16 +1,52 @@
 id: arxiv-2005-11401
 kind: paper
-title: "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks"
+title: Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks
 authors:
-  - "Patrick Lewis"
-  - "Ethan Perez"
-  - "Aleksandra Piktus"
-  - "et al."
+  - Patrick Lewis
+  - Ethan Perez
+  - Aleksandra Piktus
+  - et al.
 year: 2020
 arxiv_id: "2005.11401"
 url: https://arxiv.org/abs/2005.11401
-tags: [rag, retrieval]
+tags:
+  - rag
+  - retrieval
 ingested_at: 2026-09-02
 citations_total: 17840
 citations_recent_12mo: 1000
 citations_checked_at: 2026-09-04
+brief: >-
+  New Facebook AI paper: attaching a dense Wikipedia index to a seq2seq model
+  beats both parametric-only models and retrieve-and-extract pipelines on
+  open-domain QA.
+
+
+  The recipe, called retrieval-augmented generation, pairs a pre-trained
+  seq2seq generator (parametric memory) with a dense vector index of Wikipedia
+  accessed by a pre-trained neural retriever (non-parametric memory),
+  fine-tuned end to end for generation rather than extraction.
+
+
+  They compare 2 formulations: one conditions on the same retrieved passages
+  for the whole output sequence, the other can attend to different passages
+  per token. RAG sets state of the art on 3 open domain QA tasks. The abstract
+  reports no other numbers.
+
+
+  That is the important part: the gains are not limited to QA. On open-ended
+  generation, RAG produces more specific, diverse and factual text than a
+  strong parametric-only seq2seq baseline, and the retrieved passages give
+  provenance and let you update world knowledge by swapping the index instead
+  of retraining.
+
+
+  The boundary: everything is fine-tuned per task on knowledge-intensive
+  benchmarks with a Wikipedia index. No evidence here for zero-shot use,
+  non-Wikipedia corpora, or reasoning-heavy tasks.
+
+
+  If you are fine-tuning a generator for factual output, make the retriever
+  part of the training loop rather than a preprocessing step.
+brief_generated_at: 2026-09-05
+brief_model: claude-opus-5

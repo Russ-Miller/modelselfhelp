@@ -39,6 +39,25 @@ export default async function SourcePage({ params }: PageProps<"/sources/[id]">)
         )}
         {s.url && <a href={s.url} className="text-sm hover:underline">{s.url}</a>}
       </header>
+      {s.brief && (
+        <section className="space-y-3">
+          <h2 className="font-semibold">In brief</h2>
+          {s.brief_unverified_figures?.length ? (
+            <p className="rounded border border-amber-300 bg-amber-50 p-2 text-xs text-amber-900 dark:border-amber-800 dark:bg-amber-950/30 dark:text-amber-200">
+              Unverified figures: {s.brief_unverified_figures.join(", ")}. These do not appear in the
+              abstract this was written from, so read the paper before quoting them.
+            </p>
+          ) : null}
+          <div className="space-y-3 text-sm leading-relaxed text-neutral-800 dark:text-neutral-200">
+            {s.brief.split(/\n\s*\n/).map((para, i) => <p key={i}>{para}</p>)}
+          </div>
+          <p className="text-xs text-neutral-500">
+            Written from the abstract by {s.brief_model ?? "a model"}
+            {s.brief_generated_at ? ` on ${s.brief_generated_at}` : ""}, with every figure checked
+            against it. Not a substitute for the paper.
+          </p>
+        </section>
+      )}
       {s.summary && <p className="text-sm text-neutral-700 dark:text-neutral-300">{s.summary}</p>}
       <section>
         <h2 className="font-semibold mb-1">Referenced by</h2>

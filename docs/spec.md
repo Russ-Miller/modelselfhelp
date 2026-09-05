@@ -258,6 +258,25 @@ eroding:
 
 `status` is `active`/`superseded`: record lifecycle, not a verdict.
 
+### Source briefs
+A paper Source can carry a `brief`: a 120-200 word digest in the house style
+(`docs/prompts/paper-summary.md`), written from the abstract by
+`scripts/summarize-sources.mjs` and shown above the fold on the source
+page. Abstracts are written to be citable; briefs are written to be
+skimmed, which is the whole reason they exist.
+
+`summary` and `brief` are different objects and both stay. `summary` is a
+hand-written factual gloss. `brief` is generated, and says so on the page.
+
+Because the style runs on dense figures and an abstract often has none,
+generation carries an anti-fabrication guard: the model must list the
+figures it used copied verbatim, and every number in the output is then
+checked against the abstract independently of what the model claimed.
+Unmatched numbers land in `brief_unverified_figures` and render as a
+warning rather than sitting there looking authoritative. The check is the
+guard that matters, because it does not rely on the model having obeyed
+the instruction.
+
 ### Contribution provenance (§8)
 Every record still carries `submitted_by`, format `human:<handle>` or
 `agent:<agent-name>@<owner-login>`. Kept even though I'm the only author

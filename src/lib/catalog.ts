@@ -41,6 +41,12 @@ export interface Source {
   ingested_at: string;
   citations_total?: number; citations_recent_12mo?: number; citations_checked_at?: string;
   semantic_scholar_id?: string;
+  /** Reader-facing digest in the house style, generated from the abstract by
+   *  scripts/summarize-sources.mjs. `summary` stays a hand-written gloss. */
+  brief?: string; brief_generated_at?: string; brief_model?: string;
+  /** Figures in `brief` that are not in the abstract it came from. Non-empty
+   *  means the digest is suspect and must be read before it is trusted. */
+  brief_unverified_figures?: string[];
 }
 export interface Claim {
   id: string; capability: string; statement: string; tags?: string[];

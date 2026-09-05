@@ -552,3 +552,40 @@ Worth noting both corrections came from copy I had written around text
 Russ supplied. His paragraphs used "mitigation" too; the difference is he
 recognized it as wrong when he saw it rendered. Reading the page as a
 reader catches framing errors that reading the diff does not.
+
+## 2026-09-04 — Briefs instead of abstracts, with a number check
+Russ finds Rohan Paul's paper posts easier to process than abstracts and
+wants one for every paper here. Reverse-engineered the format from four
+full X posts (read with the Chrome extension, since X walls the timeline
+after ~6 posts logged out) and six longer newsletter write-ups, wrote it
+up in docs/prompts/paper-summary.md, and implemented it as
+scripts/summarize-sources.mjs writing to a new `brief` field.
+
+Two things make that format work, and only one of them is style. Figures
+are comparative rather than adjectival — "drops from 69.3 to 33.0 when
+Gemini 3.1 Pro becomes the executor", not "degrades substantially". And
+every summary states its own boundary, which is what makes the rest read
+as credible instead of promotional. That second habit is the same instinct
+as backing_strength and the scope conditions in every claim statement
+here, arrived at independently by someone writing for a different reason.
+
+**The risk this creates.** The style runs on dense figures. The generator
+is handed an abstract that frequently has none. That is a direct
+invitation to invent numbers, inside a catalog whose entire value is
+provenance — the same failure mode as the plausible-but-wrong citation
+rejected earlier today, except manufactured by us rather than supplied.
+
+So the prompt forbids ungrounded figures and requires the model to list
+what it used, and then every number in the output is checked against the
+abstract independently. Unmatched figures go to
+`brief_unverified_figures` and render as a warning on the source page. The
+second guard is the one that counts: it does not depend on the model
+having complied with the first. The first run caught one flag immediately
+— which turned out to be the extractor reading "3" out of "GPT-3.", fixed
+with a lookbehind. Worth noting the failure mode: a checker with false
+positives is worse than none, because real inventions get lost among them.
+
+Not done: briefs for queue candidates, which is where papers are actually
+triaged. That is ~145 candidates at roughly $0.01 each per run, on a set
+that churns nightly, so it is a spending decision rather than a technical
+one.

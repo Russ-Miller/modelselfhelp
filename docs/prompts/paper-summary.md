@@ -1,106 +1,116 @@
-# Paper-summary prompt (Rohan Paul style)
+# Paper-summary style
 
-Reverse-engineered on 2026-09-04 from six paper write-ups across two
-issues of Rohan Paul's newsletter (rohan-paul.com). His X posts
-(@rohanpaul_ai, 156K followers) are compressed versions of these — same
-opening move, truncated at "Show more" — so the newsletter is the better
-source for the full shape. X itself is login-walled after ~6 posts.
+Reverse-engineered 2026-09-04 from Rohan Paul (@rohanpaul_ai): four full posts
+read from X with the browser extension, plus six longer write-ups from his
+newsletter at rohan-paul.com. Implemented in `scripts/summarize-sources.mjs`,
+which writes the result to a source's `brief` field.
 
-## What makes the format work
+## Why this format works
 
-The structure is a funnel: stake → finding → how → numbers → where it
-breaks → what you do. Two things carry it. First, the numbers are
-specific and comparative, never "significantly improved." Second, every
-summary names its own limit, which is what makes the rest believable.
+It is a funnel — finding, method, figures, turn, boundary, takeaway — and two
+things carry it.
 
-## The prompt
+Figures are specific and comparative. Not "improved substantially" but "drops
+from 69.3 on SWE-Pro with Opus running it to 33.0 when Gemini 3.1 Pro becomes
+the executor." The comparator is what makes a number mean something.
 
-> You are summarizing a research paper for practitioners who build with
-> LLMs. They are technical, short on time, and reading on a phone. Write
-> 150–250 words in this structure, one blank line between every paragraph.
-> No headings, no bullet points unless the paper is a list of findings.
->
-> **1. Title line.** `🗞️ "Exact Paper Title"` — quoted verbatim, nothing else.
->
-> **2. Hook, one sentence.** Give the reader a reason to care before they
-> know anything about the paper. Address them directly. Use a conditional
-> or a consequence, not a description. Good: "When an AI agent fails,
-> blaming the model can send you to the wrong fix." / "If you're spending
-> extra tokens making an LLM critique itself, this paper says a simpler
-> move can be better: just let it try again." Bad: "This paper studies
-> agent failure modes."
->
-> **3. Attribution and finding, one or two sentences.** Name the lab, then
-> state the finding plainly: "New Microsoft paper finds that some
-> expensive test-time reasoning can be replaced with a small set of rules
-> learned from previous agent runs."
->
-> **4. Method, one or two sentences.** Concrete enough that a reader could
-> picture running it. Include the actual quantities: "collect 35–50 past
-> trajectories, have a coding agent extract recurring failure patterns,
-> then turn those into a small markdown skill added to the system prompt."
->
-> **5. Results, dense with numbers.** Every claim carries a figure and,
-> where possible, a comparator: "recovered 55%–100%+ of the gap between
-> non-reasoning and reasoning modes across 4 agent benchmarks, while using
-> 2.9–4.5× fewer output tokens." Name the benchmarks.
->
-> **6. The wrinkle.** One thing that is more interesting than the headline
-> result. Open with a phrase like "The useful part is that…" or "The limit
-> is equally useful:…"
->
-> **7. The boundary.** State plainly where the result does not hold —
-> model sizes, task types, what was not tested. "Study boundary matters:
-> this is Qwen2.5 on math, not frontier models or open-ended tasks."
-> Never omit this, even when the paper undersells its own limits.
->
-> **8. The takeaway, one or two sentences.** What the reader should
-> actually do differently. Start with "So the practical split is:" or "For
-> agent teams, the practical shift is simple:" or similar.
->
-> **Style rules**
-> - Numerals for every number, including small ones: "1 extra term",
->   "4 judges", "7 test-time reasoning methods".
-> - Multipliers as `×`, ranges with en-dashes: `2.9–4.5×`, `55%–100%`.
-> - Paragraphs of 1–3 sentences. Blank line between each.
-> - Second person in the hook and the takeaway; third person in between.
-> - Plain declaratives. No "significantly", "notably", "importantly",
->   "it is worth noting", "delve", "leverage".
-> - Never claim a result the paper did not measure. If the paper argues
->   from mechanism rather than measurement, say so.
+Every summary states its own limit. "Study boundary matters: this is Qwen2.5
+on math, not frontier models or open-ended tasks." That paragraph is why the
+rest reads as credible rather than promotional, and it is the same instinct as
+`backing_strength` and the scope conditions written into every claim here.
 
-## Worked example, from the source
+## Structure
 
-> 🗞️ "Sample More, Reflect Less: Self-Refine and Reflexion Lose to
-> Repeated Sampling at Equal Token Cost, from 1.5B to 7B"
->
-> If you're spending extra tokens making an LLM critique itself, this
-> paper says a simpler move can be better: just let it try again.
->
-> The study compares 7 test-time reasoning methods on Qwen2.5 models from
-> 1.5B to 7B, then asks a fairer question: what happens if repeated
-> sampling gets the same token budget?
->
-> Repeated sampling means solving the same math problem several times and
-> taking the answer that shows up most often. Across 36 comparisons, none
-> of the more elaborate methods reliably beat that baseline at equal
-> generated-token cost; 10 were significantly worse.
->
-> For checkable reasoning, extra tokens may be better spent creating
-> independent attempts than asking the model to reconsider its own work.
-> Study boundary matters: this is Qwen2.5 on math, not frontier models or
-> open-ended tasks.
+1. **The finding, first line, no preamble.** Stated as a consequence, not a
+   description. `New MIT paper: If agents can see and reuse what earlier agents
+   built, the whole system gets stronger over time.` Lab attribution when the
+   source names one, either inline or as its own line (`New Google DeepMind
+   paper.`). Where no lab is evident, the finding stands alone: `LLMs learn a
+   narrower set of answers than their training data, even when you sample
+   instead of using greedy decoding.`
+2. **What the paper did.** Named system, models, benchmarks, concrete enough to
+   picture. `HarnessDev starts each creator model from a nearly empty runtime
+   and asks it to build the execution loop, tools, context handling, recovery,
+   and verification needed for real tasks.`
+3. **Results, with figures.** `Codex solves 28.8% of HumanEval problems in a
+   single attempt, against 11.4% for GPT-J and 0% for GPT-3.`
+4. **The turn** — the thing more interesting than the headline, opened with a
+   flat connective: `That means`, `That is the important part:`, `Portability
+   is another problem:`.
+5. **The boundary.** Where it does not hold.
+6. **What to do differently.** One sentence.
 
-## Where this fits here
+Paragraphs are one or two sentences with a blank line between. 120–200 words.
 
-The boundary paragraph is the part worth stealing. It is the same
-instinct as `backing_strength` and the scope conditions this catalog
-writes into every claim statement — a result without its limit gets
-misapplied. If this prompt is ever wired into the ingestion pipeline for
-queue summaries, that paragraph is the one that must not be dropped for
-length.
+## Style rules
 
-Note the mismatch to watch: this format is written to make a paper sound
-worth reading, and the catalog exists to judge whether a paper's claim
-holds up. Borrow the structure and the numeric density; do not borrow the
-enthusiasm.
+- Numerals for every number, including small ones: `1 agent`, `34 math
+  problems`, `24 others`, `4 benchmarks`.
+- Multipliers as `×`, ranges with en-dashes.
+- Short declaratives. No *significantly*, *notably*, *importantly*, *it is
+  worth noting*, *delve*, *leverage*, *robust*, *novel*.
+- Second person in the opening and closing sentence only.
+- No selling. Rohan's own posts occasionally open "A brutal study." — that is
+  the one habit deliberately not copied. This catalog judges whether a claim
+  holds; it does not advertise papers.
+
+## X versus the newsletter
+
+The two forms differ and the X one is the model here.
+
+| | X post | Newsletter |
+|---|---|---|
+| Title | at the **bottom**, `Title: "…"`, often a threaded reply with the arXiv link | at the top, `🗞️ "…"` |
+| Emoji | none | `🗞️` per item |
+| Length | ~150 words | ~250 words |
+
+## The fabrication problem
+
+The style runs on dense figures, and the generator is handed an abstract that
+frequently has none. That is a direct invitation to invent numbers, in a
+catalog whose entire value is provenance — the same failure that made a
+plausible-but-wrong citation worth rejecting earlier.
+
+Two guards, both in `summarize-sources.mjs`:
+
+1. The prompt forbids any figure not present in the source text, and requires
+   the model to list the figures it used, copied verbatim.
+2. Every number in the output is then checked against the abstract. Anything
+   unmatched lands in `brief_unverified_figures` and renders as a warning on
+   the source page, rather than sitting there looking authoritative.
+
+The second guard is the one that counts, because it does not depend on the
+model having complied with the first.
+
+One extractor subtlety worth keeping: the number matcher uses a lookbehind to
+skip digits attached to a name. Without it, `GPT-3.` yields the figure `3`,
+which fails the check and buries real inventions under false positives.
+
+## Worked example
+
+> New OpenAI paper: sampling a code model many times and filtering beats trying
+> to get 1 correct answer.
+>
+> Codex is a GPT model fine-tuned on public GitHub code, evaluated on Python
+> program synthesis. The authors release HumanEval, a benchmark that scores
+> functional correctness of programs generated from docstrings by running unit
+> tests rather than comparing text.
+>
+> Codex solves 28.8% of HumanEval problems in a single attempt, against 11.4%
+> for GPT-J and 0% for GPT-3. With 100 samples per problem, 70.2% of problems
+> are solved.
+>
+> That gap is the important part: most of the model's capability is
+> inaccessible from 1 sample, so the useful unit of a code agent is a
+> sampling-and-selection loop, not a single generation.
+>
+> The limits are structural, not fixable by more sampling. Codex struggles with
+> docstrings that describe long chains of operations and with binding
+> operations to specific variables. Evaluation covers Python synthesis from
+> docstrings only; nothing here speaks to other languages, repository-scale
+> edits, or how well 100 samples can be filtered without hidden tests.
+>
+> If you are building a code tool, budget for multiple samples and a verifier
+> instead of tuning the prompt for a single shot.
+
+Generated by the script from the arXiv abstract alone, every figure grounded.
