@@ -28,6 +28,9 @@ const arg = (n) => { const i = args.indexOf(`--${n}`); return i >= 0 ? args[i + 
 const dryRun = args.includes("--dry-run");
 const onlyCapability = arg("capability");
 const limit = args.includes("--all") ? Infinity : Number(arg("limit") ?? 10);
+// Between API calls. Nothing waits on a nightly job, and a steady trickle is
+// far cheaper than discovering a rate limit 40 calls into a paid batch.
+const delayMs = Number(arg("delay") ?? 1000);
 
 const Verdict = z.object({
   about_capability: z.boolean()
@@ -185,6 +188,7 @@ for (const [i, item] of batch.entries()) {
     errors++;
     console.error(`      error: ${err?.message ?? err}`);
   }
+  if (i < batch.length - 1) await new Promise((r) => setTimeout(r, delayMs));
 }
 
 // Rewrite queue files with verdicts attached. Re-serializing via YAML.stringify
