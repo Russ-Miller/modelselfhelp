@@ -21,3 +21,7 @@ summary: >-
   and Best-of-N selection (+6.3% on WildBench). Giving the generated
   checklists to human annotators also raised inter-annotator agreement.
 ingested_at: 2026-09-04
+citations_total: 61
+citations_recent_12mo: 33
+citations_checked_at: 2026-09-04
+semantic_scholar_id: 82068d5f0126575e6b41dc4aa0653dd85939c91d
