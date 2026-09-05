@@ -8,7 +8,12 @@ name: nightly-ingestion
 # crawl rather than a failing job.
 on:
   schedule:
-    - cron: "0 9 * * *"     # 09:00 UTC — early morning US, after arXiv's daily feed
+    # 09:17 rather than 09:00. GitHub queues scheduled runs on a shared pool
+    # and drops or badly delays them at popular times; the top of the hour is
+    # the most contended slot there is. An odd minute is the standard way to
+    # avoid it. GitHub still guarantees nothing about schedules, which is why
+    # the run log records whether a run happened at all.
+    - cron: "17 9 * * *"    # 09:17 UTC — early morning US, after arXiv's daily feed
   workflow_dispatch:         # and on demand from the Actions tab
     inputs:
       days:
