@@ -1,0 +1,23 @@
+id: evaluation-validity
+label: Whether the measurement made the finding
+summary: Whether a reported result describes the model or the way it was scored — the metric, the prompt format, the contamination, the baseline.
+description: >-
+  A finding can be an artifact of how it was measured. A discontinuous
+  scoring rule turns smooth improvement into an apparent jump; a baseline
+  given a smaller budget loses; a benchmark in the training data flatters
+  everyone. This capability collects claims about when a measurement stops
+  reflecting the thing it names. It sits oddly beside the others because it
+  is not a property of a model, but every claim in this index rests on some
+  measurement, so it is the one capability whose failures propagate
+  everywhere.
+tags: [evaluation]
+match_terms: ["emergent abilities", "metric choice", "benchmark contamination", "evaluation artifact", "measurement validity", "construct validity", "scaling law fit"]
+discriminator: >-
+  In scope when the paper's finding is about the measurement rather than the
+  model: showing a result changes or disappears under a different metric,
+  prompt format, baseline budget, or decontaminated split. NOT in scope: a
+  benchmark paper reporting how models score, which belongs to whichever
+  capability it tests; and not general "we need better evals" position
+  papers with no demonstration.
+status: active
+submitted_by: human:Russ-Miller
