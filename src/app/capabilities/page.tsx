@@ -1,23 +1,30 @@
 import Link from "next/link";
-import { getCapabilities, claimsFor } from "@/lib/catalog";
+import { capabilityTags, getCapabilities, claimsFor, unmitigatedCapabilities } from "@/lib/catalog";
 import { capabilityShortlist } from "@/lib/queue";
-import { ContestedFilter } from "@/components/contested-filter";
+import { FilterBar } from "@/components/filter-bar";
 
 export const metadata = { title: "Capabilities" };
 
 export default function CapabilitiesPage() {
   const shortlist = capabilityShortlist();
-  const disputed = getCapabilities().filter((c) => claimsFor(c.id).some((x) => x.contested)).length;
+  const unfixed = unmitigatedCapabilities();
+  // Counts come from the same helpers the /open-questions sections use, so a
+  // filter here and the section of the same name can never disagree.
+  const options = [
+    { value: "contested", label: "Contested", count: getCapabilities().filter((c) => claimsFor(c.id).some((x) => x.contested)).length },
+    { value: "no-technique", label: "No technique catalogued", count: unfixed.filter((u) => u.kind === "no-technique").length },
+    { value: "none-measured", label: "Techniques, none measured", count: unfixed.filter((u) => u.kind === "none-measured").length },
+  ];
   return (
     <div className="space-y-4">
       <h1 className="text-2xl font-semibold">Capabilities</h1>
       <p className="text-sm text-neutral-500">Topics, not scores &mdash; each lists the claims filed under it.</p>
-      <ContestedFilter count={disputed} noun="capabilities">
+      <FilterBar options={options}>
       <table className="w-full text-sm">
         <thead className="text-left text-neutral-500"><tr><th className="py-1">Capability</th><th>Tags</th><th>Claims</th><th>Contested</th><th>Status</th></tr></thead>
         <tbody>
           {getCapabilities().map((c) => (
-            <tr key={c.id} data-contested={claimsFor(c.id).some((x) => x.contested)} className="border-t border-neutral-200 dark:border-neutral-800 align-top">
+            <tr key={c.id} data-tags={capabilityTags(c)} className="border-t border-neutral-200 dark:border-neutral-800 align-top">
               <td className="py-2"><Link href={`/capabilities/${c.id}`} className="font-medium hover:underline">{c.label}</Link>
                 <div className="text-neutral-600 dark:text-neutral-400">{c.summary}</div></td>
               <td className="py-2">{(c.tags ?? []).join(", ")}</td>
@@ -35,7 +42,7 @@ export default function CapabilitiesPage() {
           ))}
         </tbody>
       </table>
-      </ContestedFilter>
+      </FilterBar>
 
       {shortlist.length > 0 && (
         <section className="space-y-2 pt-6">

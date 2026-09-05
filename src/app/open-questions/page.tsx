@@ -4,26 +4,39 @@ import { StrengthBadge } from "@/components/badges";
 
 export const metadata = { title: "Open questions" };
 
-const SECTIONS: { kind: OpenKind; heading: string; blurb: string }[] = [
+const SECTIONS: { kind: OpenKind; heading: string; blurb: string; filter: string }[] = [
   {
     kind: "searched",
+    filter: "searched",
     heading: "Searched, still open",
     blurb:
       "I went looking for a study that isolates this technique and did not find one. Each entry records what was searched for and, where there was one, the nearest paper and why it does not actually support the technique. That is a research brief: the question, the dead end already walked, and what a clean experiment would have to separate.",
   },
   {
     kind: "unsearched",
+    filter: "unsearched",
     heading: "Not yet searched",
     blurb:
       "No efficacy claim filed and no search recorded — so this says nothing about the literature, only about this catalog. Do not read these as unstudied. The first useful move is to look, and to write down the result either way.",
   },
   {
     kind: "asserted-not-measured",
+    filter: "argued",
     heading: "Argued, not measured",
     blurb:
       "Backed only by reasoning about how the technique works, with no source measuring the effect. The mechanism may well be right; nobody has put a number on it. A weaker opening than silence, but a real one — and the easiest kind to mistake for settled.",
   },
 ];
+
+/** Same cut of the data, seen among its peers rather than in isolation. The
+ *  filter state lives in the query string precisely so this can link to it. */
+function InTab({ href, tab }: { href: string; tab: string }) {
+  return (
+    <Link href={href} className="text-xs font-normal text-neutral-500 hover:text-neutral-800 hover:underline dark:hover:text-neutral-200">
+      see in {tab} &rarr;
+    </Link>
+  );
+}
 
 function Entry({ q }: { q: OpenQuestion }) {
   const t = q.technique;
@@ -143,16 +156,18 @@ export default function OpenQuestionsPage() {
         </p>
         {noTechnique.length > 0 && (
           <>
-            <h3 className="pt-1 text-sm font-medium text-neutral-700 dark:text-neutral-300">
+            <h3 className="flex flex-wrap items-baseline gap-2 pt-1 text-sm font-medium text-neutral-700 dark:text-neutral-300">
               No technique catalogued <span className="font-normal text-neutral-500">{noTechnique.length}</span>
+              <InTab href="/capabilities?filter=no-technique" tab="Capabilities" />
             </h3>
             <ul className="space-y-3">{noTechnique.map((u) => <Unfixed key={u.capability.id} u={u} />)}</ul>
           </>
         )}
         {noneMeasured.length > 0 && (
           <>
-            <h3 className="pt-1 text-sm font-medium text-neutral-700 dark:text-neutral-300">
+            <h3 className="flex flex-wrap items-baseline gap-2 pt-1 text-sm font-medium text-neutral-700 dark:text-neutral-300">
               Techniques catalogued, none measured <span className="font-normal text-neutral-500">{noneMeasured.length}</span>
+              <InTab href="/capabilities?filter=none-measured" tab="Capabilities" />
             </h3>
             <p className="max-w-3xl text-xs text-neutral-500">
               Something is written down as a mitigation, but no claim in this catalog measures
@@ -168,12 +183,13 @@ export default function OpenQuestionsPage() {
         Techniques nothing measures <span className="text-sm font-normal text-neutral-500">{all.length}</span>
       </h2>
 
-      {SECTIONS.map(({ kind, heading, blurb }) => {
+      {SECTIONS.map(({ kind, heading, blurb, filter }) => {
         const items = all.filter((q) => q.kind === kind);
         return (
           <section key={kind} className="space-y-3">
-            <h3 className="text-sm font-medium text-neutral-700 dark:text-neutral-300">
+            <h3 className="flex flex-wrap items-baseline gap-2 text-sm font-medium text-neutral-700 dark:text-neutral-300">
               {heading} <span className="font-normal text-neutral-500">{items.length}</span>
+              {items.length > 0 && <InTab href={`/techniques?filter=${filter}`} tab="Techniques" />}
             </h3>
             <p className="max-w-3xl text-sm text-neutral-500">{blurb}</p>
             {items.length === 0 ? (

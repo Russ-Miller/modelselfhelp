@@ -31,10 +31,19 @@ body {
 .citation-signal:hover .citation-card,
 .citation-signal:focus-visible .citation-card { display: block; }
 
-/* Contested-only filter (src/components/contested-filter.tsx). The list is
-   server-rendered and static; the toggle only flips the wrapper attribute, so
-   filtering costs no client-side copy of the data. Kept here rather than as a
-   Tailwind variant because it crosses a component boundary. */
-[data-filter="contested"] [data-contested="false"] {
+/* List filtering (src/components/filter-bar.tsx). Rows are server-rendered
+   with `data-tags`; the toggle flips `data-filter` on the wrapper and these
+   rules hide whatever does not carry the tag. The list stays static and the
+   filter ships no second copy of the data. One rule per filter value, using
+   :not() rather than re-showing with `display: revert`, so a <tr> goes back to
+   table-row and an <li> to list-item without depending on cascade origins.
+   Kept here rather than as Tailwind variants because it crosses a component
+   boundary and the selector shape has no utility equivalent. */
+[data-filter="contested"] [data-tags]:not([data-tags~="contested"]),
+[data-filter="argued"] [data-tags]:not([data-tags~="argued"]),
+[data-filter="no-technique"] [data-tags]:not([data-tags~="no-technique"]),
+[data-filter="none-measured"] [data-tags]:not([data-tags~="none-measured"]),
+[data-filter="searched"] [data-tags]:not([data-tags~="searched"]),
+[data-filter="unsearched"] [data-tags]:not([data-tags~="unsearched"]) {
   display: none;
 }

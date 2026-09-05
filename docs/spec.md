@@ -367,12 +367,27 @@ again by strength: `no-technique` (nothing is even proposed) versus
 `none-measured` (something is written down, nobody checked it). The
 second is a citation away from closing; the first would be new knowledge.
 
-### Contested-only filtering
-The capability and claim lists carry a client-side "only contested"
-toggle. Rows are server-rendered with `data-contested`, and the toggle
-flips a `data-filter` attribute on the wrapper that a rule in
-`globals.css` keys off. The list stays fully static and no copy of the
-data is shipped for the filter to work over.
+### List filters, and /open-questions as a lens rather than a place
+The capability, claim and technique lists carry a segmented filter bar
+(All first, then one button per cut, each showing its count). Rows are
+server-rendered with `data-tags`, the bar flips `data-filter` on a
+wrapper, and rules in `globals.css` hide what does not match — so the
+lists stay fully static and no second copy of the data ships for the
+filter to work over.
+
+The cuts are deliberately the *same* cuts /open-questions shows, computed
+by the same helpers (`capabilityTags`, `techniqueTags`, `claimTags`, all
+resting on `openQuestions()` and `unmitigatedCapabilities()`). A count on
+a filter button and the count on the section of that name cannot drift,
+because there is one predicate behind both. Capabilities filter to
+contested / no-technique / none-measured; techniques to searched /
+unsearched / argued; claims to contested / argued.
+
+The active filter is mirrored into the query string, which is what makes
+/open-questions a lens rather than a separate place: each section links
+to the same set seen among its peers on the main tab. That matters for
+judgment — "seven capabilities have no measured mitigation" reads very
+differently next to the nine that do.
 
 ### Evidence activity on a claim
 A claim's status row shows aggregate citation activity across the sources

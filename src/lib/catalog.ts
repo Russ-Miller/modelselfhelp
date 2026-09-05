@@ -259,3 +259,31 @@ export function unmitigatedCapabilities(): Unmitigated[] {
   }
   return out.sort((a, b) => b.claims.length - a.claims.length || a.capability.label.localeCompare(b.capability.label));
 }
+
+/**
+ * Row tags driving the list filters (src/components/filter-bar.tsx). These
+ * deliberately reuse the same predicates as openQuestions() and
+ * unmitigatedCapabilities() rather than recomputing something similar, so a
+ * filter on the Capabilities or Techniques tab shows exactly the set the
+ * /open-questions section of the same name shows.
+ */
+export function capabilityTags(c: Capability): string {
+  const tags: string[] = [];
+  if (claimsFor(c.id).some((x) => x.contested)) tags.push("contested");
+  const u = unmitigatedCapabilities().find((x) => x.capability.id === c.id);
+  if (u) tags.push(u.kind);
+  return tags.join(" ");
+}
+
+export function techniqueTags(t: Technique): string {
+  const q = openQuestions().find((x) => x.technique.id === t.id);
+  if (!q) return "";
+  return q.kind === "asserted-not-measured" ? "argued" : q.kind;
+}
+
+export function claimTags(c: Claim): string {
+  const tags: string[] = [];
+  if (c.contested) tags.push("contested");
+  if (c.backing_strength === "mechanism-reasoning") tags.push("argued");
+  return tags.join(" ");
+}

@@ -464,3 +464,27 @@ looks. It means "measured" cannot drift between the two pages, and it
 puts real weight on the mechanism-reasoning backing strength: a claim
 filed that way deliberately does not count as a fix, which is why filing
 those honestly earlier today paid off immediately.
+
+## 2026-09-04 — Open questions became a lens, not a destination
+The three /open-questions sections were only visible on /open-questions,
+which framed them as a separate list of chores. The interesting reading is
+comparative: "seven capabilities have no measured mitigation" means
+something only next to the nine that do.
+
+So the same cuts are now filters on the Capabilities, Claims and
+Techniques tabs, and each /open-questions section links to its own
+filtered view. Checkboxes became a segmented bar — All first, then one
+button per cut with its count — because these are alternative views of one
+list, not independent booleans to combine, and a row of checkboxes implies
+an AND nobody wants.
+
+The part worth keeping honest: the filters call the same helpers the
+sections do (`openQuestions`, `unmitigatedCapabilities`), so a button's
+count and a section's count cannot disagree. The alternative — a filter
+predicate written inline per page — would have been three chances to
+define "measured" slightly differently, which is exactly how a catalog
+starts lying to itself.
+
+Filter state lives in the query string rather than component state alone.
+That is what makes the cross-links work, and it means a filtered view is
+something you can send someone.
