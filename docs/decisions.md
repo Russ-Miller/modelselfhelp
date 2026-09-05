@@ -524,3 +524,31 @@ have contradicted the section it sat in.
 
 So: sentence style changed, vocabulary restored. Applied to the Open
 Questions tab only for now; the other tabs still carry the older voice.
+
+## 2026-09-04 — Weaknesses looking for techniques, not problems looking for mitigations
+Two vocabulary corrections from Russ, both about framing rather than
+wording.
+
+**"Mitigation" is out.** It imports risk-management framing: hazards to be
+contained. That is not what this is. The work is finding what makes a
+capability better — innovation and answers, not damage control. The word
+is "technique", which is also the entity name, so the copy now matches the
+schema. `unmitigatedCapabilities()` became `unsolvedCapabilities()`.
+
+Kept where it is accurate rather than framing: papers say "mitigate
+hallucination", so the ingestion scorer still matches the term, capability
+discriminators still describe papers that mitigate something, and the
+judge-bias claims still say a bias was mitigated. Those describe the
+literature; they are not the site's voice.
+
+**"Problem" became "weakness."** Russ's reasoning: a model not performing
+to the level you would expect is not a problem, it is a weakness. That
+also restores continuity with the original reframe — Weakness was renamed
+to Capability so the axis could stay neutral, and a weakness is a
+*position* on that axis rather than an entity. Calling it a problem
+quietly re-introduces the thing that rename removed.
+
+Worth noting both corrections came from copy I had written around text
+Russ supplied. His paragraphs used "mitigation" too; the difference is he
+recognized it as wrong when he saw it rendered. Reading the page as a
+reader catches framing errors that reading the diff does not.

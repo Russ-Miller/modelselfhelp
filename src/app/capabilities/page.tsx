@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { capabilityTags, getCapabilities, claimsFor, unmitigatedCapabilities } from "@/lib/catalog";
+import { capabilityTags, getCapabilities, claimsFor, unsolvedCapabilities } from "@/lib/catalog";
 import { capabilityShortlist } from "@/lib/queue";
 import { FilterBar } from "@/components/filter-bar";
 
@@ -7,7 +7,7 @@ export const metadata = { title: "Capabilities" };
 
 export default function CapabilitiesPage() {
   const shortlist = capabilityShortlist();
-  const unfixed = unmitigatedCapabilities();
+  const unfixed = unsolvedCapabilities();
   // Counts come from the same helpers the /open-questions sections use, so a
   // filter here and the section of the same name can never disagree.
   const options = [

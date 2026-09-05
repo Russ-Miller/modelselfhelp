@@ -233,21 +233,23 @@ export function claimActivity(claim: Claim): ClaimActivity | null {
 }
 
 /**
- * Capabilities where a problem is documented but nothing is known to fix it.
+ * Capabilities with a documented weakness and nothing known to close it. A
+ * weakness is a position on the capability, not a separate entity -- the axis
+ * stays neutral, which is why this reads off claims rather than a flag.
  * The counterpart to openQuestions(): that view asks whether a technique
  * works, this one asks whether anything works at all. Split the same way,
  * because "no technique catalogued" and "techniques catalogued, none measured"
  * are different invitations.
  */
-export type UnmitigatedKind = "no-technique" | "none-measured";
-export interface Unmitigated { capability: Capability; kind: UnmitigatedKind; claims: Claim[]; techniques: Technique[] }
+export type UnsolvedKind = "no-technique" | "none-measured";
+export interface Unsolved { capability: Capability; kind: UnsolvedKind; claims: Claim[]; techniques: Technique[] }
 
-export function unmitigatedCapabilities(): Unmitigated[] {
-  const out: Unmitigated[] = [];
+export function unsolvedCapabilities(): Unsolved[] {
+  const out: Unsolved[] = [];
   for (const capability of loadCatalog().capabilities) {
     if (capability.status !== "active") continue;
     const claims = claimsFor(capability.id);
-    if (claims.length === 0) continue; // no documented problem yet, so nothing to mitigate
+    if (claims.length === 0) continue; // no documented weakness yet, so nothing to solve
     const techniques = techniquesFor(capability.id).filter((t) => t.status === "active");
     if (techniques.some((t) => claimsAboutTechnique(t.id).some(isMeasured))) continue;
     out.push({
@@ -263,14 +265,14 @@ export function unmitigatedCapabilities(): Unmitigated[] {
 /**
  * Row tags driving the list filters (src/components/filter-bar.tsx). These
  * deliberately reuse the same predicates as openQuestions() and
- * unmitigatedCapabilities() rather than recomputing something similar, so a
+ * unsolvedCapabilities() rather than recomputing something similar, so a
  * filter on the Capabilities or Techniques tab shows exactly the set the
  * /open-questions section of the same name shows.
  */
 export function capabilityTags(c: Capability): string {
   const tags: string[] = [];
   if (claimsFor(c.id).some((x) => x.contested)) tags.push("contested");
-  const u = unmitigatedCapabilities().find((x) => x.capability.id === c.id);
+  const u = unsolvedCapabilities().find((x) => x.capability.id === c.id);
   if (u) tags.push(u.kind);
   return tags.join(" ");
 }

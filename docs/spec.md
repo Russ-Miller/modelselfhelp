@@ -361,8 +361,15 @@ supposed to make visible.
 
 The page also runs the question the other way. The three states above ask
 whether a given *technique* works; a fourth section asks whether anything
-does — capabilities carrying claims that establish a problem, where no
-technique addressing them has an efficacy claim anybody measured. Split
+does — capabilities carrying claims that establish a weakness, where no
+technique addressing them has an efficacy claim anybody measured. The
+helper is `unsolvedCapabilities()`. Two vocabulary rules hold here: these
+are *weaknesses* looking for *techniques*, not problems looking for
+mitigations. "Mitigation" imports risk-management framing the project
+does not want — the work is finding what improves a capability, not
+containing a hazard. And "weakness" is a position on a capability, never
+an entity of its own; the axis stays neutral, which is the whole reason
+Weakness was renamed to Capability in the first place (§4). Split
 again by strength: `no-technique` (nothing is even proposed) versus
 `none-measured` (something is written down, nobody checked it). The
 second is a citation away from closing; the first would be new knowledge.
@@ -377,7 +384,7 @@ filter to work over.
 
 The cuts are deliberately the *same* cuts /open-questions shows, computed
 by the same helpers (`capabilityTags`, `techniqueTags`, `claimTags`, all
-resting on `openQuestions()` and `unmitigatedCapabilities()`). A count on
+resting on `openQuestions()` and `unsolvedCapabilities()`). A count on
 a filter button and the count on the section of that name cannot drift,
 because there is one predicate behind both. Capabilities filter to
 contested / no-technique / none-measured; techniques to searched /
@@ -386,7 +393,7 @@ unsearched / argued; claims to contested / argued.
 The active filter is mirrored into the query string, which is what makes
 /open-questions a lens rather than a separate place: each section links
 to the same set seen among its peers on the main tab. That matters for
-judgment — "seven capabilities have no measured mitigation" reads very
+judgment — "seven capabilities have no measured technique" reads very
 differently next to the nine that do.
 
 ### Evidence activity on a claim

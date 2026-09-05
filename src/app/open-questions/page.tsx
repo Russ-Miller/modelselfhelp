@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getCapability, getSource, openQuestions, unmitigatedCapabilities, type OpenKind, type OpenQuestion, type Unmitigated } from "@/lib/catalog";
+import { getCapability, getSource, openQuestions, unsolvedCapabilities, type OpenKind, type OpenQuestion, type Unsolved } from "@/lib/catalog";
 import { StrengthBadge } from "@/components/badges";
 
 export const metadata = { title: "Open questions" };
@@ -97,7 +97,7 @@ function Entry({ q }: { q: OpenQuestion }) {
   );
 }
 
-function Unfixed({ u }: { u: Unmitigated }) {
+function UnsolvedEntry({ u }: { u: Unsolved }) {
   return (
     <li className="rounded border border-neutral-200 p-4 dark:border-neutral-800">
       <div className="mb-1 flex flex-wrap items-baseline gap-2">
@@ -109,7 +109,7 @@ function Unfixed({ u }: { u: Unmitigated }) {
       <p className="text-sm text-neutral-600 dark:text-neutral-400">{u.capability.summary}</p>
       <p className="mt-2 text-xs text-neutral-500">
         {u.techniques.length === 0 ? (
-          "No technique catalogued against it at all."
+          "No technique catalogued for it at all."
         ) : (
           <>
             Catalogued but unmeasured:{" "}
@@ -128,7 +128,7 @@ function Unfixed({ u }: { u: Unmitigated }) {
 
 export default function OpenQuestionsPage() {
   const all = openQuestions();
-  const unfixed = unmitigatedCapabilities();
+  const unfixed = unsolvedCapabilities();
   const noTechnique = unfixed.filter((u) => u.kind === "no-technique");
   const noneMeasured = unfixed.filter((u) => u.kind === "none-measured");
   return (
@@ -137,8 +137,8 @@ export default function OpenQuestionsPage() {
         <h1 className="text-2xl font-semibold">Open questions</h1>
         <p className="text-sm text-neutral-500">These are the places where we still don&rsquo;t have a good answer.</p>
         <p className="text-sm text-neutral-500">
-          Some are problems that have been documented, but no one has shown that a particular
-          mitigation actually works. Others are techniques people use in practice, but we
+          Some are weaknesses that have been documented, but no one has shown that a particular
+          technique actually works. Others are techniques people use in practice, but we
           couldn&rsquo;t find evidence that they do what people claim they do. Those are the gaps
           most worth investigating.
         </p>
@@ -156,11 +156,11 @@ export default function OpenQuestionsPage() {
           Documented, but nothing measured to fix it <span className="text-sm font-normal text-neutral-500">{unfixed.length}</span>
         </h2>
         <p className="max-w-3xl text-sm text-neutral-500">
-          These are problems we know exist, but we couldn&rsquo;t find a mitigation that has
+          These are weaknesses we know exist, but we couldn&rsquo;t find a technique that has
           actually been tested and shown to work.
         </p>
         <p className="max-w-3xl text-sm text-neutral-500">
-          That makes these especially interesting: evidence that a mitigation works would add
+          That makes these especially interesting: evidence that a technique works would add
           something genuinely new, rather than just confirming an existing result.
         </p>
         {noTechnique.length > 0 && (
@@ -170,9 +170,9 @@ export default function OpenQuestionsPage() {
               <InTab href="/capabilities?filter=no-technique" tab="Capabilities" />
             </h3>
             <p className="max-w-3xl text-xs text-neutral-500">
-              No technique has been catalogued against these yet, so there is nothing to measure.
+              No technique has been catalogued for these yet, so there is nothing to measure.
             </p>
-            <ul className="space-y-3">{noTechnique.map((u) => <Unfixed key={u.capability.id} u={u} />)}</ul>
+            <ul className="space-y-3">{noTechnique.map((u) => <UnsolvedEntry key={u.capability.id} u={u} />)}</ul>
           </>
         )}
         {noneMeasured.length > 0 && (
@@ -182,11 +182,11 @@ export default function OpenQuestionsPage() {
               <InTab href="/capabilities?filter=none-measured" tab="Capabilities" />
             </h3>
             <p className="max-w-3xl text-xs text-neutral-500">
-              A technique is catalogued against these, but no claim measures whether it moves the
+              A technique is catalogued for these, but no claim measures whether it moves the
               capability. If a study already exists, finding it would close the gap. No new
               experiment needed.
             </p>
-            <ul className="space-y-3">{noneMeasured.map((u) => <Unfixed key={u.capability.id} u={u} />)}</ul>
+            <ul className="space-y-3">{noneMeasured.map((u) => <UnsolvedEntry key={u.capability.id} u={u} />)}</ul>
           </>
         )}
       </section>

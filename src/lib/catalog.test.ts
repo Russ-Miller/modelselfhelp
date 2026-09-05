@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { claimsCiting, claimsFor, getCapability, getSource, getTechnique, loadCatalog, claimActivity, openQuestions, techniquesFor, unmitigatedCapabilities, capabilitiesByGroup } from "./catalog";
+import { claimsCiting, claimsFor, getCapability, getSource, getTechnique, loadCatalog, claimActivity, openQuestions, techniquesFor, unsolvedCapabilities, capabilitiesByGroup } from "./catalog";
 
 describe("catalog loader", () => {
   const cat = loadCatalog();
@@ -86,16 +86,16 @@ describe("catalog loader", () => {
     expect(a.checked.every((s) => s.citations_checked_at)).toBe(true);
   });
 
-  it("lists a capability as unmitigated only when no technique for it has a measured claim", () => {
+  it("lists a capability as unsolved only when no technique for it has a measured claim", () => {
     const measured = new Set(["single-paper", "replicated", "own-observation"]);
-    for (const u of unmitigatedCapabilities()) {
+    for (const u of unsolvedCapabilities()) {
       expect(u.claims.length).toBeGreaterThan(0);
       for (const t of u.techniques) {
         expect(cat.claims.filter((c) => c.technique === t.id).some((c) => measured.has(c.backing_strength))).toBe(false);
       }
       expect(u.kind).toBe(u.techniques.length === 0 ? "no-technique" : "none-measured");
     }
-    // A capability with a measured mitigation must not appear.
-    expect(unmitigatedCapabilities().map((u) => u.capability.id)).not.toContain("prompt-injection");
+    // A capability with a measured technique must not appear.
+    expect(unsolvedCapabilities().map((u) => u.capability.id)).not.toContain("prompt-injection");
   });
 });
