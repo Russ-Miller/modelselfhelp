@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { claimsCiting, claimsFor, getCapability, getSource, getTechnique, loadCatalog, claimActivity, openQuestions, techniquesFor, unsolvedCapabilities, capabilitiesByGroup } from "./catalog";
+import { claimsCiting, claimsFor, getCapability, getSource, getTechnique, loadCatalog, claimActivity, openQuestions, techniqueStanding, techniquesFor, unsolvedCapabilities, capabilitiesByGroup } from "./catalog";
 
 describe("catalog loader", () => {
   const cat = loadCatalog();
@@ -97,5 +97,18 @@ describe("catalog loader", () => {
     }
     // A capability with a measured technique must not appear.
     expect(unsolvedCapabilities().map((u) => u.capability.id)).not.toContain("prompt-injection");
+  });
+
+  it("reads a technique's standing from its claims, not from a stored flag", () => {
+    // Filed with sources on both sides and a stated axis.
+    expect(techniqueStanding("external-feedback-repair").standing).toBe("contested");
+    // No efficacy claim at all.
+    expect(techniqueStanding("reread-before-edit").standing).toBe("unmeasured");
+    // Backed only by reasoning about how it works.
+    expect(techniqueStanding("program-aided-computation").standing).toBe("argued");
+    for (const t of cat.techniques) {
+      const st = techniqueStanding(t.id);
+      expect(st.supporting + st.contesting).toBe(st.claims.reduce((n, c) => n + c.sources.length, 0));
+    }
   });
 });

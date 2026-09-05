@@ -589,3 +589,49 @@ Not done: briefs for queue candidates, which is where papers are actually
 triaged. That is ~145 candidates at roughly $0.01 each per run, on a set
 that churns nightly, so it is a spending decision rather than a technical
 one.
+
+## 2026-09-05 — Testing the catalog against cases where the answer is known
+Russ asked whether we can validate any of this: find findings later shown
+false or weaker, check whether the papers that overturned them are here,
+and whether the catalog reflects them properly.
+
+docs/known-reversals.yaml is a held-out set of four such cases, each with
+its reversing paper verified against arXiv. scripts/backtest.mjs asks two
+separate questions of each:
+
+1. Did the catalog **catch** it — is the reversing paper here, cited with
+   stance `contests`, on a claim marked contested with a stated axis?
+2. Would ingestion **surface** it — does the paper's title match a
+   capability?
+
+The second matters more. A miss on the first is a filing gap, fixable in
+an afternoon. A miss on the second is a standing blind spot no diligence
+closes.
+
+Result: 2 caught, 2 missed. Both misses are structural rather than
+behind-on-work. Nothing in the index covers whether a measurement choice
+manufactures a finding (the emergent-abilities-as-metric-artifact result),
+or whether stated reasoning reflects the computation (chain-of-thought
+unfaithfulness). Both are failure modes of *evidence*, which this catalog
+runs on end to end, so the blind spot is aimed squarely at our own
+foundations.
+
+**A mistake worth recording.** The first version of the reach test
+reimplemented the matcher by hand, got the title rule wrong, and reported
+that neither caught case would have been surfaced — a dramatic finding
+that was entirely an artifact of the copy. The matcher now lives in
+scripts/match-lib.mjs and both the pipeline and the backtest import it. A
+second implementation of a rule answers a subtly different question than
+the first, and the difference shows up as a false finding rather than an
+error.
+
+**Directional standing.** `techniqueStanding()` reads a technique's
+evidence as one of unmeasured / argued / supported / narrowed / contested,
+derived from its claims rather than stored. Categorical on purpose: a
+number here would be the Goodhart trap the project deleted with eval
+scoring, and would invite tuning the catalog to move it.
+
+`narrowed` is the one worth having. It means a contesting source is on
+file but the claim was never marked contested — usually because the scope
+condition absorbed the objection. That is how a technique quietly gets
+weaker without anyone saying so.

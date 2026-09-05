@@ -1,0 +1,93 @@
+# A held-out set for testing this catalog against itself.
+#
+# Each entry is a case where the field's view demonstrably moved: something
+# widely believed was later shown false, or narrower than first claimed. They
+# are chosen because the answer is already known, which is what makes them
+# usable as a test — scripts/backtest.mjs asks whether this catalog reflects
+# each one, and whether the ingestion pipeline would have surfaced the paper
+# that moved it.
+#
+# Rules for adding: the reversing paper must exist and be verifiable (every id
+# here was checked against the arXiv API), and the reversal must be a real
+# change in what the evidence supports — not merely a later paper on the same
+# topic. Cases we already handle well are worth keeping: a test only made of
+# failures cannot tell you when you have regressed.
+#
+# `expect` says what we believe today, so a drifting result is visible as a
+# change rather than being quietly re-baselined.
+#
+# `reversing_titles` carries the paper's exact title (checked against arXiv)
+# for papers not in the catalog. Without it the reach test is untestable for
+# exactly the cases we most want to test: the ones we missed.
+
+reversals:
+  - id: self-correction-needs-external-grounding
+    capability: self-repair
+    technique: external-feedback-repair
+    was_believed: >-
+      Having a model critique and revise its own answer improves accuracy, so
+      a reflect-and-retry loop is a general-purpose quality technique.
+    what_changed: >-
+      With no external signal, review-and-revise did not improve reasoning
+      accuracy and often degraded it. The gain in the earlier results came
+      from grounding — a failing test, an environment outcome — not from the
+      reflection step.
+    original: [arxiv-2303-11366, arxiv-2303-17651]
+    reversing: [arxiv-2310-01798]
+    expect: caught
+
+  - id: prompting-does-not-reach-digit-level-arithmetic
+    capability: arithmetic
+    technique: chain-of-thought
+    was_believed: >-
+      Chain-of-thought prompting fixes arithmetic, because writing out the
+      steps lets the model compute correctly.
+    what_changed: >-
+      Step-by-step prompting improves decomposition but not the calculation
+      inside a step; multi-digit accuracy still collapses with operand size.
+      Separately, prompting that re-represents the operands can recover some
+      of it, so the boundary is contested rather than settled.
+    original: [arxiv-2201-11903]
+    reversing: [arxiv-2305-18654, arxiv-2402-14903]
+    expect: caught
+
+  - id: emergent-abilities-may-be-a-metric-artifact
+    capability: ""
+    technique: ""
+    was_believed: >-
+      Certain capabilities appear abruptly and unpredictably at scale — a
+      discontinuity in what models can do.
+    what_changed: >-
+      The apparent discontinuity can be produced by the choice of metric.
+      Nonlinear or discontinuous scoring turns smooth underlying improvement
+      into an apparent jump; linear metrics on the same outputs show no jump.
+    original: []
+    reversing: [arxiv-2304-15004]
+    reversing_titles:
+      - "Are Emergent Abilities of Large Language Models a Mirage?"
+    expect: missed
+    note: >-
+      No capability in this index covers how a measurement choice manufactures
+      a finding. That is a gap worth naming: it is a failure mode of
+      evaluation itself, which this catalog depends on throughout.
+
+  - id: chain-of-thought-is-not-necessarily-faithful
+    capability: ""
+    technique: chain-of-thought
+    was_believed: >-
+      A model's stated reasoning describes the process that produced its
+      answer, so reading the chain of thought tells you why it answered as
+      it did.
+    what_changed: >-
+      Stated reasoning can be systematically unfaithful. Models change their
+      answers in response to features they never mention, and produce
+      plausible explanations that do not reflect what drove the output.
+    original: [arxiv-2201-11903]
+    reversing: [arxiv-2305-04388]
+    reversing_titles:
+      - "Language Models Don't Always Say What They Think: Unfaithful Explanations in Chain-of-Thought Prompting"
+    expect: missed
+    note: >-
+      Directly relevant to this project: every claim filed from a paper's
+      stated reasoning inherits this problem, and the catalog currently has
+      no capability for whether an explanation reflects the computation.

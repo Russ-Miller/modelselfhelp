@@ -12,6 +12,7 @@ import fs from "node:fs";
 import path from "node:path";
 import YAML from "yaml";
 import { loadCatalog } from "./catalog-lib.mjs";
+import { matchCapabilities } from "./match-lib.mjs";
 
 const MAILTO = process.env.OPENALEX_MAILTO || "miller.russ@gmail.com";
 const UA = `modelselfhelp/0.1 (mailto:${MAILTO})`;
@@ -97,41 +98,6 @@ const DOMAIN_TOPICS = /health|medic|clinic|educat|translat|marketing|agricultur|
 // match_terms) so it stays with the content rather than drifting in code.
 // This answers "what is it about", NOT "does it improve or degrade the
 // capability" -- that direction is the semantic call stage 2 exists to make.
-const CAPABILITY_TERMS = loadCatalog().capabilities.map((rec) => {
-  const d = rec.data;
-  const terms = new Set([
-    d.id.replace(/-/g, " "),
-    ...(d.aliases ?? []),
-    ...(d.match_terms ?? []),
-  ].map((t) => String(t).toLowerCase()).filter((t) => t.length > 3));
-  return { id: d.id, label: d.label, terms: [...terms] };
-});
-
-// A term in the TITLE is strong evidence the paper is about that capability.
-// A term buried in the abstract is often just a passing mention -- a model
-// technical report will name half a dozen capabilities it benchmarked without
-// being about any of them. So an abstract-only match needs corroboration:
-// two or more distinct terms for the same capability.
-function matchCapabilities(c) {
-  const title = String(c.title ?? "").toLowerCase();
-  const abstract = String(c.abstract ?? "").toLowerCase();
-  const hits = [];
-  for (const cap of CAPABILITY_TERMS) {
-    if (cap.terms.some((t) => title.includes(t))) { hits.push(cap.id); continue; }
-    // Otherwise require the abstract to actually dwell on it: two or more
-    // total occurrences of the capability's vocabulary. A passing mention in
-    // a benchmark list appears once; a substantive discussion repeats itself.
-    let occurrences = 0;
-    for (const t of cap.terms) {
-      let i = abstract.indexOf(t);
-      while (i !== -1 && occurrences < 2) { occurrences++; i = abstract.indexOf(t, i + t.length); }
-      if (occurrences >= 2) break;
-    }
-    if (occurrences >= 2) hits.push(cap.id);
-  }
-  return hits;
-}
-
 function scoreCandidate(c) {
   const haystack = `${c.title} ${c.abstract ?? ""}`;
   let score = 0;

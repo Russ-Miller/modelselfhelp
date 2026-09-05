@@ -11,6 +11,7 @@
     "lint": "eslint",
     "validate": "node scripts/validate.mjs",
     "verify-papers": "node scripts/verify-papers.mjs",
+    "backtest": "node scripts/backtest.mjs",
     "summarize": "node --env-file-if-exists=.env scripts/summarize-sources.mjs",
     "test:unit": "vitest run",
     "test": "npm run validate && npm run test:unit && npm run lint && npm run build"
