@@ -39,6 +39,10 @@ const abstractOnly = args.includes("--abstract-only");
 // is waiting on -- the nightly run has all night -- and avoids the retry
 // storms that made an earlier pass give up entirely.
 const delayMs = Number(arg("delay") ?? 6000);
+// A long lead-in lets an earlier throttling penalty expire before the first
+// request, instead of spending the retry budget discovering it is still on.
+const startDelayMs = Number(arg("start-delay") ?? 0);
+const CHUNK = Number(arg("chunk") ?? 12);
 const limit = args.includes("--all") ? Infinity : Number(arg("limit") ?? 5);
 
 const SYSTEM = `You write short digests of AI research papers for a catalogue that tracks what
@@ -178,8 +182,8 @@ async function fetchAbstracts(ids, attempt = 0) {
   const url = `https://export.arxiv.org/api/query?id_list=${ids.join(",")}&max_results=${ids.length}`;
   const res = await fetch(url);
   if (res.status === 429 || res.status >= 500) {
-    if (attempt >= 8) throw new Error(`arXiv ${res.status} after ${attempt} retries`);
-    const wait = Math.min(60000, 8000 * 2 ** attempt);
+    if (attempt >= 6) throw new Error(`arXiv ${res.status} after ${attempt} retries`);
+    const wait = Math.min(300000, 15000 * 2 ** attempt);
     console.log(`  arXiv ${res.status}, retrying in ${wait / 1000}s`);
     await new Promise((r) => setTimeout(r, wait));
     return fetchAbstracts(ids, attempt + 1);
@@ -216,12 +220,24 @@ console.log(`Processing ${batch.length}${batch.length < work.length ? ` of ${wor
 
 const bare = (id) => String(id).replace(/v\d+$/, "");
 const abstracts = new Map();
-for (let i = 0; i < batch.length; i += 20) {
-  const chunk = batch.slice(i, i + 20).map((b) => bare(b.data.arxiv_id));
-  for (const [k, v] of await fetchAbstracts(chunk)) abstracts.set(k, v);
-  if (i + 20 < batch.length) await new Promise((r) => setTimeout(r, delayMs));
+if (startDelayMs) {
+  console.log(`waiting ${startDelayMs / 1000}s before touching arXiv`);
+  await new Promise((r) => setTimeout(r, startDelayMs));
+}
+for (let i = 0; i < batch.length; i += CHUNK) {
+  const chunk = batch.slice(i, i + CHUNK).map((b) => bare(b.data.arxiv_id));
+  try {
+    for (const [k, v] of await fetchAbstracts(chunk)) abstracts.set(k, v);
+  } catch (err) {
+    // Never fatal. A chunk arXiv refuses today is a set of sources that keep
+    // their missing brief and get picked up by the next run -- the script is
+    // resumable by design, so a partial pass is progress, not a failure.
+    console.log(`  chunk ${i / CHUNK + 1} failed (${err?.message ?? err}), continuing without it`);
+  }
+  if (i + CHUNK < batch.length) await new Promise((r) => setTimeout(r, delayMs));
 }
 console.log(`fetched ${abstracts.size} abstract(s) for ${batch.length} source(s)\n`);
+if (!abstracts.size) { console.log("arXiv returned nothing at all -- try again later."); process.exit(0); }
 
 if (dryRun) {
   const { data } = batch[0];

@@ -2,54 +2,22 @@ id: arxiv-2107-03374
 kind: paper
 title: Evaluating Large Language Models Trained on Code
 authors:
-  - Mark Chen
-  - Jerry Tworek
-  - Heewoo Jun
-  - Qiming Yuan
-  - et al.
+- Mark Chen
+- Jerry Tworek
+- Heewoo Jun
+- Qiming Yuan
+- et al.
 year: 2021
-arxiv_id: "2107.03374"
+arxiv_id: '2107.03374'
 url: https://arxiv.org/abs/2107.03374
-summary: "Introduces HumanEval and Codex: measures functional correctness of
-  generated code by running held-out tests, rather than surface similarity to
-  a reference solution, establishing that as the standard way to grade code
-  generation."
+summary: 'Introduces HumanEval and Codex: measures functional correctness of generated
+  code by running held-out tests, rather than surface similarity to a reference
+  solution, establishing that as the standard way to grade code generation.'
 tags:
-  - code-generation
-  - reasoning
+- code-generation
+- reasoning
 ingested_at: 2026-09-04
 citations_total: 11293
 citations_recent_12mo: 1000
 citations_checked_at: 2026-09-04
 semantic_scholar_id: acbdbf49f9bc3f151b93d9ca9a06009f4f6eb269
-brief: >-
-  New OpenAI paper: sampling a code model many times and filtering by tests
-  beats trying to get 1 correct completion.
-
-
-  The paper introduces Codex, a GPT model fine-tuned on public GitHub code,
-  evaluated on Python program synthesis from docstrings. It also releases
-  HumanEval, a hand-written benchmark that measures functional correctness by
-  running unit tests rather than matching text. A separate production version
-  of Codex powers GitHub Copilot.
-
-
-  With 1 sample per problem, Codex solves 28.8% of HumanEval, against 0% for
-  GPT-3 and 11.4% for GPT-J.
-
-
-  That is the important part: repeated sampling changes the picture. With 100
-  samples per problem, 70.2% of problems are solved, so the gap between a
-  model that looks weak and one that looks strong is largely a search budget.
-
-
-  The boundary is in the failure analysis. Codex struggles with docstrings
-  describing long chains of operations and with binding operations to
-  variables, and the evidence covers Python synthesis from docstrings only,
-  not repository-scale or multi-language work.
-
-
-  If you can execute and check candidate programs, budget for many samples
-  instead of a better single completion.
-brief_generated_at: 2026-09-05
-brief_model: claude-opus-5

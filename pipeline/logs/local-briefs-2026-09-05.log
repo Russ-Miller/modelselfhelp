@@ -1,0 +1,25 @@
+64 paper sources without a brief
+Processing 64 with claude-opus-5
+
+  arXiv 429, retrying in 8s
+  arXiv 429, retrying in 16s
+  arXiv 429, retrying in 32s
+  arXiv 429, retrying in 60s
+  arXiv 429, retrying in 60s
+  arXiv 429, retrying in 60s
+  arXiv 429, retrying in 60s
+  arXiv 429, retrying in 60s
+file:///Users/russmiller/modelselfhelp/scripts/summarize-sources.mjs:181
+    if (attempt >= 8) throw new Error(`arXiv ${res.status} after ${attempt} retries`);
+                            ^
+
+Error: arXiv 429 after 8 retries
+    at fetchAbstracts (file:///Users/russmiller/modelselfhelp/scripts/summarize-sources.mjs:181:29)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async file:///Users/russmiller/modelselfhelp/scripts/summarize-sources.mjs:221:24
+
+Node.js v26.7.0
+64 paper sources without a brief
+Processing 64 with claude-opus-5
+
+waiting 900s before touching arXiv
