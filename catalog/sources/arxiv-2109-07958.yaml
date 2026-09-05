@@ -2,15 +2,56 @@ id: arxiv-2109-07958
 kind: paper
 title: "TruthfulQA: Measuring How Models Mimic Human Falsehoods"
 authors:
-  - "Stephanie Lin"
-  - "Jacob Hilton"
-  - "Owain Evans"
+  - Stephanie Lin
+  - Jacob Hilton
+  - Owain Evans
 year: 2021
 arxiv_id: "2109.07958"
 url: https://arxiv.org/abs/2109.07958
-tags: [truthfulness, benchmark]
+tags:
+  - truthfulness
+  - benchmark
 code_url: https://github.com/sylinrl/TruthfulQA
 ingested_at: 2026-09-02
 citations_total: 3851
 citations_recent_12mo: 1000
 citations_checked_at: 2026-09-04
+brief: >-
+  Bigger language models are less truthful on questions designed to elicit
+  common human misconceptions, reversing the usual scaling trend. The reason
+  offered is that false answers with high likelihood on web text -- "imitative
+  falsehoods" -- get learned better as models improve.
+
+
+  TruthfulQA is 817 hand-written questions across 38 categories (health, law,
+  finance, politics), scored zero-shot on full-sentence generation with human
+  judges, plus a multiple-choice variant. Tested families: GPT-3, GPT-Neo/J,
+  GPT-2, and UnifiedQA (T5), across sizes, with several prompts for
+  GPT-3-175B.
+
+
+  The best model, GPT-3-175B with a helpful prompt, was truthful on 58% of
+  questions against 94% for a human participant, and gave
+  false-but-informative answers 42% of the time versus 6% for the human. The
+  largest GPT-Neo/J was 17% less truthful than a model 60x smaller; on
+  multiple choice, GPT-Neo/J 6B was 12% less truthful than the 125M version
+  and no model beat random guessing.
+
+
+  The imitative explanation is supported rather than assumed: matched control
+  questions edited by 1-3 words improve with scale, paraphrases reproduce the
+  same falsehoods, and the trend transfers to GPT-Neo/J, which was not used
+  for adversarial filtering. Questions and reference answers were written by
+  the authors; external validators disagreed on 6-7%.
+
+
+  437 of the questions were adversarially filtered against GPT-3-175B, so
+  absolute scores understate general truthfulness. Nothing covers long-form
+  generation or dialogue.
+
+
+  Treat inverse scaling here as evidence about imitation objectives, not about
+  model capacity.
+brief_generated_at: 2026-09-05
+brief_model: claude-opus-5
+brief_source: full-text

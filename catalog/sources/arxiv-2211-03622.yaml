@@ -1,17 +1,48 @@
 id: arxiv-2211-03622
 kind: paper
-title: "Do Users Write More Insecure Code with AI Assistants?"
+title: Do Users Write More Insecure Code with AI Assistants?
 authors:
-  - "Neil Perry"
-  - "Megha Srivastava"
-  - "Deepak Kumar"
-  - "Dan Boneh"
+  - Neil Perry
+  - Megha Srivastava
+  - Deepak Kumar
+  - Dan Boneh
 year: 2022
 arxiv_id: "2211.03622"
 url: https://arxiv.org/abs/2211.03622
-tags: [secure-coding, user-study]
+tags:
+  - secure-coding
+  - user-study
 ingested_at: 2026-09-02
 citations_total: 430
 citations_recent_12mo: 200
 citations_checked_at: 2026-09-04
 semantic_scholar_id: ce3f027b68dad014a58aa35f52380932c8d0b209
+brief: >-
+  Access to a code-generation assistant made developers write less secure code
+  while making them more confident it was secure. In a controlled user study,
+  47 participants (33 with a Codex davinci-002 assistant, 14 without) solved 5
+  security-related tasks across Python, JavaScript, and C in a custom sandbox
+  UI, with access to the open web in both conditions.
+
+
+  Assistant users produced less secure solutions on 4 of 5 tasks. On the ECDSA
+  signing task only 3% of assisted participants wrote a secure solution versus
+  21% of controls (p=0.039); on the SQL task 36% of assisted participants
+  wrote injection-vulnerable code versus 7% of controls (p=0.041); on
+  encryption they were more likely to use trivial ciphers (p=0.018). The C
+  string task showed mixed results. Assisted participants rated their answers
+  as more secure than controls on every question, and those who wrote insecure
+  code trusted the assistant more than those who wrote secure code (4.0 vs 1.5
+  on Q3).
+
+
+  Effects were measured with randomized assignment and logistic regression
+  controlling for security background, student status, and programming
+  experience, with 2 raters coding security (Cohen-Kappa 0.68-0.88). The
+  sample is small, unbalanced 33/14, and 66% undergraduates, so professional
+  developers with security incentives are untested, as are modern chat-style
+  assistants. Read it as evidence that assistance shifts the burden to
+  verification that users do not perform.
+brief_generated_at: 2026-09-05
+brief_model: claude-opus-5
+brief_source: full-text

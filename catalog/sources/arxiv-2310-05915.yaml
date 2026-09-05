@@ -2,25 +2,57 @@ id: arxiv-2310-05915
 kind: paper
 title: "FireAct: Toward Language Agent Fine-tuning"
 authors:
-  - "Baian Chen"
-  - "Chang Shu"
-  - "Ehsan Shareghi"
-  - "Nigel Collier"
-  - "Karthik Narasimhan"
-  - "Shunyu Yao"
+  - Baian Chen
+  - Chang Shu
+  - Ehsan Shareghi
+  - Nigel Collier
+  - Karthik Narasimhan
+  - Shunyu Yao
 year: 2023
 date: 2023-10-09
 arxiv_id: "2310.05915"
 url: https://arxiv.org/abs/2310.05915
-tags: [tool-use, fine-tuning, agentic]
-summary: >-
-  Fine-tunes backbone LMs on agent trajectories for question answering with
-  a search API. Llama2-7B fine-tuned on 500 GPT-4-generated trajectories
-  gained 77% on HotpotQA. FireAct mixes trajectories from multiple tasks
-  and prompting methods, and finds more diverse fine-tuning data improves
-  agents further.
+tags:
+  - tool-use
+  - fine-tuning
+  - agentic
+summary: Fine-tunes backbone LMs on agent trajectories for question answering
+  with a search API. Llama2-7B fine-tuned on 500 GPT-4-generated trajectories
+  gained 77% on HotpotQA. FireAct mixes trajectories from multiple tasks and
+  prompting methods, and finds more diverse fine-tuning data improves agents
+  further.
 ingested_at: 2026-09-04
 citations_total: 252
 citations_recent_12mo: 101
 citations_checked_at: 2026-09-04
 semantic_scholar_id: 67daf8c4fe1958d20ebdf95c2a36dd490c73836f
+brief: >-
+  Fine-tuning a small model on agent trajectories distilled from GPT-4 beats
+  few-shot prompting the same model, and mixing prompting methods in the
+  training data beats using one. FireAct generates ReAct, CoT, and Reflexion
+  trajectories with GPT-4 on open-domain QA with a Google search tool
+  (SerpAPI), converts them all into ReAct format, and fine-tunes GPT-3.5,
+  Llama-2-7B/13B, and CodeLlama-7B/13B/34B, mostly with LoRA.
+
+
+  With 500 ReAct trajectories, HotpotQA exact match rises from 31.4 to 39.2
+  for GPT-3.5 (25%) and from 14.8 to 26.2 for Llama-2-7B (77%). Adding CoT
+  trajectories lifts GPT-3.5 to 41.0. Inference time drops from 9.0s to 2.7s
+  per trial. Under a search API corrupted 50% of the time, ReAct EM falls
+  33.8% ("None") and 28.0% (random), while FireAct falls 14.2% and 5.1%.
+
+
+  Effects are measured against matched prompting baselines on the same 500
+  HotpotQA dev questions, with ablations over data scale (100–1000), LoRA vs
+  full fine-tuning, and method mixes. The best mix depends on the base model:
+  ReAct+CoT helps GPT-3.5 and Llama-2 but hurts CodeLlama. Oracle per-instance
+  method choice reaches 52.0, so selection is far from solved.
+
+
+  Scope is 1 tool, QA only, and 4 datasets; HotpotQA fine-tuning did not
+  transfer to StrategyQA or MMLU, and all fine-tuned agents lost to plain IO
+  prompting on MMLU. If your agent task is fixed and you can afford GPT-4
+  distillation, fine-tune.
+brief_generated_at: 2026-09-05
+brief_model: claude-opus-5
+brief_source: full-text

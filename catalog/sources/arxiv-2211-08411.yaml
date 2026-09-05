@@ -1,17 +1,57 @@
 id: arxiv-2211-08411
 kind: paper
-title: "Large Language Models Struggle to Learn Long-Tail Knowledge"
+title: Large Language Models Struggle to Learn Long-Tail Knowledge
 authors:
-  - "Nikhil Kandpal"
-  - "Haikang Deng"
-  - "Adam Roberts"
-  - "Ethan Wallace"
-  - "Colin Raffel"
+  - Nikhil Kandpal
+  - Haikang Deng
+  - Adam Roberts
+  - Ethan Wallace
+  - Colin Raffel
 year: 2022
 arxiv_id: "2211.08411"
 url: https://arxiv.org/abs/2211.08411
-tags: [knowledge, long-tail]
+tags:
+  - knowledge
+  - long-tail
 ingested_at: 2026-09-02
 citations_total: 730
 citations_recent_12mo: 203
 citations_checked_at: 2026-09-04
+brief: >-
+  A language model's ability to answer a factoid question tracks how many
+  pre-training documents contain both the question entity and the answer
+  entity, and the relationship is causal, not just correlational.
+
+
+  The authors entity-linked 2.1TB of pre-training text (The Pile, ROOTS En,
+  C4, OpenWebText, Wikipedia) with DBpedia Spotlight, then counted
+  question-answer entity co-occurrences for TriviaQA and Natural Questions,
+  evaluating GPT-Neo (125M-20B), BLOOM (560M-176B), and GPT-3 in a 4-shot
+  closed-book setting.
+
+
+  BLOOM-176B accuracy rises from 25% to above 55% as relevant documents go
+  from 10^1 to 10^4, and it is over 4x more accurate than BLOOM-560M on
+  questions with more than 10^5 relevant documents. Fitting BLOOM accuracy on
+  rare Natural Questions instances (<100 relevant docs) against log model size
+  gives R^2=0.98 and extrapolates to over 10^18 parameters to match a
+  supervised baseline.
+
+
+  The causal claim rests on retraining a 4.8B model on C4 with all relevant
+  documents for sampled questions removed (~30% of C4); accuracy drops only on
+  the questions that had many relevant documents. A human
+  leave-one-annotator-out control shows the opposite trend, ruling out "rare
+  questions are just harder". The document-counting pipeline is only ~60%
+  precise by human audit of 300 TriviaQA pairs.
+
+
+  Only factoid QA in English was tested; retrieval augmentation with BM25
+  top-3 or gold paragraphs removes most of the dependence.
+
+
+  If you need long-tail factual coverage, budget for retrieval rather than
+  scale.
+brief_generated_at: 2026-09-05
+brief_model: claude-opus-5
+brief_source: full-text

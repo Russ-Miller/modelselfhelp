@@ -2,14 +2,48 @@ id: arxiv-2211-09527
 kind: paper
 title: "Ignore Previous Prompt: Attack Techniques For Language Models"
 authors:
-  - "F\u00e1bio Perez"
-  - "Ian Ribeiro"
+  - Fábio Perez
+  - Ian Ribeiro
 year: 2022
 arxiv_id: "2211.09527"
 url: https://arxiv.org/abs/2211.09527
-tags: [prompt-injection]
+tags:
+  - prompt-injection
 ingested_at: 2026-09-02
 citations_total: 1055
 citations_recent_12mo: 475
 citations_checked_at: 2026-09-04
 semantic_scholar_id: 9716a2876d08fce9d8e5c5ba4d7b1a9af44806d6
+brief: >-
+  The most capable model in a family is the easiest to hijack with injected
+  instructions, an inverse-scaling result for instruction-following.
+  Handcrafted user text that says to ignore the application prompt reliably
+  derails GPT-3 apps built by string substitution.
+
+
+  PromptInject assembles base prompts, attack strings, delimiters and model
+  settings into a grid. The 35 base prompts come from OpenAI's public Examples
+  page, run mostly on text-davinci-002, with 2 attacks: goal hijacking (make
+  the model print a target string) and prompt leaking (make it print its own
+  instruction).
+
+
+  Best observed rates were 58.6% ± 1.6 for goal hijacking and 23.6% ± 2.7 for
+  leaking. Across models the same attack got 13.8% ± 2.2 (text-ada-001), 29.5%
+  ± 5.9 (babbage), 23.8% ± 3.9 (curie), 30.5% ± 3.9 (davinci-001), 58.6% ± 1.6
+  (davinci-002). More harmful rogue strings worked less well ("I hate humans"
+  58.6% ± 1.6 vs "Kill all humans" 49.3% ± 2.7 vs non-harmful 70.0% ± 3.7).
+  Stop sequences (60.0% ± 0.0 to 47.5% ± 5.0) and text placed after the user
+  input (63.1% ± 2.4 to 51.8% ± 3.6) reduced success.
+
+
+  Each factor is varied one at a time over the same 35 prompts and repeated 4
+  times, so attribution within the grid is clean, but the search was not
+  exhaustive, success is exact-match, and only OpenAI models were tested.
+
+
+  Treat capability at following instructions as an attack surface that grows
+  with model quality.
+brief_generated_at: 2026-09-05
+brief_model: claude-opus-5
+brief_source: full-text

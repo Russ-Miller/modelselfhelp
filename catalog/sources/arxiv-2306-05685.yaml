@@ -1,18 +1,55 @@
 id: arxiv-2306-05685
 kind: paper
-title: "Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena"
+title: Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena
 authors:
-  - "Lianmin Zheng"
-  - "Wei-Lin Chiang"
-  - "Ying Sheng"
-  - "et al."
+  - Lianmin Zheng
+  - Wei-Lin Chiang
+  - Ying Sheng
+  - et al.
 year: 2023
 arxiv_id: "2306.05685"
 url: https://arxiv.org/abs/2306.05685
-tags: [llm-as-judge, benchmark]
+tags:
+  - llm-as-judge
+  - benchmark
 code_url: https://github.com/lm-sys/FastChat
 ingested_at: 2026-09-02
 citations_total: 10936
 citations_recent_12mo: 1000
 citations_checked_at: 2026-09-04
 semantic_scholar_id: a0a79dad89857a96f8f71b14238e5237cbfc4787
+brief: >-
+  GPT-4 judging chatbot answers agrees with human experts about as often as
+  experts agree with each other, but only after position bias is neutralized
+  and reference answers are supplied for math.
+
+
+  The setup is MT-bench, 80 hand-written multi-turn questions across 8
+  categories, answered by GPT-4, GPT-3.5, Claude-v1, Vicuna-13B, Alpaca-13B
+  and LLaMA-13B, plus Chatbot Arena, a crowdsourced anonymous battle platform.
+  Judges were GPT-4, GPT-3.5 and Claude-v1 against 58 expert labelers (roughly
+  3K votes) and 3K crowd votes sampled from 30K.
+
+
+  On non-tie votes GPT-4 pairwise matched humans at 85% first turn, versus 81%
+  human-human; on Arena, 87%. Biases were measured directly: on near-identical
+  answer pairs, judges were consistent under swapping only 23.8% (Claude-v1),
+  46.2% (GPT-3.5) and 65.0% (GPT-4) of the time. A "repetitive list" verbosity
+  attack on 23 answers fooled Claude-v1 and GPT-3.5 91.3% of the time, GPT-4
+  8.7%. On 10 math questions, GPT-4 judge failure fell from 14/20 default to
+  6/20 with chain-of-thought and 3/20 with a reference answer. Few-shot
+  judging raised GPT-4 consistency 65.0% to 77.5% at 4x prompt cost.
+
+
+  The bias probes are controlled ablations; self-enhancement was left
+  undetermined, since GPT-4 favored itself by 10% and Claude-v1 by 25% but
+  data was too thin to isolate the cause. Safety, honesty and separate
+  helpfulness dimensions were not evaluated, and agreement drops toward 70%
+  when models are close in strength.
+
+
+  Use LLM judges for coarse ranking, with position swapping and references,
+  not for splitting near-equal models.
+brief_generated_at: 2026-09-05
+brief_model: claude-opus-5
+brief_source: full-text

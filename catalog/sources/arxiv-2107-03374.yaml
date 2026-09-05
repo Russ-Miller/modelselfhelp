@@ -2,22 +2,57 @@ id: arxiv-2107-03374
 kind: paper
 title: Evaluating Large Language Models Trained on Code
 authors:
-- Mark Chen
-- Jerry Tworek
-- Heewoo Jun
-- Qiming Yuan
-- et al.
+  - Mark Chen
+  - Jerry Tworek
+  - Heewoo Jun
+  - Qiming Yuan
+  - et al.
 year: 2021
-arxiv_id: '2107.03374'
+arxiv_id: "2107.03374"
 url: https://arxiv.org/abs/2107.03374
-summary: 'Introduces HumanEval and Codex: measures functional correctness of generated
-  code by running held-out tests, rather than surface similarity to a reference
-  solution, establishing that as the standard way to grade code generation.'
+summary: "Introduces HumanEval and Codex: measures functional correctness of
+  generated code by running held-out tests, rather than surface similarity to
+  a reference solution, establishing that as the standard way to grade code
+  generation."
 tags:
-- code-generation
-- reasoning
+  - code-generation
+  - reasoning
 ingested_at: 2026-09-04
 citations_total: 11293
 citations_recent_12mo: 1000
 citations_checked_at: 2026-09-04
 semantic_scholar_id: acbdbf49f9bc3f151b93d9ca9a06009f4f6eb269
+brief: >-
+  Sampling a code model 100 times and filtering by unit tests turns a model
+  that solves under a third of problems into one that solves most of them.
+  Codex is a GPT model with up to 12B parameters fine-tuned on 159 GB of
+  Python from 54 million GitHub repositories, evaluated on HumanEval, a
+  hand-written set of 164 programming problems with an average of 7.7 unit
+  tests each, scored by pass@k with an unbiased estimator over n=200 samples.
+
+
+  Codex-12B solves 28.8% of problems with 1 sample, against 11.62% for GPT-J
+  6B, 6.41% for GPT-Neo 2.7B, 2.58% for TabNine, and near 0% for GPT models.
+  Further supervised fine-tuning on standalone functions (Codex-S) gives 37.7%
+  at 1 sample and 77.5% within 100 samples. Without an oracle, ranking 100
+  samples by mean log-probability reaches 44.5%; back-translation ranking does
+  worse than that but better than random.
+
+
+  Effects are measured, with temperature tuned per k (0.2 for pass@1, 0.8 for
+  pass@100) and same-metric comparisons across 7 Codex sizes plus external
+  baselines, though the compute budget per method is not equalized.
+
+
+  Limits are direct: on synthetic docstrings chaining 13 string-manipulation
+  building blocks, pass rate falls by roughly 2-3x per added component, and
+  the model misbinds operations to variables. On APPS, 1-shot Codex-12B
+  reaches 25.02% raw pass@1000 on introductory problems but 3.23% on
+  competition ones.
+
+
+  Treat sample-and-filter as the main lever, and chained specifications as the
+  failure mode.
+brief_generated_at: 2026-09-05
+brief_model: claude-opus-5
+brief_source: full-text

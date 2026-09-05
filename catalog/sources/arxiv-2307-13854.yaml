@@ -2,16 +2,53 @@ id: arxiv-2307-13854
 kind: paper
 title: "WebArena: A Realistic Web Environment for Building Autonomous Agents"
 authors:
-  - "Shuyan Zhou"
-  - "Frank F. Xu"
-  - "Hao Zhu"
-  - "et al."
+  - Shuyan Zhou
+  - Frank F. Xu
+  - Hao Zhu
+  - et al.
 year: 2023
 arxiv_id: "2307.13854"
 url: https://arxiv.org/abs/2307.13854
-tags: [agents, benchmark, web]
+tags:
+  - agents
+  - benchmark
+  - web
 code_url: https://github.com/web-arena-x/webarena
 ingested_at: 2026-09-02
 citations_total: 1931
 citations_recent_12mo: 1000
 citations_checked_at: 2026-09-04
+brief: >-
+  Frontier LLMs prompted as web agents complete a small fraction of realistic,
+  multi-step web tasks that humans finish most of the time. WebArena hosts 4
+  self-contained, functional websites built from open-source software with
+  data imported from real counterparts (an e-commerce store, Reddit, GitLab, a
+  store CMS), plus a map, calculator, scratchpad, and Wikipedia, all in Docker
+  with a gym-style API.
+
+
+  The benchmark has 812 tasks from 241 templates, scored by functional
+  correctness: programmatic checks of database or page state, plus
+  exact_match, must_include, and gpt-4-0613 fuzzy_match for
+  information-seeking answers. Some tasks are deliberately unachievable.
+
+
+  GPT-4 with chain-of-thought reaches 11.70% success; removing the
+  unachievable-task hint raises it to 14.41%. GPT-3.5 with CoT gets 8.75%,
+  text-bison-001 5.05%, and 5 CS graduate students get 78.24%. With the hint,
+  GPT-4 wrongly calls 54.9% of feasible tasks impossible; without it, it still
+  flags 44.44% of unachievable tasks.
+
+
+  The prompt hint effect is measured by direct ablation across both models,
+  and CoT contributes 2.34% for GPT-3.5. The human number comes from 170
+  sampled templates, not the full 812, so it is not a matched comparison. Only
+  text observations (accessibility tree) and 2-shot prompting were tested; no
+  fine-tuned, screenshot-based, or search/memory-augmented agents.
+
+
+  Treat agent success rates on simplified web benchmarks as upper bounds, and
+  expect prompt wording to move results by several points.
+brief_generated_at: 2026-09-05
+brief_model: claude-opus-5
+brief_source: full-text

@@ -1,18 +1,57 @@
 id: arxiv-2110-14168
 kind: paper
-title: "Training Verifiers to Solve Math Word Problems"
+title: Training Verifiers to Solve Math Word Problems
 authors:
-  - "Karl Cobbe"
-  - "Vineet Kosaraju"
-  - "Mohammad Bavarian"
-  - "et al."
+  - Karl Cobbe
+  - Vineet Kosaraju
+  - Mohammad Bavarian
+  - et al.
 year: 2021
 arxiv_id: "2110.14168"
 url: https://arxiv.org/abs/2110.14168
-tags: [math, benchmark]
+tags:
+  - math
+  - benchmark
 code_url: https://github.com/openai/grade-school-math
 ingested_at: 2026-09-02
 citations_total: 10385
 citations_recent_12mo: 1000
 citations_checked_at: 2026-09-04
 semantic_scholar_id: d6045d2ccc9c09ca1671348de86d07da6bc28eea
+brief: >-
+  Sampling 100 solutions and picking the one a learned verifier ranks highest
+  beats trying to get 1 correct answer from a much larger model. On the full
+  GSM8K training set, a 6B model with verification slightly outperforms a
+  finetuned 175B model, a gain roughly equivalent to a 30x model size
+  increase.
+
+
+  GSM8K is 8.5K human-written grade school word problems with natural language
+  solutions, split 7.5K train and 1K test, each needing 2 to 8 steps, with
+  under 2 percent estimated to contain breaking errors. Generators are GPT-3
+  models (6B and 175B) finetuned for 2 epochs, with calculator annotations
+  injected; the verifier is a separate model scoring correctness at every
+  token, trained on 100 labeled samples per training problem.
+
+
+  Verification loses to finetuning at small dataset sizes and only takes off
+  past a threshold, earlier for 175B than 6B. Test-time gains keep rising up
+  to 400 completions then decline, suggesting adversarial solutions that fool
+  the verifier. Removing intermediate steps so a 6B model outputs only the
+  final answer drops performance from 20.6% to 5.2%.
+
+
+  Effects are measured against a matched finetuning baseline with 3 runs (175B
+  verification is a single run), and ablations isolate token-level vs
+  solution-level scoring, the auxiliary language modeling objective, generator
+  vs verifier size, and 20% residual dropout. Large-generator/small-verifier
+  beats the reverse, hinting the verifier uses coarse heuristics.
+
+
+  Only GPT-3 models and grade school arithmetic were tested; labels come from
+  final answers, so flawed reasoning that lands correct counts as positive.
+  Treat verifier-guided sampling as a data-hungry substitute for scale, not a
+  free one.
+brief_generated_at: 2026-09-05
+brief_model: claude-opus-5
+brief_source: full-text

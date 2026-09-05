@@ -1,16 +1,56 @@
 id: arxiv-2201-11903
 kind: paper
-title: "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models"
+title: Chain-of-Thought Prompting Elicits Reasoning in Large Language Models
 authors:
-  - "Jason Wei"
-  - "Xuezhi Wang"
-  - "Dale Schuurmans"
-  - "et al."
+  - Jason Wei
+  - Xuezhi Wang
+  - Dale Schuurmans
+  - et al.
 year: 2022
 arxiv_id: "2201.11903"
 url: https://arxiv.org/abs/2201.11903
-tags: [reasoning, prompting]
+tags:
+  - reasoning
+  - prompting
 ingested_at: 2026-09-02
 citations_total: 21548
 citations_recent_12mo: 1000
 citations_checked_at: 2026-09-04
+brief: >-
+  Prompting a model with a few worked examples that show intermediate
+  reasoning steps unlocks multi-step reasoning that standard few-shot
+  prompting does not, but only in models around 100B parameters and above.
+
+
+  The method, chain-of-thought prompting, was tested with 8 hand-written
+  exemplars against standard input-output prompting on 5 math word problem
+  benchmarks (GSM8K, SVAMP, ASDiv, AQuA, MAWPS), 5 commonsense sets (CSQA,
+  StrategyQA, Date, Sports, SayCan), and 2 symbolic toy tasks, across GPT-3,
+  LaMDA, PaLM, UL2 20B and Codex, with greedy decoding.
+
+
+  PaLM 540B reaches 57 on GSM8K solve rate versus 18 with standard prompting,
+  above finetuned GPT-3 175B at 33 and prior best at 55. On StrategyQA it gets
+  75.6% vs prior state of the art 69.4%, and 95.4% vs 84% for a sports
+  enthusiast. Below ~100B, chain of thought hurts: small models write fluent
+  but illogical chains.
+
+
+  The causal story is well isolated. Ablations show equation-only prompting,
+  emitting dots equal to the equation length, and putting the chain after the
+  answer all perform about the same as baseline, so neither extra compute nor
+  knowledge activation explains the gain. 3 annotators and 3 sets of exemplars
+  sampled from GSM8K training data all beat standard prompting. Error analysis
+  on 50 correct and 50 incorrect LaMDA 137B chains found 46% of failures
+  almost correct, 54% with major errors.
+
+
+  Gains were minimal on CSQA and on single-step MAWPS problems, no model was
+  finetuned, and out-of-domain symbolic performance stays below in-domain.
+
+
+  If you serve models under 100B, expect this to cost you accuracy rather than
+  buy it.
+brief_generated_at: 2026-09-05
+brief_model: claude-opus-5
+brief_source: full-text

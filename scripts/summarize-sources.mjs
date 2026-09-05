@@ -167,7 +167,14 @@ async function fetchFullText(arxivId) {
   if (/No HTML for this paper|html is not available/i.test(html)) return null;
   const text = html
     .replace(/<(script|style|nav|footer)[\s\S]*?<\/\1>/gi, " ")
+    // LaTeXML emits every formula twice: the rendered MathML and an
+    // <annotation> holding the LaTeX source. Stripping tags without dropping
+    // the annotation interleaves them, which corrupts numbers -- 19,000 came
+    // out as "19true000" and "37" as "37 37". A corrupted figure then reads as
+    // an invented one, which is the worst possible failure for the check.
+    .replace(/<annotation[\s\S]*?<\/annotation>/gi, " ")
     .replace(/<[^>]+>/g, " ")
+    .replace(/[\u200b\u200c\u200d\u00ad]/g, "")
     .replace(/&nbsp;/g, " ").replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">")
     .replace(/\s+/g, " ")
     .trim();

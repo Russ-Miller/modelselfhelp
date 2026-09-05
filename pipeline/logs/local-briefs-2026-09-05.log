@@ -182,3 +182,65 @@ errors:  24
 Processing 28 with claude-opus-5
 
 waiting 600s before touching arXiv
+fetched 28 abstract(s) for 28 source(s)
+
+[1/28] arxiv-2005-11401 :: Retrieval-Augmented Generation for Knowledge-Intensi
+      written from full-text, 22 figure(s), all grounded
+[2/28] arxiv-2107-03374 :: Evaluating Large Language Models Trained on Code
+      written from full-text, 20 figure(s), all grounded
+[3/28] arxiv-2108-09293 :: Asleep at the Keyboard? Assessing the Security of Gi
+      written from full-text, 35 figure(s), all grounded
+[4/28] arxiv-2109-07958 :: TruthfulQA: Measuring How Models Mimic Human Falseho
+      written from full-text, 14 figure(s), all grounded
+[5/28] arxiv-2110-14168 :: Training Verifiers to Solve Math Word Problems
+      written from full-text, 15 figure(s), all grounded
+[6/28] arxiv-2201-11903 :: Chain-of-Thought Prompting Elicits Reasoning in Larg
+      written from full-text, 0 figure(s), all grounded
+[7/28] arxiv-2202-07206 :: Impact of Pretraining Term Frequencies on Few-Shot R
+      written from full-text, 18 figure(s), all grounded
+[8/28] arxiv-2206-15474 :: Forecasting Future World Events with Neural Networks
+      written from full-text, 21 figure(s), all grounded
+[9/28] arxiv-2211-03622 :: Do Users Write More Insecure Code with AI Assistants
+      written from full-text, 18 figure(s), all grounded
+[10/28] arxiv-2211-08411 :: Large Language Models Struggle to Learn Long-Tail Kn
+      written from full-text, 0 figure(s), all grounded
+[11/28] arxiv-2211-09527 :: Ignore Previous Prompt: Attack Techniques For Langua
+      written from full-text, 14 figure(s), all grounded
+[12/28] arxiv-2211-10435 :: PAL: Program-aided Language Models
+      written from full-text, 18 figure(s), all grounded
+[13/28] arxiv-2306-05685 :: Judging LLM-as-a-Judge with MT-Bench and Chatbot Are
+      written from full-text, 23 figure(s), all grounded
+[14/28] arxiv-2307-03172 :: Lost in the Middle: How Language Models Use Long Con
+      written from full-text, 20 figure(s), all grounded
+[15/28] arxiv-2307-13854 :: WebArena: A Realistic Web Environment for Building A
+      written from full-text, 13 figure(s), all grounded
+[16/28] arxiv-2307-16513 :: Deception Abilities Emerged in Large Language Models
+      written from abstract, 0 figure(s), all grounded
+[17/28] arxiv-2307-16789 :: ToolLLM: Facilitating Large Language Models to Maste
+      written from full-text, 22 figure(s), all grounded
+[18/28] arxiv-2308-03688 :: AgentBench: Evaluating LLMs as Agents
+      written from full-text, 20 figure(s), all grounded
+[19/28] arxiv-2308-03958 :: Simple synthetic data reduces sycophancy in large la
+      written from full-text, 12 figure(s), all grounded
+[20/28] arxiv-2308-15022 :: Recursively Summarizing Enables Long-Term Dialogue M
+      written from full-text, 19 figure(s), all grounded
+[21/28] arxiv-2309-04658 :: Exploring Large Language Models for Communication Ga
+      written from full-text, 15 figure(s), all grounded
+[22/28] arxiv-2309-12288 :: The Reversal Curse: LLMs trained on "A is B" fail to
+      written from full-text, 19 figure(s), all grounded
+[23/28] arxiv-2310-01798 :: Large Language Models Cannot Self-Correct Reasoning 
+      written from full-text, 21 figure(s), all grounded
+[24/28] arxiv-2310-05915 :: FireAct: Toward Language Agent Fine-tuning
+      written from full-text, 20 figure(s), all grounded
+[25/28] arxiv-2310-06770 :: SWE-bench: Can Language Models Resolve Real-World Gi
+      written from full-text, 1 UNGROUNDED FIGURE(S): 19000
+[26/28] arxiv-2311-07911 :: Instruction-Following Evaluation for Large Language 
+      written from full-text, 16 figure(s), all grounded
+[27/28] arxiv-2404-06654 :: RULER: What's the Real Context Size of Your Long-Con
+      written from full-text, 31 figure(s), all grounded
+[28/28] arxiv-2406-12045 :: τ-bench: A Benchmark for Tool-Agent-User Interaction
+      written from full-text, 26 figure(s), all grounded
+
+tokens: 369002 in (35343 cached) / 19596 out
+cost:   $2.3349 for 28 ≈ $0.0834 each
+flagged: 1 brief(s) contain a figure absent from the abstract -- read those before trusting them

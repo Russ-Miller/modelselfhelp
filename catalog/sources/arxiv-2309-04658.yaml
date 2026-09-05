@@ -1,25 +1,63 @@
 id: arxiv-2309-04658
 kind: paper
-title: "Exploring Large Language Models for Communication Games: An Empirical Study on Werewolf"
+title: "Exploring Large Language Models for Communication Games: An Empirical
+  Study on Werewolf"
 authors:
-  - "Yuzhuang Xu"
-  - "Shuo Wang"
-  - "Peng Li"
-  - "Fuwen Luo"
-  - "Xiaolong Wang"
-  - "Weidong Liu"
-  - "Yang Liu"
+  - Yuzhuang Xu
+  - Shuo Wang
+  - Peng Li
+  - Fuwen Luo
+  - Xiaolong Wang
+  - Weidong Liu
+  - Yang Liu
 year: 2023
 arxiv_id: "2309.04658"
 url: https://arxiv.org/abs/2309.04658
-summary: >-
-  Frozen LLMs, using only retrieval over past communications and
-  self-reflection rather than fine-tuning, can play the social deduction
-  game Werewolf competently and show emergent strategic behavior,
-  including deception, without being explicitly trained for it.
-tags: [deception, agentic]
+summary: Frozen LLMs, using only retrieval over past communications and
+  self-reflection rather than fine-tuning, can play the social deduction game
+  Werewolf competently and show emergent strategic behavior, including
+  deception, without being explicitly trained for it.
+tags:
+  - deception
+  - agentic
 ingested_at: 2026-09-04
 citations_total: 312
 citations_recent_12mo: 59
 citations_checked_at: 2026-09-04
 semantic_scholar_id: 24d52678c887331b9da0368e8a2f58bec07f7203
+brief: >-
+  Frozen LLMs can play a 7-player Werewolf game and pick up strategy from past
+  games through retrieval and reflection alone, but the gains do not scale
+  with how much experience you give them. Agents built on gpt-3.5-turbo-0301,
+  one per role (2 werewolves, 2 villagers, witch, guard, seer), get a prompt
+  containing the most recent 15 messages, rule-matched informative messages, a
+  reflection built by answering 5 predefined plus 2 freely asked questions
+  over retrieved memory, a suggestion mined from an experience pool, and a
+  chain-of-thought trigger.
+
+
+  Experience pools were built from 10, 20, 30, and 40 rounds and given only to
+  the village side, with werewolves held fixed as a reference; each condition
+  ran 50 rounds. Pools of 10 and 20 rounds raised villager win rate and game
+  duration; 30 rounds lengthened games without a clear win-rate change; 40
+  rounds gave shorter games. The paper reports these as chart trends and gives
+  no win-rate numbers.
+
+
+  Evidence is thin. Ablations are mostly qualitative, with 1 human-annotated
+  comparison of 50 sampled responses judged reasonable or not. The werewolf
+  baseline is not actually constant: werewolf camouflage behavior also
+  shifted, so the control is compromised, as the authors concede. 1 model, 1
+  game, 1 configuration.
+
+
+  Emergent trust, confrontation, camouflage, and leadership are documented by
+  example and by a 7x7 trust table, not measured against a baseline; they
+  persisted when role names were replaced with unrelated words.
+
+
+  Treat this as an existence proof for prompt-only social play, not a scaling
+  result.
+brief_generated_at: 2026-09-05
+brief_model: claude-opus-5
+brief_source: full-text
