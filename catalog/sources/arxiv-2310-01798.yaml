@@ -1,16 +1,50 @@
 id: arxiv-2310-01798
 kind: paper
-title: "Large Language Models Cannot Self-Correct Reasoning Yet"
+title: Large Language Models Cannot Self-Correct Reasoning Yet
 authors:
-  - "Jie Huang"
-  - "Xinyun Chen"
-  - "Swaroop Mishra"
-  - "et al."
+  - Jie Huang
+  - Xinyun Chen
+  - Swaroop Mishra
+  - et al.
 year: 2023
 arxiv_id: "2310.01798"
 url: https://arxiv.org/abs/2310.01798
-tags: [self-correction, reasoning]
+tags:
+  - self-correction
+  - reasoning
 ingested_at: 2026-09-02
 citations_total: 1164
 citations_recent_12mo: 503
 citations_checked_at: 2026-09-04
+brief: >-
+  Asking a model to review and revise its own reasoning, with no external
+  feedback, makes it worse, not better. The gains reported in earlier
+  self-correction work come from oracle answer labels deciding when to stop.
+
+
+  The setup: GPT-3.5-Turbo, GPT-4, GPT-4-Turbo and Llama-2-70b-chat on GSM8K
+  (1,319 problems), CommonSenseQA (1,221 dev questions) and HotpotQA (100
+  questions, closed book), with up to 2 rounds of self-correction using
+  prompts taken from RCI and Reflexion.
+
+
+  With oracle labels GPT-3.5 goes 75.9 to 84.3 on GSM8K and 75.8 to 89.7 on
+  CommonSenseQA. Without them, every model drops: GPT-3.5 to 74.7 and 41.8
+  after 2 rounds, GPT-4 from 95.5 to 89.0 on GSM8K, Llama-2 from 62.0 to 36.5.
+  3 different feedback prompts were tried; all lose. Multi-agent debate at 9
+  responses scores 83.0 on GSM8K versus 88.2 for self-consistency at the same
+  9 responses. On CommonGen-Hard, writing the constraint into the initial
+  prompt gives 81.8 coverage, above the 67.0 that Self-Refine reports after 7
+  calls.
+
+
+  The design isolates the cause well: oracle vs no-oracle, matched response
+  budgets, and matched prompt effort, with replication of prior setups. Only
+  reasoning tasks are covered; style and safety self-correction may differ.
+
+
+  Treat any self-correction gain as suspect until the label source and token
+  budget are stated.
+brief_generated_at: 2026-09-05
+brief_model: claude-opus-5
+brief_source: full-text

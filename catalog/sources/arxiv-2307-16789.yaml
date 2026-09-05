@@ -1,17 +1,56 @@
 id: arxiv-2307-16789
 kind: paper
-title: "ToolLLM: Facilitating Large Language Models to Master 16000+ Real-world APIs"
+title: "ToolLLM: Facilitating Large Language Models to Master 16000+
+  Real-world APIs"
 authors:
-  - "Yujia Qin"
-  - "Shihao Liang"
-  - "Yining Ye"
-  - "et al."
+  - Yujia Qin
+  - Shihao Liang
+  - Yining Ye
+  - et al.
 year: 2023
 arxiv_id: "2307.16789"
 url: https://arxiv.org/abs/2307.16789
-tags: [tool-use, benchmark]
+tags:
+  - tool-use
+  - benchmark
 code_url: https://github.com/OpenBMB/ToolBench
 ingested_at: 2026-09-02
 citations_total: 2160
 citations_recent_12mo: 1000
 citations_checked_at: 2026-09-04
+brief: >-
+  A 7B open model fine-tuned on ChatGPT-generated API-call traces reaches
+  roughly ChatGPT-level tool use, and the search strategy used to build the
+  data matters as much as the data itself. Vicuna and Alpaca, tuned for
+  general dialogue, score 0.0 pass rate on the same tasks.
+
+
+  ToolBench collects 16,464 real RESTful APIs across 49 categories from
+  RapidAPI (filtered down from 53,190), prompts ChatGPT to generate single-
+  and multi-tool instructions, then annotates solution paths with a
+  depth-first-search decision tree (DFSDT) that can retract steps, yielding
+  126,486 instruction-solution pairs and 469,585 real API calls. LLaMA-2 7B is
+  fine-tuned on these, evaluated by ToolEval on pass rate and win rate against
+  ChatGPT-ReACT.
+
+
+  ToolLLaMA-DFSDT averages 66.7 pass / 60.0 win versus ChatGPT-DFSDT at 64.8 /
+  64.3 and GPT-4-DFSDT at 71.1 / 70.4; ReACT-only ToolLLaMA drops to 29.0 /
+  47.0. A trained dense retriever hits 78.0 NDCG@1 average versus 49.6 for Ada
+  and 18.5 for BM25.
+
+
+  DFSDT is compared against a ReACT@N baseline matched on OpenAI API cost,
+  63.8 vs 44.5 average pass rate, so the search gain is not just extra
+  compute. Evaluation is ChatGPT-based, with reported 87.1% and 80.3%
+  agreement with human annotators, and the training data comes from the same
+  teacher being compared against. Generalization is tested on unseen tools and
+  categories and on APIBench, where ToolLLaMA plus oracle retriever gets 88.80
+  AST on HuggingFace.
+
+
+  If you assume tool use needs a frontier model, this suggests distillation
+  with better search closes much of the gap.
+brief_generated_at: 2026-09-05
+brief_model: claude-opus-5
+brief_source: full-text

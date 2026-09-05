@@ -2,16 +2,53 @@ id: arxiv-2310-06770
 kind: paper
 title: "SWE-bench: Can Language Models Resolve Real-World GitHub Issues?"
 authors:
-  - "Carlos E. Jimenez"
-  - "John Yang"
-  - "Alexander Wettig"
-  - "et al."
+  - Carlos E. Jimenez
+  - John Yang
+  - Alexander Wettig
+  - et al.
 year: 2023
 arxiv_id: "2310.06770"
 url: https://arxiv.org/abs/2310.06770
-tags: [coding, benchmark, agents]
+tags:
+  - coding
+  - benchmark
+  - agents
 code_url: https://github.com/SWE-bench/SWE-bench
 ingested_at: 2026-09-02
 citations_total: 3594
 citations_recent_12mo: 1000
 citations_checked_at: 2026-09-04
+brief: >-
+  Frontier language models in 2023 could not resolve real GitHub issues: the
+  best system fixed under 2% of them when it had to find its own context.
+
+
+  SWE-bench pairs 2294 merged pull requests from 12 popular Python
+  repositories with the issues they closed and the tests they added. A model
+  sees the issue text plus retrieved files from a codebase averaging 3,010
+  non-test files and 438K lines, and must emit a patch that turns at least 1
+  failing test green without breaking a median of 51 other tests. Evaluated:
+  ChatGPT-3.5, GPT-4, Claude 2, Claude 3 Opus, and CodeLlama 7b/13b fine-tuned
+  on 19000 issue-PR pairs from 37 disjoint repositories (SWE-Llama).
+
+
+  With BM25 retrieval, Claude 2 resolves 1.97%, GPT-4-turbo 1.31%, ChatGPT-3.5
+  0.17%, SWE-Llama 13b 0.70%. Giving models the oracle files raises Claude 2
+  to 4.8%; collapsing those files to the edited lines ±15 raises it to 5.93%
+  and GPT-4 from 1.3% to 3.4%. Asking for whole files instead of patches drops
+  Claude 2 to 2.2%.
+
+
+  The retrieval and format ablations isolate localization and output format as
+  separate bottlenecks. Pre/post-2023 splits show little date effect, arguing
+  against contamination, though GPT-4 was run on a 25% subset. Python only,
+  single-turn prompting, no agent scaffolds tested.
+
+
+  Treat the low numbers as a floor for non-agentic setups, not a ceiling on
+  the task.
+brief_generated_at: 2026-09-05
+brief_model: claude-opus-5
+brief_source: full-text
+brief_unverified_figures:
+  - "19000"

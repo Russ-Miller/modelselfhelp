@@ -1,17 +1,42 @@
 id: arxiv-2406-12045
 kind: paper
-title: "\u03c4-bench: A Benchmark for Tool-Agent-User Interaction in Real-World Domains"
+title: "τ-bench: A Benchmark for Tool-Agent-User Interaction in Real-World Domains"
 authors:
-  - "Shunyu Yao"
-  - "Noah Shinn"
-  - "Pedram Razavi"
-  - "Karthik Narasimhan"
+  - Shunyu Yao
+  - Noah Shinn
+  - Pedram Razavi
+  - Karthik Narasimhan
 year: 2024
 arxiv_id: "2406.12045"
 url: https://arxiv.org/abs/2406.12045
-tags: [tool-use, benchmark, customer-support]
+tags:
+  - tool-use
+  - benchmark
+  - customer-support
 code_url: https://github.com/sierra-research/tau-bench
 ingested_at: 2026-09-02
 citations_total: 1075
 citations_recent_12mo: 889
 citations_checked_at: 2026-09-04
+brief: "Function-calling agents that look competent on average are unreliable
+  when the same task is run repeatedly: consistency, not average success, is
+  where they break. τ-bench places an agent between a language-model-simulated
+  user (gpt-4-0613) and a set of database APIs in 2 customer-service domains,
+  τ-retail (115 tasks, 500 users, 50 products, 1,000 orders) and τ-airline (50
+  tasks, 300 flights, 2,000 reservations), scoring an episode by comparing the
+  final database state to a single annotated ground-truth state, plus required
+  substrings in agent replies. The best model, gpt-4o with native function
+  calling, reaches pass^1 of 61.2 on retail and 35.2 on airline; gpt-3.5-turbo
+  gets 20.0 and 10.8, open-weight meta-llama-3-70B 14.8 and 14.4. Requiring
+  all 8 i.i.d. trials to succeed drops gpt-4o to pass^8 <25% on retail.
+  Removing the domain policy from the system prompt costs gpt-4o only 4.4% on
+  retail but 22.4% on airline, while gpt-3.5-turbo loses 1.2% on airline. That
+  policy ablation is the cleanest causal test here; the rest is cross-model
+  comparison at 3+ trials per task, with hand-annotated ground truth and a
+  manual breakdown of 36 gpt-4o failures. Tasks were tuned using a gpt-4-turbo
+  agent, so some bias toward that family is possible; no reflection or
+  planning scaffolds were tested, and only 2 synthetic domains exist. Treat
+  single-shot pass rates as an overestimate of deployment reliability."
+brief_generated_at: 2026-09-05
+brief_model: claude-opus-5
+brief_source: full-text

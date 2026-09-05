@@ -83,6 +83,52 @@
     "requires": {
       "type": "string"
     },
+    "evidence_search": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "A record of having looked for efficacy evidence and not found it. Turns an empty cell into a negative result with provenance. Absent means nobody has looked, which is a different state from having looked and come up empty.",
+      "required": [
+        "searched_on",
+        "note"
+      ],
+      "properties": {
+        "searched_on": {
+          "$ref": "common.schema.json#/$defs/date"
+        },
+        "note": {
+          "type": "string",
+          "minLength": 40,
+          "description": "What was searched for, and what the state of the literature appeared to be."
+        },
+        "nearest_miss": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "why_it_does_not_fit"
+            ],
+            "properties": {
+              "source": {
+                "$ref": "common.schema.json#/$defs/slug"
+              },
+              "title": {
+                "type": "string"
+              },
+              "url": {
+                "type": "string",
+                "format": "uri"
+              },
+              "why_it_does_not_fit": {
+                "type": "string",
+                "minLength": 30
+              }
+            }
+          }
+        }
+      }
+    },
     "status": {
       "type": "string",
       "enum": [

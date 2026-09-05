@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getCapability, getClaim, getClaims, getModel, getSource, getTagLabel, isQuietSource } from "@/lib/catalog";
+import { claimActivity, getCapability, getClaim, getClaims, getModel, getSource, getTagLabel, isQuietSource } from "@/lib/catalog";
 import type { SourceLink } from "@/lib/catalog";
-import { CitationSignal, ContestedBadge, KindBadge, StanceBadge, StrengthBadge } from "@/components/badges";
+import { CitationSignal, ContestedBadge, EvidenceSignal, KindBadge, StanceBadge, StrengthBadge } from "@/components/badges";
 
 function SourceItem({ link }: { link: SourceLink }) {
   const src = getSource(link.source);
@@ -91,9 +91,15 @@ export default async function ClaimPage({ params }: PageProps<"/claims/[id]">) {
         </section>
       )}
 
-      <section className="text-sm text-neutral-500 flex flex-wrap gap-x-6 gap-y-1">
+      <section className="text-sm text-neutral-500 flex flex-wrap items-center gap-x-6 gap-y-1">
         <span>Status: {c.status}</span>
         <span>Last checked: {c.last_checked_at}</span>
+        {(() => {
+          const a = claimActivity(c);
+          // Say so rather than rendering nothing: a blank here would read as
+          // "no activity" when it means "not looked up yet".
+          return a ? <EvidenceSignal activity={a} /> : <span>Evidence activity: not checked yet</span>;
+        })()}
         {c.last_new_evidence_at && <span>New evidence: {c.last_new_evidence_at}</span>}
         {c.superseded_by && <span>Superseded by <Link href={`/claims/${c.superseded_by}`} className="hover:underline">{c.superseded_by}</Link></span>}
       </section>

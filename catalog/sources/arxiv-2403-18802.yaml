@@ -1,17 +1,54 @@
 id: arxiv-2403-18802
 kind: paper
-title: "Long-form factuality in large language models"
+title: Long-form factuality in large language models
 authors:
-  - "Jerry Wei"
-  - "Chengrun Yang"
-  - "Xinying Song"
-  - "et al."
+  - Jerry Wei
+  - Chengrun Yang
+  - Xinying Song
+  - et al.
 year: 2024
 arxiv_id: "2403.18802"
 url: https://arxiv.org/abs/2403.18802
-tags: [factuality, evaluation, tooling]
+tags:
+  - factuality
+  - evaluation
+  - tooling
 code_url: https://github.com/google-deepmind/long-form-factuality
 ingested_at: 2026-09-02
 citations_total: 167
 citations_recent_12mo: 75
 citations_checked_at: 2026-09-04
+brief: >-
+  An LLM agent that decomposes a long response into individual facts and
+  checks each one with iterative Google Search queries annotates factuality
+  more accurately than crowdsourced humans, and for a fraction of the cost.
+
+
+  The system, SAFE, uses gpt-3.5-turbo-0125 plus the Serper Google Search API:
+  it splits a response into self-contained facts, filters irrelevant ones,
+  then runs up to 5 query steps per fact before rating it supported or not. It
+  was checked against the crowdsourced annotations from Min et al. (2023) and
+  used to benchmark 13 models across Gemini, GPT, Claude, and PaLM-2 on
+  LongFact, a GPT-4-generated set of 2,280 prompts over 38 topics.
+
+
+  On 16,011 individual facts SAFE agreed with human labels 72.0% of the time.
+  On 100 randomly sampled disagreement cases, re-annotated by researchers with
+  full internet access as ground truth, SAFE was correct 76% and humans 19%.
+  Cost was $0.19 per response versus $4.00. On 250 LongFact-Objects prompts,
+  GPT-4-Turbo led at 95.0 F1@64 and 66.4 F1@178; PaLM-2-L-IT trailed at 31.1
+  and 13.2.
+
+
+  The head-to-head is measured, but the ground truth on disagreements was set
+  by the authors themselves, and the human baseline comes from 1 prior dataset
+  of biography prompts. Google Search is the only knowledge source, and the
+  paper notes it may be thin in law and medicine. F1@K also assumes no
+  repeated facts and can be gamed by repetition.
+
+
+  If you evaluate long-form generation, this is a usable substitute for human
+  raters, with the caveat that its ceiling is what search can verify.
+brief_generated_at: 2026-09-05
+brief_model: claude-opus-5
+brief_source: full-text

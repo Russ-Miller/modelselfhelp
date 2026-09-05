@@ -2,16 +2,53 @@ id: arxiv-2404-06654
 kind: paper
 title: "RULER: What's the Real Context Size of Your Long-Context Language Models?"
 authors:
-  - "Cheng-Ping Hsieh"
-  - "Simeng Sun"
-  - "Samuel Kriman"
-  - "et al."
+  - Cheng-Ping Hsieh
+  - Simeng Sun
+  - Samuel Kriman
+  - et al.
 year: 2024
 arxiv_id: "2404.06654"
 url: https://arxiv.org/abs/2404.06654
-tags: [long-context, benchmark]
+tags:
+  - long-context
+  - benchmark
 code_url: https://github.com/NVIDIA/RULER
 ingested_at: 2026-09-02
 citations_total: 1243
 citations_recent_12mo: 759
 citations_checked_at: 2026-09-04
+brief: >-
+  Near-perfect needle-in-a-haystack scores do not mean a model handles its
+  claimed context length. Ruler, a synthetic benchmark with 13 tasks across 4
+  categories (retrieval with varied needle types and counts, multi-hop
+  variable tracking, common/frequent word aggregation, and QA padded with
+  distractor paragraphs), was run on 17 long-context LMs at 4K, 8K, 16K, 32K,
+  64K, 128K, 500 examples per length, greedy decoding on 8 A100s via vLLM.
+
+
+  Using Llama2-7B's 4K score (85.6%) as the passing threshold, only about half
+  the models hold up at 32K, and almost all fall below threshold before their
+  claimed length. Gemini-1.5-Pro stays >128K effective (95.8 avg); GPT-4 drops
+  from 96.6 at 4K to 81.2 at 128K (effective 64K); DBRX falls to 2.4 at 64K;
+  LWM, trained on 1M context, has effective length <4K. Error analysis on
+  Yi-34B-200K shows ~40 point loss with a haystack full of distractor needles,
+  ~15 points going from 1 to 8 queries, and over 80% of its 128K CWE outputs
+  copied verbatim from the one-shot example.
+
+
+  Effects are measured, with ablations isolating training context length (LWM
+  series at fixed 7B), model size (Yi 6B/9B/34B, same data and 200K training
+  length), and architecture (RWKV-v5 and Mamba-2.8B both degrade by 8K and
+  trail Llama2-7B).
+
+
+  The authors note no depth/position breakdown, no verified correlation with
+  realistic long-context tasks, no short-context evaluation, and no
+  prompt-robustness study.
+
+
+  Treat claimed context windows as marketing and check
+  retrieval-plus-aggregation behavior separately.
+brief_generated_at: 2026-09-05
+brief_model: claude-opus-5
+brief_source: full-text

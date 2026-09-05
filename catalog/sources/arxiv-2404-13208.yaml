@@ -1,17 +1,59 @@
 id: arxiv-2404-13208
 kind: paper
-title: "The Instruction Hierarchy: Training LLMs to Prioritize Privileged Instructions"
+title: "The Instruction Hierarchy: Training LLMs to Prioritize Privileged
+  Instructions"
 authors:
-  - "Eric Wallace"
-  - "Kai Xiao"
-  - "Reimar Leike"
-  - "et al."
+  - Eric Wallace
+  - Kai Xiao
+  - Reimar Leike
+  - et al.
 year: 2024
 arxiv_id: "2404.13208"
 url: https://arxiv.org/abs/2404.13208
-tags: [prompt-injection, training]
+tags:
+  - prompt-injection
+  - training
 ingested_at: 2026-09-02
 citations_total: 486
 citations_recent_12mo: 285
 citations_checked_at: 2026-09-04
 semantic_scholar_id: f18e5a844c37e5342f8f3d409c74c1a9c91d1f8f
+brief: >-
+  Teaching a model that system messages outrank user messages, which outrank
+  tool outputs, transfers to attack types never seen in training. OpenAI
+  fine-tuned GPT-3.5 Turbo with supervised fine-tuning plus RLHF on synthetic
+  data built by two rules: for instructions aligned with the higher-privilege
+  one, decompose compositional requests and train on the original response;
+  for misaligned ones, train the model to answer as if it never saw the
+  lower-level text.
+
+
+  Training data covered direct prompt injections in open and closed domains,
+  indirect injections via browsing, and system message extraction. Jailbreaks,
+  password extraction from system prompts, and injections through non-browsing
+  tools were deliberately excluded to test generalization.
+
+
+  Robustness rose by up to 63% on the main safety evaluations and by up to 34%
+  on the held-out categories, including jailbreaks. Capability benchmarks
+  (TriviaQA, LAMBADA, HellaSwag) were comparable to baseline.
+
+
+  The comparison is a matched fine-tuned baseline trained on the same
+  capability data minus the hierarchy examples, which isolates the
+  intervention reasonably well. But the evaluation suite is partly self-built
+  and self-reported, there is 1 model, and no independent replication or
+  attack-strength scaling is reported.
+
+
+  Over-refusal regressed on 2 adversarially constructed benign sets: System
+  Message Probing Questions and Jailbreakchat with Allowed Prompts. Only text
+  was tested; images and audio were not. The authors state models remain
+  vulnerable to strong adversarial attacks.
+
+
+  If you are building agents, this is evidence that privilege structure can be
+  trained in rather than bolted on.
+brief_generated_at: 2026-09-05
+brief_model: claude-opus-5
+brief_source: full-text

@@ -1,18 +1,57 @@
 id: arxiv-2405-17399
 kind: paper
-title: "Transformers Can Do Arithmetic with the Right Embeddings"
+title: Transformers Can Do Arithmetic with the Right Embeddings
 authors:
-  - "Sean McLeish"
-  - "Arpit Bansal"
-  - "Alex Stein"
-  - "et al."
+  - Sean McLeish
+  - Arpit Bansal
+  - Alex Stein
+  - et al.
 year: 2024
 arxiv_id: "2405.17399"
 url: https://arxiv.org/abs/2405.17399
-tags: [arithmetic, architecture]
+tags:
+  - arithmetic
+  - architecture
 code_url: https://github.com/mcleish7/arithmetic
 ingested_at: 2026-09-02
 citations_total: 91
 citations_recent_12mo: 36
 citations_checked_at: 2026-09-04
 semantic_scholar_id: 59cf4f0391430523cff7d7ca1819389476ff87a6
+brief: >-
+  Transformer failure on multi-digit addition is largely a digit-alignment
+  problem, not an arithmetic one: giving every digit an embedding encoding its
+  position relative to the start of its number restores near-perfect accuracy
+  and lets length generalization jump well past prior work.
+
+
+  Abacus Embeddings assign the same learned positional embedding to all digits
+  of equal significance, with a random starting offset drawn from U[1,k],
+  k=100, during training. Decoder-only models were trained from scratch on 20
+  million samples of reversed-format addition with operands up to 20 digits,
+  under a cramming budget of 8 exaFLOP (1 RTXA4000 for 24 hours), then tested
+  on unseen digit lengths, plus multiplication up to 15 digits and sorting
+  arrays of up to 30 numbers of up to 30 digits.
+
+
+  Training on 20-digit operands generalized to 120-digit problems, a 6x
+  generalization factor against a prior best of 2.5x, with up to 99% accuracy
+  on 100-digit addition. Adding input injection and looped (weight-tied)
+  layers raised OOD accuracy from 92.9% to 99.1%, an 87% error reduction; an
+  8x2 recurrent block halved OOD error versus 16x1. Sorting was mixed: Abacus
+  beat FIRE on number-length OOD (68.63 vs 55.32) but lost on array-length OOD
+  (9.67 vs 21.35), with Abacus+FIRE best on all-OOD at 4.48.
+
+
+  Effects are measured, averaged over 3 runs rather than best-of-10, with
+  ablations over embedding type, architecture, recurrent block size, and
+  effective depth. Scale is small and no natural-language task was tested, so
+  compatibility with general-purpose models is argued from the FIRE and RoPE
+  combinations, not demonstrated.
+
+
+  If you attribute arithmetic failure to reasoning capacity, this suggests
+  checking positional representation first.
+brief_generated_at: 2026-09-05
+brief_model: claude-opus-5
+brief_source: full-text

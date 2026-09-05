@@ -2,16 +2,44 @@ id: arxiv-2402-06363
 kind: paper
 title: "StruQ: Defending Against Prompt Injection with Structured Queries"
 authors:
-  - "Sizhe Chen"
-  - "Julien Piet"
-  - "Chawin Sitawarin"
-  - "David Wagner"
+  - Sizhe Chen
+  - Julien Piet
+  - Chawin Sitawarin
+  - David Wagner
 year: 2024
 arxiv_id: "2402.06363"
 url: https://arxiv.org/abs/2402.06363
-tags: [prompt-injection, training]
+tags:
+  - prompt-injection
+  - training
 code_url: https://github.com/Sizhe-Chen/StruQ
 ingested_at: 2026-09-02
 citations_total: 394
 citations_recent_12mo: 243
 citations_checked_at: 2026-09-04
+brief: 'Separating prompt from data at the API level, and fine-tuning a base
+  model to only obey the prompt channel, drives hand-crafted prompt injection
+  to near zero without costing utility. StruQ combines a front-end that
+  encodes prompt and data with reserved delimiter tokens ([MARK], [INST],
+  [INPT], [RESP], [COLN]) and filters those strings plus ## from user data,
+  with "structured instruction tuning": 50% clean Alpaca samples, 25% with a
+  Naive injection, 25% with a Completion-Other injection, all trained to
+  answer only the prompt-side instruction. Evaluated on Llama-7B and
+  Mistral-7B against at least 15 attack types, using 208 AlpacaFarm samples
+  per attack and AlpacaEval 1.0 for utility. All manual attacks drop to <2%;
+  Completion-Real goes 96% to 0% on both models. Optimization-based attacks
+  survive: TAP falls 97% to 9% on Llama (100% to 36% on Mistral), GCG only 97%
+  to 58% (99% to 56%). Utility moves 67.2% to 67.6% on Llama and 80.0% to
+  78.7% on Mistral, against a 0.7% standard error. Ablations isolate the
+  components: naive+completion augmentation gives 0% best-ASR versus 41%
+  undefended, fake-delimiter augmentation is worse than useless (70%), and
+  all-special delimiters give the best utility at equal security. Adaptive
+  "near-miss" delimiters, 9 variants, are stopped. Baselines are test-time
+  prompting defenses (39%-85% ASR) and a BIPIA reproduction. Limits: 2 7B base
+  models, 1 instruction-tuning dataset, short AlpacaFarm data, injection only
+  at the end of data, and no defense against gradient-access attackers. Treat
+  channel separation as a strong fix for scripted injection and an open
+  problem for optimized ones.'
+brief_generated_at: 2026-09-05
+brief_model: claude-opus-5
+brief_source: full-text

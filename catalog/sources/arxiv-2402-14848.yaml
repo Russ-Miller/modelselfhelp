@@ -1,16 +1,55 @@
 id: arxiv-2402-14848
 kind: paper
-title: "Same Task, More Tokens: the Impact of Input Length on the Reasoning Performance of Large Language Models"
+title: "Same Task, More Tokens: the Impact of Input Length on the Reasoning
+  Performance of Large Language Models"
 authors:
-  - "Mosh Levy"
-  - "Alon Jacoby"
-  - "Yoav Goldberg"
+  - Mosh Levy
+  - Alon Jacoby
+  - Yoav Goldberg
 year: 2024
 arxiv_id: "2402.14848"
 url: https://arxiv.org/abs/2402.14848
-tags: [long-context, reasoning]
+tags:
+  - long-context
+  - reasoning
 ingested_at: 2026-09-02
 citations_total: 238
 citations_recent_12mo: 104
 citations_checked_at: 2026-09-04
 semantic_scholar_id: a816817423d4ab4e02c307b5a8f54e374d80caac
+brief: >-
+  Reasoning accuracy falls off well before a model's advertised context limit,
+  and the drop is caused by length itself, not by the task getting harder.
+  Padding an input with exact duplicates of the relevant paragraphs, where
+  nothing needs to be searched for, still degrades performance.
+
+
+  FLenQA holds the reasoning task fixed and varies only input length: 3
+  True/False tasks (MonoRel, People In Rooms, a simplified Ruletaker), 100
+  base instances each, expanded to roughly 250, 500, 1000, 2000 and 3000
+  tokens with padding that is duplicate, similar (same task), or different
+  (Books Corpus), and with key paragraphs placed first, middle, last, or
+  randomly separated. Models: GPT4, GPT3.5, Gemini-Pro, Mistral Medium,
+  Mixtral 8x7B.
+
+
+  Averaged over models, accuracy drops from 0.92 at minimal length to 0.68 at
+  3000 tokens. Book-corpus padding hurts more than same-task padding.
+  Next-word prediction accuracy rises with length while reasoning falls
+  (Pearson -0.95, p=0.01). CoT raises accuracy but the gain is roughly
+  constant across lengths, except in GPT4. Failure modes: refusals, a bias
+  toward "False", answering before reasoning (odds-ratio 3.643, p<0.001), and
+  incomplete fact coverage in CoT steps (odds-ratio 3.138, p<0.001).
+
+
+  The length variable is isolated by construction, with 300-600 samples per
+  point, but the tasks are deliberately simple 2-fact problems, only 5 models
+  were tested, distance between key paragraphs was not varied, and the
+  mechanism is unexplained.
+
+
+  Treat perplexity or next-word claims about long context as no evidence of
+  long-context reasoning.
+brief_generated_at: 2026-09-05
+brief_model: claude-opus-5
+brief_source: full-text

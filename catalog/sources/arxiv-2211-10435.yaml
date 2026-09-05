@@ -2,16 +2,56 @@ id: arxiv-2211-10435
 kind: paper
 title: "PAL: Program-aided Language Models"
 authors:
-  - "Luyu Gao"
-  - "Aman Madaan"
-  - "Shuyan Zhou"
-  - "et al."
+  - Luyu Gao
+  - Aman Madaan
+  - Shuyan Zhou
+  - et al.
 year: 2022
 arxiv_id: "2211.10435"
 url: https://arxiv.org/abs/2211.10435
-tags: [math, tooling, prompting]
+tags:
+  - math
+  - tooling
+  - prompting
 code_url: https://github.com/reasoning-machines/pal
 ingested_at: 2026-09-02
 citations_total: 824
 citations_recent_12mo: 268
 citations_checked_at: 2026-09-04
+brief: >-
+  Having a language model write Python and letting an interpreter run it beats
+  having the model both decompose and compute. PAL prompts the LLM to emit
+  interleaved natural-language comments and code as its reasoning chain,
+  withholds final answers from in-context examples, and takes the
+  interpreter's output as the answer.
+
+
+  Evaluation covers 13 tasks: 8 math word-problem sets (gsm8k, svamp, asdiv,
+  mawps subsets), 3 BIG-Bench Hard symbolic tasks (Colored Objects, Penguins,
+  Date), and 2 algorithmic tasks (Object Counting, Repeat Copy), with Codex
+  code-davinci-002 as the backend and shared in-context examples with prior
+  chain-of-thought work.
+
+
+  PAL reaches 72.0 on gsm8k versus 65.6 for CoT with Codex and 56.9 for
+  PaLM-540b, 95.1 vs 86.3 on Colored Objects, 93.3 vs 79.2 on Penguins, 96.7
+  vs 73.0 on Object Counting. On gsm-hard, built by swapping in integers of up
+  to 7 digits, CoT falls from 65.6% to 20.1% while PAL holds at 61.5%.
+
+
+  The cause is isolated reasonably well. Prompting the model to generate
+  Python but self-execute it scores 23.2 on gsm8k, only 4.5 above Direct, so
+  the interpreter, not the code-style prompt, carries the gain. Ablations show
+  removing comments costs little but replacing meaningful variable names with
+  random characters drops below CoT.
+
+
+  Boundaries: 1 model family plus text-davinci variants, where PAL loses to
+  CoT at text-davinci-001; tasks are all programmatically expressible.
+
+
+  If your task has a deterministic solution procedure, spend prompt effort on
+  code, not prose.
+brief_generated_at: 2026-09-05
+brief_model: claude-opus-5
+brief_source: full-text

@@ -2,16 +2,60 @@ id: arxiv-2307-03172
 kind: paper
 title: "Lost in the Middle: How Language Models Use Long Contexts"
 authors:
-  - "Nelson F. Liu"
-  - "Kevin Lin"
-  - "John Hewitt"
-  - "et al."
+  - Nelson F. Liu
+  - Kevin Lin
+  - John Hewitt
+  - et al.
 year: 2023
 arxiv_id: "2307.03172"
 url: https://arxiv.org/abs/2307.03172
-tags: [long-context, benchmark]
+tags:
+  - long-context
+  - benchmark
 code_url: https://github.com/nelson-liu/lost-in-the-middle
 ingested_at: 2026-09-02
 citations_total: 4887
 citations_recent_12mo: 1000
 citations_checked_at: 2026-09-04
+brief: >-
+  Where a fact sits inside a long prompt changes whether a model can use it,
+  and the middle is the worst place. Accuracy traces a U-shape: high at the
+  start (primacy) and end (recency), low in between, even for models sold on
+  extended context.
+
+
+  The setup is 2 controlled tasks. Multi-document QA uses 2655
+  NaturalQuestions-Open queries with 1 answer-bearing Wikipedia passage plus
+  Contriever-retrieved distractors, at 10, 20, and 30 documents, with the gold
+  document moved to each slot. A synthetic key-value retrieval task uses JSON
+  objects of 75, 140, and 300 UUID pairs (500 examples each). Models:
+  MPT-30B-Instruct, LongChat-13B (16K), GPT-3.5-Turbo and its 16K version,
+  Claude-1.3 and its 100K version.
+
+
+  GPT-3.5-Turbo drops by more than 20% depending on position; at 20 and 30
+  documents, worst-case accuracy falls below its closed-book score of 56.1%.
+  Extended-context variants match their base counterparts almost exactly. On
+  key-value retrieval, Claude-1.3 is near perfect, while GPT-3.5-Turbo (16K)
+  bottoms out at 45.6% before query-aware contextualization, which restores
+  near-perfect accuracy but barely changes multi-document QA.
+
+
+  The design isolates position cleanly: only document order changes, output
+  stays fixed, and controls cover distractor ordering, random distractors, and
+  unambiguous questions. Ablations separate architecture (Flan-UL2 is robust
+  within its 2048-token training window, 1.9% best-worst gap, U-shaped beyond
+  it), instruction tuning (MPT-30B base also U-shaped; tuning narrows the gap
+  from near 10% to about 4%), and scale (Llama-2 7B is only recency-biased;
+  13B and 70B are U-shaped). GPT-4 was tested only on a subset due to cost.
+
+
+  Open-domain QA saturates well before retriever recall: going from 20 to 50
+  documents adds ~1.5% for GPT-3.5-Turbo and ~1% for Claude-1.3.
+
+
+  If you build retrieval-augmented systems, rerank so relevant passages land
+  near the edges and stop paying for documents past the saturation point.
+brief_generated_at: 2026-09-05
+brief_model: claude-opus-5
+brief_source: full-text

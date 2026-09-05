@@ -1,0 +1,21 @@
+id: audio-understanding
+label: Understanding speech and audio
+summary: Hearing what is said and how it is said — tone, emotion, speaker identity, and events in a soundscape.
+description: >-
+  Covers audio and speech-language models: transcription fidelity, but more
+  interestingly the paralinguistic layer that text transcripts discard —
+  prosody, emotion, sarcasm, speaker turns, overlapping speech, and
+  non-speech events. Also whether a model reasons over time in audio, since
+  a sound's meaning often depends on what preceded it.
+tags: [knowledge, reasoning]
+modality: [audio]
+discriminator: >-
+  In scope when the paper studies what a model does with audio input: speech
+  understanding, paralinguistic inference (how something was said), audio
+  event recognition, or reasoning over an audio timeline. NOT in scope: text-
+  to-speech and voice synthesis, which are generation rather than
+  understanding; and ASR word-error-rate work that treats audio purely as a
+  transcription pipeline without any understanding claim.
+match_terms: ["audio language model", "speech understanding", "paralinguistic", "spoken language", "audio understanding", "speech emotion"]
+status: active
+submitted_by: human:Russ-Miller

@@ -1,16 +1,56 @@
 id: arxiv-2005-11401
 kind: paper
-title: "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks"
+title: Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks
 authors:
-  - "Patrick Lewis"
-  - "Ethan Perez"
-  - "Aleksandra Piktus"
-  - "et al."
+  - Patrick Lewis
+  - Ethan Perez
+  - Aleksandra Piktus
+  - et al.
 year: 2020
 arxiv_id: "2005.11401"
 url: https://arxiv.org/abs/2005.11401
-tags: [rag, retrieval]
+tags:
+  - rag
+  - retrieval
 ingested_at: 2026-09-02
 citations_total: 17840
 citations_recent_12mo: 1000
 citations_checked_at: 2026-09-04
+brief: >-
+  Bolting a dense retriever onto a seq2seq generator and fine-tuning both
+  end-to-end beats both closed-book parametric models and extractive
+  retrieve-and-read pipelines on knowledge-intensive tasks, without a
+  re-ranker or an extractive reader.
+
+
+  RAG pairs a DPR bi-encoder over a 21M-document Wikipedia index (December
+  2018 dump, 100-word chunks, FAISS) with BART-large (400M parameters). Two
+  variants marginalize retrieved documents per-sequence or per-token.
+  Evaluated on 4 open-domain QA sets (NQ, TriviaQA, WebQuestions,
+  CuratedTrec), MS-MARCO abstractive QA, Jeopardy question generation, and
+  FEVER.
+
+
+  RAG-Sequence reaches 44.5 EM on NQ and 45.2 on WQ against DPR's 41.5 and
+  41.1 and T5-11B+SSM's 36.6 and 44.7. On MS-MARCO it beats BART by 2.6 Bleu
+  and 2.6 Rouge-L. Human raters on 452 Jeopardy pairs judged RAG more factual
+  in 42.7% of cases versus BART in 7.1%. FEVER 3-way lands within 4.3% of
+  pipeline systems that use retrieval supervision. RAG produces a correct NQ
+  answer in 11.8% of cases where no retrieved document contains it.
+
+
+  Ablations isolate the retriever: freezing it or swapping in BM25 lowers QA
+  scores (RAG-Sequence-BM25 31.8 on NQ dev vs 44.0), though BM25 wins on
+  FEVER. Swapping the 2016 index gives 70% on 2016 world leaders versus 12%
+  with the mismatched 2018 index, across 82 queries.
+
+
+  The retriever was pre-trained on NQ and TriviaQA supervision, so QA gains
+  are not fully independent of that; only 1 generator family was tested.
+
+
+  Use this as the baseline evidence that retrieval helps generation, not just
+  extraction.
+brief_generated_at: 2026-09-05
+brief_model: claude-opus-5
+brief_source: full-text

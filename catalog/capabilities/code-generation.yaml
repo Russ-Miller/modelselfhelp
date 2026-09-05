@@ -13,5 +13,6 @@ description: >-
 tags: [reasoning, agentic]
 related: [secure-coding, self-repair]
 match_terms: ["code generation", "code synthesis", "program synthesis", "code editing", "unit test generation", "repository-level"]
+modality: [text]
 status: active
 submitted_by: human:Russ-Miller

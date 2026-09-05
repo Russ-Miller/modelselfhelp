@@ -364,3 +364,228 @@ with no published study ("no controlled study isolates its effect"),
 which is a statement about backing strength -- so filing them as claims
 needs either a real source or an own-observation source the user
 actually made, not one fabricated on their behalf.
+
+## 2026-09-04 — Modality is a field, not a split, except where mechanisms differ
+The catalog was implicitly text-only. Rather than declaring that, a
+`modality` field now records where a capability is genuinely bound to one
+— `text | image | audio | video | action`, optional and multi-valued.
+
+Only six of the nineteen existing capabilities got one. Reversal curse,
+arithmetic, code generation, long-context degradation, secure coding and
+hallucination are text-bound by construction. The rest — sycophancy,
+tool-use, prompt injection, state tracking, procedure following — are the
+same capability whatever comes in the input, and tagging them `[text]`
+would have asserted a boundary that isn't there. Absent means
+modality-agnostic, not unknown.
+
+Four capabilities were added from the stage-2b proposals, all of which
+had been blocked on this decision: audio-understanding,
+video-temporal-reasoning, visual-grounding, embodied-control.
+
+The interesting one is visual-grounding. It could have been
+`hallucination` with `modality: [image]`, since the failure looks the
+same — asserting what isn't there. It's separate because the mechanism
+and the mitigations differ: text hallucination is addressed with
+retrieval and verification, while visual ungroundedness is about whether
+the model attends to image evidence at all or falls back on language
+priors about what usually appears in such a scene. Same criterion already
+used for every other split — different mechanism, different capability —
+so a shared surface symptom isn't enough to merge them. They're linked
+via `related` instead.
+
+Likewise embodied-control is not tool-use. A tool call succeeds or
+returns an error; a knocked-over object stays knocked over.
+Irreversibility and continuous partial state are what make it a distinct
+problem.
+
+## 2026-09-04 — An unbacked technique is a research brief, but only if someone looked
+Clearing the efficacy backlog left one technique — `reread-before-edit` —
+with no supporting study, and a supplied citation (FastContext) that was
+a real paper on an adjacent subject and would have read as support
+without being any. Rejecting it raised the better question: a technique
+nobody has measured is an opportunity, and the app should say so.
+
+The trap is that "no efficacy claim" has three causes that look identical
+in the data. Genuinely unstudied. Studied, but I haven't found it. Or
+argued from mechanism and never quantified. Only the first is a research
+opportunity, and a count of zero cannot tell them apart — so a view that
+lumped them would assert "nobody has researched this" with nothing behind
+it. That is the same unfalsifiable move as the `status: accepted` field
+this catalog already deleted, run in reverse.
+
+What makes the absence real is recording the search. New optional
+`evidence_search` on Technique: `searched_on`, a `note` saying what was
+looked for, and `nearest_miss` entries pairing a paper with why it does
+not fit. `reread-before-edit` now carries the FastContext dead end and a
+sketch of the experiment that would settle it — rate of silently wrong
+edits with and without the read-recency precondition, same task set.
+
+`/open-questions` derives the rest: 1 searched-and-open, 9 not yet
+searched, 3 argued-not-measured. Nothing new is stored for sections 2 and
+3; they fall out of claims that already exist. The section headings carry
+the distinction rather than a tooltip, because the whole value of the
+page is that the three states are not the same claim.
+
+This also gives the gamification idea from docs/reputation-notes.md a
+unit that resists gaming: an open question with a documented search
+behind it is something a person can actually close, and closing one is
+checkable in a way that "contributed a citation" is not.
+
+## 2026-09-04 — Asking the open question in the other direction
+Three additions, one theme: the catalog knows more about its own gaps
+than it was showing.
+
+**Evidence activity per claim.** The sources list already showed citation
+recency per paper; a claim rests on several. Aggregated as the *max*
+across its sources, not the sum — one paper the field is still citing
+means the evidence base is live, and adding counts across papers would
+report a number no one measured. Sources never fetched are excluded
+rather than counted as zero, and a claim with none checked says so
+explicitly. A blank cell reads as "no citations"; it actually meant "not
+looked up", and those are different.
+
+**Contested-only filtering** on the capability and claim lists. Done with
+a `data-contested` attribute per row and one CSS rule, so the pages stay
+fully static and the filter ships no second copy of the data.
+
+**Capabilities with no measured mitigation** on /open-questions. The
+existing sections ask "does this technique work"; this asks "does
+anything work". A capability qualifies when claims establish the problem
+and no technique addressing it has an efficacy claim with measured
+backing. Split the same way as the technique sections, because
+`no-technique` and `none-measured` invite different work: the second is a
+citation away from closing, the first would be new knowledge. Currently 3
+and 7, against 9 capabilities that do have a measured fix — a ratio worth
+watching, since it is the closest thing here to a map of what is actually
+unsolved.
+
+Reusing one `isMeasured` predicate across both views matters more than it
+looks. It means "measured" cannot drift between the two pages, and it
+puts real weight on the mechanism-reasoning backing strength: a claim
+filed that way deliberately does not count as a fix, which is why filing
+those honestly earlier today paid off immediately.
+
+## 2026-09-04 — Open questions became a lens, not a destination
+The three /open-questions sections were only visible on /open-questions,
+which framed them as a separate list of chores. The interesting reading is
+comparative: "seven capabilities have no measured mitigation" means
+something only next to the nine that do.
+
+So the same cuts are now filters on the Capabilities, Claims and
+Techniques tabs, and each /open-questions section links to its own
+filtered view. Checkboxes became a segmented bar — All first, then one
+button per cut with its count — because these are alternative views of one
+list, not independent booleans to combine, and a row of checkboxes implies
+an AND nobody wants.
+
+The part worth keeping honest: the filters call the same helpers the
+sections do (`openQuestions`, `unmitigatedCapabilities`), so a button's
+count and a section's count cannot disagree. The alternative — a filter
+predicate written inline per page — would have been three chances to
+define "measured" slightly differently, which is exactly how a catalog
+starts lying to itself.
+
+Filter state lives in the query string rather than component state alone.
+That is what makes the cross-links work, and it means a filtered view is
+something you can send someone.
+
+## 2026-09-04 — UI voice: explain the gap, don't argue about it
+Russ rewrote the /open-questions copy and the difference is worth naming,
+because it will apply to every page eventually.
+
+The old copy argued with itself. It reached for the project's internal
+reasoning ("the same unfalsifiable move as `status: accepted`, just
+inverted"), used em-dashes to stack clauses, and wrote from "I". That
+reads as a designer defending a decision to another designer.
+
+The new copy explains. Short declarative sentences, one idea each. First
+person plural, because a reader looking at a catalog wants to know what
+*we* found, not what I did. And the distinction that motivated the whole
+page survives in plain words: "If we searched the literature and found
+nothing, that tells us something about the state of the research. If we
+simply haven't investigated a technique yet, that only tells us we haven't
+looked at it."
+
+That is the same argument, and it lands harder without the jargon. The
+rule going forward: the reasoning belongs in docs/decisions.md, the
+consequence belongs in the UI.
+
+**Style, not vocabulary.** The first pass at this got it wrong by
+rewriting the nouns too: "technique" drifted to "mitigation", "nearest
+miss" to "closest paper we found", "unmeasured" to "untested". Those are
+schema words. Technique, claim, capability, source, measured, contested,
+mechanism — a reader who learns them on one page should find the same
+words on the next, and `nearest_miss` is a literal field name.
+
+One of the swaps was worse than drift. "Would bear on" became "Would help
+with", which asserts the technique helps — the exact claim this catalog
+refuses to make about a technique nothing has measured. The copy would
+have contradicted the section it sat in.
+
+So: sentence style changed, vocabulary restored. Applied to the Open
+Questions tab only for now; the other tabs still carry the older voice.
+
+## 2026-09-04 — Weaknesses looking for techniques, not problems looking for mitigations
+Two vocabulary corrections from Russ, both about framing rather than
+wording.
+
+**"Mitigation" is out.** It imports risk-management framing: hazards to be
+contained. That is not what this is. The work is finding what makes a
+capability better — innovation and answers, not damage control. The word
+is "technique", which is also the entity name, so the copy now matches the
+schema. `unmitigatedCapabilities()` became `unsolvedCapabilities()`.
+
+Kept where it is accurate rather than framing: papers say "mitigate
+hallucination", so the ingestion scorer still matches the term, capability
+discriminators still describe papers that mitigate something, and the
+judge-bias claims still say a bias was mitigated. Those describe the
+literature; they are not the site's voice.
+
+**"Problem" became "weakness."** Russ's reasoning: a model not performing
+to the level you would expect is not a problem, it is a weakness. That
+also restores continuity with the original reframe — Weakness was renamed
+to Capability so the axis could stay neutral, and a weakness is a
+*position* on that axis rather than an entity. Calling it a problem
+quietly re-introduces the thing that rename removed.
+
+Worth noting both corrections came from copy I had written around text
+Russ supplied. His paragraphs used "mitigation" too; the difference is he
+recognized it as wrong when he saw it rendered. Reading the page as a
+reader catches framing errors that reading the diff does not.
+
+## 2026-09-04 — Briefs instead of abstracts, with a number check
+Russ finds Rohan Paul's paper posts easier to process than abstracts and
+wants one for every paper here. Reverse-engineered the format from four
+full X posts (read with the Chrome extension, since X walls the timeline
+after ~6 posts logged out) and six longer newsletter write-ups, wrote it
+up in docs/prompts/paper-summary.md, and implemented it as
+scripts/summarize-sources.mjs writing to a new `brief` field.
+
+Two things make that format work, and only one of them is style. Figures
+are comparative rather than adjectival — "drops from 69.3 to 33.0 when
+Gemini 3.1 Pro becomes the executor", not "degrades substantially". And
+every summary states its own boundary, which is what makes the rest read
+as credible instead of promotional. That second habit is the same instinct
+as backing_strength and the scope conditions in every claim statement
+here, arrived at independently by someone writing for a different reason.
+
+**The risk this creates.** The style runs on dense figures. The generator
+is handed an abstract that frequently has none. That is a direct
+invitation to invent numbers, inside a catalog whose entire value is
+provenance — the same failure mode as the plausible-but-wrong citation
+rejected earlier today, except manufactured by us rather than supplied.
+
+So the prompt forbids ungrounded figures and requires the model to list
+what it used, and then every number in the output is checked against the
+abstract independently. Unmatched figures go to
+`brief_unverified_figures` and render as a warning on the source page. The
+second guard is the one that counts: it does not depend on the model
+having complied with the first. The first run caught one flag immediately
+— which turned out to be the extractor reading "3" out of "GPT-3.", fixed
+with a lookbehind. Worth noting the failure mode: a checker with false
+positives is worse than none, because real inventions get lost among them.
+
+Not done: briefs for queue candidates, which is where papers are actually
+triaged. That is ~145 candidates at roughly $0.01 each per run, on a set
+that churns nightly, so it is a spending decision rather than a technical
+one.

@@ -2,16 +2,53 @@ id: arxiv-2212-08073
 kind: paper
 title: "Constitutional AI: Harmlessness from AI Feedback"
 authors:
-  - "Yuntao Bai"
-  - "Saurav Kadavath"
-  - "Sandipan Kundu"
-  - "et al."
+  - Yuntao Bai
+  - Saurav Kadavath
+  - Sandipan Kundu
+  - et al.
 year: 2022
 arxiv_id: "2212.08073"
 url: https://arxiv.org/abs/2212.08073
-tags: [safety, training]
+tags:
+  - safety
+  - training
 ingested_at: 2026-09-02
 citations_total: 3617
 citations_recent_12mo: 1000
 citations_checked_at: 2026-09-04
 semantic_scholar_id: 3936fd3c6187f606c6e4e2e20b196dbc41cc4654
+brief: >-
+  A language model can supervise its own harmlessness training with no human
+  harm labels at all, using only a short written list of principles, and the
+  resulting assistant is rated less harmful than one trained on human
+  harmlessness feedback. Anthropic's Constitutional AI has 2 stages: sample
+  harmful responses from a helpful-only RLHF model, have it critique and
+  revise them against a randomly drawn principle, finetune on the revisions
+  (SL-CAI); then have a feedback model pick the less harmful of 2 sampled
+  responses, train a preference model on those AI labels mixed with human
+  helpfulness labels, and run RL (RL-CAI).
+
+
+  Models up to 52B were compared by crowdworker Elo, with 10,274 helpfulness
+  and 8,135 comparisons across 24 snapshots. RL-CAI sits on a better
+  harmlessness-helpfulness frontier than helpful or HH RLHF, and is rarely
+  evasive: it explains its objections instead of refusing. 16 principles,
+  182,831 red team prompts, 135,296 human helpfulness prompts. On 438 binary
+  HHH comparison questions, chain-of-thought lifts pretrained-model accuracy
+  toward that of preference models trained on hundreds of thousands of human
+  labels.
+
+
+  Effects are measured, with ablations on revision count, number of principles
+  (no PM-score gain), critique vs direct revision (helps small models only),
+  and label clamping at 40-60 percent. But harmlessness Elo depends on new
+  crowdworker instructions penalizing evasiveness, which shifts the RLHF
+  baselines; helpfulness still uses human labels; 1 model family, self-run
+  evaluation. Robustness to red teaming was not established.
+
+
+  If you assumed harmlessness requires large human label sets, this is the
+  counterexample.
+brief_generated_at: 2026-09-05
+brief_model: claude-opus-5
+brief_source: full-text

@@ -1,4 +1,4 @@
-import type { BackingStrength, ClaimKind, Source, Stance } from "@/lib/catalog";
+import type { BackingStrength, ClaimActivity, ClaimKind, Source, Stance } from "@/lib/catalog";
 
 const base = "inline-flex items-center gap-1 rounded px-1.5 py-0.5 text-xs font-medium";
 
@@ -127,6 +127,52 @@ export function CitationSignal({ source }: { source: Source }) {
     <span className={wrapper} tabIndex={0} aria-label={label}>
       {glyph}
       {card}
+    </span>
+  );
+}
+
+/**
+ * Citation activity for a whole claim, for the claim's metadata row. Shows the
+ * liveliest source it rests on -- one paper the field is still citing means the
+ * evidence base is live. Deliberately not a total: adding citation counts
+ * across papers would produce a number no one reported.
+ */
+export function EvidenceSignal({ activity }: { activity: ClaimActivity }) {
+  const level = activityLevel(activity.maxRecent);
+  const tone = activity.allQuiet
+    ? "text-amber-600 dark:text-amber-400"
+    : level > 0
+      ? "text-emerald-600 dark:text-emerald-400"
+      : "text-neutral-400 dark:text-neutral-600";
+
+  const headline = activity.allQuiet
+    ? "every source under this claim has gone quiet"
+    : ACTIVITY_TIERS[level].label;
+
+  return (
+    <span className="citation-signal relative inline-flex items-center gap-1.5 align-middle" tabIndex={0}
+      aria-label={`Evidence activity: ${headline}`}>
+      <svg viewBox="0 0 22 14" className={`h-3.5 w-[22px] ${tone}`} aria-hidden focusable="false">
+        {[0, 1, 2, 3].map((i) => {
+          const h = 4 + i * 3;
+          return <rect key={i} x={i * 5.5} y={14 - h} width="3.5" height={h} rx="1" fill="currentColor" opacity={i < level ? 1 : 0.22} />;
+        })}
+      </svg>
+      <span className="text-xs">Evidence activity</span>
+      <span role="tooltip" className="citation-card pointer-events-none absolute left-0 top-full z-20 mt-1 w-max max-w-sm rounded border border-neutral-200 bg-white p-2 text-xs font-normal leading-relaxed text-neutral-700 shadow-lg dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-300">
+        <span className="block font-medium text-neutral-900 dark:text-neutral-100">{headline}</span>
+        {activity.checked.map((s) => (
+          <span key={s.id} className="mt-1 block">
+            {fmtRecent(s.citations_recent_12mo ?? 0)} in 12mo &middot; {s.citations_total ?? 0} total &mdash;{" "}
+            <span className="text-neutral-500">{s.title}</span>
+          </span>
+        ))}
+        {activity.unchecked > 0 && (
+          <span className="mt-1 block text-neutral-500">
+            {activity.unchecked} source{activity.unchecked > 1 ? "s" : ""} not yet checked, so not counted
+          </span>
+        )}
+      </span>
     </span>
   );
 }

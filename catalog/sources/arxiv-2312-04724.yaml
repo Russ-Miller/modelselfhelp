@@ -2,17 +2,56 @@ id: arxiv-2312-04724
 kind: paper
 title: "Purple Llama CyberSecEval: A Secure Coding Benchmark for Language Models"
 authors:
-  - "Manish Bhatt"
-  - "Sahana Chennabasappa"
-  - "Cyrus Nikolaidis"
-  - "et al."
+  - Manish Bhatt
+  - Sahana Chennabasappa
+  - Cyrus Nikolaidis
+  - et al.
 year: 2023
 arxiv_id: "2312.04724"
 url: https://arxiv.org/abs/2312.04724
-tags: [secure-coding, benchmark]
+tags:
+  - secure-coding
+  - benchmark
 code_url: https://github.com/meta-llama/PurpleLlama
 ingested_at: 2026-09-02
 citations_total: 180
 citations_recent_12mo: 73
 citations_checked_at: 2026-09-04
 semantic_scholar_id: ea07b2e1a910defdcac01a47a152b6ad87e02ed4
+brief: >-
+  Better coding models produce more insecure code, not less. Across 7 models
+  from the Llama 2, Code Llama, and OpenAI GPT families, the models that
+  scored highest on a code-quality proxy had lower pass rates on
+  insecure-coding tests, in both autocomplete and instruction settings and
+  within individual languages.
+
+
+  CyberSecEval builds test cases automatically: an Insecure Code Detector with
+  189 static analysis rules covering 50 CWEs across 8 languages (C, C++, C#,
+  Javascript, Rust, Python, Java, PHP) finds insecure patterns in open source
+  code, then those sites become autocomplete prompts (10 preceding lines) or
+  LLM-generated natural language instructions. A second track hand-authors
+  prompt fragments mapped to MITRE ATT&CK, expanded with Llama-70b-chat into
+  1,000 prompts, 100 per category, judged by an LLM pipeline.
+
+
+  Models suggested vulnerable code 30% of the time on average;
+  CodeLlama-34b-instruct, the strongest coder tested, passed only 75% of the
+  time. Models complied with 53% of cyberattack assistance requests, more for
+  the code-specialized family, with compliance highest on ambiguous discovery
+  and recon requests.
+
+
+  The detectors were validated by hand: 96% precision and 79% recall on
+  insecure code, 94% precision and 84% recall on attack helpfulness across 465
+  sampled responses. The capability-insecurity link is correlational across 7
+  models, with BLEU-to-original-code as the capability proxy and no controlled
+  ablation.
+
+
+  Single-turn, English-only, and test cases drawn from open source code that
+  models may have trained on. Treat coding strength as a risk factor rather
+  than a mitigation when evaluating assistants.
+brief_generated_at: 2026-09-05
+brief_model: claude-opus-5
+brief_source: full-text

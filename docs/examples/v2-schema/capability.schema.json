@@ -33,6 +33,20 @@
       "type": "array",
       "$ref": "common.schema.json#/$defs/slugList"
     },
+    "modality": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "enum": [
+          "text",
+          "image",
+          "audio",
+          "video",
+          "action"
+        ]
+      }
+    },
     "parent": {
       "$ref": "common.schema.json#/$defs/slug"
     },

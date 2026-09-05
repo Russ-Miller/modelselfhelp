@@ -1,0 +1,31 @@
+id: withholding-the-users-opinion-is-the-no-training-alternative
+capability: sycophancy
+technique: synthetic-desycophancy-training
+statement: >-
+  Sycophancy is triggered by the user's stated view being in context, so
+  the cheapest control is not putting it there — ask for the answer before
+  the opinion, or withhold the opinion entirely. Fine-tuning is the answer
+  for the cases where the opinion has to be in context and the answer still
+  must not move.
+tags: [behavior, chat-assistant]
+kind: mechanism
+backing_strength: mechanism-reasoning
+sources:
+  - source: arxiv-2308-03958
+    stance: supports
+    note: >-
+      Establishes the trigger by construction: models agree with
+      objectively incorrect addition statements when the user endorses
+      them, despite answering correctly without the endorsement. The
+      no-opinion condition is the paper's own baseline.
+contested: false
+status: active
+last_checked_at: 2026-09-04
+notes: >-
+  Backing is mechanism-reasoning, not single-paper, and the gap is
+  specific: the paper's design shows the opinion is what moves the answer,
+  but nobody has tested answer-before-opinion ordering as a deliberate
+  intervention, and I would expect it to leak in multi-turn settings where
+  the view was stated earlier and is still in context. Worth an
+  own-observation claim if I ever run it.
+submitted_by: human:Russ-Miller

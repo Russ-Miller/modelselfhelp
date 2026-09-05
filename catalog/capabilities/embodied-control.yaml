@@ -1,0 +1,19 @@
+id: embodied-control
+label: Turning plans into physical action
+summary: Closing the loop from perception to action in a body or simulator, where mistakes have physical consequences and cannot be retried freely.
+description: >-
+  Distinct from tool-use, where a tool call either succeeds or returns an
+  error. Embodied control adds continuous state, partial observability, and
+  irreversibility — a knocked-over object stays knocked over. Covers robotic
+  manipulation, navigation, and vision-language-action models.
+tags: [agentic, reasoning]
+modality: [action, image]
+related: [tool-use, state-tracking]
+discriminator: >-
+  In scope when a model's output drives actuation or navigation and success is
+  judged by an achieved physical or simulated world state. NOT in scope: agents
+  that only call software tools (that is tool-use), and not planning papers
+  where the plan is never executed against an environment.
+match_terms: ["embodied", "robotic manipulation", "vision-language-action", "navigation policy", "sim-to-real"]
+status: active
+submitted_by: human:Russ-Miller

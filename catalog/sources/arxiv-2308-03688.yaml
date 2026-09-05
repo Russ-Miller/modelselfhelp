@@ -2,16 +2,51 @@ id: arxiv-2308-03688
 kind: paper
 title: "AgentBench: Evaluating LLMs as Agents"
 authors:
-  - "Xiao Liu"
-  - "Hao Yu"
-  - "Hanchen Zhang"
-  - "et al."
+  - Xiao Liu
+  - Hao Yu
+  - Hanchen Zhang
+  - et al.
 year: 2023
 arxiv_id: "2308.03688"
 url: https://arxiv.org/abs/2308.03688
-tags: [agents, benchmark]
+tags:
+  - agents
+  - benchmark
 code_url: https://github.com/THUDM/AgentBench
 ingested_at: 2026-09-02
 citations_total: 1243
 citations_recent_12mo: 797
 citations_checked_at: 2026-09-04
+brief: >-
+  Open-source models at or below 70B fall far behind commercial APIs when
+  asked to act as agents in interactive environments, and the dominant failure
+  is running out of interaction turns rather than getting the answer wrong.
+  AgentBench puts 29 LLMs into 8 environments across 3 groundings: operating
+  system, database, and knowledge graph; digital card game, lateral thinking
+  puzzles, and ALFWorld house-holding; WebShop and Mind2Web. All models are
+  evaluated with plain CoT-plus-action prompting at temperature=0, no
+  reflection, search, or repeated sampling, on 1,014 test instances (269 dev),
+  roughly 11k inference calls.
+
+
+  gpt-4 leads on 6 of 8 datasets with an overall score of 4.01, including 78.0
+  success on house-holding, versus 2.32 for gpt-3.5-turbo. The best OSS model,
+  codellama-34b, scores 0.96; OSS average is 0.51 against 2.32 for API models.
+  Failure attribution across all models shows Task Limit Exceeded dominating
+  (82.5 on lateral thinking puzzles, 67.9 on knowledge graph), with Invalid
+  Format at 53.3 on database and Invalid Action at 64.1 on house-holding.
+
+
+  The cross-model claims are correlational, not controlled. Code training
+  helps procedural tasks and hurts others based on codellama versus llama-2
+  comparison; alignment data quality is argued from vicuna-13b beating
+  llama-2-13b at the same base. llama-2-13b and llama-2-70b score similarly
+  (0.77 vs 0.78), which the authors attribute to under-training or weak
+  instruction following without a direct test.
+
+
+  Use this to calibrate how far unaided prompting gets an agent, not to rank
+  current frontier models.
+brief_generated_at: 2026-09-05
+brief_model: claude-opus-5
+brief_source: full-text

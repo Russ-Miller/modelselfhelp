@@ -16,5 +16,6 @@ discriminator: >-
   (that is a perception result), or math word problems where the difficulty
   is the reasoning chain rather than the calculation -- those belong with
   reasoning unless the paper isolates the arithmetic step.
+modality: [text]
 status: active
 submitted_by: human:Russ-Miller

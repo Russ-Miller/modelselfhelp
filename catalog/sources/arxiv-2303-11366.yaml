@@ -2,16 +2,53 @@ id: arxiv-2303-11366
 kind: paper
 title: "Reflexion: Language Agents with Verbal Reinforcement Learning"
 authors:
-  - "Noah Shinn"
-  - "Federico Cassano"
-  - "Edward Berman"
-  - "et al."
+  - Noah Shinn
+  - Federico Cassano
+  - Edward Berman
+  - et al.
 year: 2023
 arxiv_id: "2303.11366"
 url: https://arxiv.org/abs/2303.11366
-tags: [self-correction, agents]
+tags:
+  - self-correction
+  - agents
 code_url: https://github.com/noahshinn/reflexion
 ingested_at: 2026-09-02
 citations_total: 5075
 citations_recent_12mo: 1000
 citations_checked_at: 2026-09-04
+brief: >-
+  Letting an agent write a natural-language post-mortem of its own failure and
+  carry that text into the next attempt beats retrying with the raw trajectory
+  alone. Reflexion splits an agent into an Actor (ReAct or Chain-of-Thought),
+  an Evaluator (exact match, hand-written heuristics, or self-generated unit
+  tests), and a Self-Reflection model that turns a binary reward into a verbal
+  lesson stored in a memory buffer capped at 1-3 experiences.
+
+
+  Testing covers 134 AlfWorld environments, 100 HotPotQA questions, and code
+  generation on HumanEval, MBPP, and a new LeetcodeHardGym of 40 Leetcode hard
+  problems released after the GPT-4 cutoff.
+
+
+  Reflexion solves 130 of 134 AlfWorld tasks over 12 trials, against a
+  ReAct-only agent that plateaus between trials 6 and 7 at a 22% hallucination
+  rate. HumanEval Python pass@1 goes 80.1 to 91.0, HumanEval Rust 60.0 to
+  68.0, MBPP Rust 70.9 to 75.4, Leetcode Hard 7.5 to 15.0. MBPP Python drops,
+  80.1 to 77.1, traced to a 16.3% false-positive rate on self-generated tests
+  versus 1.4% on HumanEval.
+
+
+  Two ablations isolate the parts: on the 50 hardest HumanEval Rust problems,
+  removing test generation gives 0.52 versus 0.60 baseline, and removing the
+  reflection step gives 0.60, no gain. On HotPotQA, adding episodic memory
+  alone underperforms full self-reflection by 8% absolute.
+
+
+  All results use GPT-4 or GPT-3 style models with no matched-token-budget
+  baseline, and the code gains depend entirely on test-suite quality. Useful
+  if you are deciding whether verbal feedback loops need a separate reflection
+  stage rather than blind retry.
+brief_generated_at: 2026-09-05
+brief_model: claude-opus-5
+brief_source: full-text

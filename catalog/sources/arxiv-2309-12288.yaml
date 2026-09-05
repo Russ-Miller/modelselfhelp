@@ -1,17 +1,56 @@
 id: arxiv-2309-12288
 kind: paper
-title: "The Reversal Curse: LLMs trained on \"A is B\" fail to learn \"B is A\""
+title: 'The Reversal Curse: LLMs trained on "A is B" fail to learn "B is A"'
 authors:
-  - "Lukas Berglund"
-  - "Meg Tong"
-  - "Max Kaufmann"
-  - "et al."
+  - Lukas Berglund
+  - Meg Tong
+  - Max Kaufmann
+  - et al.
 year: 2023
 arxiv_id: "2309.12288"
 url: https://arxiv.org/abs/2309.12288
-tags: [reversal-curse, knowledge]
+tags:
+  - reversal-curse
+  - knowledge
 code_url: https://github.com/lukasberglund/reversal_curse
 ingested_at: 2026-09-02
 citations_total: 530
 citations_recent_12mo: 174
 citations_checked_at: 2026-09-04
+brief: >-
+  Auto-regressive language models trained on "A is B" do not learn "B is A" at
+  all: the correct answer in the reverse direction is no more likely than a
+  random name. This is a failure of generalization on a symmetric relation
+  that models handle fine when the fact is in context.
+
+
+  GPT-3 base models and Llama-1 were finetuned on 30 fictitious facts about
+  celebrities, each paraphrased 30 times (900 documents per subset), split
+  into NameToDescription, DescriptionToName, and a "both orders" auxiliary
+  subset, then queried with held-out prompts in both directions. A third
+  experiment finetuned Llama-7b/13b/30b on 1100 question-answer instructions
+  in each order.
+
+
+  GPT-3-175B reached 96.7 ± 1.2 exact-match in the trained direction for
+  DescriptionToName and 50.0 ± 2.1 for NameToDescription, versus 0.1 ± 0.1 and
+  0.0 ± 0.0 reversed. Log-probability of the correct name matched a random
+  name (t-tests and Kolmogorov–Smirnov tests found no difference). Llama-1
+  models scored above 80% forward and below 7% reversed. On 1573 real
+  celebrity-parent pairs, GPT-4 named the parent 79% of the time and the child
+  33%.
+
+
+  Evidence is measured, with hyperparameter sweeps, multiple model sizes and
+  families, paraphrase augmentation, a dataset scale-up from 3000 to 40,000,
+  and prompt tuning as ablations; none removed the effect. Contemporaneous
+  influence-function and from-scratch-training work agrees.
+
+
+  Boundaries: finetuning rather than pretraining, synthetic data in Experiment
+  1, identity-like relations only, and Experiment 2 cannot control what was in
+  pretraining. Treat one-directional facts in a training corpus as not learned
+  in reverse.
+brief_generated_at: 2026-09-05
+brief_model: claude-opus-5
+brief_source: full-text

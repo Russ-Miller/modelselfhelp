@@ -1,0 +1,37 @@
+id: retrieval-moves-the-trust-boundary-rather-than-removing-it
+capability: hallucination
+technique: retrieval-augmented-generation
+statement: >-
+  Grounding answers in retrieved documents reduces unsupported generation
+  but transfers the trust problem to the retrieval channel: whatever lands
+  in context is treated as reliable, which shows up both as following
+  instructions planted in retrieved content and as deferring to whichever
+  account is better represented when sources disagree.
+tags: [knowledge, rag-qa]
+kind: mechanism
+backing_strength: replicated
+sources:
+  - source: arxiv-2302-12173
+    stance: supports
+    note: >-
+      The instruction-following half: text planted in content the system
+      retrieves can hijack real LLM-integrated applications, because the
+      model does not distinguish retrieved data from instructions.
+  - source: arxiv-2305-13300
+    stance: supports
+    note: >-
+      The conflicting-sources half: models adopt a coherent counter-memory
+      passage readily, and under conflict follow the majority while showing
+      confirmation bias toward their own prior — neither of which is
+      reliability-weighted.
+contested: false
+status: active
+last_checked_at: 2026-09-04
+notes: >-
+  Not an argument against retrieval — the reduction in unsupported
+  generation is real and filed separately. This is the scope condition:
+  retrieval is only as trustworthy as the channel feeding it, so the
+  defenses belong at the boundary (see the prompt-injection capability),
+  not in the generation step. Replicated in the sense of two independent
+  papers reaching the same mechanism from different failure modes.
+submitted_by: human:Russ-Miller

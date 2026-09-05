@@ -8,7 +8,12 @@ name: nightly-ingestion
 # crawl rather than a failing job.
 on:
   schedule:
-    - cron: "0 9 * * *"     # 09:00 UTC — early morning US, after arXiv's daily feed
+    # 09:17 rather than 09:00. GitHub queues scheduled runs on a shared pool
+    # and drops or badly delays them at popular times; the top of the hour is
+    # the most contended slot there is. An odd minute is the standard way to
+    # avoid it. GitHub still guarantees nothing about schedules, which is why
+    # the run log records whether a run happened at all.
+    - cron: "17 9 * * *"    # 09:17 UTC — early morning US, after arXiv's daily feed
   workflow_dispatch:         # and on demand from the Actions tab
     inputs:
       days:
@@ -42,6 +47,24 @@ jobs:
         with: { node-version: 22, cache: npm }
       - run: npm ci
 
+      # One dated log per run, persisted with the rest of pipeline/ so each
+      # morning's result can be read without opening the Actions tab. Every
+      # stage tees into it; a stage that fails still leaves its output behind.
+      - name: Start run log
+        run: |
+          mkdir -p pipeline/logs
+          echo "RUN_LOG=pipeline/logs/$(date -u +%Y-%m-%d).md" >> "$GITHUB_ENV"
+      - name: Log header
+        run: |
+          {
+            echo "# Ingestion run $(date -u +'%Y-%m-%d %H:%M UTC')"
+            echo
+            echo "- workflow run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+            echo "- window: ${{ inputs.days || '7' }} days · classify limit ${{ inputs.classify_limit || '60' }} · propose limit ${{ inputs.propose_limit || '80' }}"
+            echo "- paid stages: ${{ env.HAS_ANTHROPIC_KEY == 'true' && 'enabled' || 'SKIPPED (no ANTHROPIC_API_KEY)' }}"
+            echo
+          } >> "$RUN_LOG"
+
       # Pipeline state (queue + seen-ledger) lives on its own branch, not main:
       # main's ruleset requires the `test` check, which a direct bot push cannot
       # satisfy, and github-actions[bot] is not offered as a bypass actor. Using
@@ -58,14 +81,22 @@ jobs:
       # Stage 1 — free. Trailing window plus the seen-ledger is self-healing
       # against OpenAlex's arXiv indexing lag.
       - name: Fetch candidates (OpenAlex)
-        run: node scripts/fetch-openalex.mjs --days "${{ inputs.days || '7' }}"
+        run: |
+          echo '## Stage 1 — fetch candidates (OpenAlex)' >> "$RUN_LOG"
+          echo '```' >> "$RUN_LOG"
+          node scripts/fetch-openalex.mjs --days "${{ inputs.days || '7' }}" 2>&1 | tee -a "$RUN_LOG"
+          echo '```' >> "$RUN_LOG"
 
       # Stage 2 — judges direction and contradiction for newly matched papers.
       - name: Classify direction
         if: env.HAS_ANTHROPIC_KEY == 'true'
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-        run: node scripts/classify-candidates.mjs --limit "${{ inputs.classify_limit || '60' }}"
+        run: |
+          echo '## Stage 2 — classify direction' >> "$RUN_LOG"
+          echo '```' >> "$RUN_LOG"
+          node scripts/classify-candidates.mjs --limit "${{ inputs.classify_limit || '60' }}" 2>&1 | tee -a "$RUN_LOG"
+          echo '```' >> "$RUN_LOG"
 
       # Stage 2b — mines the unmatched pile for capabilities not yet tracked.
       - name: Propose new capabilities
@@ -73,8 +104,27 @@ jobs:
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: |
-          node scripts/propose-capabilities.mjs --limit "${{ inputs.propose_limit || '80' }}"
-          node scripts/propose-capabilities.mjs --consolidate
+          echo '## Stage 2b — propose capabilities' >> "$RUN_LOG"
+          echo '```' >> "$RUN_LOG"
+          node scripts/propose-capabilities.mjs --limit "${{ inputs.propose_limit || '80' }}" 2>&1 | tee -a "$RUN_LOG"
+          node scripts/propose-capabilities.mjs --consolidate 2>&1 | tee -a "$RUN_LOG"
+          echo '```' >> "$RUN_LOG"
+
+      # Stage 3 — write a readable digest for any paper source that lacks one.
+      # Usually zero work: sources are created by hand when a claim is filed,
+      # not by this job. Runs from full text where arXiv renders it, and paces
+      # itself deliberately — nothing is waiting on this at 09:00 UTC, and the
+      # slow path avoids the retry storms that made an impatient pass give up.
+      - name: Write source briefs
+        if: env.HAS_ANTHROPIC_KEY == 'true'
+        continue-on-error: true
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          echo '## Stage 3 — source briefs' >> "$RUN_LOG"
+          echo '```' >> "$RUN_LOG"
+          node scripts/summarize-sources.mjs --limit 15 --delay 10000 2>&1 | tee -a "$RUN_LOG"
+          echo '```' >> "$RUN_LOG"
 
       # The catalog itself is never written by this job — only the queue and
       # the ledger. Validation guards against a malformed write reaching main.
@@ -84,13 +134,32 @@ jobs:
       # Vercel's GitHub integration never linked for this repo, so a push does
       # not trigger a build. Deploy explicitly with the CLI instead, which
       # uploads the directory and needs no git connection.
+      #
+      # The CLI is a pinned devDependency, not `npx --yes vercel@latest`. That
+      # matters twice: `@latest` silently changes the deploy tool under us
+      # between runs, and fetching-and-executing a package at deploy time is a
+      # supply-chain step in the one job that holds the production token. Same
+      # `npm run deploy` runs locally, so there is one deploy command, not two.
       - name: Deploy to Vercel
         if: env.HAS_VERCEL_TOKEN == 'true'
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
-        run: npx --yes vercel@latest --prod --yes --token "$VERCEL_TOKEN"
+        run: npm run deploy -- --token "$VERCEL_TOKEN"
+
+      - name: Close run log
+        if: always()
+        run: |
+          {
+            echo
+            echo "## Outcome"
+            echo
+            echo "- job status: ${{ job.status }}"
+            echo "- queue files: $(ls pipeline/queue 2>/dev/null | wc -l | tr -d ' ')"
+            echo "- candidates: $(grep -ch '^  - id:' pipeline/queue/*.yaml 2>/dev/null | paste -sd+ - | bc 2>/dev/null || echo '?')"
+            echo "- finished: $(date -u +'%Y-%m-%d %H:%M UTC')"
+          } >> "$RUN_LOG"
 
       - name: Persist pipeline state
         run: |

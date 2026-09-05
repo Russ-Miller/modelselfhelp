@@ -1,0 +1,35 @@
+id: generated-checklists-make-instruction-requirements-individually-checkable
+capability: procedure-following
+technique: checklist-decomposition
+statement: >-
+  Decomposing an instruction into explicit yes/no items and judging against
+  them beats asking for a holistic score, and the same checklist turned on
+  the model's own draft improves the draft. The gain comes from making each
+  requirement separately checkable, not from the model trying harder — so
+  it is largest on instructions carrying several constraints at once.
+tags: [behavior, general]
+kind: mechanism
+backing_strength: single-paper
+observed_on:
+  era: "2024, frontier chat models"
+sources:
+  - source: arxiv-2410-03608
+    stance: supports
+    note: >-
+      Checklist-based judging raised exact agreement with human preference
+      from 46.4% to 52.2% over direct scoring, and self-refinement against
+      generated checklists gained +7.8% absolute on LiveBench reasoning,
+      +6.3% via Best-of-N on WildBench. Human annotators given the same
+      checklists also agreed with each other more.
+contested: false
+status: active
+last_checked_at: 2026-09-04
+notes: >-
+  Closest published isolation of the technique, but not an exact match to
+  how it is used in practice. TICK generates the checklist from the
+  instruction and applies it as an evaluation protocol; the practitioner
+  version has the agent write its own list up front and tick it off before
+  finishing, which is nearer to the STICK self-refinement setting than to
+  the judging result. Scope condition worth keeping in mind before quoting
+  the numbers at a coding agent.
+submitted_by: human:Russ-Miller

@@ -1,18 +1,58 @@
 id: arxiv-2108-09293
 kind: paper
-title: "Asleep at the Keyboard? Assessing the Security of GitHub Copilot's Code Contributions"
+title: Asleep at the Keyboard? Assessing the Security of GitHub Copilot's Code
+  Contributions
 authors:
-  - "Hammond Pearce"
-  - "Baleegh Ahmad"
-  - "Benjamin Tan"
-  - "Brendan Dolan-Gavitt"
-  - "Ramesh Karri"
+  - Hammond Pearce
+  - Baleegh Ahmad
+  - Benjamin Tan
+  - Brendan Dolan-Gavitt
+  - Ramesh Karri
 year: 2021
 arxiv_id: "2108.09293"
 url: https://arxiv.org/abs/2108.09293
-tags: [secure-coding]
+tags:
+  - secure-coding
 ingested_at: 2026-09-02
 citations_total: 952
 citations_recent_12mo: 413
 citations_checked_at: 2026-09-04
 semantic_scholar_id: 6e5eb6167d9766fbb4d14611d15cf95d7b75fb9d
+brief: >-
+  GitHub Copilot produces code containing known security weaknesses in roughly
+  40% of security-relevant completions, and the security of its output shifts
+  with parts of the prompt that have nothing to do with the task.
+
+
+  The study built 89 hand-written scenarios in Python, C, and Verilog, each an
+  incomplete snippet where a plausible completion could instantiate a MITRE
+  2021 CWE Top 25 weakness, then requested up to 25 suggestions per scenario
+  and scanned the assembled programs with CodeQL plus manual inspection. 7 of
+  the top 25 CWEs were excluded as unmeasurable in this setup.
+
+
+  Across 1,689 programs, approximately 40% were vulnerable. In the
+  diversity-of-weakness axis, 54 scenarios over 18 CWEs gave 1084 valid
+  programs, 477 (44.00%) vulnerable, with 24 (44.44%) of scenarios having a
+  vulnerable top-scoring suggestion. C fared worse than Python: 50.29% of 513
+  C programs vulnerable vs 38.35% of 571 Python. CWE-79 had 0 vulnerable top
+  suggestions and 19% vulnerable options; CWE-22 had all top suggestions
+  vulnerable and 60% overall. In the prompt-variation axis on SQL injection,
+  17 mutations of 1 control produced 407 programs, 152 (37.35%) vulnerable;
+  adding a non-vulnerable SQL function above the task yielded 0 vulnerable
+  options, adding a vulnerable one yielded 17 of 18.
+
+
+  The prompt axis is a clean controlled mutation of a single scenario, so
+  causation there is attributable, but scenarios are author-designed rather
+  than sampled from real work, only 1 model behind a closed API was tested,
+  functional correctness was not scored, and completions were marked
+  non-vulnerable when ambiguous, which biases the rate downward. Weaknesses
+  requiring reasoning beyond a single file were out of scope.
+
+
+  Treat completion-model output as unreviewed code, and treat surrounding file
+  context as a security-relevant input.
+brief_generated_at: 2026-09-05
+brief_model: claude-opus-5
+brief_source: full-text

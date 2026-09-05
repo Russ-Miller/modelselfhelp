@@ -1,17 +1,53 @@
 id: arxiv-2311-07911
 kind: paper
-title: "Instruction-Following Evaluation for Large Language Models"
+title: Instruction-Following Evaluation for Large Language Models
 authors:
-  - "Jeffrey Zhou"
-  - "Tianjian Lu"
-  - "Swaroop Mishra"
-  - "et al."
+  - Jeffrey Zhou
+  - Tianjian Lu
+  - Swaroop Mishra
+  - et al.
 year: 2023
 arxiv_id: "2311.07911"
 url: https://arxiv.org/abs/2311.07911
-tags: [instruction-following, benchmark]
+tags:
+  - instruction-following
+  - benchmark
 code_url: https://github.com/google-research/google-research/tree/master/instruction_following_eval
 ingested_at: 2026-09-02
 citations_total: 1081
 citations_recent_12mo: 625
 citations_checked_at: 2026-09-04
+brief: >-
+  Instruction following can be scored without a judge model or human
+  annotators if you restrict yourself to instructions a short program can
+  check, and models that seem fluent still miss many of them. IFEval defines
+  25 verifiable instruction types, such as "write in more than 400 words",
+  "wrap your entire response in JSON", "do not use any commas", and "end with
+  this exact phrase", and combines 1 to 3 of them into base prompts.
+
+
+  The set is 541 prompts, built by appending randomly chosen instructions to
+  base prompts, filtering illogical combinations with few-shot prompting,
+  rephrasing for diversity, then hand-editing each one. Scoring is 4 numbers:
+  prompt-level and instruction-level, each under a strict string check and a
+  loose check that strips markdown bold, the first line, and the last line, in
+  8 transformation combinations.
+
+
+  GPT-4 reaches 76.89% prompt-level strict and 83.57% instruction-level
+  strict, 79.30% and 85.37% loose. PaLM 2 S reaches 43.07% and 55.76% strict,
+  46.95% and 59.11% loose.
+
+
+  This is a benchmark construction paper, not a controlled study. 2 models,
+  scraped at different dates through APIs, with sizes the authors say are not
+  comparable. The loose metric admits false positives, and nothing outside
+  format-and-count constraints is covered: no tone, no reasoning quality, no
+  multi-modal instructions.
+
+
+  Use it as a cheap, deterministic constraint-compliance check, not as a
+  measure of instruction following in general.
+brief_generated_at: 2026-09-05
+brief_model: claude-opus-5
+brief_source: full-text

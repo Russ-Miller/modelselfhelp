@@ -1,0 +1,30 @@
+id: program-aided-computation-moves-errors-to-translation
+capability: arithmetic
+technique: program-aided-computation
+statement: >-
+  Offloading the calculation to generated code removes the arithmetic as a
+  source of error but does not remove error — what remains is the
+  translation from problem to program, which is now the only thing the
+  model is doing. Verification has to move there with it.
+tags: [reasoning, math]
+kind: mechanism
+backing_strength: mechanism-reasoning
+sources:
+  - source: arxiv-2211-10435
+    stance: supports
+    note: >-
+      The paper frames its own design this way: "decomposing the natural
+      language problem into runnable steps remains the only learning task
+      for the LLM, while solving is delegated to the interpreter." A
+      correct program run correctly still answers the wrong question if
+      the decomposition was wrong.
+contested: false
+status: active
+last_checked_at: 2026-09-04
+notes: >-
+  Marked mechanism-reasoning rather than single-paper deliberately. The
+  relocation follows from the decomposition the paper states; what I do
+  not have is a source isolating how large the residual translation-error
+  rate is, or whether it grows with problem complexity. Worth revisiting
+  if a paper measures that directly.
+submitted_by: human:Russ-Miller

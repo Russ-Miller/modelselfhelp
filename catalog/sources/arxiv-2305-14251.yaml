@@ -1,18 +1,57 @@
 id: arxiv-2305-14251
 kind: paper
-title: "FActScore: Fine-grained Atomic Evaluation of Factual Precision in Long Form Text Generation"
+title: "FActScore: Fine-grained Atomic Evaluation of Factual Precision in Long
+  Form Text Generation"
 authors:
-  - "Sewon Min"
-  - "Kalpesh Krishna"
-  - "Xinxi Lyu"
-  - "et al."
+  - Sewon Min
+  - Kalpesh Krishna
+  - Xinxi Lyu
+  - et al.
 year: 2023
 arxiv_id: "2305.14251"
 url: https://arxiv.org/abs/2305.14251
-tags: [factuality, evaluation]
+tags:
+  - factuality
+  - evaluation
 code_url: https://github.com/shmsw25/FActScore
 ingested_at: 2026-09-02
 citations_total: 1643
 citations_recent_12mo: 697
 citations_checked_at: 2026-09-04
 semantic_scholar_id: bd5deadc58ee45b5e004378ba1d54a96bc947b4a
+brief: >-
+  Long-form generations from commercial LMs are a mix of supported and
+  unsupported claims, so binary factuality judgments hide most of the signal:
+  scoring at the level of atomic facts puts ChatGPT at 58% supported, and
+  search augmentation does not fix it. FActScore decomposes a generation into
+  short single-fact sentences and measures the fraction supported by a
+  knowledge source, here English Wikipedia, on the task of writing biographies
+  of people.
+
+
+  Human annotators labeled generations for 183 sampled Wikidata people
+  entities from InstructGPT, ChatGPT, and PerplexityAI, at roughly $4 per
+  generation and 26.3–40.8 atomic facts per response.
+
+
+  FActScores were 42.5, 58.3 and 71.5 respectively. Precision falls sharply
+  with entity rarity (80%→16% for ChatGPT; relative drops of 50% at atomic
+  level for retrieval-augmented PerplexityAI) and falls for facts later in the
+  generation. PerplexityAI citations barely track correctness: 36.0% of
+  supported and 37.6% of unsupported sentences carry citations.
+
+
+  An automated estimator using retrieval plus an LM eval reaches error rates
+  under 2% against the human scores, with ablations over 4 prompting variants,
+  2 evaluator LMs, and trivial baselines; the best variant depends on the
+  subject model, and the estimator is not accurate on individual judgments.
+  Applied to 6,500 generations from 13 subjects, all LMs trail human-written
+  bios; Alpaca 65B > 13B > 7B.
+
+
+  Scope is 1 task and 1 knowledge source, and recall is not measured, so
+  abstaining models are rewarded. Report FActScore alongside abstention rate
+  and fact count.
+brief_generated_at: 2026-09-05
+brief_model: claude-opus-5
+brief_source: full-text

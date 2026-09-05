@@ -1,29 +1,63 @@
 id: arxiv-2403-07974
 kind: paper
-title: "LiveCodeBench: Holistic and Contamination Free Evaluation of Large Language Models for Code"
+title: "LiveCodeBench: Holistic and Contamination Free Evaluation of Large
+  Language Models for Code"
 authors:
-  - "Naman Jain"
-  - "King Han"
-  - "Alex Gu"
-  - "Wen-Ding Li"
-  - "Fanjia Yan"
-  - "Tianjun Zhang"
-  - "Sida Wang"
-  - "Armando Solar-Lezama"
-  - "Koushik Sen"
-  - "Ion Stoica"
+  - Naman Jain
+  - King Han
+  - Alex Gu
+  - Wen-Ding Li
+  - Fanjia Yan
+  - Tianjun Zhang
+  - Sida Wang
+  - Armando Solar-Lezama
+  - Koushik Sen
+  - Ion Stoica
 year: 2024
 arxiv_id: "2403.07974"
 url: https://arxiv.org/abs/2403.07974
-summary: >-
-  Continuously collects newly-published coding problems to stay
-  contamination-free, evaluating 52 models; static fixed-problem
-  benchmarks like HumanEval saturate and leak into training data over
-  time, so an honest current read needs a benchmark that keeps adding
-  problems.
-tags: [code-generation, reasoning]
+summary: Continuously collects newly-published coding problems to stay
+  contamination-free, evaluating 52 models; static fixed-problem benchmarks
+  like HumanEval saturate and leak into training data over time, so an honest
+  current read needs a benchmark that keeps adding problems.
+tags:
+  - code-generation
+  - reasoning
 ingested_at: 2026-09-04
 citations_total: 2073
 citations_recent_12mo: 1000
 citations_checked_at: 2026-09-04
 semantic_scholar_id: afe0998d191f3ea8490c7df100a3ffc5dcc62c5e
+brief: >-
+  Strong HumanEval scores from fine-tuned open code models do not transfer to
+  fresh competition problems, and several models show sharp performance drops
+  exactly at their training cutoff dates. LiveCodeBench collects 511 problems
+  released May 2023-May 2024 from LeetCode, AtCoder and CodeForces, each
+  tagged with a release date, and scores 18 base and 34 instruction-tuned
+  models across code generation, self-repair, code execution, and test output
+  prediction using Pass@1 over 10 samples.
+
+
+  DS-Base-33B falls from Pass@1 ~60 on May LeetCode problems to ~0 on
+  September ones; GPT-4-O drops after its November cutoff; Codestral goes from
+  36.5 to 28.3 after Feb'24. HumanEval+ and LCB-Easy correlate only 0.72:
+  DS-Ins-1.3B gets 59.8% on HumanEval+ but 26.3% on LCB-Easy. DS-Ins-33B
+  trails GPT-4-Turbo by 4.3 points on HumanEval+ but 16.2 points (69%) on LCB
+  generation, and by 96% and 134% on test output prediction and code
+  execution. Scenario correlations exceed 0.88, so ranking is largely stable
+  across tasks.
+
+
+  The contamination claim is inferred from time-segmented performance curves,
+  not from inspecting training data; there is no controlled ablation
+  separating contamination from problem-difficulty drift across months.
+  Post-cutoff evaluation uses 349 problems, with 1-1.5% estimated variation
+  from set sampling; scope is Python and competition-style problems only, with
+  untuned prompts.
+
+
+  Treat HumanEval-topping open fine-tunes as unproven until checked on
+  post-cutoff problems.
+brief_generated_at: 2026-09-05
+brief_model: claude-opus-5
+brief_source: full-text

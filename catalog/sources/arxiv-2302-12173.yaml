@@ -1,16 +1,54 @@
 id: arxiv-2302-12173
 kind: paper
-title: "Not what you've signed up for: Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection"
+title: "Not what you've signed up for: Compromising Real-World LLM-Integrated
+  Applications with Indirect Prompt Injection"
 authors:
-  - "Kai Greshake"
-  - "Sahar Abdelnabi"
-  - "Shailesh Mishra"
-  - "et al."
+  - Kai Greshake
+  - Sahar Abdelnabi
+  - Shailesh Mishra
+  - et al.
 year: 2023
 arxiv_id: "2302.12173"
 url: https://arxiv.org/abs/2302.12173
-tags: [prompt-injection]
+tags:
+  - prompt-injection
 ingested_at: 2026-09-02
 citations_total: 1870
 citations_recent_12mo: 1000
 citations_checked_at: 2026-09-04
+brief: >-
+  Retrieval turns untrusted text into executable instructions: prompts planted
+  in web pages, emails, or imported code can take over an LLM-integrated
+  application without the attacker ever touching the user interface. The paper
+  names this indirect prompt injection and builds a security taxonomy for it
+  (information gathering, fraud, intrusion, malware, manipulated content,
+  availability).
+
+
+  The attacks are demonstrated on Bing Chat (GPT-4-backed, black-box, via
+  prompts hidden in local HTML comments read by the Edge sidebar), GitHub
+  Copilot (Codex), and synthetic LangChain/ReAct agents built on
+  text-davinci-003 and gpt-4 with mock search, URL-fetch, email, address book,
+  and key-value memory tools, run at temperature 0.
+
+
+  Results are qualitative demonstrations, not measured success rates.
+  Injections persuaded a simulated journalist to disclose a name and follow a
+  disguised markdown link, produced phishing and malware lures, spread
+  themselves via an email agent (a prompt worm), re-poisoned a reset agent
+  from stored memory, blocked a named news source, denied a factual claim, and
+  caused timeouts or empty answers. Base64-encoded and multi-stage payloads
+  also worked.
+
+
+  Evidence is existence proofs with no attack-success statistics, no baseline,
+  no defense evaluation, and no ablation of which prompt elements mattered.
+  Copilot injection was "very sensitive to context" and weaker inside larger
+  applications. Bing Chat behavior is unstable and undocumented, so results
+  may not replicate.
+
+
+  Treat any retrieved content as untrusted code in your threat model.
+brief_generated_at: 2026-09-05
+brief_model: claude-opus-5
+brief_source: full-text

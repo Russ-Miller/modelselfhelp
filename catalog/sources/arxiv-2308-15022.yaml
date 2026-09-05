@@ -1,16 +1,57 @@
 id: arxiv-2308-15022
 kind: paper
-title: "Recursively Summarizing Enables Long-Term Dialogue Memory in Large Language Models"
+title: Recursively Summarizing Enables Long-Term Dialogue Memory in Large
+  Language Models
 authors:
-  - "Qingyue Wang"
-  - "Liang Ding"
-  - "Yanan Cao"
-  - "et al."
+  - Qingyue Wang
+  - Liang Ding
+  - Yanan Cao
+  - et al.
 year: 2023
 arxiv_id: "2308.15022"
 url: https://arxiv.org/abs/2308.15022
-tags: [memory, prompting]
+tags:
+  - memory
+  - prompting
 ingested_at: 2026-09-02
 citations_total: 93
 citations_recent_12mo: 51
 citations_checked_at: 2026-09-04
+brief: >-
+  Recursively updating a running summary at the end of each dialogue session
+  beats storing fixed per-session summaries or retrieving past utterances,
+  even when the whole history fits in the context window. The method,
+  LLM-Rsum, prompts the model to fold the previous memory plus the new session
+  into an updated memory, then answers using only the latest memory.
+
+
+  Tested on sessions 4 and 5 of Multi-Session Chat and the translated Carecall
+  dataset, with gpt-3.5-turbo-0301, Llama2-7B, ChatGLM2-6B, text-davinci-003,
+  longlora-8k, gpt-3.5-turbo-16k and GPT-4o as backbones, against BM25/DPR
+  retrieval, MemoChat and MemoryBank.
+
+
+  On MSC session 5, ChatGPT-Rsum reaches F1 20.48 vs 20.28 for MemoryBank and
+  19.41 for context-only ChatGPT; GPT-4 single-model scoring gives 82.41
+  average vs 80.05 and 75.32. In 1000 pairwise GPT-4 comparisons against
+  MemoryBank it wins 48.2% and loses 11.9%. Adding it to ChatGPT-16k raises
+  consistency from 79.20 to 92.44; to GPT-4o, 82.00 to 93.29. 3-shot prompting
+  lifts session 5 F1 to 21.08.
+
+
+  Ablations isolate the memory: removing it drops F1 to 18.94, and gold memory
+  (20.46) underperforms generated memory. Manual audit of 100 dialogs found
+  under 10% of memory content inaccurate. Automatic gains are fractions of a
+  point; the large margins come from GPT-4 and human judges, and no cost or
+  token-budget baseline is reported.
+
+
+  All inputs were under 4k tokens, so this is not evidence about genuinely
+  overlong contexts, and only 2 dialogue datasets were used.
+
+
+  If you build persona-consistent chatbots, treat memory rewriting as
+  orthogonal to both retrieval and longer windows.
+brief_generated_at: 2026-09-05
+brief_model: claude-opus-5
+brief_source: full-text

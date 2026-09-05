@@ -1,28 +1,62 @@
 id: arxiv-2206-15474
 kind: paper
-title: "Forecasting Future World Events with Neural Networks"
+title: Forecasting Future World Events with Neural Networks
 authors:
-  - "Andy Zou"
-  - "Tristan Xiao"
-  - "Ryan Jia"
-  - "Joe Kwon"
-  - "Mantas Mazeika"
-  - "Richard Li"
-  - "Dawn Song"
-  - "Jacob Steinhardt"
-  - "Owain Evans"
-  - "Dan Hendrycks"
+  - Andy Zou
+  - Tristan Xiao
+  - Ryan Jia
+  - Joe Kwon
+  - Mantas Mazeika
+  - Richard Li
+  - Dawn Song
+  - Jacob Steinhardt
+  - Owain Evans
+  - Dan Hendrycks
 year: 2022
 arxiv_id: "2206.15474"
 url: https://arxiv.org/abs/2206.15474
-summary: >-
-  Introduces Autocast, a dataset of real forecasting-tournament questions
-  with an accompanying news corpus. Pre-GPT-4-era language models
-  underperform human experts, with accuracy improving with model scale
-  and access to relevant news context.
-tags: [forecasting, reasoning]
+summary: Introduces Autocast, a dataset of real forecasting-tournament
+  questions with an accompanying news corpus. Pre-GPT-4-era language models
+  underperform human experts, with accuracy improving with model scale and
+  access to relevant news context.
+tags:
+  - forecasting
+  - reasoning
 ingested_at: 2026-09-04
 citations_total: 68
 citations_recent_12mo: 33
 citations_checked_at: 2026-09-04
 semantic_scholar_id: 2a85c44afeeeb336c5eafcd4001ccb033d3d1f1c
+brief: >-
+  Language models forecasting real future events sit far below aggregate human
+  forecasters, and retrieval over dated news is what closes part of the gap,
+  not scale alone. Autocast collects 6,707 questions from Metaculus, Good
+  Judgment Open and CSET Foretell across 44 subcategories, paired with a 200GB
+  date-organized Common Crawl news corpus so models can only see articles
+  published before the forecast date; the train/test split is cut at mid-2021
+  to prevent leakage.
+
+
+  On binary questions the best model reaches 65.4% versus 92.4% for the human
+  crowd and 50% random. Zero-shot UnifiedQA-v2 is near chance (54.9% T/F at
+  2.8B), fine-tuned T5 reaches 60.0-61.3% T/F but stays near chance on
+  multiple choice, and retrieval-augmented FiD Static raises the Average score
+  by 93% over UnifiedQA and 15% over T5, improving with parameter count. FiD
+  Temporal, which trains GPT-2 on daily crowd predictions, scores 37.8 average
+  versus 37.2, so the auxiliary crowd signal neither helps nor hurts.
+
+
+  The comparisons are measured across 3 model sizes each for 4 architectures,
+  isolating retrieval and scale; the human baseline is real contemporaneous
+  crowd forecasts rather than retrospective annotation. Models tested top out
+  at 4.3B, all encoder-decoder or GPT-2 class, with no prompting-based large
+  model and no chain-of-thought. Calibration on numerical quantities is
+  handled by a separate 30,000-question dataset, IntervalQA, where DeBERTa-v3
+  RMS calibration error falls from 19.1 at 22M to 13.5 at 304M.
+
+
+  Treat forecasting accuracy claims for small retrieval-augmented models with
+  caution: the headline gap to humans is large and unclosed.
+brief_generated_at: 2026-09-05
+brief_model: claude-opus-5
+brief_source: full-text

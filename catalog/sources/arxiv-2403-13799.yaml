@@ -1,16 +1,56 @@
 id: arxiv-2403-13799
 kind: paper
-title: "Reverse Training to Nurse the Reversal Curse"
+title: Reverse Training to Nurse the Reversal Curse
 authors:
-  - "Olga Golovneva"
-  - "Zeyuan Allen-Zhu"
-  - "Jason Weston"
-  - "Sainbayar Sukhbaatar"
+  - Olga Golovneva
+  - Zeyuan Allen-Zhu
+  - Jason Weston
+  - Sainbayar Sukhbaatar
 year: 2024
 arxiv_id: "2403.13799"
 url: https://arxiv.org/abs/2403.13799
-tags: [reversal-curse, training]
+tags:
+  - reversal-curse
+  - training
 ingested_at: 2026-09-02
 citations_total: 60
 citations_recent_12mo: 15
 citations_checked_at: 2026-09-04
+brief: >-
+  Training a language model on both the original text and a chunk-reversed
+  copy of it removes much of the reversal curse, and the unit of reversal has
+  to match the size of the target concept. Reversing tokens or words is not
+  enough; entity names and multi-word descriptions must stay in left-to-right
+  order inside chunks.
+
+
+  Reverse training doubles the token count by adding REVERSE(x) for each
+  sample, with 4 reversal types: token, word, entity-preserving, and random
+  segment (chunks of 1-k tokens joined by [REV]). Tested on a symbolic a→b
+  task, the bioS/bioR synthetic biography datasets, real-world celebrity
+  parent questions with 1.4B Llama-2 models pre-trained on 2T tokens, and
+  fictitious-fact finetuning at 1.4B and 7B.
+
+
+  On the symbolic task standard training scores 0 at all entity lengths;
+  entity-preserving reversal reaches 100.0 for 2-, 3- and 5-word entities,
+  while word reversal falls from 95.8 to 2.0 as entities lengthen. On bioS
+  full-name recall, standard and token/word reversal give 0.0, entity gives
+  99.0, random k=25 gives 99.8. Fictitious NameToDescription reverse goes from
+  0.0 with standard finetuning to 99.0 at 7B with random segment reversal;
+  DescriptionToName reverse reaches 70.0 only with random segment reversal.
+
+
+  Both a data-matched (1T token) and compute-matched (2T token) baseline were
+  run, which is the key control. On 9 standard benchmarks random reversal
+  averages 48.8 against 47.5 data-matched and 49.4 compute-matched, so the
+  gain is only in the data-bound regime.
+
+
+  The celebrity numbers are low throughout (best@1 of 3.6 for the best reverse
+  method on parent→celebrity), name-from-birthdate recall stays near 0, and
+  nothing above 7B was pre-trained. If you are data-bound rather than
+  compute-bound, random segment reversal is close to free.
+brief_generated_at: 2026-09-05
+brief_model: claude-opus-5
+brief_source: full-text

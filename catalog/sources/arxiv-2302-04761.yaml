@@ -2,16 +2,49 @@ id: arxiv-2302-04761
 kind: paper
 title: "Toolformer: Language Models Can Teach Themselves to Use Tools"
 authors:
-  - "Timo Schick"
-  - "Jane Dwivedi-Yu"
-  - "Roberto Dess\u00ec"
-  - "et al."
+  - Timo Schick
+  - Jane Dwivedi-Yu
+  - Roberto Dessì
+  - et al.
 year: 2023
 arxiv_id: "2302.04761"
 url: https://arxiv.org/abs/2302.04761
-tags: [tool-use, training]
+tags:
+  - tool-use
+  - training
 ingested_at: 2026-09-02
 citations_total: 5422
 citations_recent_12mo: 1000
 citations_checked_at: 2026-09-04
 semantic_scholar_id: 53d128ea815bcc0526856eb5a9c42cc977cb36a7
+brief: >-
+  A language model can annotate its own pretraining corpus with API calls and
+  keep only those that reduce loss on the following tokens, and that alone is
+  enough to teach it when to call a tool. Toolformer applies this to GPT-J
+  (6.7B) on a CCNet subset, with 5 tools: a QA system (Atlas), BM25 Wikipedia
+  search, a calculator, a calendar, and NLLB translation. Evaluation is
+  zero-shot, no in-context examples.
+
+
+  On LAMA subsets it beats the best same-size baseline by 11.7, 5.2 and 18.6
+  points and passes GPT-3 (175B); on math it reaches 40.4 / 29.4 / 44.0 on
+  ASDiv / SVAMP / MAWPS against GPT-3's 14.0 / 10.0 / 19.8, calling the
+  calculator on 97.9% of examples. On Dateset it gets 27.3 vs 3.9 for GPT-J.
+
+
+  The design isolates the effect reasonably: baselines include GPT-J finetuned
+  on the same text without API calls, and Toolformer with API calls disabled
+  at decoding. Perplexity is unchanged (10.3 WikiText, 10.5 CCNet) with calls
+  off.
+
+
+  Boundaries: it lags GPT-3 on WebQS/NQ/TriviaQA, does not consistently beat
+  GPT-J on multilingual MLQA, ignores the calendar on TempLAMA (0.2% use),
+  cannot chain or refine calls, and the ability only emerges around 775M
+  parameters. 1 model family, 1 corpus.
+
+
+  Useful if you are deciding whether tool use needs human demonstrations.
+brief_generated_at: 2026-09-05
+brief_model: claude-opus-5
+brief_source: full-text

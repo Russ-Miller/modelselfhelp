@@ -8,5 +8,6 @@ aliases: ["directional recall", "asymmetric knowledge"]
 techniques: [reverse-training]
 related: [hallucination]
 match_terms: ["reversal curse", "directional recall"]
+modality: [text]
 status: active
 submitted_by: human:Russ-Miller

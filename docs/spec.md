@@ -155,6 +155,9 @@ not to render a verdict.
 | summary | string | one sentence — what this topic is about |
 | description | string | a paragraph of context; what's interesting about this area |
 | tags | slug[] | soft, freely re-assignable labels — see §7. Not a single required parent group. |
+| modality | enum[]? | `text` / `image` / `audio` / `video` / `action`. Only where the capability is genuinely modality-bound; omit when it cuts across modalities. |
+| match_terms | string[]? | phrases the ingestion keyword matcher looks for — see §6 |
+| discriminator | string? | in-scope / out-of-scope boundary, written for the stage-2 classifier and for me |
 | parent | slug? | optional parent capability, for variants |
 | aliases | string[]? | other names used in the literature |
 | techniques | slug[]? | techniques relevant to this capability |
@@ -231,11 +234,48 @@ version+date+context triple a claim must supply the way the old
 score-bearing Claim did.
 
 ### Technique  (`catalog/techniques/<id>.yaml`)
-Mostly unchanged: `id`, `label`, `summary`, `description`, `addresses`
-(capability slugs), `kind` (`prompting`/`retrieval`/`tooling`/`training`/
-`decoding`/`architecture`/`process`), `sources` (source slugs — renamed
-from `papers`), `repos` (`{url, note, verified_on?}`), `contexts`,
-`caveats`, `status`, `submitted_by`.
+`id`, `label`, `summary`, `description`, `addresses` (capability slugs),
+`kind` (`prompting`/`retrieval`/`tooling`/`training`/`decoding`/
+`architecture`/`process`), `sources` (source slugs — renamed from
+`papers`), `repos` (`{url, note, verified_on?}`), `contexts`, `requires`,
+`evidence_search?`, `status`, `submitted_by`.
+
+A Technique describes *what it is*, never whether it works — that is a
+Claim carrying `technique`. Two fields exist to keep that boundary from
+eroding:
+
+- **`requires`** is prerequisites and applicability ("needs fine-tuning
+  access", "needs a sandboxed interpreter"). It replaced `caveats`, which
+  had been mixing prerequisites with unsourced efficacy assertions.
+- **`evidence_search`** (`{searched_on, note, nearest_miss?}`) records
+  having *looked* for efficacy evidence and come up empty. Each
+  `nearest_miss` is `{source? | title? | url?, why_it_does_not_fit}`.
+  This is what makes an absence usable: "searched, still open, and here
+  is the nearest paper and why it isn't support" is a research brief,
+  where a technique with no claims and no search is only an unchecked box
+  in *this* catalog and says nothing about the literature. The two states
+  must never be displayed as the same thing — see §7.
+
+`status` is `active`/`superseded`: record lifecycle, not a verdict.
+
+### Source briefs
+A paper Source can carry a `brief`: a 120-200 word digest in the house style
+(`docs/prompts/paper-summary.md`), written from the abstract by
+`scripts/summarize-sources.mjs` and shown above the fold on the source
+page. Abstracts are written to be citable; briefs are written to be
+skimmed, which is the whole reason they exist.
+
+`summary` and `brief` are different objects and both stay. `summary` is a
+hand-written factual gloss. `brief` is generated, and says so on the page.
+
+Because the style runs on dense figures and an abstract often has none,
+generation carries an anti-fabrication guard: the model must list the
+figures it used copied verbatim, and every number in the output is then
+checked against the abstract independently of what the model claimed.
+Unmatched numbers land in `brief_unverified_figures` and render as a
+warning rather than sitting there looking authoritative. The check is the
+guard that matters, because it does not rely on the model having obeyed
+the instruction.
 
 ### Contribution provenance (§8)
 Every record still carries `submitted_by`, format `human:<handle>` or
@@ -312,6 +352,76 @@ capability or claim must belong to. Expect to re-carve this at least
 twice as real content accumulates; because claims (and capabilities) are
 the primary objects and tags are just labels on them, re-carving is a
 re-tagging exercise, not a migration.
+
+### Open questions (`/open-questions`)
+A derived view, not stored state: techniques in the catalog that no claim
+measures. It exists because the gap *is* content — a technique in wide use
+with nothing behind it is the most actionable thing here — but it is only
+useful if it distinguishes three states that look identical in a bare
+count:
+
+1. **Searched, still open.** `evidence_search` is present. Someone looked,
+   found nothing that isolates the technique, and wrote down what they
+   looked for and which near-miss paper failed to support it and why. This
+   is the section that is genuinely about the literature.
+2. **Not yet searched.** No claims, no search. Evidence about *this
+   catalog* only. Advertising these as unstudied would be the same
+   unfalsifiable move as the old `status: accepted` — an assertion nobody
+   can check — just inverted.
+3. **Argued, not measured.** Every efficacy claim rests on
+   `mechanism-reasoning`: believed for a structural reason, never
+   quantified. A weaker opening than silence, and the easiest to mistake
+   for settled.
+
+The ordering is deliberate and so is the labelling. Collapsing 1 and 2
+into "no research exists" would manufacture research opportunities out of
+gaps in my own reading, which is precisely the failure this project is
+supposed to make visible.
+
+The page also runs the question the other way. The three states above ask
+whether a given *technique* works; a fourth section asks whether anything
+does — capabilities carrying claims that establish a weakness, where no
+technique addressing them has an efficacy claim anybody measured. The
+helper is `unsolvedCapabilities()`. Two vocabulary rules hold here: these
+are *weaknesses* looking for *techniques*, not problems looking for
+mitigations. "Mitigation" imports risk-management framing the project
+does not want — the work is finding what improves a capability, not
+containing a hazard. And "weakness" is a position on a capability, never
+an entity of its own; the axis stays neutral, which is the whole reason
+Weakness was renamed to Capability in the first place (§4). Split
+again by strength: `no-technique` (nothing is even proposed) versus
+`none-measured` (something is written down, nobody checked it). The
+second is a citation away from closing; the first would be new knowledge.
+
+### List filters, and /open-questions as a lens rather than a place
+The capability, claim and technique lists carry a segmented filter bar
+(All first, then one button per cut, each showing its count). Rows are
+server-rendered with `data-tags`, the bar flips `data-filter` on a
+wrapper, and rules in `globals.css` hide what does not match — so the
+lists stay fully static and no second copy of the data ships for the
+filter to work over.
+
+The cuts are deliberately the *same* cuts /open-questions shows, computed
+by the same helpers (`capabilityTags`, `techniqueTags`, `claimTags`, all
+resting on `openQuestions()` and `unsolvedCapabilities()`). A count on
+a filter button and the count on the section of that name cannot drift,
+because there is one predicate behind both. Capabilities filter to
+contested / no-technique / none-measured; techniques to searched /
+unsearched / argued; claims to contested / argued.
+
+The active filter is mirrored into the query string, which is what makes
+/open-questions a lens rather than a separate place: each section links
+to the same set seen among its peers on the main tab. That matters for
+judgment — "seven capabilities have no measured technique" reads very
+differently next to the nine that do.
+
+### Evidence activity on a claim
+A claim's status row shows aggregate citation activity across the sources
+it rests on, using the *liveliest* source rather than a total — summing
+citation counts across papers would produce a figure nobody reported.
+Sources whose citations have not been fetched are excluded and counted
+separately, and a claim with no checked sources says "not checked yet"
+rather than rendering blank, since a blank reads as "no activity".
 
 ## 8. Site (progressive disclosure)
 

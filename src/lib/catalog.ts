@@ -41,6 +41,12 @@ export interface Source {
   ingested_at: string;
   citations_total?: number; citations_recent_12mo?: number; citations_checked_at?: string;
   semantic_scholar_id?: string;
+  /** Reader-facing digest in the house style, generated from the abstract by
+   *  scripts/summarize-sources.mjs. `summary` stays a hand-written gloss. */
+  brief?: string; brief_generated_at?: string; brief_model?: string;
+  /** Figures in `brief` that are not in the abstract it came from. Non-empty
+   *  means the digest is suspect and must be read before it is trusted. */
+  brief_unverified_figures?: string[];
 }
 export interface Claim {
   id: string; capability: string; statement: string; tags?: string[];
@@ -52,12 +58,18 @@ export interface Claim {
   last_checked_at: string; last_new_evidence_at?: string; notes?: string; submitted_by: string;
 }
 export interface Repo { url: string; note: string; verified_on?: string }
+export interface NearestMiss { source?: string; title?: string; url?: string; why_it_does_not_fit: string }
+/** A record of having looked for efficacy evidence and come up empty. Absent
+ *  means nobody has looked -- a different state from a documented dead end,
+ *  and the whole point of the distinction. */
+export interface EvidenceSearch { searched_on: string; note: string; nearest_miss?: NearestMiss[] }
 export interface Technique {
   id: string; label: string; summary: string; description: string; addresses: string[];
   kind: "prompting" | "retrieval" | "tooling" | "training" | "decoding" | "architecture" | "process";
   sources?: string[]; repos?: Repo[]; contexts?: string[];
   /** Prerequisites and applicability -- what you need to use it. Never efficacy. */
   requires?: string;
+  evidence_search?: EvidenceSearch;
   status: TechniqueStatus; submitted_by: string;
 }
 export interface ModelVersion { id: string; label: string; released?: string }
@@ -171,4 +183,115 @@ export function isQuietSource(s: Source): boolean {
   const pubYear = s.year ?? (s.date ? Number(s.date.slice(0, 4)) : undefined);
   const age = pubYear ? new Date().getFullYear() - pubYear : 0;
   return (s.citations_recent_12mo ?? 0) === 0 && age >= 2;
+}
+
+/**
+ * Techniques with no efficacy claim behind them, split by whether anyone has
+ * actually looked. The distinction is the point: an empty cell can mean the
+ * literature is silent or only that this catalog is. A documented search is a
+ * negative result with provenance and reads as a research brief; no search is
+ * just an unchecked box, and the view must not advertise the second as the
+ * first.
+ */
+export type OpenKind = "searched" | "unsearched" | "asserted-not-measured";
+export interface OpenQuestion { technique: Technique; kind: OpenKind; claims: Claim[] }
+
+export function openQuestions(): OpenQuestion[] {
+  const rank: Record<OpenKind, number> = { searched: 0, unsearched: 1, "asserted-not-measured": 2 };
+  const out: OpenQuestion[] = [];
+  for (const technique of loadCatalog().techniques) {
+    if (technique.status !== "active") continue;
+    const claims = claimsAboutTechnique(technique.id);
+    if (claims.length === 0) {
+      out.push({ technique, kind: technique.evidence_search ? "searched" : "unsearched", claims });
+    } else if (!claims.some(isMeasured)) {
+      // Believed for a structural reason, never measured. A weaker opening
+      // than silence, but still an opening.
+      out.push({ technique, kind: "asserted-not-measured", claims });
+    }
+  }
+  return out.sort((a, b) => rank[a.kind] - rank[b.kind] || a.technique.label.localeCompare(b.technique.label));
+}
+
+/** Backing strengths where somebody actually measured the effect, as opposed
+ *  to arguing it from how the technique works. */
+const MEASURED: BackingStrength[] = ["single-paper", "replicated", "own-observation"];
+const isMeasured = (c: Claim) => MEASURED.includes(c.backing_strength);
+
+/**
+ * Aggregate citation activity for the sources a claim rests on. Uses the
+ * liveliest source rather than a total: one paper the field is still citing
+ * means the evidence base is live, and summing across papers would invent a
+ * figure nobody reported. Only counts sources whose citations have been
+ * checked -- unchecked is not the same as quiet.
+ */
+export interface ClaimActivity { checked: Source[]; unchecked: number; maxRecent: number; allQuiet: boolean }
+export function claimActivity(claim: Claim): ClaimActivity | null {
+  const sources = claim.sources.map((s) => getSource(s.source)).filter((s): s is Source => !!s);
+  const checked = sources.filter((s) => s.citations_checked_at);
+  if (checked.length === 0) return null;
+  return {
+    checked: [...checked].sort((a, b) => (b.citations_recent_12mo ?? 0) - (a.citations_recent_12mo ?? 0)),
+    unchecked: sources.length - checked.length,
+    maxRecent: Math.max(...checked.map((s) => s.citations_recent_12mo ?? 0)),
+    allQuiet: checked.every(isQuietSource),
+  };
+}
+
+/**
+ * Capabilities with a documented weakness and nothing known to close it. A
+ * weakness is a position on the capability, not a separate entity -- the axis
+ * stays neutral, which is why this reads off claims rather than a flag.
+ * The counterpart to openQuestions(): that view asks whether a technique
+ * works, this one asks whether anything works at all. Split the same way,
+ * because "no technique catalogued" and "techniques catalogued, none measured"
+ * are different invitations.
+ */
+export type UnsolvedKind = "no-technique" | "none-measured";
+export interface Unsolved { capability: Capability; kind: UnsolvedKind; claims: Claim[]; techniques: Technique[] }
+
+export function unsolvedCapabilities(): Unsolved[] {
+  const out: Unsolved[] = [];
+  for (const capability of loadCatalog().capabilities) {
+    if (capability.status !== "active") continue;
+    const claims = claimsFor(capability.id);
+    if (claims.length === 0) continue; // no documented weakness yet, so nothing to solve
+    const techniques = techniquesFor(capability.id).filter((t) => t.status === "active");
+    if (techniques.some((t) => claimsAboutTechnique(t.id).some(isMeasured))) continue;
+    out.push({
+      capability,
+      kind: techniques.length === 0 ? "no-technique" : "none-measured",
+      claims,
+      techniques,
+    });
+  }
+  return out.sort((a, b) => b.claims.length - a.claims.length || a.capability.label.localeCompare(b.capability.label));
+}
+
+/**
+ * Row tags driving the list filters (src/components/filter-bar.tsx). These
+ * deliberately reuse the same predicates as openQuestions() and
+ * unsolvedCapabilities() rather than recomputing something similar, so a
+ * filter on the Capabilities or Techniques tab shows exactly the set the
+ * /open-questions section of the same name shows.
+ */
+export function capabilityTags(c: Capability): string {
+  const tags: string[] = [];
+  if (claimsFor(c.id).some((x) => x.contested)) tags.push("contested");
+  const u = unsolvedCapabilities().find((x) => x.capability.id === c.id);
+  if (u) tags.push(u.kind);
+  return tags.join(" ");
+}
+
+export function techniqueTags(t: Technique): string {
+  const q = openQuestions().find((x) => x.technique.id === t.id);
+  if (!q) return "";
+  return q.kind === "asserted-not-measured" ? "argued" : q.kind;
+}
+
+export function claimTags(c: Claim): string {
+  const tags: string[] = [];
+  if (c.contested) tags.push("contested");
+  if (c.backing_strength === "mechanism-reasoning") tags.push("argued");
+  return tags.join(" ");
 }

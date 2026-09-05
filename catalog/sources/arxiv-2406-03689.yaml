@@ -1,17 +1,56 @@
 id: arxiv-2406-03689
 kind: paper
-title: "Evaluating the World Model Implicit in a Generative Model"
+title: Evaluating the World Model Implicit in a Generative Model
 authors:
-  - "Keyon Vafa"
-  - "Justin Y. Chen"
-  - "Ashesh Rambachan"
-  - "Jon Kleinberg"
-  - "Sendhil Mullainathan"
+  - Keyon Vafa
+  - Justin Y. Chen
+  - Ashesh Rambachan
+  - Jon Kleinberg
+  - Sendhil Mullainathan
 year: 2024
 arxiv_id: "2406.03689"
 url: https://arxiv.org/abs/2406.03689
-tags: [state-tracking, world-model]
+tags:
+  - state-tracking
+  - world-model
 ingested_at: 2026-09-02
 citations_total: 144
 citations_recent_12mo: 75
 citations_checked_at: 2026-09-04
+brief: >-
+  A model can produce near-perfect next-token predictions and pass linear
+  probes for the current state while its implicit map of the domain is
+  incoherent. The authors formalize the world as a deterministic finite
+  automaton and derive two Myhill-Nerode-based metrics: sequence compression
+  (do 2 prefixes reaching the same state accept the same continuations) and
+  sequence distinction (do prefixes reaching different states get
+  distinguished at the right suffixes).
+
+
+  They train GPT-2-style transformers (89.3M and 1.5B parameters) from scratch
+  on turn-by-turn NYC taxi sequences over a Manhattan graph with 4580 nodes
+  and 9846 edges, using shortest paths, noisy shortest paths, and random
+  walks, and reuse Li et al.'s 2 Othello models plus 8 LLMs on a 3-person
+  seating logic puzzle.
+
+
+  All 3 map transformers hit 1.00 on the next-token test and 0.91-0.99 on the
+  current-state probe, yet compression precision is 0.10, 0.05, and 0.50, and
+  distinction recall 0.20, 0.24, and 1.00. With a 1% random detour,
+  valid-traversal rates fall from 0.99 to 0.69 (shortest paths) and 0.96 to
+  0.52 (noisy), while the random-walk model stays at 0.99. GPT-4 solves 1.00
+  of fully specified logic puzzles with compression precision 0.21.
+
+
+  The effect is measured, with an untrained-transformer floor, a
+  noise-corrupted true-model control matched to the transformer's error rate,
+  and detour robustness tracking the metric ranking. Everything assumes a
+  known DFA; richer or unknown world models are untested, and metrics depend
+  on an acceptance threshold (\u03b5=0.01, with ablations).
+
+
+  Treat next-token validity and probe accuracy as insufficient evidence of a
+  world model.
+brief_generated_at: 2026-09-05
+brief_model: claude-opus-5
+brief_source: full-text
