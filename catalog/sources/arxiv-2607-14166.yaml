@@ -1,22 +1,64 @@
 id: arxiv-2607-14166
 kind: paper
-title: "Stop Means Stop: Measuring and Repairing the Enforcement Gap in Agent-Framework Control Primitives"
+title: "Stop Means Stop: Measuring and Repairing the Enforcement Gap in
+  Agent-Framework Control Primitives"
 authors:
-  - "Sajjad Khan"
+  - Sajjad Khan
 year: 2026
 date: 2026-07-15
 arxiv_id: "2607.14166"
 url: https://arxiv.org/abs/2607.14166
-tags: [agentic, safety, approval-gate]
-summary: >-
-  Approval gates, run cancellation and execution timeouts in six widely
+tags:
+  - agentic
+  - safety
+  - approval-gate
+summary: Approval gates, run cancellation and execution timeouts in six widely
   used agent frameworks imply barrier semantics that none of them deliver.
-  Differential probes isolate a recurring sibling leak — the gate suspends
-  its own branch while a sibling's side effect executes during the pause —
-  in five of six frameworks, plus replay double-execution, cancellation
-  orphans and timeout zombies. Frontier models emit the triggering plan
-  shape at up to 14%; live runs leaked 215 of 1,200. The proposed repair,
-  SOUNDGATE, is an environment-external Rust admission gate enforcing
-  complete mediation, mechanically verified and blocking every measured
-  violation.
+  Differential probes isolate a recurring sibling leak — the gate suspends its
+  own branch while a sibling's side effect executes during the pause — in five
+  of six frameworks, plus replay double-execution, cancellation orphans and
+  timeout zombies. Frontier models emit the triggering plan shape at up to
+  14%; live runs leaked 215 of 1,200. The proposed repair, SOUNDGATE, is an
+  environment-external Rust admission gate enforcing complete mediation,
+  mechanically verified and blocking every measured violation.
 ingested_at: 2026-09-04
+brief: >-
+  Approval gates, cancellation, and timeouts in agent frameworks do not
+  actually block side effects. On 6 widely used open-source frameworks, none
+  upheld the barrier semantics their names and docs imply.
+
+
+  Model-free differential probes isolated a recurring "sibling leak": an
+  approval gate suspends its own branch while a sibling's effect runs during
+  the pause, so rejection is defeated. This appeared in every framework
+  shipping a pre-execution gate (5 of 6, spanning 4 execution models and 2
+  language runtimes), alongside replay double-execution, cancellation orphans,
+  and timeout zombies.
+
+
+  The hazard is reachable by real models: frontier models emit the
+  leak-triggering plan shape at rates up to 14%, and live models on unmodified
+  frameworks leaked in 215 of 1,200 runs, with P(leak | emitted)=1.00. On
+  naturalistic tau-bench episodes models serialize writes, so the everyday gap
+  stays latent; injection induces the leak deterministically, and a
+  13-incident public corpus corroborates the replay and cancellation failures.
+
+
+  The proposed fix, SOUNDGATE, is an external Rust admission gate mediating
+  every side effect. Its core is verified with Verus, TLA+/TLC to 7.5e7
+  states, TLAPS, and Loom, plus differential conformance over 1.2e7 operations
+  with zero divergences; it blocks every measured violation on all 6
+  frameworks, with gated tau-bench episodes completing with zero refusals at
+  ~1 ms per write and ~12k admissions per second.
+
+
+  Evidence is probe-based and mechanical rather than statistical over diverse
+  workloads; complete mediation holds only under the stated contract,
+  discharged for network egress by 2 kernel-enforced routes, and closed-source
+  frameworks were not tested. If you rely on approval gates as safety
+  barriers, treat them as advisory until externally enforced.
+brief_generated_at: 2026-09-05
+brief_model: claude-opus-5
+brief_source: abstract
+brief_unverified_figures:
+  - 6,

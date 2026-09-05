@@ -64,6 +64,14 @@
     "brief_model": {
       "type": "string"
     },
+    "brief_source": {
+      "type": "string",
+      "enum": [
+        "abstract",
+        "full-text"
+      ],
+      "description": "What the brief was written from. Full text is available only for papers arXiv renders as HTML (roughly Dec 2023 onward); everything older falls back to the abstract, and its figures and evidence-quality paragraph are correspondingly thinner."
+    },
     "brief_unverified_figures": {
       "type": "array",
       "items": {
