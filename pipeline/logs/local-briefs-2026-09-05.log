@@ -23,3 +23,162 @@ Node.js v26.7.0
 Processing 64 with claude-opus-5
 
 waiting 900s before touching arXiv
+  arXiv 429, retrying in 15s
+  arXiv 429, retrying in 30s
+  arXiv 429, retrying in 60s
+  arXiv 429, retrying in 120s
+  arXiv 429, retrying in 240s
+  arXiv 429, retrying in 300s
+  chunk 1 failed (arXiv 429 after 6 retries), continuing without it
+  arXiv 429, retrying in 15s
+  arXiv 503, retrying in 30s
+  arXiv 429, retrying in 15s
+  arXiv 429, retrying in 30s
+  arXiv 429, retrying in 60s
+  arXiv 429, retrying in 120s
+  arXiv 429, retrying in 240s
+  arXiv 429, retrying in 300s
+  chunk 3 failed (arXiv 429 after 6 retries), continuing without it
+  arXiv 429, retrying in 15s
+  arXiv 429, retrying in 30s
+  arXiv 429, retrying in 60s
+  arXiv 429, retrying in 120s
+fetched 40 abstract(s) for 64 source(s)
+
+[1/64] arxiv-2005-11401 :: Retrieval-Augmented Generation for Knowledge-Intensi
+      no abstract returned by arXiv, skipped
+[2/64] arxiv-2107-03374 :: Evaluating Large Language Models Trained on Code
+      no abstract returned by arXiv, skipped
+[3/64] arxiv-2108-09293 :: Asleep at the Keyboard? Assessing the Security of Gi
+      no abstract returned by arXiv, skipped
+[4/64] arxiv-2109-07958 :: TruthfulQA: Measuring How Models Mimic Human Falseho
+      no abstract returned by arXiv, skipped
+[5/64] arxiv-2110-14168 :: Training Verifiers to Solve Math Word Problems
+      no abstract returned by arXiv, skipped
+[6/64] arxiv-2201-11903 :: Chain-of-Thought Prompting Elicits Reasoning in Larg
+      no abstract returned by arXiv, skipped
+[7/64] arxiv-2202-07206 :: Impact of Pretraining Term Frequencies on Few-Shot R
+      no abstract returned by arXiv, skipped
+[8/64] arxiv-2206-15474 :: Forecasting Future World Events with Neural Networks
+      no abstract returned by arXiv, skipped
+[9/64] arxiv-2211-03622 :: Do Users Write More Insecure Code with AI Assistants
+      no abstract returned by arXiv, skipped
+[10/64] arxiv-2211-08411 :: Large Language Models Struggle to Learn Long-Tail Kn
+      no abstract returned by arXiv, skipped
+[11/64] arxiv-2211-09527 :: Ignore Previous Prompt: Attack Techniques For Langua
+      no abstract returned by arXiv, skipped
+[12/64] arxiv-2211-10435 :: PAL: Program-aided Language Models
+      no abstract returned by arXiv, skipped
+[13/64] arxiv-2212-08073 :: Constitutional AI: Harmlessness from AI Feedback
+      written from full-text, 10 figure(s), all grounded
+[14/64] arxiv-2302-04761 :: Toolformer: Language Models Can Teach Themselves to 
+      written from full-text, 18 figure(s), all grounded
+[15/64] arxiv-2302-12173 :: Not what you've signed up for: Compromising Real-Wor
+      written from full-text, 0 figure(s), all grounded
+[16/64] arxiv-2303-11366 :: Reflexion: Language Agents with Verbal Reinforcement
+      written from full-text, 24 figure(s), all grounded
+[17/64] arxiv-2303-17651 :: Self-Refine: Iterative Refinement with Self-Feedback
+      written from full-text, 24 figure(s), all grounded
+[18/64] arxiv-2304-03442 :: Generative Agents: Interactive Simulacra of Human Be
+      written from full-text, 11 figure(s), all grounded
+[19/64] arxiv-2305-02363 :: Entity Tracking in Language Models
+      written from full-text, 15 figure(s), all grounded
+[20/64] arxiv-2305-13300 :: Adaptive Chameleon or Stubborn Sloth: Revealing the 
+      written from full-text, 19 figure(s), all grounded
+[21/64] arxiv-2305-14251 :: FActScore: Fine-grained Atomic Evaluation of Factual
+      written from full-text, 15 figure(s), all grounded
+[22/64] arxiv-2305-15334 :: Gorilla: Large Language Model Connected with Massive
+      written from full-text, 16 figure(s), all grounded
+[23/64] arxiv-2305-17926 :: Large Language Models are not Fair Evaluators
+      written from full-text, 23 figure(s), all grounded
+[24/64] arxiv-2305-18654 :: Faith and Fate: Limits of Transformers on Compositio
+      written from full-text, 12 figure(s), all grounded
+[25/64] arxiv-2306-05685 :: Judging LLM-as-a-Judge with MT-Bench and Chatbot Are
+      no abstract returned by arXiv, skipped
+[26/64] arxiv-2307-03172 :: Lost in the Middle: How Language Models Use Long Con
+      no abstract returned by arXiv, skipped
+[27/64] arxiv-2307-13854 :: WebArena: A Realistic Web Environment for Building A
+      no abstract returned by arXiv, skipped
+[28/64] arxiv-2307-16513 :: Deception Abilities Emerged in Large Language Models
+      no abstract returned by arXiv, skipped
+[29/64] arxiv-2307-16789 :: ToolLLM: Facilitating Large Language Models to Maste
+      no abstract returned by arXiv, skipped
+[30/64] arxiv-2308-03688 :: AgentBench: Evaluating LLMs as Agents
+      no abstract returned by arXiv, skipped
+[31/64] arxiv-2308-03958 :: Simple synthetic data reduces sycophancy in large la
+      no abstract returned by arXiv, skipped
+[32/64] arxiv-2308-15022 :: Recursively Summarizing Enables Long-Term Dialogue M
+      no abstract returned by arXiv, skipped
+[33/64] arxiv-2309-04658 :: Exploring Large Language Models for Communication Ga
+      no abstract returned by arXiv, skipped
+[34/64] arxiv-2309-12288 :: The Reversal Curse: LLMs trained on "A is B" fail to
+      no abstract returned by arXiv, skipped
+[35/64] arxiv-2310-01798 :: Large Language Models Cannot Self-Correct Reasoning 
+      no abstract returned by arXiv, skipped
+[36/64] arxiv-2310-05915 :: FireAct: Toward Language Agent Fine-tuning
+      no abstract returned by arXiv, skipped
+[37/64] arxiv-2310-06770 :: SWE-bench: Can Language Models Resolve Real-World Gi
+      written from full-text, 6 UNGROUNDED FIGURE(S): 19000, 1.97%, 1.31%, 0.17%, 0.70%, 5.93%
+[38/64] arxiv-2310-08560 :: MemGPT: Towards LLMs as Operating Systems
+      written from full-text, 15 figure(s), all grounded
+[39/64] arxiv-2310-11511 :: Self-RAG: Learning to Retrieve, Generate, and Critiq
+      written from full-text, 7 figure(s), all grounded
+[40/64] arxiv-2310-13548 :: Towards Understanding Sycophancy in Language Models
+      written from full-text, 19 figure(s), all grounded
+[41/64] arxiv-2311-05232 :: A Survey on Hallucination in Large Language Models: 
+      written from full-text, 0 figure(s), all grounded
+[42/64] arxiv-2311-07911 :: Instruction-Following Evaluation for Large Language 
+      written from full-text, 8 UNGROUNDED FIGURE(S): 76.89%, 83.57%, 43.07%, 55.76%, 79.30%, 85.37%, 46.95%, 59.11%
+[43/64] arxiv-2312-04724 :: Purple Llama CyberSecEval: A Secure Coding Benchmark
+      written from full-text, 15 figure(s), all grounded
+[44/64] arxiv-2402-06363 :: StruQ: Defending Against Prompt Injection with Struc
+      written from full-text, 31 figure(s), all grounded
+[45/64] arxiv-2402-14848 :: Same Task, More Tokens: the Impact of Input Length o
+      written from full-text, 14 figure(s), all grounded
+[46/64] arxiv-2402-14903 :: Tokenization counts: the impact of tokenization on a
+      written from full-text, 19 figure(s), all grounded
+[47/64] arxiv-2402-18563 :: Approaching Human-Level Forecasting with Language Mo
+      written from full-text, 19 figure(s), all grounded
+[48/64] arxiv-2403-07974 :: LiveCodeBench: Holistic and Contamination Free Evalu
+      written from full-text, 19 figure(s), all grounded
+[49/64] arxiv-2403-13799 :: Reverse Training to Nurse the Reversal Curse
+      written from full-text, 20 figure(s), all grounded
+[50/64] arxiv-2403-18802 :: Long-form factuality in large language models
+      written from full-text, 18 figure(s), all grounded
+[51/64] arxiv-2404-06654 :: RULER: What's the Real Context Size of Your Long-Con
+      written from full-text, 5 UNGROUNDED FIGURE(S): 94.4%, 81.2%, 31.7%, 0.0%, 82.3%
+[52/64] arxiv-2404-13208 :: The Instruction Hierarchy: Training LLMs to Prioriti
+      written from full-text, 2 figure(s), all grounded
+[53/64] arxiv-2405-17399 :: Transformers Can Do Arithmetic with the Right Embedd
+      written from full-text, 24 figure(s), all grounded
+[54/64] arxiv-2406-03689 :: Evaluating the World Model Implicit in a Generative 
+      written from full-text, 22 figure(s), all grounded
+[55/64] arxiv-2406-10162 :: Sycophancy to Subterfuge: Investigating Reward-Tampe
+      written from full-text, 17 figure(s), all grounded
+[56/64] arxiv-2406-10279 :: We Have a Package for You! A Comprehensive Analysis 
+      written from full-text, 21 figure(s), all grounded
+[57/64] arxiv-2406-12045 :: τ-bench: A Benchmark for Tool-Agent-User Interaction
+      written from full-text, 1 UNGROUNDED FIGURE(S): 55%
+[58/64] arxiv-2410-03608 :: TICKing All the Boxes: Generated Checklists Improve 
+      written from full-text, 21 figure(s), all grounded
+[59/64] arxiv-2410-09024 :: AgentHarm: A Benchmark for Measuring Harmfulness of 
+      written from full-text, 22 figure(s), all grounded
+[60/64] arxiv-2410-10813 :: LongMemEval: Benchmarking Chat Assistants on Long-Te
+      written from full-text, 21 figure(s), all grounded
+[61/64] arxiv-2412-04984 :: Frontier Models are Capable of In-context Scheming
+      written from full-text, 24 figure(s), all grounded
+[62/64] arxiv-2412-14470 :: Agent-SafetyBench: Evaluating the Safety of LLM Agen
+      written from full-text, 22 figure(s), all grounded
+[63/64] arxiv-2512-22387 :: AI-Generated Code Is Not Reproducible (Yet): An Empi
+      written from full-text, 24 figure(s), all grounded
+[64/64] arxiv-2607-14166 :: Stop Means Stop: Measuring and Repairing the Enforce
+      written from abstract, 13 figure(s), all grounded
+
+tokens: 622716 in (51051 cached) / 28164 out
+cost:   $3.8177 for 64 ≈ $0.0597 each
+flagged: 4 brief(s) contain a figure absent from the abstract -- read those before trusting them
+errors:  24
+28 paper sources without a brief
+Processing 28 with claude-opus-5
+
+waiting 600s before touching arXiv

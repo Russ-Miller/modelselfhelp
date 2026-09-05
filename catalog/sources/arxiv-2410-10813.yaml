@@ -2,18 +2,53 @@ id: arxiv-2410-10813
 kind: paper
 title: "LongMemEval: Benchmarking Chat Assistants on Long-Term Interactive Memory"
 authors:
-  - "Di Wu"
-  - "Hongwei Wang"
-  - "Wenhao Yu"
-  - "Yuwei Zhang"
-  - "Kai-Wei Chang"
-  - "Dong Yu"
+  - Di Wu
+  - Hongwei Wang
+  - Wenhao Yu
+  - Yuwei Zhang
+  - Kai-Wei Chang
+  - Dong Yu
 year: 2024
 arxiv_id: "2410.10813"
 url: https://arxiv.org/abs/2410.10813
-tags: [memory, benchmark]
+tags:
+  - memory
+  - benchmark
 code_url: https://github.com/xiaowu0162/LongMemEval
 ingested_at: 2026-09-02
 citations_total: 588
 citations_recent_12mo: 517
 citations_checked_at: 2026-09-04
+brief: >-
+  Chat assistants with memory components lose most of their accuracy once user
+  information is buried in a long, realistic interaction history, and
+  long-context reading does not rescue them. LongMemEval supplies 500
+  hand-written questions across 7 types covering information extraction,
+  multi-session reasoning, knowledge updates, temporal reasoning, and
+  abstention, embedded in length-configurable task-oriented chat histories:
+  LongMemEval S at ~115k tokens and LongMemEval M at 500 sessions (~1.5M
+  tokens).
+
+
+  GPT-4o reading only the evidence sessions scores 0.870, but 0.606 on the
+  full S history, a 30.3% drop; Llama 3.1 70B Instruct falls from 0.744 to
+  0.334 (55.1%). On a 97-question setting roughly 10x shorter than S, ChatGPT
+  with GPT-4o scored 0.5773 and Coze 0.3299 against 0.9184 for offline reading
+  with the same model.
+
+
+  Design choices were ablated along value, key, query, and reading strategy.
+  Rounds beat whole sessions as the stored unit; expanding keys with extracted
+  user facts added 9.4% recall@k and 5.4% accuracy; time-aware query expansion
+  added 6.8%-11.3% recall on temporal questions, but only with GPT-4o as the
+  expander. Chain-of-Note plus JSON formatting moved reading accuracy by as
+  much as 10 absolute points even under oracle retrieval.
+
+
+  Ablations are matched on token budget, but the commercial-system numbers
+  come from 97 manually driven conversations by 3 annotators, and questions
+  were LLM-seeded then human-rewritten. If you build memory systems, this
+  reframes retrieval quality and reading format as separate failure points.
+brief_generated_at: 2026-09-05
+brief_model: claude-opus-5
+brief_source: full-text

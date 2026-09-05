@@ -1,16 +1,52 @@
 id: arxiv-2305-17926
 kind: paper
-title: "Large Language Models are not Fair Evaluators"
+title: Large Language Models are not Fair Evaluators
 authors:
-  - "Peiyi Wang"
-  - "Lei Li"
-  - "Liang Chen"
-  - "et al."
+  - Peiyi Wang
+  - Lei Li
+  - Liang Chen
+  - et al.
 year: 2023
 arxiv_id: "2305.17926"
 url: https://arxiv.org/abs/2305.17926
-tags: [llm-as-judge, position-bias]
+tags:
+  - llm-as-judge
+  - position-bias
 ingested_at: 2026-09-02
 citations_total: 1242
 citations_recent_12mo: 506
 citations_checked_at: 2026-09-04
+brief: >-
+  Swapping the order of two candidate responses flips which one a GPT-4 or
+  ChatGPT judge prefers, often enough to reverse a model comparison entirely.
+  The prompt already instructs the evaluator to ignore order.
+
+
+  The setup is the Vicuna benchmark: 80 questions in 9 categories, pairwise
+  judgments of Vicuna-13B against ChatGPT and Alpaca-13B, with GPT-4 ("gpt-4")
+  and ChatGPT ("gpt-3.5-turbo-0301") as evaluators. 3 of the authors
+  hand-annotated win/tie/lose on all 80 items as ground truth.
+
+
+  On Vicuna-13B vs ChatGPT, Vicuna's win rate is 51.3% in position 1 and 23.8%
+  in position 2 under GPT-4; under ChatGPT it is 2.5% vs 82.5%. Conflict rates
+  on swap: GPT-4 46.3% and 5.0%, ChatGPT 82.5% and 52.5%. GPT-4 favors the
+  first slot, ChatGPT the second. Agreement with humans: GPT-4 vanilla 52.7%
+  accuracy (kappa 0.24), ChatGPT 44.4% (0.06), against a human average of
+  71.7% (0.54). Generating evidence before scoring, sampling k=3, and
+  averaging across both orders lifts GPT-4 to 62.5% and ChatGPT to 58.7%;
+  adding 20% human review reaches 73.8% and 71.3%.
+
+
+  Evidence is measured, with a matched-budget check: MEC(k=3)+BPC beats
+  MEC(k=6) at equal cost, isolating position rather than sampling as the
+  cause. Bias shrinks when quality gaps are large (score gap >=3), so lopsided
+  comparisons are less affected. 2 evaluator models, 1 benchmark, 80 items,
+  authors as annotators.
+
+
+  If you run LLM-as-judge, average over both orders before trusting any win
+  rate.
+brief_generated_at: 2026-09-05
+brief_model: claude-opus-5
+brief_source: full-text

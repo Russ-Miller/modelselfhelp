@@ -2,17 +2,49 @@ id: arxiv-2310-08560
 kind: paper
 title: "MemGPT: Towards LLMs as Operating Systems"
 authors:
-  - "Charles Packer"
-  - "Sarah Wooders"
-  - "Kevin Lin"
-  - "et al."
+  - Charles Packer
+  - Sarah Wooders
+  - Kevin Lin
+  - et al.
 year: 2023
 arxiv_id: "2310.08560"
 url: https://arxiv.org/abs/2310.08560
-tags: [memory, architecture]
+tags:
+  - memory
+  - architecture
 code_url: https://github.com/letta-ai/letta
 ingested_at: 2026-09-02
 citations_total: 1246
 citations_recent_12mo: 984
 citations_checked_at: 2026-09-04
 semantic_scholar_id: 908dad62c0e43d80e3e3cb3c0402f7c71c70499c
+brief: >-
+  Letting a fixed-context LLM call functions to page its own memory in and out
+  beats feeding it a recursive summary, and the gain depends heavily on how
+  good the base model is at function calling. MemGPT splits the prompt into
+  system instructions, a writable working context, and a FIFO message queue,
+  with evicted content pushed to external recall and archival stores
+  (PostgreSQL plus pgvector) that the model queries itself, chaining calls via
+  a request_heartbeat flag.
+
+
+  On a deep memory retrieval task built from Multi-Session Chat, MemGPT raised
+  accuracy from 32.1% to 92.5% with GPT-4, 35.3% to 93.4% with GPT-4 Turbo,
+  and 38.7% to 66.9% with GPT-3.5 Turbo, with ROUGE-L recall rising from 0.296
+  to 0.814 on GPT-4. Conversation openers scored 0.868 SIM-1 (GPT-4) against
+  0.800 for human-written openers. On a new nested key-value task with 140
+  UUID pairs and 30 orderings, GPT-4 and GPT-4 Turbo hit 0% accuracy by 3
+  nesting levels, while MemGPT with GPT-4 was unaffected.
+
+
+  Baselines are matched on retriever and context budget, and the model sweep
+  isolates function-calling ability as the limiting factor: MemGPT with
+  GPT-3.5 degrades badly, and MemGPT with GPT-4 Turbo underperforms MemGPT
+  with GPT-4 on nested KV. Evaluation uses an LLM judge, document QA covers 50
+  sampled questions, and no open-weight models were tested. Treat
+  self-directed paging as a real substitute for context length, but one
+  bottlenecked by retrieval quality and the agent's willingness to keep
+  paging.
+brief_generated_at: 2026-09-05
+brief_model: claude-opus-5
+brief_source: full-text

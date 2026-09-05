@@ -1,15 +1,58 @@
 id: arxiv-2402-14903
 kind: paper
-title: "Tokenization counts: the impact of tokenization on arithmetic in frontier LLMs"
+title: "Tokenization counts: the impact of tokenization on arithmetic in
+  frontier LLMs"
 authors:
-  - "Aaditya K. Singh"
-  - "DJ Strouse"
+  - Aaditya K. Singh
+  - DJ Strouse
 year: 2024
 arxiv_id: "2402.14903"
 url: https://arxiv.org/abs/2402.14903
-tags: [arithmetic, tokenization]
+tags:
+  - arithmetic
+  - tokenization
 ingested_at: 2026-09-02
 citations_total: 126
 citations_recent_12mo: 44
 citations_checked_at: 2026-09-04
 semantic_scholar_id: 49c45d2a2773c537804c38d69cde67e00fbad6fe
+brief: >-
+  Adding commas to a multi-digit addition problem, which forces GPT tokenizers
+  to chunk digits right-to-left instead of the default left-to-right, raises
+  arithmetic accuracy by up to 20%. The gain comes from tokenization alignment
+  between addends and answer, not from the commas' familiarity or from extra
+  tokens to think with.
+
+
+  The setup is few-shot addition of 7-9 digit addends through the OpenAI Chat
+  Completions API, greedy decoding, 90 problems balanced across addend length
+  pairs, 1-8 shots, on gpt-3.5-turbo-0301 plus 5 held-out checkpoints
+  including gpt-4-0314, gpt-4-0613 and gpt-4-1106-preview.
+
+
+  On GPT-3.5, L2R goes from 68.5% at 1-shot to 75.6% at 8-shot, while R2L goes
+  from 95.6% to 97.8%. The damage is concentrated where the answer has more
+  digits than either addend: L2R drops to 8.25%, and of the 91.25% it misses
+  it always gets digit 4 wrong and always gets the first 3 digits right.
+  Accuracy is flat in number of carries. Nearly all remaining errors (24 of 25
+  R2L, 53 of 56 L2R) are off-by-one and sit at the last digit of an output
+  token.
+
+
+  The cause is isolated reasonably well: alternate single-token separators
+  ('.', '$', '#', space) reproduce the effect, and two matched-token-count
+  controls for "thinking tokens" fail to recover it. Prompting the model to
+  repeat the problem in R2L recovers most of the loss; merely answering in R2L
+  does not.
+
+
+  Boundaries: only OpenAI models, only addition, only 7-9 digit operands, no
+  pretraining ablation over tokenizers. GPT-4 shows a weaker effect, GPT-4
+  Turbo a stronger one again.
+
+
+  If you benchmark numerical reasoning on GPT-family models, format your
+  numbers before concluding anything about arithmetic ability.
+brief_generated_at: 2026-09-05
+brief_model: claude-opus-5
+brief_source: full-text

@@ -1,15 +1,18 @@
 id: arxiv-2310-06770
 kind: paper
-title: "SWE-bench: Can Language Models Resolve Real-World GitHub Issues?"
+title: 'SWE-bench: Can Language Models Resolve Real-World GitHub Issues?'
 authors:
-  - "Carlos E. Jimenez"
-  - "John Yang"
-  - "Alexander Wettig"
-  - "et al."
+- Carlos E. Jimenez
+- John Yang
+- Alexander Wettig
+- et al.
 year: 2023
-arxiv_id: "2310.06770"
+arxiv_id: '2310.06770'
 url: https://arxiv.org/abs/2310.06770
-tags: [coding, benchmark, agents]
+tags:
+- coding
+- benchmark
+- agents
 code_url: https://github.com/SWE-bench/SWE-bench
 ingested_at: 2026-09-02
 citations_total: 3594

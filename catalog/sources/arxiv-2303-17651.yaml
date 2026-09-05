@@ -2,16 +2,55 @@ id: arxiv-2303-17651
 kind: paper
 title: "Self-Refine: Iterative Refinement with Self-Feedback"
 authors:
-  - "Aman Madaan"
-  - "Niket Tandon"
-  - "Prakhar Gupta"
-  - "et al."
+  - Aman Madaan
+  - Niket Tandon
+  - Prakhar Gupta
+  - et al.
 year: 2023
 arxiv_id: "2303.17651"
 url: https://arxiv.org/abs/2303.17651
-tags: [self-correction, prompting]
+tags:
+  - self-correction
+  - prompting
 code_url: https://github.com/madaan/self-refine
 ingested_at: 2026-09-02
 citations_total: 4530
 citations_recent_12mo: 1000
 citations_checked_at: 2026-09-04
+brief: >-
+  A single LLM prompted to critique and rewrite its own output improves on
+  open-ended generation tasks but barely moves on math, where it cannot tell
+  that an answer is wrong. Self-Refine uses 3 few-shot prompts (generate,
+  feedback, refine) with the same model, no training, up to 4 iterations.
+
+
+  Evaluation covers 7 tasks (dialogue response, code optimization, code
+  readability, GSM8K math, sentiment reversal, acronym generation, constrained
+  generation with 20-30 keyword constraints) on GPT-3.5, ChatGPT, GPT-4, plus
+  Codex on code tasks, scored by task metrics, blind human A/B, and
+  GPT-4-as-judge.
+
+
+  Gains average ~20% absolute, range 5-40%. GPT-4 code optimization rises 27.3
+  to 36.0; GPT-4 dialogue preference 25.4 to 74.6. Math is flat: 64.1 to 64.1
+  for GPT-3.5, 92.9 to 93.1 for GPT-4, with ChatGPT feedback saying
+  'everything looks good' on 94% of instances.
+
+
+  Ablations isolate the feedback step: generic feedback drops sentiment
+  reversal 43.2 to 31.2, no feedback to 0. A sampling baseline compares
+  Self-Refine against k=4 ChatGPT samples in 1-vs-k human preference, and
+  Self-Refine wins. Manual analysis of 70 samples attributes 33% of failures
+  to mislocated errors, 61% to bad suggested fixes, 6% to the refiner.
+
+
+  Only closed OpenAI models work; Vicuna-13B could not produce formatted
+  feedback or follow refine prompts. English only, greedy decoding at
+  temperature 0.7, no matched token-budget accounting.
+
+
+  Treat self-refinement as a fix for underspecified generation, not for
+  verifiable reasoning.
+brief_generated_at: 2026-09-05
+brief_model: claude-opus-5
+brief_source: full-text

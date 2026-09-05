@@ -2,17 +2,57 @@ id: arxiv-2304-03442
 kind: paper
 title: "Generative Agents: Interactive Simulacra of Human Behavior"
 authors:
-  - "Joon Sung Park"
-  - "Joseph C. O'Brien"
-  - "Carrie J. Cai"
-  - "et al."
+  - Joon Sung Park
+  - Joseph C. O'Brien
+  - Carrie J. Cai
+  - et al.
 year: 2023
 arxiv_id: "2304.03442"
 url: https://arxiv.org/abs/2304.03442
-tags: [memory, agents]
+tags:
+  - memory
+  - agents
 code_url: https://github.com/joonspk-research/generative_agents
 ingested_at: 2026-09-02
 citations_total: 5387
 citations_recent_12mo: 1000
 citations_checked_at: 2026-09-04
 semantic_scholar_id: 5278a8eb2ba2429d4029745caf4e661080073c81
+brief: >-
+  A language model plus three add-on mechanisms — a natural-language memory
+  stream with scored retrieval, periodic reflection, and recursive planning —
+  produces agents that stay in character and coordinate over days of simulated
+  time, and each of the three components is needed.
+
+
+  The system, Smallville, is a Sims-like sandbox populated by 25 agents driven
+  by gpt3.5-turbo, each seeded with a one-paragraph identity description.
+  Memories are retrieved by a weighted sum of recency (exponential decay
+  factor 0.995), model-assigned importance (1 to 10 integer), and embedding
+  cosine relevance; reflections fire when accumulated importance exceeds 150,
+  about two or three times a day; daily plans are decomposed from 5 to 8 broad
+  chunks down to 5–15 minute actions.
+
+
+  The headline behavior is emergent coordination: from a single seeded intent
+  that Isabella throw a Valentine's Day party, invitations spread and 5 agents
+  show up at Hobbs Cafe at 5 pm.
+
+
+  Evidence comes from 2 evaluations: a controlled study interviewing agents in
+  natural language, with ablations removing memory, reflection, and planning,
+  and a 2-day end-to-end run. The ablations are the causal claim; the source
+  text here gives no numeric scores for either evaluation, so believability is
+  reported qualitatively. Failure modes named are retrieval misses, fabricated
+  embellishments, and overly formal speech inherited from instruction tuning.
+
+
+  Boundaries: 1 model, 1 hand-authored environment, 25 agents, short horizon,
+  no comparison against scripted NPCs and no cost accounting.
+
+
+  Treat this as an architecture proposal with directional ablation support,
+  not a quantified benchmark.
+brief_generated_at: 2026-09-05
+brief_model: claude-opus-5
+brief_source: full-text

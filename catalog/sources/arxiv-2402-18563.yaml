@@ -1,22 +1,58 @@
 id: arxiv-2402-18563
 kind: paper
-title: "Approaching Human-Level Forecasting with Language Models"
+title: Approaching Human-Level Forecasting with Language Models
 authors:
-  - "Danny Halawi"
-  - "Fred Zhang"
-  - "Chen Yueh-Han"
-  - "Jacob Steinhardt"
+  - Danny Halawi
+  - Fred Zhang
+  - Chen Yueh-Han
+  - Jacob Steinhardt
 year: 2024
 arxiv_id: "2402.18563"
 url: https://arxiv.org/abs/2402.18563
-summary: >-
-  A retrieval-augmented forecasting system built on GPT-4-class models
-  approaches, and sometimes exceeds, human crowd forecaster accuracy on
-  real prediction-market-style questions dated after the model's training
-  cutoff.
-tags: [forecasting, reasoning]
+summary: A retrieval-augmented forecasting system built on GPT-4-class models
+  approaches, and sometimes exceeds, human crowd forecaster accuracy on real
+  prediction-market-style questions dated after the model's training cutoff.
+tags:
+  - forecasting
+  - reasoning
 ingested_at: 2026-09-04
 citations_total: 125
 citations_recent_12mo: 76
 citations_checked_at: 2026-09-04
 semantic_scholar_id: 59347f86ce9af155266729e4b0301a29c65abf88
+brief: >-
+  Off-the-shelf language models forecast real events near or worse than
+  chance, but a retrieval-plus-fine-tuning pipeline closes most of the gap to
+  aggregated human forecasters.
+
+
+  The system generates search queries from decomposed sub-questions, pulls
+  historical news, has GPT-3.5-Turbo rate relevance and summarize, then
+  ensembles 6 forecasts (3 from prompted GPT-4-1106-Preview, 3 from a
+  GPT-4-0613 fine-tuned on its own crowd-beating reasonings) by trimmed mean.
+  Evaluation uses 914 binary test questions opened after June 1, 2023, from
+  Metaculus, GJOpen, INFER, Polymarket and Manifold, scored by Brier score.
+
+
+  Baseline zero-shot models cluster near the .25 unskilled score; the best,
+  GPT-4-1106-Preview, reaches .208 against a human crowd .149. The full system
+  gets .179 Brier and 71.5% accuracy (crowd 77.0%). Selectively forecasting
+  where the crowd is uncertain (.3-.7) gives .238 vs crowd .240; all 3
+  heuristics jointly give .240 vs .247, on 22% of forecasts.
+
+
+  Ablations isolate the parts: removing fine-tuning gives .186, removing
+  retrieval too gives .206, essentially the baseline. Swapping in a fine-tuned
+  GPT-3.5 gives .182, so the gain is not GPT-4-specific.
+
+
+  The crowd still wins overall and on confident questions, where the system
+  hedges; selection criteria were chosen on validation, and only binary
+  questions were tested.
+
+
+  Treat retrieval and self-supervised reasoning fine-tuning, not model scale
+  alone, as the lever for judgmental forecasting.
+brief_generated_at: 2026-09-05
+brief_model: claude-opus-5
+brief_source: full-text

@@ -1,15 +1,54 @@
 id: arxiv-2305-02363
 kind: paper
-title: "Entity Tracking in Language Models"
+title: Entity Tracking in Language Models
 authors:
-  - "Najoung Kim"
-  - "Sebastian Schuster"
+  - Najoung Kim
+  - Sebastian Schuster
 year: 2023
 arxiv_id: "2305.02363"
 url: https://arxiv.org/abs/2305.02363
-tags: [state-tracking, reasoning]
+tags:
+  - state-tracking
+  - reasoning
 ingested_at: 2026-09-02
 citations_total: 43
 citations_recent_12mo: 14
 citations_checked_at: 2026-09-04
 semantic_scholar_id: 035d7fce7690d61df76d7479d294e697a4319b7a
+brief: >-
+  Tracking which objects are in which box across a text is not something
+  text-only pretraining produces, even at 175B parameters, but code-heavy
+  pretraining is. The task: a described initial world of 7 boxes holding
+  objects, then 0-12 move/remove/put operations, with a cloze completion
+  asking the contents of Box N. 2200 scenarios were generated
+  programmatically, giving 91 examples per scenario, with initial-state
+  signatures kept disjoint across splits to block slot-filling.
+
+
+  Only GPT-3.5 text-davinci-003 beat a strong random baseline on boxes whose
+  contents had changed, still correct in more than 25% of cases after 7
+  operations. GPT-3 davinci and Flan-T5 base/XL mostly repeated the initial
+  state description. A reanalysis of Li et al. (2021)'s Alchemy probing result
+  finds 87.6% of its datapoints trivial; the classifier got 86.8% on those and
+  3.1% on the non-trivial 12.4%.
+
+
+  The code-vs-RLHF question was isolated by comparing 6 GPT variants:
+  code-davinci-002, which had no human-feedback training, also beat the
+  text-only models, pointing at code rather than RLHF. Finetuned T5-base
+  reached near-perfect accuracy on the base split, above 45% generalizing from
+  2 to longer operation sequences, while randomly initialized T5 failed.
+
+
+  Evidence is behavioral only, English only, 1 synthetic domain, and OpenAI
+  training data is undisclosed, so the code attribution rests on model
+  metadata. Performance degrades quickly with more operations and on
+  context-dependent operations even after finetuning.
+
+
+  Treat entity-tracking claims about text-only LMs skeptically, and check
+  benchmark datasets for trivial-case inflation before trusting reported
+  accuracy.
+brief_generated_at: 2026-09-05
+brief_model: claude-opus-5
+brief_source: full-text

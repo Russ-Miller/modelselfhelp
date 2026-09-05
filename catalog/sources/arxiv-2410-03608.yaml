@@ -1,27 +1,63 @@
 id: arxiv-2410-03608
 kind: paper
-title: "TICKing All the Boxes: Generated Checklists Improve LLM Evaluation and Generation"
+title: "TICKing All the Boxes: Generated Checklists Improve LLM Evaluation and
+  Generation"
 authors:
-  - "Jonathan Cook"
-  - "Tim Rocktäschel"
-  - "Jakob Foerster"
-  - "Dennis Aumiller"
-  - "Alex Wang"
+  - Jonathan Cook
+  - Tim Rocktäschel
+  - Jakob Foerster
+  - Dennis Aumiller
+  - Alex Wang
 year: 2024
 date: 2024-10-04
 arxiv_id: "2410.03608"
 url: https://arxiv.org/abs/2410.03608
-tags: [evaluation, prompting, instruction-following]
-summary: >-
-  TICK has an LLM decompose an instruction into instruction-specific
-  YES/NO checklist items and evaluates responses against them, raising
-  exact agreement with human preference judgements from 46.4% to 52.2%
-  over direct scoring. STICK applies the same checklists to the model's
-  own output for self-refinement (+7.8% absolute on LiveBench reasoning)
-  and Best-of-N selection (+6.3% on WildBench). Giving the generated
-  checklists to human annotators also raised inter-annotator agreement.
+tags:
+  - evaluation
+  - prompting
+  - instruction-following
+summary: TICK has an LLM decompose an instruction into instruction-specific
+  YES/NO checklist items and evaluates responses against them, raising exact
+  agreement with human preference judgements from 46.4% to 52.2% over direct
+  scoring. STICK applies the same checklists to the model's own output for
+  self-refinement (+7.8% absolute on LiveBench reasoning) and Best-of-N
+  selection (+6.3% on WildBench). Giving the generated checklists to human
+  annotators also raised inter-annotator agreement.
 ingested_at: 2026-09-04
 citations_total: 61
 citations_recent_12mo: 33
 citations_checked_at: 2026-09-04
 semantic_scholar_id: 82068d5f0126575e6b41dc4aa0653dd85939c91d
+brief: >-
+  Making an LLM judge write an instruction-specific YES/NO checklist and
+  answer each item explicitly beats holistic scoring, and feeding those
+  answers back to the generator produces self-correction on tasks where
+  unstructured self-critique degrades performance. TICK generates the
+  checklist and answers it; STICK uses the same model as its own judge.
+
+
+  Evaluation was checked against 612 internal instructions with 3
+  human-written checklists each, plus InFoBench and WildBench, with GPT-4o,
+  Command-R+ and Llama3.1-70B. GPT-4o checklists matched the chosen human
+  ground truth as closely as alternate human checklists (BLEU 0.759 vs 0.733)
+  and answered questions at 0.826 accuracy against a 3-annotator majority.
+
+
+  On pairwise agreement with human preferences, exact-match rose from 0.464
+  (direct scoring) to 0.522 (TICK), with Check-then-Score at 0.487 and raw
+  preference prompting at 0.293. Self-refinement gave +6.5% on InFoBench and
+  +7.1% on WildBench, and on LiveBench reasoning +7.8% for Command-R+, while
+  vanilla Self-Refine dropped overall scores 8.3 points for both models.
+  Best-of-8 self-selection: 0.843 to 0.894 DRFR, 64.9 to 71.2 WB-Score,
+  beating the ArmoRM reward model. Human annotators given checklists moved
+  Krippendorff's alpha from 0.194 to 0.256.
+
+
+  The Self-Refine and direct-scoring baselines are matched on task but not on
+  inference tokens, so part of the gain may be extra compute; checklist
+  generation costs more. Gains plateau or regress after 1 iteration on
+  LiveBench and 4 on the others, and agreement stays low in absolute terms. If
+  you run LLM judges, decomposing before scoring is worth the extra calls.
+brief_generated_at: 2026-09-05
+brief_model: claude-opus-5
+brief_source: full-text

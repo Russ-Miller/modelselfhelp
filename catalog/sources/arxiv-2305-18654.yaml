@@ -2,15 +2,57 @@ id: arxiv-2305-18654
 kind: paper
 title: "Faith and Fate: Limits of Transformers on Compositionality"
 authors:
-  - "Nouha Dziri"
-  - "Ximing Lu"
-  - "Melanie Sclar"
-  - "et al."
+  - Nouha Dziri
+  - Ximing Lu
+  - Melanie Sclar
+  - et al.
 year: 2023
 arxiv_id: "2305.18654"
 url: https://arxiv.org/abs/2305.18654
-tags: [arithmetic, compositionality, reasoning]
+tags:
+  - arithmetic
+  - compositionality
+  - reasoning
 ingested_at: 2026-09-02
 citations_total: 690
 citations_recent_12mo: 229
 citations_checked_at: 2026-09-04
+brief: >-
+  Transformers appear to solve compositional problems by matching linearized
+  subgraphs seen in training rather than executing the underlying algorithm,
+  and accuracy collapses as compositional complexity grows even when the
+  reasoning steps are handed to them explicitly.
+
+
+  The setup formalizes 3 tasks as computation graphs: multi-digit
+  multiplication (up to 5x5 digits), Einstein's logic grid puzzles (K houses x
+  M attributes), and a dynamic programming relaxation of Maximum Weighted
+  Independent Set. GPT3 (text-davinci-003), ChatGPT and GPT4 were tested
+  zero-shot and few-shot; GPT3 was finetuned exhaustively on ~1.8M
+  multiplication pairs, ~142K DP pairs, and ~41K puzzle pairs, with
+  question-answer and question-scratchpad formats.
+
+
+  Off-the-shelf ChatGPT and GPT4 reach 55% and 59% on 3-digit by 3-digit
+  multiplication. Finetuned GPT3 is near-perfect in-distribution and drops
+  toward zero on graphs of greater depth or width, with or without
+  scratchpads. Training past overfitting (420K steps question-answer, 30K
+  steps scratchpad) produced no grokking. Full computation subgraphs appear
+  more frequently in training data for correctly predicted test items than
+  incorrect ones. 82.3% of correct 4-digit by 2-digit answers had at least 1
+  error in the computation graph.
+
+
+  Evidence is measured, with train/test splits disjoint by graph depth and
+  width, error typing into local, propagation and restoration categories, and
+  matched question-answer versus scratchpad conditions. Finetuning is 1 model
+  family (GPT3) at modest scale, budget-limited, and the theoretical
+  error-propagation propositions are argued on stylized abstractions, not
+  proven about transformers specifically.
+
+
+  Treat high scores on multi-step benchmarks as possible evidence of pattern
+  coverage rather than acquired procedure.
+brief_generated_at: 2026-09-05
+brief_model: claude-opus-5
+brief_source: full-text

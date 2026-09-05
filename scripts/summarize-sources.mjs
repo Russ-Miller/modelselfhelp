@@ -142,7 +142,13 @@ function haystack(text) {
  *  punishing formatting. */
 function unverified(brief, source) {
   const hay = haystack(source);
-  return figuresIn(brief).filter((f) => !hay.includes(norm(f)));
+  // In a rendered table the unit often sits in the column header, so the body
+  // holds "76.89" where the digest correctly writes "76.89%". Match on the
+  // numeric core as well. This trades away catching a unit swap, which is far
+  // rarer and milder than invention -- and a checker that cries wolf gets
+  // ignored, which costs more than the case it would catch.
+  const grounded = (f) => hay.includes(norm(f)) || hay.includes(norm(f.replace(/[%\s]/g, "")));
+  return figuresIn(brief).filter((f) => !grounded(f));
 }
 
 /**

@@ -2,16 +2,51 @@ id: arxiv-2305-15334
 kind: paper
 title: "Gorilla: Large Language Model Connected with Massive APIs"
 authors:
-  - "Shishir G. Patil"
-  - "Tianjun Zhang"
-  - "Xin Wang"
-  - "Joseph E. Gonzalez"
+  - Shishir G. Patil
+  - Tianjun Zhang
+  - Xin Wang
+  - Joseph E. Gonzalez
 year: 2023
 arxiv_id: "2305.15334"
 url: https://arxiv.org/abs/2305.15334
-tags: [tool-use, hallucination]
+tags:
+  - tool-use
+  - hallucination
 code_url: https://github.com/ShishirPatil/gorilla
 ingested_at: 2026-09-02
 citations_total: 1585
 citations_recent_12mo: 805
 citations_checked_at: 2026-09-04
+brief: >-
+  A lightly finetuned 7B model beats GPT-4 at emitting correct,
+  non-hallucinated ML API calls, and adding a weak retriever at test time can
+  make things worse rather than better. Gorilla is LLaMA-7B instruction-tuned
+  on self-instruct pairs built from 1,645 model cards scraped from Torch Hub,
+  TensorFlow Hub and HuggingFace, evaluated on APIBench with AST sub-tree
+  matching, where a call outside the API database counts as hallucination and
+  a wrong call as error.
+
+
+  Zero-shot, Gorilla scores 59.13 on Torch Hub, 71.68 on HuggingFace and 83.79
+  on TensorFlow Hub, reported as 20.43% better than GPT-4 and 10.75% better
+  than ChatGPT overall. GPT-4 zero-shot hallucinates heavily: 36.55 on Torch
+  Hub, 78.65 on TensorFlow Hub, and consistently more than GPT-3.5, which the
+  authors attribute to RLHF. Attaching BM25 to a model finetuned without
+  retrieval drops accuracy 21.50% on Torch Hub and 47.57% on HuggingFace;
+  training with an oracle retriever gains 12.37% on Torch Hub and 23.46% on
+  HuggingFace but degrades 52.27% when BM25 replaces the oracle at inference.
+
+
+  The retrieval comparison is a clean ablation across 4 retriever settings and
+  5 model families. Documentation-change adaptation is shown by 2 qualitative
+  examples, not measured. HuggingFace scoring is asymmetric: baselines are
+  only checked for correct domain, Gorilla on full AST. Constraint-following
+  was tested on 65.26% of Torch Hub, where Gorilla leads zero-shot (47.88
+  accuracy-constrained) but GPT-3.5 wins with an oracle (69.01).
+
+
+  If you are wiring an LLM to a large API surface, finetuning may beat
+  retrieval unless your retriever is near-oracle.
+brief_generated_at: 2026-09-05
+brief_model: claude-opus-5
+brief_source: full-text

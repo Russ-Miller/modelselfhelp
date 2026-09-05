@@ -1,18 +1,56 @@
 id: arxiv-2310-11511
 kind: paper
-title: "Self-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection"
+title: "Self-RAG: Learning to Retrieve, Generate, and Critique through
+  Self-Reflection"
 authors:
-  - "Akari Asai"
-  - "Zeqiu Wu"
-  - "Yizhong Wang"
-  - "Avirup Sil"
-  - "Hannaneh Hajishirzi"
+  - Akari Asai
+  - Zeqiu Wu
+  - Yizhong Wang
+  - Avirup Sil
+  - Hannaneh Hajishirzi
 year: 2023
 arxiv_id: "2310.11511"
 url: https://arxiv.org/abs/2310.11511
-tags: [rag, training]
+tags:
+  - rag
+  - training
 code_url: https://github.com/AkariAsai/self-rag
 ingested_at: 2026-09-02
 citations_total: 2517
 citations_recent_12mo: 1000
 citations_checked_at: 2026-09-04
+brief: >-
+  Training a language model to emit its own retrieval and critique tokens lets
+  it decide when to retrieve, filter irrelevant passages, and rank its own
+  outputs, beating fixed-passage RAG at smaller scale.
+
+
+  Self-Rag trains a generator (Llama 2-based, 7B and 13B) on a corpus where a
+  critic model has inserted 4 kinds of reflection tokens offline: Retrieve,
+  IsRel, IsSup, IsUse. The critic itself is a Llama 2-7B distilled from GPT-4
+  reflection-token annotations, 4k-20k examples per token type. At inference
+  the model retrieves on demand, processes K passages in parallel, and does
+  segment-level beam search scored by a weighted sum of critique-token
+  probabilities.
+
+
+  Across 6 tasks spanning open-domain QA, reasoning, fact verification and
+  long-form generation, Self-Rag outperforms retrieval-augmented ChatGPT on 4
+  tasks and Llama2-chat and Alpaca on all tasks, with higher citation
+  accuracy. The critic agrees with GPT-4 predictions above 90% on most
+  reflection-token categories.
+
+
+  The evidence is benchmark comparison against pre-trained, instruction-tuned
+  and RAG baselines, plus analysis of reflection tokens and a demonstrated
+  precision-completeness trade-off at test time. Inference cost versus
+  baselines is not reported here, and the reflection-token supervision
+  originates from GPT-4, so critic quality is bounded by that source.
+
+
+  One generator family was tested. If you run RAG pipelines, this argues the
+  retrieve/filter decision can be learned into the generator rather than
+  bolted on with external models.
+brief_generated_at: 2026-09-05
+brief_model: claude-opus-5
+brief_source: full-text

@@ -1,16 +1,55 @@
 id: arxiv-2311-05232
 kind: paper
-title: "A Survey on Hallucination in Large Language Models: Principles, Taxonomy, Challenges, and Open Questions"
+title: "A Survey on Hallucination in Large Language Models: Principles,
+  Taxonomy, Challenges, and Open Questions"
 authors:
-  - "Lei Huang"
-  - "Weijiang Yu"
-  - "Weitao Ma"
-  - "et al."
+  - Lei Huang
+  - Weijiang Yu
+  - Weitao Ma
+  - et al.
 year: 2023
 arxiv_id: "2311.05232"
 url: https://arxiv.org/abs/2311.05232
-tags: [hallucination, survey]
+tags:
+  - hallucination
+  - survey
 ingested_at: 2026-09-02
 citations_total: 3664
 citations_recent_12mo: 1000
 citations_checked_at: 2026-09-04
+brief: >-
+  Hallucination in large language models is reframed here not as a single
+  failure mode but as two distinct ones: factuality hallucination
+  (contradicting or fabricating real-world facts) and faithfulness
+  hallucination (deviating from the user's instruction, the provided context,
+  or the model's own reasoning chain). This replaces the older
+  intrinsic/extrinsic split inherited from task-specific NLG, which the
+  authors argue no longer fits open-ended general-purpose models.
+
+
+  The survey covers causes across 3 stages — data, training, inference — plus
+  detection methods, benchmarks, mitigation strategies, and the limits of
+  retrieval-augmented generation. Named causes include imitative falsehoods
+  memorised from flawed pre-training corpora, long-tail, up-to-date and
+  copyright-restricted knowledge boundaries, exposure bias and the snowball
+  effect, sycophancy induced by RLHF preference models, sampling temperature,
+  softmax bottleneck, and the Reversal Curse.
+
+
+  One cited result is load-bearing and counterintuitive: supervised
+  fine-tuning on instruction pairs containing facts outside the model's
+  pre-training knowledge boundary correlates with more hallucination, not
+  less. Task-format-focused and overly complex instructions also raise
+  hallucination rates.
+
+
+  This is a literature synthesis, not an experiment. No new measurements, no
+  baselines, no models run. Every quantitative claim is second-hand and the
+  reader must chase the primary sources.
+
+
+  Use it as a map of the causal taxonomy and detection literature, not as
+  evidence for any specific mitigation.
+brief_generated_at: 2026-09-05
+brief_model: claude-opus-5
+brief_source: full-text

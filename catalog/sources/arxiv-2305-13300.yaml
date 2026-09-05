@@ -1,17 +1,56 @@
 id: arxiv-2305-13300
 kind: paper
-title: "Adaptive Chameleon or Stubborn Sloth: Revealing the Behavior of Large Language Models in Knowledge Conflicts"
+title: "Adaptive Chameleon or Stubborn Sloth: Revealing the Behavior of Large
+  Language Models in Knowledge Conflicts"
 authors:
-  - "Jian Xie"
-  - "Kai Zhang"
-  - "Jiangjie Chen"
-  - "Renze Lou"
-  - "Yu Su"
+  - Jian Xie
+  - Kai Zhang
+  - Jiangjie Chen
+  - Renze Lou
+  - Yu Su
 year: 2023
 arxiv_id: "2305.13300"
 url: https://arxiv.org/abs/2305.13300
-tags: [knowledge-conflict, rag]
+tags:
+  - knowledge-conflict
+  - rag
 ingested_at: 2026-09-02
 citations_total: 382
 citations_recent_12mo: 148
 citations_checked_at: 2026-09-04
+brief: >-
+  Whether a model overrides its own parametric memory depends almost entirely
+  on how coherent the conflicting evidence is, not on how strong the memory
+  is. Word-level entity substitution makes models look stubborn; a fluent
+  counter-passage generated from scratch makes the same models flip.
+
+
+  The setup elicits each model's memory answer plus a supporting passage in
+  closed-book QA, builds a counter-answer (entity swap for PopQA, label flip
+  for StrategyQA), has ChatGPT write supporting evidence for it, then filters
+  with a DeBERTa-V2 NLI entailment check and a consistency check that the
+  model still gives the memory answer when shown its own memory. 8 models:
+  ChatGPT, GPT-4, PaLM2, Qwen-7B, Llama2-7B/70B, Vicuna-7B/33B. Final sets run
+  3,787–9,544 PopQA items and 500–1,356 StrategyQA items per model.
+
+
+  With only the generated counter-memory present, memorization ratios drop to
+  3.7 for ChatGPT, 8.9 for GPT-4, 2.3 for Qwen-7B on PopQA. Add the parametric
+  memory alongside it and ratios jump to 43.0 and 65.4; GPT-4 reaches 80%
+  memorization on the most popular entities. Order matters: PaLM2 swings 38.6
+  to 72.2, Llama2-7B 33.3 to 82.8, while GPT-4 barely moves. More evidence on
+  one side pulls the answer that way, and 2/4 beats 1/2 despite equal
+  proportion.
+
+
+  Evidence is measured, with the substitution method as a matched within-model
+  baseline and an NLI filter hand-checked at 99% accuracy on 200 examples; 50
+  stubborn cases were inspected manually. Only 2 QA datasets, multiple-choice
+  format, and the counter-memory generator is ChatGPT itself.
+
+
+  If you build retrieval augmentation, expect fluent disinformation to win
+  when it stands alone and expect confirmation bias when it does not.
+brief_generated_at: 2026-09-05
+brief_model: claude-opus-5
+brief_source: full-text

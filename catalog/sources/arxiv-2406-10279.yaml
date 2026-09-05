@@ -1,16 +1,57 @@
 id: arxiv-2406-10279
 kind: paper
-title: "We Have a Package for You! A Comprehensive Analysis of Package Hallucinations by Code Generating LLMs"
+title: We Have a Package for You! A Comprehensive Analysis of Package
+  Hallucinations by Code Generating LLMs
 authors:
-  - "Joseph Spracklen"
-  - "Raveen Wijewickrama"
-  - "A H M Nazmus Sakib"
-  - "et al."
+  - Joseph Spracklen
+  - Raveen Wijewickrama
+  - A H M Nazmus Sakib
+  - et al.
 year: 2024
 arxiv_id: "2406.10279"
 url: https://arxiv.org/abs/2406.10279
-tags: [secure-coding, hallucination, supply-chain]
+tags:
+  - secure-coding
+  - hallucination
+  - supply-chain
 ingested_at: 2026-09-02
 citations_total: 106
 citations_recent_12mo: 80
 citations_checked_at: 2026-09-04
+brief: >-
+  Code-generating LLMs recommend packages that do not exist at rates high
+  enough to constitute a supply-chain attack surface, and the hallucinated
+  names are mostly not typos of real ones. Open-source models are far worse
+  than commercial ones.
+
+
+  The study prompted 16 models (GPT-3.5/4/4 Turbo, CodeLlama, DeepSeek,
+  Mistral, Mixtral, WizardCoder, Magicoder, OpenChat) with 2 custom prompt
+  datasets, one built from Stack Overflow tags and one generated from PyPI/npm
+  package descriptions, producing 576,000 Python and JavaScript code samples.
+  Package names were extracted by 3 heuristics and checked against PyPI/npm
+  master lists as of 10 January, 2024.
+
+
+  Of 2.23 million recommended packages, 440,445 (19.7%) were hallucinated,
+  with 205,474 unique non-existent names. Commercial models averaged 5.2%
+  versus 21.7% for open-source; GPT-4 Turbo was lowest at 3.59%.
+  Hallucinations rose sharply above temperature 1 (GPT-3.5 reached 31.8%), and
+  top-k/top-p/min-p tuning made things slightly worse (+1.16% on average). 43%
+  of hallucinated packages recurred in all 10 repeat queries; 81% of unique
+  hallucinated names came from only 1 model. Only 13.4% had Levenshtein
+  distance 1–2 from a valid package. Deleted packages accounted for 0.17%.
+
+
+  The prevalence numbers are measured at scale, though hallucination detection
+  depends on repository lists that may already contain adversary-published
+  names, making rates a lower bound. RQ2–RQ4 analyses narrow to Python and 4
+  models. Mitigation results (RAG, self-refinement, fine-tuning) are described
+  but the source text cuts off before their numbers.
+
+
+  Treat any package name from a code model as unverified input, especially
+  from open-source models at default temperature.
+brief_generated_at: 2026-09-05
+brief_model: claude-opus-5
+brief_source: full-text
