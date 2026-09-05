@@ -163,7 +163,9 @@ jobs:
             echo
             echo "- job status: ${{ job.status }}"
             echo "- queue files: $(ls pipeline/queue 2>/dev/null | wc -l | tr -d ' ')"
-            echo "- candidates: $(grep -ch '^  - id:' pipeline/queue/*.yaml 2>/dev/null | paste -sd+ - | bc 2>/dev/null || echo '?')"
+            echo "- candidates: $(cat pipeline/queue/*.yaml 2>/dev/null | grep -c '^  - openalex_id:' || echo 0)"
+            echo "- classified: $(cat pipeline/queue/*.yaml 2>/dev/null | grep -c '^      capability:' || echo 0) verdicts"
+            echo "- shortlist: $(grep -c '^  - id:' pipeline/capability-shortlist.yaml 2>/dev/null || echo 0) candidate capabilities"
             echo "- finished: $(date -u +'%Y-%m-%d %H:%M UTC')"
           } >> "$RUN_LOG"
 
