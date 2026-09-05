@@ -194,6 +194,10 @@ if (dryRun) {
   process.exit(0);
 }
 
+// Between batched API calls. A nightly job has all night; hitting a rate
+// limit halfway through a paid pass costs more than the wait ever will.
+const delayMs = Number(process.env.PROPOSE_DELAY_MS ?? 2000);
+
 const client = new Anthropic();
 let inTokens = 0, outTokens = 0, cacheRead = 0, errors = 0;
 const proposals = [];
@@ -230,6 +234,7 @@ for (const [bi, batch] of batches.entries()) {
     errors++;
     console.log(`error: ${err?.message ?? err}`);
   }
+  if (bi < batches.length - 1) await new Promise((r) => setTimeout(r, delayMs));
 }
 
 for (const [file, parsed] of queues) fs.writeFileSync(file, YAML.stringify(parsed, { lineWidth: 100 }));

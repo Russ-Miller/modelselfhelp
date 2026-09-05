@@ -176,12 +176,22 @@ if (!from) {
 to = to ?? iso(new Date());
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+// Between result pages. OpenAlex's polite pool (we send a mailto UA) allows
+// far more than this; nothing is waiting on a nightly job, so the cheapest
+// insurance against a throttle is simply going slower.
+const PAGE_DELAY_MS = Number(process.env.PAGE_DELAY_MS ?? 750);
 
-async function getJson(url, attempts = 4) {
+async function getJson(url, attempts = 6) {
   for (let i = 1; i <= attempts; i++) {
     const res = await fetch(url, { headers: { "User-Agent": UA } });
     if (res.ok) return res.json();
-    if (res.status === 429 || res.status >= 500) { await sleep(2000 * i); continue; }
+    // Exponential, not linear. A linear ramp spends its whole budget inside
+    // the window a throttle is still open, then gives up just as it lifts.
+    if (res.status === 429 || res.status >= 500) {
+      const wait = Math.min(120000, 3000 * 2 ** (i - 1));
+      console.error(`  HTTP ${res.status}, retry ${i}/${attempts} in ${wait / 1000}s`);
+      await sleep(wait); continue;
+    }
     console.error(`  HTTP ${res.status} ${url}`);
     return null;
   }
@@ -270,7 +280,7 @@ for (const query of QUERIES) {
     cursor = data.meta?.next_cursor;
     pages++;
     if (!data.results?.length) break;
-    await sleep(200);
+    await sleep(PAGE_DELAY_MS);
   }
   console.log(`  ${String(queryCount).padStart(4)} raw  ${query}`);
 }

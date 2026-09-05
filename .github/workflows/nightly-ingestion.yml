@@ -33,6 +33,9 @@ concurrency:
 jobs:
   ingest:
     runs-on: ubuntu-latest
+    # Generous, because every stage is deliberately slow -- but bounded, so a
+    # hung fetch cannot sit on a runner for the 6-hour default.
+    timeout-minutes: 90
     permissions:
       contents: write         # to commit the refreshed queue
     env:
@@ -81,6 +84,8 @@ jobs:
       # Stage 1 — free. Trailing window plus the seen-ledger is self-healing
       # against OpenAlex's arXiv indexing lag.
       - name: Fetch candidates (OpenAlex)
+        env:
+          PAGE_DELAY_MS: "1500"
         run: |
           echo '## Stage 1 — fetch candidates (OpenAlex)' >> "$RUN_LOG"
           echo '```' >> "$RUN_LOG"
@@ -95,7 +100,7 @@ jobs:
         run: |
           echo '## Stage 2 — classify direction' >> "$RUN_LOG"
           echo '```' >> "$RUN_LOG"
-          node scripts/classify-candidates.mjs --limit "${{ inputs.classify_limit || '60' }}" 2>&1 | tee -a "$RUN_LOG"
+          node scripts/classify-candidates.mjs --limit "${{ inputs.classify_limit || '60' }}" --delay 2500 2>&1 | tee -a "$RUN_LOG"
           echo '```' >> "$RUN_LOG"
 
       # Stage 2b — mines the unmatched pile for capabilities not yet tracked.
@@ -103,6 +108,7 @@ jobs:
         if: env.HAS_ANTHROPIC_KEY == 'true'
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          PROPOSE_DELAY_MS: "4000"
         run: |
           echo '## Stage 2b — propose capabilities' >> "$RUN_LOG"
           echo '```' >> "$RUN_LOG"
@@ -123,7 +129,7 @@ jobs:
         run: |
           echo '## Stage 3 — source briefs' >> "$RUN_LOG"
           echo '```' >> "$RUN_LOG"
-          node scripts/summarize-sources.mjs --limit 15 --delay 10000 2>&1 | tee -a "$RUN_LOG"
+          node scripts/summarize-sources.mjs --limit 15 --delay 20000 --chunk 8 --start-delay 60000 2>&1 | tee -a "$RUN_LOG"
           echo '```' >> "$RUN_LOG"
 
       # The catalog itself is never written by this job — only the queue and
