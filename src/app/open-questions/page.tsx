@@ -10,8 +10,8 @@ const SECTIONS: { kind: OpenKind; heading: string; blurb: string[]; filter: stri
     filter: "searched",
     heading: "Searched, still open",
     blurb: [
-      "We looked for a study that tests the technique on its own, and didn't find one. Each entry says what we searched for. Where there was a close call, it names the paper and explains why it doesn't actually support the technique.",
-      "These are the most useful gaps to pick up. The question is already clear, one dead end has been ruled out, and what a clean experiment would need to separate is written down.",
+      "We went looking for a study that isolates the technique, and did not find one. Each entry records what was searched for. Where there was a nearest paper, it names that paper and why it does not actually support the technique.",
+      "That makes each of these a research brief: the question, the dead end already walked, and what a clean experiment would have to separate.",
     ],
   },
   {
@@ -19,8 +19,8 @@ const SECTIONS: { kind: OpenKind; heading: string; blurb: string[]; filter: stri
     filter: "unsearched",
     heading: "Not yet searched",
     blurb: [
-      "We have no evidence filed for these, and we haven't recorded a search either. That only tells us we haven't looked yet. It says nothing about whether the research exists.",
-      "The first useful step is to search, and to write down what turns up either way.",
+      "No efficacy claim is filed for these, and no search is recorded either. That only tells us we have not looked yet. It says nothing about whether the research exists.",
+      "The first useful move is to look, and to record the result either way.",
     ],
   },
   {
@@ -28,8 +28,8 @@ const SECTIONS: { kind: OpenKind; heading: string; blurb: string[]; filter: stri
     filter: "argued",
     heading: "Argued, not measured",
     blurb: [
-      "There is a reason to believe these work, based on how they operate, but nobody has measured the effect. The reasoning may well be right.",
-      "These are the easiest to mistake for settled, which is why we keep them apart from the rest.",
+      "These are backed only by reasoning about how the technique works. No source measures the effect. The mechanism may well be right; nobody has put a number on it.",
+      "That is a weaker opening than silence, but a real one. It is also the easiest kind to mistake for settled, which is why we keep it separate.",
     ],
   },
 ];
@@ -55,7 +55,7 @@ function Entry({ q }: { q: OpenQuestion }) {
       </div>
       <p className="text-sm text-neutral-600 dark:text-neutral-400">{t.summary}</p>
       <p className="mt-1 text-xs text-neutral-500">
-        Would help with{" "}
+        Would bear on{" "}
         {t.addresses.map((a, i) => (
           <span key={a}>
             {i > 0 && ", "}
@@ -73,7 +73,7 @@ function Entry({ q }: { q: OpenQuestion }) {
             const href = src ? `/sources/${src.id}` : m.url;
             return (
               <div key={i} className="text-sm">
-                <div className="text-xs font-medium uppercase tracking-wide text-neutral-500">Closest paper we found</div>
+                <div className="text-xs font-medium uppercase tracking-wide text-neutral-500">Nearest miss</div>
                 {href ? <a href={href} className="hover:underline">{title}</a> : <span>{title}</span>}
                 <p className="text-neutral-600 dark:text-neutral-400">{m.why_it_does_not_fit}</p>
               </div>
@@ -103,16 +103,16 @@ function Unfixed({ u }: { u: Unmitigated }) {
       <div className="mb-1 flex flex-wrap items-baseline gap-2">
         <Link href={`/capabilities/${u.capability.id}`} className="font-medium hover:underline">{u.capability.label}</Link>
         <span className="text-xs text-neutral-500">
-          {u.claims.length} claim{u.claims.length === 1 ? "" : "s"} describing it
+          {u.claims.length} claim{u.claims.length === 1 ? "" : "s"} documenting it
         </span>
       </div>
       <p className="text-sm text-neutral-600 dark:text-neutral-400">{u.capability.summary}</p>
       <p className="mt-2 text-xs text-neutral-500">
         {u.techniques.length === 0 ? (
-          "Nothing has been proposed for this yet."
+          "No technique catalogued against it at all."
         ) : (
           <>
-            Proposed, but untested:{" "}
+            Catalogued but unmeasured:{" "}
             {u.techniques.map((t, i) => (
               <span key={t.id}>
                 {i > 0 && ", "}
@@ -166,11 +166,11 @@ export default function OpenQuestionsPage() {
         {noTechnique.length > 0 && (
           <>
             <h3 className="flex flex-wrap items-baseline gap-2 pt-1 text-sm font-medium text-neutral-700 dark:text-neutral-300">
-              No mitigation proposed <span className="font-normal text-neutral-500">{noTechnique.length}</span>
+              No technique catalogued <span className="font-normal text-neutral-500">{noTechnique.length}</span>
               <InTab href="/capabilities?filter=no-technique" tab="Capabilities" />
             </h3>
             <p className="max-w-3xl text-xs text-neutral-500">
-              Nobody has suggested anything for these yet, so there is nothing to test.
+              No technique has been catalogued against these yet, so there is nothing to measure.
             </p>
             <ul className="space-y-3">{noTechnique.map((u) => <Unfixed key={u.capability.id} u={u} />)}</ul>
           </>
@@ -178,12 +178,12 @@ export default function OpenQuestionsPage() {
         {noneMeasured.length > 0 && (
           <>
             <h3 className="flex flex-wrap items-baseline gap-2 pt-1 text-sm font-medium text-neutral-700 dark:text-neutral-300">
-              A mitigation exists, but nobody measured it <span className="font-normal text-neutral-500">{noneMeasured.length}</span>
+              Techniques catalogued, none measured <span className="font-normal text-neutral-500">{noneMeasured.length}</span>
               <InTab href="/capabilities?filter=none-measured" tab="Capabilities" />
             </h3>
             <p className="max-w-3xl text-xs text-neutral-500">
-              Something is written down as a mitigation here, but we have nothing that measures
-              whether it helps. If a study already exists, finding it would close the gap. No new
+              A technique is catalogued against these, but no claim measures whether it moves the
+              capability. If a study already exists, finding it would close the gap. No new
               experiment needed.
             </p>
             <ul className="space-y-3">{noneMeasured.map((u) => <Unfixed key={u.capability.id} u={u} />)}</ul>
@@ -192,7 +192,7 @@ export default function OpenQuestionsPage() {
       </section>
 
       <h2 className="border-b border-neutral-200 pb-1 pt-2 text-lg font-semibold dark:border-neutral-800">
-        Techniques we couldn&rsquo;t find evidence for <span className="text-sm font-normal text-neutral-500">{all.length}</span>
+        Techniques nothing measures <span className="text-sm font-normal text-neutral-500">{all.length}</span>
       </h2>
 
       {SECTIONS.map(({ kind, heading, blurb, filter }) => {

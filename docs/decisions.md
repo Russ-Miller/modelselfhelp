@@ -510,7 +510,17 @@ That is the same argument, and it lands harder without the jargon. The
 rule going forward: the reasoning belongs in docs/decisions.md, the
 consequence belongs in the UI.
 
-Section headings moved the same way — "Techniques catalogued, none
-measured" became "A mitigation exists, but nobody measured it", and
-"Nearest miss" became "Closest paper we found". Applied to the Open
+**Style, not vocabulary.** The first pass at this got it wrong by
+rewriting the nouns too: "technique" drifted to "mitigation", "nearest
+miss" to "closest paper we found", "unmeasured" to "untested". Those are
+schema words. Technique, claim, capability, source, measured, contested,
+mechanism — a reader who learns them on one page should find the same
+words on the next, and `nearest_miss` is a literal field name.
+
+One of the swaps was worse than drift. "Would bear on" became "Would help
+with", which asserts the technique helps — the exact claim this catalog
+refuses to make about a technique nothing has measured. The copy would
+have contradicted the section it sat in.
+
+So: sentence style changed, vocabulary restored. Applied to the Open
 Questions tab only for now; the other tabs still carry the older voice.
