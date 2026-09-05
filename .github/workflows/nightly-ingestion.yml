@@ -84,13 +84,19 @@ jobs:
       # Vercel's GitHub integration never linked for this repo, so a push does
       # not trigger a build. Deploy explicitly with the CLI instead, which
       # uploads the directory and needs no git connection.
+      #
+      # The CLI is a pinned devDependency, not `npx --yes vercel@latest`. That
+      # matters twice: `@latest` silently changes the deploy tool under us
+      # between runs, and fetching-and-executing a package at deploy time is a
+      # supply-chain step in the one job that holds the production token. Same
+      # `npm run deploy` runs locally, so there is one deploy command, not two.
       - name: Deploy to Vercel
         if: env.HAS_VERCEL_TOKEN == 'true'
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
-        run: npx --yes vercel@latest --prod --yes --token "$VERCEL_TOKEN"
+        run: npm run deploy -- --token "$VERCEL_TOKEN"
 
       - name: Persist pipeline state
         run: |

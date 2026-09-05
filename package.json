@@ -6,6 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "deploy": "vercel --prod --yes",
+    "deploy:preview": "vercel --yes",
     "lint": "eslint",
     "validate": "node scripts/validate.mjs",
     "verify-papers": "node scripts/verify-papers.mjs",
@@ -31,6 +33,7 @@
     "tailwindcss": "^4",
     "tsx": "^4.23.13",
     "typescript": "^5",
+    "vercel": "^59.11.2",
     "vitest": "^4.1.11",
     "yaml": "^2.9.0"
   }
