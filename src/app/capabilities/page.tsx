@@ -20,16 +20,25 @@ export default function CapabilitiesPage() {
       <h1 className="text-2xl font-semibold">Capabilities</h1>
       <p className="text-sm text-neutral-500">Topics, not scores &mdash; each lists the claims filed under it.</p>
       <FilterBar options={options}>
+      <div className="overflow-x-auto">
       <table className="w-full text-sm">
-        <thead className="text-left text-neutral-500"><tr><th className="py-1">Capability</th><th>Tags</th><th>Claims</th><th>Contested</th><th>Status</th></tr></thead>
+        <thead className="text-left text-neutral-500">
+          <tr>
+            <th className="py-1 pr-6">Capability</th>
+            <th className="py-1 pr-6">Tags</th>
+            <th className="py-1 pr-6 whitespace-nowrap">Claims</th>
+            <th className="py-1 pr-6 whitespace-nowrap">Contested</th>
+            <th className="py-1 whitespace-nowrap">Status</th>
+          </tr>
+        </thead>
         <tbody>
           {getCapabilities().map((c) => (
             <tr key={c.id} data-tags={capabilityTags(c)} className="border-t border-neutral-200 dark:border-neutral-800 align-top">
-              <td className="py-2"><Link href={`/capabilities/${c.id}`} className="font-medium hover:underline">{c.label}</Link>
+              <td className="py-2 pr-6"><Link href={`/capabilities/${c.id}`} className="font-medium hover:underline">{c.label}</Link>
                 <div className="text-neutral-600 dark:text-neutral-400">{c.summary}</div></td>
-              <td className="py-2">{(c.tags ?? []).join(", ")}</td>
-              <td className="py-2">{claimsFor(c.id).length}</td>
-              <td className="py-2">
+              <td className="py-2 pr-6">{(c.tags ?? []).join(", ")}</td>
+              <td className="py-2 pr-6">{claimsFor(c.id).length}</td>
+              <td className="py-2 pr-6">
                 {(() => {
                   const n = claimsFor(c.id).filter((x) => x.contested).length;
                   return n ? (
@@ -37,11 +46,12 @@ export default function CapabilitiesPage() {
                   ) : <span className="text-neutral-400">—</span>;
                 })()}
               </td>
-              <td className="py-2">{c.status}</td>
+              <td className="py-2 whitespace-nowrap">{c.status}</td>
             </tr>
           ))}
         </tbody>
       </table>
+      </div>
       </FilterBar>
 
       {shortlist.length > 0 && (

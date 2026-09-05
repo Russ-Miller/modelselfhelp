@@ -1,0 +1,24 @@
+id: explanation-faithfulness
+label: Saying what actually drove the answer
+summary: Whether a model's stated reasoning reflects the computation that produced its answer, rather than a plausible story told after the fact.
+description: >-
+  A model can write a chain of thought that reads as sound while the answer
+  was actually driven by something the explanation never mentions. This is
+  not the same as being wrong: the answer can be right and the stated
+  reasoning still not be the reason. It matters wherever an explanation is
+  used as evidence — debugging an agent, auditing a decision, or filing a
+  claim from a paper's reported reasoning.
+tags: [behavior, evaluation]
+modality: [text]
+related: [self-repair, hallucination]
+match_terms: ["faithfulness", "unfaithful", "chain-of-thought faithfulness", "explanation faithfulness", "post-hoc rationalization", "self-explanation"]
+discriminator: >-
+  In scope when the paper tests whether stated reasoning corresponds to the
+  process that produced the output: perturbing an unmentioned feature and
+  watching the answer move, measuring whether steps are load-bearing, or
+  auditing explanations against internal computation. NOT in scope: whether
+  the reasoning is correct, which is the underlying task capability; and not
+  interpretability work that reads internals without comparing them to what
+  the model said.
+status: active
+submitted_by: human:Russ-Miller

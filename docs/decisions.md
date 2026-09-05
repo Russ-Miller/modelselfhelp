@@ -635,3 +635,27 @@ scoring, and would invite tuning the catalog to move it.
 file but the claim was never marked contested — usually because the scope
 condition absorbed the objection. That is how a technique quietly gets
 weaker without anyone saying so.
+
+## 2026-09-05 — Closing the two blind spots the backtest named
+Added `explanation-faithfulness` and `evaluation-validity`, the two
+capabilities the backtest showed nothing in the index covered.
+
+The backtest result after adding them is the useful part, because it moved
+one thing and not the other. Ingestion reach went from "title alone would
+not match any capability" to matching both new capabilities — the pipeline
+would now surface those papers. The grade stayed `missed`, because catching
+a reversal also requires the paper filed as a source and a claim citing it
+with stance `contests`. That split is exactly the distinction the backtest
+was built to draw: the matcher gap is closed, the filing gap is not.
+
+`evaluation-validity` sits oddly beside the others and the description says
+so. It is not a property of a model. But every claim in this index rests on
+some measurement, so it is the one capability whose failures propagate into
+all the rest — including into the briefs, whose figures we check precisely
+because a measurement can be wrong in ways prose hides.
+
+Also fixed the layout the additions exposed. The capability table's header
+cells had no horizontal gutters, so "Claims Contested Status" ran together;
+and the nav, at eight links, overflowed a phone viewport and pushed the
+whole page sideways. The nav bug was mine, from adding Open questions. A nav
+that overflows breaks every screen, not just its own, so it now wraps.

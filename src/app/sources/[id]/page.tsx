@@ -39,6 +39,12 @@ export default async function SourcePage({ params }: PageProps<"/sources/[id]">)
         )}
         {s.url && <a href={s.url} className="text-sm hover:underline">{s.url}</a>}
       </header>
+      {/* The hand-written gloss reads as the lede: one or two sentences saying
+          what the paper is for. It sat below the generated brief, unlabelled,
+          which made it look like an afterthought rather than the summary it is. */}
+      {s.summary && (
+        <p className="text-base leading-relaxed text-neutral-800 dark:text-neutral-200">{s.summary}</p>
+      )}
       {s.brief && (
         <section className="space-y-3">
           <h2 className="font-semibold">In brief</h2>
@@ -58,7 +64,7 @@ export default async function SourcePage({ params }: PageProps<"/sources/[id]">)
           </p>
         </section>
       )}
-      {s.summary && <p className="text-sm text-neutral-700 dark:text-neutral-300">{s.summary}</p>}
+
       <section>
         <h2 className="font-semibold mb-1">Referenced by</h2>
         <p className="mb-2 text-xs text-neutral-500">Claims in this catalog that draw on this source, and whether as support or counterpoint.</p>

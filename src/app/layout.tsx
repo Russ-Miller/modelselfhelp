@@ -17,10 +17,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col font-sans">
         <header className="border-b border-neutral-200 dark:border-neutral-800">
-          <nav className="mx-auto max-w-5xl px-4 py-3 flex items-center gap-6 text-sm">
+          {/* Wraps rather than overflowing: eight links did not fit a phone,
+              and a nav that pushes the page sideways breaks every screen, not
+              just its own. gap-x/gap-y differ so wrapped rows stay compact. */}
+          <nav className="mx-auto flex max-w-5xl flex-wrap items-center gap-x-6 gap-y-2 px-4 py-3 text-sm">
             <Link href="/" className="font-semibold tracking-tight">modelselfhelp</Link>
             <NavLinks />
-            <a href="https://github.com/Russ-Miller/modelselfhelp" className="ml-auto hover:underline">GitHub</a>
+            <a href="https://github.com/Russ-Miller/modelselfhelp" className="hover:underline sm:ml-auto">GitHub</a>
           </nav>
         </header>
         <main className="mx-auto w-full max-w-5xl px-4 py-8 flex-1">{children}</main>
