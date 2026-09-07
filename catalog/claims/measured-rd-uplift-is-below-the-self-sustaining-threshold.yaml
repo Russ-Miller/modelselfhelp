@@ -1,0 +1,39 @@
+id: measured-rd-uplift-is-below-the-self-sustaining-threshold
+capability: evaluation-validity
+statement: >-
+  On the best current calibration, AI is not yet accelerating its own
+  development in a self-sustaining way: the modelled threshold is that a
+  one-unit gain in model capability must buy at least 15% higher AI R&D
+  productivity, and the back-of-envelope figure from reported engineer uplift
+  since coding agents launched is about 9% — below it, but rising, so the
+  gap is a current reading rather than a ceiling.
+tags: [evaluation]
+kind: observation
+backing_strength: single-paper
+observed_on:
+  era: "2026, calibrated on the Epoch Capabilities Index and reported engineer uplift"
+sources:
+  - source: elasticity-2026-economics-of-rsi
+    stance: supports
+    note: >-
+      Derives the self-sustaining acceleration condition from the elasticities
+      around the core feedback loop, then calibrates it: the condition is met
+      at roughly 15% R&D productivity gain per unit of capability, and the
+      reported figure is around 9%. States plainly that the return is not
+      constant and has been increasing, so the finding is that we are not
+      there yet, not that we cannot get there.
+contested: false
+status: active
+last_checked_at: 2026-09-07
+notes: >-
+  Filed as an observation, not a mechanism. The 15% threshold comes from a
+  model whose structure could be wrong, and the 9% is a back-of-envelope from
+  self-reported uplift — both will move. The durable part is the shape of the
+  argument, which is held separately in
+  input-telemetry-cannot-establish-self-improvement.
+
+  Relevant to this project rather than merely interesting: docs/ambitions.md
+  proposes that this system improve itself from its own catalog. This is the
+  serious attempt to say what would have to be true for that to be happening,
+  and its answer is a ratio nobody currently publishes.
+submitted_by: human:Russ-Miller
