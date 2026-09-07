@@ -1,0 +1,51 @@
+id: putting-relevant-passages-first-mitigates-position-effects
+capability: long-context-degradation
+technique: reorder-context-by-relevance
+statement: >-
+  Where a passage sits in a long input changes how much the model uses it —
+  accuracy is highest when the needed information is at the very start or the
+  very end and lowest when it is in the middle — so ordering retrieved
+  passages to put the most relevant ones first is a real lever on accuracy.
+tags: [context, rag-qa]
+kind: mechanism
+backing_strength: single-paper
+observed_on:
+  era: "2023, GPT-3.5 / Claude / open long-context models"
+sources:
+  - source: arxiv-2307-03172
+    stance: supports
+    note: >-
+      Measures the U-shaped curve directly: multi-document QA and key-value
+      retrieval accuracy drops sharply when the relevant document sits in the
+      middle of the context, and is highest at the beginning or the end.
+  - source: arxiv-2609-03148
+    stance: contests
+    note: >-
+      Contests the remedy rather than the effect. When several passages
+      genuinely conflict, whichever is placed first dominates the output, and
+      randomly permuting the evidence does not move that dominance — the skew
+      is already present in the residual-stream representation of the combined
+      prompt, so reordering cannot be the fix.
+contested: true
+disagreement_axis:
+  description: >-
+    Probably what the other passages are. The supporting result places one
+    relevant passage among distractors, where moving it out of the middle
+    recovers accuracy that position was costing. The contesting result places
+    several mutually incompatible passages of equal legitimacy, where position
+    is not degrading access to a known answer but deciding which answer wins —
+    and reordering only moves which passage occupies the winning slot. If that
+    is right, both hold, and the ordering technique is a remedy for
+    distraction rather than for conflict. I have not tested the two setups
+    against each other.
+  is_guess: true
+status: active
+last_checked_at: 2026-09-07
+notes: >-
+  Filed deliberately as an incumbent position rather than as a held belief.
+  The catalog previously recorded only claims it endorsed, which left
+  contesting evidence with nothing to attach to — the reason the backtest
+  grades known reversals as missed even when the reversing paper is on file.
+  A claim someone reasonably holds, with the evidence against it attached, is
+  more useful than its absence.
+submitted_by: human:Russ-Miller

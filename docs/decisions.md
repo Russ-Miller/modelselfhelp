@@ -764,3 +764,46 @@ the epistemics would corrode them.
 The operational form: when something looks blocked, say what would have to
 be true for it to be possible, and go test that. "This cannot work because
 X" is unfinished until X has been checked.
+
+## 2026-09-07 — File the incumbent, then contest it
+Russ and I independently drafted records for the same two papers. We agreed
+on almost everything — capability, kind, backing strength, the technique,
+the core finding. We disagreed twice on `stance_on_existing`, and both
+disagreements were the same disagreement.
+
+He marked both papers `contests` and left `related_claim_id` blank, because
+what each contests is not in this index: single-factor prompt evaluation in
+one case, position-shuffling heuristics and context-aware decoding in the
+other. I marked one `supports` and one `neither`, because I was answering
+"stance on a claim we hold" while he was answering "stance on what is
+currently believed."
+
+His reading is the more useful one, and the gap is structural. The catalog
+only ever filed claims it endorsed, so contesting evidence had nothing to
+attach to. That is also why the backtest grades known reversals as missed
+even when the reversing paper is on file: nothing records the position
+being reversed.
+
+So the rule, demonstrated here: **when a paper contests something, file the
+incumbent claim first, with its own source, then attach the contest.** The
+catalog should hold positions it does not endorse. That is what makes
+`contested: true` with sources on both sides mean anything at all, and it
+is what the disagreement_axis field is for.
+
+Filed: `putting-relevant-passages-first-mitigates-position-effects` under
+long-context-degradation, supported by Lost in the Middle and contested by
+the new knowledge-conflicts paper, with a guessed axis — that the
+supporting result places one relevant passage among distractors while the
+contesting one places several incompatible passages of equal legitimacy, so
+ordering may be a remedy for distraction and not for conflict. Separately,
+`first-evidence-dominance-is-representational-not-decoding` holds the new
+paper's own positive finding, because where a bias lives and whether a
+remedy works are different assertions.
+
+`reorder-context-by-relevance` moved from "nothing measured" to
+"contested" as a result, which is the first time a technique's standing has
+changed from evidence rather than from filing.
+
+Also worth recording: the confidence field has no stated definition, and we
+diverged on it both times — he weighted replication breadth, I weighted
+dataset realism. Two data points is enough to say the field needs a rule.

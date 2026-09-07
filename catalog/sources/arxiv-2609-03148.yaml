@@ -1,0 +1,17 @@
+id: arxiv-2609-03148
+kind: paper
+title: Large Language Models in Resolving Contextual Knowledge Conflicts
+year: 2026
+date: 2026-09-02
+arxiv_id: "2609.03148"
+url: https://arxiv.org/abs/2609.03148
+tags: [rag, knowledge-conflict, context]
+summary: >-
+  Studies conflicts that arise within the context itself rather than between
+  context and parametric knowledge, across six conflict types (factual,
+  inferential, temporal, granularity, perspective, ambiguity) on a dataset
+  called ContextConflict. Finds a first-evidence positional bias that is
+  visible in residual-stream activations, survives random reordering of the
+  evidence, and can be reduced by steering activations toward an
+  evidence-neutral centroid.
+ingested_at: 2026-09-07

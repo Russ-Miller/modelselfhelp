@@ -1095,6 +1095,13 @@ candidates:
       target in the downward view and flies toward it. On 100 closed-loop episodes in CARLA-Air's
       Town10HD scene, AGC-VLN reaches a 77.0% joint success rate, a collaboration gain of +27.0%
       over the weaker individual agent (the UAV, 50.0%"
+    proposal:
+      proposed_id: multi-agent-coordination
+      proposed_label: Coordinating with other agents
+      scope_note: Covers whether models can share information and divide roles with other model-driven
+        agents to achieve a joint goal; excludes single-agent planning or tool use.
+      rationale: The paper finds no stable cooperative behavior between aerial and ground agents in
+        collaborative navigation across state-of-the-art models.
   - openalex_id: https://openalex.org/W7208707819
     score: 11
     signals:
@@ -1135,6 +1142,8 @@ candidates:
       degrades retrieval when the first-stage ranking is already strong, and that a single
       top-ranked chunk outperforms larger contexts at generation time. Experiments were run in late
       2024-early 2025 with the models available at that time.
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7208748326
     score: 11
     signals:
@@ -1172,6 +1181,8 @@ candidates:
       0.590 to 0.679, while using 29% fewer generated tokens. These results show that preference
       optimization and verifiable-reward reinforcement learning address complementary requirements
       for reliable banking agents."
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7208745206
     score: 11
     signals:
@@ -1206,6 +1217,8 @@ candidates:
       GPU-native Jenkins hash improves null calibration by 1.8$\\times$ while producing more diverse
       text. Experiments across two seeding schemes and eight $(γ, δ)$ configurations confirm
       statistical equivalence with ROC-AUC differences below 0.01."
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7208715359
     score: 11
     signals:
@@ -1242,6 +1255,14 @@ candidates:
       baseline, raising CIDEr by 27%. On VSI-Bench, GraFT improves frozen MLLMs by up to 65%,
       surpassing every proprietary and general-purpose open-source baseline, and several prominent
       fine-tuned spatial models."
+    proposal:
+      proposed_id: spatial-reasoning
+      proposed_label: Reasoning about 3D space and viewpoints
+      scope_note: Covers metric/geometric estimation, layout, and egocentric-allocentric perspective
+        transformation from images or scenes; excludes mere object recognition or grounding to
+        visible evidence.
+      rationale: The paper shows MLLMs fail at precise geometric measurement and viewpoint transformation
+        without external 3D scene structure.
   - openalex_id: https://openalex.org/W7208747888
     score: 11
     signals:
@@ -1280,6 +1301,8 @@ candidates:
       always missed. Third, generational progress is non-monotonic, so newer models cannot be
       assumed better. Fourth, this error behavior shifts only modestly and non-monotonically across
       sampling temperatures, indicating charac"
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7208706621
     score: 11
     signals:
@@ -1310,6 +1333,8 @@ candidates:
       neighbour evidence, LLMs substantially outperform all baselines without disadvantaging
       low-resource languages. We further find that most LLM rationales are consistent with the
       provided evidence, offering a step toward explainable typological feature prediction.
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7208792383
     score: 11
     signals:
@@ -1348,6 +1373,8 @@ candidates:
       proposed benchmark and analysis provide a step towards practical, human-interpretable dataset
       introspection for autonomous driving datasets. Our implementation and benchmark dataset are
       available at https://github.com/KIT-MRT/AD-Diff"
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7208760800
     score: 10
     signals:
@@ -1387,6 +1414,8 @@ candidates:
       of LAB-Bench 2. On BixBench, Bioinfoysis achieves state-of-the-art accuracy of 82.4\\%. Across
       four underlying language models, Bioinfoysis increases average accuracy from 27.81\\% to
       64.13\\% on SeqQA2 and from 3.13\\% to 31.25\\% on DbQA2. The"
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7125566909
     score: 10
     signals:
@@ -1422,6 +1451,8 @@ candidates:
       Per-tool evidence — which suite drives it, whether it has been exercised against a real
       autopilot, how often a model chose it in the scored campaigns — is in the generated
       docs/tool_test_coverage.md.- MavSDK client-side coverage: 223 implemented and 15 do"
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7208756648
     score: 10
     signals:
@@ -1509,6 +1540,8 @@ candidates:
       on a telecom churn dataset. On a real-world Bitcoin anti-money laundering (AML) dataset
       (Elliptic) and a synthetic digital currency AML benchmark (SimECNY), KnowFeat maintains
       competitive detection performance with full provenance traceability.
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7208709424
     score: 10
     signals:
@@ -1544,6 +1577,8 @@ candidates:
       statements, and safe continuations, so that it learns to redirect unsafe generations back to
       safe responses after activation. Experiments across multiple safety and general-purpose
       benchmarks demonstrate the effectiveness of our method in post-alignment settings."
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7208730798
     score: 10
     signals:
@@ -1577,6 +1612,14 @@ candidates:
       between localized and full-table reasoning achieves the best overall performance. These
       results highlight that long-table QA requires deciding not only how to localize, but also when
       to localize. Our code and datasets will be made available upon publication of the paper.
+    proposal:
+      proposed_id: table-reasoning
+      proposed_label: Reasoning over tables
+      scope_note: Covers answering questions over structured tabular data, including locating relevant
+        rows/columns and aggregating across large tables; excludes free-text QA and generic
+        long-context effects.
+      rationale: The paper shows LLM table QA accuracy degrades with table size and varies by question
+        type requiring evidence localization.
   - openalex_id: https://openalex.org/W7208715321
     score: 10
     signals:
@@ -1612,6 +1655,12 @@ candidates:
       LiveCodeBench, TCS improves both pass@1 and inference-time answer selection according to
       generated tests. We find the learned test generator also enables effective selection among
       other LLM outputs."
+    proposal:
+      proposed_id: test-generation
+      proposed_label: Writing tests that expose bugs
+      scope_note: Covers generating sound and discriminative test cases or counterexamples that reveal
+        faults in code; excludes writing the implementation itself.
+      rationale: The paper trains and evaluates models on generating sound, adversarial test cases for code.
   - openalex_id: https://openalex.org/W7208741194
     score: 9
     signals:

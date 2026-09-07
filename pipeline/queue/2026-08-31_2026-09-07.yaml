@@ -1,0 +1,318 @@
+window:
+  from: 2026-08-31
+  to: 2026-09-07
+generated_at: 2026-09-07
+candidates:
+  - openalex_id: https://openalex.org/W7208838799
+    score: 15
+    signals:
+      - +benchmark
+      - +failure
+      - +proposes-method
+      - +training-method
+      - +architecture
+      - +mitigation
+    title: "Caught in the Story: Narrative Captivity in Multi-turn LLMs Conversation"
+    date: 2026-09-03
+    arxiv_id: "2609.03407"
+    authors:
+      - Yuhe Wu
+      - Guangyu Wang
+      - Yujie Chen
+      - Jiatong Zhang
+      - Yuran Chen
+      - Yutong Zhang
+    venue: arXiv (Cornell University)
+    topic: Topic Modeling
+    cited_by_count: 0
+    abstract: "People increasingly turn to large language models (LLMs) for everyday advice, making
+      ethically charged interpersonal problems a practical moral-advisory context. Most prior work
+      has studied this context through single-turn judgments or pressure-laden rebuttals,
+      assumptions that poorly match how guidance is sought in real-world contexts. These assumptions
+      leave unclear whether narration alone, without an explicit opposing position, can shift model
+      judgments during multi-turn moral consultation. Yet real-world moral-conflict conversation
+      often elicits one party's self-justifying account, which can unfold over multiple turns and
+      create information asymmetry. We introduce \\textbf{narrative captivity}, a failure mode in
+      which a model treats an unopposed one-sided account as complete and aligns with the narrator's
+      interpretation without seeking missing perspectives. To measure this phenomenon, we build a
+      benchmark of $5{,}078$ interpersonal-conflict scenarios spanning six moral dimensions. Across
+      17 LLMs, narrative captivity is widespread: end-state judgments under multi-turn narration
+      shift by 25 percentage points on average beyond the matched single-turn baseline. Stage-level
+      analysis identifies preference optimization as a major contributor, while four inference-time
+      strategies provide only partial mitigation. We hope our project fosters LLM advisors that
+      preserve independent judgment in real-world consultation."
+    proposal:
+      suggests_new_capability: false
+  - openalex_id: https://openalex.org/W7161928209
+    score: 15
+    signals:
+      - +benchmark
+      - +evaluation
+      - +failure
+      - +robustness
+      - +finding
+      - +outperforms
+      - +mitigation
+    title: "Code Transformation Rule Synthesis using LLMs: Potential and Limits"
+    date: 2026-09-03
+    arxiv_id: "2609.03592"
+    doi: https://doi.org/10.48550/arxiv.2609.03592
+    authors:
+      - Axel Allain
+      - Aymeric Blot
+      - Khelladi, Djamel, Eddine
+      - Mathieu Acher
+    venue: arXiv (Cornell University)
+    topic: Software Engineering Research
+    cited_by_count: 0
+    abstract: "Due to their black-box nature, LLMs suffer from limited explain- ability and a lack of
+      determinism. Their usage cost can also rise, particularly with repetitive tasks on large
+      codebases. To mitigate this, we conduct a novel empirical study targeting three domain-
+      specific languages for transformation rules, namely Comby, GritQL, and Ast-Grep. We evaluate
+      three LLMs (GPT-5.4, GPT-oss-120B, and Llama3.1-8B) on six diverse datasets covering four
+      software- evolution tasks: API misuse correction, program repair, API migra- tion, and
+      language version migration. Our results provide evidence that transformation rule synthesis
+      moves beyond proof-of-concept with strong frontier models. GPT-5.4 achieves consistently high
+      rule applicability rates and produces transformations closest to the ground truth across most
+      benchmarks. Smaller and open-weight GPT-oss-120B and Llama3.1-8B models remain effective for
+      simpler, localized changes but struggle with complex migration scenarios. We also observe
+      non-negligible generalizability through the usage of meta-variables and through a high reuse
+      score in the first quartile of many datasets. Finally, when compared to the anti-unification
+      algorithm, LLMs outperform it in correctness, but underperform in rule applicability. Overall,
+      our results show great potential for LLMs to generate sound, correct, generalizable, and
+      reusable rules."
+    proposal:
+      suggests_new_capability: false
+  - openalex_id: https://openalex.org/W7208838791
+    score: 13
+    signals:
+      - +benchmark
+      - +evaluation
+      - +analysis
+      - +improves
+      - +proposes-method
+      - +training-method
+    title: "SVG-Score: Human-Aligned Evaluation of Text-to-SVG Generation"
+    date: 2026-09-03
+    arxiv_id: "2609.03806"
+    authors:
+      - Marco Cipriano
+      - Leonardo Zini
+      - Alexandra Schild
+      - Valentin Teutschbein
+      - Afsana Mimi
+      - Marcella Cornia
+    venue: arXiv (Cornell University)
+    topic: Multimodal Machine Learning Applications
+    cited_by_count: 0
+    abstract: "Scalable Vector Graphics (SVG) generation is attracting increasing attention as
+      generative models improve in expressiveness and controllability. Progress, however, is held
+      back by the lack of domain-specific evaluation protocols: current practice relies on metrics
+      designed for natural images, most notably CLIPScore, which was never trained on vector
+      graphics and aligns only partially with human judgment. We introduce \\textbf{\\ours}, a
+      human-aligned evaluation framework for text-to-SVG generation. Through controlled caption and
+      image perturbations, we first show that CLIP-based scores barely react to the errors SVG
+      generators actually make, such as wrong colors, counts, and spatial relations, and that
+      off-the-shelf Vision-Language Model (VLM) judges, while more sensitive, respond unevenly
+      across error types and SVG styles. We then introduce a human-annotated dataset for
+      \\textit{Semantic Alignment}, measuring how faithfully a generated SVG reflects its caption.
+      Building on it, we develop two complementary evaluators: CLIP scorers adapted to vector
+      graphics and then aligned to human preferences, for fast large-scale evaluation, and a VLM
+      judge trained with supervised fine-tuning and reward-shaped reinforcement learning, for more
+      expressive and interpretable assessment. Using both, we benchmark major open-source,
+      commercial, and optimization-based SVG generators on an independent caption set."
+    proposal:
+      suggests_new_capability: false
+  - openalex_id: https://openalex.org/W7208838840
+    score: 12
+    signals:
+      - +benchmark
+      - +evaluation
+      - +finding
+      - +named-model
+      - +outperforms
+      - +improves
+      - +proposes-method
+    title: To What Extent Do Large Language Models Understand Bangla Idioms?
+    date: 2026-09-03
+    arxiv_id: "2609.03410"
+    authors:
+      - Mousumi Akter
+      - Md. Faiyaz Abdullah Sayeedi
+      - Nurul Labib Sayeedi
+      - Swakkhar Shatabda
+    venue: arXiv (Cornell University)
+    topic: Natural Language Processing Techniques
+    cited_by_count: 0
+    abstract: "Idiomatic expressions are an integral part of natural language, reflecting cultural
+      nuances and posing unique challenges for computational models, particularly in low-resource
+      languages. In this paper, we present the first large-scale benchmark dataset of Bangla idioms,
+      complemented by a synthetic multiple-choice question (MCQ) dataset for idiom meaning
+      identification. We conduct a comprehensive evaluation of recent large language models (LLMs)
+      across three idiom-related tasks: paraphrasing, idiom span detection, and meaning
+      identification, leveraging zero-shot and few-shot prompting strategies. Our results reveal
+      substantial variability in model performance, with no single LLM consistently outperforming
+      others across all tasks. Notably, Phi-4-mini-instruct excels in paraphrasing,
+      Kimi-K2-32b-instruct in span detection, and Gemini-2.5-flash in meaning identification. We
+      believe that our datasets and analyses will provide valuable resources to guide future
+      research in improving LLM comprehension of idiomatic expressions, particularly in Bangla and
+      other low-resource languages."
+    proposal:
+      proposed_id: figurative-language-understanding
+      proposed_label: Understanding idioms and figurative language
+      scope_note: Covers interpreting idioms, metaphors, and non-literal expressions (including in
+        low-resource languages); excludes general translation quality or factual recall.
+      rationale: The paper benchmarks LLMs on Bangla idiom paraphrasing, span detection, and meaning
+        identification, a non-literal comprehension skill not covered by existing entries.
+  - openalex_id: https://openalex.org/W7208838826
+    score: 5
+    signals:
+      - +evaluation
+      - +robustness
+      - +finding
+      - +proposes-method
+      - -recsys
+    title: "Epistemic Warrant for LLM Recommendations: Characterizing the Basis for Reliance When Ground
+      Truth Is Unavailable"
+    date: 2026-09-03
+    arxiv_id: "2609.04127"
+    authors:
+      - Shai Vardi
+      - João Sedoc
+    venue: arXiv (Cornell University)
+    topic: Mobile Crowdsensing and Crowdsourcing
+    cited_by_count: 0
+    abstract: "Large language models are increasingly used to support organizational decisions, yet
+      users often lack a principled basis for assessing whether to rely on a specific
+      recommendation. Existing approaches typically evaluate broad model properties, such as
+      reliability, uncertainty, or robustness, or focus on user trust, rather than the underlying
+      basis for relying on an individual recommendation. Adapting theoretical foundations from
+      epistemology, we introduce epistemic warrant, a decision-level construct that characterizes
+      the stability of a model's preference and the scope over which that preference holds. We
+      operationalize this construct through a four-tier reliance certificate for pairwise
+      recommendations, distinguishing among unstable, context-dependent, locally supported, and
+      broadly supported recommendations. We validate the construct using contemporary methodologies:
+      known-groups tests successfully recover expert-prespecified warrant orderings, and stronger
+      warrants systematically align with independent consensus from crowd workers. Furthermore, we
+      demonstrate that epistemic warrant provides information distinct from verbalized confidence
+      and is not readily explained by decision difficulty. Ultimately, this framework offers a
+      theoretically grounded, implementable approach for characterizing the warrant of individual
+      LLM recommendations when objective ground truth is unavailable."
+  - openalex_id: https://openalex.org/W7165817702
+    score: 5
+    signals:
+      - +hallucination
+      - +mitigation
+    capabilities:
+      - hallucination
+    title: "Hallucination Is Generative Memory With Its Verifier Turned Down: One Constraint Axis Links
+      Dreaming Sleep and LLM Confabulation"
+    date: 2026-09-05
+    arxiv_id: "2606.21666"
+    doi: https://doi.org/10.5281/zenodo.22314159
+    authors:
+      - Carson Rodrigues
+    venue: arXiv (Cornell University)
+    topic: Logic, Reasoning, and Knowledge
+    cited_by_count: 0
+    abstract: "Dreaming and large language model hallucination are usually studied apart, one as biology
+      and the other as engineering. We argue they are two expressions of a single computation:
+      generative reconstruction from distributed memory under incomplete constraints. Neither the
+      sleeping brain nor an autoregressive model retrieves stored records; both synthesize output by
+      recombining learned representations, and both produce fluent, structured content that can
+      depart from fact. We organize the two systems with a four-stage account, encoding, latent
+      representation, generative reconstruction, and reality verification, and argue that the
+      difference between a reliable output and a hallucination or a dream is governed by one
+      variable: the strength of the constraints and verification acting on the generator. In the
+      brain these are sensory evidence and prefrontal control, both attenuated in REM sleep; in a
+      model they are grounding and external checking, both absent in free decoding. We state where
+      the mapping holds and where it breaks (it is computational, not phenomenal, and dreaming may
+      be adaptive where hallucination is an unselected byproduct), and we separate our claim from
+      accounts that treat dreams as training-time regularization or hallucination as narrativity. On
+      this view, hallucination is the expected behavior of a generative memory whose verification
+      channel is turned down, not a discrete defect. We recast mitigation as restoring verification
+      rather than removing generation, conn"
+    verdicts:
+      - capability: hallucination
+        about_capability: true
+        direction: measures
+        confidence: medium
+        rationale: The paper offers an explanatory account of hallucination as unconstrained generative
+          reconstruction rather than proposing or breaking a technique.
+        scope_condition: Conceptual/theoretical framework analogizing LLM confabulation to REM dreaming; no
+          experiments
+        classified_at: 2026-09-07
+        model: claude-opus-5
+  - openalex_id: https://openalex.org/W7208838801
+    score: 3
+    signals:
+      - +evaluation
+      - +agentic
+    title: "RASER: Resilient Agent Scheduling and Execution Runtime for HPC Clusters"
+    date: 2026-09-03
+    arxiv_id: "2609.03598"
+    authors:
+      - Sima Attar-Khorasani
+      - Matthias Lieber
+      - Siavash Ghiasvand
+    venue: arXiv (Cornell University)
+    topic: Distributed and Parallel Computing Systems
+    cited_by_count: 0
+    abstract: The emergence of modern agents powered by large language models has created a demand for
+      executing long-horizon, autonomous workflows in various domains that require significant
+      computational resources. While High Performance Computing clusters provide the ideal
+      infrastructure for these computation-intensive workloads, traditional HPC job schedulers such
+      as Slurm are not designed for dynamic, agentic workflows characterized by unpredictable task
+      durations, external API calls, and fault tolerance requirements of modern agents. This work
+      presents RASER, a user-space framework that enables seamless execution of agentic workflows on
+      production HPC clusters by extending Slurm's internal primitives. RASER introduces agentic job
+      arrays with work stealing via shared filesystem queues, user-space checkpointing through
+      application-level state serialization combined with Slurm requeue, and Apptainer
+      container-based isolation without requiring any image modifications. Evaluations demonstrate
+      that RASER reduces makespan by nearly 39% compared to static partitioning while achieving
+      near-full CPU utilization. RASER provides resilience against preemption and failures while
+      maintaining minimal checkpoint/restore overhead. It requires no kernel privileges or external
+      database infrastructure, making it an accessible solution for deploying agentic workflows on
+      existing HPC infrastructure.
+  - openalex_id: https://openalex.org/W7208838822
+    score: -2
+    signals:
+      - +evaluation
+      - -education
+    capabilities:
+      - long-term-memory
+    title: A Prompt-Engineering Approach to Develop Scalable, Flexible, and Real-Time Hybrid Micro-Level
+      Personalization in a General Purpose AI Teaching Assistant
+    date: 2026-09-03
+    arxiv_id: "2609.03402"
+    authors:
+      - Saptarshi Basu
+      - Sandeep Kakar
+      - Ashok Goel
+    venue: arXiv (Cornell University)
+    topic: Intelligent Tutoring Systems and Adaptive Learning
+    cited_by_count: 0
+    abstract: "Artificial intelligence (AI) teaching assistants powered by large language models (LLMs)
+      offer scalable educational support but often provide limited personalization. This study
+      presents a prompt-engineering-based framework for personalizing general-purpose LLM/RAG-based
+      AI teaching assistants such as Jill Watson across academic disciplines and courses. The
+      framework adapts responses using six learner-specific dimensions: self-assessment, abstraction
+      preference, verbosity preference, perceptual orientation, information processing style, and
+      level of understanding, yielding 96 distinct learner profiles. Student queries are
+      additionally analyzed using Bloom's Taxonomy to estimate cognitive complexity at the
+      interaction level. Learner attributes and cognitive assessments are encoded in structured
+      prompts that condition the LLM without requiring model retraining. The framework is evaluated
+      through experiments using NLP metrics and a human study with five participants. Results show
+      perceived differences in response style and structure across personalization conditions, with
+      statistical analyses identifying learner attributes associated with measurable response
+      changes. These findings provide preliminary evidence that prompt-based personalization can
+      support adaptive behavior in LLM-powered educational agents."
+    verdicts:
+      - capability: long-term-memory
+        about_capability: false
+        direction: not_applicable
+        confidence: high
+        rationale: The paper is about prompt-based personalization profiles in an educational assistant, not
+          about recalling facts or preferences across prior sessions.
+        classified_at: 2026-09-07
+        model: claude-opus-5

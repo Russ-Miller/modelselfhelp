@@ -1,0 +1,37 @@
+arxiv_id: "2608.30959"
+title: "LOCI: A Locator-Critic with Refinement Loop"
+url: https://arxiv.org/abs/2608.30959
+drafted_at: 2026-09-07
+drafted_from: full-text
+model: claude-opus-5
+status: draft — not filed. Review, edit, then move into catalog/ by hand.
+capability: self-repair
+statement: In multi-step visual QA, a critic step run by the same model
+  improves final accuracy only when it is shown the candidate evidence alone
+  and denied the generator's textual rationale; conditioned on that rationale,
+  the critic ratifies the generator's initial hypothesis and the loop performs
+  worse than no critic at all.
+kind: mechanism
+backing_strength: single-paper
+scope_condition: Frontier VLMs (Gemini 2.5 Pro, Qwen3-VL, GPT-5, Grok) on
+  high-resolution visual search benchmarks where the bottleneck is locating a
+  small detail, not reasoning; critic and generator are the same underlying
+  model differentiated by prompt.
+technique: ""
+proposed_technique: Critic blinded to the generator's rationale
+stance_on_existing: supports
+related_claim_id: self-critique-without-grounding-unreliable
+stance_reason: Text-only Self-Refine scored below direct prompting on V*, and
+  a locate-verify-answer loop where the verifier saw the model's own reasoning
+  was 6.8 points below the same loop with the reasoning withheld.
+falsifier: An ablation on comparable visual-search tasks where feeding the
+  locator's textual reasoning to the critic matches or beats the crops-only
+  critic, or where critic-in-the-loop gains persist regardless of what the
+  critic sees.
+evidence_note: "Ablation on V* with Gemini 2.5 Pro: direct 83.8, locator only
+  89.2, locator+critic seeing crops only 92.7, locator+critic also seeing
+  locator text 87.2; plus a token-matched baseline comparison (Explicit
+  Locate-Verify-Answer 85.9). Single benchmark for the ablation, one backbone;
+  the headline gains replicate across four VLMs and three benchmarks but the
+  blinding ablation itself does not."
+confidence: medium

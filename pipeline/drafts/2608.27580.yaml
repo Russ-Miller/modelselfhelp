@@ -1,0 +1,37 @@
+arxiv_id: "2608.27580"
+title: "LongGuard: Mechanistic Analysis and Training-Free Mitigation of
+  Long-Context Failure in Safety Guardrails"
+url: https://arxiv.org/abs/2608.27580
+drafted_at: 2026-09-07
+drafted_from: full-text
+model: claude-opus-5
+status: draft — not filed. Review, edit, then move into catalog/ by hand.
+capability: long-context-degradation
+statement: "For safety guardrail classifiers, long-context failure is caused
+  by proportional dilution of the unsafe evidence rather than by absolute
+  input length: as the flagged span's share of the input shrinks, attention
+  mass on it falls, the unsafe-minus-safe logit margin compresses, and unsafe
+  recall collapses, while filling the same length with copies of the unsafe
+  text leaves recall largely intact."
+kind: mechanism
+backing_strength: single-paper
+scope_condition: Open guardrail classifiers (7B-20B) judging a short labeled
+  span embedded in neutral filler, 0.25k-32k words; filler from Wikipedia,
+  chat logs, code, and Chinese text. Safe recall is largely unaffected.
+technique: ""
+proposed_technique: Chunked detection plus attention-head sharpening for long-context guardrails
+stance_on_existing: neither
+related_claim_id: ""
+stance_reason: ""
+falsifier: A paired design in which unsafe recall drops as much when the
+  context is filled with repeated copies of the unsafe needle as when it is
+  filled with benign text, or where recall tracks absolute length rather than
+  needle share.
+evidence_note: "15 guardrails on a 30,400-sample synthetic benchmark: mean
+  unsafe recall change -50.1 points vs -1.3 for safe recall; Benign-Fill drops
+  76.0 to 25.1 while the Needle-Repeat control drops only 85.4 to 67.5. Six
+  models analyzed for attention and logit margin, with partial correlations
+  controlling for log length. Restricting visible context to the needle raises
+  recall; keeping equal random filler lowers it. All needles are synthetically
+  inserted, so real-world long prompts may dilute differently."
+confidence: medium

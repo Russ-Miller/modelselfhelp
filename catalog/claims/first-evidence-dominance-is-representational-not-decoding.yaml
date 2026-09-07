@@ -1,0 +1,38 @@
+id: first-evidence-dominance-is-representational-not-decoding
+capability: fact-verification
+statement: >-
+  Given several conflicting but equally legitimate passages, a model's answer
+  is driven disproportionately by whichever passage comes first, and the skew
+  sits in the representation of the combined prompt rather than in decoding —
+  which is why reordering the passages does not remove it and why steering the
+  activations does.
+tags: [knowledge, rag-qa]
+kind: mechanism
+backing_strength: single-paper
+observed_on:
+  era: "2026, seven models from 8B to 120B, open and closed"
+sources:
+  - source: arxiv-2609-03148
+    stance: supports
+    note: >-
+      Shapley attribution over evidence pieces gives the first passage a large
+      majority of the contribution, a layer-wise projection shows combined
+      activations shifted toward the first evidence at every layer, a
+      reordering control leaves the dominance in place, and steering toward an
+      evidence-neutral centroid raises accuracy — a causal handle on the
+      proposed mechanism.
+  - source: arxiv-2305-13300
+    stance: supports
+    note: >-
+      The prior account of which conflicting source wins: models follow the
+      majority and lean toward their own prior. Position is an additional
+      determinant alongside those, not a replacement for them.
+contested: false
+status: active
+last_checked_at: 2026-09-07
+notes: >-
+  Held apart from the claim about reordering because they are different
+  assertions. This one says where the bias lives; that one says whether a
+  remedy works. The dataset is partly semi-synthetic and real retrieval is
+  untested, which is why this is single-paper and why the era is recorded.
+submitted_by: human:Russ-Miller

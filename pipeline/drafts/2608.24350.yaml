@@ -1,0 +1,36 @@
+arxiv_id: "2608.24350"
+title: "FARCA: Fact-Aligned Reliability-Aware Credit Assignment for
+  Reinforcement Learning with Factual Supervision"
+url: https://arxiv.org/abs/2608.24350
+drafted_at: 2026-09-07
+drafted_from: full-text
+model: claude-opus-5
+status: draft — not filed. Review, edit, then move into catalog/ by hand.
+capability: fact-verification
+statement: When training small instruction-tuned models with reinforcement
+  learning plus factual supervision, routing each atomic fact's verification
+  score only to the tokens that produced it, and down-weighting verifier
+  judgements that do not change when their key evidence is removed, improves
+  factuality benchmark scores over trajectory-level or reasoning-step-level
+  factual rewards.
+kind: mechanism
+backing_strength: single-paper
+scope_condition: 3B-parameter instruct models (Qwen2.5-3B-Instruct,
+  Llama-3.2-3B-Instruct), GRPO-style RL on multi-hop QA with Wikipedia
+  evidence snippets, GPT-4o for fact extraction and NLI verifier for scoring;
+  not tested on larger models.
+technique: ""
+proposed_technique: fact-aligned reliability-weighted token credit
+stance_on_existing: neither
+related_claim_id: ""
+stance_reason: ""
+falsifier: An ablation or replication where token-level routing and
+  reliability weighting give no gain over step-level factual rewards, or where
+  coarse aggregation matches it once tuned equally.
+evidence_note: Two 3B models, four hallucination benchmarks and four math
+  benchmarks; FARCA beats KnowRL, FSPO, FaithRL and plain GRPO by roughly
+  1.75-2.21 average points. Ablations remove token provenance and reliability
+  estimation separately, each dropping scores, which isolates the two
+  components. Small models only, single seed reported, and the pipeline
+  depends on GPT-4o extraction so the comparison is not compute-matched.
+confidence: low
