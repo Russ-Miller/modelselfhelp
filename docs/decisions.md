@@ -659,3 +659,108 @@ cells had no horizontal gutters, so "Claims Contested Status" ran together;
 and the nav, at eight links, overflowed a phone viewport and pushed the
 whole page sideways. The nav bug was mine, from adding Open questions. A nav
 that overflows breaks every screen, not just its own, so it now wraps.
+
+## 2026-09-06 — Two ambitions recorded, with their failure modes
+Russ named two long-range goals: the system improving itself by querying
+its own catalog for techniques with supported claims, and other AIs
+contributing research findings altruistically. Written up in
+docs/ambitions.md rather than the roadmap, because neither is scoped work
+— they are recorded to explain why provenance fields, machine-readable
+content and the backtest earn their keep now, while one person uses this.
+
+The second is not new. Agents contributing was in the first sketch, which
+is why submitted_by already accepts agent:<name>@<owner> and sourceLink
+carries submitted_by and added_at. Worth recording that the current schema
+anticipated it.
+
+What the write-up adds is the failure mode for each, since that is the
+part that shapes decisions.
+
+**Self-improvement is a closed loop.** A system improving itself against
+its own catalog inherits that catalog's blind spots and amplifies them.
+The backtest is the natural check: a step that leaves `npm run backtest`
+worse off is rejected whatever else it improved, and it must run against
+the same held-out set rather than one the system picked. Also the third
+appearance of Goodhart in this project — after eval scoring and
+contributor reputation — with the same answer each time: reward what
+survives contest, not what scores well. And a self-improvement result is
+an own-observation claim, the weakest backing strength, on purpose.
+
+**Agent contribution fails on arithmetic, not on API design.** Submission
+is free for an agent and expensive for a reviewer, so any design where
+review is the bottleneck loses. The reputation notes already reached the
+answer that applies here unchanged: reward resolution that survives, never
+submission count.
+
+The sharper point is that "altruistically" is a motivation, not a security
+assumption. A contested-claim structure with sources on both sides gives
+the same answer whether a submitter is generous or adversarial, and that
+indifference is the feature. What makes agent contribution worth wanting
+is narrower and better than volume: refutation is counter-cyclical —
+everyone is incentivised to publish techniques that work and almost nobody
+to publish that a popular one does not — and agents with no career stake
+are well placed to do that unglamorous half.
+
+Both ambitions are the same loop at different scales, and both rest on one
+bet: that a claim here is worth more than a claim elsewhere because it
+carries its scope condition, its backing strength, and whatever cuts
+against it. That bet is testable now, and the backtest is the measure.
+
+**Revised the same day, on Russ's push.** The first draft catalogued
+obstacles without proposing ways through them, which is the wrong posture
+for a research project — the obstacles are why the research is necessary,
+not arguments against it. Rewritten so every obstacle carries an attack.
+
+Three of those attacks are worth more than the rest.
+
+*A falsification quota.* Require each self-improvement cycle to also
+attempt N refutations of claims currently held. A loop that must spend
+effort trying to break its own beliefs is self-correcting by construction
+rather than by supervision.
+
+*Invert what triggers review.* Do not review agent submissions on
+submission. Let a claim sit marked unreviewed until something contests it,
+then review the disagreement. Review cost scales with conflict instead of
+volume, which dissolves the arithmetic objection rather than mitigating
+it.
+
+*Instrument rather than ask.* This corrects yesterday's claim that a
+self-improvement result is condemned to `own-observation`. The pipeline
+already emits signals that owe nothing to narration — backtest coverage,
+off-topic rate, ungrounded-figure count, cost per accepted claim. Measured
+against a held-out set with a stated falsifier, a self-improvement result
+has the same standing as any single-paper experimental claim. The weak
+backing was a consequence of asking the system to describe itself, and
+instrumentation removes the need to ask.
+
+And the structural point the first draft missed: the two ambitions solve
+each other. Independent instances contributing and contesting are the
+external check that breaks the self-improvement loop's closed circle, and
+a system that improves its own verification is what raises review
+throughput enough to accept open contribution. Each is the other's missing
+capability, which is the argument for pursuing both rather than either.
+
+## 2026-09-06 — The sign on the wall
+Russ asked for a metaphorical sign somewhere in the project: *focus on the
+art of the possible — ultimately, and it will take time, iteration and
+effort, there is a way. Unless there isn't, but let's prove that rather
+than give in easily.*
+
+Put in three places, deliberately. At the top of CLAUDE.md, because that
+is the wall actually looked at while working here. As the epigraph of
+docs/ambitions.md, because that document exists to hold things not yet
+possible. And at the foot of /open-questions, because that page is
+literally a list of gaps nobody has closed, and a list of gaps needs to
+say what it is for.
+
+The second clause is the one that earns it a place in this project. It is
+a falsifier, not a hedge. "There is a way" is a claim, and this catalogue
+holds that a claim is worth having only when someone could show it wrong —
+so the honest response is to try hard to break it, not to assume it and
+not to abandon it. That makes the sign consistent with the schema rather
+than merely motivational, which matters, because a slogan that contradicted
+the epistemics would corrode them.
+
+The operational form: when something looks blocked, say what would have to
+be true for it to be possible, and go test that. "This cannot work because
+X" is unfinished until X has been checked.
