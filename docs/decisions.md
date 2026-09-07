@@ -848,3 +848,38 @@ fixed held-out set — rather than reporting how much work happened.
 Worth noting what just occurred: an informal source materially improved
 the project's own reasoning within a day of being written. That is the
 argument for `kind: post`, made by the first instance of it.
+
+## 2026-09-07 — A review page, because review is the bottleneck
+The drafter can produce claims far faster than anyone can read them, which
+makes "more drafts" an input rather than progress — our own green box, in
+the language filed this morning. The outcome variable is claims filed that
+survive contest, and the only thing between a draft and that is a human
+verdict. So the highest-leverage build was not more pipeline.
+
+/drafts renders each proposal with the three things a verdict actually
+needs: the statement, the capability, and — collapsed but present — every
+claim that capability already holds. The stance question is unanswerable
+without that last part, and reading it out of YAML meant opening several
+files per draft.
+
+Verdicts are accept / edit / reject plus a note, kept in localStorage and
+exported as text to paste back into the conversation. The site is static
+and has nowhere to POST, and inventing a backend for this would be the
+later-phase platform work the reframe deliberately deferred. Pasting text
+is honest about the architecture and keeps filing a deliberate act, which
+is the property worth protecting.
+
+Flagged drafts sort first, since those are the ones that must not be
+skimmed.
+
+Two things worth recording from building it. The setState-in-effect lint
+error appeared again, in the same shape as the filter bar: mirroring
+external state into React state and syncing it in an effect. The fix was
+the same, useSyncExternalStore over localStorage, with a cached raw string
+so getSnapshot returns a stable reference. Twice now means it is a pattern
+to reach for first, not a rule to work around.
+
+And the drafts vanished mid-build: an earlier `git add -A` had committed
+them onto a feature branch, so checking out main deleted them. Untracked
+working files that matter should be either committed deliberately or kept
+outside the repo, not left to whichever branch happened to capture them.

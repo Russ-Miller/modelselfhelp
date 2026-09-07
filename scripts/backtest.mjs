@@ -27,7 +27,6 @@ const { reversals } = YAML.parse(fs.readFileSync("docs/known-reversals.yaml", "u
 const catalog = loadCatalog();
 const sources = new Map(catalog.sources.map((s) => [s.data.id, s.data]));
 const claims = catalog.claims.map((c) => c.data);
-const capabilities = catalog.capabilities.map((c) => c.data);
 
 /**
  * Would ingestion have surfaced this paper? Calls the pipeline's own matcher
