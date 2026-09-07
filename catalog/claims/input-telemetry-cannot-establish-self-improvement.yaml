@@ -1,0 +1,36 @@
+id: input-telemetry-cannot-establish-self-improvement
+capability: evaluation-validity
+statement: >-
+  Reporting how much a lab's models are used in its own research — tokens,
+  lines of code, inference compute, experiments per researcher — cannot show
+  that the models are accelerating the research, because every one of those
+  is an input. Establishing the loop needs an outcome variable over time:
+  algorithmic efficiency as a function of capability, which is the edge that
+  turns a pipeline into a feedback loop.
+tags: [evaluation]
+kind: mechanism
+backing_strength: mechanism-reasoning
+sources:
+  - source: post-wu-rsi-outcome-variables
+    stance: supports
+    note: >-
+      Sets out the causal graph and marks each node by whether it was
+      disclosed. Inference and experimental compute are reported; algorithmic
+      improvements, algorithmic efficiency and capabilities are not; and the
+      one edge marked "what we need to measure" is capability feeding back
+      into the rate of improvement. Effort spent is not effect achieved.
+contested: false
+status: active
+last_checked_at: 2026-09-07
+notes: >-
+  Filed as mechanism-reasoning, not single-paper. The argument is structural
+  and holds on its own — an input cannot evidence an output — and the source
+  is a post rather than a study, so it can originate the claim but not carry
+  measurement behind it. That ceiling is deliberate for kind: post.
+
+  Recorded here because this catalog is subject to the same test. Its
+  ambitions include improving itself from its own contents, and the honest
+  measure of that is not tokens spent or drafts produced but a held-out
+  outcome that moves — which is what npm run backtest exists to be. Anything
+  else is our own green boxes.
+submitted_by: human:Russ-Miller

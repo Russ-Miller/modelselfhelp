@@ -764,3 +764,87 @@ the epistemics would corrode them.
 The operational form: when something looks blocked, say what would have to
 be true for it to be possible, and go test that. "This cannot work because
 X" is unfinished until X has been checked.
+
+## 2026-09-07 — File the incumbent, then contest it
+Russ and I independently drafted records for the same two papers. We agreed
+on almost everything — capability, kind, backing strength, the technique,
+the core finding. We disagreed twice on `stance_on_existing`, and both
+disagreements were the same disagreement.
+
+He marked both papers `contests` and left `related_claim_id` blank, because
+what each contests is not in this index: single-factor prompt evaluation in
+one case, position-shuffling heuristics and context-aware decoding in the
+other. I marked one `supports` and one `neither`, because I was answering
+"stance on a claim we hold" while he was answering "stance on what is
+currently believed."
+
+His reading is the more useful one, and the gap is structural. The catalog
+only ever filed claims it endorsed, so contesting evidence had nothing to
+attach to. That is also why the backtest grades known reversals as missed
+even when the reversing paper is on file: nothing records the position
+being reversed.
+
+So the rule, demonstrated here: **when a paper contests something, file the
+incumbent claim first, with its own source, then attach the contest.** The
+catalog should hold positions it does not endorse. That is what makes
+`contested: true` with sources on both sides mean anything at all, and it
+is what the disagreement_axis field is for.
+
+Filed: `putting-relevant-passages-first-mitigates-position-effects` under
+long-context-degradation, supported by Lost in the Middle and contested by
+the new knowledge-conflicts paper, with a guessed axis — that the
+supporting result places one relevant passage among distractors while the
+contesting one places several incompatible passages of equal legitimacy, so
+ordering may be a remedy for distraction and not for conflict. Separately,
+`first-evidence-dominance-is-representational-not-decoding` holds the new
+paper's own positive finding, because where a bias lives and whether a
+remedy works are different assertions.
+
+`reorder-context-by-relevance` moved from "nothing measured" to
+"contested" as a result, which is the first time a technique's standing has
+changed from evidence rather than from filing.
+
+Also worth recording: the confidence field has no stated definition, and we
+diverged on it both times — he weighted replication breadth, I weighted
+dataset realism. Two data points is enough to say the field needs a rule.
+
+## 2026-09-07 — Informal sources, and naming our own green boxes
+Two changes from one X post.
+
+**`kind: post`.** A Source can now be informal writing. Posts are good at
+exactly what papers are bad at for our purposes: they carry the incumbent
+beliefs nobody writes a paper to assert, they carry negative results, and
+practitioners state scope conditions that papers generalise away. Given
+yesterday's rule — file the incumbent, then contest it — informal writing
+is the natural supply of incumbents.
+
+They are weak as backing and the schema says so: own-observation is the
+ceiling, never replicated. And `archived_text` with `retrieved_at` is
+*required*, enforced by a conditional in the schema and verified by
+deleting the field and watching validation fail. Papers can be re-fetched
+years later; posts are edited and deleted, and a citation that quietly
+stops being checkable is worse than one never made. This project has
+already been handed two fabricated paper titles; an unarchived post would
+be the same failure with no way to detect it.
+
+**Our own green boxes.** Cheryl Wu's critique of OpenAI's
+research-acceleration disclosure gave a sharper version of an argument
+already in docs/ambitions.md, plus a method: draw the causal graph, colour
+each node by whether you have data on it. Her point compresses to one
+line — effort spent is not effect achieved — and everything OpenAI
+reported was upstream of the loop the claim was about.
+
+Applied to us, honestly: everything we measure is an input. Candidates
+fetched, drafts produced, cost per paper, tokens. `npm run backtest` is the
+only outcome measure in the project. Cost per paper is our tokens-and-
+lines-of-code — real, reportable, evidence of nothing.
+
+So ambition 1 is now stated as Wu's blue arrow drawn for us: does a
+technique taken from this catalogue, applied to a stage of this pipeline,
+move a held-out outcome? And the first experiment names its outcome
+variable up front — stage-2 about_capability false-positive rate on a
+fixed held-out set — rather than reporting how much work happened.
+
+Worth noting what just occurred: an informal source materially improved
+the project's own reasoning within a day of being written. That is the
+argument for `kind: post`, made by the first instance of it.

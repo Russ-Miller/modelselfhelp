@@ -1,0 +1,34 @@
+arxiv_id: "2609.01736"
+title: Harness Engineering in LLM Tool Use via Agent-Native Reusable Tool Primitives
+url: https://arxiv.org/abs/2609.01736
+drafted_at: 2026-09-07
+drafted_from: full-text
+model: claude-opus-5
+status: draft — not filed. Review, edit, then move into catalog/ by hand.
+capability: tool-use
+statement: When an agent must work over a very large tool catalogue, wrapping
+  each tool in a natural-language interface that resolves the API schema
+  internally — so raw schemas are retrieved on demand rather than enumerated
+  in the model's prompt — contributes more to multi-step tool-call success
+  than the surrounding planner, router, or verifier stages.
+kind: mechanism
+backing_strength: single-paper
+scope_condition: Multi-agent harness with an 8B backbone, over a repository of
+  ~25.5k functions, evaluated on ToolBench and NESTFUL nested-call tasks; not
+  tested with strong frontier backbones inside the harness.
+technique: ""
+proposed_technique: Natural-language tool wrappers with on-demand schema retrieval
+stance_on_existing: neither
+related_claim_id: ""
+stance_reason: ""
+falsifier: An ablation on comparable benchmarks where removing the
+  natural-language tool wrapper (exposing raw schemas plus retrieval) costs
+  less than removing the verifier or planner, or where the wrapper gives no
+  gain once tools are retrieved on demand.
+evidence_note: "Component ablation in one paper: removing ToolFace/Tool
+  Primitives dropped ToolBench average pass rate from 75.1 to 16.1 and NESTFUL
+  full-sequence accuracy from 0.44 to 0.06, larger than removing the verifier
+  (47.6 / 0.15), planner, or router. Single system, single backbone; the
+  ablation removes retrieval and the wrapper together, so it does not separate
+  the two."
+confidence: low

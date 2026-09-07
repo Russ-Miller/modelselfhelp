@@ -258,6 +258,25 @@ eroding:
 
 `status` is `active`/`superseded`: record lifecycle, not a verdict.
 
+### Informal sources (`kind: post`)
+A Source can be a post — a thread, a blog entry, a forum comment — as well
+as a paper or the user's own observation. Informal writing is good at
+things papers are bad at: it carries the *incumbent* beliefs nobody
+publishes a paper to assert, it carries negative results ("we tried it, it
+did not hold"), and practitioners volunteer scope conditions that papers
+generalise away. All three are things this catalog wants and struggles to
+source.
+
+It is correspondingly weak as backing. A post can originate a claim; it
+cannot strongly support one. Treat `own-observation` as its ceiling — it
+is someone else's observation — and never `replicated`.
+
+`archived_text` is **required** for `kind: post`, with `retrieved_at`.
+Papers can be re-fetched years later; posts are edited and deleted. Without
+the archive a citation quietly stops being checkable, which is worse than
+not having made it — see the two fabricated paper titles this project has
+already been handed.
+
 ### Source briefs
 A paper Source can carry a `brief`: a 120-200 word digest in the house style
 (`docs/prompts/paper-summary.md`), written from the abstract by

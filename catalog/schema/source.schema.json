@@ -17,8 +17,10 @@
       "type": "string",
       "enum": [
         "paper",
-        "observation"
-      ]
+        "observation",
+        "post"
+      ],
+      "description": "paper: a published or preprint work, durable and re-checkable. observation: something the catalog's owner personally noticed. post: informal public writing -- a thread, a blog entry, a forum comment. A post can originate a claim but cannot strongly back one; it caps at own-observation backing, and never counts as replicated."
     },
     "title": {
       "type": "string",
@@ -46,6 +48,19 @@
     "url": {
       "type": "string",
       "format": "uri"
+    },
+    "author_handle": {
+      "type": "string",
+      "description": "For kind: post \u2014 the author's handle or username, e.g. \"@cherylwoooo\"."
+    },
+    "retrieved_at": {
+      "$ref": "common.schema.json#/$defs/date",
+      "description": "For kind: post \u2014 when the text below was captured. Required with archived_text."
+    },
+    "archived_text": {
+      "type": "string",
+      "minLength": 40,
+      "description": "For kind: post \u2014 the post's text, verbatim, captured at retrieved_at. REQUIRED for kind: post. Posts are deleted and edited; a paper can be re-fetched years later and a post cannot. Without the archive the citation quietly stops being checkable, which is worse than not having it."
     },
     "venue": {
       "type": "string"
@@ -107,5 +122,37 @@
     "semantic_scholar_id": {
       "type": "string"
     }
-  }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "post"
+          }
+        },
+        "required": [
+          "kind"
+        ]
+      },
+      "then": {
+        "properties": {
+          "archived_text": {
+            "type": "string"
+          },
+          "retrieved_at": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "archived_text",
+          "retrieved_at",
+          "url"
+        ]
+      }
+    }
+  ]
 }

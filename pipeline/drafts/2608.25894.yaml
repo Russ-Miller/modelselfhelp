@@ -1,0 +1,35 @@
+arxiv_id: "2608.25894"
+title: "From Passive Response to Proactive Correction: Enhancing LLM
+  Robustness Against Input Fact Perturbations"
+url: https://arxiv.org/abs/2608.25894
+drafted_at: 2026-09-07
+drafted_from: full-text
+model: claude-opus-5
+status: draft — not filed. Review, edit, then move into catalog/ by hand.
+capability: hallucination
+statement: On questions whose premises are false or internally contradictory,
+  prompting mid-size instruct models (Qwen2.5-7B, LLaMA-3.1-8B, Gemma3-12B) to
+  reason step by step can lower accuracy below plain answering, because the
+  reasoning chain elaborates from the flawed premise instead of challenging
+  it.
+kind: mechanism
+backing_strength: single-paper
+scope_condition: Mid-size open instruct models, short-form QA with planted
+  false premises or contradictions (TruthfulQA multiple-choice, FalseQA, the
+  authors' MisFactQA); not tested on premise-clean questions, where CoT is
+  expected to help.
+technique: chain-of-thought
+proposed_technique: Verify input premises before answering
+stance_on_existing: neither
+related_claim_id: ""
+stance_reason: ""
+falsifier: On false-premise question sets, CoT prompting matching or beating
+  direct answering across model families, with the drop not reproducing.
+evidence_note: Measured on three open instruct models across three datasets
+  against a default-prompt baseline; CoT fell below Original on TruthfulQA for
+  all three models and on FalseQA for LLaMA and Gemma, and also below Original
+  for GPT-4o-mini and DeepSeek-V3. Judged by an o3-mini automated judge with
+  reported human agreement. Single paper; the causal story (reasoning
+  amplifies the accepted premise) is argued from case studies rather than
+  isolated experimentally.
+confidence: medium

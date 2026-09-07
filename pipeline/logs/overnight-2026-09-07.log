@@ -1,0 +1,35 @@
+=== overnight chain started 2026-09-07 02:18 UTC ===
+ingestion: success
+queue files: 6
+--- verifying 'Critical Analysis of Scaling Frontiers' ---
+attempt 1: HTTP 503,      126 bytes
+attempt 2: HTTP 429,       14 bytes
+attempt 3: HTTP 429,       14 bytes
+attempt 4: HTTP 503,      126 bytes
+attempt 5: HTTP 429,       14 bytes
+entries: 0
+--- drafting ---
+Drafting 8 of 74 candidate(s) with claude-opus-5
+
+2609.00759 :: Compile, Don't Memorize: A Context Compilation Architectur
+  drafted from full-text -> pipeline/drafts/2609.00759.yaml
+2608.30959 :: LOCI: A Locator-Critic with Refinement Loop
+  drafted from full-text -> pipeline/drafts/2608.30959.yaml
+2608.25894 :: From Passive Response to Proactive Correction: Enhancing L
+  drafted from full-text -> pipeline/drafts/2608.25894.yaml
+2609.01888 :: Does Playing it Safe Count as Faithfulness? Reassessing LV
+  drafted from full-text -> pipeline/drafts/2609.01888.yaml  [1 problem(s)]
+2608.27580 :: LongGuard: Mechanistic Analysis and Training-Free Mitigati
+  drafted from full-text -> pipeline/drafts/2608.27580.yaml
+2608.24350 :: FARCA: Fact-Aligned Reliability-Aware Credit Assignment fo
+  drafted from full-text -> pipeline/drafts/2608.24350.yaml
+2608.30653 :: Fine-Grained Multi Image Object Hallucination Benchmark
+  drafted from full-text -> pipeline/drafts/2608.30653.yaml
+2609.01736 :: Harness Engineering in LLM Tool Use via Agent-Native Reusa
+  drafted from full-text -> pipeline/drafts/2609.01736.yaml
+
+tokens: 191649 in / 5507 out   cost: $1.0959
+
+Drafts are NOT catalog content. Read pipeline/drafts/, edit, then file by hand.
+drafts on disk: 8
+=== overnight chain finished 2026-09-07 02:54 UTC ===

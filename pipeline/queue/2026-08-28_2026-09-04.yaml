@@ -96,6 +96,8 @@ candidates:
       with skill-alignment regularization to prevent policy drift. Experiments on 7 benchmarks
       demonstrate that APEx achieves state-of-the-art performance, surpassing GPT-5.4 by 14.7 points
       and the strongest memory-augmented baseline by 3.0 points.
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7207545319
     score: 17
     signals:
@@ -199,6 +201,8 @@ candidates:
       Alzheimer's disease, Parkinson's disease, and working memory spike decoding. Across 8 trials
       per task, the system consistently outperforms strong baselines on the primary metric,
       demonstrating the ability of NS-Copilot for effective and "
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7207775301
     score: 15
     signals:
@@ -241,6 +245,8 @@ candidates:
       subtypes, 1,173 synthetic examples, and an orthogonal axis of 30 domains. Using this
       structure, we generate 150,000 verifier-scored tasks and 15,000 open-ended tasks. We then
       train the Qwen3 decoder on these tasks, while explicitly s"
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7207781962
     score: 14
     signals:
@@ -281,6 +287,8 @@ candidates:
       turns, and in 7 of 20 detectable defeats they failed to query within the 20 turn warning
       window before game end. Agents also frequently fail to execute near-term commitments stated in
       their own planning reflections (RAG@10 "
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7207720039
     score: 14
     signals:
@@ -318,6 +326,8 @@ candidates:
       demonstrate that multi-layer fusion, multiple slots, and hard-negative-aware slot
       specialization provide complementary gains. Code is available at
       https://github.com/sejong-rcv/MARS.
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7207774731
     score: 14
     signals:
@@ -410,6 +420,8 @@ candidates:
       Furthermore, we analyse the role of ``ground truth'' in Cliff and investigate its training
       dynamics. These results establish Cliff as a simple, general and effective approach for
       improving RLVR with riche"
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7206167187
     score: 13
     signals:
@@ -450,6 +462,12 @@ candidates:
       ViTAL-X outperforms 7B-parameter models and surpasses baselines trained on 600x more data.
       These results demonstrate that targeted, high-quality temporal alignment provides a highly
       efficient alternative to pure scaling.
+    proposal:
+      proposed_id: temporal-reasoning-video
+      proposed_label: Understanding order and motion in video
+      scope_note: Covers whether vision-language models perceive event order, direction, and motion
+        dynamics rather than static frame content; excludes static image understanding.
+      rationale: XTE-Bench shows video-language models are temporally blind and rely on spatial shortcuts.
   - openalex_id: https://openalex.org/W7207772435
     score: 13
     signals:
@@ -489,6 +507,8 @@ candidates:
       Refer-KITTI-V2 show that YesTrack significantly outperforms existing state-of-the-art methods
       while maintaining high efficiency, even when implemented with the smallest variant of
       Qwen3-VL. Code is released at https://github.com/ggbondrighthere24/YesTrack."
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7207773836
     score: 12
     signals:
@@ -528,6 +548,13 @@ candidates:
       accuracy, while the best model reaches only 62.83%. Reasoning-enhanced models consistently
       show improved results, but performance degrades as reasoning complexity increases. Overall,
       DocHop provides a controlled testbed for challenging multi-hop document reasoning."
+    proposal:
+      proposed_id: chart-reasoning
+      proposed_label: Reading and aggregating evidence from charts
+      scope_note: Covers extracting, comparing, and aggregating values across charts and tables, including
+        combining them with surrounding document text; not plain image description.
+      rationale: DocHop tests whether models can use narrative context to select and aggregate evidence
+        across multiple charts, which current models struggle with.
   - openalex_id: https://openalex.org/W7207592423
     score: 12
     signals:
@@ -563,6 +590,8 @@ candidates:
       knowledge, we design a multi-dimensional reward considering both accuracy and retrieval
       benefit. NE-R1 achieves state-of-the-art performance on various benchmarks, with an average F1
       score gain of 2.52% in in-domain evaluation and 1.18% in zero-shot cross-domain evaluation.'
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7207558001
     score: 11
     signals:
@@ -599,6 +628,8 @@ candidates:
       on-/off-policy optimization with chunk-aware credit assignment. Experiments on ALFWorld and
       ScienceWorld show that SPACE improves success rates by 7.0%-31.3% over the strongest baseline
       in each setting while reducing average LLM decision rounds by up to 78.9%."
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7207517948
     score: 11
     signals:
@@ -685,6 +716,8 @@ candidates:
       Llama-3.1-8B and Qwen3-32B, LoRA-TSD outperforms every competing LoRA optimizer and stays
       robust to the adapter rank. Code is available at
       https://github.com/brain-lab-research/LoRA-TSD.
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7207837867
     score: 11
     signals:
@@ -719,6 +752,13 @@ candidates:
       cross-modal safety drift with a frozen MLLM backbone. Experiments across multiple benchmarks
       and models show that SRT effectively improves safety in diverse cross-modal settings while
       preserving utility. Code is available at https://github.com/cucu220123/safety-awareness."
+    proposal:
+      proposed_id: cross-modal-safety
+      proposed_label: Holding safety rules across modalities
+      scope_note: Covers cases where harmful intent is carried by an image (or audio) combined with benign
+        text, and refusal behavior learned in text fails to transfer; excludes text-only jailbreaks.
+      rationale: The paper documents a 'cross-modal safety drift' where visually grounded harmful requests
+        bypass refusals that text-only versions trigger.
   - openalex_id: https://openalex.org/W7207749175
     score: 10
     signals:
@@ -862,6 +902,8 @@ candidates:
       TeleLogs and TelecomTS, demonstrate that the proposed framework consistently improves
       diagnostic accuracy and decision consistency compared with baseline techniques. These
       cross-dataset results highlight the importance of structured reasoning de
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7207880245
     score: 10
     signals:
@@ -901,6 +943,8 @@ candidates:
       faster; $\\sim$33$\\times$ with an 8B-parameter synthesizer). We discuss our deployment
       experience, highlighting lessons learned regarding the trade-offs between agentic depth and
       inference latency, negative results in redundancy detection"
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7207576271
     score: 10
     signals:
@@ -937,6 +981,8 @@ candidates:
       Ablation studies, efficiency analyses, and case studies further validate the contributions of
       contextual subgraph modeling, semantic path retrieval, path-entity interaction, and
       contrastive regularization.
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7207798774
     score: 10
     signals:
@@ -977,6 +1023,8 @@ candidates:
       no-tool screens exclude 222 from the reported pool, and direct GPT-5.5 API calls at medium
       reasoning (the API default) exclude another 121. Of the remaining 135, a GPT-5.5 Codex CLI
       agent with access to FEniCSx solves 130; exact deduplicati"
+    proposal:
+      suggests_new_capability: false
   - openalex_id: https://openalex.org/W7207649393
     score: 9
     signals:

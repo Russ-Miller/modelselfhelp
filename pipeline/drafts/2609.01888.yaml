@@ -1,0 +1,39 @@
+arxiv_id: "2609.01888"
+title: Does Playing it Safe Count as Faithfulness? Reassessing LVLM
+  Hallucination Mitigation Methods
+url: https://arxiv.org/abs/2609.01888
+drafted_at: 2026-09-07
+drafted_from: full-text
+model: claude-opus-5
+status: draft — not filed. Review, edit, then move into catalog/ by hand.
+capability: evaluation-validity
+statement: "For training-free inference-time hallucination mitigation in 7B
+  vision-language models, reported gains on object-hallucination benchmarks
+  are largely inseparable from reduced informativeness: hallucination rate and
+  object recall/coverage move together, so a lower score can mean the model
+  mentioned fewer visual entities rather than grounded better."
+kind: observation
+backing_strength: single-paper
+scope_condition: Six decoding-time and attention/hidden-state mitigation
+  methods on three 7B open LVLMs (LLaVA-1.5, LLaVA-NeXT, InstructBLIP),
+  evaluated on CHAIR, AMBER, and MMStar with author-default hyperparameters.
+  Not tested for training-based or retrieval-based mitigation, larger models,
+  or attribute/relational hallucination.
+technique: ""
+proposed_technique: Score hallucination jointly with informativeness and general capability
+stance_on_existing: neither
+related_claim_id: ""
+stance_reason: ""
+falsifier: A mitigation method that lowers CHAIR/AMBER hallucination while
+  holding or raising object recall and coverage, and does not degrade MMStar
+  fine-grained perception and reasoning, across several models.
+evidence_note: 54 configurations (3 models x 6 methods x 3 benchmarks).
+  Reports Pearson r=0.73 between CHAIRs and object recall, r=0.70 between
+  AMBER Hal and Cover, over the method set. Correlation is across methods, not
+  within a method under varied strength, so it does not isolate a causal
+  mechanism; the authors say so. Two methods (CAAC, CEI) reportedly preserved
+  recall, so the pattern is a tendency, not universal. On MMStar, 16 of 18
+  fine-grained-perception configurations degraded or gained under 1%.
+confidence: medium
+problems:
+  - "figures not in the source: 16"

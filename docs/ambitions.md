@@ -96,6 +96,47 @@ it requires other parties to fail to refute it, and it is why
 only rewarding while the measure is fixed. A held-out set that grows and
 rotates makes the shortcut unstable.
 
+### Naming our own green boxes
+
+Cheryl Wu's critique of OpenAI's research-acceleration disclosure
+(`catalog/sources/post-wu-rsi-outcome-variables.yaml`) supplies a sharper
+version of this section's argument than the section originally had, and a
+method worth copying.
+
+The method: draw the causal graph, then colour every node by whether you
+actually have data on it. Her graph runs human R&D labor, experimental
+compute and inference compute into *algorithmic improvements*; those
+accumulate into *algorithmic efficiency*; efficiency with training compute
+and data produces *capabilities*; and capabilities feed back into the rate
+of improvement. Green marks what was disclosed — inference and
+experimental compute. Red marks what was not — improvements, efficiency,
+capabilities. The single edge marked "what we need to measure" is the
+feedback one. Everything reported is upstream of the loop, and the loop is
+what the claim was about.
+
+The test compresses to one line: **effort spent is not effect achieved.**
+Tokens, lines of code and experiments per researcher are inputs. No
+quantity of them evidences an outcome.
+
+This catalogue is subject to the same test, and currently fails it. What
+we measure today is:
+
+| | |
+|---|---|
+| **Green — what we have data on** | candidates fetched, drafts produced, cost per paper, tokens in and out, stage-2 off-topic rate |
+| **Red — what we need data on** | whether the catalogue is getting more accurate; whether a technique's standing changes when it should; whether a filed claim survives contest |
+| **Blue arrow — the edge that closes the loop** | whether using the catalogue improves the pipeline that builds the catalogue |
+
+Every green entry is an input. `npm run backtest` is the only outcome
+measure in the project, which is why it carries so much weight in this
+document and why the held-out set is worth growing. Cost per paper is our
+tokens-and-lines-of-code: real, reportable, and evidence of nothing.
+
+So the honest statement of ambition 1 is Wu's blue arrow drawn for us:
+*does a technique taken from this catalogue, applied to a stage of this
+pipeline, move a held-out outcome?* Until that number exists and moves,
+any claim of self-improvement here is our own green box.
+
 ### Obstacle: self-report
 
 `explanation-faithfulness` says a system's account of its own reasoning
@@ -118,10 +159,18 @@ need to ask.
 
 One capability the pipeline depends on, one technique with a supported
 efficacy claim, applied to one stage, measured on the held-out set, filed
-as a claim with a falsifier. `checklist-decomposition` on the stage-2
-classifier is a good first candidate: it has a real efficacy claim behind
-it, the stage has a measured error rate to move, and the whole loop fits
-in an afternoon.
+as a claim with a falsifier.
+
+`checklist-decomposition` on the stage-2 classifier is the first
+candidate: it has a real efficacy claim behind it, and the stage has a
+measured error rate to move.
+
+State the outcome variable before running it, in Wu's terms:
+**stage-2 `about_capability` false-positive rate on a fixed, held-out set
+of candidate-capability pairs, before and after.** Not tokens, not cost,
+not how many drafts came out — those are inputs and would tell us nothing.
+Write the falsifier down first too: the technique did not help if the rate
+does not fall outside noise on the same pairs.
 
 ## 2. Other AIs contribute what they learn
 
