@@ -807,3 +807,44 @@ changed from evidence rather than from filing.
 Also worth recording: the confidence field has no stated definition, and we
 diverged on it both times — he weighted replication breadth, I weighted
 dataset realism. Two data points is enough to say the field needs a rule.
+
+## 2026-09-07 — Informal sources, and naming our own green boxes
+Two changes from one X post.
+
+**`kind: post`.** A Source can now be informal writing. Posts are good at
+exactly what papers are bad at for our purposes: they carry the incumbent
+beliefs nobody writes a paper to assert, they carry negative results, and
+practitioners state scope conditions that papers generalise away. Given
+yesterday's rule — file the incumbent, then contest it — informal writing
+is the natural supply of incumbents.
+
+They are weak as backing and the schema says so: own-observation is the
+ceiling, never replicated. And `archived_text` with `retrieved_at` is
+*required*, enforced by a conditional in the schema and verified by
+deleting the field and watching validation fail. Papers can be re-fetched
+years later; posts are edited and deleted, and a citation that quietly
+stops being checkable is worse than one never made. This project has
+already been handed two fabricated paper titles; an unarchived post would
+be the same failure with no way to detect it.
+
+**Our own green boxes.** Cheryl Wu's critique of OpenAI's
+research-acceleration disclosure gave a sharper version of an argument
+already in docs/ambitions.md, plus a method: draw the causal graph, colour
+each node by whether you have data on it. Her point compresses to one
+line — effort spent is not effect achieved — and everything OpenAI
+reported was upstream of the loop the claim was about.
+
+Applied to us, honestly: everything we measure is an input. Candidates
+fetched, drafts produced, cost per paper, tokens. `npm run backtest` is the
+only outcome measure in the project. Cost per paper is our tokens-and-
+lines-of-code — real, reportable, evidence of nothing.
+
+So ambition 1 is now stated as Wu's blue arrow drawn for us: does a
+technique taken from this catalogue, applied to a stage of this pipeline,
+move a held-out outcome? And the first experiment names its outcome
+variable up front — stage-2 about_capability false-positive rate on a
+fixed held-out set — rather than reporting how much work happened.
+
+Worth noting what just occurred: an informal source materially improved
+the project's own reasoning within a day of being written. That is the
+argument for `kind: post`, made by the first instance of it.

@@ -1,0 +1,54 @@
+id: post-wu-rsi-outcome-variables
+kind: post
+title: On OpenAI's research-acceleration disclosure — the measured variables are all inputs
+authors:
+  - Cheryl Wu
+author_handle: "@cherylwoooo"
+year: 2026
+date: 2026-09-06
+url: https://x.com/cherylwoooo/status/2096741494866715055
+tags: [evaluation, rsi, measurement]
+summary: >-
+  Argues that OpenAI's disclosure on models accelerating its own research
+  reports only input-side quantities — inference compute, experiments per
+  researcher, tokens, lines of code — and none of the outcome variables that
+  would show whether those inputs became capability. Names the specific
+  missing measurement: algorithmic efficiency as a function of capability,
+  the feedback edge that makes recursive self-improvement a loop rather than
+  a pipeline.
+retrieved_at: 2026-09-07
+archived_text: |
+  I appreciate this as an initial step toward more transparent reporting on
+  RSI. But there is still much further data we need to fully understand RSI.
+
+  In particular, OAI disclosed some evidence about the inference compute
+  usage, number of experiments/researcher, and to a lesser extent, how
+  researchers interact with models of different capabilities (see the green
+  boxes in the diagram).
+
+  However, the evidence they provided is just on the input side (tokens,
+  lines of code). We urgently need to know how these inputs get turned into
+  algorithmic improvements and [probably internally deployed] AI
+  capabilities. Even just a simple time series on those outcome variables
+  would be extremely valuable.
+
+  You can then know, as AI helps researchers do more AI R&D, how the
+  corresponding algorithm efficiency grows (the blue arrow C -> A dot). Right
+  now we are missing this key puzzle piece.
+
+  [Attached diagram: human R&D labor (L), experimental compute (E) and
+  inference compute (K) feed algorithmic improvements (A-dot); those
+  accumulate into algorithmic efficiency (A); A with training compute (T) and
+  data (D) produces capabilities (C); and a blue arrow runs C back to A-dot.
+  Green = what OAI provided evidence on (E, K). Red = what we urgently need
+  data on (A-dot, A, C). Blue arrow = what we need to measure.]
+
+  [Quoting Kevin Liu @kliu128, 2026-09-06: "Today we're releasing data on
+  models accelerating research at OpenAI. Recursive self-improvement could be
+  the most important contributor to AI capabilities over the next few years,
+  but by default it will only be seen inside a few frontier AI labs. Being
+  transparent is more urgent than ever, so we can inform the public
+  discussion on whether and how to pace model development. I ask other AI
+  companies to do the same." Links to "Research acceleration: The view inside
+  OpenAI", openai.com.]
+ingested_at: 2026-09-07
