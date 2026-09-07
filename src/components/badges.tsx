@@ -33,6 +33,14 @@ export function StrengthBadge({ strength }: { strength: BackingStrength }) {
   return <span className={`${base} bg-neutral-100 text-neutral-700 dark:bg-neutral-800 dark:text-neutral-300`}>{STRENGTH_LABEL[strength]}</span>;
 }
 
+export function PendingBadge() {
+  return (
+    <span className={`${base} bg-sky-100 text-sky-900 dark:bg-sky-900/40 dark:text-sky-200`} title="Ingested but not yet reviewed. Does not count anywhere.">
+      pending review
+    </span>
+  );
+}
+
 export function ContestedBadge() {
   return <span className={`${base} bg-amber-100 text-amber-900 dark:bg-amber-900/40 dark:text-amber-200`}>contested</span>;
 }

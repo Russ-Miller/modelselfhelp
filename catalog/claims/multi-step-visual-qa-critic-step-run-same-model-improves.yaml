@@ -1,0 +1,38 @@
+id: multi-step-visual-qa-critic-step-run-same-model-improves
+capability: self-repair
+statement: >-
+  In multi-step visual QA, a critic step run by the same model improves
+  final accuracy only when it is shown the candidate evidence alone and
+  denied the generator's textual rationale; conditioned on that rationale,
+  the critic ratifies the generator's initial hypothesis and the loop
+  performs worse than no critic at all.
+kind: mechanism
+backing_strength: single-paper
+observed_on:
+  era: "Frontier VLMs (Gemini 2.5 Pro, Qwen3-VL, GPT-5, Grok) on high-resolution visual search benchmarks where the bottleneck is locating a small detail, not reasoning; critic and generat"
+sources:
+  - source: arxiv-2608-30959
+    stance: supports
+    note: >-
+      Ablation on V* with Gemini 2.5 Pro: direct 83.8, locator only 89.2,
+      locator+critic seeing crops only 92.7, locator+critic also seeing
+      locator text 87.2; plus a token-matched baseline comparison
+      (Explicit Locate-Verify-Answer 85.9). Single benchmark for the
+      ablation, one backbone; the headline gains replicate across four
+      VLMs and three benchmarks but the blinding ablation itself does not.
+# Drafted stance toward self-critique-without-grounding-unreliable: supports.
+# Text-only Self-Refine scored below direct prompting on V*, and a locate-verify-answer loop where the verifier saw the model's own reasoning was 6.8 points below the same loop with the reasoning withheld.
+contested: false
+status: pending-review
+last_checked_at: 2026-09-07
+notes: >-
+  Ingested unreviewed on 2026-09-07 and deliberately inert until a human
+  endorses it: it does not move a technique standing, does not count
+  toward the backtest, and is excluded anywhere a claim would carry
+  weight. Drafted confidence: medium. Falsifier as drafted: An ablation on
+  comparable visual-search tasks where feeding the locator's textual
+  reasoning to the critic matches or beats the crops-only critic, or where
+  critic-in-the-loop gains persist regardless of what the critic sees.
+  Proposed technique, not yet catalogued: Critic blinded to the
+  generator's rationale.
+submitted_by: agent:claude-opus-5@Russ-Miller

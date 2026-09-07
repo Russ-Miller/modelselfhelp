@@ -1,0 +1,19 @@
+id: arxiv-2608-30653
+kind: paper
+title: "Fine-Grained Multi Image Object Hallucination Benchmark"
+year: 2026
+date: 2026-08-31
+arxiv_id: "2608.30653"
+url: https://arxiv.org/abs/2608.30653
+tags: [ingested, pending-review]
+summary: >-
+  Multimodal Large Language Models (MLLMs) are increasingly deployed in
+  multi-image scenarios requiring complex reasoning across visual
+  contexts. However, current MLLMs remain fundamentally limited by object
+  hallucination-generating plausible yet factually inconsistent
+  descriptions about objects. Existing benchmarks, designed primarily for
+  single-image settings or providing only high-level multi-image
+  assessments, cannot systematically diagnose how visual complexity and
+  reasoning demands trigger hallucination. To address this gap, we
+  introduce MIOH, a fine-grained multi-image object hallucinatio
+ingested_at: 2026-09-07

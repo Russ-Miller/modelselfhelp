@@ -1,0 +1,19 @@
+id: arxiv-2608-27580
+kind: paper
+title: "LongGuard: Mechanistic Analysis and Training-Free Mitigation of Long-Context Failure in Safety Guardrails"
+year: 2026
+date: 2026-08-27
+arxiv_id: "2608.27580"
+url: https://arxiv.org/abs/2608.27580
+tags: [ingested, pending-review]
+summary: >-
+  Safety guardrails serve as the last line of defense against harmful
+  inputs and outputs of large language models (LLMs), yet they are trained
+  and evaluated almost exclusively on short text. We present LongGuard, a
+  framework that evaluates, mechanistically analyzes, and mitigates long-
+  context guardrail failure. We formulate the task as Safety Needle-in-a-
+  Haystack (SafetyNIAH) over a 0.25k-32k length grid; across 15 mainstream
+  guardrails, unsafe recall drops monotonically by more than 50% on
+  average, and a paired Benign-Fill vs. Needle-Repeat design attributes
+  the failure to proportional dilution
+ingested_at: 2026-09-07

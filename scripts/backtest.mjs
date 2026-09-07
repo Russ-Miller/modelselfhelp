@@ -26,7 +26,9 @@ const verbose = process.argv.includes("--verbose");
 const { reversals } = YAML.parse(fs.readFileSync("docs/known-reversals.yaml", "utf8"));
 const catalog = loadCatalog();
 const sources = new Map(catalog.sources.map((s) => [s.data.id, s.data]));
-const claims = catalog.claims.map((c) => c.data);
+// Only reviewed claims count. A pending claim that happens to cite a
+// reversing paper has not caught anything -- nobody has checked it.
+const claims = catalog.claims.map((c) => c.data).filter((c) => c.status !== "pending-review");
 
 /**
  * Would ingestion have surfaced this paper? Calls the pipeline's own matcher

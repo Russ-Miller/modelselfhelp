@@ -9,7 +9,9 @@ export type Stance = "supports" | "contests";
 export type ClaimKind = "mechanism" | "observation";
 export type BackingStrength = "single-paper" | "replicated" | "mechanism-reasoning" | "own-observation";
 export type CapabilityStatus = "active" | "parked";
-export type ClaimStatus = "active" | "superseded" | "retired";
+/** `pending-review` is ingested but not endorsed: browsable, and deliberately
+ *  inert everywhere a claim would otherwise carry weight. */
+export type ClaimStatus = "pending-review" | "active" | "superseded" | "retired";
 /** Record lifecycle, deliberately NOT a verdict on whether the technique works.
  *  Efficacy lives in claims that reference the technique. */
 export type TechniqueStatus = "active" | "superseded";
@@ -111,6 +113,12 @@ export function loadCatalog(): Catalog {
 export const getCapabilities = () => loadCatalog().capabilities;
 export const getCapability = (id: string) => loadCatalog().capabilities.find((c) => c.id === id);
 export const getClaims = () => loadCatalog().claims;
+/** Ingested but not yet endorsed by a human. */
+export const isPending = (c: Claim) => c.status === "pending-review";
+/** Claims that count. Everything downstream of a verdict uses this, so that
+ *  ingesting an unreviewed claim can never quietly change what the catalog
+ *  asserts -- which would make "pending" a label rather than a state. */
+export const reviewedClaims = () => loadCatalog().claims.filter((c) => !isPending(c));
 export const getClaim = (id: string) => loadCatalog().claims.find((c) => c.id === id);
 export const getSources = () => loadCatalog().sources;
 export const getSource = (id: string) => loadCatalog().sources.find((s) => s.id === id);
@@ -124,7 +132,7 @@ export const getTagLabel = (id: string) => {
 
 export const claimsFor = (capabilityId: string) => loadCatalog().claims.filter((c) => c.capability === capabilityId);
 /** Efficacy claims: assertions that this technique moves some capability. */
-export const claimsAboutTechnique = (techniqueId: string) => loadCatalog().claims.filter((c) => c.technique === techniqueId);
+export const claimsAboutTechnique = (techniqueId: string) => reviewedClaims().filter((c) => c.technique === techniqueId);
 export const techniquesFor = (capabilityId: string) => loadCatalog().techniques.filter((t) => t.addresses.includes(capabilityId));
 
 /** Every claim that cites a given source, alongside the stance that claim's citation carries. */
@@ -146,7 +154,7 @@ export function capabilitiesByGroup(): { group: TaxonomyEntry; capabilities: Cap
 }
 
 /** Claims marked contested, i.e. carrying sources on both sides. */
-export const contestedClaims = () => loadCatalog().claims.filter((c) => c.contested);
+export const contestedClaims = () => reviewedClaims().filter((c) => c.contested);
 
 /** Capabilities that hold at least one contested claim, with those claims. */
 export function capabilitiesWithDispute(): { capability: Capability; claims: Claim[] }[] {
@@ -254,7 +262,8 @@ export function unsolvedCapabilities(): Unsolved[] {
   const out: Unsolved[] = [];
   for (const capability of loadCatalog().capabilities) {
     if (capability.status !== "active") continue;
-    const claims = claimsFor(capability.id);
+    // An unreviewed claim does not establish that a weakness is documented.
+    const claims = claimsFor(capability.id).filter((c) => !isPending(c));
     if (claims.length === 0) continue; // no documented weakness yet, so nothing to solve
     const techniques = techniquesFor(capability.id).filter((t) => t.status === "active");
     if (techniques.some((t) => claimsAboutTechnique(t.id).some(isMeasured))) continue;
@@ -291,6 +300,7 @@ export function techniqueTags(t: Technique): string {
 
 export function claimTags(c: Claim): string {
   const tags: string[] = [];
+  if (isPending(c)) tags.push("pending");
   if (c.contested) tags.push("contested");
   if (c.backing_strength === "mechanism-reasoning") tags.push("argued");
   return tags.join(" ");

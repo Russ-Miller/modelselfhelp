@@ -1,0 +1,36 @@
+id: agent-must-work-over-very-large-tool-catalogue-wrapping
+capability: tool-use
+statement: >-
+  When an agent must work over a very large tool catalogue, wrapping each
+  tool in a natural-language interface that resolves the API schema
+  internally — so raw schemas are retrieved on demand rather than
+  enumerated in the model's prompt — contributes more to multi-step tool-
+  call success than the surrounding planner, router, or verifier stages.
+kind: mechanism
+backing_strength: single-paper
+observed_on:
+  era: "Multi-agent harness with an 8B backbone, over a repository of ~25.5k functions, evaluated on ToolBench and NESTFUL nested-call tasks; not tested with strong frontier backbones insi"
+sources:
+  - source: arxiv-2609-01736
+    stance: supports
+    note: >-
+      Component ablation in one paper: removing ToolFace/Tool Primitives
+      dropped ToolBench average pass rate from 75.1 to 16.1 and NESTFUL
+      full-sequence accuracy from 0.44 to 0.06, larger than removing the
+      verifier (47.6 / 0.15), planner, or router. Single system, single
+      backbone; the ablation removes retrieval and the wrapper together,
+      so it does not separate the two.
+contested: false
+status: pending-review
+last_checked_at: 2026-09-07
+notes: >-
+  Ingested unreviewed on 2026-09-07 and deliberately inert until a human
+  endorses it: it does not move a technique standing, does not count
+  toward the backtest, and is excluded anywhere a claim would carry
+  weight. Drafted confidence: low. Falsifier as drafted: An ablation on
+  comparable benchmarks where removing the natural-language tool wrapper
+  (exposing raw schemas plus retrieval) costs less than removing the
+  verifier or planner, or where the wrapper gives no gain once tools are
+  retrieved on demand. Proposed technique, not yet catalogued: Natural-
+  language tool wrappers with on-demand schema retrieval.
+submitted_by: agent:claude-opus-5@Russ-Miller

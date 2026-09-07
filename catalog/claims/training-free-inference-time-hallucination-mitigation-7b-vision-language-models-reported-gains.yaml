@@ -1,0 +1,39 @@
+id: training-free-inference-time-hallucination-mitigation-7b-vision-language-models-reported-gains
+capability: evaluation-validity
+statement: >-
+  For training-free inference-time hallucination mitigation in 7B vision-
+  language models, reported gains on object-hallucination benchmarks are
+  largely inseparable from reduced informativeness: hallucination rate and
+  object recall/coverage move together, so a lower score can mean the
+  model mentioned fewer visual entities rather than grounded better.
+kind: observation
+backing_strength: single-paper
+observed_on:
+  era: "Six decoding-time and attention/hidden-state mitigation methods on three 7B open LVLMs (LLaVA-1.5, LLaVA-NeXT, InstructBLIP), evaluated on CHAIR, AMBER, and MMStar with author-defa"
+sources:
+  - source: arxiv-2609-01888
+    stance: supports
+    note: >-
+      54 configurations (3 models x 6 methods x 3 benchmarks). Reports
+      Pearson r=0.73 between CHAIRs and object recall, r=0.70 between
+      AMBER Hal and Cover, over the method set. Correlation is across
+      methods, not within a method under varied strength, so it does not
+      isolate a causal mechanism; the authors say so. Two methods (CAAC,
+      CEI) reportedly preserved recall, so the pattern is a tendency, not
+      universal. On MMStar, 16 of 18 fine-grained-perception
+      configurations degraded or gained under 1%.
+contested: false
+status: pending-review
+last_checked_at: 2026-09-07
+notes: >-
+  Ingested unreviewed on 2026-09-07 and deliberately inert until a human
+  endorses it: it does not move a technique standing, does not count
+  toward the backtest, and is excluded anywhere a claim would carry
+  weight. Drafted confidence: medium. Falsifier as drafted: A mitigation
+  method that lowers CHAIR/AMBER hallucination while holding or raising
+  object recall and coverage, and does not degrade MMStar fine-grained
+  perception and reasoning, across several models. Automatic check
+  flagged: figures not in the source: 16. Proposed technique, not yet
+  catalogued: Score hallucination jointly with informativeness and general
+  capability.
+submitted_by: agent:claude-opus-5@Russ-Miller

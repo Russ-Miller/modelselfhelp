@@ -1,0 +1,35 @@
+id: multimodal-model-asked-object-existence-question-over-set-images-once
+capability: visual-grounding
+statement: >-
+  When a multimodal model is asked an object-existence question over a set
+  of images at once, it is less accurate than when the same images are
+  queried one at a time and the answers combined, so cross-image
+  integration adds errors beyond the per-image perception errors.
+kind: mechanism
+backing_strength: single-paper
+observed_on:
+  era: "Object-centric questions (existence, counting, attribute, position) over sets of 2-10 natural images; shown for existence in a controlled decomposition ablation across 29 MLLMs inc"
+sources:
+  - source: arxiv-2608-30653
+    stance: supports
+    note: >-
+      Ablation on the existence task comparing comprehensive multi-image
+      questions against per-image decomposed questions over identical
+      content; the paper reports the single-image route wins consistently
+      across all models and scales, but the gap size is only shown in a
+      figure. Overall benchmark average was 36.1% across 29 models;
+      accuracy fell as image count rose (existence 62.4% easy to 30.0% at
+      larger image counts).
+contested: false
+status: pending-review
+last_checked_at: 2026-09-07
+notes: >-
+  Ingested unreviewed on 2026-09-07 and deliberately inert until a human
+  endorses it: it does not move a technique standing, does not count
+  toward the backtest, and is excluded anywhere a claim would carry
+  weight. Drafted confidence: medium. Falsifier as drafted: A model whose
+  accuracy on joint multi-image existence questions matches or exceeds the
+  combined per-image decomposed queries on the same images. Proposed
+  technique, not yet catalogued: Decompose multi-image questions into per-
+  image queries.
+submitted_by: agent:claude-opus-5@Russ-Miller

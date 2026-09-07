@@ -1,0 +1,19 @@
+id: arxiv-2609-01888
+kind: paper
+title: "Does Playing it Safe Count as Faithfulness? Reassessing LVLM Hallucination Mitigation Methods"
+year: 2026
+date: 2026-09-01
+arxiv_id: "2609.01888"
+url: https://arxiv.org/abs/2609.01888
+tags: [ingested, pending-review]
+summary: >-
+  Recent inference-time hallucination mitigation methods for large vision-
+  language models (LVLMs) report strong gains on hallucination benchmarks.
+  However, it remains unclear whether lower hallucination scores reflect
+  improved multimodal grounding or more conservative generation. We
+  evaluate six mitigation methods across three LVLMs and four benchmarks,
+  including hallucination-focused evaluation and the diverse capability
+  benchmark MMStar. Our analysis reveals two consistent patterns. First,
+  hallucination reduction is often coupled with reduced informativeness:
+  methods that lower hallucination r
+ingested_at: 2026-09-07

@@ -1,0 +1,19 @@
+id: arxiv-2608-30959
+kind: paper
+title: "LOCI: A Locator-Critic with Refinement Loop"
+year: 2026
+date: 2026-08-31
+arxiv_id: "2608.30959"
+url: https://arxiv.org/abs/2608.30959
+tags: [ingested, pending-review]
+summary: >-
+  Vision-Language Models (VLMs) still struggle on tasks requiring complex
+  visual understanding. We argue that the core issue is not high-level
+  reasoning, but instead failing to locate critical details in the image.
+  Due to this shortcoming, VLMs generate often plausible but incorrect
+  reasoning based on flawed perceptual grounding. To address this, we
+  propose Locator-Critic (LOCI), a training-free framework that decouples
+  visual search from evidence verification. LOCI employs a Locator agent
+  to propose candidate visual evidence and a separate Critic agent to
+  evaluate its relevance and sufficiency.
+ingested_at: 2026-09-07

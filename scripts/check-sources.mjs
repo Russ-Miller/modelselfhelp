@@ -18,7 +18,6 @@
 import fs from "node:fs";
 import path from "node:path";
 import crypto from "node:crypto";
-import YAML from "yaml";
 import { loadCatalog } from "./catalog-lib.mjs";
 
 const write = process.argv.includes("--write");

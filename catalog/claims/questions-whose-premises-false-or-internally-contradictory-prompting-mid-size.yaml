@@ -1,0 +1,38 @@
+id: questions-whose-premises-false-or-internally-contradictory-prompting-mid-size
+capability: hallucination
+statement: >-
+  On questions whose premises are false or internally contradictory,
+  prompting mid-size instruct models (Qwen2.5-7B, LLaMA-3.1-8B,
+  Gemma3-12B) to reason step by step can lower accuracy below plain
+  answering, because the reasoning chain elaborates from the flawed
+  premise instead of challenging it.
+kind: mechanism
+backing_strength: single-paper
+observed_on:
+  era: "Mid-size open instruct models, short-form QA with planted false premises or contradictions (TruthfulQA multiple-choice, FalseQA, the authors' MisFactQA); not tested on premise-clea"
+sources:
+  - source: arxiv-2608-25894
+    stance: supports
+    note: >-
+      Measured on three open instruct models across three datasets against
+      a default-prompt baseline; CoT fell below Original on TruthfulQA for
+      all three models and on FalseQA for LLaMA and Gemma, and also below
+      Original for GPT-4o-mini and DeepSeek-V3. Judged by an o3-mini
+      automated judge with reported human agreement. Single paper; the
+      causal story (reasoning amplifies the accepted premise) is argued
+      from case studies rather than isolated experimentally.
+contested: false
+# Drafter linked technique "chain-of-thought", but that technique does not list this
+# capability in addresses -- an unreviewed judgment, so it is recorded here
+# rather than asserted. Either the link or the technique record is wrong.
+status: pending-review
+last_checked_at: 2026-09-07
+notes: >-
+  Ingested unreviewed on 2026-09-07 and deliberately inert until a human
+  endorses it: it does not move a technique standing, does not count
+  toward the backtest, and is excluded anywhere a claim would carry
+  weight. Drafted confidence: medium. Falsifier as drafted: On false-
+  premise question sets, CoT prompting matching or beating direct
+  answering across model families, with the drop not reproducing. Proposed
+  technique, not yet catalogued: Verify input premises before answering.
+submitted_by: agent:claude-opus-5@Russ-Miller

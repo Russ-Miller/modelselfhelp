@@ -915,3 +915,41 @@ This is the second instance of the same problem and the second answer of the
 same shape. `kind: post` requires archived text because posts vanish; this
 pins a hash because documents mutate. A citation must not be able to quietly
 stop meaning what it meant.
+
+## 2026-09-07 — Ingest unreviewed, but make it inert
+Russ read the drafts and said he needs more time before he can judge them,
+so they should be ingested as pending review rather than sat on. That is
+the right call — a draft outside the catalog is invisible, and eight of
+them in a directory decay into a chore nobody starts.
+
+The design question is what "pending" means, and there is only one answer
+that is not a lie. If an unreviewed claim can change what the catalog
+asserts, then ingesting it *is* endorsing it and the label is decoration.
+
+So `status: pending-review` joins the claim enum, and everything downstream
+of a verdict now reads `reviewedClaims()`:
+
+- `claimsAboutTechnique` — so a technique's standing cannot move on
+  evidence nobody has checked
+- `contestedClaims` — so an unreviewed disagreement is not a disagreement
+- `unsolvedCapabilities` — so a pending claim does not establish that a
+  weakness is documented
+- the backtest — a pending claim citing a reversing paper has caught
+  nothing
+
+Locked in by a test rather than by intention: it asserts that no pending
+claim appears in any technique's standing, in the reviewed set, or as
+contested. The counts moved as they should — 93 claims, 85 reviewed.
+
+Provenance is `agent:claude-opus-5@Russ-Miller`, the first real use of the
+agent format the schema has carried since the first sketch. Which makes
+these eight a small rehearsal for ambition 2: unreviewed agent-submitted
+claims sitting in the catalog, visible, inert, waiting on judgment.
+
+Validation caught something on the way in. Two drafts linked a technique
+whose `addresses` does not include the claim's capability —
+chain-of-thought to hallucination, checklist-decomposition to
+long-context-degradation. Both are plausible-sounding and unreviewed, so
+the link is recorded as a comment rather than asserted. Either the drafter
+was wrong or the technique record is too narrow, and that is exactly the
+kind of question review exists to settle.

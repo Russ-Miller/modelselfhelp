@@ -1,7 +1,7 @@
 import Link from "next/link";
-import { claimTags, getCapability, getClaims, getSource, isQuietSource } from "@/lib/catalog";
+import { claimTags, getCapability, getClaims, getSource, isPending, isQuietSource } from "@/lib/catalog";
 import type { SourceLink } from "@/lib/catalog";
-import { CitationSignal, ContestedBadge, KindBadge, StanceBadge, StrengthBadge } from "@/components/badges";
+import { CitationSignal, ContestedBadge, KindBadge, PendingBadge, StanceBadge, StrengthBadge } from "@/components/badges";
 import { FilterBar } from "@/components/filter-bar";
 
 export const metadata = { title: "Claims" };
@@ -26,6 +26,7 @@ export default function ClaimsPage() {
   const options = [
     { value: "contested", label: "Contested", count: contestedCount },
     { value: "argued", label: "Argued, not measured", count: claims.filter((c) => c.backing_strength === "mechanism-reasoning").length },
+    { value: "pending", label: "Pending review", count: claims.filter(isPending).length },
   ];
   return (
     <div className="space-y-4">
@@ -51,6 +52,7 @@ export default function ClaimsPage() {
                 <KindBadge kind={c.kind} />
                 <StrengthBadge strength={c.backing_strength} />
                 {c.contested && <ContestedBadge />}
+                {isPending(c) && <PendingBadge />}
                 <span className="text-xs text-neutral-500">checked {c.last_checked_at}</span>
                 {c.status !== "active" && <span className="text-xs text-neutral-500">&middot; {c.status}</span>}
               </div>

@@ -1,0 +1,19 @@
+id: arxiv-2609-00759
+kind: paper
+title: "Compile, Don't Memorize: A Context Compilation Architecture (CCA) for In-Context Learning"
+year: 2026
+date: 2026-09-01
+arxiv_id: "2609.00759"
+url: https://arxiv.org/abs/2609.00759
+tags: [ingested, pending-review]
+summary: >-
+  Large language models (LLMs) increasingly handle in-context learning
+  (ICL) tasks where a long, novel context defines the rules, knowledge,
+  and output schema for a series of questions. On benchmarks that grade
+  against every detail of the context, even strong open-weights models
+  pass only 12-16% of tasks: a single overlooked rule fails the whole
+  response. We argue this brittleness is structural: the dominant "read-
+  and-reason" paradigm asks the model to extract, plan, generate, and
+  self-verify in one forward pass. We therefore ask whether explicit
+  context compilation can fix it, how it compares t
+ingested_at: 2026-09-07
