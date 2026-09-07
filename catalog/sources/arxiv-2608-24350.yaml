@@ -1,0 +1,19 @@
+id: arxiv-2608-24350
+kind: paper
+title: "FARCA: Fact-Aligned Reliability-Aware Credit Assignment for Reinforcement Learning with Factual Supervision"
+year: 2026
+date: 2026-08-25
+arxiv_id: "2608.24350"
+url: https://arxiv.org/abs/2608.24350
+tags: [ingested, pending-review]
+summary: >-
+  To reduce the hallucination risk caused by outcome-driven rewards in
+  large language models trained through reinforcement learning with
+  verifiable rewards, existing mitigation approaches introduce process-
+  level factual supervision. However, due to coarse-grained aggregation of
+  factual signals and the lack of reliability assessment for these
+  signals, they create a mismatch between fact verification and policy
+  updates. We term this noisy factual credit assignment and decompose it
+  into two aspects: credit localization ambiguity and credit reliability
+  ambiguity. To address these issues, we propose
+ingested_at: 2026-09-07

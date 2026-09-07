@@ -1,0 +1,32 @@
+id: elasticity-2026-economics-of-rsi
+kind: paper
+title: The Economics of Recursive Self-Improvement
+authors:
+  - Tom Cunningham
+  - Lukas Althoff
+  - Basil Halperin
+  - Brian Jabarian
+  - Andrew Koh
+  - Arjun Ramani
+  - Phil Trammell
+  - Parker Whitfill
+  - Cheryl Wu
+year: 2026
+date: 2026-07-13
+url: https://elasticity.institute/rsi-paper.pdf
+# The authors maintain the PDF in a public repo and revise it in place --
+# four commits between 2026-06-19 and 2026-07-13. The raw file is canonical.
+content_url: https://github.com/elasticity-ai/elasticity/raw/main/paper/elasticity-rsi-paper.pdf
+content_sha256: 4ba9f2baa812bd1142ee14b11c2b6f19c423b5092b82b483f18037a6985ca6cf
+content_checked_at: 2026-09-07
+venue: Elasticity Institute
+tags: [rsi, economics, measurement, evaluation]
+summary: >-
+  Models recursive self-improvement as a set of feedback loops on a directed
+  graph, where net acceleration depends on the product of elasticities around
+  each loop. Derives the condition for self-sustaining acceleration —
+  progress continuing without growth in exogenous inputs — and calibrates it
+  against existing data. Also publishes a wish list of measurements AI
+  companies could feasibly share, which is the source of the diagram in
+  Cheryl Wu's post on OpenAI's disclosure.
+ingested_at: 2026-09-07

@@ -242,6 +242,14 @@ volume of new claims, but pressure on existing ones.
 
 ---
 
+## Notes not yet acted on
+
+`docs/notes-rsi-measurement.md` holds what came out of the September 2026
+RSI discussion and is not yet scoped: their wishlist format, the gap
+between self-reported uplift and the quantity that matters, narrow versus
+broad capability as a candidate record, and our own honest data wishlist —
+in which every row is red.
+
 ## How these two connect
 
 They are not two goals. They are one loop at two scales, and each solves

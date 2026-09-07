@@ -19,6 +19,14 @@ sources:
       improvements, algorithmic efficiency and capabilities are not; and the
       one edge marked "what we need to measure" is capability feeding back
       into the rate of improvement. Effort spent is not effect achieved.
+  - source: elasticity-2026-economics-of-rsi
+    stance: supports
+    note: >-
+      The underlying work. The diagram in the post is this paper's causal
+      graph, and the paper publishes the data wish list the post is asking
+      OpenAI to fill: growth rate of algorithmic efficiency inside labs, how
+      R&D spend splits across inputs, and direct measures of how much models
+      contribute to research.
 contested: false
 status: active
 last_checked_at: 2026-09-07

@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { claimActivity, getCapability, getClaim, getClaims, getModel, getSource, getTagLabel, isQuietSource } from "@/lib/catalog";
+import { claimActivity, getCapability, getClaim, getClaims, getModel, getSource, getTagLabel, isPending, isQuietSource } from "@/lib/catalog";
 import type { SourceLink } from "@/lib/catalog";
-import { CitationSignal, ContestedBadge, EvidenceSignal, KindBadge, StanceBadge, StrengthBadge } from "@/components/badges";
+import { CitationSignal, ContestedBadge, EvidenceSignal, KindBadge, PendingBadge, StanceBadge, StrengthBadge } from "@/components/badges";
 
 function SourceItem({ link }: { link: SourceLink }) {
   const src = getSource(link.source);
@@ -44,8 +44,16 @@ export default async function ClaimPage({ params }: PageProps<"/claims/[id]">) {
           <KindBadge kind={c.kind} />
           <StrengthBadge strength={c.backing_strength} />
           {c.contested && <ContestedBadge />}
+          {isPending(c) && <PendingBadge />}
         </div>
         <h1 className="text-2xl font-semibold tracking-tight">{c.statement}</h1>
+        {isPending(c) && (
+          <p className="rounded border border-sky-300 bg-sky-50 p-3 text-sm text-sky-900 dark:border-sky-800 dark:bg-sky-950/30 dark:text-sky-200">
+            Ingested from a paper but not yet reviewed by a human. It is deliberately inert: it does
+            not move any technique&rsquo;s standing, does not count toward the backtest, and is
+            excluded anywhere a claim would carry weight. Read the source before relying on it.
+          </p>
+        )}
         <p className="text-sm text-neutral-500">
           Capability: <Link href={`/capabilities/${c.capability}`} className="hover:underline">{cap?.label ?? c.capability}</Link>
           {c.tags?.length ? <> &middot; {c.tags.map(getTagLabel).join(", ")}</> : null}

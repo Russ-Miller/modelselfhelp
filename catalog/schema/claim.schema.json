@@ -68,10 +68,12 @@
     "status": {
       "type": "string",
       "enum": [
+        "pending-review",
         "active",
         "superseded",
         "retired"
-      ]
+      ],
+      "description": "pending-review: ingested but not yet endorsed by a human. Browsable and linkable, but deliberately inert \u2014 it does not move a technique's standing, does not count toward the backtest, and is excluded anywhere a claim would otherwise carry weight. active: reviewed and held. superseded / retired: no longer current."
     },
     "superseded_by": {
       "$ref": "common.schema.json#/$defs/slug"

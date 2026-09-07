@@ -1,0 +1,19 @@
+id: arxiv-2608-25894
+kind: paper
+title: "From Passive Response to Proactive Correction: Enhancing LLM Robustness Against Input Fact Perturbations"
+year: 2026
+date: 2026-08-26
+arxiv_id: "2608.25894"
+url: https://arxiv.org/abs/2608.25894
+tags: [ingested, pending-review]
+summary: >-
+  Large language models (LLMs) frequently produce confident yet factually
+  incorrect responses when user inputs contain misleading premises, a
+  phenomenon we attribute to fact perturbations in the input. Existing
+  approaches to hallucination mitigation typically assume reliable user
+  inputs, overlooking how such factual errors can actively mislead model
+  reasoning. To address this vulnerability, we propose DEDUCE, a three-
+  stage framework that transforms LLMs from passive responders into
+  proactive error correctors. DEDUCE operates in three stages: (1) detect
+  errors through fine-grained fact extraction
+ingested_at: 2026-09-07

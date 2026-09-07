@@ -1,0 +1,45 @@
+id: rubric-graded-long-context-tasks-most-gain-context-compilation-harness-comes-extracting
+capability: long-context-degradation
+statement: >-
+  On rubric-graded long-context tasks, most of the gain from a context-
+  compilation harness comes from extracting the context's rules, exact
+  terms and output spec into an explicit checklist placed in the prompt,
+  not from the executable verifiers built on top of it — and the gain
+  appears only on rule-dense tasks and on models with enough capacity,
+  disappearing or reversing on open-ended tasks and on a small-activation
+  model.
+kind: mechanism
+backing_strength: single-paper
+observed_on:
+  era: "Long novel contexts (median 20K characters) graded against 5-20 all-or-nothing rubric criteria; four large open models; gains concentrated in rule/procedure-heavy categories and ab"
+sources:
+  - source: arxiv-2609-00759
+    stance: supports
+    note: >-
+      Ablation on 1,899 CL-bench tasks, one model (Kimi K2.5), temperature
+      0, single GPT-5.1 judge: full pipeline 21.40% vs vanilla 15.40%;
+      removing checklist injection -3.07pp, removing correction loop
+      -1.28pp, verifier execution alone ~0.53pp. Component isolation not
+      repeated on the other three models. LongBench-v2 probe shows
+      aggregate accuracy below vanilla, supporting the scope limit.
+      Absolute pass rates are low throughout, so deltas are on a small
+      base.
+# Drafted stance toward generated-checklists-make-instruction-requirements-individually-checkable: supports.
+# The ablation shows the checklist injection of extracted constraints is the largest single contributor (-3.07pp when removed of a +6.00pp total), with verifier execution alone worth about half a point.
+contested: false
+# Drafter linked technique "checklist-decomposition", but that technique does not list this
+# capability in addresses -- an unreviewed judgment, so it is recorded here
+# rather than asserted. Either the link or the technique record is wrong.
+status: pending-review
+last_checked_at: 2026-09-07
+notes: >-
+  Ingested unreviewed on 2026-09-07 and deliberately inert until a human
+  endorses it: it does not move a technique standing, does not count
+  toward the backtest, and is excluded anywhere a claim would carry
+  weight. Drafted confidence: low. Falsifier as drafted: An ablation on
+  other models or benchmarks where removing the verifier/correction loop
+  costs more pass rate than removing the checklist injection, or where the
+  checklist gives similar gains on open-ended tasks. Proposed technique,
+  not yet catalogued: Compile context into a typed rule IR and inject it
+  as a checklist.
+submitted_by: agent:claude-opus-5@Russ-Miller

@@ -883,3 +883,73 @@ And the drafts vanished mid-build: an earlier `git add -A` had committed
 them onto a feature branch, so checking out main deleted them. Untracked
 working files that matter should be either committed deliberately or kept
 outside the repo, not left to whichever branch happened to capture them.
+
+## 2026-09-07 — Pin what we actually read
+The Elasticity RSI paper says on its own title page that the latest version
+lives in a public repo, and the commit history shows it revised roughly
+fortnightly — four times between 19 June and 13 July. Our source record
+cited a URL that serves whatever the current version happens to be, and the
+claim filed from it quotes two numbers, 9% and 15%, that are precisely the
+kind a revision moves.
+
+arXiv solves this with a version in the id. Nothing solves it for a PDF in a
+repo, an institute-hosted preprint, or any document behind a stable address.
+
+So sources may now pin `content_url` and `content_sha256`, and
+`npm run check-sources` re-fetches them and reports what moved, naming the
+claims that rest on each. Free, no key, and wired into the nightly with
+continue-on-error, because a changed source is news rather than a broken
+build.
+
+The design decision worth recording: when a source changes, the recorded
+hash is **not** updated. It marks the version the claims were written
+against, and overwriting it would erase exactly the fact that matters — that
+those claims now rest on something nobody has read. Only
+`content_changed_at` is added.
+
+Verified both paths, since a checker that only passes is not evidence of
+anything: corrupting the stored hash produced "CHANGED", named both
+dependent claims, and exited non-zero; restoring it produced "unchanged".
+
+This is the second instance of the same problem and the second answer of the
+same shape. `kind: post` requires archived text because posts vanish; this
+pins a hash because documents mutate. A citation must not be able to quietly
+stop meaning what it meant.
+
+## 2026-09-07 — Ingest unreviewed, but make it inert
+Russ read the drafts and said he needs more time before he can judge them,
+so they should be ingested as pending review rather than sat on. That is
+the right call — a draft outside the catalog is invisible, and eight of
+them in a directory decay into a chore nobody starts.
+
+The design question is what "pending" means, and there is only one answer
+that is not a lie. If an unreviewed claim can change what the catalog
+asserts, then ingesting it *is* endorsing it and the label is decoration.
+
+So `status: pending-review` joins the claim enum, and everything downstream
+of a verdict now reads `reviewedClaims()`:
+
+- `claimsAboutTechnique` — so a technique's standing cannot move on
+  evidence nobody has checked
+- `contestedClaims` — so an unreviewed disagreement is not a disagreement
+- `unsolvedCapabilities` — so a pending claim does not establish that a
+  weakness is documented
+- the backtest — a pending claim citing a reversing paper has caught
+  nothing
+
+Locked in by a test rather than by intention: it asserts that no pending
+claim appears in any technique's standing, in the reviewed set, or as
+contested. The counts moved as they should — 93 claims, 85 reviewed.
+
+Provenance is `agent:claude-opus-5@Russ-Miller`, the first real use of the
+agent format the schema has carried since the first sketch. Which makes
+these eight a small rehearsal for ambition 2: unreviewed agent-submitted
+claims sitting in the catalog, visible, inert, waiting on judgment.
+
+Validation caught something on the way in. Two drafts linked a technique
+whose `addresses` does not include the claim's capability —
+chain-of-thought to hallucination, checklist-decomposition to
+long-context-degradation. Both are plausible-sounding and unreviewed, so
+the link is recorded as a comment rather than asserted. Either the drafter
+was wrong or the technique record is too narrow, and that is exactly the
+kind of question review exists to settle.

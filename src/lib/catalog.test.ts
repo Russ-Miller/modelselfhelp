@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { claimsCiting, claimsFor, getCapability, getSource, getTechnique, loadCatalog, claimActivity, openQuestions, techniqueStanding, techniquesFor, unsolvedCapabilities, capabilitiesByGroup } from "./catalog";
+import { claimsCiting, claimsFor, getCapability, getSource, getTechnique, loadCatalog, claimActivity, isPending, openQuestions, reviewedClaims, techniqueStanding, techniquesFor, unsolvedCapabilities, capabilitiesByGroup } from "./catalog";
 
 describe("catalog loader", () => {
   const cat = loadCatalog();
@@ -110,5 +110,20 @@ describe("catalog loader", () => {
       const st = techniqueStanding(t.id);
       expect(st.supporting + st.contesting).toBe(st.claims.reduce((n, c) => n + c.sources.length, 0));
     }
+  });
+
+  it("keeps pending-review claims inert everywhere they would carry weight", () => {
+    const pending = cat.claims.filter(isPending);
+    expect(pending.length, "expected some ingested-but-unreviewed claims").toBeGreaterThan(0);
+    const reviewedIds = new Set(reviewedClaims().map((c) => c.id));
+    for (const p of pending) expect(reviewedIds.has(p.id)).toBe(false);
+
+    // A pending claim must never move a technique's standing.
+    for (const t of cat.techniques) {
+      const ids = new Set(techniqueStanding(t.id).claims.map((c) => c.id));
+      for (const p of pending) expect(ids.has(p.id), `${t.id} counted pending ${p.id}`).toBe(false);
+    }
+    // ...nor appear as contested evidence.
+    for (const p of pending) expect(p.contested).toBe(false);
   });
 });

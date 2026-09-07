@@ -132,6 +132,18 @@ jobs:
           node scripts/summarize-sources.mjs --limit 15 --delay 20000 --chunk 8 --start-delay 60000 2>&1 | tee -a "$RUN_LOG"
           echo '```' >> "$RUN_LOG"
 
+      # Free, no key. Re-fetches sources that pin a file hash and reports any
+      # that changed under the same URL. continue-on-error because a changed
+      # source is news, not a broken build — the exit code is non-zero by
+      # design so the log carries it.
+      - name: Check pinned sources
+        continue-on-error: true
+        run: |
+          echo '## Pinned sources' >> "$RUN_LOG"
+          echo '```' >> "$RUN_LOG"
+          npm run check-sources 2>&1 | tee -a "$RUN_LOG"
+          echo '```' >> "$RUN_LOG"
+
       # The catalog itself is never written by this job — only the queue and
       # the ledger. Validation guards against a malformed write reaching main.
       - name: Validate

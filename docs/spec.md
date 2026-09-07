@@ -258,6 +258,29 @@ eroding:
 
 `status` is `active`/`superseded`: record lifecycle, not a verdict.
 
+### Pinning what we actually read
+arXiv puts a version in the id, so a paper cited here stays readable. Other
+sources do not. A PDF served from a repository, a preprint on an institute
+site, a doc behind a stable URL — those change underneath the same address
+with nothing to notice it. The Elasticity RSI paper is revised roughly
+fortnightly, and the figures our claim quotes are exactly the kind that get
+revised.
+
+So a source may carry `content_url` (the exact file read, where that differs
+from the landing page), `content_sha256`, and `content_checked_at`.
+`npm run check-sources` re-fetches each one and reports any that changed,
+naming the claims that rest on it; the nightly runs it and writes the result
+into the run log.
+
+When a source changes, `content_changed_at` is recorded and the pinned hash
+is **left alone**. It marks the version the claims were written against.
+Overwriting it would erase the evidence that those claims now rest on
+something nobody has read.
+
+Companion to the archiving rule below: that one handles sources that vanish,
+this handles sources that mutate. Both exist so a citation cannot quietly
+stop meaning what it meant when it was made.
+
 ### Informal sources (`kind: post`)
 A Source can be a post — a thread, a blog entry, a forum comment — as well
 as a paper or the user's own observation. Informal writing is good at

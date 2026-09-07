@@ -49,6 +49,24 @@
       "type": "string",
       "format": "uri"
     },
+    "content_url": {
+      "type": "string",
+      "format": "uri",
+      "description": "Direct link to the exact file read, where that differs from `url`. For a paper maintained in a repository this is the raw file, which is the canonical copy."
+    },
+    "content_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$",
+      "description": "SHA-256 of the file at content_url when it was read. Pins which version a claim rests on. Papers on arXiv get a version in their id; a PDF served from a repo can change under the same URL with nothing to notice it."
+    },
+    "content_checked_at": {
+      "$ref": "common.schema.json#/$defs/date",
+      "description": "When content_sha256 was last confirmed to still match."
+    },
+    "content_changed_at": {
+      "$ref": "common.schema.json#/$defs/date",
+      "description": "Set when the file at content_url stopped matching content_sha256. Claims citing this source need re-reading; the figures they quote may have been revised."
+    },
     "author_handle": {
       "type": "string",
       "description": "For kind: post \u2014 the author's handle or username, e.g. \"@cherylwoooo\"."

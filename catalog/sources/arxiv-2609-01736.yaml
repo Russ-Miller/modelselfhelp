@@ -1,0 +1,19 @@
+id: arxiv-2609-01736
+kind: paper
+title: "Harness Engineering in LLM Tool Use via Agent-Native Reusable Tool Primitives"
+year: 2026
+date: 2026-09-01
+arxiv_id: "2609.01736"
+url: https://arxiv.org/abs/2609.01736
+tags: [ingested, pending-review]
+summary: >-
+  Large language models (LLMs) augmented with external tools have
+  demonstrated remarkable capability in solving complex real-world tasks.
+  However, existing approaches suffer from two key challenges: brittle
+  multi-step and multi-turn reasoning caused by incompatible tool output
+  types and API schemas, and performance degradation under large tool
+  catalogues. To address these, we introduce \textbf{Tool Primitives}, a
+  design that replaces rigid API schema-based invocation with natural
+  language as the interface for tool calling, where each tool is wrapped
+  with an LLM interface that handles schema reso
+ingested_at: 2026-09-07
