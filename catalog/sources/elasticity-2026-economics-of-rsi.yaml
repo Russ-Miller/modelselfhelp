@@ -14,6 +14,11 @@ authors:
 year: 2026
 date: 2026-07-13
 url: https://elasticity.institute/rsi-paper.pdf
+# The authors maintain the PDF in a public repo and revise it in place --
+# four commits between 2026-06-19 and 2026-07-13. The raw file is canonical.
+content_url: https://github.com/elasticity-ai/elasticity/raw/main/paper/elasticity-rsi-paper.pdf
+content_sha256: 4ba9f2baa812bd1142ee14b11c2b6f19c423b5092b82b483f18037a6985ca6cf
+content_checked_at: 2026-09-07
 venue: Elasticity Institute
 tags: [rsi, economics, measurement, evaluation]
 summary: >-

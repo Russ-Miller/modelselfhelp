@@ -883,3 +883,35 @@ And the drafts vanished mid-build: an earlier `git add -A` had committed
 them onto a feature branch, so checking out main deleted them. Untracked
 working files that matter should be either committed deliberately or kept
 outside the repo, not left to whichever branch happened to capture them.
+
+## 2026-09-07 — Pin what we actually read
+The Elasticity RSI paper says on its own title page that the latest version
+lives in a public repo, and the commit history shows it revised roughly
+fortnightly — four times between 19 June and 13 July. Our source record
+cited a URL that serves whatever the current version happens to be, and the
+claim filed from it quotes two numbers, 9% and 15%, that are precisely the
+kind a revision moves.
+
+arXiv solves this with a version in the id. Nothing solves it for a PDF in a
+repo, an institute-hosted preprint, or any document behind a stable address.
+
+So sources may now pin `content_url` and `content_sha256`, and
+`npm run check-sources` re-fetches them and reports what moved, naming the
+claims that rest on each. Free, no key, and wired into the nightly with
+continue-on-error, because a changed source is news rather than a broken
+build.
+
+The design decision worth recording: when a source changes, the recorded
+hash is **not** updated. It marks the version the claims were written
+against, and overwriting it would erase exactly the fact that matters — that
+those claims now rest on something nobody has read. Only
+`content_changed_at` is added.
+
+Verified both paths, since a checker that only passes is not evidence of
+anything: corrupting the stored hash produced "CHANGED", named both
+dependent claims, and exited non-zero; restoring it produced "unchanged".
+
+This is the second instance of the same problem and the second answer of the
+same shape. `kind: post` requires archived text because posts vanish; this
+pins a hash because documents mutate. A citation must not be able to quietly
+stop meaning what it meant.
