@@ -212,6 +212,19 @@ export default function OpenQuestionsPage() {
           </section>
         );
       })}
+
+      {/* The page is a list of things not yet answered, so it needs to say what
+          that is for. The second sentence is the load-bearing one: it is a
+          falsifier, not a hedge. See CLAUDE.md, "The sign on the wall". */}
+      <section className="border-t border-neutral-200 pt-6 dark:border-neutral-800">
+        <p className="max-w-3xl text-sm text-neutral-600 dark:text-neutral-400">
+          Every gap on this page is here because nobody has closed it yet. That is a
+          statement about effort so far, not about what is possible. Given time,
+          iteration and work, <strong className="font-medium text-neutral-800 dark:text-neutral-200">there
+          is a way</strong> &mdash; and where there isn&rsquo;t, the job is to prove that
+          rather than assume it.
+        </p>
+      </section>
     </div>
   );
 }

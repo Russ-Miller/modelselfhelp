@@ -1,5 +1,15 @@
 # Ambitions
 
+> **Focus on the art of the possible.** Ultimately — and it will take
+> time, iteration, and effort — *there is a way.* Unless there isn't, in
+> which case prove that, rather than giving in easily.
+
+That second clause is a falsifier, not a hedge, which is why this belongs
+in a document about a catalogue built on falsifiers. "There is a way" is
+a claim like any other here: it holds until someone does the work of
+breaking it, and nobody has.
+
+
 Two long-range goals, recorded 2026-09-06 so they shape decisions early
 even though neither is v1. Both are downstream of the reframe in
 `docs/spec.md` §1: the personal study tool comes first, and these are the

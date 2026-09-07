@@ -739,3 +739,28 @@ external check that breaks the self-improvement loop's closed circle, and
 a system that improves its own verification is what raises review
 throughput enough to accept open contribution. Each is the other's missing
 capability, which is the argument for pursuing both rather than either.
+
+## 2026-09-06 — The sign on the wall
+Russ asked for a metaphorical sign somewhere in the project: *focus on the
+art of the possible — ultimately, and it will take time, iteration and
+effort, there is a way. Unless there isn't, but let's prove that rather
+than give in easily.*
+
+Put in three places, deliberately. At the top of CLAUDE.md, because that
+is the wall actually looked at while working here. As the epigraph of
+docs/ambitions.md, because that document exists to hold things not yet
+possible. And at the foot of /open-questions, because that page is
+literally a list of gaps nobody has closed, and a list of gaps needs to
+say what it is for.
+
+The second clause is the one that earns it a place in this project. It is
+a falsifier, not a hedge. "There is a way" is a claim, and this catalogue
+holds that a claim is worth having only when someone could show it wrong —
+so the honest response is to try hard to break it, not to assume it and
+not to abandon it. That makes the sign consistent with the schema rather
+than merely motivational, which matters, because a slogan that contradicted
+the epistemics would corrode them.
+
+The operational form: when something looks blocked, say what would have to
+be true for it to be possible, and go test that. "This cannot work because
+X" is unfinished until X has been checked.

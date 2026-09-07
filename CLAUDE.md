@@ -1,5 +1,23 @@
 # modelselfhelp — working rules for Claude
 
+## The sign on the wall
+
+**Focus on the art of the possible.** Ultimately — and it will take time,
+iteration, and effort — *there is a way.* Unless there isn't, in which
+case prove that, rather than giving in easily.
+
+Read the second sentence as carefully as the first. It is not a hedge, it
+is a falsifier, and it is what separates this from mere optimism: "there
+is a way" is a claim, and the honest response to a claim is to try hard to
+break it, not to assume it or to abandon it. Every obstacle written down
+in `docs/ambitions.md` carries an attack for this reason. Cataloguing a
+wall without proposing a door is the wrong posture here — the walls are
+why the work is necessary, not arguments against it.
+
+Concretely, when something looks blocked: say what would have to be true
+for it to be possible, and go test that. "This cannot work because X" is
+only finished if X has been checked.
+
 ## What this is
 Primarily a personal study tool for organizing what's actually understood
 about LLM capabilities — curiosity-driven, "the neuroscience of LLMs" —
