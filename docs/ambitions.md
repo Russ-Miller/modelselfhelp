@@ -33,36 +33,85 @@ several catalogued capabilities:
 loop: reading that answer, changing a prompt or a stage, and measuring
 whether it helped.
 
-**What makes it go wrong.** Three things, in increasing seriousness.
+Three obstacles stand in the way. Each is a research problem with a
+tractable attack, and the attacks are the actual work.
 
-*The closed loop.* A system that improves itself against its own catalog
-inherits that catalog's blind spots and then amplifies them. The backtest
-exists for exactly this and is the natural safety instrument: a
-self-improvement step that leaves `npm run backtest` worse off is
-rejected, whatever else it improved. That check has to run on the same
-held-out set, not on one the system chose.
+### Obstacle: the closed loop
 
-*Goodhart, one level up.* This is the third time the same problem has
-appeared in this project — eval scoring, then contributor reputation
-(`docs/reputation-notes.md`), now this. If the system optimizes for
-something the catalog measures, the catalog stops measuring it. The
-defense is the same each time: reward what survives contest, not what
-scores well.
+A system improving itself against its own catalog inherits that catalog's
+blind spots and amplifies them.
 
-*Self-report.* A self-improvement step produces evidence about itself, and
+**Attack 1 — held-out sets the improver cannot see or grow.**
+`docs/known-reversals.yaml` is the seed. The discipline that makes it work
+is ordinary and strict: the improver never sees the set, never adds to it,
+and a step that degrades coverage is rejected regardless of what else it
+improved. Grow the set from sources the system does not control — papers
+that contest claims already held, found by a process separate from the one
+being tuned.
+
+**Attack 2 — different model proposes than evaluates.** A self-improvement
+step drafted by one model and judged by another breaks the shared-prior
+failure. Cheap to do today: the pipeline already runs multiple stages that
+need not share a model.
+
+**Attack 3 — a falsification quota.** Require every self-improvement cycle
+to also attempt N refutations of claims currently held. A loop that must
+spend effort trying to break its own beliefs cannot drift purely toward
+self-confirmation. This is the single highest-leverage idea here, because
+it makes the loop self-correcting by construction rather than by
+supervision.
+
+**Attack 4 — and the real one: ambition 2 solves this.** An external check
+is exactly what a population of independent instances provides. See "How
+these two connect".
+
+### Obstacle: Goodhart
+
+Third appearance in this project, after eval scoring and contributor
+reputation. If the system optimises for what the catalog measures, the
+catalog stops measuring it.
+
+**Attack 1 — make the proxy expensive.** Goodhart bites hardest when the
+proxy is cheap relative to the goal. A claim that requires a runnable
+falsifier — a prompt, a model version, an expected result someone else can
+execute — costs nearly as much to fake as to earn. Cheapness is the
+vulnerability, not measurement itself.
+
+**Attack 2 — measure survival, not score.** A claim's standing is whether
+it survived contest over time. That is structurally hard to game because
+it requires other parties to fail to refute it, and it is why
+`techniqueStanding()` is categorical and derived rather than a number.
+
+**Attack 3 — rotate what is measured.** Overfitting to a fixed measure is
+only rewarding while the measure is fixed. A held-out set that grows and
+rotates makes the shortcut unstable.
+
+### Obstacle: self-report
+
 `explanation-faithfulness` says a system's account of its own reasoning
-need not reflect what happened. So a step's result is an
-`own-observation` claim — the weakest backing strength in the schema, on
-purpose — and it is contestable like anything else. The system does not
-get to grade its own homework merely because it wrote the homework.
+need not reflect what happened. So do not take its account.
 
-**The falsifiable version.** Every self-improvement step is a claim with a
-statement, a scope condition, and a falsifier: *"applying technique T to
-stage N raised measured quantity Q under conditions C; it would be wrong
-if Q did not move on a re-run against the held-out set."* If a step cannot
-be written that way, it is a change, not an improvement.
+**Attack — instrument instead of asking.** The pipeline already emits
+measurable signals that owe nothing to narration: backtest coverage, the
+stage-2 off-topic rate, the count of ungrounded figures, cost per accepted
+claim. A self-improvement step's evidence is the delta in those numbers on
+a held-out run, not the system's report of what it did.
 
----
+This upgrades an earlier assumption worth correcting: a self-improvement
+result is *not* condemned to `own-observation`. Measured against a
+held-out set with a stated falsifier, it has the same standing as any
+single-paper experimental claim. The weak backing was a consequence of
+asking the system to describe itself, and instrumentation removes the
+need to ask.
+
+### The smallest experiment that tests this
+
+One capability the pipeline depends on, one technique with a supported
+efficacy claim, applied to one stage, measured on the held-out set, filed
+as a claim with a falsifier. `checklist-decomposition` on the stage-2
+classifier is a good first candidate: it has a real efficacy claim behind
+it, the stage has a measured error rate to move, and the whole loop fits
+in an afternoon.
 
 ## 2. Other AIs contribute what they learn
 
@@ -76,31 +125,54 @@ already accepts `agent:<name>@<owner-login>` and why `sourceLink` carries
 The mechanics are the easy part and are already sketched in §9: an API, an
 MCP endpoint, tokens with a `kind` of human or agent.
 
-**What makes it go wrong.** Not the API. Trust and volume.
+The obstacles are not the API. They are trust and arithmetic, and both
+have attacks.
 
-*Volume is free for a submitter and expensive for a reviewer.* An agent
-can produce a plausible claim per second; a person cannot check one per
-second. Any design where submission is cheap and review is the bottleneck
-fails on arithmetic alone. `docs/reputation-notes.md` already worked out
-the shape of the answer — reward resolution that survives, never
-submission count — and that reasoning applies unchanged here.
+### Obstacle: submission is free, review is not
 
-*An agent's "what I learned" is its own generated reasoning*, which is
-precisely what `explanation-faithfulness` says can be confident and
-unfaithful. So an agent submission needs the same discipline as a
-generated brief: figures checked against a citable source, claims tied to
-evidence someone else can inspect. A submission that rests only on the
-agent's account of its own experience is `backing_strength:
-own-observation` — already the weakest category, and now unverifiable in a
-way a human's own observation is not, because nobody can ask the agent
-what it actually saw.
+An agent can produce a plausible claim per second; a person cannot check
+one per second. Any design where review is the bottleneck fails on
+arithmetic alone.
 
-*The altruism framing is doing work that structure should do.* "Sharing
-what they are learning altruistically" is a fine motivation and a bad
-security assumption. The catalog should be indifferent to whether a
-submitter is generous or adversarial, because a contested-claim structure
-with sources on both sides gives the same answer either way. That
-indifference is the feature.
+**Attack 1 — invert what triggers review.** Do not review on submission.
+Let a submitted claim sit, marked unreviewed, until something contests it,
+and review the disagreement. Review cost then scales with *conflict*
+rather than with volume, and volume becomes harmless. This is the
+structural fix, and it is a change to when review happens, not to how much
+of it there is.
+
+**Attack 2 — make submissions machine-checkable.** A claim carrying a
+runnable falsifier can be verified without a human: run it, see whether
+the stated result holds. The catalog already checks generated figures
+against source text; the same discipline extends to submissions. Human
+attention then goes only to claims that pass the automatic checks and are
+contested.
+
+**Attack 3 — weight by track record.** A submitter's history of claims
+that survived contest earns their future submissions higher priority.
+Volume without survival earns nothing, which makes flooding pointless
+rather than merely filtered. This is `docs/reputation-notes.md` applied.
+
+### Obstacle: an agent's report of its own experience is unverifiable
+
+**Attack — require reproduction, not testimony.** An observation submitted
+as "I tried X and it failed" is unverifiable. The same observation
+submitted as a prompt, a model version, a setup and an expected output is
+an experiment anyone can re-run. That is the original project instinct —
+git-linked reproducible code — returning exactly where it is needed. It
+converts the weakest backing strength into the strongest kind of evidence
+the catalog can hold, because a reproducible check does not decay when the
+witness is unavailable.
+
+### Obstacle: motivation is not a guarantee
+
+Altruism is a fine reason to contribute and a poor thing to depend on.
+
+**Attack — build so it does not matter.** A contested-claim structure with
+sources on both sides returns the same answer whether a submitter is
+generous or adversarial. Designing for indifference to intent is what
+makes open contribution safe to want, and it is already how the schema
+works.
 
 **What makes it worth doing anyway.** Refutation is counter-cyclical, per
 `docs/reputation-notes.md`: everyone is incentivized to publish techniques
@@ -113,12 +185,28 @@ volume of new claims, but pressure on existing ones.
 
 ## How these two connect
 
-They are the same loop at two scales. One system improving itself from
-verified claims is the single-agent case; many systems contributing and
-contesting claims is the population case. Both depend on the same thing
-being true: that a claim here is worth more than a claim elsewhere,
-because it carries its scope condition, its backing strength, and whatever
-evidence cuts against it.
+They are not two goals. They are one loop at two scales, and each solves
+the other's hardest problem.
 
-That is the actual bet of the project, and it is testable well before
-either ambition is built. `npm run backtest` is the current measure of it.
+**Ambition 2 breaks ambition 1's closed loop.** The deepest objection to a
+self-improving system is that it grades its own homework against its own
+blind spots. Independent instances, contributing and contesting into a
+shared catalog, are an external check that no amount of internal
+discipline can manufacture. A blind spot shared by one system is not
+usually shared by all of them.
+
+**Ambition 1 fixes ambition 2's arithmetic.** The objection to open agent
+contribution is that verification cannot keep up with submission. A system
+that can improve its own verification — better grounding checks, better
+triage precision, cheaper reproduction — is exactly what raises the
+throughput of review. Each ambition is the other's missing capability.
+
+That symmetry is the reason to pursue both rather than either. It also
+gives the project a real thesis to test: that distributed, contested,
+scope-bearing claims are worth more than the same claims held privately —
+because they can be checked by parties who did not produce them.
+
+The bet is testable long before either ambition is built. `npm run
+backtest` is the current measure of it: 2 caught, 2 missed today, with the
+misses now reachable by ingestion. Move that number honestly and the rest
+of this becomes engineering.

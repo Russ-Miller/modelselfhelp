@@ -705,3 +705,37 @@ Both ambitions are the same loop at different scales, and both rest on one
 bet: that a claim here is worth more than a claim elsewhere because it
 carries its scope condition, its backing strength, and whatever cuts
 against it. That bet is testable now, and the backtest is the measure.
+
+**Revised the same day, on Russ's push.** The first draft catalogued
+obstacles without proposing ways through them, which is the wrong posture
+for a research project — the obstacles are why the research is necessary,
+not arguments against it. Rewritten so every obstacle carries an attack.
+
+Three of those attacks are worth more than the rest.
+
+*A falsification quota.* Require each self-improvement cycle to also
+attempt N refutations of claims currently held. A loop that must spend
+effort trying to break its own beliefs is self-correcting by construction
+rather than by supervision.
+
+*Invert what triggers review.* Do not review agent submissions on
+submission. Let a claim sit marked unreviewed until something contests it,
+then review the disagreement. Review cost scales with conflict instead of
+volume, which dissolves the arithmetic objection rather than mitigating
+it.
+
+*Instrument rather than ask.* This corrects yesterday's claim that a
+self-improvement result is condemned to `own-observation`. The pipeline
+already emits signals that owe nothing to narration — backtest coverage,
+off-topic rate, ungrounded-figure count, cost per accepted claim. Measured
+against a held-out set with a stated falsifier, a self-improvement result
+has the same standing as any single-paper experimental claim. The weak
+backing was a consequence of asking the system to describe itself, and
+instrumentation removes the need to ask.
+
+And the structural point the first draft missed: the two ambitions solve
+each other. Independent instances contributing and contesting are the
+external check that breaks the self-improvement loop's closed circle, and
+a system that improves its own verification is what raises review
+throughput enough to accept open contribution. Each is the other's missing
+capability, which is the argument for pursuing both rather than either.
