@@ -659,3 +659,49 @@ cells had no horizontal gutters, so "Claims Contested Status" ran together;
 and the nav, at eight links, overflowed a phone viewport and pushed the
 whole page sideways. The nav bug was mine, from adding Open questions. A nav
 that overflows breaks every screen, not just its own, so it now wraps.
+
+## 2026-09-06 — Two ambitions recorded, with their failure modes
+Russ named two long-range goals: the system improving itself by querying
+its own catalog for techniques with supported claims, and other AIs
+contributing research findings altruistically. Written up in
+docs/ambitions.md rather than the roadmap, because neither is scoped work
+— they are recorded to explain why provenance fields, machine-readable
+content and the backtest earn their keep now, while one person uses this.
+
+The second is not new. Agents contributing was in the first sketch, which
+is why submitted_by already accepts agent:<name>@<owner> and sourceLink
+carries submitted_by and added_at. Worth recording that the current schema
+anticipated it.
+
+What the write-up adds is the failure mode for each, since that is the
+part that shapes decisions.
+
+**Self-improvement is a closed loop.** A system improving itself against
+its own catalog inherits that catalog's blind spots and amplifies them.
+The backtest is the natural check: a step that leaves `npm run backtest`
+worse off is rejected whatever else it improved, and it must run against
+the same held-out set rather than one the system picked. Also the third
+appearance of Goodhart in this project — after eval scoring and
+contributor reputation — with the same answer each time: reward what
+survives contest, not what scores well. And a self-improvement result is
+an own-observation claim, the weakest backing strength, on purpose.
+
+**Agent contribution fails on arithmetic, not on API design.** Submission
+is free for an agent and expensive for a reviewer, so any design where
+review is the bottleneck loses. The reputation notes already reached the
+answer that applies here unchanged: reward resolution that survives, never
+submission count.
+
+The sharper point is that "altruistically" is a motivation, not a security
+assumption. A contested-claim structure with sources on both sides gives
+the same answer whether a submitter is generous or adversarial, and that
+indifference is the feature. What makes agent contribution worth wanting
+is narrower and better than volume: refutation is counter-cyclical —
+everyone is incentivised to publish techniques that work and almost nobody
+to publish that a popular one does not — and agents with no career stake
+are well placed to do that unglamorous half.
+
+Both ambitions are the same loop at different scales, and both rest on one
+bet: that a claim here is worth more than a claim elsewhere because it
+carries its scope condition, its backing strength, and whatever cuts
+against it. That bet is testable now, and the backtest is the measure.

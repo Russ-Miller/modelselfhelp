@@ -472,6 +472,14 @@ wants agent/contributor traffic.
 - **Importance claims**: `(capability, context)`-scoped, evidence-backed
   salience rating, considered as an alternative to raw up/down voting —
   see decision log, 2026-09-03.
+
+Two longer-range goals sit beyond even this, recorded in
+`docs/ambitions.md`: the system improving itself by querying its own
+catalog for techniques with supported claims, and other AI systems
+contributing findings so the knowledge is shared rather than re-derived.
+Neither is scoped work. They are written down because they explain why
+provenance fields, machine-readable content, and the backtest all earn
+their place now, while only one person is using this.
 - **Prediction-before-test** as an entry type: record an expectation
   before checking it, since memory quietly edits priors to match outcomes
   after the fact — also later phase, not because it's a bad idea, but
