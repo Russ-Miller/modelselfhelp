@@ -74,7 +74,7 @@ export default function Home() {
           )}
           <p className="text-xs text-neutral-500">
             <Link href={`/sources/${til.source.id}`} className="hover:underline">the source in full</Link>
-            {til.hn_url && <> &middot; <a href={til.hn_url} className="hover:underline">{til.hn_points} points on Hacker News</a></>}
+            {til.hn_url && <> &middot; <a href={til.hn_url} target="_blank" rel="noopener noreferrer" className="hover:underline">{til.hn_points} points on Hacker News</a></>}
             {" "}&middot; featured as something worth reading, not as something judged correct
           </p>
         </section>
