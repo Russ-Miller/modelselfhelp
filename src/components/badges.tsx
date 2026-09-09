@@ -118,7 +118,13 @@ export function CitationSignal({ source }: { source: Source }) {
       role="tooltip"
       className="citation-card pointer-events-none absolute left-0 top-full z-20 mt-1 w-max max-w-xs rounded border border-neutral-200 bg-white p-2 text-xs font-normal leading-relaxed text-neutral-700 shadow-lg dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-300"
     >
-      <span className="block font-medium text-neutral-900 dark:text-neutral-100">{ACTIVITY_TIERS[level].label}</span>
+      {/* Name the paper. Beside a claim, a bare "heavily cited" reads as if it
+          describes the claim, which it does not -- it is how much the field
+          cites this one source. */}
+      <span className="block font-medium text-neutral-900 dark:text-neutral-100">
+        This source: {source.title.length > 70 ? `${source.title.slice(0, 70)}…` : source.title}
+      </span>
+      <span className="mt-1 block">How much the field cites it &mdash; {ACTIVITY_TIERS[level].label}</span>
       <span className="block">{fmtRecent(recent)} in the last 12 months &middot; {total} total</span>
       {year && <span className="block">published {year}</span>}
       <span className="block text-neutral-500">checked {source.citations_checked_at}</span>
@@ -176,7 +182,10 @@ export function EvidenceSignal({ activity }: { activity: ClaimActivity }) {
       </svg>
       <span className="text-xs">Evidence activity</span>
       <span role="tooltip" className="citation-card pointer-events-none absolute left-0 top-full z-20 mt-1 w-max max-w-sm rounded border border-neutral-200 bg-white p-2 text-xs font-normal leading-relaxed text-neutral-700 shadow-lg dark:border-neutral-700 dark:bg-neutral-900 dark:text-neutral-300">
-        <span className="block font-medium text-neutral-900 dark:text-neutral-100">{headline}</span>
+        <span className="block font-medium text-neutral-900 dark:text-neutral-100">
+          How much the field cites the sources under this claim
+        </span>
+        <span className="mt-1 block">{headline}</span>
         {activity.checked.map((s) => (
           <span key={s.id} className="mt-1 block">
             {fmtRecent(s.citations_recent_12mo ?? 0)} in 12mo &middot; {s.citations_total ?? 0} total &mdash;{" "}

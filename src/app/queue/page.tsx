@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { getCapability } from "@/lib/catalog";
-import { candidateUrl, groupByCapability, loadQueue, verdictFor, type Direction, type QueueCandidate } from "@/lib/queue";
+import { getCapability, getClaim } from "@/lib/catalog";
+import { candidateUrl, challengers, groupByCapability, loadQueue, verdictFor, type Direction, type QueueCandidate } from "@/lib/queue";
 
 export const metadata = { title: "Review queue" };
 
@@ -85,6 +85,10 @@ export default function QueuePage() {
   const { candidates, windows, generatedAt } = loadQueue();
   const { groups, unmatched } = groupByCapability(candidates);
   const matchedCount = candidates.length - unmatched.length;
+  // Had its own page until /contested was folded into the claims list. This is
+  // queue content -- unreviewed papers a machine thinks cut against something
+  // filed -- so it belongs beside the rest of the queue.
+  const incoming = challengers(candidates);
 
   return (
     <div className="space-y-6">
@@ -106,6 +110,35 @@ export default function QueuePage() {
           {generatedAt ? ` · generated ${generatedAt}` : ""}
         </p>
       </div>
+
+      {incoming.length > 0 && (
+        <section className="space-y-2">
+          <h2 className="flex items-baseline gap-2 border-b border-neutral-200 pb-1 text-lg font-semibold dark:border-neutral-800">
+            Incoming challenges <span className="text-sm font-normal text-neutral-500">{incoming.length}</span>
+          </h2>
+          <p className="max-w-3xl text-sm text-neutral-500">
+            Papers here whose findings appear to cut against a claim already filed. A machine
+            judgment, unreviewed &mdash; the point is to notice them, not to believe them.
+          </p>
+          <ul className="space-y-2">
+            {incoming.map(({ candidate, verdict }) => {
+              const target = verdict.contradicts_claim_id ? getClaim(verdict.contradicts_claim_id) : undefined;
+              return (
+                <li key={candidate.arxiv_id ?? candidate.title}
+                  className="rounded border border-amber-300 bg-amber-50 p-3 text-sm dark:border-amber-800 dark:bg-amber-950/20">
+                  <a href={candidateUrl(candidate)} target="_blank" rel="noopener noreferrer" className="font-medium hover:underline">{candidate.title}</a>
+                  {target && (
+                    <div className="mt-1 text-neutral-700 dark:text-neutral-300">
+                      cuts against <Link href={`/claims/${target.id}`} className="underline">{target.statement}</Link>
+                    </div>
+                  )}
+                  {verdict.rationale && <div className="mt-1 text-xs text-neutral-600 dark:text-neutral-400">{verdict.rationale}</div>}
+                </li>
+              );
+            })}
+          </ul>
+        </section>
+      )}
 
       {candidates.length === 0 ? (
         <p className="text-sm text-neutral-500">

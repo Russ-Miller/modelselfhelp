@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ListSearch } from "@/components/list-search";
 import { claimsCiting, isQuietSource, sourcesByRecency } from "@/lib/catalog";
 import { CitationSignal, StanceBadge } from "@/components/badges";
 
@@ -18,6 +19,7 @@ export default function SourcesPage() {
         the other direction: which claims <em>in this catalog</em> draw on the source, and whether
         they lean on it as support or as a counterpoint.
       </p>
+      <ListSearch noun="sources" placeholder="Filter sources…" />
       <table className="w-full text-sm">
         <thead className="text-left text-neutral-500">
           <tr>
@@ -33,7 +35,8 @@ export default function SourcesPage() {
             const citing = claimsCiting(s.id);
             const quiet = isQuietSource(s);
             return (
-              <tr key={s.id} className={`border-t border-neutral-200 dark:border-neutral-800 align-top ${quiet ? "opacity-60" : ""}`}>
+              <tr key={s.id}
+                data-search={`${s.title} ${(s.authors ?? []).join(" ")} ${s.kind} ${s.arxiv_id ?? ""} ${s.year ?? ""} ${(s.tags ?? []).join(" ")}`.toLowerCase()} className={`border-t border-neutral-200 dark:border-neutral-800 align-top ${quiet ? "opacity-60" : ""}`}>
                 <td className="py-2 pr-4">
                   <Link href={`/sources/${s.id}`} className="font-medium hover:underline">{s.title}</Link>
                   <div className="text-xs text-neutral-500">{s.kind}{s.authors?.length ? ` · ${s.authors[0]}${s.authors.length > 1 ? " et al." : ""}` : ""}</div>
