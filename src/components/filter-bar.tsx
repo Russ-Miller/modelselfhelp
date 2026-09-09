@@ -2,7 +2,7 @@
 
 import { useCallback, useSyncExternalStore } from "react";
 
-export interface FilterOption { value: string; label: string; count: number }
+export interface FilterOption { value: string; label: string; count: number; hint?: string }
 
 /**
  * Segmented filter over a server-rendered list. The list stays fully static:
@@ -55,7 +55,7 @@ export function FilterBar({
   // than rendering a list with everything hidden.
   const active = options.some((o) => o.value === fromUrl && o.count > 0) ? fromUrl : "all";
 
-  const all: FilterOption[] = [{ value: "all", label: "All", count: 0 }, ...options];
+  const all: FilterOption[] = [{ value: "all", label: "All", count: 0, hint: "Everything" }, ...options];
 
   return (
     <>
@@ -69,6 +69,8 @@ export function FilterBar({
               type="button"
               onClick={() => setParam(param, o.value)}
               disabled={empty}
+              title={o.hint}
+              aria-label={o.hint ? `${o.label} — ${o.hint}` : undefined}
               aria-pressed={isActive}
               className={[
                 "rounded-full border px-3 py-1 text-xs transition-colors",
