@@ -45,12 +45,25 @@ export default function CapabilitiesPage() {
               <td className="py-2 pr-6"><Link href={`/capabilities/${c.id}`} className="font-medium hover:underline">{c.label}</Link>
                 <div className="text-neutral-600 dark:text-neutral-400">{c.summary}</div></td>
               <td className="py-2 pr-6">{(c.tags ?? []).join(", ")}</td>
-              <td className="py-2 pr-6">{claimsFor(c.id).length}</td>
+              <td className="py-2 pr-6">
+                {(() => {
+                  const n = claimsFor(c.id).length;
+                  return n ? (
+                    // A pill, not bare text: a single digit is a poor click
+                    // target, and padding is what makes it hittable.
+                    <Link href={`/capabilities/${c.id}`} aria-label={`${n} claim${n === 1 ? "" : "s"} under ${c.label}`}
+                      className="inline-flex min-w-8 items-center justify-center rounded-full border border-neutral-300 px-2.5 py-1 text-xs font-medium text-neutral-700 hover:border-neutral-500 hover:bg-neutral-100 dark:border-neutral-700 dark:text-neutral-300 dark:hover:border-neutral-500 dark:hover:bg-neutral-800">
+                      {n}
+                    </Link>
+                  ) : <span className="text-neutral-400">&mdash;</span>;
+                })()}
+              </td>
               <td className="py-2 pr-6">
                 {(() => {
                   const n = claimsFor(c.id).filter((x) => x.contested).length;
                   return n ? (
-                    <Link href="/claims?filter=contested" className="rounded bg-amber-100 px-1.5 py-0.5 text-xs font-medium text-amber-900 hover:underline dark:bg-amber-900/40 dark:text-amber-200">{n}</Link>
+                    <Link href="/claims?filter=contested" aria-label={`${n} contested claim${n === 1 ? "" : "s"} under ${c.label}`}
+                      className="inline-flex min-w-8 items-center justify-center rounded-full border border-amber-300 bg-amber-100 px-2.5 py-1 text-xs font-medium text-amber-900 hover:border-amber-500 dark:border-amber-800 dark:bg-amber-900/40 dark:text-amber-200">{n}</Link>
                   ) : <span className="text-neutral-400">—</span>;
                 })()}
               </td>
