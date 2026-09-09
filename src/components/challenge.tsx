@@ -1,4 +1,4 @@
-import type { Claim } from "@/lib/catalog";
+import type { Capability, Claim } from "@/lib/catalog";
 
 const REPO = "https://github.com/Russ-Miller/modelselfhelp";
 
@@ -33,6 +33,36 @@ with the setup written down counts):
     <a href={url} target="_blank" rel="noopener noreferrer"
       className="inline-flex items-center gap-1.5 rounded border border-neutral-300 px-3 py-1.5 text-xs text-neutral-700 hover:border-neutral-500 dark:border-neutral-700 dark:text-neutral-300 dark:hover:border-neutral-500">
       <span aria-hidden>&darr;</span> Contest this claim
+    </a>
+  );
+}
+
+/**
+ * The same route for a capability: is this a real topic, is the boundary
+ * right, should it be merged or dropped. Proposed capabilities were added by a
+ * pipeline noticing a recurring framing, so they especially need somewhere for
+ * "no, that is two things" to land.
+ */
+export function CapabilityChallengeLink({ capability }: { capability: Capability }) {
+  const body = `Capability: ${capability.id} (${capability.status})
+${capability.summary.replace(/\s+/g, " ").trim()}
+
+**What should change?** (delete what does not apply)
+- This is not a real topic — it should be dropped:
+- This is really the same thing as another capability — merge it with:
+- This is two things and should be split into:
+- The boundary is wrong — it should include / exclude:
+- The name or wording is misleading:
+
+**Why** (a paper, an example, or a case the current wording handles badly):
+
+**Who you are** (optional, for attribution):
+`;
+  const url = `${REPO}/issues/new?title=${encodeURIComponent(`Capability: ${capability.id}`)}&body=${encodeURIComponent(body)}&labels=capability`;
+  return (
+    <a href={url} target="_blank" rel="noopener noreferrer"
+      className="inline-flex items-center gap-1.5 rounded border border-neutral-300 px-3 py-1.5 text-xs text-neutral-700 hover:border-neutral-500 dark:border-neutral-700 dark:text-neutral-300 dark:hover:border-neutral-500">
+      <span aria-hidden>&#8646;</span> Suggest a change
     </a>
   );
 }

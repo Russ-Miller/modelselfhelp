@@ -8,7 +8,9 @@ export type SourceKind = "paper" | "observation" | "post" | "vendor-doc";
 export type Stance = "supports" | "contests";
 export type ClaimKind = "mechanism" | "observation";
 export type BackingStrength = "single-paper" | "replicated" | "mechanism-reasoning" | "own-observation";
-export type CapabilityStatus = "active" | "parked";
+/** `proposed` is mined from the literature and added without anyone endorsing
+ *  it -- the capability equivalent of a pending-review claim. */
+export type CapabilityStatus = "proposed" | "active" | "parked";
 /** `pending-review` is ingested but not endorsed: browsable, and deliberately
  *  inert everywhere a claim would otherwise carry weight. */
 export type ClaimStatus = "pending-review" | "active" | "superseded" | "retired";
@@ -112,6 +114,7 @@ export function loadCatalog(): Catalog {
 
 export const getCapabilities = () => loadCatalog().capabilities;
 export const getCapability = (id: string) => loadCatalog().capabilities.find((c) => c.id === id);
+export const isProposed = (c: Capability) => c.status === "proposed";
 export const getClaims = () => loadCatalog().claims;
 /** Ingested but not yet endorsed by a human. */
 export const isPending = (c: Claim) => c.status === "pending-review";
@@ -275,6 +278,8 @@ export interface Unsolved { capability: Capability; kind: UnsolvedKind; claims: 
 export function unsolvedCapabilities(): Unsolved[] {
   const out: Unsolved[] = [];
   for (const capability of loadCatalog().capabilities) {
+    // Only endorsed capabilities. A proposed one having no mitigation says
+    // nothing -- nobody has decided it is a real topic yet.
     if (capability.status !== "active") continue;
     // Descriptive, not a verdict: an unreviewed claim still documents that
     // someone found something here, which is what this test is asking.
@@ -301,6 +306,7 @@ export function unsolvedCapabilities(): Unsolved[] {
  */
 export function capabilityTags(c: Capability): string {
   const tags: string[] = [];
+  if (isProposed(c)) tags.push("proposed");
   if (claimsFor(c.id).some((x) => x.contested)) tags.push("contested");
   const u = unsolvedCapabilities().find((x) => x.capability.id === c.id);
   if (u) tags.push(u.kind);
