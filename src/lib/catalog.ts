@@ -112,7 +112,11 @@ export function loadCatalog(): Catalog {
   return cache;
 }
 
-export const getCapabilities = () => loadCatalog().capabilities;
+/** Sorted by the label, because that is what the reader sees. Files sort by
+ *  id, and an id rarely resembles its label -- "arithmetic" displays as
+ *  "Digit-level arithmetic" -- so file order looks like no order at all. */
+export const getCapabilities = () =>
+  [...loadCatalog().capabilities].sort((a, b) => a.label.localeCompare(b.label));
 export const getCapability = (id: string) => loadCatalog().capabilities.find((c) => c.id === id);
 export const isProposed = (c: Capability) => c.status === "proposed";
 export const getClaims = () => loadCatalog().claims;
@@ -134,9 +138,11 @@ export const isPending = (c: Claim) => c.status === "pending-review";
  */
 export const reviewedClaims = () => loadCatalog().claims.filter((c) => !isPending(c));
 export const getClaim = (id: string) => loadCatalog().claims.find((c) => c.id === id);
-export const getSources = () => loadCatalog().sources;
+export const getSources = () =>
+  [...loadCatalog().sources].sort((a, b) => a.title.localeCompare(b.title));
 export const getSource = (id: string) => loadCatalog().sources.find((s) => s.id === id);
-export const getTechniques = () => loadCatalog().techniques;
+export const getTechniques = () =>
+  [...loadCatalog().techniques].sort((a, b) => a.label.localeCompare(b.label));
 export const getTechnique = (id: string) => loadCatalog().techniques.find((t) => t.id === id);
 export const getModel = (id: string) => loadCatalog().models.find((m) => m.id === id);
 export const getTagLabel = (id: string) => {
@@ -147,7 +153,8 @@ export const getTagLabel = (id: string) => {
 export const claimsFor = (capabilityId: string) => loadCatalog().claims.filter((c) => c.capability === capabilityId);
 /** Efficacy claims: assertions that this technique moves some capability. */
 export const claimsAboutTechnique = (techniqueId: string) => reviewedClaims().filter((c) => c.technique === techniqueId);
-export const techniquesFor = (capabilityId: string) => loadCatalog().techniques.filter((t) => t.addresses.includes(capabilityId));
+export const techniquesFor = (capabilityId: string) =>
+  getTechniques().filter((t) => t.addresses.includes(capabilityId));
 
 /** Every claim that cites a given source, alongside the stance that claim's citation carries. */
 export function claimsCiting(sourceId: string): { claim: Claim; stance: Stance }[] {
@@ -162,8 +169,9 @@ export function claimsCiting(sourceId: string): { claim: Claim; stance: Stance }
 /** Capabilities grouped by their first tag (loose grouping — tags are soft, see spec §7). */
 export function capabilitiesByGroup(): { group: TaxonomyEntry; capabilities: Capability[] }[] {
   const { taxonomy, capabilities } = loadCatalog();
+  const sorted = [...capabilities].sort((a, b) => a.label.localeCompare(b.label));
   return taxonomy.groups
-    .map((group) => ({ group, capabilities: capabilities.filter((c) => c.tags?.includes(group.id)) }))
+    .map((group) => ({ group, capabilities: sorted.filter((c) => c.tags?.includes(group.id)) }))
     .filter((g) => g.capabilities.length > 0);
 }
 
