@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { claimActivity, getCapability, getClaim, getClaims, getModel, getSource, getTagLabel, isPending, isQuietSource } from "@/lib/catalog";
 import type { SourceLink } from "@/lib/catalog";
 import { CitationSignal, ContestedBadge, EvidenceSignal, KindBadge, PendingBadge, StanceBadge, StrengthBadge } from "@/components/badges";
+import { ChallengeLink } from "@/components/challenge";
 
 function SourceItem({ link }: { link: SourceLink }) {
   const src = getSource(link.source);
@@ -110,6 +111,17 @@ export default async function ClaimPage({ params }: PageProps<"/claims/[id]">) {
         })()}
         {c.last_new_evidence_at && <span>New evidence: {c.last_new_evidence_at}</span>}
         {c.superseded_by && <span>Superseded by <Link href={`/claims/${c.superseded_by}`} className="hover:underline">{c.superseded_by}</Link></span>}
+      </section>
+
+      {/* Refutation is the contribution this catalog most wants and least has:
+          everyone publishes what worked. Making it one click is the cheapest
+          thing that could change that. */}
+      <section className="space-y-2 border-t border-neutral-200 pt-6 dark:border-neutral-800">
+        <ChallengeLink claim={c} />
+        <p className="text-xs text-neutral-500">
+          Disagreeing is the most useful thing you can do here. Both sides of every contested
+          claim in this catalog were assembled by the same person, which is its weakest point.
+        </p>
       </section>
 
       {c.notes && (
