@@ -74,7 +74,7 @@ function Entry({ q }: { q: OpenQuestion }) {
             return (
               <div key={i} className="text-sm">
                 <div className="text-xs font-medium uppercase tracking-wide text-neutral-500">Nearest miss</div>
-                {href ? <a href={href} className="hover:underline">{title}</a> : <span>{title}</span>}
+                {href ? <a href={href} {...(href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})} className="hover:underline">{title}</a> : <span>{title}</span>}
                 <p className="text-neutral-600 dark:text-neutral-400">{m.why_it_does_not_fit}</p>
               </div>
             );

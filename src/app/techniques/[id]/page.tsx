@@ -78,7 +78,7 @@ export default async function TechniquePage({ params }: PageProps<"/techniques/[
                     return (
                       <div key={i} className="text-sm">
                         <div className="text-xs font-medium uppercase tracking-wide text-neutral-500">Nearest miss</div>
-                        {href ? <a href={href} className="hover:underline">{title}</a> : <span>{title}</span>}
+                        {href ? <a href={href} {...(href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})} className="hover:underline">{title}</a> : <span>{title}</span>}
                         <p className="text-neutral-600 dark:text-neutral-400">{m.why_it_does_not_fit}</p>
                       </div>
                     );
@@ -116,7 +116,7 @@ export default async function TechniquePage({ params }: PageProps<"/techniques/[
         {t.repos?.length ? (
           <ul className="space-y-1 text-sm">
             {t.repos.map((r) => (
-              <li key={r.url}><a href={r.url} className="font-mono hover:underline">{r.url}</a>
+              <li key={r.url}><a href={r.url} target="_blank" rel="noopener noreferrer" className="font-mono hover:underline">{r.url}</a>
                 <span className="text-neutral-600 dark:text-neutral-400"> — {r.note}</span>
                 {r.verified_on && <span className="ml-1 text-xs text-neutral-500">verified {r.verified_on}</span>}</li>
             ))}

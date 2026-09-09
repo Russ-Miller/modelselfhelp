@@ -37,7 +37,15 @@ export default async function SourcePage({ params }: PageProps<"/sources/[id]">)
             </span>
           </p>
         )}
-        {s.url && <a href={s.url} className="text-sm hover:underline">{s.url}</a>}
+        {/* Leaving the site, so a new tab: the reader is mid-way through a
+            source page and losing it to a PDF is a poor trade. */}
+        {s.url && (
+          <a href={s.url} target="_blank" rel="noopener noreferrer"
+            className="inline-flex items-baseline gap-1 text-sm hover:underline">
+            {s.url}<span aria-hidden className="text-xs text-neutral-500">&#8599;</span>
+            <span className="sr-only">(opens in a new tab)</span>
+          </a>
+        )}
       </header>
       {/* The hand-written gloss reads as the lede: one or two sentences saying
           what the paper is for. It sat below the generated brief, unlabelled,

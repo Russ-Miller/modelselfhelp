@@ -12,7 +12,8 @@ function SourceItem({ link }: { link: SourceLink }) {
       <div className="flex flex-wrap items-center gap-2 mb-0.5">
         <StanceBadge stance={link.stance} />
         {src ? (
-          <a href={src.url ?? `#${src.id}`} className="font-medium hover:underline">{src.title}</a>
+          <a href={src.url ?? `#${src.id}`} target="_blank" rel="noopener noreferrer"
+            className="font-medium hover:underline">{src.title}</a>
         ) : link.source}
         {src && <CitationSignal source={src} />}
       </div>
