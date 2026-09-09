@@ -1,0 +1,41 @@
+id: ui-to-code-generation-where-rendered-screenshot-gives-genuine-external-feedback
+capability: code-generation
+statement: >-
+  In UI-to-code generation, where a rendered screenshot gives genuine
+  external feedback, iterative self-critique still drifts below the initial
+  draft over ten rounds, because a code edit changes the rendering
+  non-locally and a fix for one region breaks regions that were already
+  faithful; restricting each round to one typed, scoped repair target and
+  carrying past targets forward as an avoid-list reduces that drift.
+kind: mechanism
+backing_strength: single-paper
+observed_on:
+  era: "HTML/CSS webpage reproduction from a screenshot, three frontier and three open Qwen VLMs, ten refinement rounds, VLM-judge visual-fidelity scoring; effects on open models are mixed"
+sources:
+  - source: arxiv-2608-24138
+    stance: supports
+    note: >-
+      Measured across 6 models x 3 benchmarks (18 settings): scoped rubrics
+      beat naive self-evolution in 15/18 final-round and 14/18 best-round
+      settings, average +1.20 overall judge points; naive refinement fell
+      below the initial draft on Design2Code for both GPT models. A
+      60-sample human preference study on one benchmark for two models backs
+      the main comparison. Scoring is by VLM judge, which the authors note
+      is unstable on subtle differences; the coupling mechanism is argued
+      and illustrated rather than directly measured.
+contested: false
+status: pending-review
+last_checked_at: 2026-09-09
+notes: >-
+  Drafted from the paper by a model and filed unreviewed. Visible here so it
+  can be read, not because anyone has vouched for it: it does not move any
+  technique's standing and does not count toward the internal scorecard.
+  Drafter linked technique "external-feedback-repair", which does not list
+  this capability in addresses -- recorded, not asserted. Drafted
+  confidence: medium. Falsifier as drafted: Show that naive self-refinement
+  with rendered feedback improves monotonically over rounds on these
+  benchmarks, or that restricting each round to a single scoped repair
+  target gives no advantage over free-form critique at equal round budget.
+  Proposed technique, not catalogued: Rubric-scoped iterative repair with
+  history.
+submitted_by: agent:claude-opus-5@Russ-Miller

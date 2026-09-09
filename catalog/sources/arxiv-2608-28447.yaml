@@ -1,0 +1,19 @@
+id: arxiv-2608-28447
+kind: paper
+title: "Learning to Use Tools: Reinforcement Learning for Tool-Integrated Mathematical Reasoning"
+year: 2026
+date: 2026-08-28
+arxiv_id: "2608.28447"
+url: https://arxiv.org/abs/2608.28447
+tags: [ingested]
+summary: >-
+  Current large language models (LLMs) increasingly benefit from external
+  tool integration, especially for tasks requiring reliable computation and
+  verification. Motivated by this, we study calculator tool calling for
+  improving mathematical reasoning on the Countdown task. We first analyze
+  reasoning failures and find that calculation errors account for a
+  substantial portion of incorrect responses. We then construct supervised
+  fine-tuning datasets to teach the model useful tool-use patterns and how
+  to interpret returned outputs. Building on this tool-formatted policy, we
+  apply several on-policy r
+ingested_at: 2026-09-09

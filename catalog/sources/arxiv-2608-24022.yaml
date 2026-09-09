@@ -1,0 +1,19 @@
+id: arxiv-2608-24022
+kind: paper
+title: "What Guides the Agent? Adjudicating Unauthorized Behavior via Localizing Behavior-Guiding Instructions"
+year: 2026
+date: 2026-08-25
+arxiv_id: "2608.24022"
+url: https://arxiv.org/abs/2608.24022
+tags: [ingested]
+summary: >-
+  LLM agents integrated with external resources gain complex task
+  capabilities, yet the unified natural-language context channel makes them
+  vulnerable to injection attacks: untrusted external data may be
+  dynamically parsed as behavior-guiding instructions during LLM inference,
+  thereby subverting the agent's decision. Existing defenses focus on static
+  detection or isolation of malicious content at the input/output level,
+  remains insufficient for detecting such dynamic inducements that arise
+  during model reasoning. We propose Attnlocate, a runtime framework for
+  fine-grained localization of context
+ingested_at: 2026-09-09

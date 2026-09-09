@@ -1,0 +1,36 @@
+arxiv_id: "2608.28476"
+title: "ContextPilot: Teaching Agents for Proactive Context Management via
+  Fine-grained RL"
+url: https://arxiv.org/abs/2608.28476
+drafted_at: 2026-09-09
+drafted_from: full-text
+model: claude-opus-5
+status: draft — not filed. Review, edit, then move into catalog/ by hand.
+capability: context-hygiene
+statement: Handing an agent context-editing tools (delete, summarize, note,
+  fold) by prompt alone makes mid-size models worse than leaving their context
+  untouched — Qwen3-8B, Qwen3-14B and Gemma4-E4B all scored lower on
+  long-context QA with the tools than without them; only after fine-tuning on
+  trajectories that use the tools does the toolset become a gain.
+kind: observation
+backing_strength: single-paper
+scope_condition: Long-context QA benchmarks (NovelQA, InfinityBench En.MC,
+  LongMemEval-S, BrowseComp+) with 8B-14B open models capped at a 32K working
+  window; a very large model (Qwen3.5-397B-A17B) did benefit from the same
+  tools without fine-tuning.
+technique: ""
+proposed_technique: RL-trained proactive context management with action-level credit assignment
+stance_on_existing: neither
+related_claim_id: ""
+stance_reason: ""
+falsifier: A prompt-only agent given the same context-editing toolset matching
+  or beating the same base model's no-tool score on these long-context QA
+  benchmarks at 8B-14B scale.
+evidence_note: Measured across three base models and four benchmarks, three
+  runs each, against a no-tools baseline at the model's full 128K window.
+  Average scores dropped for every base model with prompt-only tools; SFT and
+  RL versions of the same models exceeded the no-tools baseline. Does not
+  isolate whether the loss comes from wrong tool arguments or from bad editing
+  decisions, though a separate analysis shows high early invocation-failure
+  rates for memory and offloading tools.
+confidence: medium

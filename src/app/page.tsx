@@ -1,11 +1,12 @@
 import Link from "next/link";
-import { loadCatalog, capabilitiesByGroup, claimsByRecency, getCapability } from "@/lib/catalog";
+import { loadCatalog, capabilitiesByGroup, claimsByRecency, getCapability, isPending } from "@/lib/catalog";
 import { KindBadge, StrengthBadge, ContestedBadge } from "@/components/badges";
 
 export default function Home() {
   const cat = loadCatalog();
   const groups = capabilitiesByGroup();
   const recent = claimsByRecency().slice(0, 6);
+  const pending = cat.claims.filter(isPending).length;
   return (
     <div className="space-y-10">
       <section className="space-y-3">
@@ -13,6 +14,15 @@ export default function Home() {
         <p className="max-w-2xl text-neutral-600 dark:text-neutral-400">
           Not a scoreboard &mdash; a set of directional, scoped claims, each tied to the sources that
           support or contest it. Capabilities are topics; claims are the actual findings.
+        </p>
+        {/* A visitor should meet the caveat on arrival, not discover it later. The
+            whole proposition is that you can judge an entry yourself, which only
+            works if you know what you are looking at. */}
+        <p className="max-w-2xl text-sm text-neutral-500">
+          Incomplete, and partly unreviewed &mdash; {pending} of {cat.claims.length} claims are
+          drafted from a paper and not yet checked by a person, and are marked as such. Nothing is
+          presented with more confidence than it has.{" "}
+          <Link href="/how-this-works" className="underline">How this is collected</Link>.
         </p>
         <dl className="flex flex-wrap gap-6 text-sm">
           {[

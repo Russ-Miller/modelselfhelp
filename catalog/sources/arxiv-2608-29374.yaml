@@ -1,0 +1,19 @@
+id: arxiv-2608-29374
+kind: paper
+title: "Think, Look, and Revise: Inconsistency-Aware Visual Self-Correction in MLLMs"
+year: 2026
+date: 2026-08-29
+arxiv_id: "2608.29374"
+url: https://arxiv.org/abs/2608.29374
+tags: [ingested]
+summary: >-
+  Tool-augmented multimodal reasoning integrates external tools (e.g.,
+  object detection, depth estimation) into multimodal large language models
+  (MLLMs) to address perceptual bottlenecks in complex visual tasks.
+  However, existing approaches rarely verify tool outputs, limiting their
+  ability to detect and recover from tool failures. We propose ReVISE, a
+  framework that equips MLLMs with verification and dynamic error recovery
+  for tool-augmented reasoning. ReVISE introduces (1) a curated training
+  dataset that supervises reflective behaviors, enabling models to validate
+  tool-derived evidence, reform
+ingested_at: 2026-09-09

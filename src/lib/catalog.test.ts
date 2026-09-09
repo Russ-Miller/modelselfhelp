@@ -91,7 +91,11 @@ describe("catalog loader", () => {
     for (const u of unsolvedCapabilities()) {
       expect(u.claims.length).toBeGreaterThan(0);
       for (const t of u.techniques) {
-        expect(cat.claims.filter((c) => c.technique === t.id).some((c) => measured.has(c.backing_strength))).toBe(false);
+        // Reviewed claims only, deliberately: an unreviewed claim does not get
+        // to settle whether a technique has been measured. Unreviewed content
+        // is visible everywhere and authoritative nowhere.
+        const decisive = reviewedClaims().filter((c) => c.technique === t.id);
+        expect(decisive.some((c) => measured.has(c.backing_strength))).toBe(false);
       }
       expect(u.kind).toBe(u.techniques.length === 0 ? "no-technique" : "none-measured");
     }

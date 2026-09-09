@@ -1,0 +1,40 @@
+arxiv_id: "2608.30147"
+title: "CAST: Critique-Aware Supervision for Training Reliable Long-Horizon
+  Tool-Calling Agents"
+url: https://arxiv.org/abs/2608.30147
+drafted_at: 2026-09-09
+drafted_from: full-text
+model: claude-opus-5
+status: draft — not filed. Review, edit, then move into catalog/ by hand.
+capability: tool-use
+statement: Used zero-shot as step-level action critics in long-horizon
+  tool-calling tasks, frontier models are over-pessimistic — flagging a large
+  share of correct actions and pushing the actor into revision loops that
+  lower success below no critic at all — whereas small models fine-tuned on
+  action-level verification rationales flag far fewer valid actions and raise
+  repeated-run reliability.
+kind: observation
+backing_strength: single-paper
+scope_condition: tau-Bench/tau-Trait style multi-turn tool-calling domains
+  (retail, airline, telecom, telehealth); actor fixed as Qwen3-32B; critics
+  were GPT-4.1, Qwen3-235B, Qwen2.5-72B prompted, versus 4B/8B critics trained
+  on teacher-annotated step rationales.
+technique: ""
+proposed_technique: critique-aware supervision from action-level verification rationales
+stance_on_existing: supports
+related_claim_id: self-critique-without-grounding-unreliable
+stance_reason: Prompted frontier critics without training degraded actor
+  performance relative to running with no critique agent, consistent with
+  unaided critique being an unreliable improvement signal.
+falsifier: A study where prompted frontier-model critics improve pass^k over
+  no-critique baselines on the same benchmarks, or where their false-flag rate
+  on valid actions matches that of small critics trained on verification
+  rationales.
+evidence_note: Measured on four tool-calling domains with
+  pass^1/pass^3/pass^4; reported GPT-4.1 critic flagging 46.8% of correct
+  actions versus 13.6% and 11.4% for the trained 4B/8B critics, and average
+  pass^4 falling from 11.5% (no critique) to 6.0% with GPT-4.1 critique while
+  rising to 15.9%/19.5% with trained critics. Single paper, one model family
+  for the trained critics, small out-of-domain task counts (18-20 tasks in
+  telecom/telehealth), and prompting for the frontier critics was not tuned.
+confidence: medium

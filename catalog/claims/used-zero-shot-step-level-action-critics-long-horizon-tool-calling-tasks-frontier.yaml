@@ -1,0 +1,42 @@
+id: used-zero-shot-step-level-action-critics-long-horizon-tool-calling-tasks-frontier
+capability: tool-use
+statement: >-
+  Used zero-shot as step-level action critics in long-horizon tool-calling
+  tasks, frontier models are over-pessimistic — flagging a large share of
+  correct actions and pushing the actor into revision loops that lower
+  success below no critic at all — whereas small models fine-tuned on
+  action-level verification rationales flag far fewer valid actions and
+  raise repeated-run reliability.
+kind: observation
+backing_strength: single-paper
+observed_on:
+  era: "tau-Bench/tau-Trait style multi-turn tool-calling domains (retail, airline, telecom, telehealth); actor fixed as Qwen3-32B; critics were GPT-4.1, Qwen3-235B, Qwen2.5-72B prompted, "
+sources:
+  - source: arxiv-2608-30147
+    stance: supports
+    note: >-
+      Measured on four tool-calling domains with pass^1/pass^3/pass^4;
+      reported GPT-4.1 critic flagging 46.8% of correct actions versus 13.6%
+      and 11.4% for the trained 4B/8B critics, and average pass^4 falling
+      from 11.5% (no critique) to 6.0% with GPT-4.1 critique while rising to
+      15.9%/19.5% with trained critics. Single paper, one model family for
+      the trained critics, small out-of-domain task counts (18-20 tasks in
+      telecom/telehealth), and prompting for the frontier critics was not
+      tuned.
+contested: false
+status: pending-review
+last_checked_at: 2026-09-09
+notes: >-
+  Drafted from the paper by a model and filed unreviewed. Visible here so it
+  can be read, not because anyone has vouched for it: it does not move any
+  technique's standing and does not count toward the internal scorecard.
+  Drafted confidence: medium. Falsifier as drafted: A study where prompted
+  frontier-model critics improve pass^k over no-critique baselines on the
+  same benchmarks, or where their false-flag rate on valid actions matches
+  that of small critics trained on verification rationales. Drafted stance
+  toward self-critique-without-grounding-unreliable: supports -- Prompted
+  frontier critics without training degraded actor performance relative to
+  running with no critique agent, consistent with unaided critique being an
+  unreliable improvement signal. Proposed technique, not catalogued:
+  critique-aware supervision from action-level verification rationales.
+submitted_by: agent:claude-opus-5@Russ-Miller

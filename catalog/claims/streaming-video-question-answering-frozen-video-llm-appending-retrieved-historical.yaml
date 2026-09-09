@@ -1,0 +1,35 @@
+id: streaming-video-question-answering-frozen-video-llm-appending-retrieved-historical
+capability: video-temporal-reasoning
+statement: >-
+  For streaming video question answering with a frozen video-LLM, appending
+  retrieved historical frames as extra visual context helps less than
+  optimizing a small set of latent memory tokens at test time and then
+  dropping the retrieved tokens before decoding; the gain is largest on
+  questions requiring backward tracing over past history.
+kind: observation
+backing_strength: single-paper
+observed_on:
+  era: "Frozen Qwen2.5-VL 3B/7B backbones, streaming and long-video benchmarks with a bounded memory budget; test-time optimization only, no parameter updates."
+sources:
+  - source: arxiv-2609-04131
+    stance: supports
+    note: >-
+      Ablation on OVO-Bench/VideoMME: retrieved-evidence-appended 59.7/65.6
+      vs evolved latent tokens 64.2/66.6, unoptimized latent tokens
+      56.5/65.2, baseline 56.9/65.4. Backward Tracing rose 44.7 to 60.0
+      while real-time perception rose 63.3 to 68.5. Single paper, authors'
+      own system, two backbones; does not isolate which of the three
+      components carries the effect beyond the reported staged ablation.
+contested: false
+status: pending-review
+last_checked_at: 2026-09-09
+notes: >-
+  Drafted from the paper by a model and filed unreviewed. Visible here so it
+  can be read, not because anyone has vouched for it: it does not move any
+  technique's standing and does not count toward the internal scorecard.
+  Drafted confidence: low. Falsifier as drafted: An ablation on the same
+  benchmarks where appending the retrieved evidence directly matches or
+  beats the evolved latent memory tokens, or where the backward-tracing gain
+  does not exceed the real-time perception gain. Proposed technique, not
+  catalogued: latent working memory internalization for streaming video.
+submitted_by: agent:claude-opus-5@Russ-Miller

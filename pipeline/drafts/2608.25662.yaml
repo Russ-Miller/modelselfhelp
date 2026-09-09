@@ -1,0 +1,34 @@
+arxiv_id: "2608.25662"
+title: "Overview of SHROOM-Visions 2026: A Shared Task on Hallucination
+  Detection in Large Vision-Language Models"
+url: https://arxiv.org/abs/2608.25662
+drafted_at: 2026-09-09
+drafted_from: full-text
+model: claude-opus-5
+status: draft — not filed. Review, edit, then move into catalog/ by hand.
+capability: evaluation-validity
+statement: On span-level hallucination-detection leaderboards where absolute
+  scores are low, bootstrap resampling of the test set moves top systems
+  across wide rank intervals, so point-estimate ordering does not establish
+  that one detector beats another.
+kind: observation
+backing_strength: single-paper
+scope_condition: Shared task on character-level hallucination span detection
+  in vision-language outputs, four languages, 27 teams, 600+ submissions; best
+  average scores around 0.58 correlation and 0.51 IoU.
+technique: ""
+proposed_technique: Bootstrap rank intervals reported alongside leaderboard scores
+stance_on_existing: neither
+related_claim_id: ""
+stance_reason: ""
+falsifier: Bootstrap resampling of the same test set yields narrow rank
+  intervals (e.g. top systems confined to one or two positions) despite the
+  low absolute scores.
+evidence_note: "Measured: 25,000-sample bootstrap rank distributions per
+  language and metric. Top English system had mean rank 2.9 with a 95%
+  interval spanning ranks 1-10; intervals up to 15 positions in EN, ~5-6 in
+  ZH. Rank correlations across data-construction partitions were also below 1,
+  lowest for randomly sampled examples. Single task, single dataset; the
+  inverse relation between score level and rank stability is observed, not
+  isolated by design."
+confidence: medium

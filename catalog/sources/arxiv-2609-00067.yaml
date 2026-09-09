@@ -1,0 +1,19 @@
+id: arxiv-2609-00067
+kind: paper
+title: "Do Multimodal LLMs See Before They Read? Diagnosing Contextual Sycophancy"
+year: 2026
+date: 2026-08-30
+arxiv_id: "2609.00067"
+url: https://arxiv.org/abs/2609.00067
+tags: [ingested]
+summary: >-
+  External text can override conflicting image evidence in multimodal large
+  language models, a failure we call multimodal contextual sycophancy. We
+  introduce a 998-case diagnostic that independently varies visual evidence,
+  commonsense priors, and external text, and probe when this failure arises
+  by moving the information boundary around a context-blind visual witness.
+  On abnormal images paired with Gemini-generated false text, GPT-5.1 scores
+  7.9% under joint conditioning, 49.7% when the context-blind witness report
+  is scored directly, 63.7% under a matched two-call witness-arbiter
+  pipeline that
+ingested_at: 2026-09-09

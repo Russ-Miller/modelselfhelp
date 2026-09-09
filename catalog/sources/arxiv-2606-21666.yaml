@@ -1,0 +1,19 @@
+id: arxiv-2606-21666
+kind: paper
+title: "Hallucination Is Generative Memory With Its Verifier Turned Down: One Constraint Axis Links Dreaming Sleep and LLM Confabulation"
+year: 2026
+date: 2026-09-05
+arxiv_id: "2606.21666"
+url: https://arxiv.org/abs/2606.21666
+tags: [ingested]
+summary: >-
+  Dreaming and large language model hallucination are usually studied apart,
+  one as biology and the other as engineering. We argue they are two
+  expressions of a single computation: generative reconstruction from
+  distributed memory under incomplete constraints. Neither the sleeping
+  brain nor an autoregressive model retrieves stored records; both
+  synthesize output by recombining learned representations, and both produce
+  fluent, structured content that can depart from fact. We organize the two
+  systems with a four-stage account, encoding, latent representation,
+  generative reconstruction, and reality
+ingested_at: 2026-09-09

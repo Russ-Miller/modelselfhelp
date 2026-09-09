@@ -1,0 +1,42 @@
+arxiv_id: "2608.30776"
+title: Likelihood-Constrained Acoustic Reranking for Training-Free
+  Hallucination Mitigation in LLM-Based ASR
+url: https://arxiv.org/abs/2608.30776
+drafted_at: 2026-09-09
+drafted_from: full-text
+model: claude-opus-5
+status: draft — not filed. Review, edit, then move into catalog/ by hand.
+capability: hallucination
+statement: "In LLM-based ASR, steering decoding toward acoustic evidence only
+  helps if candidates are first restricted to tokens within a small likelihood
+  margin of the greedy token: unconstrained selection by an acoustic
+  compatibility score removes hallucinated outputs but destroys transcription
+  accuracy through unbounded insertions, while the constrained version removes
+  a large share of hallucinations at near-zero WER/CER cost."
+kind: mechanism
+backing_strength: single-paper
+scope_condition: Four open LLM-based ASR systems (Qwen3-ASR-1.7B,
+  Qwen2-Audio-7B Base, Kimi-Audio-7B-Instruct, GLM-ASR-Nano) on two
+  500-utterance stress suites built to elicit code-switching and
+  instruction-following failures; greedy decoding baseline; margin delta=0.60
+  nats.
+technique: ""
+proposed_technique: likelihood-constrained acoustic reranking
+stance_on_existing: neither
+related_claim_id: ""
+stance_reason: ""
+falsifier: An unconstrained acoustic-reranking decoder that matches or beats
+  the likelihood-constrained version on both hallucination removal and
+  standard-test WER/CER, or a constrained variant whose hallucination
+  reduction comes with large WER regressions on normal speech.
+evidence_note: "Paired greedy-vs-LCAR decoding on 8800 frozen
+  detector-positive records plus negative controls, with an LLM detector whose
+  precision was human-audited at 93.3% on a 400-case stratified sample.
+  Ablation on 800 Qwen3 positives isolates the likelihood constraint:
+  acoustic-only selection gives comparable overall hallucination fixing but
+  >600/1000 point WER/CER increases. Normal-speech effects measured on
+  LibriSpeech test-clean and AISHELL2. Gains vary by model and suite; only
+  28.8% of detected events became faithful transcripts, so most fixes turned
+  hallucinations into ordinary ASR errors. Single paper, open models only, no
+  human-preference or downstream-task outcome."
+confidence: medium

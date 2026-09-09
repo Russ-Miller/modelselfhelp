@@ -1,0 +1,38 @@
+arxiv_id: "2609.03267"
+title: "Refusing the Impossible: A Taxonomy and Benchmark for Code
+  Hallucination in Large Language Models"
+url: https://arxiv.org/abs/2609.03267
+drafted_at: 2026-09-09
+drafted_from: full-text
+model: claude-opus-5
+status: draft — not filed. Review, edit, then move into catalog/ by hand.
+capability: hallucination
+statement: "On code prompts that are unsatisfiable by design, open-weight code
+  and reasoning models refuse based on how suspicious the request looks rather
+  than how deeply impossible it is: they refuse famous theoretical
+  impossibilities far more often than requests for plausible-sounding
+  nonexistent packages, and the stronger models in the set close the gap on
+  theory while barely improving on fabricated ecosystem entities."
+kind: observation
+backing_strength: single-paper
+scope_condition: Twelve open-weight code/reasoning models (7B-32B), 270
+  adversarial unsatisfiable prompts across six languages plus 91 matched
+  solvable controls, temperature 0, graded by a two-tier judge validated
+  against 138 human labels.
+technique: ""
+proposed_technique: Unsatisfiable-task refusal benchmark with matched solvable controls
+stance_on_existing: neither
+related_claim_id: ""
+stance_reason: ""
+falsifier: A model set where refusal rates on plausible fabricated package
+  prompts equal or exceed those on abstract theoretical-impossibility prompts,
+  or where higher-capability models improve on both classes at similar rates.
+evidence_note: "Measured: aggregate hallucination rate 0.60 and refusal 0.27
+  on adversarial prompts, 0% over-refusal on controls. Subcategory gradient
+  from 0.98 (nonexistent npm) down to 0.08 (modified classics). Top-4 vs
+  bottom-4 models: theory subcategories 0.23 vs 0.82, plausible-entity 0.87 vs
+  0.98. Prompt identity explained more outcome variance than model identity.
+  Only open-weight models tested; no frontier commercial models, so the
+  capability trend is extrapolated within a narrow band. Framing and
+  per-ecosystem comparisons are observational, not fully crossed."
+confidence: medium

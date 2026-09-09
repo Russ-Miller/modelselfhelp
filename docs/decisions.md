@@ -1023,3 +1023,41 @@ vendor quietly rewording one claim.
 
 Third time this project has learned the same lesson: a checker that only
 ever passes is not evidence of anything. Test the failure path.
+
+## 2026-09-08 — Visible everywhere, authoritative nowhere
+Russ pushed back on my framing. I had said: stop building verification
+machinery until the index is worth verifying. He said: make a useful list
+of capabilities, claims, disputed claims, techniques and sources that is
+interesting even if unverified.
+
+Those are not the same and his is better. Mine is a sequencing claim that
+still treats verification as the destination. His makes usefulness the
+destination and verification optional — which means the moment they
+conflict, usefulness wins.
+
+They were about to conflict. `contestedClaims()` filtered out pending
+claims, and after the bulk ingest roughly 47% of the catalog is pending. So
+/contested — the page whose entire job is showing where evidence disagrees
+— would have hidden about half the disagreements in the index. Verification
+machinery quietly destroying the thing it was protecting.
+
+The line is redrawn as: **unreviewed claims are visible everywhere and
+authoritative nowhere.**
+
+Visible in lists, counts, capability pages and /contested, badged. Hiding
+them would make the catalog look emptier than it is, and at half the
+content that is a large lie told by omission.
+
+Excluded only where a claim would silently decide something: a technique's
+standing, and the backtest scorecard. A verdict derived from unchecked
+content is a verdict nobody made.
+
+Also moved: whether a capability has a documented weakness now counts
+unreviewed claims. That question is descriptive — did anyone find something
+here — not a verdict, and answering it "no" while holding three unreviewed
+claims on the topic was simply wrong.
+
+And a naming problem worth admitting. "pending-review" implies a queue that
+will be worked. It will not be; there is more worth indexing than one
+person can check, so unreviewed is a normal permanent state. /how-this-works
+now says that outright rather than implying a backlog that is being cleared.

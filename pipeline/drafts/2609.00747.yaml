@@ -1,0 +1,36 @@
+arxiv_id: "2609.00747"
+title: Can Large Language Models Forecast What Researchers Study Next?
+url: https://arxiv.org/abs/2609.00747
+drafted_at: 2026-09-09
+drafted_from: full-text
+model: claude-opus-5
+status: draft — not filed. Review, edit, then move into catalog/ by hand.
+capability: evaluation-validity
+statement: "When research-idea forecasts are scored by whether a later paper
+  matches them under an LLM judge rubric, higher scores partly reflect
+  broader, less specific ideas: the backbone with the higher hit rate also
+  produced measurably more general forecasts and had more retrieved candidate
+  papers pass the gate, and tightening the specificity threshold does not
+  separate the two."
+kind: mechanism
+backing_strength: single-paper
+scope_condition: Open-ended generation scored by retrieve-then-judge matching
+  against a future document stream; shown for GPT-4.1 vs Qwen2.5 backbones on
+  624 topic-cutoff episodes of arXiv cs.ML literature.
+technique: ""
+proposed_technique: Outcome-blind generality rating alongside match-rate scoring
+stance_on_existing: neither
+related_claim_id: ""
+stance_reason: ""
+falsifier: An outcome-blind specificity rating that shows no association
+  between forecast breadth and match rate, or a controlled intervention
+  holding specificity fixed that reproduces the same score gap between
+  backbones.
+evidence_note: "Measured: outcome-blind generality on 832 forecasts (one per
+  topic per config), Qwen2.5-7B Summary generality 6.58 vs GPT-4.1 3.58;
+  forecast-level match rate rises 0.205 to 0.406 from lowest to highest
+  generality bin, correlation 0.17; passing candidates among ten retrieved
+  0.565 for GPT-4.1 vs 1.470/1.642 for Qwen2.5. Association only, no causal
+  control; the authors say the S>=3 gate does not control intrinsic
+  generality, and generality itself is rated by an LLM."
+confidence: medium

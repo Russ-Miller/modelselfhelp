@@ -1,0 +1,19 @@
+id: arxiv-2608-27750
+kind: paper
+title: "The Calls are Coming from Inside the Model: Investigating Probe-based Detection of Tool-Calling Errors in LLMs"
+year: 2026
+date: 2026-08-27
+arxiv_id: "2608.27750"
+url: https://arxiv.org/abs/2608.27750
+tags: [ingested]
+summary: >-
+  The hidden states of large language models (LLMs) are known to capture
+  rich information relating to model knowledge and behavior that can be hard
+  to extract from examination of input and output alone. As LLM-based
+  systems increasingly interface with the external world, one area of
+  concern is detecting incorrect or improper use of tools. Motivated by
+  this, we study the effectiveness of using linear probes to detect
+  incorrect tool-calls, measuring probe efficacy across 18 tool-calling LLMs
+  evaluated on the Berkeley Function Calling Leaderboard. Overall, we find
+  that probing is an effective means
+ingested_at: 2026-09-09

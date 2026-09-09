@@ -1,0 +1,40 @@
+id: code-prompts-unsatisfiable-design-open-weight-code-reasoning-models-refuse
+capability: hallucination
+statement: >-
+  On code prompts that are unsatisfiable by design, open-weight code and
+  reasoning models refuse based on how suspicious the request looks rather
+  than how deeply impossible it is: they refuse famous theoretical
+  impossibilities far more often than requests for plausible-sounding
+  nonexistent packages, and the stronger models in the set close the gap on
+  theory while barely improving on fabricated ecosystem entities.
+kind: observation
+backing_strength: single-paper
+observed_on:
+  era: "Twelve open-weight code/reasoning models (7B-32B), 270 adversarial unsatisfiable prompts across six languages plus 91 matched solvable controls, temperature 0, graded by a two-tier"
+sources:
+  - source: arxiv-2609-03267
+    stance: supports
+    note: >-
+      Measured: aggregate hallucination rate 0.60 and refusal 0.27 on
+      adversarial prompts, 0% over-refusal on controls. Subcategory gradient
+      from 0.98 (nonexistent npm) down to 0.08 (modified classics). Top-4 vs
+      bottom-4 models: theory subcategories 0.23 vs 0.82, plausible-entity
+      0.87 vs 0.98. Prompt identity explained more outcome variance than
+      model identity. Only open-weight models tested; no frontier commercial
+      models, so the capability trend is extrapolated within a narrow band.
+      Framing and per-ecosystem comparisons are observational, not fully
+      crossed.
+contested: false
+status: pending-review
+last_checked_at: 2026-09-09
+notes: >-
+  Drafted from the paper by a model and filed unreviewed. Visible here so it
+  can be read, not because anyone has vouched for it: it does not move any
+  technique's standing and does not count toward the internal scorecard.
+  Drafted confidence: medium. Falsifier as drafted: A model set where
+  refusal rates on plausible fabricated package prompts equal or exceed
+  those on abstract theoretical-impossibility prompts, or where
+  higher-capability models improve on both classes at similar rates.
+  Proposed technique, not catalogued: Unsatisfiable-task refusal benchmark
+  with matched solvable controls.
+submitted_by: agent:claude-opus-5@Russ-Miller

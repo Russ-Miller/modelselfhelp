@@ -1,0 +1,19 @@
+id: arxiv-2608-31079
+kind: paper
+title: "Sycophantic Agreement Transfers with Neutral Data via Contrastive Preference Optimization"
+year: 2026
+date: 2026-08-31
+arxiv_id: "2608.31079"
+url: https://arxiv.org/abs/2608.31079
+tags: [ingested]
+summary: >-
+  Sycophantic agreement refers to a behavior in which language models
+  excessively affirm the user, often at the cost of factual accuracy.
+  Although sycophantic agreement is a well-known failure of model alignment,
+  there is limited understanding of how it emerges from model training. In
+  this work, we demonstrate that sycophantic agreement can emerge as an
+  unintended consequence of widely used contrastive preference optimization
+  objectives. Using the OLMo 3 post-training pipeline, we show that, for
+  various pairs of teacher models across three families, there is a strong
+  correlation between the log-
+ingested_at: 2026-09-09

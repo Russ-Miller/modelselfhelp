@@ -1,0 +1,40 @@
+arxiv_id: "2609.00949"
+title: "Calibration is the Bottleneck: An Action-Class Diagnostic of
+  Multi-Turn Tool-Calling"
+url: https://arxiv.org/abs/2609.00949
+drafted_at: 2026-09-09
+drafted_from: full-text
+model: claude-opus-5
+status: draft — not filed. Review, edit, then move into catalog/ by hand.
+capability: evaluation-validity
+statement: "On multi-turn tool-calling benchmarks that score whether the final
+  environment state matches a gold trajectory, aggregate accuracy hides wrong
+  action-class choices: a model can call a withheld or under-specified tool
+  with fabricated arguments, be handed the missing piece on a later turn, and
+  still be graded PASS — so heavily tool-trained model families rank high
+  while almost never asking for a missing parameter or refusing an unavailable
+  function."
+kind: mechanism
+backing_strength: single-paper
+scope_condition: Multi-turn, state-graded tool benchmarks (BFCL v3 multi-turn,
+  tau2-bench retail/airline) where the simulator supplies missing information
+  on later turns; needs a per-category gold action class to compute the
+  diagnostic.
+technique: ""
+proposed_technique: Gold Action Recall alongside state-graded accuracy
+stance_on_existing: neither
+related_claim_id: ""
+stance_reason: ""
+falsifier: Compute per-turn gold action class agreement on the same benchmarks
+  and find it tracks state-graded accuracy — no cases where accuracy exceeds
+  gold-action recall, and no family with high aggregate score and low
+  ask/refuse emission.
+evidence_note: 26 checkpoints (11 open-weight families, 4 closed anchors) on
+  BFCL v3 multi-turn, 200 conversations per category, cross-checked on
+  tau2-bench; xLAM-2-8b reported at 71.8% aggregate accuracy with 10%
+  miss_func gold-action recall, and a 200-case audit (kappa 0.92) found 92.3%
+  of its miss_func misses invoked the held-out function. Design shows the
+  grader is blind to action class; it does not establish which training stage
+  causes the miscalibration, and gold action classes come from benchmark
+  design rather than a deployable detector.
+confidence: medium

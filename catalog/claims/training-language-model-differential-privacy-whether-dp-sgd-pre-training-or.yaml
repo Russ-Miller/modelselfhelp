@@ -1,0 +1,41 @@
+id: training-language-model-differential-privacy-whether-dp-sgd-pre-training-or
+capability: hallucination
+statement: >-
+  Training a language model with differential privacy — whether DP-SGD
+  pre-training or DP LoRA fine-tuning — makes it generate more false claims
+  about facts in its training data than a non-private counterpart, and the
+  effect grows as the privacy budget tightens, because per-example gradient
+  clipping plus noise prevents low-frequency facts from being acquired at
+  all while flattening the next-token distribution onto incorrect
+  alternatives.
+kind: mechanism
+backing_strength: single-paper
+observed_on:
+  era: "Open-ended long-form generation of Wikipedia-style articles, scored by atomic-claim verification; GPT-J 6B fine-tuned at epsilon 8 and 16, and VaultGemma-1B pre-trained at epsilon "
+sources:
+  - source: arxiv-2609-00492
+    stance: supports
+    note: >-
+      FactScore on three Wikipedia sets plus human annotation by 5 graduate
+      students on 30 stratified AI articles; ordering non-DP > eps=16 >
+      eps=8 held on both datasets, though one comparison was not significant
+      and eps=8 was near the untrained base model on the AI set. Mechanism
+      supported by nucleus/entropy measurements and a synthetic bigram
+      replication rather than by intervention. Model-human agreement on
+      claim support was low, so the automated metric is an imperfect proxy.
+contested: false
+status: pending-review
+last_checked_at: 2026-09-09
+notes: >-
+  Drafted from the paper by a model and filed unreviewed. Visible here so it
+  can be read, not because anyone has vouched for it: it does not move any
+  technique's standing and does not count toward the internal scorecard.
+  Drafted confidence: medium. Falsifier as drafted: A DP-trained model at a
+  strict privacy budget matching or beating its non-private counterpart on
+  atomic-fact accuracy for facts present in the training data, with no
+  reduction in output informativeness. Drafted stance toward
+  accuracy-fact-scales-how-many-pretraining-documents-mention: supports -- A
+  controlled experiment varying fact frequency shows DP raises the
+  repetition count needed to acquire a fact, so the frequency-accuracy
+  dependence sharpens under DP.
+submitted_by: agent:claude-opus-5@Russ-Miller

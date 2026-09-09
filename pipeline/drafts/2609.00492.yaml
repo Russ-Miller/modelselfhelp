@@ -1,0 +1,40 @@
+arxiv_id: "2609.00492"
+title: The Privacy-Hallucination Tradeoff in Differentially Private Language Models
+url: https://arxiv.org/abs/2609.00492
+drafted_at: 2026-09-09
+drafted_from: full-text
+model: claude-opus-5
+status: draft — not filed. Review, edit, then move into catalog/ by hand.
+capability: hallucination
+statement: Training a language model with differential privacy — whether
+  DP-SGD pre-training or DP LoRA fine-tuning — makes it generate more false
+  claims about facts in its training data than a non-private counterpart, and
+  the effect grows as the privacy budget tightens, because per-example
+  gradient clipping plus noise prevents low-frequency facts from being
+  acquired at all while flattening the next-token distribution onto incorrect
+  alternatives.
+kind: mechanism
+backing_strength: single-paper
+scope_condition: Open-ended long-form generation of Wikipedia-style articles,
+  scored by atomic-claim verification; GPT-J 6B fine-tuned at epsilon 8 and
+  16, and VaultGemma-1B pre-trained at epsilon 2 versus Gemma baselines. Not
+  tested on DP retrieval-augmented setups or with refusal/uncertainty
+  post-training.
+technique: ""
+proposed_technique: ""
+stance_on_existing: supports
+related_claim_id: accuracy-fact-scales-how-many-pretraining-documents-mention
+stance_reason: A controlled experiment varying fact frequency shows DP raises
+  the repetition count needed to acquire a fact, so the frequency-accuracy
+  dependence sharpens under DP.
+falsifier: A DP-trained model at a strict privacy budget matching or beating
+  its non-private counterpart on atomic-fact accuracy for facts present in the
+  training data, with no reduction in output informativeness.
+evidence_note: FactScore on three Wikipedia sets plus human annotation by 5
+  graduate students on 30 stratified AI articles; ordering non-DP > eps=16 >
+  eps=8 held on both datasets, though one comparison was not significant and
+  eps=8 was near the untrained base model on the AI set. Mechanism supported
+  by nucleus/entropy measurements and a synthetic bigram replication rather
+  than by intervention. Model-human agreement on claim support was low, so the
+  automated metric is an imperfect proxy.
+confidence: medium

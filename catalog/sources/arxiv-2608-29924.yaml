@@ -1,0 +1,19 @@
+id: arxiv-2608-29924
+kind: paper
+title: "Hallucination Mitigation for Large Vision-Language Models via Implicit Feature Stabilization"
+year: 2026
+date: 2026-08-30
+arxiv_id: "2608.29924"
+url: https://arxiv.org/abs/2608.29924
+tags: [ingested]
+summary: >-
+  Large Vision-Language Models (LVLMs) are prone to hallucinations: they
+  fluently describe objects, attributes, and scenes that are not in the
+  image. We connect part of this failure to a measurable property of their
+  representations, feature instability, where mild semantics-preserving
+  perturbations of the input cause large changes in the learned embeddings;
+  hallucination rates rise together with this variability. Existing
+  stability-motivated remedies are explicit, in the sense that they
+  intervene at inference time through latent steering or constrained
+  decoding, and pay for it on every query. We
+ingested_at: 2026-09-09

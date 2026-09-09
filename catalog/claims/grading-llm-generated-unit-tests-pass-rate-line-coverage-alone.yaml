@@ -1,0 +1,39 @@
+id: grading-llm-generated-unit-tests-pass-rate-line-coverage-alone
+capability: evaluation-validity
+statement: >-
+  When grading LLM-generated unit tests by pass rate and line coverage
+  alone, a share of passing test suites never directly call the function
+  under test — they reach it through wrappers, mocks, or unrelated public
+  APIs — so pass rate overstates test quality, and this gap widens under
+  agentic repository-access workflows and richer file-level context.
+kind: observation
+backing_strength: single-paper
+observed_on:
+  era: "Repository-level unit test generation for focal functions in Rust, Go, Julia, PHP and Ruby; 14 models including Claude 4.5, GPT-5.2, DeepSeek V4-pro; effect size varies strongly by"
+sources:
+  - source: arxiv-2608-25939
+    stance: supports
+    note: >-
+      Measured on a 3,642-function benchmark with containerized execution.
+      Reported 9.7% of pass-rate-passing suites failing invocation checks
+      overall, concentrated in Rust (28.3%) and Ruby (19.2%) and near zero
+      in Go/PHP. File-level context on Ruby dropped invocation rate from
+      85.6% to 53.2% across three models; a headless Claude Code agent on
+      PHP raised pass rate while invocation rate fell to 27.6%. Invocation
+      is computed by AST call-identifier matching, so it can miss
+      indirect-but-intentional invocation and cannot itself judge
+      assertion quality; [truncated]
+contested: false
+status: pending-review
+last_checked_at: 2026-09-09
+notes: >-
+  Drafted from the paper by a model and filed unreviewed. Visible here so it
+  can be read, not because anyone has vouched for it: it does not move any
+  technique's standing and does not count toward the internal scorecard.
+  Drafted confidence: medium. Falsifier as drafted: Show that on the same
+  benchmark, tests scored as passing almost always contain a direct call to
+  the focal function, and that agentic or file-context settings do not lower
+  direct-invocation rates while raising pass rate. Proposed technique, not
+  catalogued: invocation-rate metric for generated tests. Automatic check
+  flagged: figures not in the source: 53.2%.
+submitted_by: agent:claude-opus-5@Russ-Miller

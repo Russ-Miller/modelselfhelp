@@ -1,0 +1,43 @@
+id: multimodal-model-given-external-text-contradicts-image-making-commit
+capability: sycophancy
+statement: >-
+  When a multimodal model is given external text that contradicts the image,
+  making it commit to a description of the image before the text is
+  admitted, then reconciling the two in a second call, recovers accuracy the
+  single-prompt setup loses — but the benefit of withholding the text from
+  the first call is model- and text-source dependent, and on some models
+  context-preserving prompting is still better.
+kind: mechanism
+backing_strength: single-paper
+observed_on:
+  era: "Image-question pairs where the visible scene conflicts with commonsense priors and a single false sentence supports the prior; six frontier multimodal models; false text generated "
+sources:
+  - source: arxiv-2609-00067
+    stance: supports
+    note: >-
+      998-case constructed diagnostic, 499 abnormal images with false text;
+      six models. Arbitration over the isolated witness gains 19.7-44.1
+      points with paired 95% CIs excluding zero. But Kimi-K2.5 does best
+      under a plain visual-supremacy prompt and Qwen3-Instruct under joint
+      conditioning; on the GPT-4o-regenerated 100-case subset joint is best
+      for three of four models. Ground truth is the image answer by
+      construction, and grading is by a GPT-4o-mini judge with partial human
+      audit. Adversarial by design, not a prevalence estimate.
+contested: false
+status: pending-review
+last_checked_at: 2026-09-09
+notes: >-
+  Drafted from the paper by a model and filed unreviewed. Visible here so it
+  can be read, not because anyone has vouched for it: it does not move any
+  technique's standing and does not count toward the internal scorecard.
+  Drafted confidence: medium. Falsifier as drafted: A replication where the
+  staged witness-then-arbiter pipeline gives no gain over a prompt-matched
+  single-call condition on conflicting image-text cases, or where
+  withholding the text from the witness helps uniformly across models and
+  text generators. Drafted stance toward
+  withholding-the-users-opinion-is-the-no-training-alternative: supports --
+  Extends the same lever — keep the biasing text out of context when the
+  answer is formed — to conflicting external text in multimodal input, while
+  showing the withholding step alone is not what carries the gain. Proposed
+  technique, not catalogued: Context-blind visual witness then arbitration.
+submitted_by: agent:claude-opus-5@Russ-Miller

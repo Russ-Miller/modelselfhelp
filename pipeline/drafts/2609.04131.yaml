@@ -1,0 +1,35 @@
+arxiv_id: "2609.04131"
+title: "Beyond Retrieval: Progressive Latent Memory Evolution for Streaming
+  Video Understanding"
+url: https://arxiv.org/abs/2609.04131
+drafted_at: 2026-09-09
+drafted_from: full-text
+model: claude-opus-5
+status: draft — not filed. Review, edit, then move into catalog/ by hand.
+capability: video-temporal-reasoning
+statement: For streaming video question answering with a frozen video-LLM,
+  appending retrieved historical frames as extra visual context helps less
+  than optimizing a small set of latent memory tokens at test time and then
+  dropping the retrieved tokens before decoding; the gain is largest on
+  questions requiring backward tracing over past history.
+kind: observation
+backing_strength: single-paper
+scope_condition: Frozen Qwen2.5-VL 3B/7B backbones, streaming and long-video
+  benchmarks with a bounded memory budget; test-time optimization only, no
+  parameter updates.
+technique: ""
+proposed_technique: latent working memory internalization for streaming video
+stance_on_existing: neither
+related_claim_id: ""
+stance_reason: ""
+falsifier: An ablation on the same benchmarks where appending the retrieved
+  evidence directly matches or beats the evolved latent memory tokens, or
+  where the backward-tracing gain does not exceed the real-time perception
+  gain.
+evidence_note: "Ablation on OVO-Bench/VideoMME: retrieved-evidence-appended
+  59.7/65.6 vs evolved latent tokens 64.2/66.6, unoptimized latent tokens
+  56.5/65.2, baseline 56.9/65.4. Backward Tracing rose 44.7 to 60.0 while
+  real-time perception rose 63.3 to 68.5. Single paper, authors' own system,
+  two backbones; does not isolate which of the three components carries the
+  effect beyond the reported staged ablation."
+confidence: low

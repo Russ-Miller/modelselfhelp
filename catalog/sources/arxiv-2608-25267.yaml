@@ -1,0 +1,19 @@
+id: arxiv-2608-25267
+kind: paper
+title: "Mitigating LLM sycophancy with RL-based fine-tuning: Bayesian Truth Serum approach"
+year: 2026
+date: 2026-08-26
+arxiv_id: "2608.25267"
+url: https://arxiv.org/abs/2608.25267
+tags: [ingested]
+summary: >-
+  Large language models (LLMs) frequently exhibit \emph{sycophancy}: they
+  adapt their answers to a user's stated beliefs or preferences instead of
+  reporting what they hold to be true, which lowers factual accuracy and can
+  amplify misinformation. This paper proposes a methodology for mitigating
+  sycophancy that employs the Bayesian Truth Serum (BTS), a peer-prediction
+  mechanism, as the reward in Group Relative Policy Optimization (GRPO) to
+  fine-tune an LLM. BTS pays an answer for being \emph{surprisingly common},
+  that is, more frequent among respondents than those respondents themselves
+  predicted.
+ingested_at: 2026-09-09

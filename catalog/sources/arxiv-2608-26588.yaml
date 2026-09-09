@@ -1,0 +1,19 @@
+id: arxiv-2608-26588
+kind: paper
+title: "Unsaid, Unsafe? Implicit Security Obligations in LLM-Based RTL Code Generation"
+year: 2026
+date: 2026-08-27
+arxiv_id: "2608.26588"
+url: https://arxiv.org/abs/2608.26588
+tags: [ingested]
+summary: >-
+  Large Language Models (LLMs) generate register-transfer-level (RTL) code
+  with rapidly improving functional correctness. Security of LLM-generated
+  code, however, has been studied mainly for software, where flaws can still
+  be patched after deployment. Insecure RTL offers no such remedy once taped
+  out into silicon. We construct SECRTL-GEN, a multi-language
+  resource-access security benchmark grounded in real SoC IP: 392 tasks over
+  five CWE families and four HDLs (Verilog, SystemVerilog, VHDL, and
+  Python), each with black-box functional and security testbenches.
+  Functional specifications intentiona
+ingested_at: 2026-09-09

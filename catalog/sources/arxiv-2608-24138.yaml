@@ -1,0 +1,19 @@
+id: arxiv-2608-24138
+kind: paper
+title: "Rubrics as Visual-Repair Context for Self-Evolving UI-to-Code Generation"
+year: 2026
+date: 2026-08-25
+arxiv_id: "2608.24138"
+url: https://arxiv.org/abs/2608.24138
+tags: [ingested]
+summary: >-
+  Large vision-language models have shown strong progress in UI-to-code
+  generation, yet their test-time self-evolution remains unstable. We first
+  identify a fundamental obstacle, termed visual repair coupling: a local
+  code edit may propagate through layout, style, and component dependencies,
+  correcting one visual mismatch while degrading regions that were
+  previously faithful. To address this issue, we present RubSE, a
+  Rubric-guided Self-Evolution framework that uses rubrics to represent
+  visual feedback as a structured visual-repair context. At each refinement
+  round, RubSE generates typed candida
+ingested_at: 2026-09-09

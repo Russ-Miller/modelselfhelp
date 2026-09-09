@@ -1,0 +1,19 @@
+id: arxiv-2608-26199
+kind: paper
+title: "Benchmarking AI Agents for Hardware Design Automation via MCP Tool Calling"
+year: 2026
+date: 2026-08-25
+arxiv_id: "2608.26199"
+url: https://arxiv.org/abs/2608.26199
+tags: [ingested]
+summary: >-
+  We ask whether AI agents powered by locally deployed large language models
+  can reliably automate expert-defined hardware design workflows in an
+  industry-realistic tool-calling setting. In these environments, engineers
+  issue repetitive, dependency-ordered operations---such as creating
+  components, adding ports, and wiring connections---through specialised
+  tools. Confidentiality constraints on component specifications and naming
+  conventions often preclude hosted proprietary APIs, motivating the use of
+  locally deployed models. To study this setting, we build a Model Context
+  Protocol (MCP) server t
+ingested_at: 2026-09-09

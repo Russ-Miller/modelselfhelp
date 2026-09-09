@@ -1,0 +1,41 @@
+id: open-weight-agents-where-attention-matrices-accessible-detecting-injection-asking
+capability: prompt-injection
+statement: >-
+  For open-weight agents where attention matrices are accessible, detecting
+  injection by asking which context span actually drove the tool call —
+  aggregating attention over the decision tokens and localizing the guiding
+  span, then checking whether that span's provider has authority for the
+  action — catches unauthorized tool invocations at higher true-positive and
+  lower false-positive rates than static scanners that look for
+  malicious-looking text, because benign-looking injected text is only
+  harmful when it is what the model actually attends to.
+kind: mechanism
+backing_strength: single-paper
+observed_on:
+  era: "Requires white-box access to attention during inference, plus provenance annotations that map token positions to providers; evaluated on tool-metadata poisoning and indirect prompt"
+sources:
+  - source: arxiv-2608-24022
+    stance: supports
+    note: >-
+      Measured on MCPTox and InjecAgent across ten agent configurations
+      from six model families, against static scanning (LLM-Guard, LLM
+      Detector), behavior auditing (MCIP), and attribution baselines
+      (MindGuard, TracLLM). Reported average AUROC 0.956 and 0.934 TPR at
+      0.067 FPR; static scanners were near 0.5-0.67 TPR with FPR above
+      0.36. Detectors are trained per model-dataset pair in the main
+      table, so headline numbers are not a fully unseen-deployment
+      estimate; transfer results are lower. [truncated]
+contested: false
+status: pending-review
+last_checked_at: 2026-09-09
+notes: >-
+  Drafted from the paper by a model and filed unreviewed. Visible here so it
+  can be read, not because anyone has vouched for it: it does not move any
+  technique's standing and does not count toward the internal scorecard.
+  Drafted confidence: medium. Falsifier as drafted: A study finding that the
+  localized high-attention span does not correspond to the span that changes
+  the tool call under ablation, or that static/content-based scanners match
+  this detection rate at equal false-positive rate on the same benchmarks.
+  Proposed technique, not catalogued: attention-localized behavior-guiding
+  span adjudication.
+submitted_by: agent:claude-opus-5@Russ-Miller

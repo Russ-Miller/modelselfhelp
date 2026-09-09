@@ -1,0 +1,35 @@
+arxiv_id: "2606.21666"
+title: "Hallucination Is Generative Memory With Its Verifier Turned Down: One
+  Constraint Axis Links Dreaming Sleep and LLM Confabulation"
+url: https://arxiv.org/abs/2606.21666
+drafted_at: 2026-09-09
+drafted_from: full-text
+model: claude-opus-5
+status: draft — not filed. Review, edit, then move into catalog/ by hand.
+capability: hallucination
+statement: In multi-agent LLM systems where one agent starts with an erroneous
+  shared belief, broadcasting every agent's full context at every step raises
+  the rate of false assertions above doing no synchronization at all, because
+  the error propagates to agents that were previously correct — and the harm
+  appears only in tasks where one wrong fact cascades across semantically
+  linked dimensions (destination to airport to weather), not where agent
+  contexts are largely orthogonal.
+kind: mechanism
+backing_strength: single-paper
+scope_condition: Three-agent planning tasks with deliberately injected context
+  mismatches, Claude Haiku agents; travel-planning domain showed the effect,
+  software sprint planning did not.
+technique: ""
+proposed_technique: threshold-gated context synchronization between agents
+stance_on_existing: neither
+related_claim_id: ""
+stance_reason: ""
+falsifier: Full-context broadcast between agents matching or lowering
+  hallucination rate relative to no synchronization in cascading-belief tasks,
+  across models and injected-error setups.
+evidence_note: Measured on 30/30/15 trials in travel and 10/10/5 in software
+  with one model. Full-broadcast HR 0.658 vs no-sync 0.492 (p=0.0022, d=1.18)
+  in travel; effect absent in software. Errors were deliberately injected, so
+  the result isolates propagation of a seeded false belief rather than
+  naturally arising drift. Single author, single model, small n.
+confidence: medium

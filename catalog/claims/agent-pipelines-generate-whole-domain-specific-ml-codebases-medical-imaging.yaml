@@ -1,0 +1,39 @@
+id: agent-pipelines-generate-whole-domain-specific-ml-codebases-medical-imaging
+capability: code-generation
+statement: >-
+  In agent pipelines that generate whole domain-specific ML codebases
+  (medical imaging) from scratch, execution/assembly validation and domain
+  knowledge bases fix different failures: removing runtime and assembly
+  testing mainly costs autonomy (more human interventions to debug), while
+  removing the curated domain knowledge base mainly costs output quality
+  (syntactically fine but domain-inappropriate pipelines) with little change
+  in intervention count.
+kind: mechanism
+backing_strength: single-paper
+observed_on:
+  era: "Multi-agent code generation of complete deep-learning pipelines in a specialised domain with objective end-task metrics; shown with Claude-4.5-Opus as backbone across six medical i"
+sources:
+  - source: arxiv-2608-29016
+    stance: supports
+    note: >-
+      One ablation table on six datasets, single backbone model, Pass@3
+      best-of-three; component removals reported as average changes in
+      human-intervention count and task metric. Human intervention count is
+      a subjective measure by the authors; no independent replication.
+contested: false
+status: pending-review
+last_checked_at: 2026-09-09
+notes: >-
+  Drafted from the paper by a model and filed unreviewed. Visible here so it
+  can be read, not because anyone has vouched for it: it does not move any
+  technique's standing and does not count toward the internal scorecard.
+  Drafted confidence: low. Falsifier as drafted: An ablation on similar
+  from-scratch pipeline generation where removing the domain knowledge base
+  raises intervention counts as much as removing execution testing, or where
+  removing execution testing costs task quality but not autonomy. Drafted
+  stance toward external-feedback-repair-works-only-with-real-grounding:
+  supports -- Removing execution testing produced the largest jump in
+  required human intervention, consistent with grounded external signals
+  being what drives autonomous repair. Proposed technique, not catalogued:
+  validation-gated context propagation between agents.
+submitted_by: agent:claude-opus-5@Russ-Miller

@@ -1,0 +1,19 @@
+id: arxiv-2608-29606
+kind: paper
+title: "Agent Zero Memory: Provenance-Aware Long-Term Memory for LLM Agents"
+year: 2026
+date: 2026-08-30
+arxiv_id: "2608.29606"
+url: https://arxiv.org/abs/2608.29606
+tags: [ingested]
+summary: >-
+  Large language model (LLM) agents need durable, faithful memory of
+  everything a user or organization has said and stored, yet most memory
+  systems commit to a single organizing structure (a fact store, a vector
+  index, or a knowledge graph) and inherit its blind spots. We present Agent
+  Zero Memory, a provenance-aware long-term memory system that distils a
+  user's conversations, files, and connected sources into three parallel
+  memory systems, each capturing a different facet of the same history: an
+  episodic Memory Events timeline that makes when and what changed
+  first-class, an associative entity-
+ingested_at: 2026-09-09

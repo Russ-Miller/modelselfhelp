@@ -1,0 +1,19 @@
+id: arxiv-2608-30147
+kind: paper
+title: "CAST: Critique-Aware Supervision for Training Reliable Long-Horizon Tool-Calling Agents"
+year: 2026
+date: 2026-08-31
+arxiv_id: "2608.30147"
+url: https://arxiv.org/abs/2608.30147
+tags: [ingested]
+summary: >-
+  Large language model (LLM) agents are increasingly deployed in
+  long-horizon, interactive, and stateful environments. In these settings, a
+  single wrong action, such as refunding the wrong purchase, can cause
+  irreversible task failure and must be intercepted before execution. Such
+  failures may not appear in every single run, but can emerge across
+  repeated trials, making reliability across steps and trials critical.
+  However, ensuring agentic reliability is challenging: even frontier LLMs
+  struggle to explain why an action may be wrong, especially in long,
+  intertwined trajectories governed by domai
+ingested_at: 2026-09-09

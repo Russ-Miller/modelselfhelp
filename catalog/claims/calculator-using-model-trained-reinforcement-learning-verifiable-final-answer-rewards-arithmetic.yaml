@@ -1,0 +1,38 @@
+id: calculator-using-model-trained-reinforcement-learning-verifiable-final-answer-rewards-arithmetic
+capability: tool-use
+technique: tool-use-fine-tuning
+statement: >-
+  When a calculator-using model is trained with reinforcement learning on
+  verifiable final-answer rewards for an arithmetic search task (Countdown),
+  the gain lands almost entirely at low k — pass@1 rises sharply while
+  pass@16 moves little or falls — because the update can only reinforce
+  correct trajectories the starting policy already samples, and prompt
+  groups with no correct sample supply no gradient.
+kind: mechanism
+backing_strength: single-paper
+observed_on:
+  era: "Outcome-only (final-answer-verified) on-policy RL — RLOO, RLOO++, GRPO, DAPO — starting from a tool-formatted SFT checkpoint, on the Countdown 3- and 4-number task with a live calc"
+sources:
+  - source: arxiv-2608-28447
+    stance: supports
+    note: >-
+      Measured on a fresh 1,024-problem held-out Countdown set (plus a
+      noisy 50-problem public split) with 95% bootstrap intervals. Tool-
+      RLOO went 35.8 to 56.6 pass@1 while pass@16 went 73.7 to 74.0; Tool-
+      RLOO++ reduced pass@16 below Tool-RLOO. Correctness-distribution
+      analysis over 16 samples per prompt shows mass shifting toward
+      fully-correct sets and zero-correct prompts persisting. Tool-DAPO is
+      a partial exception: it improved pass@16 modestly and cut the zero-
+      correct fraction. [truncated]
+contested: false
+status: pending-review
+last_checked_at: 2026-09-09
+notes: >-
+  Drafted from the paper by a model and filed unreviewed. Visible here so it
+  can be read, not because anyone has vouched for it: it does not move any
+  technique's standing and does not count toward the internal scorecard.
+  Drafted confidence: medium. Falsifier as drafted: An outcome-only RL run
+  on the same setup that raises pass@16 by as much as pass@1, or that turns
+  prompts with zero correct samples in the base policy into solved prompts
+  without added search or process supervision.
+submitted_by: agent:claude-opus-5@Russ-Miller

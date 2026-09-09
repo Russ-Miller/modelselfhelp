@@ -1,0 +1,36 @@
+id: handing-agent-context-editing-tools-delete-summarize-note-fold-prompt
+capability: context-hygiene
+statement: >-
+  Handing an agent context-editing tools (delete, summarize, note, fold) by
+  prompt alone makes mid-size models worse than leaving their context
+  untouched — Qwen3-8B, Qwen3-14B and Gemma4-E4B all scored lower on
+  long-context QA with the tools than without them; only after fine-tuning
+  on trajectories that use the tools does the toolset become a gain.
+kind: observation
+backing_strength: single-paper
+observed_on:
+  era: "Long-context QA benchmarks (NovelQA, InfinityBench En.MC, LongMemEval-S, BrowseComp+) with 8B-14B open models capped at a 32K working window; a very large model (Qwen3.5-397B-A17B)"
+sources:
+  - source: arxiv-2608-28476
+    stance: supports
+    note: >-
+      Measured across three base models and four benchmarks, three runs
+      each, against a no-tools baseline at the model's full 128K window.
+      Average scores dropped for every base model with prompt-only tools;
+      SFT and RL versions of the same models exceeded the no-tools baseline.
+      Does not isolate whether the loss comes from wrong tool arguments or
+      from bad editing decisions, though a separate analysis shows high
+      early invocation-failure rates for memory and offloading tools.
+contested: false
+status: pending-review
+last_checked_at: 2026-09-09
+notes: >-
+  Drafted from the paper by a model and filed unreviewed. Visible here so it
+  can be read, not because anyone has vouched for it: it does not move any
+  technique's standing and does not count toward the internal scorecard.
+  Drafted confidence: medium. Falsifier as drafted: A prompt-only agent
+  given the same context-editing toolset matching or beating the same base
+  model's no-tool score on these long-context QA benchmarks at 8B-14B scale.
+  Proposed technique, not catalogued: RL-trained proactive context
+  management with action-level credit assignment.
+submitted_by: agent:claude-opus-5@Russ-Miller

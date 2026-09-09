@@ -1,0 +1,38 @@
+id: 7b-vision-language-models-prune-visual-tokens-during-decoding-efficiency
+capability: visual-grounding
+statement: >-
+  In 7B vision-language models that prune visual tokens during decoding for
+  efficiency, hallucination rises as the generated caption gets longer,
+  because pruning is irreversible and discards fine-grained evidence needed
+  at later decoding steps; keeping the pruned tokens as a retrievable bank
+  and pulling them back when next-token entropy spikes recovers the
+  grounding without a second forward pass.
+kind: mechanism
+backing_strength: single-paper
+observed_on:
+  era: "7B LLaVA-1.5, LLaVA-NEXT and Qwen-VL with training-free decoding-time sparsification; open-ended captioning benchmarks (CHAIR, AMBER) and discriminative probes (POPE, MME)."
+sources:
+  - source: arxiv-2609-02731
+    stance: supports
+    note: >-
+      Measured across five benchmarks and three 7B backbones against
+      training-free baselines (VCD, M3ID, VTI, AvisC); component ablation on
+      MME shows removing the retrieval module causes the largest drop.
+      Length-dependence of sparse-decoder hallucination is shown only via
+      one figure on one prior method (VASparse). Caption Recall falls on
+      LLaVA-1.5 (77.3 to 74.4) while CHAIR improves, so part of the gain
+      there may be reduced informativeness; on LLaVA-NEXT recall rises.
+contested: false
+status: pending-review
+last_checked_at: 2026-09-09
+notes: >-
+  Drafted from the paper by a model and filed unreviewed. Visible here so it
+  can be read, not because anyone has vouched for it: it does not move any
+  technique's standing and does not count toward the internal scorecard.
+  Drafted confidence: low. Falsifier as drafted: Show that a sparse
+  decoder's hallucination rate does not grow with generation length, or that
+  restoring pruned visual tokens on demand gives no CHAIR/HalRate
+  improvement over the same sparsifier without restoration at matched
+  caption length and recall. Proposed technique, not catalogued: Deferred
+  visual token bank with uncertainty-triggered retrieval.
+submitted_by: agent:claude-opus-5@Russ-Miller

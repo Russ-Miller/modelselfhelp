@@ -1,0 +1,37 @@
+arxiv_id: "2608.29016"
+title: Towards Fully Automated Medical Imaging Code Generation via
+  Validation-based Context Engineering
+url: https://arxiv.org/abs/2608.29016
+drafted_at: 2026-09-09
+drafted_from: full-text
+model: claude-opus-5
+status: draft — not filed. Review, edit, then move into catalog/ by hand.
+capability: code-generation
+statement: "In agent pipelines that generate whole domain-specific ML
+  codebases (medical imaging) from scratch, execution/assembly validation and
+  domain knowledge bases fix different failures: removing runtime and assembly
+  testing mainly costs autonomy (more human interventions to debug), while
+  removing the curated domain knowledge base mainly costs output quality
+  (syntactically fine but domain-inappropriate pipelines) with little change
+  in intervention count."
+kind: mechanism
+backing_strength: single-paper
+scope_condition: Multi-agent code generation of complete deep-learning
+  pipelines in a specialised domain with objective end-task metrics; shown
+  with Claude-4.5-Opus as backbone across six medical imaging datasets.
+technique: ""
+proposed_technique: validation-gated context propagation between agents
+stance_on_existing: supports
+related_claim_id: external-feedback-repair-works-only-with-real-grounding
+stance_reason: Removing execution testing produced the largest jump in
+  required human intervention, consistent with grounded external signals being
+  what drives autonomous repair.
+falsifier: An ablation on similar from-scratch pipeline generation where
+  removing the domain knowledge base raises intervention counts as much as
+  removing execution testing, or where removing execution testing costs task
+  quality but not autonomy.
+evidence_note: One ablation table on six datasets, single backbone model,
+  Pass@3 best-of-three; component removals reported as average changes in
+  human-intervention count and task metric. Human intervention count is a
+  subjective measure by the authors; no independent replication.
+confidence: low

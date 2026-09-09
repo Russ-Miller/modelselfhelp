@@ -1,0 +1,19 @@
+id: arxiv-2609-02396
+kind: paper
+title: "Improving Health Literacy through Lay Summarization of Radiological Reports: An Evaluation of BioNER and Retrieval-Augmented Generation"
+year: 2026
+date: 2026-09-02
+arxiv_id: "2609.02396"
+url: https://arxiv.org/abs/2609.02396
+tags: [ingested]
+summary: >-
+  Radiology reports are written primarily for clinicians, and their
+  specialized terminology often makes them difficult for patients to
+  interpret. As a result, many patients turn to publicly available Large
+  Language Models (LLMs) to help explain their reports, despite
+  well-documented risks of factual inaccuracies and hallucinations.
+  Automated lay-summary generation has emerged as a promising alternative,
+  yet the effectiveness of retrieval-enhanced and clinically informed
+  approaches for radiology-specific communication remains underexplored.
+  This study investigates the extent to which Retrieval-Au
+ingested_at: 2026-09-09

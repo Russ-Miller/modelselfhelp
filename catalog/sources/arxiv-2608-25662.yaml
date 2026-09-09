@@ -1,0 +1,19 @@
+id: arxiv-2608-25662
+kind: paper
+title: "Overview of SHROOM-Visions 2026: A Shared Task on Hallucination Detection in Large Vision-Language Models"
+year: 2026
+date: 2026-08-26
+arxiv_id: "2608.25662"
+url: https://arxiv.org/abs/2608.25662
+tags: [ingested]
+summary: >-
+  In 2026, we held the fourth iteration of the SHROOM Shared Task series:
+  SHROOM-Visions (\textbf{S}hared-task on \textbf{H}allucinations and
+  \textbf{R}elated \textbf{O}bservable \textbf{O}vergeneration
+  \textbf{M}istakes in \textbf{Vision} language model\textbf{s}), which is
+  hosted at the UncertaiNLP Workshop co-located with EMNLP 2026. Following
+  the success of the 2024 and 2025 tasks, this time we aim to tackle
+  hallucinations through a model-agnostic detection task focused on large
+  vision-language models. Building on the recently introduced SHEEP dataset,
+  designed for long-term evaluation acros
+ingested_at: 2026-09-09

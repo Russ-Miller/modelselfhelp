@@ -1,0 +1,19 @@
+id: arxiv-2608-25667
+kind: paper
+title: "AI Slop and Hallucinations in Vulnerability Assessment: A Survey on Reasoning Failures and Trustworthy Mitigation"
+year: 2026
+date: 2026-08-26
+arxiv_id: "2608.25667"
+url: https://arxiv.org/abs/2608.25667
+tags: [ingested]
+summary: >-
+  The integration of Large Language Models (LLMs) into cybersecurity has
+  transformed vulnerability assessment, but it has also produced a
+  trustworthiness crisis driven by the unchecked proliferation of "AI slop."
+  These artifacts, hallucinated vulnerabilities, plausible but incorrect
+  patches, and semantically repackaged bug reports, impose a cognitive
+  burden on human triage pipelines that mirrors a denial-of-service attack.
+  This paper surveys the empirical evidence, identifies a unifying
+  mechanism, and traces a path toward trustworthy triage. We formalize a
+  taxonomy of AI slop grounded in a struc
+ingested_at: 2026-09-09

@@ -12,6 +12,7 @@ const SECTIONS = [
   { href: "/open-questions", label: "Open questions" },
   { href: "/queue", label: "Queue" },
   { href: "/drafts", label: "Drafts" },
+  { href: "/how-this-works", label: "How this works" },
 ];
 
 export function NavLinks() {

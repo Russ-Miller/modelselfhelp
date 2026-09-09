@@ -1,0 +1,33 @@
+arxiv_id: "2608.25667"
+title: "AI Slop and Hallucinations in Vulnerability Assessment: A Survey on
+  Reasoning Failures and Trustworthy Mitigation"
+url: https://arxiv.org/abs/2608.25667
+drafted_at: 2026-09-09
+drafted_from: full-text
+model: claude-opus-5
+status: draft — not filed. Review, edit, then move into catalog/ by hand.
+capability: hallucination
+statement: "For filtering unsupported LLM-generated vulnerability reports in
+  security triage, statistical machine-text detectors are the wrong
+  instrument: they score provenance, not correctness, and human-written
+  security reports are template-driven and low-perplexity, so they trip the
+  same signal that flags machine text."
+kind: mechanism
+backing_strength: single-paper
+scope_condition: Security artifacts with rigid templates and standardized
+  formatting — bug bounty reports, stack traces, patch descriptions; argued,
+  not measured here.
+technique: ""
+proposed_technique: Deductive coverage scoring of vulnerability claims
+stance_on_existing: neither
+related_claim_id: ""
+stance_reason: ""
+falsifier: A statistical AI-text detector applied to a mixed corpus of human
+  and LLM bug bounty reports achieves both low false-positive rates on human
+  reports and high separation of unsupported claims from grounded ones.
+evidence_note: Survey. Argued from the low lexical diversity of security
+  report templates plus a cited theoretical result that detector AUC converges
+  to chance as model output distributions approach human writing. No new
+  measurement on security reports is reported here; the causal step from
+  'formulaic' to 'high false-positive rate' is asserted rather than isolated.
+confidence: medium

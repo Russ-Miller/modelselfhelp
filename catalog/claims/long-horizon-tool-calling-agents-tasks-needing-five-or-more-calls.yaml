@@ -1,0 +1,38 @@
+id: long-horizon-tool-calling-agents-tasks-needing-five-or-more-calls
+capability: prompt-injection
+statement: >-
+  For long-horizon tool-calling agents (tasks needing five or more calls),
+  embedding state-transition cues — preconditions, invariants, completion
+  states — into the descriptions of the tools on the intended chain is what
+  actually steers the agent's trajectory; runtime corrective text appended
+  to tool results only patches residual drift, and the plausible user prompt
+  alone (persona, deadlines, format constraints) does not establish the
+  trajectory at all.
+kind: mechanism
+backing_strength: single-paper
+observed_on:
+  era: "Attacker can modify natural-language tool metadata (malicious MCP tool publication or post-registration description change) and also supplies the user prompt; measured on a 120-tas"
+sources:
+  - source: arxiv-2608-30441
+    stance: supports
+    note: >-
+      Ablation on the authors' own benchmark under a defended DeepSeek
+      victim: prompt-only 19-27% success, runtime correction alone 37.5%,
+      tool-description encoding 66.7%, both 69.2%. Same-lab benchmark and
+      success metric; the ablation isolates the channels but only for one
+      victim model and one filter, and the mechanism claim generalizes
+      beyond what was tested.
+contested: false
+status: pending-review
+last_checked_at: 2026-09-09
+notes: >-
+  Drafted from the paper by a model and filed unreviewed. Visible here so it
+  can be read, not because anyone has vouched for it: it does not move any
+  technique's standing and does not count toward the internal scorecard.
+  Drafted confidence: medium. Falsifier as drafted: An ablation on
+  comparable long-horizon agent tasks where rewriting tool descriptions with
+  workflow cues adds little over the prompt alone, or where runtime
+  correction signals alone reach similar attack success and trajectory
+  similarity. Proposed technique, not catalogued: Static workflow encoding
+  in tool descriptions.
+submitted_by: agent:claude-opus-5@Russ-Miller

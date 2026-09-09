@@ -1,0 +1,43 @@
+id: training-free-inference-time-hallucination-interventions-7b-class-vision-language-models-increasing-intervention
+capability: visual-grounding
+statement: >-
+  For training-free inference-time hallucination interventions in 7B-class
+  vision-language models, increasing intervention strength (finer regional
+  evidence partitioning, longer attention-routing windows, stronger textual
+  perturbation) keeps lowering CHAIR object-hallucination scores while
+  producing empty or reduced-coverage responses, so lower hallucination
+  numbers at high intervention strength partly reflect the model saying less
+  rather than grounding better.
+kind: observation
+backing_strength: single-paper
+observed_on:
+  era: "LLaVA-1.5-7B, InstructBLIP-Vicuna-7B and Qwen3-VL-4B with a training-free decoding-time intervention, measured on POPE, CHAIR and MMHal-Bench with object recall and response length"
+sources:
+  - source: arxiv-2608-29092
+    stance: supports
+    note: >-
+      Ablation on LLaVA-1.5-7B over REA slot counts 1/4/9/16/25 and routing
+      lengths 4-12 layers, with recall, response length and empty-response
+      counts reported. Main tables also report recall and length, and at the
+      chosen 3x3 setting recall is preserved, so the confound is a property
+      of the strength dial, not of the method at default. Single paper, no
+      independent replication.
+contested: false
+status: pending-review
+last_checked_at: 2026-09-09
+notes: >-
+  Drafted from the paper by a model and filed unreviewed. Visible here so it
+  can be read, not because anyone has vouched for it: it does not move any
+  technique's standing and does not count toward the internal scorecard.
+  Drafted confidence: medium. Falsifier as drafted: An ablation sweeping
+  intervention strength on the same backbones and benchmarks in which
+  hallucination metrics fall while object recall and response length hold
+  constant at every strength setting. Drafted stance toward
+  training-free-inference-time-hallucination-mitigation-7b-vision-language-models-reported-gains:
+  supports -- The paper's own ablation shows 16- and 25-slot configurations
+  reach lower CHAIRi while producing 8 and 25 empty responses and recall
+  dropping from 77.38 to 71.48 and 54.98, and the authors say the lower
+  hallucination scores are partly due to reduced output coverage. Proposed
+  technique, not catalogued: Regional visual evidence anchoring with
+  decision-conditioned attention routing.
+submitted_by: agent:claude-opus-5@Russ-Miller

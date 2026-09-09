@@ -1,0 +1,19 @@
+id: arxiv-2609-00492
+kind: paper
+title: "The Privacy-Hallucination Tradeoff in Differentially Private Language Models"
+year: 2026
+date: 2026-08-31
+arxiv_id: "2609.00492"
+url: https://arxiv.org/abs/2609.00492
+tags: [ingested]
+summary: >-
+  Both privacy and factual accuracy are paramount in high-stakes domains
+  like healthcare. Concerningly, we uncover and investigate a
+  privacy-hallucination tradeoff in differentially private (DP) language
+  models. First, we empirically show that models pre-trained or fine-tuned
+  with DP tend to produce more hallucinations than non-DP counterparts, with
+  increased severity as the privacy budget grows stricter. Second, we
+  investigate model properties driving this tradeoff, demonstrating that DP
+  mechanisms flatten output distributions, potentially redistributing
+  probability mass toward factually incorr
+ingested_at: 2026-09-09

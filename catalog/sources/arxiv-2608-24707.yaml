@@ -1,0 +1,19 @@
+id: arxiv-2608-24707
+kind: paper
+title: "Lost in Speech: Trilingual Spoken Hallucination Detection Across Audio and Transcripts"
+year: 2026
+date: 2026-08-25
+arxiv_id: "2608.24707"
+url: https://arxiv.org/abs/2608.24707
+tags: [ingested]
+summary: >-
+  While text-based hallucination detection has been extensively studied,
+  spoken hallucination detection remains largely unexplored, particularly
+  for low-resource languages. We present the first multilingual spoken
+  hallucination benchmark comprising 12,013 news samples across English,
+  Russian, and Kazakh with controlled hallucinations of three types and
+  three severity levels. Samples comprise original articles and aligned
+  hallucinated counterparts in text and audio. We complement the synthetic
+  corpus with 290 fact-checked fake news items collected natively in Russian
+  (225) and Kazakh (65), transl
+ingested_at: 2026-09-09

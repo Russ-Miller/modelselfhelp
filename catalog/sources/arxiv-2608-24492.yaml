@@ -1,0 +1,19 @@
+id: arxiv-2608-24492
+kind: paper
+title: "When Do Supervised UQ Ensembles Improve LLM Hallucination Detection? A Robustness Study"
+year: 2026
+date: 2026-08-25
+arxiv_id: "2608.24492"
+url: https://arxiv.org/abs/2608.24492
+tags: [ingested]
+summary: >-
+  Uncertainty quantification (UQ) methods are widely used for hallucination
+  detection in large language models (LLMs) in closed-book settings where
+  ground-truth evidence is unavailable at inference time. Prior work has
+  proposed combining UQ signals via learned ensembles, but empirical
+  investigations into the robustness of these ensembles are limited. We
+  study a supervised ensembling framework that trains a classifier over
+  heterogeneous UQ-based scorer outputs on a small, domain-specific dataset
+  of labeled LLM responses, then applies it to out-of-sample hallucination
+  classification without retrie
+ingested_at: 2026-09-09

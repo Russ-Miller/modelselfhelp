@@ -1,0 +1,42 @@
+arxiv_id: "2609.02679"
+title: "From Tokens to Semantics: Leveraging Complementary Signals for
+  Hallucination Detection in Black-Box LLMs"
+url: https://arxiv.org/abs/2609.02679
+drafted_at: 2026-09-09
+drafted_from: full-text
+model: claude-opus-5
+status: draft — not filed. Review, edit, then move into catalog/ by hand.
+capability: hallucination
+statement: For black-box hallucination detection using only sampled responses
+  and token log-probabilities, semantic-entropy signals go to zero whenever
+  the samples collapse into one semantic cluster — which happens for a large
+  share of hallucinated queries, up to nearly all of them on tasks with
+  confusable entities and figures — while token-level uncertainty still
+  separates many of those cases, so the two signals fail on different queries
+  and combining them detects more than either alone.
+kind: mechanism
+backing_strength: single-paper
+scope_condition: Black-box API access exposing text and token
+  log-probabilities, no trusted reference document; measured on seven
+  QA/extraction/summary benchmarks with four models. Supervised combination
+  requires labelled target-domain data; neither signal catches hallucinations
+  that are both semantically consistent and generated with high token
+  confidence.
+technique: ""
+proposed_technique: Stacked semantic-plus-token hallucination detector
+stance_on_existing: neither
+related_claim_id: ""
+stance_reason: ""
+falsifier: Show that on single-semantic-cluster hallucinated queries
+  token-uncertainty features give no separation above chance, or that a
+  combined detector never beats the better single signal across datasets and
+  models.
+evidence_note: "Measured: single-cluster rate among hallucinated queries
+  ranged 39% (AmbigQA) to 99% (Financial Summaries); median TopK uncertainty
+  higher for hallucinated single-cluster queries on six of seven datasets,
+  though 21-56% of them fell below the non-hallucinated median. Stacked led or
+  tied in 11 of 26 model-dataset comparisons and was within 0.05 AUROC of the
+  best in 20 of 26. Authors note the leading method's confidence interval
+  overlaps a competitor on every dataset, so rankings among methods are not
+  conclusive; the complementarity analysis is stronger than the ranking."
+confidence: medium

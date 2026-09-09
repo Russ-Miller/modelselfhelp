@@ -1,0 +1,19 @@
+id: arxiv-2608-30480
+kind: paper
+title: "VisER: Visual Evidence and Reliance for Object Hallucination Detection in LVLMs"
+year: 2026
+date: 2026-08-31
+arxiv_id: "2608.30480"
+url: https://arxiv.org/abs/2608.30480
+tags: [ingested]
+summary: >-
+  Object hallucination remains a persistent reliability issue in large
+  vision-language models, where generated object mentions may sound
+  plausible but lack visual grounding. Recent training-free detectors use
+  internal signals such as token likelihood, attention, visual confidence,
+  or image-text similarity to identify hallucinated objects. These signals
+  are useful, but they are often source-confounded. They measure how
+  strongly an object is supported inside the model without distinguishing
+  whether that support comes from object-specific visual evidence or the
+  generated text prefix. In difficult c
+ingested_at: 2026-09-09

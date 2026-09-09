@@ -1,0 +1,38 @@
+id: 2m-parameter-classifier-head-reads-hidden-states-already-computed-during
+capability: hallucination
+statement: >-
+  A ~2M-parameter classifier head that reads hidden states already computed
+  during generation (tapping shallow, middle and deep layers of the
+  generating model) detects response-level hallucination at least as well as
+  specialized hidden-state hallucination detectors, and its detection
+  quality rises with the scale of the base model it is attached to.
+kind: mechanism
+backing_strength: single-paper
+observed_on:
+  era: "Two Ling-3.0 base models (tiny and flash); response-level ROC AUC on six offline hallucination benchmarks and seven free-generation datasets; head trained on curated factuality/hal"
+sources:
+  - source: arxiv-2608-30703
+    stance: supports
+    note: >-
+      Measured AUC, not accuracy at a threshold. Macro-average offline AUC
+      0.7765 (tiny) and 0.8012 (flash) vs best baseline DRIFT 0.7408/0.8000;
+      online free-generation average 0.6786/0.7271 vs DRIFT 0.6316/0.6546,
+      with labels from an LLM judge. Absolute AUCs are moderate and
+      per-benchmark ranking is mixed (FAVA, RAGTruth, BBH favor baselines).
+      Layer ablation shows hallucination gains more from multi-layer taps
+      than safety does, supporting the mechanism reading. Only one model
+      family, so scale claim rests on two points.
+contested: false
+status: pending-review
+last_checked_at: 2026-09-09
+notes: >-
+  Drafted from the paper by a model and filed unreviewed. Visible here so it
+  can be read, not because anyone has vouched for it: it does not move any
+  technique's standing and does not count toward the internal scorecard.
+  Drafted confidence: medium. Falsifier as drafted: A probe trained the same
+  way on reused hidden states scores no better than chance, or falls clearly
+  below external detectors of similar training budget, or its AUC fails to
+  improve when moved from a small to a larger base model. Proposed
+  technique, not catalogued: intrinsic hidden-state probe for hallucination
+  risk during decoding.
+submitted_by: agent:claude-opus-5@Russ-Miller

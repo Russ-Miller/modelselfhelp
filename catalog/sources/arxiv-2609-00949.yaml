@@ -1,0 +1,19 @@
+id: arxiv-2609-00949
+kind: paper
+title: "Calibration is the Bottleneck: An Action-Class Diagnostic of Multi-Turn Tool-Calling"
+year: 2026
+date: 2026-09-01
+arxiv_id: "2609.00949"
+url: https://arxiv.org/abs/2609.00949
+tags: [ingested]
+summary: >-
+  Multi-turn tool calling is a core evaluation scenario for large language
+  model (LLM) agents. On public tool-calling benchmarks, open-weight models
+  now approach or even surpass closed-source frontier models in aggregate
+  accuracy. However, this metric averages over many different multi-turn
+  situations and obscures whether progress is balanced across them. We
+  propose an action-class-oriented diagnostic framework that decomposes
+  multi-turn failures into two orthogonal modes: action-class miscalibration
+  and action-execution failure. The framework operates over a four-class
+  action space (TOOL_CALL/A
+ingested_at: 2026-09-09

@@ -1,0 +1,19 @@
+id: arxiv-2608-29352
+kind: paper
+title: "Cross-Relational Preference Learning for Better LLM Instruction Following"
+year: 2026
+date: 2026-08-29
+arxiv_id: "2608.29352"
+url: https://arxiv.org/abs/2608.29352
+tags: [ingested]
+summary: >-
+  Large Language Models (LLMs) still exhibit limited capability in following
+  complex instructions. While existing approaches often rely on preference
+  learning to enhance this ability, they typically overlook the
+  relationships between the permissible response spaces of different
+  instructions, which restricts a model to align with subtle and diverse
+  constraint variations. To address this, we propose Cross-Relational
+  Preference Learning (CRPL), a novel framework for constructing preference
+  data that explicitly models inter-instruction relationships through two
+  key techniques: Cross-Relationship Per
+ingested_at: 2026-09-09

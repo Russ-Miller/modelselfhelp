@@ -1,0 +1,19 @@
+id: arxiv-2608-27496
+kind: paper
+title: "ROPE: Routed Origin Policy Enforcement against Indirect Prompt Injection"
+year: 2026
+date: 2026-08-27
+arxiv_id: "2608.27496"
+url: https://arxiv.org/abs/2608.27496
+tags: [ingested]
+summary: >-
+  Indirect prompt injection (IPI) plants instructions in the content a
+  tool-using LLM agent reads, steering the agent into harmful tool calls.
+  The strongest defenses are system-level, leveraging techniques such as
+  task-conditional tool screening to prevent execution of malicious tools,
+  and information-flow control to avoid tool execution with untrusted
+  parameters. However, as agents grow more capable, users delegate more to
+  automation. Consequently, tool execution sequences and parameter values
+  are increasingly determined at runtime and cannot be reliably screened
+  from solely user's query withou
+ingested_at: 2026-09-09

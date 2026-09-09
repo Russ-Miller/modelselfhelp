@@ -1,0 +1,19 @@
+id: arxiv-2608-30248
+kind: paper
+title: "DSEffi-Bench: Demystifying Large Language Models' Capability in Efficient Data Science Code Generation"
+year: 2026
+date: 2026-08-31
+arxiv_id: "2608.30248"
+url: https://arxiv.org/abs/2608.30248
+tags: [ingested]
+summary: >-
+  Current data science (DS) code generation benchmarks equate correctness
+  with quality, overlooking execution time differences that span orders of
+  magnitude between correct solutions. We introduce DSEffi-Bench, the first
+  benchmark specifically targeting execution efficiency in LLM-generated DS
+  code, comprising 1,000 instances across 10+ DS libraries with
+  stress-testing harnesses and human-validated references. Evaluating 16
+  models across 3 tiers, we find that correctness alone fails to
+  characterize efficiency: GPT-5.4 leads in correctness (Pass, 66.9\%) but
+  its efficiency score (B$|$P, 71.7\%) n
+ingested_at: 2026-09-09

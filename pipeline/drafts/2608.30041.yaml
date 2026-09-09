@@ -1,0 +1,43 @@
+arxiv_id: "2608.30041"
+title: Reachability-Based Capability Confinement for LLM Agents under Indirect
+  Prompt Injection
+url: https://arxiv.org/abs/2608.30041
+drafted_at: 2026-09-09
+drafted_from: full-text
+model: claude-opus-5
+status: draft — not filed. Review, edit, then move into catalog/ by hand.
+capability: prompt-injection
+statement: For tool-using agents, restricting capabilities at the harness
+  level after untrusted content enters the context — revoking or tightening
+  the parameter envelopes of skills that lie on graph paths to
+  deployer-defined forbidden states — cuts indirect-injection attack success
+  further than prompt-level or per-action authorization defenses, and does so
+  with no extra model calls or tokens, because enforcement reads the
+  transition graph rather than the natural-language content.
+kind: mechanism
+backing_strength: single-paper
+scope_condition: Requires a trusted harness that mediates every skill
+  invocation, correct skill transition summaries, and a deployer-written
+  policy naming forbidden states and per-parameter steerability envelopes;
+  residual attack success remains where the attacker objective is reached
+  before restrictions apply or is not itself a policy violation.
+technique: ""
+proposed_technique: reachability-based capability confinement after contamination
+stance_on_existing: neither
+related_claim_id: ""
+stance_reason: ""
+falsifier: An evaluation on comparable agent benchmarks where
+  post-contamination capability restriction leaves attack success no lower
+  than CaMeL/AttriGuard-style per-action authorization, or where the utility
+  cost of confinement is so large that the defended agent completes fewer
+  tasks than a prompt-level defense at equal attack success.
+evidence_note: Measured on four AgentDojo suites with Gemini 2.5 Flash and
+  Llama3.3-70B, against No Defense, Spotlighting, CaMeL and AttriGuard, plus
+  an author-built compositional attack set. Reports 0% attack success on
+  Travel, Banking, Workspace for both backends and 4.8%/14.3% on Slack. Benign
+  utility often falls relative to no defense; fractional-flow restriction
+  retains more capability than binary at the same attack success. Authors' own
+  system and own compositional benchmark; guarantees are conditional on policy
+  correctness, which the paper's sensitivity test shows costs capability when
+  envelopes are left conservative.
+confidence: medium

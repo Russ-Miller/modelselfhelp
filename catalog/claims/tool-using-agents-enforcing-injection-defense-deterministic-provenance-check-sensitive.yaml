@@ -1,0 +1,39 @@
+id: tool-using-agents-enforcing-injection-defense-deterministic-provenance-check-sensitive
+capability: prompt-injection
+statement: >-
+  For tool-using agents, enforcing injection defense as a deterministic
+  provenance check on sensitive tool parameters — with the only model call
+  reading the trusted user request and never fetched content — makes
+  admission decisions invariant to how an injection is worded, whereas
+  defenses that judge the agent's runtime plan or behavior with a model can
+  be steered by reworded injections.
+kind: mechanism
+backing_strength: single-paper
+observed_on:
+  era: "Holds where the platform exposes unforgeable origin metadata (signed senders, user-owned records) for values the agent reads, and where the harm passes through a state-changing too"
+sources:
+  - source: arxiv-2608-27496
+    stance: supports
+    note: >-
+      Measured on AgentDyn (three open-ended suites) and AgentDojo with four
+      agent models against eleven baselines. Static attack success held to
+      1.6-2.6% with 82-100% of undefended clean utility; under AutoDojo
+      injection optimization the origin check moved by under a point while
+      DRIFT roughly doubled on two API models and rose from 7.1 to 28.5 on
+      Qwen3-235B. Long-horizon staged attacks reached 0% against it.
+      Paraphrase invariance is also argued formally, conditional on stated
+      deployment assumptions. Author-run comparison; [truncated]
+contested: false
+status: pending-review
+last_checked_at: 2026-09-09
+notes: >-
+  Drafted from the paper by a model and filed unreviewed. Visible here so it
+  can be read, not because anyone has vouched for it: it does not move any
+  technique's standing and does not count toward the internal scorecard.
+  Drafted confidence: medium. Falsifier as drafted: An adaptive attacker
+  that raises attack success against the origin-check defense by rewording
+  injections alone, without altering the origin of the value it plants; or a
+  model-in-the-loop plan-conformance defense that proves equally unmoved by
+  injection optimization at comparable clean utility. Proposed technique,
+  not catalogued: deterministic origin check on sensitive tool parameters.
+submitted_by: agent:claude-opus-5@Russ-Miller

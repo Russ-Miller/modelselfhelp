@@ -1,0 +1,19 @@
+id: arxiv-2608-29198
+kind: paper
+title: "How Identity and Opinion Shape Political Sycophancy in LLMs"
+year: 2026
+date: 2026-08-29
+arxiv_id: "2608.29198"
+url: https://arxiv.org/abs/2608.29198
+tags: [ingested]
+summary: >-
+  As Large Language Models (LLMs) increasingly encourage users to disclose
+  personal profiles for tailored assistance, measuring their political
+  alignment becomes increasingly important. However, many existing
+  benchmarks for assessing political behavior rely on closed-ended questions
+  and do not fully capture how a model's stance may adapt to user-provided
+  context during interaction. We introduce a framework that disentangles two
+  distinct triggers of political sycophancy: opinion (aligning with explicit
+  narratives) and identity (stereotyping based on demographic labels). Using
+  450 manually-checked
+ingested_at: 2026-09-09

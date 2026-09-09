@@ -1,0 +1,43 @@
+id: tool-augmented-multimodal-models-trained-only-how-call-vision-tools
+capability: self-repair
+technique: external-feedback-repair
+statement: >-
+  Tool-augmented multimodal models trained only on how to call vision tools
+  accept tool outputs uncritically; adding supervised trajectories where
+  tool evidence is checked against the image and re-queried, plus a reward
+  for correction that reaches a correct answer, raises accuracy on
+  perception-heavy benchmarks (counting, depth, spatial relations) in 3B and
+  7B Qwen2.5-VL, while slightly lowering it on knowledge-heavy ones.
+kind: mechanism
+backing_strength: single-paper
+observed_on:
+  era: "Qwen2.5-VL 3B and 7B backbones with a fixed suite of vision tools (detection, zoom, edge, depth); training trajectories synthesized by Gemini-2.5-Pro; gains do not transfer to MMMU"
+sources:
+  - source: arxiv-2608-29374
+    stance: supports
+    note: >-
+      Measured on CountBench, CVBench, BLINK, BLINK-HARD, MMVP, MMSTAR and
+      others against Qwen2.5-VL-Instruct, SFT, SFT-GRPO, and tool-augmented
+      baselines (ReVPT, Thyme, CodeDance), with an ablation separating
+      cold-start data, correction reward and grounding reward. Single group,
+      margins over prior SoTA are small and mixed per benchmark; the
+      trajectory data comes from a stronger proprietary model, so
+      distillation is not isolated from the verification mechanism.
+contested: false
+status: pending-review
+last_checked_at: 2026-09-09
+notes: >-
+  Drafted from the paper by a model and filed unreviewed. Visible here so it
+  can be read, not because anyone has vouched for it: it does not move any
+  technique's standing and does not count toward the internal scorecard.
+  Drafted confidence: medium. Falsifier as drafted: An ablation showing the
+  curated verification trajectories and correction reward give no gain over
+  standard tool-use SFT plus accuracy-only GRPO on the same perception
+  benchmarks and backbone. Drafted stance toward
+  external-feedback-repair-works-only-with-real-grounding: supports -- The
+  correction loop works because the model checks tool output against the
+  image itself, an external perceptual signal, and the paper notes recovery
+  fails when that signal is ambiguous or the tool fails outright. Proposed
+  technique, not catalogued: verification-supervised tool self-correction
+  training.
+submitted_by: agent:claude-opus-5@Russ-Miller

@@ -1,0 +1,37 @@
+arxiv_id: "2608.30703"
+title: SingProbe Technical Report
+url: https://arxiv.org/abs/2608.30703
+drafted_at: 2026-09-09
+drafted_from: full-text
+model: claude-opus-5
+status: draft — not filed. Review, edit, then move into catalog/ by hand.
+capability: hallucination
+statement: A ~2M-parameter classifier head that reads hidden states already
+  computed during generation (tapping shallow, middle and deep layers of the
+  generating model) detects response-level hallucination at least as well as
+  specialized hidden-state hallucination detectors, and its detection quality
+  rises with the scale of the base model it is attached to.
+kind: mechanism
+backing_strength: single-paper
+scope_condition: Two Ling-3.0 base models (tiny and flash); response-level ROC
+  AUC on six offline hallucination benchmarks and seven free-generation
+  datasets; head trained on curated factuality/hallucination data with
+  response-level labels; compared against DRIFT, HaMI, SAPLMA.
+technique: ""
+proposed_technique: intrinsic hidden-state probe for hallucination risk during decoding
+stance_on_existing: neither
+related_claim_id: ""
+stance_reason: ""
+falsifier: A probe trained the same way on reused hidden states scores no
+  better than chance, or falls clearly below external detectors of similar
+  training budget, or its AUC fails to improve when moved from a small to a
+  larger base model.
+evidence_note: Measured AUC, not accuracy at a threshold. Macro-average
+  offline AUC 0.7765 (tiny) and 0.8012 (flash) vs best baseline DRIFT
+  0.7408/0.8000; online free-generation average 0.6786/0.7271 vs DRIFT
+  0.6316/0.6546, with labels from an LLM judge. Absolute AUCs are moderate and
+  per-benchmark ranking is mixed (FAVA, RAGTruth, BBH favor baselines). Layer
+  ablation shows hallucination gains more from multi-layer taps than safety
+  does, supporting the mechanism reading. Only one model family, so scale
+  claim rests on two points.
+confidence: medium

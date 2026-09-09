@@ -1,0 +1,37 @@
+id: 7-8b-vision-language-models-fine-tuning-visual-text-embeddings-toward-perturbation-averaged
+capability: visual-grounding
+statement: >-
+  In 7-8B vision-language models, fine-tuning visual and text embeddings
+  toward perturbation-averaged and ground-truth anchors before cross-modal
+  contrastive alignment lowers object and attribute hallucination rates on
+  captioning and existence benchmarks without reducing object coverage or
+  general VQA accuracy.
+kind: observation
+backing_strength: single-paper
+observed_on:
+  era: "Single-image, single-turn settings at 7-8B scale (LLaVA-1.5, LLaVA-1.6, Qwen3-VL-8B); 2K training pairs drawn from RLHF-V chosen/rejected responses; evaluated on AMBER, ObjHal, MMH"
+sources:
+  - source: arxiv-2608-29924
+    stance: supports
+    note: >-
+      Measured on three backbones against re-run base models and re-run DPO
+      and CHiP under matched data; AMBER CHAIR falls 7.8->4.2, 8.3->3.1,
+      5.9->2.9, with coverage rising and VQA-v2/TextVQA matched or improved.
+      Ablations separate the intra-modal stage from the alignment stage. Not
+      isolated: no ablation against a data-matched plain SFT baseline, and
+      some comparison rows are literature-reported rather than controlled.
+contested: false
+status: pending-review
+last_checked_at: 2026-09-09
+notes: >-
+  Drafted from the paper by a model and filed unreviewed. Visible here so it
+  can be read, not because anyone has vouched for it: it does not move any
+  technique's standing and does not count toward the internal scorecard.
+  Drafted confidence: low. Falsifier as drafted: Replication on the same
+  backbones showing that hallucination reductions are matched by drops in
+  object coverage or in VQA-v2/TextVQA accuracy, or that a plain
+  generation-loss fine-tune on the same 2K data gives the same hallucination
+  reduction without the stabilization objectives. Proposed technique, not
+  catalogued: Perturbation-invariance fine-tuning for vision-language
+  embeddings.
+submitted_by: agent:claude-opus-5@Russ-Miller

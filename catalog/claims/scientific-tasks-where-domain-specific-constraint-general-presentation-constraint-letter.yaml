@@ -1,0 +1,39 @@
+id: scientific-tasks-where-domain-specific-constraint-general-presentation-constraint-letter
+capability: procedure-following
+statement: >-
+  On scientific tasks where a domain-specific constraint and a general
+  presentation constraint (letter case, output format, structure) are both
+  stated in the same prompt, multimodal models satisfy the domain-specific
+  constraint more often than the general formatting one, so domain
+  competence does not imply full instruction compliance.
+kind: observation
+backing_strength: single-paper
+observed_on:
+  era: "2,527 constraint-injected samples built from 13 existing scientific datasets across chemistry, geography, biology, materials science and physics; four closed-source and seven open-"
+sources:
+  - source: arxiv-2608-25973
+    stance: supports
+    note: >-
+      Measured with per-constraint DRFR split by constraint domain and
+      group: the reported gap for the top closed model is roughly 89% on
+      scientific versus 75% on general constraints, and letter constraints
+      sit near 51%. Constraints were injected into existing problems, so
+      difficulty of the two constraint types is not matched — the gap could
+      partly reflect that general constraints here are harder in absolute
+      terms, not that they are neglected.
+contested: false
+status: pending-review
+last_checked_at: 2026-09-09
+notes: >-
+  Drafted from the paper by a model and filed unreviewed. Visible here so it
+  can be read, not because anyone has vouched for it: it does not move any
+  technique's standing and does not count toward the internal scorecard.
+  Drafted confidence: medium. Falsifier as drafted: A benchmark of the same
+  kind where models score equal or higher on general formatting constraints
+  than on injected discipline-specific constraints, across model families.
+  Drafted stance toward
+  verifiable-instructions-such-length-format-constraints-strong-models:
+  supports -- The paper reports that adherence falls as constraint counts
+  rise and that general format/letter constraints are the weakest group even
+  for the strongest model.
+submitted_by: agent:claude-opus-5@Russ-Miller

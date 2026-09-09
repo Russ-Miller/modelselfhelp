@@ -1,0 +1,43 @@
+arxiv_id: "2608.26588"
+title: Unsaid, Unsafe? Implicit Security Obligations in LLM-Based RTL Code
+  Generation
+url: https://arxiv.org/abs/2608.26588
+drafted_at: 2026-09-09
+drafted_from: full-text
+model: claude-opus-5
+status: draft — not filed. Review, edit, then move into catalog/ by hand.
+capability: secure-coding
+statement: When hardware description code (Verilog, SystemVerilog, VHDL,
+  Amaranth-Python) is generated from a functional specification that omits
+  security obligations — as real SoC docs do, keeping countermeasures in
+  separate config files — frontier models pass functional tests far more often
+  than security tests, and the model with the highest functional pass rate is
+  not the safest; naming the relevant CWE in the prompt raises the security
+  pass rate sharply, showing the limit is missing awareness of the required
+  obligation rather than inability to write defensive RTL.
+kind: mechanism
+backing_strength: single-paper
+scope_condition: Five resource-access CWE families that are observable at
+  module ports under black-box simulation; 392 task instances from real
+  open-source SoC IP; five frontier models, zero-shot, temperature 0.6,
+  non-thinking mode.
+technique: ""
+proposed_technique: Symbolic inference of implicit security obligations from a
+  spec graph plus CWE ontology, then obligation-guided revision of a
+  functional draft
+stance_on_existing: supports
+related_claim_id: models-complied-insecure-completions-large-fraction-time-more
+stance_reason: Extends the software finding to hardware code and adds that
+  greater functional capability does not track greater security in the same
+  setting.
+falsifier: On the same obligation-omitted specifications, a model whose
+  functional pass rate is high also passes security tests at a similar rate,
+  or supplying the aligned CWE entry fails to raise security pass rates.
+evidence_note: Measured on a purpose-built 392-instance benchmark with
+  separate functional and security testbenches, five runs per case, mean±std
+  reported; vanilla functional pass 73-79% vs security pass 14-35%, security
+  rising to about 59% mean with the aligned CWE entry supplied. Security
+  testbenches are an operational approximation of the obligation set, and the
+  CWE-supplied condition is an upper-bound cue that also lowered functional
+  pass rates, so the two metrics are not independent.
+confidence: medium

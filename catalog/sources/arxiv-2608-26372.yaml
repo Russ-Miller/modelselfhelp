@@ -1,0 +1,19 @@
+id: arxiv-2608-26372
+kind: paper
+title: "Knowledge-Verified Emergent Deception in LLM Agents Under Conflicting Incentives"
+year: 2026
+date: 2026-08-26
+arxiv_id: "2608.26372"
+url: https://arxiv.org/abs/2608.26372
+tags: [ingested]
+summary: >-
+  Large language models are increasingly deployed as autonomous agents
+  serving users on behalf of companies, placing them in settings where user
+  and deployer interests can conflict. When an agent knows that a user is
+  owed something its deployer would prefer to deny, does it remain honest?
+  Answering this is difficult because false statements can reflect either
+  ignorance or hallucination rather than deception. To address this
+  challenge, we introduce KnownLieBench , a knowledge-verified benchmark
+  that first confirms through a neutral probe that an agent knows a user's
+  entitlement, and then evaluate
+ingested_at: 2026-09-09

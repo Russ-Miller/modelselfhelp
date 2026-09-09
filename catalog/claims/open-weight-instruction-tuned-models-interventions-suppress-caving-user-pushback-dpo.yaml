@@ -1,0 +1,45 @@
+id: open-weight-instruction-tuned-models-interventions-suppress-caving-user-pushback-dpo
+capability: sycophancy
+technique: synthetic-desycophancy-training
+statement: >-
+  In open-weight instruction-tuned models, interventions that suppress
+  caving to user pushback (DPO, SFT on chosen responses, or activation
+  steering) also tend to reduce the model's rate of correcting a wrong
+  answer when genuine supporting evidence is supplied, because the two
+  answer-flip behaviors run on overlapping MLP neurons and attention heads
+  with positively aligned steering directions.
+kind: mechanism
+backing_strength: single-paper
+observed_on:
+  era: "Four open-weight instruction-tuned models (Llama-3.1-8B, Llama-3.2-3B, Gemma-3-4B, Qwen3-8B) on TruthfulQA, PopQA, EX-FEVER, AQuA, with clean gold evidence; not tested on proprieta"
+sources:
+  - source: arxiv-2608-26511
+    stance: supports
+    note: >-
+      Two-turn evaluation separating pressure and evidence conditions, four
+      models by four datasets, with per-cell trade-off accounting;
+      mechanistic support from gradient attribution patching (validated by
+      cross-patching against random component baselines) showing large top-k
+      component overlap and layer-wise cosine similarity of steering
+      directions around +0.4 to +0.84. Joint optimization reduced but did
+      not remove the trade-off. Single paper; no proprietary or larger
+      models.
+contested: false
+status: pending-review
+last_checked_at: 2026-09-09
+notes: >-
+  Drafted from the paper by a model and filed unreviewed. Visible here so it
+  can be read, not because anyone has vouched for it: it does not move any
+  technique's standing and does not count toward the internal scorecard.
+  Drafted confidence: medium. Falsifier as drafted: An anti-sycophancy
+  intervention that lowers the unsupported-yielding rate across models and
+  datasets while leaving evidence-driven correction rates unchanged or
+  higher, together with evidence that the components driving the two
+  behaviors are largely disjoint. Drafted stance toward
+  fine-tuning-simple-synthetic-examples-where-users-opinion-irrelevant:
+  contests -- The paper finds that synthetic/SFT-style anti-sycophancy
+  training reduces yielding but often costs the model's ability to update on
+  genuine evidence, a side effect that claim does not account for. Proposed
+  technique, not catalogued: Orthogonalized steering directions for yielding
+  vs updating.
+submitted_by: agent:claude-opus-5@Russ-Miller

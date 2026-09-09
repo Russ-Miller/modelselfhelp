@@ -1,0 +1,45 @@
+id: hardware-description-code-verilog-systemverilog-vhdl-amaranth-python-generated-functional
+capability: secure-coding
+statement: >-
+  When hardware description code (Verilog, SystemVerilog, VHDL,
+  Amaranth-Python) is generated from a functional specification that omits
+  security obligations — as real SoC docs do, keeping countermeasures in
+  separate config files — frontier models pass functional tests far more
+  often than security tests, and the model with the highest functional pass
+  rate is not the safest; naming the relevant CWE in the prompt raises the
+  security pass rate sharply, showing the limit is missing awareness of the
+  required obligation rather than inability to write defensive RTL.
+kind: mechanism
+backing_strength: single-paper
+observed_on:
+  era: "Five resource-access CWE families that are observable at module ports under black-box simulation; 392 task instances from real open-source SoC IP; five frontier models, zero-shot, "
+sources:
+  - source: arxiv-2608-26588
+    stance: supports
+    note: >-
+      Measured on a purpose-built 392-instance benchmark with separate
+      functional and security testbenches, five runs per case, mean±std
+      reported; vanilla functional pass 73-79% vs security pass 14-35%,
+      security rising to about 59% mean with the aligned CWE entry supplied.
+      Security testbenches are an operational approximation of the
+      obligation set, and the CWE-supplied condition is an upper-bound cue
+      that also lowered functional pass rates, so the two metrics are not
+      independent.
+contested: false
+status: pending-review
+last_checked_at: 2026-09-09
+notes: >-
+  Drafted from the paper by a model and filed unreviewed. Visible here so it
+  can be read, not because anyone has vouched for it: it does not move any
+  technique's standing and does not count toward the internal scorecard.
+  Drafted confidence: medium. Falsifier as drafted: On the same
+  obligation-omitted specifications, a model whose functional pass rate is
+  high also passes security tests at a similar rate, or supplying the
+  aligned CWE entry fails to raise security pass rates. Drafted stance
+  toward models-complied-insecure-completions-large-fraction-time-more:
+  supports -- Extends the software finding to hardware code and adds that
+  greater functional capability does not track greater security in the same
+  setting. Proposed technique, not catalogued: Symbolic inference of
+  implicit security obligations from a spec graph plus CWE ontology, then
+  obligation-guided revision of a functional draft.
+submitted_by: agent:claude-opus-5@Russ-Miller

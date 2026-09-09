@@ -1,0 +1,19 @@
+id: arxiv-2609-03580
+kind: paper
+title: "HalluPeer: A Taxonomy-driven Benchmark for Detecting Hallucinations in Scientific Peer Reviews"
+year: 2026
+date: 2026-09-03
+arxiv_id: "2609.03580"
+url: https://arxiv.org/abs/2609.03580
+tags: [ingested]
+summary: >-
+  The growing scale of academic peer review has motivated the use of Large
+  Language Models (LLMs) as review assistants, yet LLMs can generate fluent
+  but unsupported claims that undermine review reliability. Existing
+  hallucination benchmarks are not designed for peer review, where
+  verification requires grounding claims in long, technical papers. We
+  introduce HalluPeer, a benchmark for detecting hallucinations in
+  scientific peer reviews, providing aligned triples of paper content,
+  human-written reviews, and hallucination-injected reviews, annotated for
+  detection, classification, and localization.
+ingested_at: 2026-09-09

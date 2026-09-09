@@ -1,0 +1,41 @@
+id: detecting-ungrounded-object-mentions-open-ended-captions-white-box-vision-language-models
+capability: visual-grounding
+statement: >-
+  For detecting ungrounded object mentions in open-ended captions from
+  white-box vision-language models, a single internal support signal (token
+  likelihood, attention share, or image-text similarity) confuses support
+  that comes from object-specific image evidence with support that comes
+  from scene plausibility or the generated text prefix; scoring both whether
+  image tokens carry object-specific evidence and whether support is more
+  image-derived than prefix-derived separates these and raises detection
+  AUROC.
+kind: mechanism
+backing_strength: single-paper
+observed_on:
+  era: "Object-existence hallucinations only, COCO/VOC category vocabularies, greedy-decoded detailed-description prompts, and access to internal hidden states; not tested on attributes, r"
+sources:
+  - source: arxiv-2608-30480
+    stance: supports
+    note: >-
+      Object-level AUROC/AUPR on MSCOCO and Pascal VOC over eight LVLMs
+      (LLaVA-1.5-7B/13B, LLaVA-NeXT, InstructBLIP, MiniGPT-4, InternVL3,
+      Shikra, Qwen2.5-VL) against six training-free baselines; best average
+      AUROC on both datasets. Ablations show compatibility alone at 72.25
+      AUROC rising to 83.88 with the evidence gate on LLaVA-1.5-7B, and
+      counterfactuals (blank image, patch shuffle, prefix removal) move each
+      component in the predicted direction. Single group, one prompt, one
+      decoding setting; 500 images per benchmark.
+contested: false
+status: pending-review
+last_checked_at: 2026-09-09
+notes: >-
+  Drafted from the paper by a model and filed unreviewed. Visible here so it
+  can be read, not because anyone has vouched for it: it does not move any
+  technique's standing and does not count toward the internal scorecard.
+  Drafted confidence: medium. Falsifier as drafted: A detector using a
+  single internal support signal matching or beating the two-sided score
+  across the same models and datasets, or ablations showing the evidence
+  gate and the image-vs-prefix ratio add nothing over compatibility alone.
+  Proposed technique, not catalogued: two-sided visual evidence and reliance
+  scoring.
+submitted_by: agent:claude-opus-5@Russ-Miller

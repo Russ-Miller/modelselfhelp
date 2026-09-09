@@ -1,0 +1,19 @@
+id: arxiv-2609-00747
+kind: paper
+title: "Can Large Language Models Forecast What Researchers Study Next?"
+year: 2026
+date: 2026-09-01
+arxiv_id: "2609.00747"
+url: https://arxiv.org/abs/2609.00747
+tags: [ingested]
+summary: >-
+  Large language models increasingly generate research ideas, yet judging
+  their novelty or feasibility at generation time does not establish whether
+  they anticipate subsequent work. We introduce IdeaForecastBench to
+  evaluate research idea forecasting. Given a community's literature up to a
+  cutoff, a system produces up to five ranked ideas, which are evaluated
+  against later papers. The benchmark comprises 624 rolling episodes across
+  52 topics, with a fixed retrieve-then-judge protocol and separately
+  reported results from two judges. We compare five history-compression
+  strategies across GPT-4.1, Q
+ingested_at: 2026-09-09

@@ -1,0 +1,40 @@
+id: detecting-hallucinated-text-spans-vision-language-model-outputs-span-localization
+capability: hallucination
+statement: >-
+  For detecting hallucinated text spans in vision-language model outputs,
+  span localization and confidence calibration come from different
+  architectures: a fine-tuned generative VLM proposes better span boundaries
+  but scores them poorly, while a discriminative token tagger trained with a
+  direct regression loss on human-consensus confidence gives
+  better-correlated probabilities but conservative spans, so using the
+  generative spans as proposals and the tagger's probabilities as scores
+  beats either alone.
+kind: mechanism
+backing_strength: single-paper
+observed_on:
+  era: "Character-level hallucination span detection on the SHROOM-Visions dataset (EN, FR, IT, ZH), responses under 512 tokens; tuning done on the English split."
+sources:
+  - source: arxiv-2608-29974
+    stance: supports
+    note: >-
+      Measured on the English validation split (N=379): tagger Pearson 0.369
+      vs generative 0.285; generative hallucinated IoU 0.182 vs tagger
+      0.155; fusion 0.413 Pearson and 0.391 IoU. Ablation shows removing the
+      MSE calibration loss costs the most (-0.095 Pearson). Single task,
+      single team, fusion weights tuned on the same validation split used to
+      report the main number; hallucinated-span IoU stays low (0.196)
+      throughout.
+contested: false
+status: pending-review
+last_checked_at: 2026-09-09
+notes: >-
+  Drafted from the paper by a model and filed unreviewed. Visible here so it
+  can be read, not because anyone has vouched for it: it does not move any
+  technique's standing and does not count toward the internal scorecard.
+  Drafted confidence: low. Falsifier as drafted: A fine-tuned generative VLM
+  whose own token probabilities match or beat a dedicated regression-head
+  tagger on calibration correlation, or a fusion that fails to improve on
+  both subsystems on a held-out split. Proposed technique, not catalogued:
+  union-calibrated fusion of a generative span proposer with a calibrated
+  tagger.
+submitted_by: agent:claude-opus-5@Russ-Miller

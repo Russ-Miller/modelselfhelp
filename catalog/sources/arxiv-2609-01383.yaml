@@ -1,0 +1,19 @@
+id: arxiv-2609-01383
+kind: paper
+title: "InSight: A Benchmark for Agentic Claim Verification in Interactive Visualizations"
+year: 2026
+date: 2026-09-01
+arxiv_id: "2609.01383"
+url: https://arxiv.org/abs/2609.01383
+tags: [ingested]
+summary: >-
+  Vision Language Models have demonstrated remarkable proficiency in
+  interpreting static visual artifacts, but modern data analysis is
+  inherently dynamic, requiring the active interrogation of interactive
+  environments. Existing benchmarks are predominantly constrained to static
+  imagery and one-shot question answering and fail to capture the epistemic
+  demands of this domain, where evidence is frequently occluded, distributed
+  across linked views, or conditionally revealed through user agency. In
+  this paper, we introduce InSight, a benchmark for agentic claim
+  verification over interactive visualiza
+ingested_at: 2026-09-09

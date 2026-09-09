@@ -1,0 +1,37 @@
+arxiv_id: "2609.02396"
+title: "Improving Health Literacy through Lay Summarization of Radiological
+  Reports: An Evaluation of BioNER and Retrieval-Augmented Generation"
+url: https://arxiv.org/abs/2609.02396
+drafted_at: 2026-09-09
+drafted_from: full-text
+model: claude-opus-5
+status: draft — not filed. Review, edit, then move into catalog/ by hand.
+capability: hallucination
+statement: When retrieval for a summarization task pulls definitions by
+  surface term match from a general encyclopedia, ambiguous terms fetch the
+  wrong sense and the model incorporates that unsupported background into its
+  output, lowering claim-level factuality below the no-retrieval baseline even
+  when the prompt tells it to ignore unrelated retrieved content.
+kind: mechanism
+backing_strength: single-paper
+scope_condition: Radiology-report lay summarization with a small general model
+  (Qwen3.5-0.8B) and BioBART-v2-large, retrieval via Wikipedia API
+  first-sentence definitions for terms extracted from the report; few-shot and
+  LoRA fine-tuned settings.
+technique: retrieval-augmented-generation
+proposed_technique: ""
+stance_on_existing: supports
+related_claim_id: retrieval-moves-the-trust-boundary-rather-than-removing-it
+stance_reason: Retrieved definitions were treated as reliable context and
+  injected unsupported content, so grounding shifted the failure into the
+  retrieval channel rather than removing it.
+falsifier: Same pipeline with the same surface-form retrieval showing
+  claim-level factuality (FENICE/SummaC) at or above the no-retrieval
+  baseline, or showing that the factuality drop persists when the retrieved
+  definitions are all sense-correct.
+evidence_note: One paper, 5,000 held-out radiology reports, nine metrics.
+  FENICE fell versus baseline with RAG for both models in few-shot and
+  fine-tuned settings; authors attribute this to manual inspection of
+  wrong-sense Wikipedia matches. Sense ambiguity is diagnosed qualitatively,
+  not isolated by an experiment holding retrieval quality fixed.
+confidence: medium

@@ -1,0 +1,19 @@
+id: arxiv-2608-30441
+kind: paper
+title: "ECLIPSE: Self-Evolving Stealthy Prompt Injection Attack against Long-Horizon Agentic Systems"
+year: 2026
+date: 2026-08-31
+arxiv_id: "2608.30441"
+url: https://arxiv.org/abs/2608.30441
+tags: [ingested]
+summary: >-
+  Recently, large language model (LLM) agents, such as Codex, Claude Code,
+  and OpenClaw, have become capable of planning and executing long-horizon
+  tasks through repeated tool calls. This capability also creates new
+  opportunities for prompt injection. Existing attacks either place the
+  malicious objective in one explicit instruction, making it easy to detect,
+  or distribute the intent across multiple execution stages, making
+  successful completion unreliable. In this work, we propose ECLIPSE, a
+  self-evolving and stealthy prompt-injection framework for long-horizon
+  agentic systems. ECLIPSE combines
+ingested_at: 2026-09-09

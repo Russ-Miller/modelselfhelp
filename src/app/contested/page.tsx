@@ -1,7 +1,7 @@
 import Link from "next/link";
-import { capabilitiesWithDispute, getCapability, getClaim, getSource } from "@/lib/catalog";
+import { capabilitiesWithDispute, getCapability, getClaim, getSource, isPending } from "@/lib/catalog";
 import { candidateUrl, challengers, loadQueue } from "@/lib/queue";
-import { ContestedBadge, KindBadge, StanceBadge, StrengthBadge } from "@/components/badges";
+import { ContestedBadge, KindBadge, PendingBadge, StanceBadge, StrengthBadge } from "@/components/badges";
 
 export const metadata = { title: "Contested" };
 
@@ -91,6 +91,7 @@ export default function ContestedPage() {
                     <div className="mb-1 flex flex-wrap items-center gap-2">
                       <KindBadge kind={claim.kind} />
                       <StrengthBadge strength={claim.backing_strength} />
+                      {isPending(claim) && <PendingBadge />}
                       <ContestedBadge />
                     </div>
                     <Link href={`/claims/${claim.id}`} className="font-medium hover:underline">{claim.statement}</Link>

@@ -1,0 +1,43 @@
+arxiv_id: "2608.24022"
+title: What Guides the Agent? Adjudicating Unauthorized Behavior via
+  Localizing Behavior-Guiding Instructions
+url: https://arxiv.org/abs/2608.24022
+drafted_at: 2026-09-09
+drafted_from: full-text
+model: claude-opus-5
+status: draft — not filed. Review, edit, then move into catalog/ by hand.
+capability: prompt-injection
+statement: For open-weight agents where attention matrices are accessible,
+  detecting injection by asking which context span actually drove the tool
+  call — aggregating attention over the decision tokens and localizing the
+  guiding span, then checking whether that span's provider has authority for
+  the action — catches unauthorized tool invocations at higher true-positive
+  and lower false-positive rates than static scanners that look for
+  malicious-looking text, because benign-looking injected text is only harmful
+  when it is what the model actually attends to.
+kind: mechanism
+backing_strength: single-paper
+scope_condition: Requires white-box access to attention during inference, plus
+  provenance annotations that map token positions to providers; evaluated on
+  tool-metadata poisoning and indirect prompt injection with 7B-14B open
+  models; detector trained per model-dataset pair, with degraded but usable
+  transfer to unseen models.
+technique: ""
+proposed_technique: attention-localized behavior-guiding span adjudication
+stance_on_existing: neither
+related_claim_id: ""
+stance_reason: ""
+falsifier: A study finding that the localized high-attention span does not
+  correspond to the span that changes the tool call under ablation, or that
+  static/content-based scanners match this detection rate at equal
+  false-positive rate on the same benchmarks.
+evidence_note: Measured on MCPTox and InjecAgent across ten agent
+  configurations from six model families, against static scanning (LLM-Guard,
+  LLM Detector), behavior auditing (MCIP), and attribution baselines
+  (MindGuard, TracLLM). Reported average AUROC 0.956 and 0.934 TPR at 0.067
+  FPR; static scanners were near 0.5-0.67 TPR with FPR above 0.36. Detectors
+  are trained per model-dataset pair in the main table, so headline numbers
+  are not a fully unseen-deployment estimate; transfer results are lower.
+  Detection quality falls monotonically with context length (mIoU 0.81 to
+  0.70, TPR 0.97 to 0.86 from short to >2048 tokens).
+confidence: medium

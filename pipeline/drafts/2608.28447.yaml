@@ -1,0 +1,39 @@
+arxiv_id: "2608.28447"
+title: "Learning to Use Tools: Reinforcement Learning for Tool-Integrated
+  Mathematical Reasoning"
+url: https://arxiv.org/abs/2608.28447
+drafted_at: 2026-09-09
+drafted_from: full-text
+model: claude-opus-5
+status: draft — not filed. Review, edit, then move into catalog/ by hand.
+capability: tool-use
+statement: When a calculator-using model is trained with reinforcement
+  learning on verifiable final-answer rewards for an arithmetic search task
+  (Countdown), the gain lands almost entirely at low k — pass@1 rises sharply
+  while pass@16 moves little or falls — because the update can only reinforce
+  correct trajectories the starting policy already samples, and prompt groups
+  with no correct sample supply no gradient.
+kind: mechanism
+backing_strength: single-paper
+scope_condition: Outcome-only (final-answer-verified) on-policy RL — RLOO,
+  RLOO++, GRPO, DAPO — starting from a tool-formatted SFT checkpoint, on the
+  Countdown 3- and 4-number task with a live calculator tool; single model
+  family, single task.
+technique: tool-use-fine-tuning
+proposed_technique: ""
+stance_on_existing: neither
+related_claim_id: ""
+stance_reason: ""
+falsifier: An outcome-only RL run on the same setup that raises pass@16 by as
+  much as pass@1, or that turns prompts with zero correct samples in the base
+  policy into solved prompts without added search or process supervision.
+evidence_note: "Measured on a fresh 1,024-problem held-out Countdown set (plus
+  a noisy 50-problem public split) with 95% bootstrap intervals. Tool-RLOO
+  went 35.8 to 56.6 pass@1 while pass@16 went 73.7 to 74.0; Tool-RLOO++
+  reduced pass@16 below Tool-RLOO. Correctness-distribution analysis over 16
+  samples per prompt shows mass shifting toward fully-correct sets and
+  zero-correct prompts persisting. Tool-DAPO is a partial exception: it
+  improved pass@16 modestly and cut the zero-correct fraction. One task, one
+  base policy, so the mechanism claim rests on the distribution analysis plus
+  cited prior RLVR work rather than on independent replication."
+confidence: medium
