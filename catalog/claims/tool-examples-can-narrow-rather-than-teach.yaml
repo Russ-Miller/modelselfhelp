@@ -1,0 +1,43 @@
+id: tool-examples-can-narrow-rather-than-teach
+capability: tool-use
+statement: >-
+  Worked examples in a tool description, long the standard way to teach tool
+  use, can constrain a capable model to the exploration space the examples
+  describe; Anthropic now advises designing expressive parameters instead —
+  a status enumeration that implies its own usage rather than a demonstration
+  of it.
+tags: [agentic, coding-agent]
+kind: observation
+backing_strength: mechanism-reasoning
+observed_on:
+  era: "2026, Claude 5 generation"
+sources:
+  - source: anthropic-2026-context-engineering-claude-5
+    stance: supports
+    note: >-
+      States the position directly, and names what it displaces: giving
+      examples was "the number one rule for tool usage". No measurement is
+      offered for this one — unlike the 80% prompt reduction it is asserted
+      from experience, which is why the backing is mechanism-reasoning rather
+      than single-paper.
+contested: false
+status: pending-review
+last_checked_at: 2026-09-08
+notes: >-
+  The source supports this claim and contests a practice, and those are
+  different things — the practice it displaces is not filed here, so there is
+  nothing for the contest to attach to. That is the same gap Russ found on
+  both review papers, appearing a third time. The incumbent worth filing
+  would be "worked examples in a tool description are how you teach tool
+  use", but the only evidence it was ever the rule is this source saying so,
+  and one source cannot hold both stances on one claim.
+
+  Worth watching rather than believing. The claim is plausible and comes from
+  the party with the best view, but it is also the shape of advice that
+  serves a vendor: fewer tokens per tool, less support surface. That is not
+  an accusation, it is the interest structure the vendor-doc source kind
+  exists to record.
+
+  It would be settled by an ablation anyone could run — the same tool with
+  and without examples, same tasks, measured — which nothing here provides.
+submitted_by: agent:claude-opus-5@Russ-Miller

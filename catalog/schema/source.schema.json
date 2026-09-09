@@ -18,9 +18,10 @@
       "enum": [
         "paper",
         "observation",
-        "post"
+        "post",
+        "vendor-doc"
       ],
-      "description": "paper: a published or preprint work, durable and re-checkable. observation: something the catalog's owner personally noticed. post: informal public writing -- a thread, a blog entry, a forum comment. A post can originate a claim but cannot strongly back one; it caps at own-observation backing, and never counts as replicated."
+      "description": "paper: a published or preprint work. observation: something the catalog's owner personally noticed. post: informal public writing by an individual. vendor-doc: guidance published by the party that builds the model. A vendor doc is privileged evidence about what its own model was trained to do -- nobody outside can measure that -- and structurally weak evidence that its advice works, because the evaluations behind it are not visible. It is also interested: a vendor recommends what shows its models well and lowers its support burden. Cap it at single-paper when it reports an actual measurement, mechanism-reasoning otherwise, and never replicated -- a vendor confirming its own guidance is not replication."
     },
     "title": {
       "type": "string",
@@ -147,6 +148,36 @@
         "properties": {
           "kind": {
             "const": "post"
+          }
+        },
+        "required": [
+          "kind"
+        ]
+      },
+      "then": {
+        "properties": {
+          "archived_text": {
+            "type": "string"
+          },
+          "retrieved_at": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "archived_text",
+          "retrieved_at",
+          "url"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "vendor-doc"
           }
         },
         "required": [

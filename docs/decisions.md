@@ -953,3 +953,73 @@ long-context-degradation. Both are plausible-sounding and unreviewed, so
 the link is recorded as a comment rather than asserted. Either the drafter
 was wrong or the technique record is too narrow, and that is exactly the
 kind of question review exists to settle.
+
+## 2026-09-08 — Vendor guidance as its own source kind
+Anthropic's context-engineering post for the Claude 5 generation is a good
+source and a badly-shaped one, which is why it gets `kind: vendor-doc`
+rather than being filed as a post.
+
+The evidence profile is genuinely unusual. It is privileged about the
+artifact — nobody outside can measure what a model was trained to do. It is
+structurally weak on efficacy: "no measurable loss on our coding
+evaluations" has no visible baseline, ablation or independent run, which by
+this catalog's own standard is close to unfalsifiable. It is interested, not
+dishonestly but directionally: a vendor recommends what shows its models
+well and lowers its support burden. And it is perishable, scoped to one
+family at one moment.
+
+So: capped at single-paper when it reports a measurement,
+mechanism-reasoning when it only asserts, never replicated. Archived and
+hash-pinned like a post, because marketing pages are rewritten in place.
+
+Worth stating the conflict plainly: this is my vendor writing about me, so
+my read on its authority is not disinterested either.
+
+**The find.** The post names six former best practices as myths, and one of
+them lands on a claim we already hold. It says earlier models were "more
+likely to listen to instructions at the end of their context window than at
+the start" and that the repeats this justified were deleted for Claude 5
+with no measurable loss. So
+`putting-relevant-passages-first-mitigates-position-effects` is now a
+three-way contest: Lost in the Middle measuring the effect, the 2026
+conflict paper showing reordering does not fix it under conflict, and the
+builder saying the effect is being trained away.
+
+The axis had to be rewritten with two dimensions. What the other passages
+are, and which model generation — and they cut across each other, so all
+three positions can hold at once about different models at different times.
+That is the strongest argument yet that this claim is closer to observation
+than to mechanism, and it is recorded in the axis rather than acted on.
+
+**And the stance confusion again, now three times.** My first draft marked
+the vendor doc as contesting a claim it actually supports; what it contests
+is a practice, and the practice is not filed. Validation caught it —
+contests-stance source with contested: false. Same gap Russ hit on both
+review papers. The incumbent worth filing is "worked examples are how you
+teach tool use", but the only evidence it was ever the rule is this source
+saying so, and one source cannot hold both stances on one claim.
+
+Filed pending-review, including the ones I wrote. Exempting my own filings
+from the status would make it a label for other people's work.
+
+**The checker caught my own mistake, twice, which is the best evidence it
+works.** I pinned a byte hash on the vendor page. It reported "changed" on
+the next run — because a related-posts carousel in the page furniture had
+rotated while the article had not moved a word. A byte hash is right for a
+PDF and wrong for a page.
+
+So text sources are now checked by how much of the archived text is still
+published, not by bytes. That found a second mistake: I had stored the
+archive pre-wrapped at 76 characters, so collapsing whitespace produced
+artifacts like "for- claude-5" that could never match the live page.
+Retention read 10% on a page that had not changed at all. Archives are now
+stored one line per paragraph, unwrapped, so both sides normalise the same
+way.
+
+With that fixed a clean page returns 98-99%, and the floor sits at 0.98 —
+tested by injecting one fabricated sentence, which drops it to 96.8% and
+fires. The first floor of 0.95 swallowed exactly the case that matters, a
+vendor quietly rewording one claim.
+
+Third time this project has learned the same lesson: a checker that only
+ever passes is not evidence of anything. Test the failure path.
