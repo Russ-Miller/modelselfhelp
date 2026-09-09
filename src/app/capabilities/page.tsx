@@ -11,10 +11,10 @@ export default function CapabilitiesPage() {
   // Counts come from the same helpers the /open-questions sections use, so a
   // filter here and the section of the same name can never disagree.
   const options = [
-    { value: "contested", label: "Contested", count: getCapabilities().filter((c) => claimsFor(c.id).some((x) => x.contested)).length },
-    { value: "no-technique", label: "No technique catalogued", count: unfixed.filter((u) => u.kind === "no-technique").length },
-    { value: "none-measured", label: "Techniques, none measured", count: unfixed.filter((u) => u.kind === "none-measured").length },
-    { value: "proposed", label: "Proposed", count: getCapabilities().filter(isProposed).length },
+    { value: "contested", hint: "Holds a claim where the evidence disagrees", label: "Contested", count: getCapabilities().filter((c) => claimsFor(c.id).some((x) => x.contested)).length },
+    { value: "no-technique", hint: "No technique here addresses this capability", label: "No technique", count: unfixed.filter((u) => u.kind === "no-technique").length },
+    { value: "none-measured", hint: "Has techniques, but nothing measures whether they work", label: "Untested techniques", count: unfixed.filter((u) => u.kind === "none-measured").length },
+    { value: "proposed", hint: "Added by the pipeline; nobody has endorsed it as a topic", label: "Proposed", count: getCapabilities().filter(isProposed).length },
   ];
   return (
     <div className="space-y-4">

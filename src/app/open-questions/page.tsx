@@ -109,7 +109,7 @@ function UnsolvedEntry({ u }: { u: Unsolved }) {
       <p className="text-sm text-neutral-600 dark:text-neutral-400">{u.capability.summary}</p>
       <p className="mt-2 text-xs text-neutral-500">
         {u.techniques.length === 0 ? (
-          "No technique catalogued for it at all."
+          "No technique here at all."
         ) : (
           <>
             Catalogued but unmeasured:{" "}
@@ -166,7 +166,7 @@ export default function OpenQuestionsPage() {
         {noTechnique.length > 0 && (
           <>
             <h3 className="flex flex-wrap items-baseline gap-2 pt-1 text-sm font-medium text-neutral-700 dark:text-neutral-300">
-              No technique catalogued <span className="font-normal text-neutral-500">{noTechnique.length}</span>
+              No technique <span className="font-normal text-neutral-500">{noTechnique.length}</span>
               <InTab href="/capabilities?filter=no-technique" tab="Capabilities" />
             </h3>
             <p className="max-w-3xl text-xs text-neutral-500">
@@ -178,13 +178,13 @@ export default function OpenQuestionsPage() {
         {noneMeasured.length > 0 && (
           <>
             <h3 className="flex flex-wrap items-baseline gap-2 pt-1 text-sm font-medium text-neutral-700 dark:text-neutral-300">
-              Techniques catalogued, none measured <span className="font-normal text-neutral-500">{noneMeasured.length}</span>
+              Untested techniques <span className="font-normal text-neutral-500">{noneMeasured.length}</span>
               <InTab href="/capabilities?filter=none-measured" tab="Capabilities" />
             </h3>
             <p className="max-w-3xl text-xs text-neutral-500">
-              A technique is catalogued for these, but no claim measures whether it moves the
-              capability. If a study already exists, finding it would close the gap. No new
-              experiment needed.
+              These capabilities have techniques, but nothing here measures whether any of them
+              works. If a study already exists, finding it closes the gap &mdash; no new experiment
+              needed.
             </p>
             <ul className="space-y-3">{noneMeasured.map((u) => <UnsolvedEntry key={u.capability.id} u={u} />)}</ul>
           </>
