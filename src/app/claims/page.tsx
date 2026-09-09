@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ListSearch } from "@/components/list-search";
 import { claimTags, getCapability, getClaims, getSource, isPending, isQuietSource } from "@/lib/catalog";
 import type { SourceLink } from "@/lib/catalog";
 import { CitationSignal, ContestedBadge, KindBadge, PendingBadge, StanceBadge, StrengthBadge } from "@/components/badges";
@@ -38,8 +39,9 @@ export default function ClaimsPage() {
       </p>
       <p className="text-sm text-neutral-500">
         {contestedCount} of {claims.length} are contested, sorted first &mdash;{" "}
-        <Link href="/contested" className="hover:underline">see them with incoming challenges</Link>.
+        <Link href="/claims?filter=contested" className="hover:underline">see them with incoming challenges</Link>.
       </p>
+      <ListSearch noun="claims" placeholder="Filter claims…" />
       <FilterBar options={options}>
       <ul className="space-y-4">
         {claims.map((c) => {
@@ -47,7 +49,11 @@ export default function ClaimsPage() {
           const active = c.sources.filter((s) => { const src = getSource(s.source); return !src || !isQuietSource(src); });
           const quiet = c.sources.filter((s) => { const src = getSource(s.source); return src && isQuietSource(src); });
           return (
-            <li key={c.id} data-tags={claimTags(c)} className="rounded border border-neutral-200 dark:border-neutral-800 p-4">
+            <li key={c.id} data-tags={claimTags(c)}
+              className={c.contested
+                ? "rounded border border-amber-300 bg-amber-50 p-4 dark:border-amber-800 dark:bg-amber-950/20"
+                : "rounded border border-neutral-200 p-4 dark:border-neutral-800"}
+              data-search={`${c.id} ${c.statement} ${c.capability} ${c.technique ?? ""} ${c.backing_strength} ${c.kind}`.toLowerCase()}>
               <div className="flex flex-wrap items-center gap-2 mb-2">
                 <KindBadge kind={c.kind} />
                 <StrengthBadge strength={c.backing_strength} />
@@ -57,6 +63,15 @@ export default function ClaimsPage() {
                 {c.status !== "active" && <span className="text-xs text-neutral-500">&middot; {c.status}</span>}
               </div>
               <Link href={`/claims/${c.id}`} className="font-medium hover:underline">{c.statement}</Link>
+              {c.contested && c.disagreement_axis && (
+                <p className="mt-2 text-sm text-neutral-700 dark:text-neutral-300">
+                  <span className="font-medium">Axis of disagreement</span>
+                  {c.disagreement_axis.is_guess && (
+                    <span className="ml-1 text-xs text-amber-700 dark:text-amber-400">(a guess, not verified)</span>
+                  )}
+                  : {c.disagreement_axis.description}
+                </p>
+              )}
               <div className="mt-2 text-sm text-neutral-500">
                 Capability: <Link href={`/capabilities/${c.capability}`} className="hover:underline">{cap?.label ?? c.capability}</Link>
               </div>

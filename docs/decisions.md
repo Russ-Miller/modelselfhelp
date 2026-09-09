@@ -1170,3 +1170,40 @@ cannot.
 If a signal of "how many people think this matters" turns out to be needed
 later, the design already exists and is better: Importance as an
 evidence-backed claim keyed to a capability and a context, in spec §9.
+
+## 2026-09-09 — Search on every list; /contested folded into /claims
+Three changes from one conversation.
+
+**Type-to-filter on the capability, claim, technique and source lists.**
+Rows carry a `data-search` haystack and a client component marks
+non-matching ones so CSS hides them — the same shape as the filter bar, and
+they compose without either knowing about the other. No second copy of the
+data ships and the pages stay static. Ids are in the haystack because people
+paste them out of a URL.
+
+Two bugs found by testing rather than by reading. The count reported text
+matches, so "6 of 160" could sit above an empty list when a filter was also
+active; it now counts what is actually on screen. And the count went stale
+when a filter changed without the query changing, so a MutationObserver on
+the wrapper triggers a recount.
+
+Third appearance of the setState-in-effect lint error, and this time it
+said something. The count is derived from DOM the effect just touched, so
+routing it back through React state was always the wrong shape. It is
+written straight into a span now. An effect that updates an external system
+and reports what it did is what effects are for.
+
+**/contested is gone.** Everything it showed is a filter on /claims, and a
+whole route to express one predicate was not paying for itself. The amber
+card treatment came across, and so did the axis of disagreement — which was
+the real content of that page, not the list.
+
+Its one unique section, incoming challenges from the queue, moved to
+/queue, where it belongs: those are unreviewed candidates, not claims.
+
+**And a hover card that did not say what it described.** Beside a claim, a
+tooltip reading "very heavily cited in the last 12 months" looks like it
+describes the claim. It describes one source. Both citation cards now name
+what they are about — "This source: <title>" and "How much the field cites
+the sources under this claim". The information was right and the referent
+was missing, which is the kind of thing only a reader notices.

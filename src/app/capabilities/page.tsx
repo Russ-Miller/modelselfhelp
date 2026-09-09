@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ListSearch } from "@/components/list-search";
 import { capabilityTags, getCapabilities, claimsFor, isProposed, unsolvedCapabilities } from "@/lib/catalog";
 import { FilterBar } from "@/components/filter-bar";
 import { ProposedBadge } from "@/components/badges";
@@ -24,6 +25,7 @@ export default function CapabilitiesPage() {
         the ingestion pipeline found several papers converging on the same competence and added
         it, without anyone deciding it belongs. Those are here to be argued with.
       </p>
+      <ListSearch noun="capabilities" placeholder="Filter capabilities…" />
       <FilterBar options={options}>
       <div className="overflow-x-auto">
       <table className="w-full text-sm">
@@ -38,7 +40,8 @@ export default function CapabilitiesPage() {
         </thead>
         <tbody>
           {getCapabilities().map((c) => (
-            <tr key={c.id} data-tags={capabilityTags(c)} className="border-t border-neutral-200 dark:border-neutral-800 align-top">
+            <tr key={c.id} data-tags={capabilityTags(c)}
+              data-search={`${c.label} ${c.summary} ${c.id} ${(c.tags ?? []).join(" ")} ${(c.aliases ?? []).join(" ")}`.toLowerCase()} className="border-t border-neutral-200 dark:border-neutral-800 align-top">
               <td className="py-2 pr-6"><Link href={`/capabilities/${c.id}`} className="font-medium hover:underline">{c.label}</Link>
                 <div className="text-neutral-600 dark:text-neutral-400">{c.summary}</div></td>
               <td className="py-2 pr-6">{(c.tags ?? []).join(", ")}</td>
@@ -47,7 +50,7 @@ export default function CapabilitiesPage() {
                 {(() => {
                   const n = claimsFor(c.id).filter((x) => x.contested).length;
                   return n ? (
-                    <Link href="/contested" className="rounded bg-amber-100 px-1.5 py-0.5 text-xs font-medium text-amber-900 hover:underline dark:bg-amber-900/40 dark:text-amber-200">{n}</Link>
+                    <Link href="/claims?filter=contested" className="rounded bg-amber-100 px-1.5 py-0.5 text-xs font-medium text-amber-900 hover:underline dark:bg-amber-900/40 dark:text-amber-200">{n}</Link>
                   ) : <span className="text-neutral-400">—</span>;
                 })()}
               </td>

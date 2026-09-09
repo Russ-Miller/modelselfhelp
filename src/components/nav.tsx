@@ -9,7 +9,6 @@ const SECTIONS = [
   { href: "/claims", label: "Claims" },
   { href: "/sources", label: "Sources" },
   { href: "/techniques", label: "Techniques" },
-  { href: "/contested", label: "Contested" },
   { href: "/open-questions", label: "Open questions" },
   { href: "/queue", label: "Queue" },
   { href: "/drafts", label: "Drafts" },

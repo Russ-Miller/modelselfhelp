@@ -49,3 +49,10 @@ body {
 [data-filter="unsearched"] [data-tags]:not([data-tags~="unsearched"]) {
   display: none;
 }
+
+/* Type-to-filter within a list (src/components/list-search.tsx). Composes with
+   the filter bar above: a row hidden by either rule stays hidden, and neither
+   needs to know about the other. */
+[data-search][data-hit="0"] {
+  display: none;
+}

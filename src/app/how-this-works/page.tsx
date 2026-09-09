@@ -97,7 +97,7 @@ export default function HowThisWorksPage() {
           <li>
             <strong className="font-medium text-neutral-800 dark:text-neutral-200">Its sources, and their side.</strong>{" "}
             Each source is marked as supporting or contesting. A{" "}
-            <Link href="/contested" className="underline">contested</Link> claim keeps both, plus a
+            <Link href="/claims?filter=contested" className="underline">contested</Link> claim keeps both, plus a
             written guess at why the evidence disagrees.
           </li>
         </ul>
