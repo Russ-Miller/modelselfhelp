@@ -1,0 +1,19 @@
+id: arxiv-2608-30987
+kind: paper
+title: "Stick to What You Know: A Study of Knowledge-Aligned Supervised Fine-Tuning"
+year: 2026
+date: 2026-08-31
+arxiv_id: "2608.30987"
+url: https://arxiv.org/abs/2608.30987
+tags: [ingested]
+summary: >-
+  Supervised fine-tuning (SFT) trains a base language model to imitate
+  target responses, and these targets may require knowledge the base model
+  has not robustly internalized. We study this as a source of hallucinations
+  and frame a group of mitigation methods as \emph{knowledge-aligned SFT}:
+  constraining SFT training targets to the base model's parametric
+  knowledge. Under a unified setup, we compare existing generation-based and
+  estimation-based knowledge-alignment methods and introduce two new
+  variants: Evidence Rewrite, which verifies base-model generations using
+  external evidence, and Recall R
+ingested_at: 2026-09-09

@@ -1,0 +1,19 @@
+id: arxiv-2609-00568
+kind: paper
+title: "WiseSpec: Requirements-Driven Agents for Code Generation"
+year: 2026
+date: 2026-09-01
+arxiv_id: "2609.00568"
+url: https://arxiv.org/abs/2609.00568
+tags: [ingested]
+summary: >-
+  Code generation aims to automatically generate source code from task
+  requirements and has attracted significant attention with the rapid
+  advancement of large language models (LLMs). Despite remarkable progress,
+  LLMs often struggle to generate correct code for complex software
+  engineering tasks because task descriptions are frequently incomplete,
+  ambiguous, or lack critical contextual information. Existing approaches
+  primarily improve the capabilities of coding agents through more
+  sophisticated tools, skills, and workflows, while largely overlooking the
+  quality of the task requirements themselv
+ingested_at: 2026-09-09

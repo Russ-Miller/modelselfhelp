@@ -1,0 +1,19 @@
+id: arxiv-2608-29376
+kind: paper
+title: "Evaluating Tiny Recursive Models Across Training for Code Generation"
+year: 2026
+date: 2026-08-29
+arxiv_id: "2608.29376"
+url: https://arxiv.org/abs/2608.29376
+tags: [ingested]
+summary: >-
+  Code generation increasingly relies on large transformer models, whose
+  capability advances with scale. Yet such a scale is costly, creating
+  demand for small models, especially where data is limited. Recursive
+  models address this by reusing a single block to add depth rather than
+  stacking independent layers. Such models are typically evaluated by
+  teacher-forced fit (next-token loss on ground-truth prefixes) or task
+  accuracy, at a single checkpoint, whereas code is produced by free-running
+  generation, where the model extends its own output. Whether a
+  teacher-forced advantage survives free-runnin
+ingested_at: 2026-09-09

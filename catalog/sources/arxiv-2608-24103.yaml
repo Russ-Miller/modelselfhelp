@@ -1,0 +1,19 @@
+id: arxiv-2608-24103
+kind: paper
+title: "ACE: A Self-Correcting Agentic Canvas Editor for Multi-Slide Presentation Automation"
+year: 2026
+date: 2026-08-25
+arxiv_id: "2608.24103"
+url: https://arxiv.org/abs/2608.24103
+tags: [ingested]
+summary: >-
+  Commercial design platforms increasingly edit documents through large
+  language model (LLM) agents, but two practical problems block reliable
+  deployment: legacy document formats expose only \emph{flat}, absolutely
+  positioned elements, so agents must recompute coordinates and routinely
+  break layouts; and design has no unique ground truth, so
+  diff-against-reference metrics penalize valid-but-different outputs. We
+  present \textbf{ACE}, an agentic canvas editor over a \emph{hierarchical
+  scene-graph} with a presentation-specialized action space (98 tools),
+  paired with \textbf{CARE}, a content-aware
+ingested_at: 2026-09-09

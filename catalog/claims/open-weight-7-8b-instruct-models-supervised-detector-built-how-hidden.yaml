@@ -1,0 +1,39 @@
+id: open-weight-7-8b-instruct-models-supervised-detector-built-how-hidden
+capability: hallucination
+statement: >-
+  In open-weight 7-8B instruct models, a supervised detector built on how
+  hidden states change between adjacent layers separates factually wrong
+  from correct answers better than a probe on any single layer, and
+  shuffling the layer order destroys most of the signal — so the ordering of
+  the depth trajectory, not just the content of one layer, carries the
+  information.
+kind: mechanism
+backing_strength: single-paper
+observed_on:
+  era: "Requires white-box access to intermediate activations and labelled data to train the scoring head and calibrator; evaluated on English closed-book QA and dialogue (TruthfulQA, Halu"
+sources:
+  - source: arxiv-2608-27165
+    stance: supports
+    note: >-
+      Single paper, single author, author-verified numbers. On
+      Llama-3-8B/TruthfulQA the full method reports 75.5% AUROC vs 66.8% for
+      the best single layer, 66.4% for a matched final-layer MLP, and 58.3%
+      with shuffled layer order; baselines include logit entropy,
+      perplexity, spectral geometry, semantic entropy and an NLI verifier.
+      Transfer to other backbones and datasets loses a few points. No
+      independent replication, and the detector's advantage over the
+      multi-sample baselines is small enough to be within plausible noise
+      given no error bars.
+contested: false
+status: pending-review
+last_checked_at: 2026-09-09
+notes: >-
+  Drafted from the paper by a model and filed unreviewed. Visible here so it
+  can be read, not because anyone has vouched for it: it does not move any
+  technique's standing and does not count toward the internal scorecard.
+  Drafted confidence: low. Falsifier as drafted: A replication where a probe
+  on the best single layer, or a matched-size head on the final layer,
+  matches the cross-layer transition detector's AUROC, or where shuffling
+  layer order leaves accuracy roughly unchanged. Proposed technique, not
+  catalogued: Inter-layer transition-divergence hallucination probe.
+submitted_by: agent:claude-opus-5@Russ-Miller

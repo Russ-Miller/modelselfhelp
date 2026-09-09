@@ -67,3 +67,72 @@ Drafting 66 of 66 candidate(s) with claude-opus-5
 2608.29606 :: Agent Zero Memory: Provenance-Aware Long-Term Memory for L
   drafted from full-text -> pipeline/drafts/2608.29606.yaml
 2608.29307 :: Detecting and Repairing Hallucinations in Retrieval-Augmen
+  drafted from abstract -> pipeline/drafts/2608.29307.yaml
+2608.29198 :: How Identity and Opinion Shape Political Sycophancy in LLM
+  drafted from full-text -> pipeline/drafts/2608.29198.yaml
+2608.29974 :: SpanCalib-VLM: Calibrated Hallucination Span Detection in 
+  drafted from full-text -> pipeline/drafts/2608.29974.yaml
+2608.26511 :: Sycophancy Suppression Can Impair Rational Updating: Anti-
+  drafted from full-text -> pipeline/drafts/2608.26511.yaml
+2608.25939 :: XREPOTEST: Benchmarking Multilingual Repository-Level Unit
+  drafted from full-text -> pipeline/drafts/2608.25939.yaml  [1 problem(s)]
+2608.29352 :: Cross-Relational Preference Learning for Better LLM Instru
+  drafted from full-text -> pipeline/drafts/2608.29352.yaml
+2608.29092 :: EviAnchor: Mitigating Hallucinations in Large Vision-Langu
+  drafted from full-text -> pipeline/drafts/2608.29092.yaml
+2608.28411 :: LongPIBench: A Long-Context Benchmark for Prompt Injection
+  drafted from full-text -> pipeline/drafts/2608.28411.yaml
+2608.27496 :: ROPE: Routed Origin Policy Enforcement against Indirect Pr
+  drafted from full-text -> pipeline/drafts/2608.27496.yaml
+2608.25529 :: Video-IFBench: Evaluating Instruction Following of Multimo
+  drafted from full-text -> pipeline/drafts/2608.25529.yaml
+2608.25667 :: AI Slop and Hallucinations in Vulnerability Assessment: A 
+  drafted from full-text -> pipeline/drafts/2608.25667.yaml
+2608.31079 :: Sycophantic Agreement Transfers with Neutral Data via Cont
+  drafted from full-text -> pipeline/drafts/2608.31079.yaml
+2609.00492 :: The Privacy-Hallucination Tradeoff in Differentially Priva
+  drafted from full-text -> pipeline/drafts/2609.00492.yaml
+2608.26199 :: Benchmarking AI Agents for Hardware Design Automation via 
+  drafted from full-text -> pipeline/drafts/2608.26199.yaml
+2608.28476 :: ContextPilot: Teaching Agents for Proactive Context Manage
+  drafted from full-text -> pipeline/drafts/2608.28476.yaml
+2608.25662 :: Overview of SHROOM-Visions 2026: A Shared Task on Hallucin
+  drafted from full-text -> pipeline/drafts/2608.25662.yaml
+2608.30703 :: SingProbe Technical Report
+  drafted from full-text -> pipeline/drafts/2608.30703.yaml
+2609.00067 :: Do Multimodal LLMs See Before They Read? Diagnosing Contex
+  drafted from full-text -> pipeline/drafts/2609.00067.yaml
+2608.28833 :: Evaluating the Hidden Costs of Personalization in Large La
+  drafted from full-text -> pipeline/drafts/2608.28833.yaml
+2608.29376 :: Evaluating Tiny Recursive Models Across Training for Code 
+  drafted from full-text -> pipeline/drafts/2608.29376.yaml
+2608.29016 :: Towards Fully Automated Medical Imaging Code Generation vi
+  drafted from full-text -> pipeline/drafts/2608.29016.yaml
+2609.00747 :: Can Large Language Models Forecast What Researchers Study 
+  drafted from full-text -> pipeline/drafts/2609.00747.yaml
+2609.02731 :: RVSD: Retrieval Vision Sparse Decoding for Mitigating Visu
+  drafted from full-text -> pipeline/drafts/2609.02731.yaml
+2609.02679 :: From Tokens to Semantics: Leveraging Complementary Signals
+  drafted from full-text -> pipeline/drafts/2609.02679.yaml
+2609.02265 :: CAPTURE: Disentangling Preference Drift from Memory Poison
+  drafted from full-text -> pipeline/drafts/2609.02265.yaml
+2609.02396 :: Improving Health Literacy through Lay Summarization of Rad
+  drafted from full-text -> pipeline/drafts/2609.02396.yaml
+2609.03267 :: Refusing the Impossible: A Taxonomy and Benchmark for Code
+  drafted from full-text -> pipeline/drafts/2609.03267.yaml
+2609.03588 :: KC-Bench: A Dynamic Interactive Benchmark for Evaluating K
+  drafted from full-text -> pipeline/drafts/2609.03588.yaml
+2609.04131 :: Beyond Retrieval: Progressive Latent Memory Evolution for 
+  drafted from full-text -> pipeline/drafts/2609.04131.yaml
+2609.03580 :: HalluPeer: A Taxonomy-driven Benchmark for Detecting Hallu
+  drafted from full-text -> pipeline/drafts/2609.03580.yaml
+2609.03148 :: Large Language Models in Resolving Contextual Knowledge Co
+  drafted from full-text -> pipeline/drafts/2609.03148.yaml
+2609.03156 :: Compound Prompt Constraints in LLM Code Generation: A Fact
+  drafted from full-text -> pipeline/drafts/2609.03156.yaml
+2606.21666 :: Hallucination Is Generative Memory With Its Verifier Turne
+  drafted from full-text -> pipeline/drafts/2606.21666.yaml
+
+tokens: 1739143 in / 46702 out   cost: $9.8633
+
+Drafts are NOT catalog content. Read pipeline/drafts/, edit, then file by hand.

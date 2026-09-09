@@ -1,0 +1,38 @@
+id: partially-observable-text-environments-alfworld-scienceworld-letting-llm-agent
+capability: state-tracking
+statement: >-
+  In partially observable text environments (ALFWorld, ScienceWorld),
+  letting an LLM agent query an externally maintained state estimate that
+  keeps an explicit distribution over unobserved object locations raises
+  task success more than querying a deterministic memory of what has already
+  been observed, and the gain shrinks to near zero on a frontier model that
+  already nearly saturates the benchmark.
+kind: observation
+backing_strength: single-paper
+observed_on:
+  era: "Text-based household/science task environments where the only uncertainty is object location and the state space, prior and update rule are hand-specified; agents run under ReAct a"
+sources:
+  - source: arxiv-2609-00455
+    stance: supports
+    note: >-
+      Measured success rate and steps on unseen splits of two text
+      benchmarks, three models x two agent scaffolds, three runs (one for
+      Sonnet). Belief-only beat base agent and beat a memory-only ablation
+      on ALFWorld for Llama and Qwen; Sonnet showed little or no performance
+      change. Belief accuracy is hand-engineered from the game engine's own
+      priors, so the result isolates the value of the interface, not whether
+      such a belief can be learned.
+contested: false
+status: pending-review
+last_checked_at: 2026-09-09
+notes: >-
+  Drafted from the paper by a model and filed unreviewed. Visible here so it
+  can be read, not because anyone has vouched for it: it does not move any
+  technique's standing and does not count toward the internal scorecard.
+  Drafted confidence: medium. Falsifier as drafted: An evaluation where the
+  memory-only variant (observed locations, generic 'not yet observed' reply)
+  matches the belief variant's success rate on the same tasks and models, or
+  where belief access gives no gain over the base agent for small open
+  models. Proposed technique, not catalogued: Expose a maintained belief
+  distribution to the agent as a queryable interface.
+submitted_by: agent:claude-opus-5@Russ-Miller

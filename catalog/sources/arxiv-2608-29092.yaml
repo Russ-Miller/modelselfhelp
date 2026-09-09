@@ -1,0 +1,19 @@
+id: arxiv-2608-29092
+kind: paper
+title: "EviAnchor: Mitigating Hallucinations in Large Vision-Language Models via Regional Visual Evidence Compensation"
+year: 2026
+date: 2026-08-29
+arxiv_id: "2608.29092"
+url: https://arxiv.org/abs/2608.29092
+tags: [ingested]
+summary: >-
+  Large vision-language models (LVLMs) frequently generate content
+  unsupported by visual inputs. Preliminary experiments show that visual
+  evidence is primarily incorporated into answer-side representations in
+  early-to-middle decoder layers, while its direct influence progressively
+  weakens in later layers. This attenuation suggests that visual evidence
+  acquired earlier may be insufficiently utilized during subsequent
+  generation. Based on this observation, we propose EviAnchor, a
+  training-free and single-branch inference framework that preserves and
+  reactivates visual evidence throughout generatio
+ingested_at: 2026-09-09

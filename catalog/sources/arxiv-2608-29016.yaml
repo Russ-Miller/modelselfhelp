@@ -1,0 +1,19 @@
+id: arxiv-2608-29016
+kind: paper
+title: "Towards Fully Automated Medical Imaging Code Generation via Validation-based Context Engineering"
+year: 2026
+date: 2026-08-29
+arxiv_id: "2608.29016"
+url: https://arxiv.org/abs/2608.29016
+tags: [ingested]
+summary: >-
+  Large language models (LLMs) have demonstrated considerable promise in
+  program generation for small-scale and conventional application
+  development; however, they remain limited when applied to complex,
+  domain-specific tasks such as medical image processing. General-purpose
+  models lack explicit domain knowledge and robust validation mechanisms to
+  ensure correctness, often requiring substantial human intervention to
+  produce reliable processing pipelines. To address these limitations, we
+  propose AutoMedImg, a multi-agent framework for fully automated medical
+  image processing code generation. Auto
+ingested_at: 2026-09-09

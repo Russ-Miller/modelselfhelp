@@ -1,0 +1,40 @@
+arxiv_id: "2608.25939"
+title: "XREPOTEST: Benchmarking Multilingual Repository-Level Unit Test
+  Generation for Large Language Models"
+url: https://arxiv.org/abs/2608.25939
+drafted_at: 2026-09-09
+drafted_from: full-text
+model: claude-opus-5
+status: draft — not filed. Review, edit, then move into catalog/ by hand.
+capability: evaluation-validity
+statement: When grading LLM-generated unit tests by pass rate and line
+  coverage alone, a share of passing test suites never directly call the
+  function under test — they reach it through wrappers, mocks, or unrelated
+  public APIs — so pass rate overstates test quality, and this gap widens
+  under agentic repository-access workflows and richer file-level context.
+kind: observation
+backing_strength: single-paper
+scope_condition: Repository-level unit test generation for focal functions in
+  Rust, Go, Julia, PHP and Ruby; 14 models including Claude 4.5, GPT-5.2,
+  DeepSeek V4-pro; effect size varies strongly by language.
+technique: ""
+proposed_technique: invocation-rate metric for generated tests
+stance_on_existing: neither
+related_claim_id: ""
+stance_reason: ""
+falsifier: Show that on the same benchmark, tests scored as passing almost
+  always contain a direct call to the focal function, and that agentic or
+  file-context settings do not lower direct-invocation rates while raising
+  pass rate.
+evidence_note: Measured on a 3,642-function benchmark with containerized
+  execution. Reported 9.7% of pass-rate-passing suites failing invocation
+  checks overall, concentrated in Rust (28.3%) and Ruby (19.2%) and near zero
+  in Go/PHP. File-level context on Ruby dropped invocation rate from 85.6% to
+  53.2% across three models; a headless Claude Code agent on PHP raised pass
+  rate while invocation rate fell to 27.6%. Invocation is computed by AST
+  call-identifier matching, so it can miss indirect-but-intentional invocation
+  and cannot itself judge assertion quality; agentic numbers come from a small
+  stratified subset.
+confidence: medium
+problems:
+  - "figures not in the source: 53.2%"

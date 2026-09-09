@@ -1,0 +1,33 @@
+id: video-understanding-instruction-contains-several-conditional-branches-model-must-pick
+capability: procedure-following
+statement: >-
+  When a video-understanding instruction contains several conditional
+  branches and the model must pick the branch matching what the video shows,
+  both proprietary and open multimodal models pick correctly far more often
+  when the correct branch is listed first, and accuracy falls as the correct
+  branch moves later in the list.
+kind: observation
+backing_strength: single-paper
+observed_on:
+  era: "Multimodal LLMs given video plus a selection-style instruction with three conditions plus an else branch; measured as task pass rate with the branch set held fixed and only the cor"
+sources:
+  - source: arxiv-2608-25529
+    stance: supports
+    note: >-
+      Controlled ablation on one subset of a new 1.5K-sample benchmark: same
+      conditions, correct branch moved to position 1, 2 or 3, seven
+      representative models. Drops are large for some (one model from 70.6
+      to 29.4) and one model does not follow the pattern. Single benchmark,
+      single video-instruction format; no test of whether the bias is
+      representational or decoding-level.
+contested: false
+status: pending-review
+last_checked_at: 2026-09-09
+notes: >-
+  Drafted from the paper by a model and filed unreviewed. Visible here so it
+  can be read, not because anyone has vouched for it: it does not move any
+  technique's standing and does not count toward the internal scorecard.
+  Drafted confidence: medium. Falsifier as drafted: Running the same
+  controlled position swap on a broader set of models and finding pass rate
+  flat across branch positions, or higher for later positions.
+submitted_by: agent:claude-opus-5@Russ-Miller

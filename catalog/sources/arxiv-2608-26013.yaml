@@ -1,0 +1,19 @@
+id: arxiv-2608-26013
+kind: paper
+title: "VISA: Agentic Self-Evolving Data Synthesis for Multimodal Instruction Following"
+year: 2026
+date: 2026-08-26
+arxiv_id: "2608.26013"
+url: https://arxiv.org/abs/2608.26013
+tags: [ingested]
+summary: >-
+  Multimodal instruction-following models require training data that is
+  accurate, diverse, verifiable, and challenging. Existing synthesis
+  pipelines typically follow a one-pass generate-and-filter paradigm,
+  discarding feedback from failed samples, verifier outcomes, and
+  target-model errors. We present VISA (Visual Instruction Synthesis Agent),
+  an agentic framework that reformulates multimodal instruction synthesis as
+  a self-evolving loop. At each round, VISA analyzes an image to filter
+  incompatible constraints and discover new verifiable ones, samples
+  diversity- and difficulty-aware constraint s
+ingested_at: 2026-09-09

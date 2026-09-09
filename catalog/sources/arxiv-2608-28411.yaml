@@ -1,0 +1,19 @@
+id: arxiv-2608-28411
+kind: paper
+title: "LongPIBench: A Long-Context Benchmark for Prompt Injection"
+year: 2026
+date: 2026-08-28
+arxiv_id: "2608.28411"
+url: https://arxiv.org/abs/2608.28411
+tags: [ingested]
+summary: >-
+  Prompt injection attacks pose a serious security risk to large language
+  models in real-world applications. However, existing prompt injection
+  benchmarks primarily focus on short-context inputs, leaving the attacks
+  and defenses in long-context settings largely unexplored. This gap leads
+  to a substantial overestimation of the effectiveness of current defenses.
+  In this paper, we bridge the gap by introducing LongPIBench, a
+  long-context benchmark for prompt injection covering 4 realistic
+  application scenarios: paper peer review, resume screening, code review,
+  and email summary. For each scenario,
+ingested_at: 2026-09-09

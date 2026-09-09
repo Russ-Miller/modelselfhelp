@@ -1,0 +1,39 @@
+id: llm-based-asr-steering-decoding-toward-acoustic-evidence-only-helps
+capability: hallucination
+statement: >-
+  In LLM-based ASR, steering decoding toward acoustic evidence only helps if
+  candidates are first restricted to tokens within a small likelihood margin
+  of the greedy token: unconstrained selection by an acoustic compatibility
+  score removes hallucinated outputs but destroys transcription accuracy
+  through unbounded insertions, while the constrained version removes a
+  large share of hallucinations at near-zero WER/CER cost.
+kind: mechanism
+backing_strength: single-paper
+observed_on:
+  era: "Four open LLM-based ASR systems (Qwen3-ASR-1.7B, Qwen2-Audio-7B Base, Kimi-Audio-7B-Instruct, GLM-ASR-Nano) on two 500-utterance stress suites built to elicit code-switching and in"
+sources:
+  - source: arxiv-2608-30776
+    stance: supports
+    note: >-
+      Paired greedy-vs-LCAR decoding on 8800 frozen detector-positive
+      records plus negative controls, with an LLM detector whose precision
+      was human-audited at 93.3% on a 400-case stratified sample. Ablation
+      on 800 Qwen3 positives isolates the likelihood constraint: acoustic-
+      only selection gives comparable overall hallucination fixing but
+      >600/1000 point WER/CER increases. Normal-speech effects measured on
+      LibriSpeech test-clean and AISHELL2. Gains vary by model and suite;
+      [truncated]
+contested: false
+status: pending-review
+last_checked_at: 2026-09-09
+notes: >-
+  Drafted from the paper by a model and filed unreviewed. Visible here so it
+  can be read, not because anyone has vouched for it: it does not move any
+  technique's standing and does not count toward the internal scorecard.
+  Drafted confidence: medium. Falsifier as drafted: An unconstrained
+  acoustic-reranking decoder that matches or beats the
+  likelihood-constrained version on both hallucination removal and
+  standard-test WER/CER, or a constrained variant whose hallucination
+  reduction comes with large WER regressions on normal speech. Proposed
+  technique, not catalogued: likelihood-constrained acoustic reranking.
+submitted_by: agent:claude-opus-5@Russ-Miller

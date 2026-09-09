@@ -1,0 +1,43 @@
+id: open-ended-editing-tasks-no-unique-correct-output-multi-slide-design
+capability: self-repair
+technique: external-feedback-repair
+statement: >-
+  In open-ended editing tasks with no unique correct output (multi-slide
+  design editing), a separate judge model that scores the structural diff
+  between the original and edited artifact against the instruction, and
+  returns its critique verbatim as the next-turn instruction, raises
+  instruction-following over a single pass, but the gain is selective: most
+  tasks pass on the first attempt, and a minority of the ones that enter the
+  loop get worse unless an earlier iteration is restored when the judge's
+  own score declines.
+kind: observation
+backing_strength: single-paper
+observed_on:
+  era: "94 multi-slide slide-editing tasks over a hierarchical scene graph; claude-sonnet-4-6 and gpt-5.5 backbones; gpt-5.5 as in-loop judge; at most 3 iterations; judge sees the origin d"
+sources:
+  - source: arxiv-2608-24103
+    stance: supports
+    note: >-
+      Measured on a 94-task benchmark adapted from PPTArena: IF 4.23 vs
+      3.81 for a same-backbone HTML agent (paired Wilcoxon p=.010); self-
+      correction adds +0.41 IF over single-pass ACE; 35/53 tasks halt at
+      iteration 1, and of the 18 entering the loop 13 improve, 2
+      unchanged, 3 regress by at most 1 point, with strict-peak rollback
+      removing all regressions. Circularity is bounded but not eliminated:
+      out-of-loop judges retain about two-thirds of the gain (+0.61, +0.56
+      IF), and 26 blind raters prefer self-corrected output 81% of decided
+      cases. [truncated]
+contested: false
+status: pending-review
+last_checked_at: 2026-09-09
+notes: >-
+  Drafted from the paper by a model and filed unreviewed. Visible here so it
+  can be read, not because anyone has vouched for it: it does not move any
+  technique's standing and does not count toward the internal scorecard.
+  Drafted confidence: medium. Falsifier as drafted: Running the same loop
+  with the judge scoring an edit diff shows no instruction-following gain
+  over single-pass, or the gain disappears under judges outside the loop and
+  under blind human comparison, or regressions are as common as improvements
+  among tasks entering the loop. Proposed technique, not catalogued:
+  reference-free instruction-following judge critique as repair signal.
+submitted_by: agent:claude-opus-5@Russ-Miller

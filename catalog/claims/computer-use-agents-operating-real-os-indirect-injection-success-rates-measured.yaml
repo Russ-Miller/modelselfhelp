@@ -1,0 +1,36 @@
+id: computer-use-agents-operating-real-os-indirect-injection-success-rates-measured
+capability: prompt-injection
+statement: >-
+  For computer-use agents operating on a real OS, indirect-injection success
+  rates measured with a fixed hand-written injection template understate
+  vulnerability, because an attacker that adapts phrasing from the agent's
+  own refusal trajectories can reach substantial success on models the fixed
+  template never penetrates.
+kind: observation
+backing_strength: single-paper
+observed_on:
+  era: "Black-box attacker controlling a forum comment the agent reads; 50 web-to-OS tasks from RedTeamCUA; three frontier CUAs (Claude Opus 4.6/4.8, Gemini 3.5 Flash); success requires bo"
+sources:
+  - source: arxiv-2608-30207
+    stance: supports
+    note: >-
+      Measured on 50 sampled tasks per model, three models. Baseline is
+      RedTeamCUA's single urgency-laden template: 16%/4%/0% versus
+      54%/24%/28% for the adaptive pipeline. An ablation separates
+      compositional search from the feedback loop, and two principles
+      discovered on Opus 4.6 raised success on the two unseen models. Small
+      task sample; attacker and analyzer are one model (Grok-4.3), so
+      results are not shown to be attacker-independent.
+contested: false
+status: pending-review
+last_checked_at: 2026-09-09
+notes: >-
+  Drafted from the paper by a model and filed unreviewed. Visible here so it
+  can be read, not because anyone has vouched for it: it does not move any
+  technique's standing and does not count toward the internal scorecard.
+  Drafted confidence: medium. Falsifier as drafted: An adaptive,
+  feedback-driven injection search that fails to beat the fixed template on
+  models where the template scores near zero, or whose gains vanish under
+  the same deterministic joint-success oracle. Proposed technique, not
+  catalogued: Failure-driven attack principle discovery.
+submitted_by: agent:claude-opus-5@Russ-Miller

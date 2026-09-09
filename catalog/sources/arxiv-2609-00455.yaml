@@ -1,0 +1,19 @@
+id: arxiv-2609-00455
+kind: paper
+title: "Towards a Belief-Based World Model for LLM Agents"
+year: 2026
+date: 2026-08-31
+arxiv_id: "2609.00455"
+url: https://arxiv.org/abs/2609.00455
+tags: [ingested]
+summary: >-
+  Large language models (LLMs) are being used as policies for autonomous
+  decision-making and planning in many domains. Despite their strong
+  reasoning capabilities, LLMs struggle with long-horizon tasks, especially
+  under partial observability. World models are a promising way to enhance
+  policy performance, both during training and inference. During inference,
+  agents currently use world models to simulate the consequences of
+  candidate actions before committing to an action, which can improve
+  decision-making. However, we argue that simulation alone is an incomplete
+  interface for decision-making und
+ingested_at: 2026-09-09

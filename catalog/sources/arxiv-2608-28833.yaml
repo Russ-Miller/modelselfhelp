@@ -1,0 +1,19 @@
+id: arxiv-2608-28833
+kind: paper
+title: "Evaluating the Hidden Costs of Personalization in Large Language Models"
+year: 2026
+date: 2026-08-28
+arxiv_id: "2608.28833"
+url: https://arxiv.org/abs/2608.28833
+tags: [ingested]
+summary: >-
+  While Large language models (LLMs) incorporate user personalization
+  signals to improve usability and helpfulness, they increasingly shift from
+  providing balanced, informative responses toward optimizing for user
+  satisfaction when conditioned on personal context such as conversation
+  history, inferred preferences, and user profiles. Specifically, we
+  identify three emerging risks: (1) irrelevant personalization, where
+  models reference personal information in unnecessary contexts; (2)
+  preference narrowing, where models reinforce informational echo chambers;
+  and (3) sycophantic bias, where models a
+ingested_at: 2026-09-09

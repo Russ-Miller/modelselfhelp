@@ -1,0 +1,41 @@
+id: structured-long-term-memory-substrate-indexes-retrieval-control-logic-held
+capability: long-term-memory
+technique: hierarchical-memory
+statement: >-
+  When a structured long-term memory substrate (indexes, retrieval, control
+  logic) is held fixed and only the backbone LLM is swapped, accuracy on
+  multi-session memory benchmarks like LongMemEval and LoCoMo moves by a few
+  points while per-query cost varies by roughly an order of magnitude, so
+  recall quality in these settings is set mostly by the memory and retrieval
+  design rather than by model choice.
+kind: observation
+backing_strength: single-paper
+observed_on:
+  era: "Judged answer accuracy on LongMemEval (500 questions) and LoCoMo (1,540 questions), eight backbones from three vendors, single run under each benchmark's LLM-judge protocol, with t"
+sources:
+  - source: arxiv-2608-29606
+    stance: supports
+    note: >-
+      Measured: eight backbones on LongMemEval span 92.20-95.60% with ~30x
+      cost spread, and a similar pattern on LoCoMo (though gpt-5.4-mini
+      falls to 81.10% there, which the summary claim understates). The
+      backbone comparison is internally controlled; the cross-system
+      comparisons to prior memory systems use best publicly reported numbers
+      under different harnesses. Both benchmarks are described by the
+      authors as near-saturated, so the narrow spread may partly reflect a
+      ceiling. No ablation removing individual memory stores, so the
+      attribution to the memory substrate is argued rather than isolated.
+contested: false
+status: pending-review
+last_checked_at: 2026-09-09
+notes: >-
+  Drafted from the paper by a model and filed unreviewed. Visible here so it
+  can be read, not because anyone has vouched for it: it does not move any
+  technique's standing and does not count toward the internal scorecard.
+  Drafted confidence: low. Falsifier as drafted: A controlled swap of
+  backbones over the same fixed memory substrate that produces a large
+  accuracy spread (comparable to the gap between memory architectures), or
+  evidence that the small spread here comes from benchmark saturation rather
+  than from retrieval doing the work. Proposed technique, not catalogued:
+  provenance-locked multi-store agent memory.
+submitted_by: agent:claude-opus-5@Russ-Miller

@@ -1,0 +1,19 @@
+id: arxiv-2608-28058
+kind: paper
+title: "Dynamic Alignment Compensation for Hallucination Mitigation in Large Vision-Language Models"
+year: 2026
+date: 2026-08-28
+arxiv_id: "2608.28058"
+url: https://arxiv.org/abs/2608.28058
+tags: [ingested]
+summary: >-
+  Large Vision-Language Models (LVLMs) remain prone to hallucinations,
+  producing responses that are irrelevant or inconsistent with the
+  multimodal input. Existing mitigation methods mainly rely on external
+  supervision, output calibration, or attention regulation, leaving the
+  internal representation dynamics of autoregressive generation
+  underexplored. We identify an inference-time failure mode in which
+  cross-modal representations degrade across decoder layers and drift across
+  generation steps, destabilizing token prediction and increasing
+  hallucination risk. We propose \emph{Dynamic Alignment Com
+ingested_at: 2026-09-09

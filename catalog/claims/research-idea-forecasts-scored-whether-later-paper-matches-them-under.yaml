@@ -1,0 +1,38 @@
+id: research-idea-forecasts-scored-whether-later-paper-matches-them-under
+capability: evaluation-validity
+statement: >-
+  When research-idea forecasts are scored by whether a later paper matches
+  them under an LLM judge rubric, higher scores partly reflect broader, less
+  specific ideas: the backbone with the higher hit rate also produced
+  measurably more general forecasts and had more retrieved candidate papers
+  pass the gate, and tightening the specificity threshold does not separate
+  the two.
+kind: mechanism
+backing_strength: single-paper
+observed_on:
+  era: "Open-ended generation scored by retrieve-then-judge matching against a future document stream; shown for GPT-4.1 vs Qwen2.5 backbones on 624 topic-cutoff episodes of arXiv cs.ML li"
+sources:
+  - source: arxiv-2609-00747
+    stance: supports
+    note: >-
+      Measured: outcome-blind generality on 832 forecasts (one per topic per
+      config), Qwen2.5-7B Summary generality 6.58 vs GPT-4.1 3.58;
+      forecast-level match rate rises 0.205 to 0.406 from lowest to highest
+      generality bin, correlation 0.17; passing candidates among ten
+      retrieved 0.565 for GPT-4.1 vs 1.470/1.642 for Qwen2.5. Association
+      only, no causal control; the authors say the S>=3 gate does not
+      control intrinsic generality, and generality itself is rated by an
+      LLM.
+contested: false
+status: pending-review
+last_checked_at: 2026-09-09
+notes: >-
+  Drafted from the paper by a model and filed unreviewed. Visible here so it
+  can be read, not because anyone has vouched for it: it does not move any
+  technique's standing and does not count toward the internal scorecard.
+  Drafted confidence: medium. Falsifier as drafted: An outcome-blind
+  specificity rating that shows no association between forecast breadth and
+  match rate, or a controlled intervention holding specificity fixed that
+  reproduces the same score gap between backbones. Proposed technique, not
+  catalogued: Outcome-blind generality rating alongside match-rate scoring.
+submitted_by: agent:claude-opus-5@Russ-Miller

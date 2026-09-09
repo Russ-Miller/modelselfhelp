@@ -1,0 +1,36 @@
+id: vlm-agents-must-verify-claims-against-interactive-visualizations-where
+capability: fact-verification
+statement: >-
+  When VLM agents must verify claims against interactive visualizations
+  where no claim is answerable from the initial viewport, giving them an
+  interaction budget of ten actions does not reliably beat answering
+  immediately from the first screenshot — some models score slightly lower
+  with interaction — because partial, unplanned exploration leaves the model
+  with enough evidence to abandon its prior but not enough to replace it.
+kind: observation
+backing_strength: single-paper
+observed_on:
+  era: "Screenshot-only agents (no DOM), multi-view Vega-Lite notebooks, three-way True/False/NEI labels, 500-claim stratified subset; ablation run at budgets of 1, 10 and 25 actions for o"
+sources:
+  - source: arxiv-2609-01383
+    stance: supports
+    note: >-
+      Measured on 500 claims across fourteen model configurations. Gemini
+      3.5 Flash: 44.2% at one action, 41.6% at ten, 50.0% at twenty-five;
+      Qwen 3.5 27B 46.2% vs 45.0%; Gemma 4 31B 45.4% vs 47.2%. Best overall
+      was GPT-5.5 at 57.2% against a 33.3% chance baseline. The budget
+      ablation covers only three models, and gaps are within a few points,
+      so the dip is suggestive rather than established.
+contested: false
+status: pending-review
+last_checked_at: 2026-09-09
+notes: >-
+  Drafted from the paper by a model and filed unreviewed. Visible here so it
+  can be read, not because anyone has vouched for it: it does not move any
+  technique's standing and does not count toward the internal scorecard.
+  Drafted confidence: low. Falsifier as drafted: A comparable evaluation
+  where the same models gain consistently in accuracy as soon as any
+  interaction is allowed, with no non-monotonic dip at intermediate budgets.
+  Proposed technique, not catalogued: Interaction Efficiency Score (accuracy
+  weighted by fraction of actions that change the observed state).
+submitted_by: agent:claude-opus-5@Russ-Miller

@@ -1,0 +1,34 @@
+arxiv_id: "2608.26199"
+title: Benchmarking AI Agents for Hardware Design Automation via MCP Tool Calling
+url: https://arxiv.org/abs/2608.26199
+drafted_at: 2026-09-09
+drafted_from: full-text
+model: claude-opus-5
+status: draft — not filed. Review, edit, then move into catalog/ by hand.
+capability: tool-use
+statement: For locally deployed open-weight models driving a stateful,
+  dependency-ordered MCP tool server, cutting tool descriptions from full
+  specifications (purpose, parameter semantics, constraints, failure
+  conditions) down to one sentence each raises the fraction of calls the
+  server rejects for every model tested, while its effect on task coverage is
+  less consistent.
+kind: observation
+backing_strength: single-paper
+scope_condition: Seven 4-bit quantised open models (8B-31B) run through Ollama
+  on an expert-informed hardware-design benchmark of 14 tools; single-agent
+  ReAct loop with other configuration held fixed.
+technique: retrieve-tool-docs
+proposed_technique: ""
+stance_on_existing: supports
+related_claim_id: shows-llms-hallucinate-api-names-arguments-when-calling
+stance_reason: Both find that giving the model detailed tool documentation
+  reduces malformed or invalid calls.
+falsifier: An ablation on comparable stateful tool benchmarks where minimal
+  one-sentence descriptions leave the tool failure rate unchanged or lower
+  than comprehensive descriptions across models.
+evidence_note: Measured as tool failure rate under matched configurations; the
+  paper reports TFR rises for every model and roughly doubles for most, and
+  comprehensive descriptions win in 35 of 42 model-suite best configurations.
+  No absolute per-model numbers given for the ablation, and only one tool set
+  of 14 tools on a proprietary replica server.
+confidence: medium

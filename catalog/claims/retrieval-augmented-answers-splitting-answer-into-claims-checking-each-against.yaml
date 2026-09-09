@@ -1,0 +1,40 @@
+id: retrieval-augmented-answers-splitting-answer-into-claims-checking-each-against
+capability: hallucination
+technique: atomic-fact-checking
+statement: >-
+  In retrieval-augmented answers, splitting an answer into claims, checking
+  each against the retrieved source, and then acting on the flagged claims
+  reduces the share of answers judged to contain unsupported content — but
+  the strategies trade grounding against preservation: deleting unsupported
+  claims reduces unsupported content most while retaining the least original
+  text, and rewriting retains the most while reducing least.
+kind: mechanism
+backing_strength: single-paper
+observed_on:
+  era: "RAG answers on the RAGTruth benchmark with hand-annotated unsupported passages; 916 repaired answers judged by three LLM judges from different families; no human usefulness ratings"
+sources:
+  - source: arxiv-2608-29307
+    stance: supports
+    note: >-
+      Measured on one benchmark with three LLM judges agreeing on ordering;
+      retention percentages reported (64.3% deletion, 80.1% rewriting). Does
+      not measure whether repaired answers remain useful to readers, and
+      83.5% of clean answers were also edited, so precision of the flagging
+      step is a live concern.
+contested: false
+status: pending-review
+last_checked_at: 2026-09-09
+notes: >-
+  Drafted from the paper by a model and filed unreviewed. Visible here so it
+  can be read, not because anyone has vouched for it: it does not move any
+  technique's standing and does not count toward the internal scorecard.
+  Drafted confidence: medium. Falsifier as drafted: A repair pipeline where
+  deletion does not reduce judged unsupported content more than rewriting,
+  or where all strategies preserve text equally, would break the trade-off
+  ordering; judges disagreeing on the ordering would too. Drafted stance
+  toward decomposing-long-answers-into-atomic-facts-checking-each: supports
+  -- The paper applies atomic-claim verification and shows the flagged
+  claims can be acted on, extending fact-by-fact checking from detection to
+  repair. Proposed technique, not catalogued: claim-level repair of
+  unsupported content (delete, replace with source, rewrite).
+submitted_by: agent:claude-opus-5@Russ-Miller

@@ -1,0 +1,19 @@
+id: arxiv-2608-24966
+kind: paper
+title: "Targeting the Attention Heads Behind Object Hallucination in LLaVA"
+year: 2026
+date: 2026-08-25
+arxiv_id: "2608.24966"
+url: https://arxiv.org/abs/2608.24966
+tags: [ingested]
+summary: >-
+  Vision-language models such as LLaVA-1.5-7B often hallucinate objects
+  absent from the image when generating captions. We ask whether an
+  interpretability diagnosis of this failure can guide a targeted fix, and
+  we measure what that fix actually changes. We rank attention heads by how
+  much their image attention drops around hallucinated object words, then
+  screen the shortlist by ablating candidate heads and measuring the change
+  in hallucination-token log probability, yielding a 32-head set. We
+  restrict two interventions to these heads: a head-sliced LoRA adapter and
+  an inference-time grounding co
+ingested_at: 2026-09-09

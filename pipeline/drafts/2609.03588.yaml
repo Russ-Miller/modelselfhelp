@@ -1,0 +1,36 @@
+arxiv_id: "2609.03588"
+title: "KC-Bench: A Dynamic Interactive Benchmark for Evaluating Knowledge
+  Conflicts in LLM Agents"
+url: https://arxiv.org/abs/2609.03588
+drafted_at: 2026-09-09
+drafted_from: full-text
+model: claude-opus-5
+status: draft — not filed. Review, edit, then move into catalog/ by hand.
+capability: fact-verification
+statement: When an LLM agent must reconcile user-supplied identity credentials
+  against database records before a sensitive read or write, frontier and open
+  models frequently skip the cross-field consistency check and act anyway, and
+  the failure rate barely moves whether the request is simple or has several
+  parallel sub-requests and whether the forged field is visually
+  near-identical to the true one or completely unrelated.
+kind: observation
+backing_strength: single-paper
+scope_condition: Multi-turn simulated retail customer-service tasks with
+  stateful tools and a domain policy requiring credential verification; nine
+  models, one trial per task, greedy decoding, policies that do not announce a
+  conflict is present.
+technique: ""
+proposed_technique: conflict-injection agent benchmark
+stance_on_existing: neither
+related_claim_id: ""
+stance_reason: ""
+falsifier: Showing that detection and clarification rates rise substantially
+  as the forged credential becomes more dissimilar from the true one, or as
+  the number of parallel requests drops, under the same harness.
+evidence_note: Measured on 93 retail tasks within a 238-task benchmark, scored
+  by an assertion model plus human trajectory verification; best retail score
+  was 0.7312 (Claude Haiku 4.5) with several models far lower. The complexity
+  and similarity insensitivity is reported qualitatively without per-condition
+  numbers, so that part is argued more than quantified. Single trial per task
+  limits variance estimates.
+confidence: low

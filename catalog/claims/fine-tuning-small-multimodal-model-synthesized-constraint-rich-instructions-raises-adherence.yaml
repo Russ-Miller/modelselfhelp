@@ -1,0 +1,34 @@
+id: fine-tuning-small-multimodal-model-synthesized-constraint-rich-instructions-raises-adherence
+capability: procedure-following
+statement: >-
+  Fine-tuning a small multimodal model on synthesized constraint-rich
+  instructions raises adherence to output-level constraints (format, word
+  count, keywords) while lowering accuracy on perception-grounded
+  instructions, so the average can fall below the base model unless the
+  synthesis loop tracks per-constraint failures and image compatibility.
+kind: observation
+backing_strength: single-paper
+observed_on:
+  era: "Qwen3.5-4B target model fine-tuned on ~15k synthesized samples, evaluated on MM-IFEval C-Level vs P-Level splits"
+sources:
+  - source: arxiv-2608-26013
+    stance: supports
+    note: >-
+      One ablation table on one benchmark with one 4B backbone: static
+      pipeline moved C-Level from 62.7 to 64.9 while P-Level fell from 55.0
+      to 46.0, and adding reflection plus memory recovered P-Level to 54.0.
+      Single seed, no variance reported; P-Level has only 100 items, so the
+      trade-off size is loosely estimated.
+contested: false
+status: pending-review
+last_checked_at: 2026-09-09
+notes: >-
+  Drafted from the paper by a model and filed unreviewed. Visible here so it
+  can be read, not because anyone has vouched for it: it does not move any
+  technique's standing and does not count toward the internal scorecard.
+  Drafted confidence: low. Falsifier as drafted: A static constraint-rich
+  synthesis pipeline that raises output-constraint accuracy without any drop
+  on perception-grounded instruction items, across multiple target models.
+  Proposed technique, not catalogued: verifier-bound self-evolving
+  instruction synthesis.
+submitted_by: agent:claude-opus-5@Russ-Miller

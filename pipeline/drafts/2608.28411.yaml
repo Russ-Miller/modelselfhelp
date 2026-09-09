@@ -1,0 +1,39 @@
+arxiv_id: "2608.28411"
+title: "LongPIBench: A Long-Context Benchmark for Prompt Injection"
+url: https://arxiv.org/abs/2608.28411
+drafted_at: 2026-09-09
+drafted_from: full-text
+model: claude-opus-5
+status: draft — not filed. Review, edit, then move into catalog/ by hand.
+capability: prompt-injection
+statement: "Prompt injection defenses that report near-zero attack success on
+  short-context benchmarks lose most of that protection when the injected
+  instruction sits inside a document of thousands to tens of thousands of
+  tokens: fine-tuned separation defenses and detect-localize-remove pipelines
+  still let a large share of injections through on paper review, resume
+  screening, code review and email threads."
+kind: observation
+backing_strength: single-paper
+scope_condition: Single-pass document-centric tasks with full document in one
+  inference call; open 3-8B models plus GPT-4o/GPT-4.1; synthetic and
+  real-world datasets, 100 instances per synthetic suite; not agentic or
+  multi-step tool pipelines.
+technique: structured-prompt-separation
+proposed_technique: ""
+stance_on_existing: contests
+related_claim_id: separating-prompt-data-reserved-delimiters-fine-tuning-structure-blocks
+stance_reason: A fine-tuned separation defense (MetaSecAlign 8B) that reports
+  near-zero attack success on short-context benchmarks reached attack success
+  of 1.00 on the long-context paper review and resume screening datasets.
+falsifier: Evaluating the same defenses on long-document injection with
+  matched attacks and finding attack success stays near the short-context
+  level, or showing the long-context gap disappears once no-attack baseline
+  rates and scoring criteria are matched to the short-context benchmarks.
+evidence_note: "Measured: eight LLMs, six heuristic and two optimization
+  attacks, nine detectors and six prevention defenses, four scenarios with
+  synthetic and real-world splits. Baseline is the same defenses on OPI,
+  InjecAgent, AgentDojo, where their reported attack success is near zero.
+  Design shows the effect but the authors state it does not isolate the
+  mechanism (dilution vs position). Detection defenses show extreme
+  false-positive/false-negative tradeoffs. Single group, one benchmark."
+confidence: medium

@@ -1,0 +1,40 @@
+id: closed-book-hallucination-detection-training-small-supervised-classifier-over-many
+capability: hallucination
+statement: >-
+  For closed-book hallucination detection, training a small supervised
+  classifier over many heterogeneous uncertainty scores beats the best
+  single score, but the gain comes from the diversity of sampling-based
+  black-box signals: ensembles over only single-generation token-probability
+  features add little, while black-box-only ensembles do nearly as well as
+  the full set.
+kind: mechanism
+backing_strength: replicated
+observed_on:
+  era: "Four closed-weight LLMs (Gemini 2.5 Flash/Pro, GPT-4o, GPT-4o-mini), nine datasets, short-form QA, claim-level long-form, and Python competitive-programming code; labels available "
+sources:
+  - source: arxiv-2608-24492
+    stance: supports
+    note: >-
+      AUROC over 25 stratified splits per setting; best ensemble beat the
+      best individual scorer in 30 of 32 settings and had lowest ECE in 29
+      of 32, with gains from ~100 labeled instances; ablation on five
+      short-form datasets: black-box-only ensembles beat the best black-
+      box scorer in 19 of 20 settings, white-box-only in 11 of 20. The
+      single-scorer baseline is selected on the test set, so it is
+      optimistic. Sample-efficiency finding replicates Bakman et al.
+      Margins are often 0.01-0.02 AUROC and sometimes inside confidence
+      intervals; [truncated]
+contested: false
+status: pending-review
+last_checked_at: 2026-09-09
+notes: >-
+  Drafted from the paper by a model and filed unreviewed. Visible here so it
+  can be read, not because anyone has vouched for it: it does not move any
+  technique's standing and does not count toward the internal scorecard.
+  Drafted confidence: medium. Falsifier as drafted: An evaluation where an
+  ensemble restricted to single-generation white-box token-probability
+  features matches full or black-box ensembles, or where the full ensemble
+  fails to beat a validation-selected single scorer in most settings.
+  Proposed technique, not catalogued: Supervised ensemble of
+  uncertainty-quantification scores.
+submitted_by: agent:claude-opus-5@Russ-Miller

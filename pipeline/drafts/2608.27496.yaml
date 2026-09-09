@@ -1,0 +1,41 @@
+arxiv_id: "2608.27496"
+title: "ROPE: Routed Origin Policy Enforcement against Indirect Prompt Injection"
+url: https://arxiv.org/abs/2608.27496
+drafted_at: 2026-09-09
+drafted_from: full-text
+model: claude-opus-5
+status: draft — not filed. Review, edit, then move into catalog/ by hand.
+capability: prompt-injection
+statement: For tool-using agents, enforcing injection defense as a
+  deterministic provenance check on sensitive tool parameters — with the only
+  model call reading the trusted user request and never fetched content —
+  makes admission decisions invariant to how an injection is worded, whereas
+  defenses that judge the agent's runtime plan or behavior with a model can be
+  steered by reworded injections.
+kind: mechanism
+backing_strength: single-paper
+scope_condition: Holds where the platform exposes unforgeable origin metadata
+  (signed senders, user-owned records) for values the agent reads, and where
+  the harm passes through a state-changing tool parameter; does not cover harm
+  in free-text bodies, the agent's message to the user, or parameters the user
+  delegates wholly to attacker-writable content.
+technique: ""
+proposed_technique: deterministic origin check on sensitive tool parameters
+stance_on_existing: neither
+related_claim_id: ""
+stance_reason: ""
+falsifier: An adaptive attacker that raises attack success against the
+  origin-check defense by rewording injections alone, without altering the
+  origin of the value it plants; or a model-in-the-loop plan-conformance
+  defense that proves equally unmoved by injection optimization at comparable
+  clean utility.
+evidence_note: Measured on AgentDyn (three open-ended suites) and AgentDojo
+  with four agent models against eleven baselines. Static attack success held
+  to 1.6-2.6% with 82-100% of undefended clean utility; under AutoDojo
+  injection optimization the origin check moved by under a point while DRIFT
+  roughly doubled on two API models and rose from 7.1 to 28.5 on Qwen3-235B.
+  Long-horizon staged attacks reached 0% against it. Paraphrase invariance is
+  also argued formally, conditional on stated deployment assumptions.
+  Author-run comparison; baselines reimplemented by the same team, and three
+  injection tasks were re-scored by the authors.
+confidence: medium

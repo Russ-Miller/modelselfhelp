@@ -1,0 +1,19 @@
+id: arxiv-2608-30703
+kind: paper
+title: "SingProbe Technical Report"
+year: 2026
+date: 2026-08-31
+arxiv_id: "2608.30703"
+url: https://arxiv.org/abs/2608.30703
+tags: [ingested]
+summary: >-
+  Runtime guardrails are essential for reliable large language model (LLM)
+  deployment, yet existing approaches typically rely on independent,
+  external models that introduce additional inference cost, delayed safety
+  signals, and a capacity mismatch with increasingly capable base models. To
+  address these issues, we introduce SingProbe, a lightweight intrinsic
+  runtime guard that directly reuses hidden states produced during LLM
+  inference and operates alongside autoregressive decoding. Within a unified
+  framework, SingProbe continuously predicts query intent, response safety,
+  and hallucination risk a
+ingested_at: 2026-09-09

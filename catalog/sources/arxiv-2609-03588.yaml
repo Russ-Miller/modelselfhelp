@@ -1,0 +1,19 @@
+id: arxiv-2609-03588
+kind: paper
+title: "KC-Bench: A Dynamic Interactive Benchmark for Evaluating Knowledge Conflicts in LLM Agents"
+year: 2026
+date: 2026-09-03
+arxiv_id: "2609.03588"
+url: https://arxiv.org/abs/2609.03588
+tags: [ingested]
+summary: >-
+  As LLMs increasingly act through tools, they must reconcile user
+  instructions, parametric knowledge, and dynamic environmental observations
+  before taking actions. We introduce KC-Bench, a controlled multi-turn
+  benchmark for measuring this capability across world-knowledge conflicts,
+  input inconsistencies, and multi-source temporal conflicts. Its 238 tasks
+  are manually screened from more than 1,000 generated candidates and
+  combine a user simulator, stateful tools, deterministic environment
+  assertions, an open-source natural-language evaluator, and human
+  trajectory verification. Evaluation of ni
+ingested_at: 2026-09-09

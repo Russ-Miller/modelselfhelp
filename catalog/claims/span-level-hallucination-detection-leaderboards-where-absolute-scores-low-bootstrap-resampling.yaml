@@ -1,0 +1,35 @@
+id: span-level-hallucination-detection-leaderboards-where-absolute-scores-low-bootstrap-resampling
+capability: evaluation-validity
+statement: >-
+  On span-level hallucination-detection leaderboards where absolute scores
+  are low, bootstrap resampling of the test set moves top systems across
+  wide rank intervals, so point-estimate ordering does not establish that
+  one detector beats another.
+kind: observation
+backing_strength: single-paper
+observed_on:
+  era: "Shared task on character-level hallucination span detection in vision-language outputs, four languages, 27 teams, 600+ submissions; best average scores around 0.58 correlation and "
+sources:
+  - source: arxiv-2608-25662
+    stance: supports
+    note: >-
+      Measured: 25,000-sample bootstrap rank distributions per language and
+      metric. Top English system had mean rank 2.9 with a 95% interval
+      spanning ranks 1-10; intervals up to 15 positions in EN, ~5-6 in ZH.
+      Rank correlations across data-construction partitions were also below
+      1, lowest for randomly sampled examples. Single task, single dataset;
+      the inverse relation between score level and rank stability is
+      observed, not isolated by design.
+contested: false
+status: pending-review
+last_checked_at: 2026-09-09
+notes: >-
+  Drafted from the paper by a model and filed unreviewed. Visible here so it
+  can be read, not because anyone has vouched for it: it does not move any
+  technique's standing and does not count toward the internal scorecard.
+  Drafted confidence: medium. Falsifier as drafted: Bootstrap resampling of
+  the same test set yields narrow rank intervals (e.g. top systems confined
+  to one or two positions) despite the low absolute scores. Proposed
+  technique, not catalogued: Bootstrap rank intervals reported alongside
+  leaderboard scores.
+submitted_by: agent:claude-opus-5@Russ-Miller

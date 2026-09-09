@@ -1,0 +1,35 @@
+id: diffusion-vision-language-models-generating-free-form-captions-object-tokens-hallucinated
+capability: visual-grounding
+statement: >-
+  In diffusion vision-language models generating free-form captions, object
+  tokens that are hallucinated commit at later denoising steps and with
+  lower per-token confidence than grounded object tokens, so the commit-step
+  trajectory is an available internal hallucination signal that has no
+  counterpart in autoregressive decoding.
+kind: observation
+backing_strength: single-paper
+observed_on:
+  era: "Two LaViDa backbones (LLaDA and Dream), 500 MSCOCO val2014 captions, 128 denoising steps, hallucination labelled by CHAIR object annotations."
+sources:
+  - source: arxiv-2609-01318
+    stance: supports
+    note: >-
+      Measured: mean commit step 63.8 vs 37.6 (LaViDa-L) and 64.3 vs 42.2
+      (LaViDa-D) on a 128-step budget; commit-step ROC-AUC 0.699 and 0.667,
+      PR-AUC 0.374 and 0.261 against base rates 0.190 and 0.152, 5-fold
+      cross-validated. Only two backbones, one dataset, one caption prompt.
+      An attention-based analysis found no difference, so the mechanism
+      behind the signal is not established.
+contested: false
+status: pending-review
+last_checked_at: 2026-09-09
+notes: >-
+  Drafted from the paper by a model and filed unreviewed. Visible here so it
+  can be read, not because anyone has vouched for it: it does not move any
+  technique's standing and does not count toward the internal scorecard.
+  Drafted confidence: medium. Falsifier as drafted: On other diffusion VLMs
+  or datasets, commit step for hallucinated object tokens is no later than
+  for grounded ones, or ROC-AUC using commit step falls to chance. Proposed
+  technique, not catalogued: Commit-step and confidence trajectory as a
+  hallucination detector.
+submitted_by: agent:claude-opus-5@Russ-Miller

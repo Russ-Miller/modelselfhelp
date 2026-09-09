@@ -1,0 +1,36 @@
+arxiv_id: "2609.03156"
+title: "Compound Prompt Constraints in LLM Code Generation: A Factorial Study
+  of Format, Persona, and Urgency"
+url: https://arxiv.org/abs/2609.03156
+drafted_at: 2026-09-09
+drafted_from: full-text
+model: claude-opus-5
+status: draft — not filed. Review, edit, then move into catalog/ by hand.
+capability: code-generation
+statement: When a code-generation prompt combines a prompt-enforced output
+  format (JSON or XML), a persona, and urgency framing at once, pass@1 on
+  function-level Python problems can fall well below the sum of each
+  constraint's individual effect, even when each constraint alone is neutral
+  or helpful — observed in the GPT-4o family and absent in the GPT-4.1 family
+  and o3-mini.
+kind: observation
+backing_strength: single-paper
+scope_condition: 164 HumanEval+ problems, greedy decoding, five OpenAI models;
+  format enforced by prompt instruction rather than API-level constrained
+  decoding; prompt length confounded with constraint count
+technique: ""
+proposed_technique: Factorial compound-prompt reliability testing
+stance_on_existing: neither
+related_claim_id: ""
+stance_reason: ""
+falsifier: A factorial replication on other models and benchmarks where
+  triple-constraint pass@1 matches the additive prediction within noise, or
+  where the GPT-4o-family gaps vanish once prompt-token length is held
+  constant.
+evidence_note: 22,140 evaluations across 27 conditions and 5 models;
+  interaction computed as residual against an additive main-effect prediction,
+  with McNemar paired tests (e.g., OR 3.67, p=0.004 for best single vs worst
+  triple on GPT-4o-mini). Single benchmark, single vendor, one sample per
+  condition; token-length confound acknowledged by the authors and not
+  isolated.
+confidence: medium

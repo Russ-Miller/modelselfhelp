@@ -1,0 +1,39 @@
+id: comparing-weight-shared-recursive-model-against-depth-matched-plain-transformer-code
+capability: evaluation-validity
+statement: >-
+  When comparing a weight-shared recursive model against a depth-matched
+  plain transformer on code generation, the ranking read from a single
+  checkpoint can invert during training, because the larger-parameter arm
+  passes its validation optimum and overfits while the parameter-lean
+  recursive arm keeps improving — so a late-epoch "recursion fits better"
+  reading is a degradation artifact, not a capability difference.
+kind: mechanism
+backing_strength: single-paper
+observed_on:
+  era: "~28M-parameter models, instruction-to-Python corpus of ~38k training records, many passes over a fixed corpus (data-constrained repeated-data regime), 40-epoch budget, three seeds;"
+sources:
+  - source: arxiv-2608-29376
+    stance: supports
+    note: >-
+      Measured: three arms (recursive 20-effective-depth shared 2-layer
+      block, iso-parameter 2-layer, iso-depth 20-layer) trained 40 epochs,
+      3 seeds, snapshots at 9 epochs. Fit ranking between recursive and
+      iso-depth arms reversed at epochs 8 and 40; iso-depth validation
+      loss bottomed at epoch 20 (1.15) and rose to 1.45 by epoch 40 while
+      training loss fell. Cross-seed spread tight. Only one architecture
+      family, one synthetic corpus, no execution-based correctness metric;
+      [truncated]
+contested: false
+status: pending-review
+last_checked_at: 2026-09-09
+notes: >-
+  Drafted from the paper by a model and filed unreviewed. Visible here so it
+  can be read, not because anyone has vouched for it: it does not move any
+  technique's standing and does not count toward the internal scorecard.
+  Drafted confidence: medium. Falsifier as drafted: Tracking the same
+  matched arms across training on other corpora or scales and finding the
+  fit ranking stable across all checkpoints, so a single arbitrary
+  checkpoint reproduces the validation-optimum ordering. Proposed technique,
+  not catalogued: Trajectory-wide evaluation with per-arm validation-optimum
+  checkpoint selection.
+submitted_by: agent:claude-opus-5@Russ-Miller

@@ -1,0 +1,19 @@
+id: arxiv-2609-02265
+kind: paper
+title: "CAPTURE: Disentangling Preference Drift from Memory Poisoning in Personalized LLM Agents"
+year: 2026
+date: 2026-09-02
+arxiv_id: "2609.02265"
+url: https://arxiv.org/abs/2609.02265
+tags: [ingested]
+summary: >-
+  Personalized language agents use persistent memory to adapt to users over
+  time, but the same mechanism creates an attack surface. When new
+  information conflicts with stored preferences, an agent must distinguish
+  genuine preference drift from temporary context shifts, ambiguity, or
+  adversarial memory poisoning. We formulate this problem as a
+  continuous-time partially observable decision process over a latent user
+  state and show why rules based only on recency and provenance are
+  insufficient. CAPTURE addresses this ambiguity with a neural
+  differential-equation belief tracker, a multi-timescale m
+ingested_at: 2026-09-09

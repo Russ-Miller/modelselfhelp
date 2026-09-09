@@ -1,0 +1,19 @@
+id: arxiv-2609-01318
+kind: paper
+title: "Reliability Challenges in Diffusion Vision-Language Models"
+year: 2026
+date: 2026-09-01
+arxiv_id: "2609.01318"
+url: https://arxiv.org/abs/2609.01318
+tags: [ingested]
+summary: >-
+  Diffusion-based Large Vision-Language Models (dLVLMs) have recently
+  emerged as a compelling alternative to autoregressive (AR) LVLMs, offering
+  advantages in parallel decoding, bidirectional context, and controllable
+  generation. Despite rapid progress, their reliability properties remain
+  largely uncharacterized. We present the first systematic reliability
+  evaluation of hallucination and bias in dLVLMs, benchmarking six diffusion
+  models against competitive AR baselines across four dimensions. Our key
+  findings are: (1) dLVLMs reverse the yes-bias of AR models in binary
+  visual queries; (2) they ac
+ingested_at: 2026-09-09

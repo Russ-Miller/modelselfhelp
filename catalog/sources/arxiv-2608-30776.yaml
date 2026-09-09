@@ -1,0 +1,19 @@
+id: arxiv-2608-30776
+kind: paper
+title: "Likelihood-Constrained Acoustic Reranking for Training-Free Hallucination Mitigation in LLM-Based ASR"
+year: 2026
+date: 2026-08-31
+arxiv_id: "2608.30776"
+url: https://arxiv.org/abs/2608.30776
+tags: [ingested]
+summary: >-
+  Large language model (LLM)-based automatic speech recognition (ASR)
+  systems achieve strong performance on conventional speech data by
+  leveraging powerful linguistic priors and multilingual capabilities.
+  However, under challenging conditions, these priors can override acoustic
+  evidence, resulting in unintended translation, instruction execution,
+  repetition, or catastrophic deletion. We propose Likelihood-Constrained
+  Acoustic Reranking (LCAR), a training-free decoding method that improves
+  acoustic grounding while preserving support from the base model. At each
+  decoding step, LCAR first retains t
+ingested_at: 2026-09-09

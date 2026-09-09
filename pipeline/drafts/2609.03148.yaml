@@ -1,0 +1,39 @@
+arxiv_id: "2609.03148"
+title: Large Language Models in Resolving Contextual Knowledge Conflicts
+url: https://arxiv.org/abs/2609.03148
+drafted_at: 2026-09-09
+drafted_from: full-text
+model: claude-opus-5
+status: draft — not filed. Review, edit, then move into catalog/ by hand.
+capability: fact-verification
+statement: When a prompt contains several legitimate but conflicting evidence
+  passages, models internally register the conflict — linear probes on
+  mid-to-late-layer hidden states separate conflicting from consistent inputs
+  at high AUC — while still resolving the conflict badly at the output, so the
+  failure is in evidence integration rather than in conflict detection.
+kind: mechanism
+backing_strength: single-paper
+scope_condition: Measured on open-weight models where activations are
+  accessible (Llama-3.1-8B-Instruct, GPT-OSS-20B); output-level failure
+  measured across seven models from 8B to 120B on a multi-domain conflict
+  dataset of reasoning and summarization tasks.
+technique: ""
+proposed_technique: neutral-center activation steering for evidence integration
+stance_on_existing: supports
+related_claim_id: first-evidence-dominance-is-representational-not-decoding
+stance_reason: The paper finds combined-evidence activations shift toward the
+  first evidence at every layer, that random reordering does not remove the
+  dominance, and that steering activations toward the neutral center improves
+  accuracy.
+falsifier: Show that probes cannot separate conflicting from consistent inputs
+  above chance in models that nonetheless resolve conflicts well, or that
+  probe separability tracks conflict-resolution accuracy across models and
+  conflict types.
+evidence_note: Layer-wise logistic-regression probes on paired
+  conflict/consistent inputs give AUC above 0.85 in mid-to-late layers for
+  most of six conflict types, replicated on a second architecture; same models
+  score below 50% on inferential conflicts and show Gini imbalance in
+  summarization. The dissociation is argued from two separate measurements,
+  not from a single controlled manipulation, and probe separability may
+  reflect surface cues rather than functional awareness.
+confidence: medium

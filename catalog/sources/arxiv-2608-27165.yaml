@@ -1,0 +1,19 @@
+id: arxiv-2608-27165
+kind: paper
+title: "Prediction of Prediction (PoP): Inter-Layer Activation Fusion for Single-Pass Hallucination Detection in Large Language Models"
+year: 2026
+date: 2026-08-27
+arxiv_id: "2608.27165"
+url: https://arxiv.org/abs/2608.27165
+tags: [ingested]
+summary: >-
+  Autoregressive large language models (LLMs) routinely generate factually
+  incorrect outputs with high decoding confidence, limiting their deployment
+  in high-stakes workflows. Existing output-stage uncertainty metrics can
+  fail when models are overconfident on false assertions, while multi-sample
+  verification pipelines introduce substantial memory and latency overhead.
+  This work evaluates whether internal hidden-state transition dynamics
+  during generation can signal factual errors without auxiliary decoding
+  calls. We introduce Prediction of Prediction (PoP), a mechanism that
+  captures layer-transi
+ingested_at: 2026-09-09

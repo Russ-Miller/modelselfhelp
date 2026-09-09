@@ -1,0 +1,41 @@
+id: tool-using-agents-restricting-capabilities-harness-level-after-untrusted-content
+capability: prompt-injection
+statement: >-
+  For tool-using agents, restricting capabilities at the harness level after
+  untrusted content enters the context — revoking or tightening the
+  parameter envelopes of skills that lie on graph paths to deployer-defined
+  forbidden states — cuts indirect-injection attack success further than
+  prompt-level or per-action authorization defenses, and does so with no
+  extra model calls or tokens, because enforcement reads the transition
+  graph rather than the natural-language content.
+kind: mechanism
+backing_strength: single-paper
+observed_on:
+  era: "Requires a trusted harness that mediates every skill invocation, correct skill transition summaries, and a deployer-written policy naming forbidden states and per-parameter steerab"
+sources:
+  - source: arxiv-2608-30041
+    stance: supports
+    note: >-
+      Measured on four AgentDojo suites with Gemini 2.5 Flash and
+      Llama3.3-70B, against No Defense, Spotlighting, CaMeL and AttriGuard,
+      plus an author-built compositional attack set. Reports 0% attack
+      success on Travel, Banking, Workspace for both backends and 4.8%/14.3%
+      on Slack. Benign utility often falls relative to no defense;
+      fractional-flow restriction retains more capability than binary at the
+      same attack success. Authors' own system and own compositional
+      benchmark; [truncated]
+contested: false
+status: pending-review
+last_checked_at: 2026-09-09
+notes: >-
+  Drafted from the paper by a model and filed unreviewed. Visible here so it
+  can be read, not because anyone has vouched for it: it does not move any
+  technique's standing and does not count toward the internal scorecard.
+  Drafted confidence: medium. Falsifier as drafted: An evaluation on
+  comparable agent benchmarks where post-contamination capability
+  restriction leaves attack success no lower than CaMeL/AttriGuard-style
+  per-action authorization, or where the utility cost of confinement is so
+  large that the defended agent completes fewer tasks than a prompt-level
+  defense at equal attack success. Proposed technique, not catalogued:
+  reachability-based capability confinement after contamination.
+submitted_by: agent:claude-opus-5@Russ-Miller

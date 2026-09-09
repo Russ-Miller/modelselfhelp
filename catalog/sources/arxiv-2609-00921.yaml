@@ -1,0 +1,19 @@
+id: arxiv-2609-00921
+kind: paper
+title: "VIBE-Bench: Evaluating Personalized Large Language Models When Profiles Don't Mean Preferences"
+year: 2026
+date: 2026-09-01
+arxiv_id: "2609.00921"
+url: https://arxiv.org/abs/2609.00921
+tags: [ingested]
+summary: >-
+  Personalized Large Language Models (PLLMs) aim to tailor responses to
+  individual users, where a central challenge is preference reasoning:
+  inferring query-relevant preferences from user-related history. Existing
+  benchmarks, however, largely assume that such preference can be retrieved
+  from semantically related history. We study an underexplored but
+  practically important regime, profile-preference conceptual misalignment
+  (PRCM), where observable profile cues and query-specific preferences lie
+  in different concept spaces, making semantic retrieval inconsistent for
+  personalization. We introduce V
+ingested_at: 2026-09-09

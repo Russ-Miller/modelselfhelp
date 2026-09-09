@@ -1,0 +1,40 @@
+id: preference-needed-answer-query-lies-different-concept-space-cues
+capability: long-term-memory
+statement: >-
+  When the preference needed to answer a query lies in a different concept
+  space from the cues in a user's dialogue history (e.g. inferring an
+  emotion-regulation strategy from personality cues), retrieval-based and
+  profile-summarization personalization methods barely beat a no-history
+  baseline, and dumping the full history into the prompt does worse than no
+  history at all.
+kind: observation
+backing_strength: single-paper
+observed_on:
+  era: "Synthetic multi-session English dialogue profiles built around Big Five / RIASEC psychology mappings; six instruction-tuned open models, BM25 and BERTScore retrieval, profile-augme"
+sources:
+  - source: arxiv-2609-00921
+    stance: supports
+    note: >-
+      Measured on a 128-item manually verified gold test set from a
+      3,504-persona synthetic benchmark; strategy accuracy ~21.5 for
+      no-history baseline, 18.4 for full-history prompting, 24.2 for
+      profile-augmented prompting. Ablations with injected explicit
+      preferences reach 100% for fine-tuned models, and template
+      chain-of-thought over the known concept mapping lifts Task 1 accuracy
+      by a reported 44%, isolating cross-concept mapping as the bottleneck.
+      All histories are LLM-generated, so transfer to real user logs is
+      untested.
+contested: false
+status: pending-review
+last_checked_at: 2026-09-09
+notes: >-
+  Drafted from the paper by a model and filed unreviewed. Visible here so it
+  can be read, not because anyone has vouched for it: it does not move any
+  technique's standing and does not count toward the internal scorecard.
+  Drafter linked technique "retrieval-augmented-generation", which does not
+  list this capability in addresses -- recorded, not asserted. Drafted
+  confidence: medium. Falsifier as drafted: On the same benchmark,
+  retrieval-augmented or full-history prompting reaching strategy-selection
+  accuracy well above the no-history baseline without concept supervision.
+  Automatic check flagged: figures not in the source: 21.5, 18.4.
+submitted_by: agent:claude-opus-5@Russ-Miller
