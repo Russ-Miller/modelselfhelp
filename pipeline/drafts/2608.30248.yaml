@@ -1,0 +1,37 @@
+arxiv_id: "2608.30248"
+title: "DSEffi-Bench: Demystifying Large Language Models' Capability in
+  Efficient Data Science Code Generation"
+url: https://arxiv.org/abs/2608.30248
+drafted_at: 2026-09-09
+drafted_from: full-text
+model: claude-opus-5
+status: draft — not filed. Review, edit, then move into catalog/ by hand.
+capability: code-generation
+statement: "For data-science Python tasks where several correct solutions
+  differ by orders of magnitude in runtime, a model's correctness rate does
+  not predict the efficiency of the code it writes: rankings invert between
+  the two, code-specialized open models are less efficient than general open
+  models of similar size class, and the fastest model rotates by library
+  (NumPy vs Pandas vs PyTorch vs Polars)."
+kind: observation
+backing_strength: single-paper
+scope_condition: Python data-science code using
+  Pandas/NumPy/PyTorch/SciPy/Polars, tasks drawn from efficiency-oriented
+  Stack Overflow posts, one greedy sample per task, efficiency scored relative
+  to a pool of correct solutions from 16 models plus a human reference.
+technique: ""
+proposed_technique: Efficiency-taxonomy-guided reprompting and library-conditioned model routing
+stance_on_existing: neither
+related_claim_id: ""
+stance_reason: ""
+falsifier: On a comparable efficiency benchmark, model ranking by pass rate
+  matches ranking by runtime efficiency of correct solutions, with no
+  per-library rotation of the fastest model.
+evidence_note: 1,000 human-validated instances, 16 models in 3 tiers,
+  log-normalized relative runtime score restricted to solved tasks; rank
+  inversions confirmed on pairwise win rates and on the 131 tasks all six
+  representative models solved, which controls for correctness-conditioned
+  task mix. Human reference beat the best model on efficiency. Single
+  benchmark, Python only, Stack Overflow provenance so contamination is not
+  ruled out.
+confidence: medium

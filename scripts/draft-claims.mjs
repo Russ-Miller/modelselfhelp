@@ -30,12 +30,16 @@ const MODEL = "claude-opus-5";
 const PRICE_IN = 5.0, PRICE_OUT = 25.0;
 const QUEUE_DIR = "pipeline/queue";
 const OUT_DIR = "pipeline/drafts";
+fs.mkdirSync(OUT_DIR, { recursive: true });
 
 const args = process.argv.slice(2);
 const arg = (n) => { const i = args.indexOf(`--${n}`); return i >= 0 ? args[i + 1] : undefined; };
 const onlyId = arg("id");
 const limit = Number(arg("limit") ?? 3);
 const dryRun = args.includes("--dry-run");
+const redo = args.includes("--redo");
+// arXiv throttles hard on full-text fetches, and a bulk run has all night.
+const delayMs = Number(arg("delay") ?? 8000);
 
 const Draft = z.object({
   capability: z.string().describe("Slug of the existing capability this belongs under. Must be one of the ids listed."),
@@ -121,6 +125,9 @@ for (const f of files) {
   const parsed = YAML.parse(fs.readFileSync(path.join(QUEUE_DIR, f), "utf8"));
   for (const c of parsed?.candidates ?? []) {
     if (onlyId) { if (c.arxiv_id === onlyId) work.push(c); continue; }
+    // Already drafted is already done; a bulk re-run should cost nothing for
+    // work that exists.
+    if (!redo && fs.existsSync(path.join(OUT_DIR, `${c.arxiv_id}.yaml`))) continue;
     if ((c.verdicts ?? []).some((v) => v.about_capability)) work.push(c);
   }
 }
@@ -181,6 +188,7 @@ for (const cand of batch) {
     errors++;
     console.error(`  error: ${err?.message ?? err}`);
   }
+  await new Promise((r) => setTimeout(r, delayMs));
 }
 
 const cost = (inTokens / 1e6) * PRICE_IN + (outTokens / 1e6) * PRICE_OUT;
