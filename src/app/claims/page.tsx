@@ -50,9 +50,7 @@ export default function ClaimsPage() {
           const quiet = c.sources.filter((s) => { const src = getSource(s.source); return src && isQuietSource(src); });
           return (
             <li key={c.id} data-tags={claimTags(c)}
-              className={c.contested
-                ? "rounded border border-amber-300 bg-amber-50 p-4 dark:border-amber-800 dark:bg-amber-950/20"
-                : "rounded border border-neutral-200 p-4 dark:border-neutral-800"}
+              className="rounded border border-neutral-200 p-4 dark:border-neutral-800"
               data-search={`${c.id} ${c.statement} ${c.capability} ${c.technique ?? ""} ${c.backing_strength} ${c.kind}`.toLowerCase()}>
               <div className="flex flex-wrap items-center gap-2 mb-2">
                 <KindBadge kind={c.kind} />
