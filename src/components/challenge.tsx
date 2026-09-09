@@ -1,0 +1,38 @@
+import type { Claim } from "@/lib/catalog";
+
+const REPO = "https://github.com/Russ-Miller/modelselfhelp";
+
+/**
+ * The only route by which anyone but the author can tell this catalog it is
+ * wrong. There is no backend, so it opens a prefilled GitHub issue -- which is
+ * also the right medium: a challenge should be public, attributable and
+ * durable, exactly like the claims it argues with.
+ *
+ * The prefill matters more than the button. "Report a problem" gets vague
+ * complaints; asking for the source that cuts against a claim gets something
+ * filable.
+ */
+export function ChallengeLink({ claim }: { claim: Claim }) {
+  const body = `Claim: ${claim.id}
+${claim.statement.replace(/\s+/g, " ").trim()}
+
+**What is wrong with it?** (delete what does not apply)
+- The finding does not hold — here is a source that cuts against it:
+- The scope is wrong — it holds, but not under the conditions stated:
+- The sources do not say this:
+- Something else:
+
+**Evidence** (a link, a paper, or something you ran yourself — an observation
+with the setup written down counts):
+
+**Who you are** (optional, for attribution if this gets filed):
+`;
+  const url = `${REPO}/issues/new?title=${encodeURIComponent(`Challenge: ${claim.id}`)}&body=${encodeURIComponent(body)}&labels=challenge`;
+
+  return (
+    <a href={url} target="_blank" rel="noopener noreferrer"
+      className="inline-flex items-center gap-1.5 rounded border border-neutral-300 px-3 py-1.5 text-xs text-neutral-700 hover:border-neutral-500 dark:border-neutral-700 dark:text-neutral-300 dark:hover:border-neutral-500">
+      <span aria-hidden>&darr;</span> Contest this claim
+    </a>
+  );
+}

@@ -1061,3 +1061,34 @@ And a naming problem worth admitting. "pending-review" implies a queue that
 will be worked. It will not be; there is more worth indexing than one
 person can check, so unreviewed is a normal permanent state. /how-this-works
 now says that outright rather than implying a backlog that is being cleared.
+
+## 2026-09-08 — MVP: someone other than Russ can use it, and can push back
+Russ made the point that we need a working slice others can use, with him
+as customer zero rather than the only customer. Two gaps stood out, and
+they map onto the two halves of that.
+
+**Nobody could find anything.** 160 claims, 141 sources, no search. A
+visitor arrives with a problem — "my agent loses track of state" — not with
+a capability slug. /search indexes every capability, claim, technique and
+source and scores in the browser: every query term must appear, title
+matches outrank body matches, shorter titles win ties. About fifty lines
+and no dependency, which the repo's own rule asks for. The index is a few
+hundred records, so it ships whole and the site stays static.
+
+**Nobody could tell us we were wrong.** That is the more important half.
+/how-this-works already admits that the weakest thing about this catalog is
+that both sides of every contested claim were assembled by the same person.
+Every claim page now carries "Contest this claim", opening a prefilled
+GitHub issue.
+
+The prefill is the part that matters. "Report a problem" collects vague
+complaints; asking specifically which of four things is wrong — the finding,
+the scope, the sourcing, or something else — and then asking for the source
+that cuts against it collects something filable. GitHub is also the right
+medium rather than a workaround: a challenge should be public, attributable
+and durable, like the claims it argues with.
+
+What this does not have: any way to observe use. No analytics, and I would
+rather have one person's argument than a thousand anonymous pageviews, so
+the feedback path came first. If nobody ever opens an issue, that is a
+finding too.
