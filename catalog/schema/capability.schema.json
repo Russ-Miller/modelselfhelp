@@ -79,9 +79,11 @@
     "status": {
       "type": "string",
       "enum": [
+        "proposed",
         "active",
         "parked"
-      ]
+      ],
+      "description": "proposed: mined from recurring framings in the literature and added without a human endorsing it. Browsable and challengeable, and marked as such. active: judged worth tracking. parked: noted, not being actively studied."
     },
     "submitted_by": {
       "$ref": "common.schema.json#/$defs/provenance"

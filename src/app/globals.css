@@ -45,6 +45,7 @@ body {
 [data-filter="none-measured"] [data-tags]:not([data-tags~="none-measured"]),
 [data-filter="searched"] [data-tags]:not([data-tags~="searched"]),
 [data-filter="pending"] [data-tags]:not([data-tags~="pending"]),
+[data-filter="proposed"] [data-tags]:not([data-tags~="proposed"]),
 [data-filter="unsearched"] [data-tags]:not([data-tags~="unsearched"]) {
   display: none;
 }

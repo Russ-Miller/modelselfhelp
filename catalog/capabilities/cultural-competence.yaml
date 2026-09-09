@@ -1,0 +1,22 @@
+id: cultural-competence
+label: "Handling culture-specific norms and viewpoints"
+summary: >-
+  Covers implicit cultural norms, dialects, local pragmatics, and
+  representing the spread of a population's views; excludes general
+  multilingual fluency or factual trivia about cultures.
+description: >-
+  Proposed from the ingestion pipeline rather than chosen by hand. 5
+  papers in the review queue independently pointed at this same
+  competence, arriving under 5 different names (cultural-perspective-
+  diversity, dialect-cultural-competence, cultural-competence, cultural-
+  knowledge, cultural-alignment-transfer), which is the signal that it is
+  a real recurring topic and not one author's framing. Five separate
+  proposals describe the same competence, making it clearly recurring
+  rather than a one-off framing.
+tags: [general]
+discriminator: >-
+  Covers implicit cultural norms, dialects, local pragmatics, and
+  representing the spread of a population's views; excludes general
+  multilingual fluency or factual trivia about cultures.
+status: proposed
+submitted_by: agent:claude-opus-5@Russ-Miller

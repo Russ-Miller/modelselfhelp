@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { claimsFor, getCapabilities, getCapability, techniquesFor } from "@/lib/catalog";
+import { CapabilityChallengeLink } from "@/components/challenge";
+import { ProposedBadge } from "@/components/badges";
 import { ContestedBadge, KindBadge, StrengthBadge } from "@/components/badges";
 
 export function generateStaticParams() {
@@ -23,6 +25,14 @@ export default async function CapabilityPage({ params }: PageProps<"/capabilitie
       <header className="space-y-2">
         <div className="text-sm text-neutral-500"><code className="font-mono">{c.id}</code> &middot; {c.status}</div>
         <h1 className="text-3xl font-semibold tracking-tight">{c.label}</h1>
+        {c.status === "proposed" && (
+          <p className="rounded border border-sky-300 bg-sky-50 p-3 text-sm text-sky-900 dark:border-sky-800 dark:bg-sky-950/30 dark:text-sky-200">
+            <strong className="font-medium">Proposed.</strong> Several papers in the review queue
+            converged on this framing, so the pipeline added it. Nobody has decided it is the right
+            way to carve up the subject &mdash; it may be two topics, or a duplicate of another, or
+            not a topic at all. Saying so is useful.
+          </p>
+        )}
         <p className="text-lg text-neutral-700 dark:text-neutral-300">{c.summary}</p>
         {c.aliases?.length ? <p className="text-sm text-neutral-500">Also called: {c.aliases.join(", ")}</p> : null}
         {c.tags?.length ? <p className="text-sm text-neutral-500">Tags: {c.tags.join(", ")}</p> : null}
@@ -74,6 +84,14 @@ export default async function CapabilityPage({ params }: PageProps<"/capabilitie
           {c.related.map((r, i) => <span key={r}>{i > 0 && ", "}<Link href={`/capabilities/${r}`} className="hover:underline">{getCapability(r)?.label ?? r}</Link></span>)}
         </section>
       ) : null}
+      <section className="space-y-2 border-t border-neutral-200 pt-6 dark:border-neutral-800">
+        <CapabilityChallengeLink capability={c} />
+        <p className="text-xs text-neutral-500">
+          Capabilities are a way of carving up the subject, and carvings are arguable. Say so if
+          this one is wrong &mdash; especially a proposed one, which a pipeline added because
+          several papers used the same framing, not because anyone decided it was right.
+        </p>
+      </section>
     </article>
   );
 }

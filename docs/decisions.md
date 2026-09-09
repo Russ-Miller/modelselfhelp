@@ -1131,3 +1131,42 @@ metadata, anything else is fetched, archived verbatim and hash-pinned, and
 either way it goes into the front-page slot. It creates the source only —
 drafting a claim stays separate, so nothing gets asserted as a side effect of
 saving a link.
+
+## 2026-09-09 — Capabilities can be proposed too; no voting
+Russ: drop the candidate-capabilities staging area, add them to the list,
+and give people a way to ask for one to be revised or removed.
+
+Right, and consistent with a rule already made. Claims got `pending-review`
+on the argument that an index is useful before it is verified and hiding
+half of it is a lie by omission. Capabilities were still gated by hand,
+sitting in `pipeline/capability-shortlist.yaml` as "suggestions, not
+capabilities" — the same staging problem with a different name.
+
+So `status: proposed` joins the capability enum and the nine remaining
+shortlisted candidates are now capabilities. Each says on its own page that
+a pipeline added it because several papers converged on the framing, and
+that it may be two topics, a duplicate, or not a topic at all.
+
+They are excluded from `unsolvedCapabilities()`, on the same line as
+pending claims: a proposed capability having no measured mitigation says
+nothing, because nobody has decided it is a real topic yet. Visible
+everywhere, authoritative nowhere.
+
+**On thumbs up and down, a caution using Russ's own reasoning.** The
+decision log for 2026-09-03 records rejecting up/down voting on capability
+importance because "a vote is trivially gameable and carries no
+provenance". That argument has not weakened. A vote count would also be the
+only number on a site that deliberately has no scores, and the first thing
+anyone optimises.
+
+The comment half of his suggestion is the valuable half, and it is built:
+"Suggest a change" on every capability page opens a prefilled GitHub issue
+asking which of five things is wrong — not a topic, duplicate, should be
+split, boundary wrong, name misleading — and then asking why. Same pattern
+as "Contest this claim". A disagreement with a reason attached is worth
+more than a thousand anonymous clicks, and it can be filed; a thumbs-down
+cannot.
+
+If a signal of "how many people think this matters" turns out to be needed
+later, the design already exists and is better: Importance as an
+evidence-backed claim keyed to a capability and a context, in spec §9.
