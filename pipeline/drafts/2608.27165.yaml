@@ -1,0 +1,39 @@
+arxiv_id: "2608.27165"
+title: "Prediction of Prediction (PoP): Inter-Layer Activation Fusion for
+  Single-Pass Hallucination Detection in Large Language Models"
+url: https://arxiv.org/abs/2608.27165
+drafted_at: 2026-09-09
+drafted_from: full-text
+model: claude-opus-5
+status: draft — not filed. Review, edit, then move into catalog/ by hand.
+capability: hallucination
+statement: In open-weight 7-8B instruct models, a supervised detector built on
+  how hidden states change between adjacent layers separates factually wrong
+  from correct answers better than a probe on any single layer, and shuffling
+  the layer order destroys most of the signal — so the ordering of the depth
+  trajectory, not just the content of one layer, carries the information.
+kind: mechanism
+backing_strength: single-paper
+scope_condition: Requires white-box access to intermediate activations and
+  labelled data to train the scoring head and calibrator; evaluated on English
+  closed-book QA and dialogue (TruthfulQA, HaluEval, FaithDial) with
+  Llama-3-8B, Qwen2.5-7B, Mistral-7B; predictive correlation only, no causal
+  intervention.
+technique: ""
+proposed_technique: Inter-layer transition-divergence hallucination probe
+stance_on_existing: neither
+related_claim_id: ""
+stance_reason: ""
+falsifier: A replication where a probe on the best single layer, or a
+  matched-size head on the final layer, matches the cross-layer transition
+  detector's AUROC, or where shuffling layer order leaves accuracy roughly
+  unchanged.
+evidence_note: Single paper, single author, author-verified numbers. On
+  Llama-3-8B/TruthfulQA the full method reports 75.5% AUROC vs 66.8% for the
+  best single layer, 66.4% for a matched final-layer MLP, and 58.3% with
+  shuffled layer order; baselines include logit entropy, perplexity, spectral
+  geometry, semantic entropy and an NLI verifier. Transfer to other backbones
+  and datasets loses a few points. No independent replication, and the
+  detector's advantage over the multi-sample baselines is small enough to be
+  within plausible noise given no error bars.
+confidence: low

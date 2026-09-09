@@ -115,9 +115,20 @@ export const getCapability = (id: string) => loadCatalog().capabilities.find((c)
 export const getClaims = () => loadCatalog().claims;
 /** Ingested but not yet endorsed by a human. */
 export const isPending = (c: Claim) => c.status === "pending-review";
-/** Claims that count. Everything downstream of a verdict uses this, so that
- *  ingesting an unreviewed claim can never quietly change what the catalog
- *  asserts -- which would make "pending" a label rather than a state. */
+/**
+ * Claims that carry authority. The line is: unreviewed claims are VISIBLE
+ * EVERYWHERE and AUTHORITATIVE NOWHERE.
+ *
+ * Visible, because the index is useful before it is verified -- that is the
+ * whole proposition. Hiding unreviewed content from browsing views would make
+ * the catalog look emptier than it is, and with roughly half of it unreviewed
+ * that is a large lie told by omission.
+ *
+ * Not authoritative, because a verdict derived from unchecked content is a
+ * verdict nobody made. So this is used only where a claim would silently
+ * decide something: a technique's standing, and the backtest scorecard.
+ * Listing, counting and browsing use every claim, marked.
+ */
 export const reviewedClaims = () => loadCatalog().claims.filter((c) => !isPending(c));
 export const getClaim = (id: string) => loadCatalog().claims.find((c) => c.id === id);
 export const getSources = () => loadCatalog().sources;
@@ -154,7 +165,10 @@ export function capabilitiesByGroup(): { group: TaxonomyEntry; capabilities: Cap
 }
 
 /** Claims marked contested, i.e. carrying sources on both sides. */
-export const contestedClaims = () => reviewedClaims().filter((c) => c.contested);
+/** Every contested claim, unreviewed ones included and badged. Filtering these
+ *  out would hide half the disagreements in the index, which is the opposite
+ *  of what the page is for. */
+export const contestedClaims = () => loadCatalog().claims.filter((c) => c.contested);
 
 /** Capabilities that hold at least one contested claim, with those claims. */
 export function capabilitiesWithDispute(): { capability: Capability; claims: Claim[] }[] {
@@ -262,8 +276,9 @@ export function unsolvedCapabilities(): Unsolved[] {
   const out: Unsolved[] = [];
   for (const capability of loadCatalog().capabilities) {
     if (capability.status !== "active") continue;
-    // An unreviewed claim does not establish that a weakness is documented.
-    const claims = claimsFor(capability.id).filter((c) => !isPending(c));
+    // Descriptive, not a verdict: an unreviewed claim still documents that
+    // someone found something here, which is what this test is asking.
+    const claims = claimsFor(capability.id);
     if (claims.length === 0) continue; // no documented weakness yet, so nothing to solve
     const techniques = techniquesFor(capability.id).filter((t) => t.status === "active");
     if (techniques.some((t) => claimsAboutTechnique(t.id).some(isMeasured))) continue;

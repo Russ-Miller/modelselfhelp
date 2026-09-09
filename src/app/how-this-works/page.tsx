@@ -53,11 +53,13 @@ export default function HowThisWorksPage() {
         </p>
         <p className="text-sm text-neutral-600 dark:text-neutral-400">
           Drafts are not endorsed. They enter the catalog marked{" "}
-          <strong className="font-medium text-neutral-800 dark:text-neutral-200">pending review</strong>{" "}
-          and are deliberately inert: a pending claim does not change any technique&rsquo;s
-          standing, does not count as evidence for or against anything, and is excluded anywhere
-          a claim would otherwise carry weight. It is visible so you can read it, not because
-          anyone has vouched for it.
+          <strong className="font-medium text-neutral-800 dark:text-neutral-200">pending review</strong>,
+          and the rule for those is: visible everywhere, authoritative nowhere. They appear in
+          lists, counts and the contested view like anything else, because an index is useful
+          before it is verified and hiding half of it would be a lie by omission. They are
+          excluded only where a claim would silently decide something &mdash; whether a technique
+          is judged to work, and the internal scorecard that tracks whether this catalog is
+          getting things right.
         </p>
         <p className="text-sm text-neutral-600 dark:text-neutral-400">
           Other entries were filed by hand, usually from well-known papers, when the structure of
@@ -65,7 +67,10 @@ export default function HowThisWorksPage() {
         </p>
         <p className="text-xs text-neutral-500">
           Right now: {pending.length} of {claims.length} claims are pending review, and{" "}
-          {machineDrafted.length} were drafted by a model rather than written by a person.
+          {machineDrafted.length} were drafted by a model rather than written by a person. Most
+          may stay that way. Reviewing is slow and there is more worth indexing than one person
+          can check, so &ldquo;unreviewed&rdquo; is a normal permanent state here, not a queue
+          waiting to be cleared.
         </p>
       </section>
 

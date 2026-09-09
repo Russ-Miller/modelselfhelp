@@ -1,0 +1,35 @@
+arxiv_id: "2608.24707"
+title: "Lost in Speech: Trilingual Spoken Hallucination Detection Across Audio
+  and Transcripts"
+url: https://arxiv.org/abs/2608.24707
+drafted_at: 2026-09-09
+drafted_from: full-text
+model: claude-opus-5
+status: draft — not filed. Review, edit, then move into catalog/ by hand.
+capability: evaluation-validity
+statement: "In synthetic hallucination benchmarks where faithful items are
+  human-written and hallucinated items are LLM-rewrites, a detector's binary
+  score partly measures human-vs-machine style rather than factuality: feeding
+  faithful LLM rewrites of the same truthful articles makes some fine-tuned
+  encoders flag nearly all of them as hallucinated."
+kind: mechanism
+backing_strength: single-paper
+scope_condition: Fine-tuned multilingual encoders (ReMBERT, mDeBERTa) trained
+  on an LLM-generated news hallucination corpus; provenance analysis run on
+  Russian original text only.
+technique: ""
+proposed_technique: Provenance-controlled evaluation split
+stance_on_existing: neither
+related_claim_id: ""
+stance_reason: ""
+falsifier: Detectors trained on such synthetic splits show near-baseline flag
+  rates on faithful LLM rewrites of truthful articles, i.e. their scores track
+  veracity independently of text provenance.
+evidence_note: Measured on 290 truthful human articles, 290 factcheck.kz
+  human-written fakes, 290 faithful Gemini rewrites, and synthetic
+  hallucinations. ReMBERT flagged 0.352 of human truthful vs 1.000 of faithful
+  LLM rewrites; mDeBERTa 0.221 vs 0.586, so the effect is real but
+  model-dependent. Single language, single domain, two encoders; register
+  differences between real fakes and newswire are acknowledged but not fully
+  controlled.
+confidence: medium

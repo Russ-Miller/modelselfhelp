@@ -1,0 +1,41 @@
+arxiv_id: "2608.24492"
+title: When Do Supervised UQ Ensembles Improve LLM Hallucination Detection? A
+  Robustness Study
+url: https://arxiv.org/abs/2608.24492
+drafted_at: 2026-09-09
+drafted_from: full-text
+model: claude-opus-5
+status: draft — not filed. Review, edit, then move into catalog/ by hand.
+capability: hallucination
+statement: "For closed-book hallucination detection, training a small
+  supervised classifier over many heterogeneous uncertainty scores beats the
+  best single score, but the gain comes from the diversity of sampling-based
+  black-box signals: ensembles over only single-generation token-probability
+  features add little, while black-box-only ensembles do nearly as well as the
+  full set."
+kind: mechanism
+backing_strength: replicated
+scope_condition: Four closed-weight LLMs (Gemini 2.5 Flash/Pro, GPT-4o,
+  GPT-4o-mini), nine datasets, short-form QA, claim-level long-form, and
+  Python competitive-programming code; labels available offline for training;
+  no retrieval or tools at inference. Cross-domain and cross-LLM transfer
+  untested; open-weight internal-state signals untested.
+technique: ""
+proposed_technique: Supervised ensemble of uncertainty-quantification scores
+stance_on_existing: neither
+related_claim_id: ""
+stance_reason: ""
+falsifier: An evaluation where an ensemble restricted to single-generation
+  white-box token-probability features matches full or black-box ensembles, or
+  where the full ensemble fails to beat a validation-selected single scorer in
+  most settings.
+evidence_note: "AUROC over 25 stratified splits per setting; best ensemble
+  beat the best individual scorer in 30 of 32 settings and had lowest ECE in
+  29 of 32, with gains from ~100 labeled instances; ablation on five
+  short-form datasets: black-box-only ensembles beat the best black-box scorer
+  in 19 of 20 settings, white-box-only in 11 of 20. The single-scorer baseline
+  is selected on the test set, so it is optimistic. Sample-efficiency finding
+  replicates Bakman et al. Margins are often 0.01-0.02 AUROC and sometimes
+  inside confidence intervals; label quality checked against two human
+  annotators on 400 responses."
+confidence: medium

@@ -1,0 +1,41 @@
+arxiv_id: "2608.30480"
+title: "VisER: Visual Evidence and Reliance for Object Hallucination Detection
+  in LVLMs"
+url: https://arxiv.org/abs/2608.30480
+drafted_at: 2026-09-09
+drafted_from: full-text
+model: claude-opus-5
+status: draft — not filed. Review, edit, then move into catalog/ by hand.
+capability: visual-grounding
+statement: For detecting ungrounded object mentions in open-ended captions
+  from white-box vision-language models, a single internal support signal
+  (token likelihood, attention share, or image-text similarity) confuses
+  support that comes from object-specific image evidence with support that
+  comes from scene plausibility or the generated text prefix; scoring both
+  whether image tokens carry object-specific evidence and whether support is
+  more image-derived than prefix-derived separates these and raises detection
+  AUROC.
+kind: mechanism
+backing_strength: single-paper
+scope_condition: Object-existence hallucinations only, COCO/VOC category
+  vocabularies, greedy-decoded detailed-description prompts, and access to
+  internal hidden states; not tested on attributes, relations, counts, or
+  black-box APIs.
+technique: ""
+proposed_technique: two-sided visual evidence and reliance scoring
+stance_on_existing: neither
+related_claim_id: ""
+stance_reason: ""
+falsifier: A detector using a single internal support signal matching or
+  beating the two-sided score across the same models and datasets, or
+  ablations showing the evidence gate and the image-vs-prefix ratio add
+  nothing over compatibility alone.
+evidence_note: Object-level AUROC/AUPR on MSCOCO and Pascal VOC over eight
+  LVLMs (LLaVA-1.5-7B/13B, LLaVA-NeXT, InstructBLIP, MiniGPT-4, InternVL3,
+  Shikra, Qwen2.5-VL) against six training-free baselines; best average AUROC
+  on both datasets. Ablations show compatibility alone at 72.25 AUROC rising
+  to 83.88 with the evidence gate on LLaVA-1.5-7B, and counterfactuals (blank
+  image, patch shuffle, prefix removal) move each component in the predicted
+  direction. Single group, one prompt, one decoding setting; 500 images per
+  benchmark.
+confidence: medium

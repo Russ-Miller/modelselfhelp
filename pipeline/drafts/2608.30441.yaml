@@ -1,0 +1,37 @@
+arxiv_id: "2608.30441"
+title: "ECLIPSE: Self-Evolving Stealthy Prompt Injection Attack against
+  Long-Horizon Agentic Systems"
+url: https://arxiv.org/abs/2608.30441
+drafted_at: 2026-09-09
+drafted_from: full-text
+model: claude-opus-5
+status: draft — not filed. Review, edit, then move into catalog/ by hand.
+capability: prompt-injection
+statement: For long-horizon tool-calling agents (tasks needing five or more
+  calls), embedding state-transition cues — preconditions, invariants,
+  completion states — into the descriptions of the tools on the intended chain
+  is what actually steers the agent's trajectory; runtime corrective text
+  appended to tool results only patches residual drift, and the plausible user
+  prompt alone (persona, deadlines, format constraints) does not establish the
+  trajectory at all.
+kind: mechanism
+backing_strength: single-paper
+scope_condition: Attacker can modify natural-language tool metadata (malicious
+  MCP tool publication or post-registration description change) and also
+  supplies the user prompt; measured on a 120-task long-horizon benchmark with
+  an LLM safety-filter monitor.
+technique: ""
+proposed_technique: Static workflow encoding in tool descriptions
+stance_on_existing: neither
+related_claim_id: ""
+stance_reason: ""
+falsifier: An ablation on comparable long-horizon agent tasks where rewriting
+  tool descriptions with workflow cues adds little over the prompt alone, or
+  where runtime correction signals alone reach similar attack success and
+  trajectory similarity.
+evidence_note: "Ablation on the authors' own benchmark under a defended
+  DeepSeek victim: prompt-only 19-27% success, runtime correction alone 37.5%,
+  tool-description encoding 66.7%, both 69.2%. Same-lab benchmark and success
+  metric; the ablation isolates the channels but only for one victim model and
+  one filter, and the mechanism claim generalizes beyond what was tested."
+confidence: medium

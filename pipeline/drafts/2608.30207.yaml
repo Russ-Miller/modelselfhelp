@@ -1,0 +1,34 @@
+arxiv_id: "2608.30207"
+title: "SIR: Self-improving Red-teaming for Compute Use Agents"
+url: https://arxiv.org/abs/2608.30207
+drafted_at: 2026-09-09
+drafted_from: full-text
+model: claude-opus-5
+status: draft — not filed. Review, edit, then move into catalog/ by hand.
+capability: prompt-injection
+statement: For computer-use agents operating on a real OS, indirect-injection
+  success rates measured with a fixed hand-written injection template
+  understate vulnerability, because an attacker that adapts phrasing from the
+  agent's own refusal trajectories can reach substantial success on models the
+  fixed template never penetrates.
+kind: observation
+backing_strength: single-paper
+scope_condition: Black-box attacker controlling a forum comment the agent
+  reads; 50 web-to-OS tasks from RedTeamCUA; three frontier CUAs (Claude Opus
+  4.6/4.8, Gemini 3.5 Flash); success requires both the adversarial and benign
+  task to complete, scored by deterministic system-state checks.
+technique: ""
+proposed_technique: Failure-driven attack principle discovery
+stance_on_existing: neither
+related_claim_id: ""
+stance_reason: ""
+falsifier: An adaptive, feedback-driven injection search that fails to beat
+  the fixed template on models where the template scores near zero, or whose
+  gains vanish under the same deterministic joint-success oracle.
+evidence_note: "Measured on 50 sampled tasks per model, three models. Baseline
+  is RedTeamCUA's single urgency-laden template: 16%/4%/0% versus 54%/24%/28%
+  for the adaptive pipeline. An ablation separates compositional search from
+  the feedback loop, and two principles discovered on Opus 4.6 raised success
+  on the two unseen models. Small task sample; attacker and analyzer are one
+  model (Grok-4.3), so results are not shown to be attacker-independent."
+confidence: medium

@@ -1,0 +1,32 @@
+arxiv_id: "2608.26013"
+title: "VISA: Agentic Self-Evolving Data Synthesis for Multimodal Instruction
+  Following"
+url: https://arxiv.org/abs/2608.26013
+drafted_at: 2026-09-09
+drafted_from: full-text
+model: claude-opus-5
+status: draft — not filed. Review, edit, then move into catalog/ by hand.
+capability: procedure-following
+statement: Fine-tuning a small multimodal model on synthesized constraint-rich
+  instructions raises adherence to output-level constraints (format, word
+  count, keywords) while lowering accuracy on perception-grounded
+  instructions, so the average can fall below the base model unless the
+  synthesis loop tracks per-constraint failures and image compatibility.
+kind: observation
+backing_strength: single-paper
+scope_condition: Qwen3.5-4B target model fine-tuned on ~15k synthesized
+  samples, evaluated on MM-IFEval C-Level vs P-Level splits
+technique: ""
+proposed_technique: verifier-bound self-evolving instruction synthesis
+stance_on_existing: neither
+related_claim_id: ""
+stance_reason: ""
+falsifier: A static constraint-rich synthesis pipeline that raises
+  output-constraint accuracy without any drop on perception-grounded
+  instruction items, across multiple target models.
+evidence_note: "One ablation table on one benchmark with one 4B backbone:
+  static pipeline moved C-Level from 62.7 to 64.9 while P-Level fell from 55.0
+  to 46.0, and adding reflection plus memory recovered P-Level to 54.0. Single
+  seed, no variance reported; P-Level has only 100 items, so the trade-off
+  size is loosely estimated."
+confidence: low
