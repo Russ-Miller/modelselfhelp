@@ -117,3 +117,9 @@ for (const f of fs.readdirSync(DRAFTS).filter((f) => /\.ya?ml$/.test(f))) {
 
 console.log(`${dryRun ? "[dry run] would file" : "filed"} ${filed}, skipped ${skipped}`);
 for (const n of notes) console.log(`  ${n}`);
+if (filed && !dryRun) {
+  // These sources land with the raw abstract as `summary` and no `brief`, so
+  // their pages show no readable digest until summarize-sources runs. That gap
+  // sat unnoticed for 74 papers; say so rather than leave it to be discovered.
+  console.log(`\n${filed} new source(s) have no brief yet. Run:\n  npm run summarize -- --all`);
+}

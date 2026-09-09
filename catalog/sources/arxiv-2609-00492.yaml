@@ -1,14 +1,14 @@
 id: arxiv-2609-00492
 kind: paper
-title: "The Privacy-Hallucination Tradeoff in Differentially Private Language Models"
+title: The Privacy-Hallucination Tradeoff in Differentially Private Language Models
 year: 2026
 date: 2026-08-31
 arxiv_id: "2609.00492"
 url: https://arxiv.org/abs/2609.00492
-tags: [ingested]
-summary: >-
-  Both privacy and factual accuracy are paramount in high-stakes domains
-  like healthcare. Concerningly, we uncover and investigate a
+tags:
+  - ingested
+summary: Both privacy and factual accuracy are paramount in high-stakes
+  domains like healthcare. Concerningly, we uncover and investigate a
   privacy-hallucination tradeoff in differentially private (DP) language
   models. First, we empirically show that models pre-trained or fine-tuned
   with DP tend to produce more hallucinations than non-DP counterparts, with
@@ -17,3 +17,37 @@ summary: >-
   mechanisms flatten output distributions, potentially redistributing
   probability mass toward factually incorr
 ingested_at: 2026-09-09
+brief: >-
+  Training a language model with differential privacy does not just make it
+  omit facts it failed to learn; it makes the model generate more incorrect
+  content, and the effect worsens as the privacy budget tightens. That cuts
+  against the expectation that DP simply suppresses rare facts.
+
+
+  GPT-J 6B was LoRA fine-tuned on 20355 Wikipedia articles (231 science, 124
+  AI, plus 20k random) chosen to postdate its pre-training cutoff, and
+  factuality of full generated articles was scored with FactScore using the
+  source article as evidence. DP pre-training was tested via VaultGemma-1B
+  (ε=2) against Gemma3-1B, Gemma-2B, Gemma2-2B and GPT-2 XL.
+
+
+  Fine-tuned FactScore fell from 37.7 at ε=∞ to 33.8 at ε=16 and 31.6 at ε=8
+  on Wikipedia AI, and 56.1 to 53.6 to 53.5 on Science. VaultGemma trailed
+  Gemma3-1B by 10.9 points on Science (39.5 vs 50.4) and 8.7 on AI (43.2 vs
+  51.9), and did not beat GPT-2 XL on Science. In a synthetic recall test,
+  ε=1311 required 30 repetitions per epoch for a fact to be learned, and at
+  ε≤13 no fact was learned at 60 repetitions.
+
+
+  Effects are measured, with base and task-tuned baselines, bootstrap CIs,
+  significance tests, and human annotation by 5 graduate students (Cohen's
+  κ=0.57–0.84). Model-human agreement on support was weak (κ=0.23–0.49), and
+  only 1 fine-tuned model family and Wikipedia-style generation were tested;
+  DP retrieval and hallucination mitigations were not.
+
+
+  If you plan to use DP training in a factuality-critical domain, budget for a
+  factuality regression, not just a utility one.
+brief_generated_at: 2026-09-09
+brief_model: claude-opus-5
+brief_source: full-text

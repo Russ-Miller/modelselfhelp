@@ -1,19 +1,55 @@
 id: arxiv-2608-28476
 kind: paper
-title: "ContextPilot: Teaching Agents for Proactive Context Management via Fine-grained RL"
+title: "ContextPilot: Teaching Agents for Proactive Context Management via
+  Fine-grained RL"
 year: 2026
 date: 2026-08-28
 arxiv_id: "2608.28476"
 url: https://arxiv.org/abs/2608.28476
-tags: [ingested]
-summary: >-
-  Long-horizon agentic tasks require large language models (LLMs) to
+tags:
+  - ingested
+summary: "Long-horizon agentic tasks require large language models (LLMs) to
   iteratively retrieve, integrate, and maintain dispersed information across
-  multi-turn interactions, but preserving all interaction histories leads to
-  a continuously growing working context. Recent proactive context
-  management methods allow models to edit their own working context with
-  specialized tools, yet they still face three key limitations: (1) a
-  limited toolset restricted to search, deletion, and summarization, with no
-  support for global planning, long-term memory, and adaptive compression;
-  (2) inefficient exploration tha
+  multi-turn interactions, but preserving all interaction histories leads to a
+  continuously growing working context. Recent proactive context management
+  methods allow models to edit their own working context with specialized
+  tools, yet they still face three key limitations: (1) a limited toolset
+  restricted to search, deletion, and summarization, with no support for
+  global planning, long-term memory, and adaptive compression; (2) inefficient
+  exploration tha"
 ingested_at: 2026-09-09
+brief: >-
+  Letting an agent edit its own working context works better when credit is
+  assigned to individual edit actions rather than to whole trajectories, and
+  when the toolset includes planning, long-term memory, and soft offloading
+  rather than just search, delete, and summarize. ContextPilot adds tools like
+  memorize/readMemory, foldHistory, compressContext, and plan, then trains
+  with context-aware partial rollout (branching at edits with high
+  context-length and entropy variation) plus snapshot-level advantages under
+  GRPO.
+
+
+  Evaluation covers long-context QA (NovelQA, ∞Bench, LongMemEval-S,
+  BrowseComp+) with Qwen3-8B, Qwen3-14B, Gemma4-E4B-it, and deep search
+  (BrowseComp, BrowseComp-ZH, GAIA, xBench-DS) with WebSailor-7B and
+  WebExplorer-8B, all in a 32K window.
+
+
+  ContextPilot-8B-RL beats StateLM-8B-RL by 3.55 average points; on deep
+  search it beats SUPO by 1.51 average points. RL adds 3.62 points over SFT on
+  average, and 5.34 on BrowseComp+. Input length per turn stabilizes near
+  8K–10K tokens where WebExplorer-8B grows to about 30K.
+
+
+  Effects are measured, with 3 runs per method, cumulative tool ablations
+  (63.49% to 80.96% on BrowseComp+), and an RL-component ablation showing
+  entropy-only branching hurts BrowseComp+ by 1.32 points. Tool ablations use
+  only Qwen3.5-397B-A17B, and some baselines are quoted from prior work rather
+  than rerun.
+
+
+  Untested outside QA and search: no coding or GUI agents, and hyperparameters
+  were not swept.
+brief_generated_at: 2026-09-09
+brief_model: claude-opus-5
+brief_source: full-text

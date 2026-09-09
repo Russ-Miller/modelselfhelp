@@ -5,15 +5,51 @@ year: 2026
 date: 2026-08-31
 arxiv_id: "2608.30959"
 url: https://arxiv.org/abs/2608.30959
-tags: [ingested, pending-review]
-summary: >-
-  Vision-Language Models (VLMs) still struggle on tasks requiring complex
-  visual understanding. We argue that the core issue is not high-level
-  reasoning, but instead failing to locate critical details in the image.
-  Due to this shortcoming, VLMs generate often plausible but incorrect
-  reasoning based on flawed perceptual grounding. To address this, we
-  propose Locator-Critic (LOCI), a training-free framework that decouples
-  visual search from evidence verification. LOCI employs a Locator agent
-  to propose candidate visual evidence and a separate Critic agent to
-  evaluate its relevance and sufficiency.
+tags:
+  - ingested
+  - pending-review
+summary: Vision-Language Models (VLMs) still struggle on tasks requiring
+  complex visual understanding. We argue that the core issue is not high-level
+  reasoning, but instead failing to locate critical details in the image. Due
+  to this shortcoming, VLMs generate often plausible but incorrect reasoning
+  based on flawed perceptual grounding. To address this, we propose
+  Locator-Critic (LOCI), a training-free framework that decouples visual
+  search from evidence verification. LOCI employs a Locator agent to propose
+  candidate visual evidence and a separate Critic agent to evaluate its
+  relevance and sufficiency.
 ingested_at: 2026-09-07
+brief: >-
+  On hard visual question answering, the bottleneck for strong VLMs is finding
+  the right region, not reasoning about it, and a verifier that never sees the
+  searcher's text is what unlocks the gain. Handing Gemini 2.5 Pro
+  ground-truth crops on V* lifts accuracy from 83.8 to 98.2, with the residual
+  1.8% traced to ambiguous questions.
+
+
+  LOCI is a training-free loop: a Locator VLM writes Python to crop candidate
+  regions, a Critic VLM sees only the crops, the image and the question, and
+  either accepts or returns targeted feedback, up to 10 turns with 4 crops per
+  turn. Tested on V* (191 questions), HR-Bench (800 questions) and VisualProbe
+  (106 samples) with Qwen3-VL-235B-Thinking and Gemini 2.5 Pro.
+
+
+  Gains: +12.1/+5.8/+11.2 for Qwen3-VL and +8.9/+4.3/+4.8 for Gemini on
+  V*/HR-Bench/VisualProbe. Ablations separate the parts: Locator alone +5.4,
+  Critic adds +3.5, and letting the Critic read the Locator's reasoning drops
+  to 87.2, below Locator-only 89.2.
+
+
+  Evidence is unusually well isolated. Token-matched baselines on V* put LOCI
+  at 92.7 with 3,690 tokens against Best-of-10 at 89.0 with 36,310,
+  Self-Consistency@10 at 89.7, and an Explicit Locate-Verify-Answer variant at
+  85.9. DyFo re-run on the same backbone reaches 89.5. Parallel locators help
+  to k=8 (96.0) then flatten.
+
+
+  All evaluation is self-run on 3 localization-heavy benchmarks; no test of
+  ambiguous-distractor cases, which still fool the Critic. If you build agent
+  loops, the transferable lesson is to starve the verifier of the actor's
+  rationale.
+brief_generated_at: 2026-09-09
+brief_model: claude-opus-5
+brief_source: full-text

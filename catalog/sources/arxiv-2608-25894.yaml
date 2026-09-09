@@ -1,19 +1,56 @@
 id: arxiv-2608-25894
 kind: paper
-title: "From Passive Response to Proactive Correction: Enhancing LLM Robustness Against Input Fact Perturbations"
+title: "From Passive Response to Proactive Correction: Enhancing LLM
+  Robustness Against Input Fact Perturbations"
 year: 2026
 date: 2026-08-26
 arxiv_id: "2608.25894"
 url: https://arxiv.org/abs/2608.25894
-tags: [ingested, pending-review]
-summary: >-
-  Large language models (LLMs) frequently produce confident yet factually
-  incorrect responses when user inputs contain misleading premises, a
-  phenomenon we attribute to fact perturbations in the input. Existing
+tags:
+  - ingested
+  - pending-review
+summary: "Large language models (LLMs) frequently produce confident yet
+  factually incorrect responses when user inputs contain misleading premises,
+  a phenomenon we attribute to fact perturbations in the input. Existing
   approaches to hallucination mitigation typically assume reliable user
   inputs, overlooking how such factual errors can actively mislead model
-  reasoning. To address this vulnerability, we propose DEDUCE, a three-
-  stage framework that transforms LLMs from passive responders into
-  proactive error correctors. DEDUCE operates in three stages: (1) detect
-  errors through fine-grained fact extraction
+  reasoning. To address this vulnerability, we propose DEDUCE, a three- stage
+  framework that transforms LLMs from passive responders into proactive error
+  correctors. DEDUCE operates in three stages: (1) detect errors through
+  fine-grained fact extraction"
 ingested_at: 2026-09-07
+brief: >-
+  Chain-of-thought makes models worse when the question itself contains a
+  false premise, because the reasoning elaborates the error rather than
+  catching it. Explicitly decomposing the input into atomic claims and
+  verifying them before answering fixes much of the gap.
+
+
+  DEDUCE is a 3-stage pipeline (detect atomic-fact errors, devise a correction
+  strategy via Generator/Reviewer/Arbiter roles, then correct), implemented as
+  prompting and as 2-stage LoRA tuning distilled from GPT-4o and Qwen2.5-14B
+  teachers. Tested on TruthfulQA, FalseQA, and MisFactQA (a new set with false
+  premises, internal contradictions, and compound errors) with Qwen2.5-7B,
+  LlaMA-3.1-8B, Gemma3-12B, plus GPT-4o-mini and DeepSeek-V3.
+
+
+  Accuracy on matched questions falls sharply once errors are injected:
+  Qwen2.5-7B from 75% to 45% (contradictory), 15% (false premise), 25%
+  (complex). CoT on TruthfulQA drops below the plain baseline (Qwen 67.11 to
+  61.84; Gemma 63.74 to 61.11). DEDUCE-T reaches 79.59 on FalseQA for
+  Gemma3-12B versus 53.60 for SFT; GPT-4o-mini goes 65.1% to 82.9% on
+  MisFactQA, DeepSeek-V3 69.9% to 84.6%.
+
+
+  Ablations remove each module (the Devise strategy matters most), token
+  counts are reported so cost is comparable to CoT and IAQ-FA, and the o3-mini
+  judge is validated against humans (Cohen's kappa = 0.936, r = 0.916). Judge
+  and teachers overlap with the evaluated setting; only 3 mid-scale open
+  models were tuned; ambiguous or adversarial inputs were not tested.
+
+
+  If you rely on CoT for factual robustness, check whether your inputs carry
+  premises first.
+brief_generated_at: 2026-09-09
+brief_model: claude-opus-5
+brief_source: full-text

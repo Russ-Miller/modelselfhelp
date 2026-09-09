@@ -1,19 +1,57 @@
 id: arxiv-2608-24138
 kind: paper
-title: "Rubrics as Visual-Repair Context for Self-Evolving UI-to-Code Generation"
+title: Rubrics as Visual-Repair Context for Self-Evolving UI-to-Code Generation
 year: 2026
 date: 2026-08-25
 arxiv_id: "2608.24138"
 url: https://arxiv.org/abs/2608.24138
-tags: [ingested]
-summary: >-
-  Large vision-language models have shown strong progress in UI-to-code
-  generation, yet their test-time self-evolution remains unstable. We first
-  identify a fundamental obstacle, termed visual repair coupling: a local
-  code edit may propagate through layout, style, and component dependencies,
-  correcting one visual mismatch while degrading regions that were
-  previously faithful. To address this issue, we present RubSE, a
-  Rubric-guided Self-Evolution framework that uses rubrics to represent
-  visual feedback as a structured visual-repair context. At each refinement
-  round, RubSE generates typed candida
+tags:
+  - ingested
+summary: "Large vision-language models have shown strong progress in
+  UI-to-code generation, yet their test-time self-evolution remains unstable.
+  We first identify a fundamental obstacle, termed visual repair coupling: a
+  local code edit may propagate through layout, style, and component
+  dependencies, correcting one visual mismatch while degrading regions that
+  were previously faithful. To address this issue, we present RubSE, a
+  Rubric-guided Self-Evolution framework that uses rubrics to represent visual
+  feedback as a structured visual-repair context. At each refinement round,
+  RubSE generates typed candida"
 ingested_at: 2026-09-09
+brief: >-
+  Iterative self-critique on UI-to-code generation does not reliably improve
+  output and often makes it worse, because a local code edit propagates
+  through layout and style dependencies and breaks regions that were already
+  correct. The authors call this visual repair coupling and show it directly:
+  over 15 rounds of naive self-refinement on Design2Code, all 15/15 GPT-5.2
+  refined rounds fall below round 0, ending at -2.73, while GPT-5.4 gains
+  +0.76 in round 1 then declines to -1.82 with 10/15 rounds below the initial
+  draft.
+
+
+  Their fix, RubSE, replaces free-form critique with typed rubrics under an
+  Evolve-Select-History loop: generate candidate rubrics across 5 visual
+  aspects, pick 1 as the round's repair target, and carry selected rubrics
+  forward as an avoid list. Tested on GPT-5.4, GPT-5.2, Claude-Sonnet-4.5,
+  Qwen3-VL-32B, Qwen3.5-9B and Qwen3.6-35B-A3B across UI2Code-Real (115
+  pages), Design2Code (484) and Design2Code-HARD (80), 10 rounds each, scored
+  by GPT-5.2 as judge.
+
+
+  At round 10, RubSE beats naive self-evolution by +1.20 overall and +0.11
+  aspect on average over 18 settings, larger on frontier models (+1.90 judge,
+  +0.16 aspect) than Qwen (+0.50, +0.06). Collapse rates fall for all 3
+  frontier models (18.9% to 12.8%) but rise for Qwen (14.8% to 18.1%). Cost is
+  1.60x API spend with GPT-5.4.
+
+
+  An ablation on UI2Code-Real isolates Select and History separately, and a
+  60-sample human preference study (p<0.01, 2 models) backs the main
+  comparison. But the judge is a VLM, gains are single-digit points, and
+  Qwen3-VL-32B loses on 2 of 3 benchmarks. Only HTML/CSS was tested.
+
+
+  If you run refinement loops on visually coupled artifacts, constrain each
+  round to 1 target rather than letting the critic rewrite freely.
+brief_generated_at: 2026-09-09
+brief_model: claude-opus-5
+brief_source: full-text

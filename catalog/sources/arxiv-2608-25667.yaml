@@ -1,19 +1,52 @@
 id: arxiv-2608-25667
 kind: paper
-title: "AI Slop and Hallucinations in Vulnerability Assessment: A Survey on Reasoning Failures and Trustworthy Mitigation"
+title: "AI Slop and Hallucinations in Vulnerability Assessment: A Survey on
+  Reasoning Failures and Trustworthy Mitigation"
 year: 2026
 date: 2026-08-26
 arxiv_id: "2608.25667"
 url: https://arxiv.org/abs/2608.25667
-tags: [ingested]
-summary: >-
-  The integration of Large Language Models (LLMs) into cybersecurity has
-  transformed vulnerability assessment, but it has also produced a
+tags:
+  - ingested
+summary: The integration of Large Language Models (LLMs) into cybersecurity
+  has transformed vulnerability assessment, but it has also produced a
   trustworthiness crisis driven by the unchecked proliferation of "AI slop."
   These artifacts, hallucinated vulnerabilities, plausible but incorrect
-  patches, and semantically repackaged bug reports, impose a cognitive
-  burden on human triage pipelines that mirrors a denial-of-service attack.
-  This paper surveys the empirical evidence, identifies a unifying
-  mechanism, and traces a path toward trustworthy triage. We formalize a
-  taxonomy of AI slop grounded in a struc
+  patches, and semantically repackaged bug reports, impose a cognitive burden
+  on human triage pipelines that mirrors a denial-of-service attack. This
+  paper surveys the empirical evidence, identifies a unifying mechanism, and
+  traces a path toward trustworthy triage. We formalize a taxonomy of AI slop
+  grounded in a struc
 ingested_at: 2026-09-09
+brief: >-
+  Fluency in security reports has stopped being a proxy for correctness, and
+  the standard mitigations aimed at that problem target provenance rather than
+  truth. This survey collects empirical failure cases of LLMs in vulnerability
+  assessment and organizes them into 3 branches: hallucinated vulnerabilities,
+  plausible but incorrect patches, and semantic repackaging of existing
+  findings into report spam.
+
+
+  The review covers IEEE Xplore, ACM DL, and arXiv with 2 independent
+  screeners, retaining studies with concrete failure evidence rather than
+  aggregate scores. Cited results include models reporting vulnerabilities in
+  benign code, judgments flipping under semantics-preserving variable
+  renaming, patches that fix symptoms while introducing new CWEs, and readers
+  preferring incorrect AI explanations for their clarity. The cURL case is the
+  operational anchor: by mid-2025 roughly 20% of HackerOne submissions were
+  low-quality AI slop while valid reports fell to around 5%, and the program
+  was discontinued in January 2026.
+
+
+  Nothing here is measured by the authors. The Deductive Coverage Score and
+  the 2 proposed instruments, CVE-Bench and Slop-Score, are specified but not
+  run; no baselines, no datasets, no discrimination numbers. The claim that
+  chain-of-thought and tool use narrow but do not close the gap rests on cited
+  work, not new experiments.
+
+
+  Useful as a framing and a benchmark design document, not as evidence about
+  any specific model.
+brief_generated_at: 2026-09-09
+brief_model: claude-opus-5
+brief_source: full-text

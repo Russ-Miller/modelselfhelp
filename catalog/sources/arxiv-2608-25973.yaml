@@ -1,19 +1,56 @@
 id: arxiv-2608-25973
 kind: paper
-title: "SciMIF: Understanding Multimodal Instruction Following in Scientific Domains"
+title: "SciMIF: Understanding Multimodal Instruction Following in Scientific
+  Domains"
 year: 2026
 date: 2026-08-26
 arxiv_id: "2608.25973"
 url: https://arxiv.org/abs/2608.25973
-tags: [ingested]
-summary: >-
-  Understanding instruction-following capabilities in scientific domains is
-  essential for effectively leveraging Multimodal Large Language Models
-  (MLLMs) to advance the development of scientific fields. In this work, we
-  introduce SciMIF, a novel benchmark designed to evaluate the capability of
-  MLLMs in following complex scientific instructions. Specifically, based on
-  an extensive analysis of 22 distinct tasks across 5 representative
-  scientific disciplines, we propose a comprehensive taxonomy comprising 10
-  constraint groups that captures both general functional requirements and
-  discipline-specifi
+tags:
+  - ingested
+summary: Understanding instruction-following capabilities in scientific
+  domains is essential for effectively leveraging Multimodal Large Language
+  Models (MLLMs) to advance the development of scientific fields. In this
+  work, we introduce SciMIF, a novel benchmark designed to evaluate the
+  capability of MLLMs in following complex scientific instructions.
+  Specifically, based on an extensive analysis of 22 distinct tasks across 5
+  representative scientific disciplines, we propose a comprehensive taxonomy
+  comprising 10 constraint groups that captures both general functional
+  requirements and discipline-specifi
 ingested_at: 2026-09-09
+brief: >-
+  Models that answer a science question correctly often still violate the
+  constraints attached to it, and scaling parameters does not fix constraint
+  adherence. SciMIF separates scientific correctness from instruction
+  adherence and finds the two only weakly coupled.
+
+
+  The benchmark converts 22 tasks from 13 scientific datasets across
+  chemistry, geography, biology, materials science, and physics into
+  constrained instructions, using an expert taxonomy of 10 functional
+  constraint groups and 42 discipline-adapted constraints. It holds 2,527
+  samples, 27.50% with images, scored by CSR, ISR, and DRFR across 4
+  closed-source and 7 open-source MLLMs.
+
+
+  GPT-5.2 leads at 65.67% overall ISR versus 57.39% for Qwen3.5-397B-A17B.
+  Chemistry is hardest (GPT-5.2 ISR 46.33%) against materials science at
+  78.07%. InternVL3.5 8B scores 51.37% and 38B 51.64%; Qwen3.5-27B 51.37%
+  drops to 50.41% at 122B. General constraints trail scientific ones (GPT-5.2
+  74.65% vs 88.74% DRFR), and letter constraints sit at 51.30%.
+  Correct-and-followed stays below 30% for every model, with about 20%
+  correct-but-violated.
+
+
+  Evidence is measured on a fixed benchmark, with constraint injection
+  validated automatically plus human review (884 samples revised). The scaling
+  claim rests on within-family comparisons, not matched training; constraint
+  verification partly uses LLM-as-a-judge. No fine-tuning or prompting remedy
+  was tested.
+
+
+  Treat instruction adherence as a separate axis from domain accuracy when
+  picking a science model.
+brief_generated_at: 2026-09-09
+brief_model: claude-opus-5
+brief_source: full-text

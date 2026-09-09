@@ -1,19 +1,57 @@
 id: arxiv-2608-24707
 kind: paper
-title: "Lost in Speech: Trilingual Spoken Hallucination Detection Across Audio and Transcripts"
+title: "Lost in Speech: Trilingual Spoken Hallucination Detection Across Audio
+  and Transcripts"
 year: 2026
 date: 2026-08-25
 arxiv_id: "2608.24707"
 url: https://arxiv.org/abs/2608.24707
-tags: [ingested]
-summary: >-
-  While text-based hallucination detection has been extensively studied,
-  spoken hallucination detection remains largely unexplored, particularly
-  for low-resource languages. We present the first multilingual spoken
-  hallucination benchmark comprising 12,013 news samples across English,
-  Russian, and Kazakh with controlled hallucinations of three types and
-  three severity levels. Samples comprise original articles and aligned
+tags:
+  - ingested
+summary: While text-based hallucination detection has been extensively
+  studied, spoken hallucination detection remains largely unexplored,
+  particularly for low-resource languages. We present the first multilingual
+  spoken hallucination benchmark comprising 12,013 news samples across
+  English, Russian, and Kazakh with controlled hallucinations of three types
+  and three severity levels. Samples comprise original articles and aligned
   hallucinated counterparts in text and audio. We complement the synthetic
   corpus with 290 fact-checked fake news items collected natively in Russian
   (225) and Kazakh (65), transl
 ingested_at: 2026-09-09
+brief: >-
+  Feeding audio-language models a transcript beats feeding them the audio for
+  spoken hallucination detection, and a detector's apparent factuality skill
+  can be largely style detection instead.
+
+
+  The benchmark is 12,013 news samples in English, Russian and Kazakh, each an
+  original article or an LLM-generated hallucinated counterpart with 3 types
+  (fabrication, contradiction, context inconsistency) and 3 severity levels,
+  rendered through language-specific TTS then ASR. A real-world split adds 290
+  fact-checked fakes from factcheck.kz (225 Russian, 65 Kazakh) with matched
+  truthful negatives. Models: 4 fine-tuned multilingual encoders and 5
+  zero-shot audio decoders (1.5B-33B).
+
+
+  ASR error was EN 7.30%/2.74%, RU 9.08%/4.74%, KZ 34.04%/16.90% WER/CER.
+  Encoders reached binary F1 0.52-0.89 but only 0.14-0.68 on type and
+  0.15-0.66 on severity. Decoders on direct audio were near chance for the
+  small ones; transcripts generally won. Synthetic-trained encoders
+  transferred to real fakes at macro-F1 0.82-0.88 on original text.
+
+
+  The provenance analysis is the sharpest part: faithful Gemini rewrites of
+  truthful articles, changing style but no facts, pushed ReMBERT's flag rate
+  from 0.352 to 1.000, while mDeBERTa went only to 0.586. That isolates style
+  from veracity within 1 language (Russian, original text only).
+
+
+  Boundaries: read TTS speech, not spontaneous; news domain only; 3 languages;
+  decoders never fine-tuned on audio, so audio numbers are a lower bound.
+
+
+  Treat synthetic hallucination binary scores as inflated unless provenance is
+  controlled.
+brief_generated_at: 2026-09-09
+brief_model: claude-opus-5
+brief_source: full-text

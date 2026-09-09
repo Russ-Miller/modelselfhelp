@@ -1,19 +1,60 @@
 id: arxiv-2608-29092
 kind: paper
-title: "EviAnchor: Mitigating Hallucinations in Large Vision-Language Models via Regional Visual Evidence Compensation"
+title: "EviAnchor: Mitigating Hallucinations in Large Vision-Language Models
+  via Regional Visual Evidence Compensation"
 year: 2026
 date: 2026-08-29
 arxiv_id: "2608.29092"
 url: https://arxiv.org/abs/2608.29092
-tags: [ingested]
-summary: >-
-  Large vision-language models (LVLMs) frequently generate content
+tags:
+  - ingested
+summary: Large vision-language models (LVLMs) frequently generate content
   unsupported by visual inputs. Preliminary experiments show that visual
   evidence is primarily incorporated into answer-side representations in
   early-to-middle decoder layers, while its direct influence progressively
   weakens in later layers. This attenuation suggests that visual evidence
   acquired earlier may be insufficiently utilized during subsequent
-  generation. Based on this observation, we propose EviAnchor, a
-  training-free and single-branch inference framework that preserves and
-  reactivates visual evidence throughout generatio
+  generation. Based on this observation, we propose EviAnchor, a training-free
+  and single-branch inference framework that preserves and reactivates visual
+  evidence throughout generatio
 ingested_at: 2026-09-09
+brief: >-
+  Vision-language hallucination can be reduced without training or a second
+  decoding branch by holding visual evidence in inserted "anchor" slots and
+  forcing the answer position to read them in mid-layers. Causal probes here
+  support the premise: visual influence on answer-side representations is
+  concentrated in early-to-middle decoder layers and fades later, and ablating
+  late-layer visual states leaves hallucinated objects nearly unchanged.
+
+
+  EviAnchor inserts K zero-initialized regional evidence anchor slots (default
+  3 x 3 grid, K = 9), each attending only to its image region during layers
+  0-15, then in a compensation window perturbs target-text hidden states
+  (lambda = 0.3) and transfers their attention mass to the anchors, then
+  restores native computation in upper layers. Tested on LLaVA-1.5-7B,
+  InstructBLIP-Vicuna-7B, and Qwen3-VL-4B-Instruct across POPE, CHAIR (500
+  COCO images), and MMHal-Bench (96 pairs, GPT-4 scored).
+
+
+  POPE accuracy/F1 rises 5.70/3.65 points on LLaVA-1.5, 5.56/5.78 on Qwen3-VL,
+  4.40/3.38 on InstructBLIP. CHAIRs drops 58.20 to 48.80 on LLaVA-1.5 with
+  recall preserved at 77.38; MMHal hallucination rate falls 40.6 to 29.2 on
+  Qwen3-VL. It beats VCD, ICD, CICD, VTI, ClearSight, Nullu, and MemVR on
+  every reported cell.
+
+
+  Module ablations isolate each part: removing anchoring costs 1.33 F1,
+  removing routing raises CHAIRs to 52.20, extending routing to the final
+  layer cuts recall to 71.80. Slot-count ablation exposes a failure mode the
+  headline numbers hide: 16 and 25 slots produce 8 and 25 empty responses, so
+  their low CHAIRi partly reflects lost coverage.
+
+
+  Baselines use officially recommended hyperparameters with shared decoding
+  settings, but all evaluation is self-reported, greedy decoding only, 3
+  models, and no compute-cost comparison against multi-branch methods. Treat
+  cross-layer evidence reuse as a real lever, with intervention strength
+  needing per-model tuning.
+brief_generated_at: 2026-09-09
+brief_model: claude-opus-5
+brief_source: full-text

@@ -1,19 +1,60 @@
 id: arxiv-2608-24103
 kind: paper
-title: "ACE: A Self-Correcting Agentic Canvas Editor for Multi-Slide Presentation Automation"
+title: "ACE: A Self-Correcting Agentic Canvas Editor for Multi-Slide
+  Presentation Automation"
 year: 2026
 date: 2026-08-25
 arxiv_id: "2608.24103"
 url: https://arxiv.org/abs/2608.24103
-tags: [ingested]
-summary: >-
-  Commercial design platforms increasingly edit documents through large
-  language model (LLM) agents, but two practical problems block reliable
-  deployment: legacy document formats expose only \emph{flat}, absolutely
+tags:
+  - ingested
+summary: "Commercial design platforms increasingly edit documents through
+  large language model (LLM) agents, but two practical problems block reliable
+  deployment: legacy document formats expose only \\emph{flat}, absolutely
   positioned elements, so agents must recompute coordinates and routinely
   break layouts; and design has no unique ground truth, so
   diff-against-reference metrics penalize valid-but-different outputs. We
-  present \textbf{ACE}, an agentic canvas editor over a \emph{hierarchical
-  scene-graph} with a presentation-specialized action space (98 tools),
-  paired with \textbf{CARE}, a content-aware
+  present \\textbf{ACE}, an agentic canvas editor over a \\emph{hierarchical
+  scene-graph} with a presentation-specialized action space (98 tools), paired
+  with \\textbf{CARE}, a content-aware"
 ingested_at: 2026-09-09
+brief: >-
+  Editing slides through a hierarchical scene graph rather than flat,
+  absolutely positioned XML removes most of the coordinate arithmetic that
+  breaks agent layouts, and a reference-free judge critique can serve as the
+  missing verify signal for a task with no ground truth.
+
+
+  ACE pairs a 98-tool scene-graph action space with CARE, a router that feeds
+  only the relevant deck slice, and a self-correction loop where an
+  instruction-following judge scores the original-to-prediction diff and its
+  natural-language critique becomes the next instruction. Tested on
+  figma-slide-bench-v1 (97 tasks, 94 evaluable) against a Claude-Skill HTML
+  agent and the PPTArena OpenXML baseline, across claude-sonnet-4-6, gpt-5.5,
+  gemini-3.5-flash.
+
+
+  On 53 tasks ACE reaches IF 4.45/VQ 4.02 vs HTML 4.09/3.89 and PPTArena
+  2.38/2.30, at 1.75x the speed and ~44% lower cost. On the full 94 tasks IF
+  4.23 vs 3.81, p = .010. Single-pass ACE alone scores 4.04/3.75; the loop
+  adds +0.41 IF. 66% of tasks halt after 1 pass.
+
+
+  Evidence is unusually careful about circularity: 26 blind raters, 935
+  judgments, agree with the in-loop judge on 78% of decided overall cases; 2
+  out-of-loop judge families keep the ranking and retain roughly two-thirds of
+  the +0.94 in-loop self-correction gain. Leave-one-out ablations at fixed
+  backbone isolate representation, router, tools, and loop separately.
+
+
+  VQ means are statistically indistinguishable from HTML; 9 novel tasks stay
+  low at 3.78/3.22; interactivity remains weak; everything is Figma-Slides,
+  with PowerPoint transfer untested beyond the OOXML ablation.
+
+
+  If you build document agents, the representation choice looks worth more
+  than tool count, and a critique-as-reward loop is testable without
+  references.
+brief_generated_at: 2026-09-09
+brief_model: claude-opus-5
+brief_source: full-text

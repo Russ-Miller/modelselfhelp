@@ -5,9 +5,9 @@ year: 2026
 date: 2026-09-01
 arxiv_id: "2609.00568"
 url: https://arxiv.org/abs/2609.00568
-tags: [ingested]
-summary: >-
-  Code generation aims to automatically generate source code from task
+tags:
+  - ingested
+summary: Code generation aims to automatically generate source code from task
   requirements and has attracted significant attention with the rapid
   advancement of large language models (LLMs). Despite remarkable progress,
   LLMs often struggle to generate correct code for complex software
@@ -17,3 +17,40 @@ summary: >-
   sophisticated tools, skills, and workflows, while largely overlooking the
   quality of the task requirements themselv
 ingested_at: 2026-09-09
+brief: >-
+  Rewriting the task description before coding, rather than improving the
+  coding loop, raises repository-level issue resolution. WiseSpec builds a
+  structured requirement from the codebase using a DSL of 9 primary attributes
+  and 17 sub-attributes, scores that requirement by generating code plus tests
+  and checking execution, and iteratively refines requirements classified as
+  Conflict, Omission, or Ambiguity.
+
+
+  Evaluation covers 3 benchmarks (SWE-bench-Lite, SWE-bench-Verified,
+  SWE-bench-Pro), 100 randomly sampled instances each, 2 models
+  (DeepSeek-V3.2, Qwen-Plus-2025-12-01), against Agentless, Trae-agent, and
+  Claude Code.
+
+
+  WiseSpec wins all 6 settings: %Resolved up 2%~29% and %Applied up 11%~63%
+  over baselines, average improvement of 13.17% in %Resolved. On SWE-bench-Pro
+  with Claude-Opus-4.8, Claude Code reaches 53% %Resolved and WiseSpec 56%. A
+  Wilcoxon signed-rank test (α = 0.05) gives p < 2.5 × 10−4.
+
+
+  The effect is measured, but no ablation separates the 3 components, and
+  there is no matched-budget baseline: WiseSpec runs extra generation, test
+  synthesis, and refinement iterations, so the comparison confounds
+  requirement quality with compute. The %Applied gains near 100% suggest much
+  of the benefit is patch formatting rather than reasoning.
+
+
+  The stronger-model check is 1 benchmark, 1 model, +3 points. Nothing outside
+  SWE-bench-style repository tasks was tested.
+
+
+  If you tune agent scaffolds, treat input specification as a tunable surface,
+  but demand a compute-matched comparison first.
+brief_generated_at: 2026-09-09
+brief_model: claude-opus-5
+brief_source: full-text

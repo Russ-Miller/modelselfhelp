@@ -1,19 +1,57 @@
 id: arxiv-2608-27165
 kind: paper
-title: "Prediction of Prediction (PoP): Inter-Layer Activation Fusion for Single-Pass Hallucination Detection in Large Language Models"
+title: "Prediction of Prediction (PoP): Inter-Layer Activation Fusion for
+  Single-Pass Hallucination Detection in Large Language Models"
 year: 2026
 date: 2026-08-27
 arxiv_id: "2608.27165"
 url: https://arxiv.org/abs/2608.27165
-tags: [ingested]
-summary: >-
-  Autoregressive large language models (LLMs) routinely generate factually
-  incorrect outputs with high decoding confidence, limiting their deployment
-  in high-stakes workflows. Existing output-stage uncertainty metrics can
-  fail when models are overconfident on false assertions, while multi-sample
-  verification pipelines introduce substantial memory and latency overhead.
-  This work evaluates whether internal hidden-state transition dynamics
-  during generation can signal factual errors without auxiliary decoding
-  calls. We introduce Prediction of Prediction (PoP), a mechanism that
-  captures layer-transi
+tags:
+  - ingested
+summary: Autoregressive large language models (LLMs) routinely generate
+  factually incorrect outputs with high decoding confidence, limiting their
+  deployment in high-stakes workflows. Existing output-stage uncertainty
+  metrics can fail when models are overconfident on false assertions, while
+  multi-sample verification pipelines introduce substantial memory and latency
+  overhead. This work evaluates whether internal hidden-state transition
+  dynamics during generation can signal factual errors without auxiliary
+  decoding calls. We introduce Prediction of Prediction (PoP), a mechanism
+  that captures layer-transi
 ingested_at: 2026-09-09
+brief: >-
+  How a hidden state changes from layer to layer carries more information
+  about whether an answer is factually wrong than the output logits do, and it
+  can be read off during the same forward pass used to generate the token. PoP
+  takes normalized hidden states at every layer, computes cosine divergence
+  between adjacent layers, fuses them with cross-layer attention plus temporal
+  drift, and feeds a 2-layer MLP head (fewer than 1.4 million parameters).
+
+
+  Evaluation covers Llama-3-8B-Instruct, Qwen2.5-7B-Instruct and
+  Mistral-7B-Instruct-v0.2 on TruthfulQA (817 questions), HaluEval 2.0 (10,000
+  sequences) and FaithDial (5,000 turns).
+
+
+  On TruthfulQA with Llama-3-8B, PoP reaches 75.5% AUROC against 56.1% for
+  perplexity, 66.1% for a final-layer static probe, 74.1% for semantic entropy
+  with K = 5, and 74.8% for a DeBERTa-v3 NLI verifier, at 24.4 ms/token versus
+  24.1 ms/token unhooked and 120.5 ms/token for semantic entropy. Platt
+  scaling cuts ECE from 0.142 to 0.031.
+
+
+  Ablations are the strongest part: shuffled layer order drops AUROC to 58.3%,
+  a matched final-layer MLP to 66.4%, random features to 50.1%, which isolates
+  ordered depth structure rather than head capacity. The paper itself calls
+  the numbers author-verified, with no independent replication, and declines
+  causal claims since no patching or steering was run.
+
+
+  Boundaries are stated: white-box access only, English, short outputs, no
+  long-form or reasoning-chain testing.
+
+
+  Treat the margin over multi-sample verification as unconfirmed, and the cost
+  argument as the real claim.
+brief_generated_at: 2026-09-09
+brief_model: claude-opus-5
+brief_source: full-text

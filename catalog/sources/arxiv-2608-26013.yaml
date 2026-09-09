@@ -1,19 +1,54 @@
 id: arxiv-2608-26013
 kind: paper
-title: "VISA: Agentic Self-Evolving Data Synthesis for Multimodal Instruction Following"
+title: "VISA: Agentic Self-Evolving Data Synthesis for Multimodal Instruction
+  Following"
 year: 2026
 date: 2026-08-26
 arxiv_id: "2608.26013"
 url: https://arxiv.org/abs/2608.26013
-tags: [ingested]
-summary: >-
-  Multimodal instruction-following models require training data that is
-  accurate, diverse, verifiable, and challenging. Existing synthesis
-  pipelines typically follow a one-pass generate-and-filter paradigm,
-  discarding feedback from failed samples, verifier outcomes, and
-  target-model errors. We present VISA (Visual Instruction Synthesis Agent),
-  an agentic framework that reformulates multimodal instruction synthesis as
-  a self-evolving loop. At each round, VISA analyzes an image to filter
-  incompatible constraints and discover new verifiable ones, samples
-  diversity- and difficulty-aware constraint s
+tags:
+  - ingested
+summary: Multimodal instruction-following models require training data that is
+  accurate, diverse, verifiable, and challenging. Existing synthesis pipelines
+  typically follow a one-pass generate-and-filter paradigm, discarding
+  feedback from failed samples, verifier outcomes, and target-model errors. We
+  present VISA (Visual Instruction Synthesis Agent), an agentic framework that
+  reformulates multimodal instruction synthesis as a self-evolving loop. At
+  each round, VISA analyzes an image to filter incompatible constraints and
+  discover new verifiable ones, samples diversity- and difficulty-aware
+  constraint s
 ingested_at: 2026-09-09
+brief: >-
+  Feeding verifier outcomes and target-model failure profiles back into a
+  synthesis loop produces instruction data that beats larger one-pass
+  synthetic corpora at a smaller sample count. VISA runs perception, planning,
+  reflection, and a persistent memory over an image pool, binding each
+  constraint to either a code verifier or a structured LLM judge, and reusing
+  those same contracts as RL rewards without a separate reward model.
+
+
+  Qwen3.5-27B synthesizes roughly 15k samples from the MM-IFInstruct image
+  pool; Qwen3.5-4B is the target model, evaluated on MM-IFEval and 7 general
+  benchmarks in non-thinking mode.
+
+
+  VISA-SFT-15k reaches 63.9 average on MM-IFEval versus 60.8 for the base 4B
+  and 63.0 for Qwen3.5-9B; MM-IFInstruct-23k SFT leaves the average unchanged
+  at 60.8. RL on the verifier reward reaches 64.9, with P-Level 59.0. General
+  average moves from 70.5 to 72.9, with MathVista +9.1.
+
+
+  An ablation isolates components: static pipeline 60.2, +Reflection 61.2,
+  +Memory 63.1, full 63.9. The static pipeline drops P-Level to 46.0 from a
+  base of 55.0, so naive constraint-rich synthesis harms perception behavior.
+  There is no matched-token-budget comparison, 1 model family, and the 15k vs
+  23k data sizes are not matched.
+
+
+  The registry grew from 76 to 310 constraint types over 126 rounds; 82.6% of
+  samples were labeled easy, so difficulty targeting is thin. Worth reading if
+  you build synthetic instruction data and are deciding whether closed-loop
+  feedback earns its offline compute.
+brief_generated_at: 2026-09-09
+brief_model: claude-opus-5
+brief_source: full-text

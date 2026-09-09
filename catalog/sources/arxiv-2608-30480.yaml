@@ -1,19 +1,59 @@
 id: arxiv-2608-30480
 kind: paper
-title: "VisER: Visual Evidence and Reliance for Object Hallucination Detection in LVLMs"
+title: "VisER: Visual Evidence and Reliance for Object Hallucination Detection
+  in LVLMs"
 year: 2026
 date: 2026-08-31
 arxiv_id: "2608.30480"
 url: https://arxiv.org/abs/2608.30480
-tags: [ingested]
-summary: >-
-  Object hallucination remains a persistent reliability issue in large
-  vision-language models, where generated object mentions may sound
-  plausible but lack visual grounding. Recent training-free detectors use
-  internal signals such as token likelihood, attention, visual confidence,
-  or image-text similarity to identify hallucinated objects. These signals
-  are useful, but they are often source-confounded. They measure how
-  strongly an object is supported inside the model without distinguishing
-  whether that support comes from object-specific visual evidence or the
-  generated text prefix. In difficult c
+tags:
+  - ingested
+summary: Object hallucination remains a persistent reliability issue in large
+  vision-language models, where generated object mentions may sound plausible
+  but lack visual grounding. Recent training-free detectors use internal
+  signals such as token likelihood, attention, visual confidence, or
+  image-text similarity to identify hallucinated objects. These signals are
+  useful, but they are often source-confounded. They measure how strongly an
+  object is supported inside the model without distinguishing whether that
+  support comes from object-specific visual evidence or the generated text
+  prefix. In difficult c
 ingested_at: 2026-09-09
+brief: >-
+  Internal support signals in vision-language models are source-confounded: an
+  object mention can score high because it is scene-plausible or follows from
+  the generated text prefix, not because the image contains evidence for it.
+  Separating those sources improves hallucination detection.
+
+
+  VisER is a training-free object-level score with 2 parts: Visual Evidence,
+  which gates object-context similarity by logit-lens probabilities read off
+  image tokens, and Visual Reliance, the ratio of image-derived to
+  prefix-derived support. It is scored on captions from 8 LVLMs
+  (LLaVA-1.5-7B/13B, LLaVA-NeXT, InstructBLIP, MiniGPT-4, InternVL3-8B,
+  Shikra-7B, Qwen2.5-VL) on 500 MSCOCO and Pascal VOC images, labelled by
+  CHAIR matching, against 7 training-free baselines.
+
+
+  Average MSCOCO AUROC is 84.89 vs 81.26 for GLSim; on 4 extra models 81.66 vs
+  77.42 for PAS. Against POPE-style yes/no verification on balanced subsets,
+  accuracy rises from 67.77 to 78.67 and hallucinated-object F1 from 54.75 to
+  79.42.
+
+
+  Attribution is reasonably isolated: ablations give VR alone 78.22, VE alone
+  83.88, combined 85.66; gating lifts compatibility from 72.25 to 83.88 on
+  LLaVA-1.5-7B. Counterfactuals (blank image, patch shuffle, prefix removal)
+  move each component as intended, with VR falling to 50.00 chance when the
+  prefix is removed.
+
+
+  Only object-existence errors on COCO/VOC categories are tested, not
+  attributes, relations, counts, or open-vocabulary objects, and internal
+  activations are required, so black-box APIs are out.
+
+
+  If you build hallucination filters, compare support against the prefix
+  rather than measuring support alone.
+brief_generated_at: 2026-09-09
+brief_model: claude-opus-5
+brief_source: full-text

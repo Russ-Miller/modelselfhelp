@@ -1,19 +1,53 @@
 id: arxiv-2608-29374
 kind: paper
-title: "Think, Look, and Revise: Inconsistency-Aware Visual Self-Correction in MLLMs"
+title: "Think, Look, and Revise: Inconsistency-Aware Visual Self-Correction in
+  MLLMs"
 year: 2026
 date: 2026-08-29
 arxiv_id: "2608.29374"
 url: https://arxiv.org/abs/2608.29374
-tags: [ingested]
-summary: >-
-  Tool-augmented multimodal reasoning integrates external tools (e.g.,
+tags:
+  - ingested
+summary: Tool-augmented multimodal reasoning integrates external tools (e.g.,
   object detection, depth estimation) into multimodal large language models
-  (MLLMs) to address perceptual bottlenecks in complex visual tasks.
-  However, existing approaches rarely verify tool outputs, limiting their
-  ability to detect and recover from tool failures. We propose ReVISE, a
-  framework that equips MLLMs with verification and dynamic error recovery
-  for tool-augmented reasoning. ReVISE introduces (1) a curated training
-  dataset that supervises reflective behaviors, enabling models to validate
-  tool-derived evidence, reform
+  (MLLMs) to address perceptual bottlenecks in complex visual tasks. However,
+  existing approaches rarely verify tool outputs, limiting their ability to
+  detect and recover from tool failures. We propose ReVISE, a framework that
+  equips MLLMs with verification and dynamic error recovery for tool-augmented
+  reasoning. ReVISE introduces (1) a curated training dataset that supervises
+  reflective behaviors, enabling models to validate tool-derived evidence,
+  reform
 ingested_at: 2026-09-09
+brief: >-
+  Training a multimodal model to distrust its own vision tools helps, but the
+  gains are confined to perception-heavy tasks and come at a cost on
+  knowledge-heavy ones. ReVISE adds supervised trajectories that explicitly
+  demonstrate verification, tool-retry, and fallback to intrinsic perception,
+  then GRPO with a self-correction reward (keyed to a "re-examine" token) and
+  a grounding reward combining IoU and IoU improvement over the trajectory.
+
+
+  Backbones are Qwen2.5-VL-3B and 7B, with 4 tools (open-vocabulary detection,
+  ZoomIn, edge detection, depth), SFT trajectories synthesized by
+  Gemini-2.5-Pro from SAT, TACO and TallyQA, evaluated on CountBench,
+  CV-Bench, BLINK, BLINK-HARD, MMVP, MMSTAR, MMMU, MMBench, MathVista.
+
+
+  ReVISE-3B averages 67.89 vs 66.77 for ReVPT-3B; ReVISE-7B averages 73.15 vs
+  71.81. Gains over the 3B base are 5.86%, 11.28% and 9.94% on CountBench,
+  CVBench and BLINK. MMMU and MathVista drop (-1.69 and -5.83 at 3B).
+
+
+  The reward ablation is matched on cold-start initialization: BLINK-HARD
+  56.80 to 61.20% from r_correction, CVBench 79.24 to 82.10% from r_grounding,
+  83.83 and 63.89% combined. The data ablation compares against a locally
+  reproduced ReVPT cold-start, since official checkpoints were unavailable;
+  MMSTAR falls 52.61% to 47.53% there.
+
+
+  Only 1 model family, 2 sizes, and synthetic trajectories from a proprietary
+  teacher. Treat verification training as a targeted grounding intervention,
+  not a general reasoning gain.
+brief_generated_at: 2026-09-09
+brief_model: claude-opus-5
+brief_source: full-text

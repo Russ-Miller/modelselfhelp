@@ -1,19 +1,51 @@
 id: arxiv-2608-24966
 kind: paper
-title: "Targeting the Attention Heads Behind Object Hallucination in LLaVA"
+title: Targeting the Attention Heads Behind Object Hallucination in LLaVA
 year: 2026
 date: 2026-08-25
 arxiv_id: "2608.24966"
 url: https://arxiv.org/abs/2608.24966
-tags: [ingested]
-summary: >-
-  Vision-language models such as LLaVA-1.5-7B often hallucinate objects
-  absent from the image when generating captions. We ask whether an
-  interpretability diagnosis of this failure can guide a targeted fix, and
-  we measure what that fix actually changes. We rank attention heads by how
-  much their image attention drops around hallucinated object words, then
-  screen the shortlist by ablating candidate heads and measuring the change
-  in hallucination-token log probability, yielding a 32-head set. We
-  restrict two interventions to these heads: a head-sliced LoRA adapter and
-  an inference-time grounding co
+tags:
+  - ingested
+summary: "Vision-language models such as LLaVA-1.5-7B often hallucinate
+  objects absent from the image when generating captions. We ask whether an
+  interpretability diagnosis of this failure can guide a targeted fix, and we
+  measure what that fix actually changes. We rank attention heads by how much
+  their image attention drops around hallucinated object words, then screen
+  the shortlist by ablating candidate heads and measuring the change in
+  hallucination-token log probability, yielding a 32-head set. We restrict two
+  interventions to these heads: a head-sliced LoRA adapter and an
+  inference-time grounding co"
 ingested_at: 2026-09-09
+brief: >-
+  Attention-head diagnostics in a vision-language model can be converted into
+  an intervention that actually moves behavior, but the resulting gain is
+  partly a shift toward saying less. In LLaVA-1.5-7B, heads were ranked by how
+  much their image attention drops around hallucinated object words, then
+  screened by single-head ablation on hallucination-token log probability,
+  giving a 32-head set spanning 19 layers. Both a head-sliced LoRA adapter
+  (DPO-style, r=8, α=16) and an inference-time grounding penalty on object
+  logits were restricted to those heads.
+
+
+  On 400 held-out COCO val2014 images, the combined method cut CHAIRs from
+  0.3700 to 0.2300 and CHAIRi from 0.1558 to 0.0958 (paired sign-flip tests, p
+  = 0.0001). Grounding alone did not reduce CHAIRi (p = 0.2096). Average
+  caption length fell from 61.1 to 29.6 words and object recall from 0.78 to
+  0.70.
+
+
+  Two controls support attribution. A layer-matched random-head LoRA trained
+  identically stayed at CHAIRs 0.400 on a 200-image split, while the
+  selected-head adapter reached 0.100. Under fixed token budgets the reduction
+  persisted, growing from 23% at 64 tokens to 58% at 128, and beat SPIN and
+  VCD at every budget.
+
+
+  No fully length-matched baseline, no all-head LoRA control, no human
+  evaluation, 1 model, 1 prompt, COCO annotations only. Treat this as evidence
+  that diagnostic head selection carries real leverage, not that caption
+  quality improves.
+brief_generated_at: 2026-09-09
+brief_model: claude-opus-5
+brief_source: full-text

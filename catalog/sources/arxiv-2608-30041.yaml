@@ -1,19 +1,63 @@
 id: arxiv-2608-30041
 kind: paper
-title: "Reachability-Based Capability Confinement for LLM Agents under Indirect Prompt Injection"
+title: Reachability-Based Capability Confinement for LLM Agents under Indirect
+  Prompt Injection
 year: 2026
 date: 2026-08-30
 arxiv_id: "2608.30041"
 url: https://arxiv.org/abs/2608.30041
-tags: [ingested]
-summary: >-
-  Large language model agents place outputs from external skills into their
-  execution context, allowing attacker-controlled data to influence later
-  privileged actions. Existing defenses mainly classify untrusted content or
-  authorize proposed operations. They do not directly address how an agent's
-  future authority should change once untrusted data enters its state. We
-  present SkillGuard, a harness-level enforcement layer that treats this
-  event as contamination and restricts future capabilities to disconnect the
-  resulting state from deployer-defined forbidden states. Given sound skill
-  summaries an
+tags:
+  - ingested
+summary: Large language model agents place outputs from external skills into
+  their execution context, allowing attacker-controlled data to influence
+  later privileged actions. Existing defenses mainly classify untrusted
+  content or authorize proposed operations. They do not directly address how
+  an agent's future authority should change once untrusted data enters its
+  state. We present SkillGuard, a harness-level enforcement layer that treats
+  this event as contamination and restricts future capabilities to disconnect
+  the resulting state from deployer-defined forbidden states. Given sound
+  skill summaries an
 ingested_at: 2026-09-09
+brief: >-
+  Post-hoc capability confinement can hold indirect prompt injection to
+  near-zero attack success without any extra model calls, but it costs benign
+  utility. SkillGuard sits in the agent harness: when a skill returns output
+  flagged by policy as untrusted, it marks the state contaminated and solves a
+  min-cut over a Skill Impact Graph to revoke capabilities or tighten
+  per-parameter "steerability envelopes" so no forbidden state stays
+  reachable.
+
+
+  Evaluation covers 4 AgentDojo suites (Travel, Slack, Banking, Workspace)
+  with Gemini 2.5 Flash and Llama3.3-70B, against No Defense, Spotlighting,
+  CaMeL, and AttriGuard, plus a purpose-built compositional attack set where
+  no single observation suffices.
+
+
+  Under ToolKnowledge attacks, ASR is 0% on Travel, Banking, Workspace for
+  both backends; Slack stays at 4.76% (Gemini) and 14.29% (Llama).
+  Fractional-flow restriction keeps 93.21–94.08% of capabilities on Travel
+  versus 76.25–79.29% for binary, at the same 0% ASR. On compositional attacks
+  with Llama, ASR 8.00% and utility under attack 81.82%; with Gemini, 14.29%
+  versus CaMeL's 14.00% but benign utility 92.27% versus 82.27%. Overhead is
+  at most 10.02 ms per task on 3 suites, 7.17–12.56 s on Workspace; CaMeL and
+  AttriGuard cost up to 15 model calls and 69K tokens.
+
+
+  Evidence includes an incremental ablation (IRM only, +binary cut,
+  +fractional-flow), 5 runs per single-step attack and 10 for compositional,
+  and a policy-sensitivity test: conservative envelopes hold ASR at 0% but
+  drop retention to 82.50% and BU from 60% to 45%; unconstrained envelopes
+  remove all tools. The compositional benchmark is self-constructed and
+  self-validated.
+
+
+  Guarantees are conditional on a trusted harness and correct skill summaries,
+  and utility falls sharply in places (Llama-Travel BU 40.00% undefended to
+  23.64% with IRM+FFC). Direct jailbreaks, text-to-text attacks, poisoning,
+  and multi-agent settings are out of scope. If you are choosing a runtime
+  injection defense, this is the case for cheap static reachability analysis
+  over LLM-in-the-loop authorization.
+brief_generated_at: 2026-09-09
+brief_model: claude-opus-5
+brief_source: full-text

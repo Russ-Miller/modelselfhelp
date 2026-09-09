@@ -1,19 +1,59 @@
 id: arxiv-2609-01736
 kind: paper
-title: "Harness Engineering in LLM Tool Use via Agent-Native Reusable Tool Primitives"
+title: Harness Engineering in LLM Tool Use via Agent-Native Reusable Tool Primitives
 year: 2026
 date: 2026-09-01
 arxiv_id: "2609.01736"
 url: https://arxiv.org/abs/2609.01736
-tags: [ingested, pending-review]
-summary: >-
-  Large language models (LLMs) augmented with external tools have
+tags:
+  - ingested
+  - pending-review
+summary: "Large language models (LLMs) augmented with external tools have
   demonstrated remarkable capability in solving complex real-world tasks.
   However, existing approaches suffer from two key challenges: brittle
-  multi-step and multi-turn reasoning caused by incompatible tool output
-  types and API schemas, and performance degradation under large tool
-  catalogues. To address these, we introduce \textbf{Tool Primitives}, a
-  design that replaces rigid API schema-based invocation with natural
-  language as the interface for tool calling, where each tool is wrapped
-  with an LLM interface that handles schema reso
+  multi-step and multi-turn reasoning caused by incompatible tool output types
+  and API schemas, and performance degradation under large tool catalogues. To
+  address these, we introduce \\textbf{Tool Primitives}, a design that
+  replaces rigid API schema-based invocation with natural language as the
+  interface for tool calling, where each tool is wrapped with an LLM interface
+  that handles schema reso"
 ingested_at: 2026-09-07
+brief: >-
+  Wrapping each tool in its own LLM that accepts natural language and resolves
+  the API schema internally, rather than putting raw schemas in the caller's
+  context, is where nearly all the gain comes from in a tool-use harness.
+
+
+  HEART is a Planner-Router-Verifier multi-agent pipeline over ToolFace, a
+  repository of 25,519 functions (16,464 ToolBench live APIs, 4,348 coding
+  tools, and others) retrieved on demand by semantic search. Qwen3-8B backs
+  every role, with a re-planning budget of B = 3, evaluated on ToolBench,
+  NESTFUL, tau2-Bench, ACEBench and BFCLv4.
+
+
+  HEART reports 75.1% average Pass Rate on ToolBench versus 73.4 for
+  Claude-4.6-Sonnet (DFSDT), 0.44 Full Acc. on NESTFUL one-shot versus 0.40
+  for GPT-5.4 and 0.09 for DeepSeek-V3, 86.9% overall on ACEBench, and 69.38%
+  Memory Overall on BFCLv4. On 50 hand-built real-world tasks scored by human
+  annotators it completes 84% versus 20-24% for 3 frontier models.
+
+
+  The ablation isolates the cause: removing ToolFace and Tool Primitives drops
+  ToolBench Pass from 75.1 to 16.1 and NESTFUL Full Acc. from 0.44 to 0.06;
+  removing the Verifier gives 47.6 and 0.15. Budget sweeps saturate at B = 3.
+
+
+  There is no matched-token-budget baseline: HEART spends 21,684-24,531 tokens
+  per tau2-Bench task against roughly 5,000-8,000 for single models, and the
+  cost advantage comes from a cheap 8B backbone. All numbers are
+  self-reported, 1 backbone family, and the 50-task benchmark is authored by
+  the same team.
+
+
+  Treat the interface change, not the agent scaffolding, as the claim worth
+  testing.
+brief_generated_at: 2026-09-09
+brief_model: claude-opus-5
+brief_source: full-text
+brief_unverified_figures:
+  - 5,000

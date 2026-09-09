@@ -1,19 +1,54 @@
 id: arxiv-2608-29352
 kind: paper
-title: "Cross-Relational Preference Learning for Better LLM Instruction Following"
+title: Cross-Relational Preference Learning for Better LLM Instruction Following
 year: 2026
 date: 2026-08-29
 arxiv_id: "2608.29352"
 url: https://arxiv.org/abs/2608.29352
-tags: [ingested]
-summary: >-
-  Large Language Models (LLMs) still exhibit limited capability in following
-  complex instructions. While existing approaches often rely on preference
-  learning to enhance this ability, they typically overlook the
+tags:
+  - ingested
+summary: "Large Language Models (LLMs) still exhibit limited capability in
+  following complex instructions. While existing approaches often rely on
+  preference learning to enhance this ability, they typically overlook the
   relationships between the permissible response spaces of different
   instructions, which restricts a model to align with subtle and diverse
   constraint variations. To address this, we propose Cross-Relational
   Preference Learning (CRPL), a novel framework for constructing preference
-  data that explicitly models inter-instruction relationships through two
-  key techniques: Cross-Relationship Per
+  data that explicitly models inter-instruction relationships through two key
+  techniques: Cross-Relationship Per"
 ingested_at: 2026-09-09
+brief: >-
+  Preference data built by perturbing instructions so that the perturbed
+  response space contains, partially overlaps, or is disjoint from the
+  original one trains better instruction followers than perturbation schemes
+  that only use the disjoint (opposing-constraint) case. The gain comes from
+  the data construction, not the optimizer.
+
+
+  CRPL decomposes an instruction into atomic constraints with DeepSeek v3.1,
+  generates perturbed variants targeting each of the 3 relationship types,
+  samples positives and negatives from each sub-region of the combined
+  response space, and verifies each atomic constraint with a generated code
+  function that must exceed 80% accuracy on six LLM-generated test cases.
+  Backbones are Qwen2.5-7B-Instruct and Llama3.1-8B-Instruct; evaluation on
+  IFEval, IFBench, a 200-instruction Perturbed-IF set, and FollowBench.
+
+
+  With DPO on Qwen2.5-7B, average accuracy rises from 52.8 (base) and 55.5
+  (AutoIF) to 62.4; on Llama3.1-8B, 65.2 versus 60.7 for AutoIF. Training size
+  is matched at 12k pairs across all offline baselines. Ablations remove each
+  relationship type (90.7 to 82.9-85.9 Acc_ins) and each sampling region, and
+  compare verification schemes: atomic verification gives 0 false positives
+  versus 4 for LLM-as-judge.
+
+
+  Analysis is confined to 1 backbone with IFEval training. RLVR baselines use
+  different base models and 22k data, so that comparison is not matched.
+  Online DPO gains are smaller and uneven.
+
+
+  If you build preference data by perturbing constraints, vary the
+  relationship, not just the polarity.
+brief_generated_at: 2026-09-09
+brief_model: claude-opus-5
+brief_source: full-text

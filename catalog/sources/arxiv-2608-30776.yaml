@@ -1,19 +1,61 @@
 id: arxiv-2608-30776
 kind: paper
-title: "Likelihood-Constrained Acoustic Reranking for Training-Free Hallucination Mitigation in LLM-Based ASR"
+title: Likelihood-Constrained Acoustic Reranking for Training-Free
+  Hallucination Mitigation in LLM-Based ASR
 year: 2026
 date: 2026-08-31
 arxiv_id: "2608.30776"
 url: https://arxiv.org/abs/2608.30776
-tags: [ingested]
-summary: >-
-  Large language model (LLM)-based automatic speech recognition (ASR)
-  systems achieve strong performance on conventional speech data by
-  leveraging powerful linguistic priors and multilingual capabilities.
-  However, under challenging conditions, these priors can override acoustic
-  evidence, resulting in unintended translation, instruction execution,
-  repetition, or catastrophic deletion. We propose Likelihood-Constrained
-  Acoustic Reranking (LCAR), a training-free decoding method that improves
-  acoustic grounding while preserving support from the base model. At each
-  decoding step, LCAR first retains t
+tags:
+  - ingested
+summary: Large language model (LLM)-based automatic speech recognition (ASR)
+  systems achieve strong performance on conventional speech data by leveraging
+  powerful linguistic priors and multilingual capabilities. However, under
+  challenging conditions, these priors can override acoustic evidence,
+  resulting in unintended translation, instruction execution, repetition, or
+  catastrophic deletion. We propose Likelihood-Constrained Acoustic Reranking
+  (LCAR), a training-free decoding method that improves acoustic grounding
+  while preserving support from the base model. At each decoding step, LCAR
+  first retains t
 ingested_at: 2026-09-09
+brief: >-
+  Constraining acoustic reranking to tokens the base model already finds
+  near-greedy removes a large share of hallucinations in LLM-based ASR without
+  any training, while unconstrained acoustic selection destroys recognition.
+
+
+  LCAR admits tokens within delta nats of the greedy token, then reranks them
+  with an acoustic compatibility score built from attention-pooled audio
+  embeddings passed through the existing LM head. It was tested on
+  Qwen3-ASR-1.7B, Qwen2-Audio-7B Base, Kimi-Audio-7B-Instruct and
+  GLM-ASR-Nano-2512, using 2 human-audited 500-utterance challenge suites
+  (TTS-based and open-source speech) covering translation, instruction
+  execution, repetition and catastrophic deletion, plus 2,620 LibriSpeech
+  test-clean and 5,000 AISHELL2 utterances.
+
+
+  At delta = 0.60, LCAR removes 38.8-57.1% of detector-identified
+  hallucinations. NetHIR ranges 5.7-43.7 points on IndexTTS2 and 52.8-70.9 on
+  OpenSpeech. WER/CER shifts stay small: +0.002%/-0.034% for Qwen3,
+  -0.032%/-0.154% for Kimi, +0.105%/+0.129% for Qwen2 Base.
+
+
+  Evidence is paired against same-run greedy decoding on 400 matched positives
+  and 400 negative controls per track, with an ablation over pooling and layer
+  depth. Removing the likelihood constraint drives WER/CER up by more than
+  600/1,000 percentage points; LC-DoLa reaches 46.0% HIR-Fix versus 53.1% for
+  Last-4. Hallucination detection is done by Qwen3-32B, human-audited at 93.3%
+  precision on 400 sampled positives.
+
+
+  Recovery is partial: of 3,997 events, 28.8% become faithful transcripts and
+  52.0% ordinary ASR errors, with the open-source suite far worse (17.3%
+  faithful). Suites are stress tests, not prevalence estimates; streaming and
+  non-Chinese-English code-switching are untested.
+
+
+  If you build ASR decoders, the likelihood gate, not the acoustic score, is
+  the load-bearing part.
+brief_generated_at: 2026-09-09
+brief_model: claude-opus-5
+brief_source: full-text

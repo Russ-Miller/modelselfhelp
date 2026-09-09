@@ -1,19 +1,59 @@
 id: arxiv-2609-02679
 kind: paper
-title: "From Tokens to Semantics: Leveraging Complementary Signals for Hallucination Detection in Black-Box LLMs"
+title: "From Tokens to Semantics: Leveraging Complementary Signals for
+  Hallucination Detection in Black-Box LLMs"
 year: 2026
 date: 2026-09-02
 arxiv_id: "2609.02679"
 url: https://arxiv.org/abs/2609.02679
-tags: [ingested]
-summary: >-
-  When LLMs support public-facing or high-stakes workflows, missed
+tags:
+  - ingested
+summary: "When LLMs support public-facing or high-stakes workflows, missed
   fabrications can harm users and institutions, while false alarms consume
-  limited human-review capacity. When no trusted context or reference
-  document is available, we study two signals accessible through black-box
-  model APIs: semantic entropy, which measures disagreement among sampled
-  response meanings, and uncertainty derived from token log-probabilities.
-  Their failure modes can be complementary: semantic entropy becomes
-  uninformative when responses form one semantic cluster, while token
-  uncertainty can miss consistently confide
+  limited human-review capacity. When no trusted context or reference document
+  is available, we study two signals accessible through black-box model APIs:
+  semantic entropy, which measures disagreement among sampled response
+  meanings, and uncertainty derived from token log-probabilities. Their
+  failure modes can be complementary: semantic entropy becomes uninformative
+  when responses form one semantic cluster, while token uncertainty can miss
+  consistently confide"
 ingested_at: 2026-09-09
+brief: >-
+  Semantic entropy collapses to zero on most hallucinated queries because
+  sampled responses agree with each other, and token log-probability features
+  recover part of what is lost — but neither signal catches
+  confidently-stated, semantically consistent fabrications.
+
+
+  The setup: black-box detection using only sampled text and API
+  log-probabilities, across 7 benchmarks (AA Omni Finance, AmbigQA, HotpotQA,
+  SQuAD, handwritten-cheque VQA, plus author-built Financial Summaries and
+  Long-Text QA) and 4 models (GPT-4.1-mini, GPT-5.1, GPT-5.4, Llama 3.3 70B),
+  comparing 13 methods including SE variants, CoCoA, and 3 new ones: TopK
+  (unsupervised token aggregation), Gated (routes single-cluster cases to a
+  token classifier), and Stacked (joint logistic regression).
+
+
+  Among hallucinated queries, single-cluster rates run 39% on AmbigQA to 99%
+  on Financial Summaries. Within those cases 21–56% of hallucinated queries
+  still show lower TopK uncertainty than the median correct one. Stacked led
+  or tied in 11 of 26 model–dataset comparisons, CoCoA 7, TopK 5, and stayed
+  within 0.05 AUROC of the best in 20 of 26.
+
+
+  Measured with 5-fold cross-validation and bootstrap intervals, but the
+  authors note the leader's 95% interval overlaps a competitor on every
+  dataset, so rankings are not separable. Long-Text QA has n = 30; GPT-5.4
+  returned only 1 token candidate.
+
+
+  Gated and Stacked need labelled target-domain data; zero-shot transfer is
+  untested, and no configuration of response count, temperature, or candidate
+  count helped uniformly.
+
+
+  Treat method choice and threshold as per-dataset decisions rather than
+  expecting a general detector.
+brief_generated_at: 2026-09-09
+brief_model: claude-opus-5
+brief_source: full-text

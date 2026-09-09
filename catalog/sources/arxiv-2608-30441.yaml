@@ -1,19 +1,55 @@
 id: arxiv-2608-30441
 kind: paper
-title: "ECLIPSE: Self-Evolving Stealthy Prompt Injection Attack against Long-Horizon Agentic Systems"
+title: "ECLIPSE: Self-Evolving Stealthy Prompt Injection Attack against
+  Long-Horizon Agentic Systems"
 year: 2026
 date: 2026-08-31
 arxiv_id: "2608.30441"
 url: https://arxiv.org/abs/2608.30441
-tags: [ingested]
-summary: >-
-  Recently, large language model (LLM) agents, such as Codex, Claude Code,
-  and OpenClaw, have become capable of planning and executing long-horizon
-  tasks through repeated tool calls. This capability also creates new
-  opportunities for prompt injection. Existing attacks either place the
+tags:
+  - ingested
+summary: Recently, large language model (LLM) agents, such as Codex, Claude
+  Code, and OpenClaw, have become capable of planning and executing
+  long-horizon tasks through repeated tool calls. This capability also creates
+  new opportunities for prompt injection. Existing attacks either place the
   malicious objective in one explicit instruction, making it easy to detect,
-  or distribute the intent across multiple execution stages, making
-  successful completion unreliable. In this work, we propose ECLIPSE, a
-  self-evolving and stealthy prompt-injection framework for long-horizon
-  agentic systems. ECLIPSE combines
+  or distribute the intent across multiple execution stages, making successful
+  completion unreliable. In this work, we propose ECLIPSE, a self-evolving and
+  stealthy prompt-injection framework for long-horizon agentic systems.
+  ECLIPSE combines
 ingested_at: 2026-09-09
+brief: >-
+  Splitting an injected objective across the user prompt and tool metadata,
+  then correcting the trajectory at runtime, keeps long-horizon prompt
+  injection both hard to detect and reliable to execute. Eclipse builds a
+  verified malicious tool chain in a sandbox, renders it as a natural one-shot
+  request with no tool names, rewrites target-tool descriptions with
+  state-transition cues (Static Workflow Encoding), and appends corrective
+  text to tool results when execution drifts (Dynamic Trajectory Correction).
+
+
+  The authors also release LASE-Bench: 120 malicious tasks, 198 unique tools,
+  96.7% of tasks requiring at least 5 tool calls, versus about 1.0% for
+  ASSEBench unsafe records and none in SHADE-Arena. Victims are 7 agents
+  including DeepSeek, GPT-4o, Claude 4.8 Opus, GPT-5.6 Luna, Claude Sonnet 5,
+  Kimi-k3-104b, QWEN-3.8-27b, against 5 baselines.
+
+
+  Undefended ASR reaches 96.7% on DeepSeek, 95.0% GPT-4o, 93.3% Claude 4.8
+  Opus. With an LLM safety monitor, 69.2% on DeepSeek, 27.5 percentage points
+  above ObliInjection; 62.4% on Claude 4.8 Opus where the best baseline hits
+  0.8%. Open-source victims drop to 37.2% and 36.9% under defense.
+
+
+  Ablations isolate the mechanism: prompt alone 19.2%, DTC alone 37.5%, SWE
+  66.7%, SWE+DTC 69.2%. Baselines run under matched retrieval, sandbox, and
+  call budgets. Evidence is self-run, with 1 LLM-monitor defense as the main
+  defended condition; no independent replication. Transfer shown on OpenClaw
+  (61.7% defended) and Hermes (55.8%).
+
+
+  If you rely on input-side injection detectors, this suggests tool
+  descriptions are the unguarded channel.
+brief_generated_at: 2026-09-09
+brief_model: claude-opus-5
+brief_source: full-text

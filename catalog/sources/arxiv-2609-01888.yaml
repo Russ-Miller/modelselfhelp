@@ -1,19 +1,60 @@
 id: arxiv-2609-01888
 kind: paper
-title: "Does Playing it Safe Count as Faithfulness? Reassessing LVLM Hallucination Mitigation Methods"
+title: Does Playing it Safe Count as Faithfulness? Reassessing LVLM
+  Hallucination Mitigation Methods
 year: 2026
 date: 2026-09-01
 arxiv_id: "2609.01888"
 url: https://arxiv.org/abs/2609.01888
-tags: [ingested, pending-review]
-summary: >-
-  Recent inference-time hallucination mitigation methods for large vision-
-  language models (LVLMs) report strong gains on hallucination benchmarks.
-  However, it remains unclear whether lower hallucination scores reflect
-  improved multimodal grounding or more conservative generation. We
+tags:
+  - ingested
+  - pending-review
+summary: "Recent inference-time hallucination mitigation methods for large
+  vision- language models (LVLMs) report strong gains on hallucination
+  benchmarks. However, it remains unclear whether lower hallucination scores
+  reflect improved multimodal grounding or more conservative generation. We
   evaluate six mitigation methods across three LVLMs and four benchmarks,
   including hallucination-focused evaluation and the diverse capability
   benchmark MMStar. Our analysis reveals two consistent patterns. First,
   hallucination reduction is often coupled with reduced informativeness:
-  methods that lower hallucination r
+  methods that lower hallucination r"
 ingested_at: 2026-09-07
+brief: >-
+  Inference-time hallucination mitigation for vision-language models mostly
+  buys lower hallucination scores by saying less, not by grounding better.
+  Hallucination rate and informativeness move together, so the benchmark gain
+  is partly an artifact of conservative generation.
+
+
+  The study pairs 3 7B LVLMs (LLaVA-1.5, LLaVA-NeXT, InstructBLIP) with 6
+  training-free methods spanning contrastive decoding (VCD, M3ID), attention
+  calibration (AGLA, CAAC), and hidden-state modification (CEI, AFTER), for 54
+  configurations. Hallucination metrics on CHAIR and AMBER are reported
+  alongside informativeness from the same benchmark (object recall, Cover),
+  plus MMStar for 6 capability categories.
+
+
+  CHAIRs and object recall correlate at Pearson r = 0.73; AMBER Hal and Cover
+  at r = 0.70. No method reached the low-hallucination, high-informativeness
+  quadrant; only CAAC and CEI held recall while cutting hallucination, and
+  AFTER got the lowest hallucination rate with reduced coverage. On MMStar, of
+  18 fine-grained perception configurations only 2 gained more than 1%, and
+  every method failed to improve macro averages on more than 1 of 3
+  architectures. Trade-offs flip by category: AFTER +7.2% coarse perception on
+  InstructBLIP but -4.4% math; AGLA +6.4% math on LLaVA-1.5 but -10.4
+  percentage points Science & Technology.
+
+
+  The correlations are measured against a vanilla-decoding baseline per model,
+  which isolates the method but not the mechanism; the authors state they do
+  not measure grounding directly, and risk suppression is a pattern in the
+  evaluation, not a causal claim. Methods ran at authors' default
+  hyperparameters without per-model tuning, only 3 benchmarks, 7B scale, and
+  no training-based or retrieval mitigation.
+
+
+  If you cite CHAIR or AMBER improvements as evidence of grounding, report
+  informativeness and a capability benchmark alongside them.
+brief_generated_at: 2026-09-09
+brief_model: claude-opus-5
+brief_source: full-text

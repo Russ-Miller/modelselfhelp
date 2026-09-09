@@ -1,19 +1,55 @@
 id: arxiv-2609-00747
 kind: paper
-title: "Can Large Language Models Forecast What Researchers Study Next?"
+title: Can Large Language Models Forecast What Researchers Study Next?
 year: 2026
 date: 2026-09-01
 arxiv_id: "2609.00747"
 url: https://arxiv.org/abs/2609.00747
-tags: [ingested]
-summary: >-
-  Large language models increasingly generate research ideas, yet judging
-  their novelty or feasibility at generation time does not establish whether
-  they anticipate subsequent work. We introduce IdeaForecastBench to
+tags:
+  - ingested
+summary: Large language models increasingly generate research ideas, yet
+  judging their novelty or feasibility at generation time does not establish
+  whether they anticipate subsequent work. We introduce IdeaForecastBench to
   evaluate research idea forecasting. Given a community's literature up to a
   cutoff, a system produces up to five ranked ideas, which are evaluated
-  against later papers. The benchmark comprises 624 rolling episodes across
-  52 topics, with a fixed retrieve-then-judge protocol and separately
-  reported results from two judges. We compare five history-compression
-  strategies across GPT-4.1, Q
+  against later papers. The benchmark comprises 624 rolling episodes across 52
+  topics, with a fixed retrieve-then-judge protocol and separately reported
+  results from two judges. We compare five history-compression strategies
+  across GPT-4.1, Q
 ingested_at: 2026-09-09
+brief: >-
+  Compressing a field's recent literature into a single summarizing paragraph
+  makes an LLM's research-idea forecasts match later papers far more often
+  than feeding it raw recent abstracts, but the gain is entangled with how
+  vaguely the ideas are worded.
+
+
+  IdeaForecastBench gives a forecaster a topic's arXiv cs.ML literature up to
+  a monthly cutoff and asks for 5 ranked ideas, then checks whether papers
+  submitted in the following ~3 months realize them via retrieval of 10
+  candidates plus a rubric gate (P+M>=5, S>=2). It covers 624 episodes across
+  52 topics, 5 prompting strategies, GPT-4.1, Qwen2.5-7B/14B, Qwen3.5-9B, and
+  a trained Mode-Decomposition Forecaster.
+
+
+  Summary beats Direct on Hit@5 by 0.269, 0.378, 0.338 and 0.306 across the 4
+  backbones. Qwen2.5-14B Summary hits 0.954 Hit@5 but only 0.553 Precision@5.
+  Qwen2.5 outscores GPT-4.1 everywhere; Qwen3.5 does not (Summary Hit@5 0.532
+  vs 0.756, paired difference -0.224).
+
+
+  Evidence is measured on paired episodes with topic-clustered bootstrap
+  intervals, but token and compute budgets are not equalized across
+  strategies, and an outcome-blind study of 832 forecasts finds Qwen2.5 ideas
+  are broader (generality 6.58 and 6.48 vs 3.58), with match rate rising from
+  0.205 to 0.406 across generality bins. The stricter S>=3 gate leaves the gap
+  (+0.163, +0.181) but does not control breadth.
+
+
+  Judges disagree in level (Qwen judge scores include failures, all candidates
+  failing in 72 of 624 MDF windows), and human calibration comes from an older
+  slice with Fleiss' kappa 0.135. Treat high realization scores as evidence
+  about wording and history representation, not proof of anticipation.
+brief_generated_at: 2026-09-09
+brief_model: claude-opus-5
+brief_source: full-text

@@ -1,19 +1,56 @@
 id: arxiv-2609-04131
 kind: paper
-title: "Beyond Retrieval: Progressive Latent Memory Evolution for Streaming Video Understanding"
+title: "Beyond Retrieval: Progressive Latent Memory Evolution for Streaming
+  Video Understanding"
 year: 2026
 date: 2026-09-03
 arxiv_id: "2609.04131"
 url: https://arxiv.org/abs/2609.04131
-tags: [ingested]
-summary: >-
-  Streaming video understanding requires multimodal large language models
-  (MLLMs) to process continuous visual inputs and respond to user queries
-  under strict causality and bounded memory. Existing approaches typically
-  compress historical observations into an external memory bank and retrieve
-  query-relevant evidence as additional visual context. Though effective,
-  this store-and-retrieve paradigm keeps historical evidence as external
-  visual context, preventing it from being internalized into a compact,
-  evolving latent memory that can continuously guide streaming reasoning. To
-  bridge this gap, we
+tags:
+  - ingested
+summary: Streaming video understanding requires multimodal large language
+  models (MLLMs) to process continuous visual inputs and respond to user
+  queries under strict causality and bounded memory. Existing approaches
+  typically compress historical observations into an external memory bank and
+  retrieve query-relevant evidence as additional visual context. Though
+  effective, this store-and-retrieve paradigm keeps historical evidence as
+  external visual context, preventing it from being internalized into a
+  compact, evolving latent memory that can continuously guide streaming
+  reasoning. To bridge this gap, we
 ingested_at: 2026-09-09
+brief: >-
+  Compressing retrieved video history into a small set of optimizable latent
+  tokens, then discarding the retrieved frames before decoding, beats feeding
+  the retrieved evidence to the model as extra visual context. LatentStream
+  keeps the video-LLM frozen and does all adaptation at test time on token
+  embeddings.
+
+
+  The system layers three parts on Qwen2.5-VL-3B/7B: a hierarchical
+  short/mid/long memory built online with Jenks natural-breaks consolidation,
+  3 groups of 2 latent tokens with nested retrieval scopes, and a
+  REINFORCE-style test-time update driven by a reward on group-wise predictive
+  entropy ordering. Evaluated on OVO-Bench, StreamingBench, VideoMME, MLVU,
+  LongVideoBench.
+
+
+  OVO-Bench overall goes 54.0 to 64.2 at 7B and 52.2 to 59.0 at 3B;
+  StreamingBench 73.9 to 76.9; VideoMME 63.3 to 66.6, MLVU 67.9 to 74.0,
+  LongVideoBench 60.7 to 62.1. Peak memory drops 30.80GB to 21.97GB, TPOT
+  6.45ms to 3.16ms, TTFT rises 7.63s to 8.41s.
+
+
+  The attribution is unusually clean for this kind of paper: unoptimized
+  latent tokens score 56.5/65.2, appending retrieved evidence directly scores
+  59.7/65.6, evolved tokens 64.2/66.6, so the gain is not from adding tokens
+  or from retrieval alone. Component and reward ablations, plus sweeps over R,
+  B, and sigma, are included. Everything is 1 model family, self-run, with
+  reproduced baselines; no independent replication, and gains on
+  LongVideoBench are small.
+
+
+  If you build streaming video systems, the takeaway is that test-time latent
+  optimization can replace context growth.
+brief_generated_at: 2026-09-09
+brief_model: claude-opus-5
+brief_source: full-text

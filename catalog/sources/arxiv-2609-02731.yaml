@@ -1,19 +1,54 @@
 id: arxiv-2609-02731
 kind: paper
-title: "RVSD: Retrieval Vision Sparse Decoding for Mitigating Visual Hallucinations in Large Vision-Language Models"
+title: "RVSD: Retrieval Vision Sparse Decoding for Mitigating Visual
+  Hallucinations in Large Vision-Language Models"
 year: 2026
 date: 2026-09-02
 arxiv_id: "2609.02731"
 url: https://arxiv.org/abs/2609.02731
-tags: [ingested]
-summary: >-
-  Large vision-language models have achieved remarkable success in
+tags:
+  - ingested
+summary: Large vision-language models have achieved remarkable success in
   vision-language tasks. However, they remain prone to Visual Hallucinations
   (VHs), undermining their reliability in real-world applications. Existing
   solutions typically require curated datasets, additional training, or
   multi-round decoding, resulting in considerable computational overhead. In
   this paper, we propose \textbf{RVSD} (\underline{R}etrieval
-  \underline{V}ision \underline{S}parse \underline{D}ecoding), a
-  training-free and plug-and-play decoding framework that, for the first
-  time, unifies token sparsification and \textbf{
+  \underline{V}ision \underline{S}parse \underline{D}ecoding), a training-free
+  and plug-and-play decoding framework that, for the first time, unifies token
+  sparsification and \textbf{
 ingested_at: 2026-09-09
+brief: >-
+  Pruned visual tokens do not have to be thrown away: keeping them as a
+  retrievable memory bank and pulling them back only when the decoder is
+  uncertain reduces visual hallucination without adding a second forward pass.
+  The authors also document a "sparsification-hallucination paradox" in which
+  existing sparse decoders hallucinate more as generation length grows.
+
+
+  RVSD is training-free. It scores visual tokens by cross-modal attention from
+  salient text positions, decodes over the top-k active set, and when
+  per-layer predictive entropy exceeds a threshold, retrieves top-k deferred
+  tokens via dot-product similarity and injects them through a transient
+  FFN-scale-matched adapter. Tested on 7B LLaVA-1.5, LLaVA-NEXT and Qwen-VL
+  over POPE, MME, AMBER, CHAIR and MM-Vet, against VCD, M3ID, VTI and AvisC.
+
+
+  POPE average Acc/F1 rises from 80.5/81.6 to 86.2/85.0 on LLaVA-1.5,
+  82.4/80.6 to 87.6/86.6 on LLaVA-NEXT, and 83.7/81.7 to 85.3/83.5 on Qwen-VL.
+  MM-Vet totals rise 30.0 to 33.1, 42.1 to 42.7, 36.7 to 38.4. Latency is 62.0
+  vs 61.9 ms/token for vanilla; TFLOPs 3.68 vs 4.36.
+
+
+  Evidence is measured under a stated equal decoding budget with an ablation
+  on the full MME: removing SSVR drops Cognition 371.79 to 348.21; removing
+  sparsification drops it by 14.29. Only 3 backbones, all 7B, no video or
+  long-form settings, gains on Qwen-VL are small and Count and Position stay
+  below the strongest baselines.
+
+
+  If you use sparse decoding for speed, treat pruning as reversible rather
+  than final.
+brief_generated_at: 2026-09-09
+brief_model: claude-opus-5
+brief_source: full-text

@@ -1,19 +1,52 @@
 id: arxiv-2608-30147
 kind: paper
-title: "CAST: Critique-Aware Supervision for Training Reliable Long-Horizon Tool-Calling Agents"
+title: "CAST: Critique-Aware Supervision for Training Reliable Long-Horizon
+  Tool-Calling Agents"
 year: 2026
 date: 2026-08-31
 arxiv_id: "2608.30147"
 url: https://arxiv.org/abs/2608.30147
-tags: [ingested]
-summary: >-
-  Large language model (LLM) agents are increasingly deployed in
+tags:
+  - ingested
+summary: "Large language model (LLM) agents are increasingly deployed in
   long-horizon, interactive, and stateful environments. In these settings, a
   single wrong action, such as refunding the wrong purchase, can cause
   irreversible task failure and must be intercepted before execution. Such
-  failures may not appear in every single run, but can emerge across
-  repeated trials, making reliability across steps and trials critical.
-  However, ensuring agentic reliability is challenging: even frontier LLMs
-  struggle to explain why an action may be wrong, especially in long,
-  intertwined trajectories governed by domai
+  failures may not appear in every single run, but can emerge across repeated
+  trials, making reliability across steps and trials critical. However,
+  ensuring agentic reliability is challenging: even frontier LLMs struggle to
+  explain why an action may be wrong, especially in long, intertwined
+  trajectories governed by domai"
 ingested_at: 2026-09-09
+brief: >-
+  Frontier models prompted as action-level critics for tool-calling agents are
+  badly miscalibrated: GPT-4.1 flags 46.8% of correct actions, dragging the
+  actor into revision loops and lowering success below no-critic baselines.
+  Small critics fine-tuned on synthesized step-level rationales do better.
+
+
+  CAST samples 5 trajectories per task on the 500-task tau-Bench Retail split
+  with Qwen3-32B as assistant, labels every action with a multi-agent verifier
+  that sees privileged ground truth, trains Qwen3-4B/8B critics on the
+  resulting 2,500 critique-enriched experiences, then fine-tunes a policy on
+  successful critique-guided trajectories. Evaluation covers Retail
+  (in-domain), Airline, Telecom, Telehealth, scored by pass^1 and pass^4.
+
+
+  In-domain, CAST-Policy-4B beats the base instruct model by 18.9% pass^1 and
+  10.4% pass^4, and beats RFT-4B by 4.3% pass^4 at similar pass^1. With
+  Qwen3-32B as actor, prompted critics cut avg pass^4 from 11.5% to 3.4-6.3%,
+  while Critic-4B/8B raise it to 15.9%/19.5%. False-positive flag rates fall
+  to 13.6% and 11.4%; correction after feedback succeeds in 82-88% of cases.
+
+
+  RFT is a matched baseline that isolates critique supervision from training
+  on successes. Out-of-domain results are inconsistent: Policy-8B alone drops
+  to 9.5% pass^1 on Airline, below base. 1 model family, supervised
+  fine-tuning only, no RL.
+
+
+  If you use an LLM as an action verifier, train it rather than prompt it.
+brief_generated_at: 2026-09-09
+brief_model: claude-opus-5
+brief_source: full-text

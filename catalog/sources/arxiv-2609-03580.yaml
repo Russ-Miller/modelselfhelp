@@ -1,19 +1,55 @@
 id: arxiv-2609-03580
 kind: paper
-title: "HalluPeer: A Taxonomy-driven Benchmark for Detecting Hallucinations in Scientific Peer Reviews"
+title: "HalluPeer: A Taxonomy-driven Benchmark for Detecting Hallucinations in
+  Scientific Peer Reviews"
 year: 2026
 date: 2026-09-03
 arxiv_id: "2609.03580"
 url: https://arxiv.org/abs/2609.03580
-tags: [ingested]
-summary: >-
-  The growing scale of academic peer review has motivated the use of Large
-  Language Models (LLMs) as review assistants, yet LLMs can generate fluent
-  but unsupported claims that undermine review reliability. Existing
+tags:
+  - ingested
+summary: The growing scale of academic peer review has motivated the use of
+  Large Language Models (LLMs) as review assistants, yet LLMs can generate
+  fluent but unsupported claims that undermine review reliability. Existing
   hallucination benchmarks are not designed for peer review, where
   verification requires grounding claims in long, technical papers. We
-  introduce HalluPeer, a benchmark for detecting hallucinations in
-  scientific peer reviews, providing aligned triples of paper content,
-  human-written reviews, and hallucination-injected reviews, annotated for
-  detection, classification, and localization.
+  introduce HalluPeer, a benchmark for detecting hallucinations in scientific
+  peer reviews, providing aligned triples of paper content, human-written
+  reviews, and hallucination-injected reviews, annotated for detection,
+  classification, and localization.
 ingested_at: 2026-09-09
+brief: >-
+  Off-the-shelf factuality verifiers cannot tell a hallucinated review claim
+  from a legitimate criticism, but small fine-tuned models can, once trained
+  on paper-grounded review data.
+
+
+  HalluPeer pairs paper content, human-written OpenReview reviews from ICLR
+  (2019-2024) and NeurIPS (2021-2024), and hallucination-injected versions
+  produced by an LLM editor guided by a 265-node induced taxonomy, covering
+  12K papers and 38K reviews. Tasks are detection, 9-way type classification,
+  and span localization.
+
+
+  Specialized verifiers (HHEM-2.1-Open, True-NLI, seNtLI, RefChecker) sit near
+  chance at review level, MCC <= 0.03. Prompted frontier models do better at
+  sentence level (GPT-5.2 MCC 0.56) but stay weak at review level. Fine-tuned
+  Qwen3-32B reaches F1 0.90/0.91 and sentence-level MCC 0.87, Macro-F1
+  0.59/0.82 on typing, and 0.91 Token-F1 with 0.86 Exact Span-F1 versus
+  GPT-5.2's 0.58/0.46. Hyperbole moves from near zero to 0.72/0.87.
+
+
+  Evidence is comparative across 11 baselines with cross-venue transfer (both
+  directions) and a cross-generator ablation using Mistral-Small-3.1 and
+  Llama-3.3-70B injectors, where F1 shifts 0.01-0.02. On 1,161 manually
+  annotated NeurIPS 2024 reviews the detector recovers all 20 authentic
+  hallucinations at FPR 22.1%.
+
+
+  The hallucinations are synthetic, localized edits from CS venues only, and
+  the false-positive rate is high; reviewers quoting a paper's own overclaims
+  are misflagged. Treat generic factuality models as unusable for review
+  auditing.
+brief_generated_at: 2026-09-09
+brief_model: claude-opus-5
+brief_source: full-text

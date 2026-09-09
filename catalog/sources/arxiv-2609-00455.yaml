@@ -1,19 +1,54 @@
 id: arxiv-2609-00455
 kind: paper
-title: "Towards a Belief-Based World Model for LLM Agents"
+title: Towards a Belief-Based World Model for LLM Agents
 year: 2026
 date: 2026-08-31
 arxiv_id: "2609.00455"
 url: https://arxiv.org/abs/2609.00455
-tags: [ingested]
-summary: >-
-  Large language models (LLMs) are being used as policies for autonomous
-  decision-making and planning in many domains. Despite their strong
-  reasoning capabilities, LLMs struggle with long-horizon tasks, especially
-  under partial observability. World models are a promising way to enhance
-  policy performance, both during training and inference. During inference,
-  agents currently use world models to simulate the consequences of
+tags:
+  - ingested
+summary: Large language models (LLMs) are being used as policies for
+  autonomous decision-making and planning in many domains. Despite their
+  strong reasoning capabilities, LLMs struggle with long-horizon tasks,
+  especially under partial observability. World models are a promising way to
+  enhance policy performance, both during training and inference. During
+  inference, agents currently use world models to simulate the consequences of
   candidate actions before committing to an action, which can improve
   decision-making. However, we argue that simulation alone is an incomplete
   interface for decision-making und
 ingested_at: 2026-09-09
+brief: >-
+  Giving an LLM agent direct access to a world model's belief over the current
+  state helps more than giving it action-conditioned simulation, and the two
+  compose. The claim is that simulation alone does not communicate what is
+  currently unknown, which is what epistemic (information-gathering) actions
+  require.
+
+
+  The authors hand-build Belief-Based World Models for ALFWorld and
+  ScienceWorld: a deterministic memory plus a categorical belief over object
+  locations, updated by presence/absence renormalization, queried in natural
+  language via "where is <object>". Policies are Llama-3.1-8B-Instruct,
+  Qwen3-14B and Sonnet 4.6, each under ReAct and ReflAct, compared against
+  WALL-E (validity-checking simulation) and a WALL-E Oracle in ScienceWorld.
+
+
+  On ALFWorld, Llama+ReAct goes 29.9 SR@1 base, 43.3 with belief only, 43.8
+  with WALL-E, 62.9 combined; Qwen3-14B goes 76.1 to 91.0. On ScienceWorld
+  average reward, Llama 53.0 to 66.0 and Qwen 71.0 to 80.7 under ReAct. Sonnet
+  saturates: 91.0 to 94.0 on ALFWorld, 92.2 to 92.3 on ScienceWorld.
+
+
+  Evidence is measured, 3 runs for the open models (1 for Sonnet), with a
+  memory-only ablation isolating the probabilistic part: Llama+ReAct 38.8 with
+  memory vs 43.3 with belief, Qwen 76.1 vs 90.3. WALL-E sometimes hurts alone
+  (Qwen+ReflAct 76.1 to 72.4).
+
+
+  The belief models are hand-specified for 2 text games with uncertainty
+  confined to object location; nothing here shows such beliefs can be learned.
+  Treat belief exposure as a cheap interface change worth trying on weaker
+  models under partial observability.
+brief_generated_at: 2026-09-09
+brief_model: claude-opus-5
+brief_source: full-text

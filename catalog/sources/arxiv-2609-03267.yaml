@@ -1,19 +1,54 @@
 id: arxiv-2609-03267
 kind: paper
-title: "Refusing the Impossible: A Taxonomy and Benchmark for Code Hallucination in Large Language Models"
+title: "Refusing the Impossible: A Taxonomy and Benchmark for Code
+  Hallucination in Large Language Models"
 year: 2026
 date: 2026-09-03
 arxiv_id: "2609.03267"
 url: https://arxiv.org/abs/2609.03267
-tags: [ingested]
-summary: >-
-  Large language models (LLMs) often produce code that looks plausible but
-  is not grounded in reality. The code may import packages that do not exist
-  or claim to implement algorithms that violate proven theorems, while still
-  compiling and running. We study \emph{code hallucination} as
-  \emph{ungrounded generation} and separate it from ordinary \emph{code
+tags:
+  - ingested
+summary: "Large language models (LLMs) often produce code that looks plausible
+  but is not grounded in reality. The code may import packages that do not
+  exist or claim to implement algorithms that violate proven theorems, while
+  still compiling and running. We study \\emph{code hallucination} as
+  \\emph{ungrounded generation} and separate it from ordinary \\emph{code
   error} (bugs in otherwise grounded programs). We propose a taxonomy with
-  three dimensions: \textbf{groundedness} (absolute violations of universal
-  truths vs.\ relative fabrications of contingent or ecosystem-specific
-  facts), \textbf{manifestation
+  three dimensions: \\textbf{groundedness} (absolute violations of universal
+  truths vs.\\ relative fabrications of contingent or ecosystem-specific
+  facts), \\textbf{manifestation"
 ingested_at: 2026-09-09
+brief: >-
+  Code models refuse impossible tasks based on how suspicious a request looks,
+  not on how deeply impossible it is. Plausible fabricated packages get
+  invented almost always, while famous theoretical impossibilities get flagged
+  far more often.
+
+
+  The suite is 270 adversarial, unsatisfiable prompts across 6 languages and
+  24 subcategories (fictional algorithms, nonexistent APIs, CAP/FLP
+  violations, fake build flags), paired with 91 matched solvable controls, run
+  on 12 open-weight code and reasoning models at temperature 0 (4,332 judged
+  responses).
+
+
+  Pooled hallucination rate is 0.60 against a refusal rate of 0.27, with 0.00
+  over-refusal on controls for all 12 models. Per model, HR runs 0.26
+  (qwen3-coder-next) to 0.90 (codellama:7b). Nonexistent npm packages are
+  fabricated at 0.98 versus 0.08 for modified-classic traps. Capability helps
+  theory (top-4 models 0.23 on theory subcategories vs 0.82 for bottom-4) but
+  barely helps plausible entities (0.87 vs 0.98). Prompt identity explains 36%
+  of outcome variance, model identity 14%. Framing shifts HR by 17.4 points
+  (95% CI [4.0, 31.3]).
+
+
+  Judging is a deterministic registry detector plus Claude Opus, validated on
+  a 138-item author-labeled gold set at 82% agreement, κ = 0.73. Framing and
+  per-ecosystem comparisons are observational, not fully crossed. No
+  closed-weight models, and the natural-prompt regime was not run.
+
+
+  Treat registry verification as a required step, not a scaling bet.
+brief_generated_at: 2026-09-09
+brief_model: claude-opus-5
+brief_source: full-text
