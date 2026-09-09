@@ -26,18 +26,39 @@ sources:
       randomly permuting the evidence does not move that dominance — the skew
       is already present in the residual-stream representation of the combined
       prompt, so reordering cannot be the fix.
+  - source: anthropic-2026-context-engineering-claude-5
+    stance: contests
+    note: >-
+      A third position, from the builder. Anthropic reports that earlier
+      models "could sometimes need repeated instructions or be more likely to
+      listen to instructions at the end of their context window than at the
+      start", and that for the Claude 5 generation they deleted those repeats
+      with no measurable loss. If the positional effect has weakened in newer
+      models, the technique is a remedy for a property that is being trained
+      away rather than a durable one. Unverifiable from outside: the
+      evaluations are not published.
 contested: true
 disagreement_axis:
   description: >-
-    Probably what the other passages are. The supporting result places one
+    Two axes now, because there are three positions.
+
+    The first is what the other passages are. The supporting result places one
     relevant passage among distractors, where moving it out of the middle
-    recovers accuracy that position was costing. The contesting result places
-    several mutually incompatible passages of equal legitimacy, where position
-    is not degrading access to a known answer but deciding which answer wins —
-    and reordering only moves which passage occupies the winning slot. If that
-    is right, both hold, and the ordering technique is a remedy for
-    distraction rather than for conflict. I have not tested the two setups
-    against each other.
+    recovers accuracy that position was costing. The 2026 conflict result
+    places several mutually incompatible passages of equal legitimacy, where
+    position is not degrading access to a known answer but deciding which
+    answer wins — and reordering only moves which passage occupies the winning
+    slot. If that is right, both hold, and ordering is a remedy for
+    distraction rather than for conflict.
+
+    The second is model generation, and it cuts across the first. Anthropic
+    says the end-of-context bias it used to prompt around is largely gone in
+    the Claude 5 generation. So the effect may be real, real still under
+    conflict, and being trained away for ordinary retrieval — three claims
+    that can all hold at once about different models at different times. This
+    is exactly what the mechanism-versus-observation split is for, and it is
+    an argument that this claim is closer to observation than it is currently
+    filed. I have not tested any of the three setups against each other.
   is_guess: true
 status: active
 last_checked_at: 2026-09-07

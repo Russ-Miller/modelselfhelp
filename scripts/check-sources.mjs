@@ -32,7 +32,40 @@ for (const c of catalog.claims) {
   }
 }
 
-const pinned = catalog.sources.filter((s) => s.data.content_sha256 && s.data.content_url);
+/** Article text, chrome stripped. Never perfect, but stable enough to diff. */
+function extractText(buf) {
+  return buf.toString("utf8")
+    .replace(/<(script|style|nav|footer|head)[\s\S]*?<\/\1>/gi, " ")
+    .replace(/<[^>]+>/g, "\n")
+    .replace(/&nbsp;/g, " ").replace(/&amp;/g, "&").replace(/&#x27;/g, "'")
+    .replace(/&quot;/g, '"').replace(/&lt;/g, "<").replace(/&gt;/g, ">")
+    .split("\n").map((l) => l.trim()).filter((l) => l.length > 40);
+}
+
+/** Sentences, whitespace collapsed. Compared at this granularity because
+ *  neither side controls line breaks: the archive is stored wrapped, the live
+ *  page wraps however it renders. A first attempt compared lines and reported
+ *  10% retention on a page whose article had not changed at all. */
+function sentences(text) {
+  return text.replace(/\s+/g, " ").split(/(?<=[.!?])\s+/)
+    .map((x) => x.trim()).filter((x) => x.length > 60);
+}
+
+/** Share of archived sentences still on the page. Overlap rather than a byte
+ *  hash, because a marketing page rewrites its own furniture -- the first
+ *  attempt pinned a related-posts carousel and called the article changed
+ *  when it was not. A hash is right for a PDF and wrong for a page. */
+function retention(archived, live) {
+  if (!archived.length) return 1;
+  const set = new Set(live);
+  return archived.filter((x) => set.has(x)).length / archived.length;
+}
+// 0.98: with the archive stored unwrapped, a clean page returns ~98-99%, and a
+// single revised paragraph drops it below. A looser floor missed exactly the
+// case that matters -- a vendor quietly rewording one claim.
+const DRIFT_FLOOR = 0.98;
+
+const pinned = catalog.sources.filter((s) => s.data.content_url && (s.data.content_sha256 || s.data.archived_text));
 if (!pinned.length) { console.log("No sources pin a content hash yet."); process.exit(0); }
 console.log(`Checking ${pinned.length} pinned source${pinned.length === 1 ? "" : "s"}\n`);
 
@@ -51,6 +84,29 @@ for (const rec of pinned) {
     console.log(`  unreachable: ${err?.message ?? err} — not treated as a change`);
     continue;
   }
+  // Text sources are checked by how much of the archive survives; byte hashes
+  // only mean something for a file that is meant to be identical each time.
+  if (s.archived_text) {
+    const archived = sentences(s.archived_text);
+    const keep = retention(archived, sentences(extractText(buf).join(" ")));
+    const pct = (keep * 100).toFixed(1);
+    if (keep >= DRIFT_FLOOR) { console.log(`  archive intact (${pct}% of archived sentences still present)`); continue; }
+    changed++;
+    const citing = claimsBySource.get(s.id) ?? [];
+    console.log(`  DRIFTED — only ${pct}% of the archived text is still on the page`);
+    console.log(`  ${citing.length} claim(s) rest on it${citing.length ? `: ${citing.join(", ")}` : ""}`);
+    if (write) {
+      const file = path.join("catalog/sources", `${s.id}.yaml`);
+      let text = fs.readFileSync(file, "utf8");
+      text = text.includes("content_changed_at:")
+        ? text.replace(/content_changed_at: .*/, `content_changed_at: ${today}`)
+        : text.replace(/(retrieved_at: .*)/, `$1\ncontent_changed_at: ${today}`);
+      fs.writeFileSync(file, text);
+      console.log(`  recorded content_changed_at: ${today}`);
+    }
+    continue;
+  }
+
   const now = crypto.createHash("sha256").update(buf).digest("hex");
   if (now === s.content_sha256) {
     console.log(`  unchanged (${buf.length} bytes)`);

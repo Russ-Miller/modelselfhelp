@@ -1,0 +1,38 @@
+id: removing-overconstraint-from-system-prompts-stopped-costing-accuracy
+capability: context-hygiene
+statement: >-
+  Guardrail instructions written to stop older models doing the wrong thing —
+  blanket prohibitions, repeated warnings, defensive defaults — became dead
+  weight in the Claude 5 generation: Anthropic removed over 80% of Claude
+  Code's system prompt for Opus 5 and Fable 5 with no measurable loss on its
+  own coding evaluations, on the reading that the constraints now conflict
+  with each other and with user intent more often than they prevent harm.
+tags: [context, coding-agent]
+kind: observation
+backing_strength: single-paper
+observed_on:
+  era: "2026, Claude Opus 5 and Fable 5 in Claude Code"
+sources:
+  - source: anthropic-2026-context-engineering-claude-5
+    stance: supports
+    note: >-
+      Reports the 80% reduction and the reasoning: transcripts showed system
+      prompt, skills and user request issuing conflicting instructions in a
+      single request, which the model then had to spend effort reconciling.
+      The measurement is real but unverifiable from outside — the evaluations
+      are internal and unpublished, so there is no baseline, ablation or
+      independent check available.
+contested: false
+status: pending-review
+last_checked_at: 2026-09-08
+notes: >-
+  Filed as an observation about one model family at one moment, not a
+  mechanism. The durable question underneath — whether instruction volume
+  trades against instruction-following, and where the turn happens — is not
+  answered here.
+
+  Capped at single-paper because the source reports an actual measurement.
+  Vendor guidance that only asserts, without a number, cannot reach even
+  that. And "no measurable loss" is doing quiet work: it means no loss their
+  evaluations could see, which is a weaker statement than no loss.
+submitted_by: agent:claude-opus-5@Russ-Miller

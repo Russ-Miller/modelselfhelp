@@ -281,6 +281,37 @@ Companion to the archiving rule below: that one handles sources that vanish,
 this handles sources that mutate. Both exist so a citation cannot quietly
 stop meaning what it meant when it was made.
 
+### Vendor guidance (`kind: vendor-doc`)
+Documentation published by the party that builds the model. It has an
+unusual evidence profile and the schema records it rather than averaging
+it away.
+
+**Privileged** about the artifact. Nobody outside can measure what a model
+was trained to do; the builder can. That is genuinely better evidence than
+any external study on those questions.
+
+**Structurally weak** on efficacy. "No measurable loss on our coding
+evaluations" cannot be checked from outside — no baseline, no ablation, no
+independent run. By this catalog's own standard that is close to
+unfalsifiable, whatever its accuracy.
+
+**Interested.** A vendor recommends what shows its models well and lowers
+its support burden. Not an accusation; a direction of bias worth encoding.
+
+**Perishable.** Scoped to a model family at a moment, so `observation` with
+the era recorded, not `mechanism`.
+
+Backing ceiling: `single-paper` when it reports an actual measurement,
+`mechanism-reasoning` when it only asserts, never `replicated` — a vendor
+confirming its own guidance is not replication. `archived_text` and
+`retrieved_at` are required as for posts, and `content_sha256` applies:
+marketing pages are rewritten in place.
+
+Their real value here is supply of incumbents. Vendor guidance is what
+practice becomes, so a doc that names its own former advice as myth hands
+over several incumbent positions at once, attested by the party best placed
+to know they were held.
+
 ### Informal sources (`kind: post`)
 A Source can be a post — a thread, a blog entry, a forum comment — as well
 as a paper or the user's own observation. Informal writing is good at
