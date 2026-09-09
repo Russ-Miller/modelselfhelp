@@ -56,3 +56,22 @@ body {
 [data-search][data-hit="0"] {
   display: none;
 }
+
+/* Contested claims get the amber treatment only while the Contested filter is
+   on. Always-on colour makes an ordinary list look alarmed; the filter is when
+   someone has asked to look at disagreement, and highlighting then is the
+   answer to their question rather than decoration. */
+[data-filter="contested"] li[data-tags~="contested"] {
+  border-color: var(--color-amber-300, #fcd34d);
+  background-color: var(--color-amber-50, #fffbeb);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) [data-filter="contested"] li[data-tags~="contested"] {
+    border-color: var(--color-amber-800, #92400e);
+    background-color: color-mix(in oklab, var(--color-amber-950, #451a03) 20%, transparent);
+  }
+}
+:root[data-theme="dark"] [data-filter="contested"] li[data-tags~="contested"] {
+  border-color: var(--color-amber-800, #92400e);
+  background-color: color-mix(in oklab, var(--color-amber-950, #451a03) 20%, transparent);
+}
