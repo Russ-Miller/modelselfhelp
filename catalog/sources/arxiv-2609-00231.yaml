@@ -1,19 +1,56 @@
 id: arxiv-2609-00231
 kind: paper
-title: "Beyond Language Priors: Diagnosing and Fixing Visual-Origin Hallucinations in Multimodal LLM"
+title: "Beyond Language Priors: Diagnosing and Fixing Visual-Origin
+  Hallucinations in Multimodal LLM"
 year: 2026
 date: 2026-08-31
 arxiv_id: "2609.00231"
 url: https://arxiv.org/abs/2609.00231
-tags: [ingested]
-summary: >-
-  Existing research on object hallucination in multimodal large language
-  models (MLLMs) predominantly attributes the problem to language priors
-  such as over-reliance on textual co-occurrence statistics. We challenge
-  this view by presenting quantitative evidence for a complementary,
+tags:
+  - ingested
+summary: "Existing research on object hallucination in multimodal large
+  language models (MLLMs) predominantly attributes the problem to language
+  priors such as over-reliance on textual co-occurrence statistics. We
+  challenge this view by presenting quantitative evidence for a complementary,
   under-explored cause: visual-origin hallucination, where hallucinations
   arise from incorrect visual feature extraction and misalignment between
   image and text embeddings. Through cosine similarity analysis and Smooth
   Grad-CAM entropy measurements, we show that hallucinated samples exhibit
-  systematically lower image-te
+  systematically lower image-te"
 ingested_at: 2026-09-09
+brief: >-
+  Object hallucination in multimodal models is not only a language-prior
+  effect: on short yes/no questions, hallucinated cases show measurably worse
+  image-text embedding alignment and inverted visual attention. Hallucinated
+  samples average −0.122 cosine similarity between image and text embeddings
+  versus 0.158 for correct ones, and over 500 hallucinated and 500
+  non-hallucinated samples, Grad-CAM entropy is 5.1% higher when the object is
+  present and 6.2% lower when absent.
+
+
+  The fix is Adversarial Contrastive Fine-Tuning: PGD perturbations flip an
+  image's hallucination attribute, producing positive-negative pairs differing
+  only by the perturbation, trained with a contrastive plus generation loss on
+  0.9% of COCO with no inference overhead. Models are LLaVA v1.5-7B, MiniGPT-4
+  13B, Qwen2.5-VL-7B, plus InternVL-3.5-4B.
+
+
+  On POPE, LLaVA accuracy reaches 0.841/0.906/0.897 on
+  adversarial/popular/random, beating the second-best baseline by 3.3%, 2.0%,
+  0.5%; Qwen2.5-VL rises from 0.864 to 0.877, 0.875 to 0.900, 0.884 to 0.916.
+  Ordinary contrastive fine-tuning on the same 3,000 images collapses to 0.483
+  on the adversarial subset.
+
+
+  Evidence includes an encoder-intervention causality check (POPE accuracy
+  0.842 down to 0.739–0.822 with degraded encoders, up to 0.864 with
+  SigLIP-SO400M), an OCFT ablation at matched data, and post-training
+  baselines at ~6k samples, though only on LLaVA.
+
+
+  Gains on description-level benchmarks are small (CHAIR_s 0.508 to 0.494).
+  Treat visual feature quality as a separate lever from decoding-time
+  language-prior fixes.
+brief_generated_at: 2026-09-09
+brief_model: claude-opus-5
+brief_source: full-text

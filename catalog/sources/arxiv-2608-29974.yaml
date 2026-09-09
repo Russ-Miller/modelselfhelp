@@ -1,19 +1,51 @@
 id: arxiv-2608-29974
 kind: paper
-title: "SpanCalib-VLM: Calibrated Hallucination Span Detection in Vision-Language Models"
+title: "SpanCalib-VLM: Calibrated Hallucination Span Detection in
+  Vision-Language Models"
 year: 2026
 date: 2026-08-30
 arxiv_id: "2608.29974"
 url: https://arxiv.org/abs/2608.29974
-tags: [ingested]
-summary: >-
-  Detecting hallucinations in Large Vision-Language Models (LVLMs) requires
-  both accurate span localization and well-calibrated confidence scores.
-  Fine-tuned generative VLMs excel at identifying hallucinated text spans
-  but suffer from overconfidence and high inference latency. Discriminative
-  sequence taggers offer deterministic speed and superior calibration but
-  exhibit conservative span recall. We present SpanCalib-VLM, a hybrid
-  dual-system for the SHROOM-Visions Shared Task that combines a multimodal
-  sequence tagger, consisting of XLM-RoBERTa-Large fused with a SigLIP
-  vision encoder via cross-
+tags:
+  - ingested
+summary: Detecting hallucinations in Large Vision-Language Models (LVLMs)
+  requires both accurate span localization and well-calibrated confidence
+  scores. Fine-tuned generative VLMs excel at identifying hallucinated text
+  spans but suffer from overconfidence and high inference latency.
+  Discriminative sequence taggers offer deterministic speed and superior
+  calibration but exhibit conservative span recall. We present SpanCalib-VLM,
+  a hybrid dual-system for the SHROOM-Visions Shared Task that combines a
+  multimodal sequence tagger, consisting of XLM-RoBERTa-Large fused with a
+  SigLIP vision encoder via cross-
 ingested_at: 2026-09-09
+brief: >-
+  Discriminative token taggers give better-calibrated hallucination scores
+  than fine-tuned generative VLMs, while the generative model localizes spans
+  better; combining them beats either alone. SpanCalib-VLM fuses an
+  XLM-RoBERTa-Large tagger with SigLIP-2 patch features via cross-attention,
+  trained with a span head, an MSE calibration head supervised on annotator
+  consensus, and a category head, then re-scores candidate spans from a
+  Qwen3.5-4B SFT model with weights 0.55/0.45.
+
+
+  On the SHROOM-Visions English validation split (N=379), the hybrid reaches
+  Pearson 0.413 and overall IoU 0.391, clean IoU 0.913, detection accuracy
+  70.7%, against 0.369/0.326 for the tagger alone and 0.285/0.375 for the
+  generative model. Hallucinated-span IoU stays low at 0.196. On the blind
+  test set it beats the task baseline in all 4 languages (EN IoU 0.2549 vs
+  0.1549; ZH 0.3425 vs 0.2554). The tagger runs at 5.25 samples/s, 4.5x faster
+  than standard Qwen decoding and 120x faster than chain-of-thought.
+
+
+  Ablations isolate components: removing the MSE calibration loss costs 0.095
+  Pearson, union fusion beats weighted averaging by 0.032 Pearson, and the
+  vision tower adds only 0.003 IoU. Thresholds 0.25-0.45 all give IoU 0.391.
+
+
+  Limits: 512-token truncation hides hallucinations in long responses, fusion
+  weights were tuned on English only, and spans missed by both subsystems are
+  unrecoverable. Treat the vision encoder as near-decorative here and the
+  calibration head as the load-bearing part.
+brief_generated_at: 2026-09-09
+brief_model: claude-opus-5
+brief_source: full-text

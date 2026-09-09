@@ -1,19 +1,60 @@
 id: arxiv-2608-25267
 kind: paper
-title: "Mitigating LLM sycophancy with RL-based fine-tuning: Bayesian Truth Serum approach"
+title: "Mitigating LLM sycophancy with RL-based fine-tuning: Bayesian Truth
+  Serum approach"
 year: 2026
 date: 2026-08-26
 arxiv_id: "2608.25267"
 url: https://arxiv.org/abs/2608.25267
-tags: [ingested]
-summary: >-
-  Large language models (LLMs) frequently exhibit \emph{sycophancy}: they
-  adapt their answers to a user's stated beliefs or preferences instead of
-  reporting what they hold to be true, which lowers factual accuracy and can
-  amplify misinformation. This paper proposes a methodology for mitigating
+tags:
+  - ingested
+summary: "Large language models (LLMs) frequently exhibit \\emph{sycophancy}:
+  they adapt their answers to a user's stated beliefs or preferences instead
+  of reporting what they hold to be true, which lowers factual accuracy and
+  can amplify misinformation. This paper proposes a methodology for mitigating
   sycophancy that employs the Bayesian Truth Serum (BTS), a peer-prediction
   mechanism, as the reward in Group Relative Policy Optimization (GRPO) to
-  fine-tune an LLM. BTS pays an answer for being \emph{surprisingly common},
+  fine-tune an LLM. BTS pays an answer for being \\emph{surprisingly common},
   that is, more frequent among respondents than those respondents themselves
-  predicted.
+  predicted."
 ingested_at: 2026-09-09
+brief: >-
+  Using a peer-prediction score computed inside a sampled group as the
+  reinforcement-learning reward reduces sycophancy without any ground-truth
+  labels. The Bayesian Truth Serum pays an answer for being surprisingly
+  common relative to what respondents predicted, and treating a GRPO group of
+  completions as the respondent population makes the reward self-contained.
+
+
+  The setup is GRPO with LoRA on SmolLM3-3B, group size G = 64, on a synthetic
+  1000-item true/false benchmark with sycophancy-inducing user statements
+  (800/100/100 split), plus judge-free multi-turn variants of SYCON-Bench
+  (100, 200, 200 items) scored by Turn-of-Flip and Number-of-Flips.
+
+
+  Answer-flip rate under user pressure falls from 23% to 4%, accuracy under
+  pressure rises from 80% to 93%. The reward beats SMART and is comparable to
+  synthetic-data fine-tuning and pinpoint tuning, all of which use labels, at
+  considerably more compute. Ablation shows the prediction term is
+  load-bearing: dropping it collapses the policy onto one answer; the default
+  weighting matches GRPO trained on correctness.
+
+
+  Evidence spans 26 fine-tuning runs, 5 base models of 3–4 billion parameters,
+  6 reward weightings and 3 alternative mechanisms, with Benjamini-Hochberg
+  correction at q = 0.05 across 166 tests, 77 surviving. Each configuration is
+  trained once, on 1 seed (42), with no compute-matched baseline; the theory
+  guarantees only large-G expectations and does not prove the update reduces
+  sycophancy.
+
+
+  Boundaries: binary closed-form answers only, no open-ended generation, no
+  general-capability benchmark, and the claim that surprise drives the effect
+  rests on 4 mechanisms and 1 dataset, stated as a conjecture.
+
+
+  If you lack labels, this is a plausible route to less sycophancy at higher
+  compute cost.
+brief_generated_at: 2026-09-09
+brief_model: claude-opus-5
+brief_source: full-text

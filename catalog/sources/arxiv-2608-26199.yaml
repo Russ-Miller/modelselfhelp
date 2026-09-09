@@ -1,14 +1,14 @@
 id: arxiv-2608-26199
 kind: paper
-title: "Benchmarking AI Agents for Hardware Design Automation via MCP Tool Calling"
+title: Benchmarking AI Agents for Hardware Design Automation via MCP Tool Calling
 year: 2026
 date: 2026-08-25
 arxiv_id: "2608.26199"
 url: https://arxiv.org/abs/2608.26199
-tags: [ingested]
-summary: >-
-  We ask whether AI agents powered by locally deployed large language models
-  can reliably automate expert-defined hardware design workflows in an
+tags:
+  - ingested
+summary: We ask whether AI agents powered by locally deployed large language
+  models can reliably automate expert-defined hardware design workflows in an
   industry-realistic tool-calling setting. In these environments, engineers
   issue repetitive, dependency-ordered operations---such as creating
   components, adding ports, and wiring connections---through specialised
@@ -17,3 +17,39 @@ summary: >-
   locally deployed models. To study this setting, we build a Model Context
   Protocol (MCP) server t
 ingested_at: 2026-09-09
+brief: >-
+  Locally deployed open-source models can carry out dependency-ordered
+  hardware design edits through tool calls at near-complete coverage, but only
+  under the right agent configuration, and few-shot prompting can make the
+  best models stop acting entirely.
+
+
+  The setup is an MCP server with 14 tools replicating the state and
+  dependency rules of a proprietary embedded-hardware design tool, plus an
+  expert-validated benchmark of 8 suites (Easy/Medium/Hard at 40 tasks each,
+  History, Errors, Cross, and two 60-task noisy-context suites co-locating GDB
+  and Git servers). 7 models run 4-bit quantised via Ollama, scored on
+  expected-call coverage, extraneous calls, tool failure rate, and abstention.
+
+
+  Best-configuration ECC ranges from 0.990 (Gemma 4 31B) to 0.554 (Llama 3.1
+  8B). Gaps widen with state dependency: Llama 3.1 8B scores 0.753 on
+  independent suites but 0.139 on History and Cross. Few-shot prompting cut
+  Gemma 4 31B from 0.956 to 0.571 and Gemma 4 E4B from 0.731 to 0.179, with
+  EVCR and TFR falling too. Comprehensive tool descriptions won 35 of 42
+  model-suite combinations. Plan-and-Act lifted Llama 3.1 8B from 0.554 to
+  0.718 but hurt Gemma 4 26B.
+
+
+  Effects are measured with matched-configuration ablations on prompt, tool
+  descriptions, history scope, and architecture, plus temperature checks at 0,
+  0.5, 1.0. Neither server nor benchmark is released, tasks number in the
+  tens, context management is only a binary per-task/cumulative choice, and
+  the server is a replica rather than production APIs.
+
+
+  If you deploy local tool-calling agents, budget configuration search per
+  model rather than assuming prompt tricks transfer.
+brief_generated_at: 2026-09-09
+brief_model: claude-opus-5
+brief_source: full-text

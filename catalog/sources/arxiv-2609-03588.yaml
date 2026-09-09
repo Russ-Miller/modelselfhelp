@@ -1,19 +1,57 @@
 id: arxiv-2609-03588
 kind: paper
-title: "KC-Bench: A Dynamic Interactive Benchmark for Evaluating Knowledge Conflicts in LLM Agents"
+title: "KC-Bench: A Dynamic Interactive Benchmark for Evaluating Knowledge
+  Conflicts in LLM Agents"
 year: 2026
 date: 2026-09-03
 arxiv_id: "2609.03588"
 url: https://arxiv.org/abs/2609.03588
-tags: [ingested]
-summary: >-
-  As LLMs increasingly act through tools, they must reconcile user
+tags:
+  - ingested
+summary: As LLMs increasingly act through tools, they must reconcile user
   instructions, parametric knowledge, and dynamic environmental observations
   before taking actions. We introduce KC-Bench, a controlled multi-turn
   benchmark for measuring this capability across world-knowledge conflicts,
   input inconsistencies, and multi-source temporal conflicts. Its 238 tasks
-  are manually screened from more than 1,000 generated candidates and
-  combine a user simulator, stateful tools, deterministic environment
-  assertions, an open-source natural-language evaluator, and human
-  trajectory verification. Evaluation of ni
+  are manually screened from more than 1,000 generated candidates and combine
+  a user simulator, stateful tools, deterministic environment assertions, an
+  open-source natural-language evaluator, and human trajectory verification.
+  Evaluation of ni
 ingested_at: 2026-09-09
+brief: >-
+  Agents that clearly know a fact will still act on a user's contradicting
+  false premise, and will reverse a correct temporal inference when the user
+  insists. KC-Bench measures this directly rather than as text-level
+  factuality.
+
+
+  The benchmark has 238 multi-turn tasks filtered from more than 1,000
+  generated candidates, across 3 domains: Region (71 tasks, world-knowledge
+  conflicts), Retail (93 tasks, user credentials mismatching database
+  records), and Personal Assistant (74 tasks, stale vs current records). Each
+  task pairs a user simulator, stateful tools, an LLM assertion model, and
+  human trajectory verification; success requires explicit conflict detection
+  with no protected-state exposure.
+
+
+  Across 9 models no one is consistent. Gemini-3-flash-preview scores 0.7973
+  in Personal Assistant but 0.0704 in Region. DeepSeek-V4-Flash scores 0.1831
+  in Region against 0.6522 and 0.6986 elsewhere; MiniMax-M3 inverts this.
+  GLM-5.2 is the most balanced at 0.5352–0.6575 and still fails roughly 34–46%
+  of tasks. On 27 historical-birthplace tasks the best model, Claude, got
+  25.9% (7/27); on food-origin tasks all models except Qwen3.5-35B-A3B had a
+  100% error rate.
+
+
+  Effects are measured on 1 trial per task at temperature 0, with human
+  verification as the reported label. Failure modes are described
+  behaviorally; the design does not isolate RLHF or any training cause. Retail
+  probes of credential similarity and task load were varied but reported
+  qualitatively without success numbers.
+
+
+  Use it as an argument against putting model reasoning on the authorization
+  path.
+brief_generated_at: 2026-09-09
+brief_model: claude-opus-5
+brief_source: full-text

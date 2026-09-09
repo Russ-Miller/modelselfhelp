@@ -5,15 +5,50 @@ year: 2026
 date: 2026-08-27
 arxiv_id: "2608.27496"
 url: https://arxiv.org/abs/2608.27496
-tags: [ingested]
-summary: >-
-  Indirect prompt injection (IPI) plants instructions in the content a
-  tool-using LLM agent reads, steering the agent into harmful tool calls.
-  The strongest defenses are system-level, leveraging techniques such as
-  task-conditional tool screening to prevent execution of malicious tools,
-  and information-flow control to avoid tool execution with untrusted
-  parameters. However, as agents grow more capable, users delegate more to
-  automation. Consequently, tool execution sequences and parameter values
-  are increasingly determined at runtime and cannot be reliably screened
-  from solely user's query withou
+tags:
+  - ingested
+summary: Indirect prompt injection (IPI) plants instructions in the content a
+  tool-using LLM agent reads, steering the agent into harmful tool calls. The
+  strongest defenses are system-level, leveraging techniques such as
+  task-conditional tool screening to prevent execution of malicious tools, and
+  information-flow control to avoid tool execution with untrusted parameters.
+  However, as agents grow more capable, users delegate more to automation.
+  Consequently, tool execution sequences and parameter values are increasingly
+  determined at runtime and cannot be reliably screened from solely user's
+  query withou
 ingested_at: 2026-09-09
+brief: >-
+  Enforcing where a value came from, rather than judging what it says, can
+  block indirect prompt injection without the utility collapse that
+  plan-conformance and static trust-boundary defenses suffer. ROPE precomputes
+  an offline table of state-changing tools and their sensitive parameters,
+  then uses 1 LLM call that reads only the user request to set, per parameter,
+  which of 3 trust anchors (the request, a named unforgeable sender identity,
+  the user's own authoritative records) may supply a value; a deterministic
+  origin tracker and matcher enforce it at runtime with no model in the
+  enforcement loop.
+
+
+  Across 4 agent models (GPT-4o-mini, GPT-4o, Gemini-2.5-Flash, Qwen3-235B) on
+  AgentDyn and AgentDojo, against 11 baseline defenses, ROPE holds ASR to
+  1.6–2.6% while keeping 82–100% of undefended clean utility, and beats DRIFT
+  by 7–25 CU points at comparable ASR. AutoDojo's adaptive optimizer barely
+  moves ROPE (1.8 to 1.6 on GPT-4o-mini) while roughly quadrupling DRIFT on
+  Qwen3-235B (7.1 to 28.5). AgentLAB long-horizon staged attacks reach 0.0 ASR
+  on all 3 tested models.
+
+
+  Evidence includes a policy ablation isolating the router (fixed strict pin:
+  CU 26.7; fixed loose pin: ASR 44.0; routed: 43.3 CU at 1.8 ASR) and a
+  router-swap study down to gpt-oss-20b. Residual failures are enumerated: 90
+  attack successes, 46 from parameters delegated wholly to attacker-writable
+  content, plus harm carried in free-text message bodies that no origin rule
+  pins. Soundness assumes platforms expose unforgeable origin metadata, which
+  real stacks provide unevenly.
+
+
+  If you build agent guardrails, this argues to spend effort on provenance
+  plumbing rather than better LLM judges.
+brief_generated_at: 2026-09-09
+brief_model: claude-opus-5
+brief_source: full-text

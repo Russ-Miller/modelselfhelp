@@ -1,19 +1,52 @@
 id: arxiv-2608-25939
 kind: paper
-title: "XREPOTEST: Benchmarking Multilingual Repository-Level Unit Test Generation for Large Language Models"
+title: "XREPOTEST: Benchmarking Multilingual Repository-Level Unit Test
+  Generation for Large Language Models"
 year: 2026
 date: 2026-08-26
 arxiv_id: "2608.25939"
 url: https://arxiv.org/abs/2608.25939
-tags: [ingested]
-summary: >-
-  Large language models (LLMs) have shown promise for automated unit test
-  generation, but existing evaluations largely rely on standalone settings
-  and a narrow set of programming languages, overestimating real-world
-  readiness. We introduce XREPOTEST, a multilingual repository-level
-  benchmark for unit test generation spanning five underexplored languages:
-  Rust, Go, Julia, PHP, and Ruby. XREPOTEST evaluates tests under realistic
-  repository constraints using a containerized execution framework and
-  multiple context augmentation strategies, including file-level, LSP-based,
-  and retrieval-based context
+tags:
+  - ingested
+summary: "Large language models (LLMs) have shown promise for automated unit
+  test generation, but existing evaluations largely rely on standalone
+  settings and a narrow set of programming languages, overestimating
+  real-world readiness. We introduce XREPOTEST, a multilingual
+  repository-level benchmark for unit test generation spanning five
+  underexplored languages: Rust, Go, Julia, PHP, and Ruby. XREPOTEST evaluates
+  tests under realistic repository constraints using a containerized execution
+  framework and multiple context augmentation strategies, including
+  file-level, LSP-based, and retrieval-based context"
 ingested_at: 2026-09-09
+brief: >-
+  Unit test generation collapses when tests must compile and run inside a real
+  repository, and the drop is largest in languages outside Java and Python.
+  XRepoTest holds 3,642 focal functions from curated Rust, Go, Julia, PHP, and
+  Ruby repositories (6-10 repos per language, 500+ GitHub stars), with tests
+  executed in per-language Docker containers using native frameworks, and adds
+  an Invocation Rate (IR) metric that AST-checks whether the test directly
+  calls the focal function.
+
+
+  Across 14 models under minimal focal context, the best test pass rate
+  anywhere is about 27% (Claude 4.5 Sonnet, PHP 26.93% TPR, 41.76% Cov). Rust
+  is worst (Sonnet 12.78% TPR); average compilation success is 57.4% and mean
+  mutation score 3.2% across Go, Rust, Ruby. API hallucination is the top
+  failure mode (48.05% of Rust samples, 47.90% Julia). File-level context
+  helps most (Go TPR 23.65 to 34.14), but on Ruby it cuts IR from 85.63% to
+  53.19%. A headless Claude Code agent raises TPR 1.2-2.6x, yet on PHP
+  coverage falls 33.3% and IR 71.3%.
+
+
+  All effects are measured by execution, with a shared decoding protocol,
+  bootstrap and McNemar tests, and retrieval robustness checks over window and
+  top-k. The agentic and repair results use only a stratified subset (up to 5
+  easy and 5 hard functions per repo), 1 agent scaffold, and 1 repair round;
+  prompting and retriever designs are untuned.
+
+
+  If you cite standalone pass rates as evidence of test-writing readiness,
+  this reframes them as a large overestimate.
+brief_generated_at: 2026-09-09
+brief_model: claude-opus-5
+brief_source: full-text

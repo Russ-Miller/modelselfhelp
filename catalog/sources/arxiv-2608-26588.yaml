@@ -1,19 +1,56 @@
 id: arxiv-2608-26588
 kind: paper
-title: "Unsaid, Unsafe? Implicit Security Obligations in LLM-Based RTL Code Generation"
+title: Unsaid, Unsafe? Implicit Security Obligations in LLM-Based RTL Code
+  Generation
 year: 2026
 date: 2026-08-27
 arxiv_id: "2608.26588"
 url: https://arxiv.org/abs/2608.26588
-tags: [ingested]
-summary: >-
-  Large Language Models (LLMs) generate register-transfer-level (RTL) code
-  with rapidly improving functional correctness. Security of LLM-generated
-  code, however, has been studied mainly for software, where flaws can still
-  be patched after deployment. Insecure RTL offers no such remedy once taped
-  out into silicon. We construct SECRTL-GEN, a multi-language
-  resource-access security benchmark grounded in real SoC IP: 392 tasks over
-  five CWE families and four HDLs (Verilog, SystemVerilog, VHDL, and
-  Python), each with black-box functional and security testbenches.
-  Functional specifications intentiona
+tags:
+  - ingested
+summary: "Large Language Models (LLMs) generate register-transfer-level (RTL)
+  code with rapidly improving functional correctness. Security of
+  LLM-generated code, however, has been studied mainly for software, where
+  flaws can still be patched after deployment. Insecure RTL offers no such
+  remedy once taped out into silicon. We construct SECRTL-GEN, a
+  multi-language resource-access security benchmark grounded in real SoC IP:
+  392 tasks over five CWE families and four HDLs (Verilog, SystemVerilog,
+  VHDL, and Python), each with black-box functional and security testbenches.
+  Functional specifications intentiona"
 ingested_at: 2026-09-09
+brief: >-
+  LLMs write RTL that passes functional simulation while failing security
+  checks, and the bottleneck is missing weakness awareness in the
+  specification rather than an inability to write defensive hardware.
+
+
+  SecRTL-Gen contains 98 designs from OpenTitan, Hack@DAC 2021, CVA6 and PULP,
+  each rendered in Verilog, SystemVerilog, VHDL and Amaranth Python for 392
+  instances, spanning 5 resource-access CWE families, with black-box
+  functional and security testbenches and specifications that deliberately
+  omit security obligations. 5 frontier models (GPT-5.6, DeepSeek-v4, GLM-5.2,
+  Mimo-v2.5, MiniMax-M3) were run under vanilla, self-think and CWE-cued
+  prompts, 5 runs each.
+
+
+  Vanilla prompts give 73.4%-79.4% functional pass but 14.5%-35.4% security
+  pass; MiniMax-M3 has the best functional average (79.4%) and near-worst
+  security (20.1%). CWE knowledge lifts mean security from 23.3% to 59.4% but
+  drops functional pass from 76.3% to 60.1%. RTL-Obliger, which extracts a
+  semantic graph and symbolically matches it against a CWE ontology before a
+  two-stage revision, raises mean all-pass from 49.6% (SecV) and 51.4%
+  (RESCUE) to 61.6%.
+
+
+  Gains are measured with paired Wilcoxon tests (n=392 per model) and a
+  leave-one-out ablation showing symbolic matching as the main driver (57.8%
+  to 49.7%). Baselines are re-implementations, the ablation and agent
+  comparison use 1 model and 1 run, and coverage is limited to port-observable
+  access-control weaknesses, not side channels or fault injection.
+
+
+  If you evaluate hardware generators on functional tests alone, you are
+  measuring roughly a third of what matters.
+brief_generated_at: 2026-09-09
+brief_model: claude-opus-5
+brief_source: full-text

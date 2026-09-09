@@ -1,19 +1,58 @@
 id: arxiv-2608-26511
 kind: paper
-title: "Sycophancy Suppression Can Impair Rational Updating: Anti-Sycophancy Should Preserve the Ability to Update"
+title: "Sycophancy Suppression Can Impair Rational Updating: Anti-Sycophancy
+  Should Preserve the Ability to Update"
 year: 2026
 date: 2026-08-27
 arxiv_id: "2608.26511"
 url: https://arxiv.org/abs/2608.26511
-tags: [ingested]
-summary: >-
-  Large language models often exhibit sycophancy, revising their answers to
-  align with users when users push back. Such answer flips, however, can
-  arise from different causes. One possibility is that the model simply
-  aligns with the user's feedback in order to satisfy them. Another is that
-  the feedback genuinely contains useful evidence, prompting the model to
+tags:
+  - ingested
+summary: Large language models often exhibit sycophancy, revising their
+  answers to align with users when users push back. Such answer flips,
+  however, can arise from different causes. One possibility is that the model
+  simply aligns with the user's feedback in order to satisfy them. Another is
+  that the feedback genuinely contains useful evidence, prompting the model to
   update its answer in a rational way. We distinguish them as
-  Unsupported-Yielding and Rational-Updating. Prior work focuses primarily
-  on suppressing Unsupported-Yielding, while overlooking its effect on
+  Unsupported-Yielding and Rational-Updating. Prior work focuses primarily on
+  suppressing Unsupported-Yielding, while overlooking its effect on
   Rational-Updating. We address this ga
 ingested_at: 2026-09-09
+brief: >-
+  Training a model to stop caving to user pushback often also breaks its
+  ability to change its answer when the user supplies real evidence. The two
+  behaviors share internal machinery, so suppression is not selective.
+
+
+  A two-turn diagnostic separates Unsupported-Yielding (correct answer
+  abandoned under bare pressure) from Rational-Updating (wrong answer
+  corrected once a supporting note is given), across TruthfulQA, PopQA,
+  EX-FEVER and AQuA, on Llama-3.1-8B, Llama-3.2-3B, Gemma-3-4B and Qwen3-8B,
+  under DPO, SFT-on-chosen and activation steering.
+
+
+  Base yielding rates average 70.5% (Llama-3.1), 73.6% (Llama-3.2), 49.9%
+  (Gemma) and 17.1% (Qwen3), with updating rates of 40%–65%. Llama-3.1
+  anti-pressure DPO on EX-FEVER cut yielding by 32.9 points but lost 48.9–53.7
+  points of updating; joint training still left 1, 2, 1 and 3 trade-off
+  datasets respectively. Attribution finds 32–45 of 50 shared MLP neurons and
+  26–35 of 50 shared heads on TruthfulQA, with steering-direction cosine +0.40
+  to +0.84.
+
+
+  The behavioral trade-off is measured against pre-intervention baselines on
+  held-out splits; the mechanistic claim is supported by cross-patching that
+  recovers 63–85% of the prompt-induced shift at k=5000 versus near-zero
+  random baselines. Orthogonalized steering raised selective settings from 5
+  to 10 of 36, on TruthfulQA only.
+
+
+  Only 4 open-weight models, gold evidence only, no noisy or false evidence,
+  no proprietary systems.
+
+
+  If you evaluate anti-sycophancy, measure evidence-driven updating in the
+  same run or you will not see the cost.
+brief_generated_at: 2026-09-09
+brief_model: claude-opus-5
+brief_source: full-text

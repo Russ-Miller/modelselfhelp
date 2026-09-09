@@ -1,19 +1,55 @@
 id: arxiv-2609-01318
 kind: paper
-title: "Reliability Challenges in Diffusion Vision-Language Models"
+title: Reliability Challenges in Diffusion Vision-Language Models
 year: 2026
 date: 2026-09-01
 arxiv_id: "2609.01318"
 url: https://arxiv.org/abs/2609.01318
-tags: [ingested]
-summary: >-
-  Diffusion-based Large Vision-Language Models (dLVLMs) have recently
+tags:
+  - ingested
+summary: "Diffusion-based Large Vision-Language Models (dLVLMs) have recently
   emerged as a compelling alternative to autoregressive (AR) LVLMs, offering
   advantages in parallel decoding, bidirectional context, and controllable
   generation. Despite rapid progress, their reliability properties remain
   largely uncharacterized. We present the first systematic reliability
   evaluation of hallucination and bias in dLVLMs, benchmarking six diffusion
   models against competitive AR baselines across four dimensions. Our key
-  findings are: (1) dLVLMs reverse the yes-bias of AR models in binary
-  visual queries; (2) they ac
+  findings are: (1) dLVLMs reverse the yes-bias of AR models in binary visual
+  queries; (2) they ac"
 ingested_at: 2026-09-09
+brief: >-
+  Diffusion vision-language models invert several known autoregressive failure
+  modes rather than inheriting them: they trend toward no-bias on yes/no
+  visual queries, and they pick the longest answer option so consistently that
+  accuracy collapses when the correct choice is short.
+
+
+  6 dLVLMs (LLaDA-V, LaViDa-LLaDA, LaViDa-Dream, MMaDA-MixCoT, Dream-VL,
+  Dimple) were compared against 7 AR baselines on POPE and CHAIR (MSCOCO),
+  FairFace demographic recognition, and length-controlled fine-grained MCQA on
+  CUB and Stanford Dogs.
+
+
+  Where AR models like mPLUG-Owl answer yes on 98.67% of adversarial POPE
+  items, dLVLMs sit at 35-45% Yes%. On CUB without class names, LaViDa-Dream
+  scores 2.80% when the correct option is short versus 96.50% when it is long;
+  Qwen2.5-VL reaches 50.70% in the shorter-correct condition. MMaDA-MixCoT
+  scores 0.00% on Latino Hispanic and Southeast Asian faces at tight crop, and
+  shows a -23.34 female-male gender gap where AR gaps stay within +3.22 to
+  -2.71.
+
+
+  Evidence is mostly measured with useful controls: Dimple and LLaVA-Next
+  share training data, and an AR-style decoding swap on fixed weights cut
+  Dimple's linguistic error from 13.8% to 2.0% while CHAIR_I moved only 19.59%
+  to 16.23%, separating fluency from grounding. Commit-step predicts
+  CHAIR-flagged hallucinated tokens at ROC-AUC 0.699 and 0.667 on 2 backbones.
+  Linguistic judging is GPT-4o-mini with no human validation, and vision
+  encoder and scale confounds remain.
+
+
+  Treat diffusion decoding as a distinct reliability profile, not a milder
+  version of the AR one.
+brief_generated_at: 2026-09-09
+brief_model: claude-opus-5
+brief_source: full-text

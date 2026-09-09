@@ -5,15 +5,48 @@ year: 2026
 date: 2026-08-31
 arxiv_id: "2608.30987"
 url: https://arxiv.org/abs/2608.30987
-tags: [ingested]
-summary: >-
-  Supervised fine-tuning (SFT) trains a base language model to imitate
-  target responses, and these targets may require knowledge the base model
-  has not robustly internalized. We study this as a source of hallucinations
-  and frame a group of mitigation methods as \emph{knowledge-aligned SFT}:
-  constraining SFT training targets to the base model's parametric
-  knowledge. Under a unified setup, we compare existing generation-based and
-  estimation-based knowledge-alignment methods and introduce two new
-  variants: Evidence Rewrite, which verifies base-model generations using
-  external evidence, and Recall R
+tags:
+  - ingested
+summary: "Supervised fine-tuning (SFT) trains a base language model to imitate
+  target responses, and these targets may require knowledge the base model has
+  not robustly internalized. We study this as a source of hallucinations and
+  frame a group of mitigation methods as \\emph{knowledge-aligned SFT}:
+  constraining SFT training targets to the base model's parametric knowledge.
+  Under a unified setup, we compare existing generation-based and
+  estimation-based knowledge-alignment methods and introduce two new variants:
+  Evidence Rewrite, which verifies base-model generations using external
+  evidence, and Recall R"
 ingested_at: 2026-09-09
+brief: >-
+  Filtering supervised fine-tuning targets down to facts the base model can
+  already recall reduces hallucinations, but mostly by making the model refuse
+  more rather than by making it more accurate at equal coverage.
+
+
+  The study frames several mitigations as knowledge-aligned SFT and compares
+  them on the English first-turn subset of OASST1 (3,468 examples) with
+  Qwen3-4B-Base and OLMo 3 7B: FLAME (self-generated targets), UNIT cut
+  (confidence filtering), plus 2 new variants, Evidence Rewrite (external
+  Wikipedia verification) and Recall Rewrite (keep a claim only if the base
+  model answers several paraphrased probes consistently). Evaluation covers
+  WildHalu, Biography, UnknownBench, and 4 OLMES tasks.
+
+
+  Recall Rewrite raises FActScore from 74.4 to 84.1 on WildHalu and 34.1 to
+  76.4 on Bios, but refusals rise from 2 to 55 and from 4 to 252, and
+  supported claims fall. FLAME does not beat standard SFT. UnknownBench F1
+  improves on all 3 subtasks with the lowest precision. OLMES average drops
+  0.9 points; the IFEval gap is explained by refusing 30 of 541 prompts.
+
+
+  Method comparisons are correlational; only 1 ablation varies %Known
+  (100/50/0) at fixed set size and refusal count, on 1 model and dataset.
+  Evaluation is automatic, entity-centric, and depends on
+  gpt-4o-mini/gpt-5-mini teachers; stacking with DPO or RLVR was not tested.
+
+
+  Treat the FActScore gains as a shift in response policy, not better factual
+  generation.
+brief_generated_at: 2026-09-09
+brief_model: claude-opus-5
+brief_source: full-text

@@ -1,19 +1,59 @@
 id: arxiv-2608-28447
 kind: paper
-title: "Learning to Use Tools: Reinforcement Learning for Tool-Integrated Mathematical Reasoning"
+title: "Learning to Use Tools: Reinforcement Learning for Tool-Integrated
+  Mathematical Reasoning"
 year: 2026
 date: 2026-08-28
 arxiv_id: "2608.28447"
 url: https://arxiv.org/abs/2608.28447
-tags: [ingested]
-summary: >-
-  Current large language models (LLMs) increasingly benefit from external
-  tool integration, especially for tasks requiring reliable computation and
-  verification. Motivated by this, we study calculator tool calling for
-  improving mathematical reasoning on the Countdown task. We first analyze
-  reasoning failures and find that calculation errors account for a
+tags:
+  - ingested
+summary: Current large language models (LLMs) increasingly benefit from
+  external tool integration, especially for tasks requiring reliable
+  computation and verification. Motivated by this, we study calculator tool
+  calling for improving mathematical reasoning on the Countdown task. We first
+  analyze reasoning failures and find that calculation errors account for a
   substantial portion of incorrect responses. We then construct supervised
-  fine-tuning datasets to teach the model useful tool-use patterns and how
-  to interpret returned outputs. Building on this tool-formatted policy, we
-  apply several on-policy r
+  fine-tuning datasets to teach the model useful tool-use patterns and how to
+  interpret returned outputs. Building on this tool-formatted policy, we apply
+  several on-policy r
 ingested_at: 2026-09-09
+brief: >-
+  Giving a small model a live calculator during RL rollouts and rewarding only
+  final answers raises both single-sample and multi-sample accuracy on
+  Countdown, but RL still mostly reweights trajectories the model can already
+  sample.
+
+
+  The setup is the Countdown arithmetic task, where a model must combine 3 or
+  4 given numbers to hit a target. Tool calls are written in <tool> tags and
+  executed by the environment, which inserts an <obs> result; tool
+  observations are masked out of the policy loss. Compared: no-tool SFT,
+  Tool-SFT, no-tool RLOO, Tool-RLOO, Tool-RLOO++, Tool-GRPO, Tool-DAPO,
+  evaluated on a fresh 1,024-problem held-out set with no exact overlap with
+  training data, plus the original 50-problem split.
+
+
+  RLOO lifts pass@1 from 26.4% to 50.6% without tools and 35.8% to 56.6% with
+  tools. At matched training budget Tool-RLOO beats no-tool RLOO 56.6% vs
+  50.6% pass@1 and 74.0% vs 66.6% pass@16; extended to 200 steps it reaches
+  60.7% / 76.5%. Tool-DAPO reaches 66.0% pass@1 and 76.6% pass@16, in 100
+  steps and 6.29 hours versus 16.15 hours for extended Tool-RLOO, with 60.7%
+  of prompt groups filtered by dynamic sampling.
+
+
+  Effects were measured with 95% bootstrap intervals and a matched-budget
+  tool/no-tool RLOO comparison, so the tool contribution is isolated; the
+  RL-method comparison is not budget-matched, since Tool-GRPO collapsed after
+  roughly 30 steps versus 100 for the others.
+
+
+  Boundaries: 1 task, 1 tool, 1 model checkpoint lineage, no no-tool GRPO or
+  DAPO arms, and prompts with 0 correct samples out of 16 stay unsolved.
+
+
+  Use this if you are deciding whether tool execution inside RL rollouts buys
+  anything beyond SFT demonstrations of tool use.
+brief_generated_at: 2026-09-09
+brief_model: claude-opus-5
+brief_source: full-text

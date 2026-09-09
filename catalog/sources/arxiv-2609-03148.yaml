@@ -5,13 +5,52 @@ year: 2026
 date: 2026-09-02
 arxiv_id: "2609.03148"
 url: https://arxiv.org/abs/2609.03148
-tags: [rag, knowledge-conflict, context]
-summary: >-
-  Studies conflicts that arise within the context itself rather than between
-  context and parametric knowledge, across six conflict types (factual,
-  inferential, temporal, granularity, perspective, ambiguity) on a dataset
-  called ContextConflict. Finds a first-evidence positional bias that is
-  visible in residual-stream activations, survives random reordering of the
+tags:
+  - rag
+  - knowledge-conflict
+  - context
+summary: Studies conflicts that arise within the context itself rather than
+  between context and parametric knowledge, across six conflict types
+  (factual, inferential, temporal, granularity, perspective, ambiguity) on a
+  dataset called ContextConflict. Finds a first-evidence positional bias that
+  is visible in residual-stream activations, survives random reordering of the
   evidence, and can be reduced by steering activations toward an
   evidence-neutral centroid.
 ingested_at: 2026-09-07
+brief: >-
+  Models detect conflicts between context passages internally, yet still
+  weight whichever evidence came first, and this positional preference is the
+  main obstacle to resolving the conflict.
+
+
+  ContextConflict is a 5,781-sample dataset spanning 6 conflict types built
+  from 10 base datasets: misinformation, inferential and temporal (scored by
+  accuracy) plus granularity, perspective and ambiguity (scored by a
+  Shapley-based Balance metric, lower is more even evidence use). 7 models
+  were tested, from llama-3.1-8b-instruct to gpt-5.
+
+
+  Inferential conflicts stay below 50% for every model (24.8% on
+  llama-3.1-8b-instruct, 44.3% on claude-4.5-sonnet); temporal peaks at 68.0%
+  and misinformation at 61.5%. Linear probes separate conflicting from
+  consistent inputs at AUC > 0.85 in mid-to-late layers, so awareness is
+  present without resolution. Shapley attribution gives Evidence 1 69.0% of
+  contributions in Ambiguity, 38.4% in Granularity, 35.0% in Perspective, and
+  Balance does not improve with scale (GPT-OSS-120B 31.9 vs 20B 39.8). A
+  training-free steering direction toward the mean of single-evidence
+  activations gives +19.2 points on Temporal for Llama-3.1-8B-Instruct.
+
+
+  The causal claim is supported: an intervention check, a CAS steering
+  baseline that the method beats in 5 of 6 reasoning comparisons, and
+  replication of the mechanistic trends on GPT-OSS-20B. The Balance metric
+  agrees with humans only at κ = 0.50–0.52, matching inter-human κ = 0.52, so
+  it is coarse. Steering was tested at 8B and 20B only, needs white-box
+  access, and the data is partly synthetic rather than real retrieval.
+
+
+  If you build RAG over disagreeing sources, treat first-position dominance as
+  a representation-level defect, not a prompting problem.
+brief_generated_at: 2026-09-09
+brief_model: claude-opus-5
+brief_source: full-text

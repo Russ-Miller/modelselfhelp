@@ -1,19 +1,60 @@
 id: arxiv-2608-27580
 kind: paper
-title: "LongGuard: Mechanistic Analysis and Training-Free Mitigation of Long-Context Failure in Safety Guardrails"
+title: "LongGuard: Mechanistic Analysis and Training-Free Mitigation of
+  Long-Context Failure in Safety Guardrails"
 year: 2026
 date: 2026-08-27
 arxiv_id: "2608.27580"
 url: https://arxiv.org/abs/2608.27580
-tags: [ingested, pending-review]
-summary: >-
-  Safety guardrails serve as the last line of defense against harmful
-  inputs and outputs of large language models (LLMs), yet they are trained
-  and evaluated almost exclusively on short text. We present LongGuard, a
+tags:
+  - ingested
+  - pending-review
+summary: Safety guardrails serve as the last line of defense against harmful
+  inputs and outputs of large language models (LLMs), yet they are trained and
+  evaluated almost exclusively on short text. We present LongGuard, a
   framework that evaluates, mechanistically analyzes, and mitigates long-
   context guardrail failure. We formulate the task as Safety Needle-in-a-
   Haystack (SafetyNIAH) over a 0.25k-32k length grid; across 15 mainstream
-  guardrails, unsafe recall drops monotonically by more than 50% on
-  average, and a paired Benign-Fill vs. Needle-Repeat design attributes
-  the failure to proportional dilution
+  guardrails, unsafe recall drops monotonically by more than 50% on average,
+  and a paired Benign-Fill vs. Needle-Repeat design attributes the failure to
+  proportional dilution
 ingested_at: 2026-09-07
+brief: >-
+  Safety guardrail classifiers fail on long inputs, and the cause is dilution
+  of the harmful span rather than input length itself. Across 15 open
+  guardrails, unsafe recall falls monotonically with context while safe recall
+  stays roughly flat.
+
+
+  The SafetyNIAH benchmark embeds a labeled short sample (needle) from 17
+  guardrail benchmarks into filtered neutral Wikipedia haystacks over a
+  0.25k–32k word grid, with controlled position and haystack type: 30,400
+  Benign-Fill samples plus an 8,800-sample Needle-Repeat control that removes
+  dilution while keeping length.
+
+
+  Mean unsafe recall change from 0.25k to 32k is −50.12%, versus −1.30% for
+  safe recall. Benign-Fill unsafe recall drops 76.04% → 25.10%; Needle-Repeat
+  only 85.41% → 67.50%. Decision-token attention on the needle falls 3.0–5.1x
+  under Benign-Fill but rises under Needle-Repeat, and the unsafe-minus-safe
+  logit margin compresses in step. Partial correlations controlling for log
+  length: +0.65 attention→logit, +0.83 logit→behavior, +0.56
+  attention→behavior, p<10−4.
+
+
+  The paired control isolates dilution cleanly, and head interventions have
+  matched random-head baselines (+6.4% at α=8 on top-5% heads versus [−0.3%,
+  −0.1%] on random heads). Mitigations CAHR-CD and CAHR-AHS raise the 6-guard
+  mean by +21.79% and +12.56% over 5 benchmarks, with CD costing more tokens
+  and giving near-zero gain on already-strong guards (PolyGuard −0.08).
+
+
+  Haystacks are synthetic fills; only 6 full-attention guardrails were
+  analyzed mechanistically, and fine-tuning fixes were out of scope.
+
+
+  If you deploy a guardrail on long prompts or reasoning traces, chunk the
+  input before trusting a single verdict.
+brief_generated_at: 2026-09-09
+brief_model: claude-opus-5
+brief_source: full-text

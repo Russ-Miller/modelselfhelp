@@ -1,19 +1,51 @@
 id: arxiv-2608-30248
 kind: paper
-title: "DSEffi-Bench: Demystifying Large Language Models' Capability in Efficient Data Science Code Generation"
+title: "DSEffi-Bench: Demystifying Large Language Models' Capability in
+  Efficient Data Science Code Generation"
 year: 2026
 date: 2026-08-31
 arxiv_id: "2608.30248"
 url: https://arxiv.org/abs/2608.30248
-tags: [ingested]
-summary: >-
-  Current data science (DS) code generation benchmarks equate correctness
-  with quality, overlooking execution time differences that span orders of
-  magnitude between correct solutions. We introduce DSEffi-Bench, the first
-  benchmark specifically targeting execution efficiency in LLM-generated DS
-  code, comprising 1,000 instances across 10+ DS libraries with
-  stress-testing harnesses and human-validated references. Evaluating 16
-  models across 3 tiers, we find that correctness alone fails to
-  characterize efficiency: GPT-5.4 leads in correctness (Pass, 66.9\%) but
-  its efficiency score (B$|$P, 71.7\%) n
+tags:
+  - ingested
+summary: "Current data science (DS) code generation benchmarks equate
+  correctness with quality, overlooking execution time differences that span
+  orders of magnitude between correct solutions. We introduce DSEffi-Bench,
+  the first benchmark specifically targeting execution efficiency in
+  LLM-generated DS code, comprising 1,000 instances across 10+ DS libraries
+  with stress-testing harnesses and human-validated references. Evaluating 16
+  models across 3 tiers, we find that correctness alone fails to characterize
+  efficiency: GPT-5.4 leads in correctness (Pass, 66.9\\%) but its efficiency
+  score (B$|$P, 71.7\\%) n"
 ingested_at: 2026-09-09
+brief: >-
+  Correctness rankings on data science code do not predict how fast that code
+  runs. DSEffi-Bench builds 1,000 human-validated instances from
+  efficiency-oriented Stack Overflow posts (2021.01–2025.12) across 10+
+  libraries, each with a fuzz-style input generator, correctness and stress
+  tests, and a reference solution, then scores 16 models in 3 tiers on Pass
+  and a log-normalized relative efficiency score (Beyond, and Beyond|Pass on
+  solved tasks).
+
+
+  GPT-5.4 leads correctness (66.9%) but its B|P (71.7%) ties GPT-5.4-mini
+  (71.6%), which solves 47 fewer tasks; Kimi-K2.5 is lowest in Pass among
+  frontier models (40.2%) yet highest in B|P (73.6%). Code-specialized open
+  models average B|P 50.2% against 64.3% for open generalists, and the human
+  reference reaches 86.6%. A 2-annotator taxonomy over 868 slow-fast pairs
+  (Cohen's kappa 0.82) puts 79.1% of deficits outside algorithmic complexity;
+  loop-to-vectorization failures rise from 7.3% to 29.6% across tiers while
+  overhead-aware stack matching drops from 29.3% to 9.3%.
+
+
+  The decoupling is measured, and the 131 tasks all 6 representative models
+  solve rule out correctness-conditioned selection bias. The remedies are
+  exploratory: taxonomy-augmented Effi-Learner gives +12.9% and +14.7% B|P on
+  2 models only, and library routing (74.1 B|P, $0.004/task) is 1 fixed
+  configuration on a 304-task temporal split.
+
+
+  Python only; timeouts explain just 1.3% of failures.
+brief_generated_at: 2026-09-09
+brief_model: claude-opus-5
+brief_source: full-text

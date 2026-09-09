@@ -1,19 +1,51 @@
 id: arxiv-2609-01383
 kind: paper
-title: "InSight: A Benchmark for Agentic Claim Verification in Interactive Visualizations"
+title: "InSight: A Benchmark for Agentic Claim Verification in Interactive
+  Visualizations"
 year: 2026
 date: 2026-09-01
 arxiv_id: "2609.01383"
 url: https://arxiv.org/abs/2609.01383
-tags: [ingested]
-summary: >-
-  Vision Language Models have demonstrated remarkable proficiency in
-  interpreting static visual artifacts, but modern data analysis is
-  inherently dynamic, requiring the active interrogation of interactive
-  environments. Existing benchmarks are predominantly constrained to static
-  imagery and one-shot question answering and fail to capture the epistemic
-  demands of this domain, where evidence is frequently occluded, distributed
-  across linked views, or conditionally revealed through user agency. In
-  this paper, we introduce InSight, a benchmark for agentic claim
-  verification over interactive visualiza
+tags:
+  - ingested
+summary: Vision Language Models have demonstrated remarkable proficiency in
+  interpreting static visual artifacts, but modern data analysis is inherently
+  dynamic, requiring the active interrogation of interactive environments.
+  Existing benchmarks are predominantly constrained to static imagery and
+  one-shot question answering and fail to capture the epistemic demands of
+  this domain, where evidence is frequently occluded, distributed across
+  linked views, or conditionally revealed through user agency. In this paper,
+  we introduce InSight, a benchmark for agentic claim verification over
+  interactive visualiza
 ingested_at: 2026-09-09
+brief: >-
+  Verifying claims against interactive charts by actually clicking and
+  hovering is barely better than answering blind from the first screenshot,
+  and for some models it is worse. InSight renders 297 human-authored
+  Vega-Lite analytical notebooks as scrollable web pages in a headless
+  browser, gives an agent only RGB screenshots plus a mouse/keyboard action
+  space, and asks it to label a claim True, False, or NEI. The dataset holds
+  21,349 claims (41.6% True, 45.0% False, 13.4% NEI); evaluation uses a
+  stratified 500-claim subset.
+
+
+  At a 10-action budget, GPT-5.5 leads with 57.2% accuracy, then Gemma 4 31B
+  at 47.2% and Qwen 3.5 27B at 45.0%, against 33.3% chance. Removing
+  interaction entirely (T_max=1) gives Gemini 3.5 Flash 44.2% vs 41.6% with 10
+  actions, and Qwen 3.5 27B 46.2% vs 45.0%; only Gemma 4 31B loses ground
+  (47.2% to 45.4%). Gemini reaches 50.0% at 25 actions, a non-monotonic curve.
+  False claims are hardest for weak models; NEI is easiest.
+
+
+  The no-interaction ablation is a real matched baseline but was run on only 3
+  models. The proposed Interaction Efficiency Score credits any state-changing
+  action, so it cannot distinguish correct-and-grounded from
+  correct-while-ignoring-evidence; the authors say so. Label quality rests on
+  475 annotations over 294 claims, 81.3% raw agreement.
+
+
+  Treat headline chart-QA scores as weak evidence that a model can gather
+  visual evidence on its own.
+brief_generated_at: 2026-09-09
+brief_model: claude-opus-5
+brief_source: full-text

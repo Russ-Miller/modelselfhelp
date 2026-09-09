@@ -1,19 +1,58 @@
 id: arxiv-2608-27750
 kind: paper
-title: "The Calls are Coming from Inside the Model: Investigating Probe-based Detection of Tool-Calling Errors in LLMs"
+title: "The Calls are Coming from Inside the Model: Investigating Probe-based
+  Detection of Tool-Calling Errors in LLMs"
 year: 2026
 date: 2026-08-27
 arxiv_id: "2608.27750"
 url: https://arxiv.org/abs/2608.27750
-tags: [ingested]
-summary: >-
-  The hidden states of large language models (LLMs) are known to capture
-  rich information relating to model knowledge and behavior that can be hard
-  to extract from examination of input and output alone. As LLM-based
-  systems increasingly interface with the external world, one area of
-  concern is detecting incorrect or improper use of tools. Motivated by
-  this, we study the effectiveness of using linear probes to detect
-  incorrect tool-calls, measuring probe efficacy across 18 tool-calling LLMs
-  evaluated on the Berkeley Function Calling Leaderboard. Overall, we find
-  that probing is an effective means
+tags:
+  - ingested
+summary: The hidden states of large language models (LLMs) are known to
+  capture rich information relating to model knowledge and behavior that can
+  be hard to extract from examination of input and output alone. As LLM-based
+  systems increasingly interface with the external world, one area of concern
+  is detecting incorrect or improper use of tools. Motivated by this, we study
+  the effectiveness of using linear probes to detect incorrect tool-calls,
+  measuring probe efficacy across 18 tool-calling LLMs evaluated on the
+  Berkeley Function Calling Leaderboard. Overall, we find that probing is an
+  effective means
 ingested_at: 2026-09-09
+brief: >-
+  Linear probes on a model's own hidden states detect its incorrect
+  tool-calls, including semantic errors like a plausible-but-wrong argument
+  value that logging and constrained decoding would miss, and the probes
+  transfer to error types they were never trained on.
+
+
+  18 tool-calling LLMs from 1B to 70B parameters were run on the Berkeley
+  Function Calling Leaderboard simple_python, simple_java, simple_javascript
+  and multiple splits (750 examples per model). Hidden states at the last
+  generated token of the tool-call were saved every 5th layer, and an
+  l2-regularized logistic regression was fit per layer, with BFCL's AST
+  checker sorting outputs into 7 categories (syntax, type, hallucinated
+  tool/parameter, unnecessary call, missing parameter, incorrect value,
+  correct).
+
+
+  Most models reached AUROC > 0.80 across most layers. 70B models gained ~0.06
+  AUROC and ~2 normalized AUPR over ~8B models, with peak performance in
+  middle-to-late layers rather than the final layer used in prior work.
+  Training on one disjoint error subset and testing on another still gave
+  AUROC above 0.75, with large models ~0.05-0.1 higher.
+
+
+  Measured, with a control for the obvious confound: within the 9 ~8B models,
+  tool-calling accuracy explained almost none of probe quality (R2 0.005), and
+  CoALM-70B and phi-4 had ~85% accuracy yet ~+0.08 AUROC.
+
+
+  No consistency-sampling or verifier baseline is run here, models below 80%
+  accuracy were excluded, and the tasks are single-turn BFCL splits, not long
+  agentic chains.
+
+
+  If you monitor an agent, read from middle layers, not the last one.
+brief_generated_at: 2026-09-09
+brief_model: claude-opus-5
+brief_source: full-text

@@ -1,14 +1,15 @@
 id: arxiv-2608-29016
 kind: paper
-title: "Towards Fully Automated Medical Imaging Code Generation via Validation-based Context Engineering"
+title: Towards Fully Automated Medical Imaging Code Generation via
+  Validation-based Context Engineering
 year: 2026
 date: 2026-08-29
 arxiv_id: "2608.29016"
 url: https://arxiv.org/abs/2608.29016
-tags: [ingested]
-summary: >-
-  Large language models (LLMs) have demonstrated considerable promise in
-  program generation for small-scale and conventional application
+tags:
+  - ingested
+summary: Large language models (LLMs) have demonstrated considerable promise
+  in program generation for small-scale and conventional application
   development; however, they remain limited when applied to complex,
   domain-specific tasks such as medical image processing. General-purpose
   models lack explicit domain knowledge and robust validation mechanisms to
@@ -17,3 +18,40 @@ summary: >-
   propose AutoMedImg, a multi-agent framework for fully automated medical
   image processing code generation. Auto
 ingested_at: 2026-09-09
+brief: >-
+  Wrapping a general LLM in staged validation and domain knowledge bases
+  removes the human from the loop on medical imaging pipeline generation, but
+  the biggest single contributor to output quality is the domain knowledge
+  base, not the validation.
+
+
+  AutoMedImg splits generation into a Planning Phase (dataset analysis,
+  architecture design, semantic checks plus CSP#/PAT model checking) and a
+  Coding Phase (parallel Coder agents, Pylint/Radon static checks, 30–40
+  Pytest cases per module, assembly validation), with a cross-project pipeline
+  store. It was run on 6 datasets (FLARE22, ACDC, BTCV, FLARE21,
+  Promise12MSBench, OrganMNIST3D) with 5 backbone LLMs, Pass@3, best of 3
+  trials.
+
+
+  Baseline IDE tools needed 5–17 human interventions; proprietary LLMs 5–12
+  with 0.5058–0.9752 Dice. Multi-agent and AutoML frameworks needed 1–9.
+  AutoMedImg reported 0 interventions everywhere, up to 0.9041 Dice (ACDC,
+  Claude-4.5-Opus) and 0.9938 accuracy on OrganMNIST3D.
+
+
+  Ablations on Claude-4.5-Opus isolate components: removing the knowledge base
+  costs -13.7% performance, adaptive synthesis -8.4%, single-agent mode -10.2%
+  and +1.33 HI, execution testing +3.50 HI. Intervention counts are
+  self-judged by the authors, and best-of-3 reporting inflates all systems.
+
+
+  Only segmentation and classification, only 6 public benchmarks, 1 ablation
+  backbone, no independent replication.
+
+
+  Useful if you care whether validation scaffolding or domain context is doing
+  the work in agentic code generation.
+brief_generated_at: 2026-09-09
+brief_model: claude-opus-5
+brief_source: full-text

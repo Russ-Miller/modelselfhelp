@@ -1,19 +1,59 @@
 id: arxiv-2609-02265
 kind: paper
-title: "CAPTURE: Disentangling Preference Drift from Memory Poisoning in Personalized LLM Agents"
+title: "CAPTURE: Disentangling Preference Drift from Memory Poisoning in
+  Personalized LLM Agents"
 year: 2026
 date: 2026-09-02
 arxiv_id: "2609.02265"
 url: https://arxiv.org/abs/2609.02265
-tags: [ingested]
-summary: >-
-  Personalized language agents use persistent memory to adapt to users over
-  time, but the same mechanism creates an attack surface. When new
+tags:
+  - ingested
+summary: Personalized language agents use persistent memory to adapt to users
+  over time, but the same mechanism creates an attack surface. When new
   information conflicts with stored preferences, an agent must distinguish
   genuine preference drift from temporary context shifts, ambiguity, or
-  adversarial memory poisoning. We formulate this problem as a
-  continuous-time partially observable decision process over a latent user
-  state and show why rules based only on recency and provenance are
-  insufficient. CAPTURE addresses this ambiguity with a neural
-  differential-equation belief tracker, a multi-timescale m
+  adversarial memory poisoning. We formulate this problem as a continuous-time
+  partially observable decision process over a latent user state and show why
+  rules based only on recency and provenance are insufficient. CAPTURE
+  addresses this ambiguity with a neural differential-equation belief tracker,
+  a multi-timescale m
 ingested_at: 2026-09-09
+brief: >-
+  Separating a genuine change of user preference from a planted one cannot be
+  done by any rule reading only recency and provenance, and treating
+  authenticity as a latent state to be inferred improves both adaptation and
+  security at once. CAPTURE tracks user state with a neural ODE, writes
+  hypotheses into a 3-layer ledger (stable, contextual, transient),
+  quarantines uncertain claims, and asks a clarifying question when action
+  entropy is high; it is evaluated on D-PrefGuard, a synthetic benchmark of
+  2,400 longitudinal episodes across 5 tracks, with Qwen3-8B and Llama-3.1-8B
+  backbones.
+
+
+  On 480 held-out episodes from 96 users, CAPTURE reaches 71.5% win rate,
+  11.5% fixed-policy poisoning, and 83.5% genuine-update adherence, against
+  Provenance-only at 20.0% poisoning and 74.1% adherence, and Recency RAG at
+  51.6% poisoning and 85.7% adherence. Against an adaptive paraphrase-search
+  attacker with the released weights, poisoning rises to 24.7%, statistically
+  inseparable from Provenance-only's 22.1% (difference 2.6 points, [-1.9,
+  7.2], p = 0.29).
+
+
+  Evidence is unusually well isolated: a supervised Transformer baseline given
+  identical labels, history, extractor, selector, and clarification channel
+  reaches 69.3% win and 15.9% poisoning, leaving only 2.2 points of win (p =
+  0.011) and 4.4 of poisoning (p = 0.003) attributable to architecture.
+  Component ablations, 3 seeds, and zero-shot transfer to HorizonBench plus a
+  40-participant replay are reported.
+
+
+  The attack data is synthetic and author-constructed; poisoning robustness
+  does not demonstrably transfer, and the adaptive-attack advantage
+  disappears.
+
+
+  Treat the security gain as conditional on the attacker not optimizing
+  against your gate.
+brief_generated_at: 2026-09-09
+brief_model: claude-opus-5
+brief_source: full-text

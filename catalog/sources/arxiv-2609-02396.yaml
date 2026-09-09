@@ -1,19 +1,53 @@
 id: arxiv-2609-02396
 kind: paper
-title: "Improving Health Literacy through Lay Summarization of Radiological Reports: An Evaluation of BioNER and Retrieval-Augmented Generation"
+title: "Improving Health Literacy through Lay Summarization of Radiological
+  Reports: An Evaluation of BioNER and Retrieval-Augmented Generation"
 year: 2026
 date: 2026-09-02
 arxiv_id: "2609.02396"
 url: https://arxiv.org/abs/2609.02396
-tags: [ingested]
-summary: >-
-  Radiology reports are written primarily for clinicians, and their
+tags:
+  - ingested
+summary: Radiology reports are written primarily for clinicians, and their
   specialized terminology often makes them difficult for patients to
   interpret. As a result, many patients turn to publicly available Large
   Language Models (LLMs) to help explain their reports, despite
-  well-documented risks of factual inaccuracies and hallucinations.
-  Automated lay-summary generation has emerged as a promising alternative,
-  yet the effectiveness of retrieval-enhanced and clinically informed
-  approaches for radiology-specific communication remains underexplored.
-  This study investigates the extent to which Retrieval-Au
+  well-documented risks of factual inaccuracies and hallucinations. Automated
+  lay-summary generation has emerged as a promising alternative, yet the
+  effectiveness of retrieval-enhanced and clinically informed approaches for
+  radiology-specific communication remains underexplored. This study
+  investigates the extent to which Retrieval-Au
 ingested_at: 2026-09-09
+brief: >-
+  Feeding a model a list of extracted biomedical entities helps lay
+  summarization of radiology reports; retrieving Wikipedia definitions for the
+  same terms does not, and can add hallucinations.
+
+
+  The setup pairs Qwen3.5-0.8B and BioBART-v2-large across 4 conditions
+  (baseline, +BioNER via Stanza's radiology NER, +RAG over a local term
+  database backed by the Wikipedia API, +both), in both few-shot and LoRA
+  fine-tuned regimes. Data came from PadChest, BIMCV-COVID19+, Open-i and
+  MIMIC-CXR with Layman's RRG lay summaries, re-split into 168,036 training
+  and 5,000 test reports, scored on 9 equally weighted metrics.
+
+
+  Fine-tuned BioBART with BioNER scored best overall (FKGL 6.09 vs 7.29 for
+  the plain fine-tune, ROUGE 0.5335 vs 0.5438). RAG alone cut relevance
+  (BioBART fine-tuned ROUGE 0.452, FENICE 0.4062 vs 0.6629). Combining both
+  collapsed few-shot Qwen (mean 0.5172 vs 0.8221 at 0-shot).
+
+
+  Effects were measured with matched baselines per model and regime, so the
+  enhancement is isolated, but only 2 models, 1 NER system and 1 retrieval
+  source were tested, and the failure diagnosis (surface-form collisions,
+  unmatched multi-word entities) rests on manual inspection with no counts.
+  Gold summaries are themselves machine-generated, and no patients or
+  clinicians rated the outputs.
+
+
+  If your grounding pipeline retrieves open-web definitions, check whether
+  entity extraction alone does more.
+brief_generated_at: 2026-09-09
+brief_model: claude-opus-5
+brief_source: full-text

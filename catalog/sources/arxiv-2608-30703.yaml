@@ -1,14 +1,14 @@
 id: arxiv-2608-30703
 kind: paper
-title: "SingProbe Technical Report"
+title: SingProbe Technical Report
 year: 2026
 date: 2026-08-31
 arxiv_id: "2608.30703"
 url: https://arxiv.org/abs/2608.30703
-tags: [ingested]
-summary: >-
-  Runtime guardrails are essential for reliable large language model (LLM)
-  deployment, yet existing approaches typically rely on independent,
+tags:
+  - ingested
+summary: Runtime guardrails are essential for reliable large language model
+  (LLM) deployment, yet existing approaches typically rely on independent,
   external models that introduce additional inference cost, delayed safety
   signals, and a capacity mismatch with increasingly capable base models. To
   address these issues, we introduce SingProbe, a lightweight intrinsic
@@ -17,3 +17,36 @@ summary: >-
   framework, SingProbe continuously predicts query intent, response safety,
   and hallucination risk a
 ingested_at: 2026-09-09
+brief: >-
+  Hidden states already produced during decoding carry enough signal to run a
+  guardrail almost for free: a ~2M-parameter head reading 3 layers of a frozen
+  base model matches or beats standalone guardrails 4x-8x larger. SingProbe
+  attaches a query-residual attention block plus linear classifier to
+  Ling-3.0-tiny and Ling-3.0-flash, emitting token-level scores for query
+  intent (8 categories), response unsafety, and hallucination, integrated into
+  SGLang and vLLM.
+
+
+  On 6 query-intent benchmarks the flash version averages 0.8674 F1, behind
+  YuFeng-XGuard-Reason-8B (0.8714) and GPT-5.1 (0.8683). On 8 response-safety
+  sets it averages 0.8728, ahead of Qwen3Guard-Gen-8B-strict by 1.24 points.
+  On streaming detection it reaches 0.9888 R-AUC and 0.9479 T-AUC, +2.48% and
+  +4.91% over the best Qwen3Guard-Stream. Hallucination AUC across 6 sets:
+  0.8012 vs DRIFT 0.8000. Inter-token latency overhead stays under 0.5% up to
+  concurrency 32.
+
+
+  Evidence is measured, with a latency protocol paired against a
+  base-model-only baseline over 8 rounds, plus ablations on tapped layers (L
+  in 1-8) and token weighting (adaptive 0.981 R-AUC vs uniform 0.958).
+  Weaknesses: the streaming benchmark is authored by the same team, its core
+  set has only 210 samples, online safety labels come from leave-one-out
+  detector consensus, and hallucination labels from an LLM judge. Only 1
+  base-model family was tested.
+
+
+  If you deploy guardrails as separate services, this is an argument for
+  probing your own model instead.
+brief_generated_at: 2026-09-09
+brief_model: claude-opus-5
+brief_source: full-text

@@ -1,19 +1,67 @@
 id: arxiv-2609-00949
 kind: paper
-title: "Calibration is the Bottleneck: An Action-Class Diagnostic of Multi-Turn Tool-Calling"
+title: "Calibration is the Bottleneck: An Action-Class Diagnostic of
+  Multi-Turn Tool-Calling"
 year: 2026
 date: 2026-09-01
 arxiv_id: "2609.00949"
 url: https://arxiv.org/abs/2609.00949
-tags: [ingested]
-summary: >-
-  Multi-turn tool calling is a core evaluation scenario for large language
-  model (LLM) agents. On public tool-calling benchmarks, open-weight models
-  now approach or even surpass closed-source frontier models in aggregate
-  accuracy. However, this metric averages over many different multi-turn
-  situations and obscures whether progress is balanced across them. We
-  propose an action-class-oriented diagnostic framework that decomposes
+tags:
+  - ingested
+summary: "Multi-turn tool calling is a core evaluation scenario for large
+  language model (LLM) agents. On public tool-calling benchmarks, open-weight
+  models now approach or even surpass closed-source frontier models in
+  aggregate accuracy. However, this metric averages over many different
+  multi-turn situations and obscures whether progress is balanced across them.
+  We propose an action-class-oriented diagnostic framework that decomposes
   multi-turn failures into two orthogonal modes: action-class miscalibration
   and action-execution failure. The framework operates over a four-class
-  action space (TOOL_CALL/A
+  action space (TOOL_CALL/A"
 ingested_at: 2026-09-09
+brief: >-
+  Aggregate accuracy on multi-turn tool-calling benchmarks hides whether a
+  model picks the right kind of action at all, and state graders can pass
+  trajectories where the model called a held-out tool instead of refusing. The
+  diagnostic pairs Gold Action Recall (GAR) with graded accuracy over 4 action
+  classes (tool_call/ask/refuse/confirm); since Acc should be bounded by GAR,
+  a violation (Acc > GAR) exposes grader masking and large slack (GAR much
+  greater than Acc) localizes execution failure.
+
+
+  The panel covers BFCL v3 multi-turn (4 categories, 200 conversations each)
+  with 11 open-weight families, 22 checkpoints, and 4 closed API anchors,
+  cross-checked on tau2-bench retail/airline.
+
+
+  Tool-specialized families show the masking signature: xLAM-2-8b reaches 71.8
+  aggregate accuracy with 19.5 GAR on miss_param, and xLAM-2-70b sits at
+  -59.5/-66.0 pp on miss_func/miss_param while topping the open-weight panel
+  at 77.5. General-purpose families ask but fail downstream (Qwen3-32B +43.0
+  pp on miss_param) and rarely refuse (gpt-oss-20b -38.5 pp). gpt-5.4 and
+  Gemini 3 Pro stay calibrated (65.5/44.0 and 66.5/85.0). Calibration tracks
+  family, not size: at 7-8B, Hammer-2.1-7B scores 0.5 miss_param GAR versus
+  Qwen3-8B's 84.0.
+
+
+  Evidence is measured, with a 200-case audit at kappa = 0.92 (92.3 percent of
+  audited xLAM-2-8b miss_func misses invoke the held-out function), turn-level
+  recounts, and cross-benchmark reproduction; raters were LLMs, and the label
+  taxonomy relies on keyword cues plus benchmark-supplied gold classes.
+
+
+  Inference-time probes reshape calibration without weights but
+  heterogeneously: SRI moves base accuracy +11.5 pp on Qwen3-8B and -21.0 pp
+  on ToolACE-2-8B; CRI-retry raises emission GAR (peak +36.0 pp) while
+  accuracy falls in 11 of 12 missing-info cells, and CRI-bypass raises
+  accuracy in 11 of 12 (peak +13.0 pp) without changing emission.
+
+
+  Plasticity was tested on only 6 of 26 checkpoints, both probes need oracle
+  knowledge of the gold action class, and only 2 benchmarks were covered.
+
+
+  If you rank tool-calling models on leaderboard accuracy, add a per-class
+  recall column before trusting the ordering.
+brief_generated_at: 2026-09-09
+brief_model: claude-opus-5
+brief_source: full-text

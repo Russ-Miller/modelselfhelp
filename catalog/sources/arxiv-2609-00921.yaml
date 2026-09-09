@@ -1,19 +1,56 @@
 id: arxiv-2609-00921
 kind: paper
-title: "VIBE-Bench: Evaluating Personalized Large Language Models When Profiles Don't Mean Preferences"
+title: "VIBE-Bench: Evaluating Personalized Large Language Models When
+  Profiles Don't Mean Preferences"
 year: 2026
 date: 2026-09-01
 arxiv_id: "2609.00921"
 url: https://arxiv.org/abs/2609.00921
-tags: [ingested]
-summary: >-
-  Personalized Large Language Models (PLLMs) aim to tailor responses to
-  individual users, where a central challenge is preference reasoning:
+tags:
+  - ingested
+summary: "Personalized Large Language Models (PLLMs) aim to tailor responses
+  to individual users, where a central challenge is preference reasoning:
   inferring query-relevant preferences from user-related history. Existing
   benchmarks, however, largely assume that such preference can be retrieved
-  from semantically related history. We study an underexplored but
-  practically important regime, profile-preference conceptual misalignment
-  (PRCM), where observable profile cues and query-specific preferences lie
-  in different concept spaces, making semantic retrieval inconsistent for
-  personalization. We introduce V
+  from semantically related history. We study an underexplored but practically
+  important regime, profile-preference conceptual misalignment (PRCM), where
+  observable profile cues and query-specific preferences lie in different
+  concept spaces, making semantic retrieval inconsistent for personalization.
+  We introduce V"
 ingested_at: 2026-09-09
+brief: >-
+  Personalization methods that work by retrieving semantically similar user
+  history collapse when the profile cues and the target preference sit in
+  different concept spaces. Vibe-Bench isolates this regime, called
+  profile-preference conceptual misalignment, with 3,504 personas and 12,239
+  dialogues built from Big Five personality traits, Holland's RIASEC
+  vocational interests, and emotional-support dialogue data, plus a 128-sample
+  manually verified gold test set.
+
+
+  Two tasks: pick and realize an emotion-regulation strategy for a distress
+  query, and judge whether a user's occupation fits their inferred interest
+  type. Six instruction-tuned models across 4 families were tested with
+  full-history prompting, profile-augmented prompting, BM25 and BERTScore
+  retrieval, and LoRA fine-tuning on 6 more models.
+
+
+  Strategy-selection accuracy stays between 18.36 and 24.22 against a
+  no-history baseline of 21.48; full-history prompting drops accuracy to 18.36
+  and Macro-F1 to 10.36. Fine-tuning wins Task 2 (F1 83.15, MCC 0.68) and best
+  BLEU-4 (9.11) yet still scores 17.97 strategy accuracy.
+
+
+  An ablation injecting explicit preferences gives 100.0 accuracy under both
+  non-misaligned paradigms; removing only the cross-concept mapping step costs
+  58% on Task 1 versus 7% for removing profile inference, which attributes the
+  failure to mapping rather than retrieval anchoring. Template CoT built from
+  gold persona labels recovers 44% on Task 1.
+
+
+  Synthetic English histories, 2 psychology tasks, no preference-optimization
+  baselines. Treat retrieval quality as the wrong lever for cold-start
+  personalization.
+brief_generated_at: 2026-09-09
+brief_model: claude-opus-5
+brief_source: full-text

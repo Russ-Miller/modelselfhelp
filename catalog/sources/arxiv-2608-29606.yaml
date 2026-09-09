@@ -5,9 +5,9 @@ year: 2026
 date: 2026-08-30
 arxiv_id: "2608.29606"
 url: https://arxiv.org/abs/2608.29606
-tags: [ingested]
-summary: >-
-  Large language model (LLM) agents need durable, faithful memory of
+tags:
+  - ingested
+summary: "Large language model (LLM) agents need durable, faithful memory of
   everything a user or organization has said and stored, yet most memory
   systems commit to a single organizing structure (a fact store, a vector
   index, or a knowledge graph) and inherit its blind spots. We present Agent
@@ -15,5 +15,46 @@ summary: >-
   user's conversations, files, and connected sources into three parallel
   memory systems, each capturing a different facet of the same history: an
   episodic Memory Events timeline that makes when and what changed
-  first-class, an associative entity-
+  first-class, an associative entity-"
 ingested_at: 2026-09-09
+brief: >-
+  On long-term conversational memory benchmarks, the retrieval substrate
+  rather than the backbone model appears to set the ceiling: accuracy across 8
+  very different LLMs varies by only 3.4 points while per-query cost varies by
+  ~30x.
+
+
+  Agent Zero Memory builds 3 parallel stores from a user's chats, files and
+  connectors: an episodic events timeline, an entity-event graph, and a
+  curated Hierarchical Documentary Memory with 6 categories and L0/L1/L2
+  detail levels. A query passes an intent gate, a source router, then 3
+  concurrent agentic searches over hybrid pgvector (3072-dim) + BM25/fuzzy
+  retrieval fused by reciprocal rank fusion at k=60, with answers restricted
+  to evidence actually opened.
+
+
+  Reported accuracy is 95.60% on LongMemEval (500 questions) versus Mastra at
+  94.87% and Zep at 71.20%, and 93.60% on LoCoMo (1,540 questions) versus Mem0
+  at 92.50%. deepseek-v4-pro reaches 92.20% at $0.001768 per query, roughly
+  20x cheaper than gpt-5.5; glm5.2fast is fastest at 6.16 s median.
+
+
+  The backbone study is controlled (memory, retriever and control logic fixed,
+  only the model varied). The cross-system comparison is not: competitor
+  figures are best publicly reported numbers under their own harnesses and
+  judges. The retrieval-channel ablation is the only component isolation
+  (embedding-only -1.20, grep -1.60, lexical -1.80); removing individual
+  memories or the intent gate is left to future work, so the 3-store claim is
+  argued, not measured.
+
+
+  All accuracies are single-run, LLM-judged, on 2 near-saturated benchmarks;
+  no test of organizational-scale corpora or connector sources.
+
+
+  Treat this as evidence that memory-system engineering, not model choice,
+  buys accuracy here, and as weak evidence for the specific 3-store
+  decomposition.
+brief_generated_at: 2026-09-09
+brief_model: claude-opus-5
+brief_source: full-text

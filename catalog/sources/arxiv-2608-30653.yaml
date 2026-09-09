@@ -1,19 +1,55 @@
 id: arxiv-2608-30653
 kind: paper
-title: "Fine-Grained Multi Image Object Hallucination Benchmark"
+title: Fine-Grained Multi Image Object Hallucination Benchmark
 year: 2026
 date: 2026-08-31
 arxiv_id: "2608.30653"
 url: https://arxiv.org/abs/2608.30653
-tags: [ingested, pending-review]
-summary: >-
-  Multimodal Large Language Models (MLLMs) are increasingly deployed in
-  multi-image scenarios requiring complex reasoning across visual
-  contexts. However, current MLLMs remain fundamentally limited by object
-  hallucination-generating plausible yet factually inconsistent
-  descriptions about objects. Existing benchmarks, designed primarily for
-  single-image settings or providing only high-level multi-image
-  assessments, cannot systematically diagnose how visual complexity and
-  reasoning demands trigger hallucination. To address this gap, we
-  introduce MIOH, a fine-grained multi-image object hallucinatio
+tags:
+  - ingested
+  - pending-review
+summary: Multimodal Large Language Models (MLLMs) are increasingly deployed in
+  multi-image scenarios requiring complex reasoning across visual contexts.
+  However, current MLLMs remain fundamentally limited by object
+  hallucination-generating plausible yet factually inconsistent descriptions
+  about objects. Existing benchmarks, designed primarily for single-image
+  settings or providing only high-level multi-image assessments, cannot
+  systematically diagnose how visual complexity and reasoning demands trigger
+  hallucination. To address this gap, we introduce MIOH, a fine-grained
+  multi-image object hallucinatio
 ingested_at: 2026-09-07
+brief: >-
+  Asking a vision-language model about several images at once produces more
+  object hallucination than asking about each image separately and combining
+  answers, so the failure sits in cross-image integration rather than
+  perception alone.
+
+
+  MIOH crosses 4 object-centric tasks (existence, counting, attribute,
+  position) with 3 reasoning patterns (comprehensive, comparative, selective)
+  into 26 question types, under 3 adversarial pressures: image count
+  {2,4,8,10}, hard positives (small/occluded objects), and hard negatives
+  (co-occurrence priors). It contains 3,484 questions over 11,732 images drawn
+  from COCO-ReM, PACO and SVG, validated by 3 annotators, and was run on 29
+  models at temperature 0.
+
+
+  Overall accuracy is 36.1%. Gemini-2.5 Pro reaches 64.4% and GPT-5 63.1%;
+  best open models are Qwen2-VL-7B at 49.1% and MiniCPM-V-2.6 at 48.5%.
+  Counting is the weakest task at 25.4% versus existence at 49.4%. Selection
+  is the hardest pattern at 34.2%, worst with attributes at 26.7%. Existence
+  falls from 62.4% easy to 30.0% at 8 images. Qwen2-VL-7B and Qwen2.5-VL-7B
+  lose -27.2% and -21.8% under pressure, and model size correlates with
+  easy-question accuracy but not robustness.
+
+
+  The decomposition ablation is a controlled comparison on identical images,
+  but only on the existence task, and Fig. 5 numbers are not given in text.
+  Proprietary model sizes are estimated. No mitigation method is tested.
+
+
+  Treat single-image hallucination scores as a poor proxy for multi-image
+  reliability.
+brief_generated_at: 2026-09-09
+brief_model: claude-opus-5
+brief_source: full-text

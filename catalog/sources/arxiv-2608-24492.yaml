@@ -1,19 +1,58 @@
 id: arxiv-2608-24492
 kind: paper
-title: "When Do Supervised UQ Ensembles Improve LLM Hallucination Detection? A Robustness Study"
+title: When Do Supervised UQ Ensembles Improve LLM Hallucination Detection? A
+  Robustness Study
 year: 2026
 date: 2026-08-25
 arxiv_id: "2608.24492"
 url: https://arxiv.org/abs/2608.24492
-tags: [ingested]
-summary: >-
-  Uncertainty quantification (UQ) methods are widely used for hallucination
-  detection in large language models (LLMs) in closed-book settings where
-  ground-truth evidence is unavailable at inference time. Prior work has
-  proposed combining UQ signals via learned ensembles, but empirical
-  investigations into the robustness of these ensembles are limited. We
-  study a supervised ensembling framework that trains a classifier over
-  heterogeneous UQ-based scorer outputs on a small, domain-specific dataset
-  of labeled LLM responses, then applies it to out-of-sample hallucination
+tags:
+  - ingested
+summary: Uncertainty quantification (UQ) methods are widely used for
+  hallucination detection in large language models (LLMs) in closed-book
+  settings where ground-truth evidence is unavailable at inference time. Prior
+  work has proposed combining UQ signals via learned ensembles, but empirical
+  investigations into the robustness of these ensembles are limited. We study
+  a supervised ensembling framework that trains a classifier over
+  heterogeneous UQ-based scorer outputs on a small, domain-specific dataset of
+  labeled LLM responses, then applies it to out-of-sample hallucination
   classification without retrie
 ingested_at: 2026-09-09
+brief: >-
+  Training a small supervised classifier over many heterogeneous
+  uncertainty-quantification scorers beats picking the best single scorer for
+  hallucination detection, and it works from about 100 labeled examples.
+
+
+  The setup covers 4 closed-weight LLMs (Gemini-2.5-Flash, Gemini-2.5-Pro,
+  GPT-4o, GPT-4o-mini), 9 datasets, and 3 regimes: short-form QA (BigMath,
+  OpenR1-Math, DROP, HotpotQA, SimpleQA), Python code generation (2
+  LiveCodeBench subsets), and claim-level long-form QA (FactScore-style rivers
+  and mushrooms). Combination strategies compared are logistic regression,
+  random forest, gradient boosting, and a constrained weighted average, over
+  25 stratified 70/30 splits.
+
+
+  The best ensemble beats the best individual scorer in 30 of 32 settings by
+  AUROC, 29 of 32 by ECE (never above 0.06), and 30 of 32 by PRR. Under
+  in-domain transfer to a companion dataset, degradation is 0.00-0.03 AUROC
+  and ensembles still win in 23 of 28 settings. Black-box-only ensembles win
+  19 of 20 short-form settings; white-box-only ensembles only 11 of 20.
+
+
+  Effects are measured against an optimistic baseline: the single scorer
+  selected on the test set, so gains understate practical value.
+  Access-constrained ablations isolate which scorer families carry the
+  benefit. Grading reliability was checked on 400 human-annotated responses
+  (LLM-human κ = 0.97 and κ = 0.93).
+
+
+  Untested: open-weight models, internal-state scorers, cross-domain and
+  cross-LLM transfer, non-Python code, open-ended long-form tasks.
+
+
+  If you already label responses to choose a scorer, train an ensemble on the
+  same labels instead.
+brief_generated_at: 2026-09-09
+brief_model: claude-opus-5
+brief_source: full-text

@@ -129,7 +129,7 @@ jobs:
         run: |
           echo '## Stage 3 — source briefs' >> "$RUN_LOG"
           echo '```' >> "$RUN_LOG"
-          node scripts/summarize-sources.mjs --limit 15 --delay 20000 --chunk 8 --start-delay 60000 2>&1 | tee -a "$RUN_LOG"
+          node scripts/summarize-sources.mjs --limit 25 --delay 20000 --chunk 8 --start-delay 60000 2>&1 | tee -a "$RUN_LOG"
           echo '```' >> "$RUN_LOG"
 
       # Free, no key. Re-fetches sources that pin a file hash and reports any

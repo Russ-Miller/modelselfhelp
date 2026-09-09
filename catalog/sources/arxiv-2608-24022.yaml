@@ -1,19 +1,59 @@
 id: arxiv-2608-24022
 kind: paper
-title: "What Guides the Agent? Adjudicating Unauthorized Behavior via Localizing Behavior-Guiding Instructions"
+title: What Guides the Agent? Adjudicating Unauthorized Behavior via
+  Localizing Behavior-Guiding Instructions
 year: 2026
 date: 2026-08-25
 arxiv_id: "2608.24022"
 url: https://arxiv.org/abs/2608.24022
-tags: [ingested]
-summary: >-
-  LLM agents integrated with external resources gain complex task
+tags:
+  - ingested
+summary: "LLM agents integrated with external resources gain complex task
   capabilities, yet the unified natural-language context channel makes them
-  vulnerable to injection attacks: untrusted external data may be
-  dynamically parsed as behavior-guiding instructions during LLM inference,
-  thereby subverting the agent's decision. Existing defenses focus on static
-  detection or isolation of malicious content at the input/output level,
-  remains insufficient for detecting such dynamic inducements that arise
-  during model reasoning. We propose Attnlocate, a runtime framework for
-  fine-grained localization of context
+  vulnerable to injection attacks: untrusted external data may be dynamically
+  parsed as behavior-guiding instructions during LLM inference, thereby
+  subverting the agent's decision. Existing defenses focus on static detection
+  or isolation of malicious content at the input/output level, remains
+  insufficient for detecting such dynamic inducements that arise during model
+  reasoning. We propose Attnlocate, a runtime framework for fine-grained
+  localization of context"
 ingested_at: 2026-09-09
+brief: >-
+  Attention matrices carry enough signal to pinpoint which exact span of an
+  agent's context actually drove a tool call, not merely which text looks
+  malicious. AttnLocate treats this as 1-D object detection:
+  multi-head/multi-layer attention aggregation with Gaussian layer weighting,
+  a depth-4 1-D U-Net with an anchor-free FCOS-style head, then an authority
+  arbiter that flags the call if the localized span came from a provider
+  lacking the required authority.
+
+
+  Evaluation covers ten agent configurations from six model families (Qwen3,
+  DeepSeek-R1 distills, Phi-4, LLaMA-2-7B, Mistral-7B, Gemma2-9B) on MCPTox
+  (tool poisoning) and InjecAgent (indirect prompt injection).
+
+
+  Mean IoU is 0.743, average AUROC 0.956, TPR 0.934 at FPR 0.067; per-model
+  mIoU spans 0.692-0.858 and AUROC 0.927-0.989. Against baselines on 3
+  settings, AttnLocate reaches TPR>0.910 with FPR<0.070, versus TracLLM 0.900
+  TPR / 0.129 FPR and LLM-Guard 0.513 TPR / 0.374 FPR on Qwen3-8B.
+
+
+  Measured, with ablations that isolate components: removing sink-aware
+  regularization keeps TPR at 0.946 but raises FPR to 0.417; the Gaussian
+  center at 2L/3 is swept. A detector is trained per model-dataset pair;
+  zero-shot transfer from Qwen3-8B degrades (AUROC 0.859 on Phi-4).
+
+
+  Requires white-box attention access, so no API-only models. Performance
+  falls with context length: mIoU 0.8105 to 0.6951, TPR 0.9722 to 0.8571 from
+  \u2264256 to >2048 tokens.
+
+
+  If you host models yourself, internal activations are a stronger injection
+  signal than input scanning.
+brief_generated_at: 2026-09-09
+brief_model: claude-opus-5
+brief_source: full-text
+brief_unverified_figures:
+  - "264256"

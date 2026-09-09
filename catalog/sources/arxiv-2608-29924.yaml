@@ -1,19 +1,60 @@
 id: arxiv-2608-29924
 kind: paper
-title: "Hallucination Mitigation for Large Vision-Language Models via Implicit Feature Stabilization"
+title: Hallucination Mitigation for Large Vision-Language Models via Implicit
+  Feature Stabilization
 year: 2026
 date: 2026-08-30
 arxiv_id: "2608.29924"
 url: https://arxiv.org/abs/2608.29924
-tags: [ingested]
-summary: >-
-  Large Vision-Language Models (LVLMs) are prone to hallucinations: they
-  fluently describe objects, attributes, and scenes that are not in the
+tags:
+  - ingested
+summary: "Large Vision-Language Models (LVLMs) are prone to hallucinations:
+  they fluently describe objects, attributes, and scenes that are not in the
   image. We connect part of this failure to a measurable property of their
   representations, feature instability, where mild semantics-preserving
   perturbations of the input cause large changes in the learned embeddings;
   hallucination rates rise together with this variability. Existing
-  stability-motivated remedies are explicit, in the sense that they
-  intervene at inference time through latent steering or constrained
-  decoding, and pay for it on every query. We
+  stability-motivated remedies are explicit, in the sense that they intervene
+  at inference time through latent steering or constrained decoding, and pay
+  for it on every query. We"
 ingested_at: 2026-09-09
+brief: >-
+  Vision-language hallucination tracks a measurable property of the embedding
+  space: mild semantics-preserving perturbations of an image shift the visual
+  features a lot, and hallucination rates rise with that variance. Training
+  perturbation-invariance into the weights, rather than steering activations
+  at inference, cuts hallucination with no per-query cost.
+
+
+  INFUSE fine-tunes in 2 stages: pull visual embeddings toward an anchor
+  averaged over K=100 masked views (with repulsion from a lagged embedding),
+  pull generated-text embeddings toward human-corrected captions and away from
+  hallucinated ones, then align modalities with bidirectional InfoNCE. Trained
+  on a 2K subset of RLHF-V, tested on LLaVA-1.5-7B, LLaVA-1.6-7B and
+  Qwen3-VL-8B-Instruct.
+
+
+  AMBER CHAIR drops 7.8 to 4.2, 8.3 to 3.1, and 5.9 to 2.9 (46-63% relative).
+  MMHal hallucination rate falls to 15.12% on Qwen3-VL; POPE adversarial
+  accuracy beats inference-time VTI on the shared LLaVA-1.5 backbone (83.56%
+  vs 82.57%). VQA-v2 and TextVQA are preserved. Training takes 6.2 GPU-hours
+  vs 12.5 for CHiP.
+
+
+  DPO and CHiP were re-run on matched backbone and data; RLHF-V and HALVA
+  numbers are literature-reported and not like-for-like. Stage ablations
+  separate the 2 objectives, and the S1-only interventional result supports
+  causation over correlation. The cost comparison is not matched on training
+  data.
+
+
+  Untested: multi-image, multi-turn, models above 8B, negatives from sources
+  other than RLHF-V, token- or region-level anchors. The theory bounds
+  perturbation-induced output change, not absolute hallucination rates.
+
+
+  If you use inference-time steering for grounding, this argues the same
+  effect is obtainable in the weights.
+brief_generated_at: 2026-09-09
+brief_model: claude-opus-5
+brief_source: full-text

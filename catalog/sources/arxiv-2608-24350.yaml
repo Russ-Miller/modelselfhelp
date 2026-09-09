@@ -1,19 +1,60 @@
 id: arxiv-2608-24350
 kind: paper
-title: "FARCA: Fact-Aligned Reliability-Aware Credit Assignment for Reinforcement Learning with Factual Supervision"
+title: "FARCA: Fact-Aligned Reliability-Aware Credit Assignment for
+  Reinforcement Learning with Factual Supervision"
 year: 2026
 date: 2026-08-25
 arxiv_id: "2608.24350"
 url: https://arxiv.org/abs/2608.24350
-tags: [ingested, pending-review]
-summary: >-
-  To reduce the hallucination risk caused by outcome-driven rewards in
-  large language models trained through reinforcement learning with
-  verifiable rewards, existing mitigation approaches introduce process-
-  level factual supervision. However, due to coarse-grained aggregation of
-  factual signals and the lack of reliability assessment for these
-  signals, they create a mismatch between fact verification and policy
-  updates. We term this noisy factual credit assignment and decompose it
-  into two aspects: credit localization ambiguity and credit reliability
-  ambiguity. To address these issues, we propose
+tags:
+  - ingested
+  - pending-review
+summary: "To reduce the hallucination risk caused by outcome-driven rewards in
+  large language models trained through reinforcement learning with verifiable
+  rewards, existing mitigation approaches introduce process- level factual
+  supervision. However, due to coarse-grained aggregation of factual signals
+  and the lack of reliability assessment for these signals, they create a
+  mismatch between fact verification and policy updates. We term this noisy
+  factual credit assignment and decompose it into two aspects: credit
+  localization ambiguity and credit reliability ambiguity. To address these
+  issues, we propose"
 ingested_at: 2026-09-07
+brief: >-
+  Routing factual verification signals to the exact tokens that produced each
+  claim, and down-weighting verifier judgments that survive removal of their
+  key evidence, improves factuality more than trajectory- or step-level
+  factual rewards. FARCA decomposes reasoning text into atomic facts with
+  GPT-4o, anchors each to a token span, scores it with HHEM-2.1-Open on
+  Wikipedia snippets, and interpolates the GRPO advantage toward a
+  fact-corrected direction weighted by how much the verifier score shifts when
+  the most similar evidence sentence is deleted.
+
+
+  Training used HotpotQA/2WikiMultiHopQA plus SimpleRL math on
+  Qwen2.5-3B-Instruct and Llama-3.2-3B-Instruct, against zero-shot, GRPO,
+  KnowRL, FSPO, FaithRL.
+
+
+  On Qwen, FARCA is best on all 4 hallucination benchmarks, averaging 1.75
+  points over FaithRL (+2.09 TruthfulQA, +2.67 HalluQA); on Llama the average
+  gap is 2.21 points. Math also rises (GSM8K 84.46 vs 76.12 for FaithRL).
+  KnowRL and FSPO fall below plain GRPO (Full) on several sets.
+
+
+  Ablations isolate the parts: dropping token provenance moves the
+  hallucination average from 25.36 to 24.40, dropping reliability estimation
+  degrades further, and discretizing the score costs less. A pilot on 100
+  2WikiMultiHopQA examples across 3 verifiers supports evidence-removal as a
+  reliability proxy.
+
+
+  Boundaries: 2 models, both 3B instruct, 2048-token responses, GPT-4o as
+  extractor and judge, no compute-matched baseline for the extra verification
+  calls, no larger-scale replication.
+
+
+  If you build factual RL pipelines, granularity and verifier reliability look
+  like the levers, not more supervision.
+brief_generated_at: 2026-09-09
+brief_model: claude-opus-5
+brief_source: full-text
