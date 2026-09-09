@@ -1092,3 +1092,42 @@ What this does not have: any way to observe use. No analytics, and I would
 rather have one person's argument than a thousand anonymous pageviews, so
 the feedback path came first. If nobody ever opens an issue, that is a
 finding too.
+
+## 2026-09-09 — Buzz does not work; forwarding does
+Russ suggested featuring a paper on the front page, picked by whether it had
+generated discussion on X or Reddit — attention elsewhere as a proxy for
+"worth reading."
+
+Good idea, and the automated version does not work. Measured rather than
+assumed:
+
+- **X** cannot be queried. The API is paid and restricted, and the browser
+  extension needs a person driving it.
+- **Reddit** returns 403 to unauthenticated JSON now, whatever user agent you
+  send. That endpoint used to be open; it is not.
+- **Hacker News** is queryable, free and keyless — and the discussion is not
+  there. SWE-bench drew 2 points. Lost in the Middle drew 15. Individual
+  preprints are not what Hacker News talks about.
+
+The finding nearly went the other way, which is worth recording. A loose
+title search returned a 440-point story and the script picked it as buzz for
+a paper it had nothing to do with — Algolia matches on any word. That would
+have gone on the front page as evidence of attention. The matcher now
+requires the hit's link to carry the arXiv id or its title to share most of
+its words with ours, verified against SWE-bench and Lost in the Middle,
+which it finds correctly.
+
+So the slot picks by catalog signal instead: a paper that argues with
+something already held ranks first, then one that is among the first filings
+under a thin capability, then recency. Today it picked the knowledge-conflict
+paper, because it contests a claim we hold — which is the right answer for
+the right reason.
+
+**And Russ's second suggestion is better than either.** He offered to forward
+links as he finds them. That is a person who reads X doing the selection,
+which is exactly the job the automated signal could not do.
+`scripts/add-link.mjs` takes a URL: arXiv becomes a paper record with real
+metadata, anything else is fetched, archived verbatim and hash-pinned, and
+either way it goes into the front-page slot. It creates the source only —
+drafting a claim stays separate, so nothing gets asserted as a side effect of
+saving a link.

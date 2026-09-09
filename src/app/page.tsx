@@ -1,12 +1,14 @@
 import Link from "next/link";
 import { loadCatalog, capabilitiesByGroup, claimsByRecency, getCapability, isPending } from "@/lib/catalog";
-import { KindBadge, StrengthBadge, ContestedBadge } from "@/components/badges";
+import { KindBadge, StrengthBadge, ContestedBadge, PendingBadge } from "@/components/badges";
+import { getTil } from "@/lib/til";
 
 export default function Home() {
   const cat = loadCatalog();
   const groups = capabilitiesByGroup();
   const recent = claimsByRecency().slice(0, 6);
   const pending = cat.claims.filter(isPending).length;
+  const til = getTil();
   return (
     <div className="space-y-10">
       <section className="space-y-3">
@@ -33,6 +35,50 @@ export default function Home() {
           ))}
         </dl>
       </section>
+
+      {til && (
+        <section className="space-y-3 rounded border border-neutral-200 p-4 dark:border-neutral-800">
+          <div className="flex flex-wrap items-baseline gap-2">
+            <h2 className="text-lg font-semibold">Worth a look</h2>
+            <span className="text-xs text-neutral-500">
+              {til.picked_at} &middot; {til.why}
+            </span>
+          </div>
+          <div>
+            <a href={til.source.url ?? "#"} target="_blank" rel="noopener noreferrer"
+              className="font-medium hover:underline">{til.source.title}</a>
+            {til.source.authors?.length ? (
+              <div className="text-xs text-neutral-500">
+                {til.source.authors[0]}{til.source.authors.length > 1 ? " et al." : ""}
+                {til.source.year ? `, ${til.source.year}` : ""}
+              </div>
+            ) : null}
+          </div>
+          {til.source.brief ? (
+            <p className="text-sm leading-relaxed text-neutral-700 dark:text-neutral-300">
+              {til.source.brief.split(/\n\s*\n/)[0]}
+            </p>
+          ) : til.source.summary ? (
+            <p className="text-sm leading-relaxed text-neutral-700 dark:text-neutral-300">{til.source.summary}</p>
+          ) : null}
+          {til.claims.length > 0 && (
+            <ul className="space-y-1 text-sm">
+              {til.claims.map((c) => (
+                <li key={c.id} className="flex flex-wrap items-baseline gap-2">
+                  {c.contested && <ContestedBadge />}
+                  {isPending(c) && <PendingBadge />}
+                  <Link href={`/claims/${c.id}`} className="hover:underline">{c.statement}</Link>
+                </li>
+              ))}
+            </ul>
+          )}
+          <p className="text-xs text-neutral-500">
+            <Link href={`/sources/${til.source.id}`} className="hover:underline">the source in full</Link>
+            {til.hn_url && <> &middot; <a href={til.hn_url} className="hover:underline">{til.hn_points} points on Hacker News</a></>}
+            {" "}&middot; featured as something worth reading, not as something judged correct
+          </p>
+        </section>
+      )}
 
       <section className="space-y-2">
         <h2 className="text-lg font-semibold">Most recently checked claims</h2>
