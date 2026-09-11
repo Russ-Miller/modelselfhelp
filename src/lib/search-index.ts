@@ -6,6 +6,7 @@
 // keeps the site static, which is what makes it free to host and impossible to
 // break with a bad query.
 import { getCapabilities, getClaims, getSources, getTechniques, isPending } from "./catalog";
+import { packedFor } from "./embeddings";
 
 export interface SearchRecord {
   /** c = capability, m = claim, t = technique, s = source. Short because this
@@ -17,26 +18,33 @@ export interface SearchRecord {
   /** Lowercased haystack: everything worth matching on. */
   text: string;
   pending?: 1;
+  /** Packed embedding, "<scale>|<base64 int8>", for meaning search. */
+  v?: string;
 }
+
+const vec = (k: SearchRecord["k"], id: string) => {
+  const p = packedFor(k, id);
+  return p ? { v: `${p.s}|${p.q}` } : {};
+};
 
 export function buildSearchIndex(): SearchRecord[] {
   const out: SearchRecord[] = [];
 
   for (const c of getCapabilities()) {
-    out.push({ k: "c", id: c.id, title: c.label, sub: c.summary,
+    out.push({ k: "c", id: c.id, title: c.label, sub: c.summary, ...vec("c", c.id),
       text: [c.id, c.label, c.summary, c.description, ...(c.aliases ?? []), ...(c.match_terms ?? []), ...(c.tags ?? [])].join(" ").toLowerCase() });
   }
   for (const t of getTechniques()) {
-    out.push({ k: "t", id: t.id, title: t.label, sub: t.summary,
+    out.push({ k: "t", id: t.id, title: t.label, sub: t.summary, ...vec("t", t.id),
       text: [t.id, t.label, t.summary, t.description, ...(t.addresses ?? [])].join(" ").toLowerCase() });
   }
   for (const m of getClaims()) {
-    out.push({ k: "m", id: m.id, title: m.statement, sub: m.capability,
+    out.push({ k: "m", id: m.id, title: m.statement, sub: m.capability, ...vec("m", m.id),
       text: [m.statement, m.capability, m.technique ?? "", m.notes ?? "", m.observed_on?.era ?? "", ...m.sources.map((s) => s.note)].join(" ").toLowerCase(),
       ...(isPending(m) ? { pending: 1 as const } : {}) });
   }
   for (const s of getSources()) {
-    out.push({ k: "s", id: s.id, title: s.title, sub: s.authors?.[0] ? `${s.authors[0]}${s.authors.length > 1 ? " et al." : ""}${s.year ? `, ${s.year}` : ""}` : s.kind,
+    out.push({ k: "s", id: s.id, title: s.title, ...vec("s", s.id), sub: s.authors?.[0] ? `${s.authors[0]}${s.authors.length > 1 ? " et al." : ""}${s.year ? `, ${s.year}` : ""}` : s.kind,
       text: [s.title, s.summary ?? "", ...(s.authors ?? []), s.arxiv_id ?? "", ...(s.tags ?? [])].join(" ").toLowerCase() });
   }
   return out;

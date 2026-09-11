@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ListSearch } from "@/components/list-search";
+import { vecAttr } from "@/lib/embeddings";
 import { claimTags, getCapability, getClaims, getSource, isPending, isQuietSource } from "@/lib/catalog";
 import type { SourceLink } from "@/lib/catalog";
 import { CitationSignal, ContestedBadge, KindBadge, PendingBadge, StanceBadge, StrengthBadge } from "@/components/badges";
@@ -51,7 +52,7 @@ export default function ClaimsPage() {
           return (
             <li key={c.id} data-tags={claimTags(c)}
               className="rounded border border-neutral-200 p-4 dark:border-neutral-800"
-              data-search={`${c.id} ${c.statement} ${c.capability} ${c.technique ?? ""} ${c.backing_strength} ${c.kind}`.toLowerCase()}>
+              data-vec={vecAttr("m", c.id)} data-search={`${c.id} ${c.statement} ${c.capability} ${c.technique ?? ""} ${c.backing_strength} ${c.kind}`.toLowerCase()}>
               <div className="flex flex-wrap items-center gap-2 mb-2">
                 <KindBadge kind={c.kind} />
                 <StrengthBadge strength={c.backing_strength} />

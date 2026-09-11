@@ -1,8 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import type { SearchRecord } from "@/lib/search-index";
+import { MATCH_FLOOR, cosine, embedQuery, unpackAttr } from "@/lib/embed-client";
+import { SearchModeToggle, type SearchMode } from "@/components/search-mode";
 
 const KIND: Record<SearchRecord["k"], { label: string; plural: string; section: string; href: (id: string) => string }> = {
   c: { label: "capability", plural: "capabilities", section: "/capabilities", href: (id) => `/capabilities/${id}` },
@@ -34,17 +36,48 @@ function score(rec: SearchRecord, terms: string[]): number {
 
 export function Search({ index }: { index: SearchRecord[] }) {
   const [q, setQ] = useState("");
+  const [mode, setMode] = useState<SearchMode>("keyword");
+  // Meaning mode: the embedded query, and which text it was embedded from.
+  const [qvec, setQvec] = useState<{ q: string; v: Float32Array } | null>(null);
+  const statusRef = useRef<HTMLSpanElement>(null);
   const terms = useMemo(() => q.toLowerCase().split(/\s+/).filter(Boolean), [q]);
+
+  // Catalog vectors, decoded once. Cheap: a few hundred short arrays.
+  const vectors = useMemo(() => index.map((r) => unpackAttr(r.v)), [index]);
+
+  // Embed the query after a short pause in typing. The model loads on the
+  // first call; status text goes straight to a span rather than state.
+  useEffect(() => {
+    if (mode !== "meaning" || !q.trim()) return;
+    let live = true;
+    const t = setTimeout(async () => {
+      try {
+        const v = await embedQuery(q.trim(), (m) => { if (statusRef.current) statusRef.current.textContent = m; });
+        if (live) setQvec({ q, v });
+      } catch {
+        if (statusRef.current) statusRef.current.textContent = "meaning search unavailable (model failed to load)";
+      }
+    }, 250);
+    return () => { live = false; clearTimeout(t); };
+  }, [mode, q]);
 
   // All matches, unsliced, so the per-kind counts are true totals.
   const matches = useMemo(() => {
+    if (mode === "meaning") {
+      if (!q.trim() || !qvec || qvec.q !== q) return [];
+      return index
+        .map((r, i) => ({ r, s: vectors[i] ? cosine(qvec.v, vectors[i]!) : 0 }))
+        .filter((x) => x.s >= MATCH_FLOOR)
+        .sort((a, b) => b.s - a.s);
+    }
     if (!terms.length) return [];
     return index
       .map((r) => ({ r, s: score(r, terms) }))
       .filter((x) => x.s > 0)
       .sort((a, b) => b.s - a.s);
-  }, [index, terms]);
+  }, [index, vectors, terms, mode, q, qvec]);
   const results = matches.slice(0, 40);
+  const pendingEmbed = mode === "meaning" && !!q.trim() && (!qvec || qvec.q !== q);
 
   // With no query the line shows catalog totals; with one, matches per kind.
   const counts = useMemo(() => {
@@ -56,14 +89,18 @@ export function Search({ index }: { index: SearchRecord[] }) {
 
   return (
     <div className="space-y-4">
-      <input
-        type="search"
-        value={q}
-        onChange={(e) => setQ(e.target.value)}
-        placeholder="Search claims, capabilities, techniques, sources…"
-        aria-label="Search the catalog"
-        className="w-full rounded border border-neutral-300 bg-transparent px-3 py-2 text-sm dark:border-neutral-700"
-      />
+      <div className="flex flex-wrap items-center gap-2">
+        <input
+          type="search"
+          value={q}
+          onChange={(e) => setQ(e.target.value)}
+          placeholder={mode === "meaning" ? "Describe what you are looking for…" : "Search claims, capabilities, techniques, sources…"}
+          aria-label="Search the catalog"
+          className="min-w-0 flex-1 rounded border border-neutral-300 bg-transparent px-3 py-2 text-sm dark:border-neutral-700"
+        />
+        <SearchModeToggle mode={mode} onChange={setMode} />
+      </div>
+      <span ref={statusRef} aria-live="polite" className="block text-xs text-neutral-500 empty:hidden" />
 
       <dl className="flex flex-wrap gap-6 text-sm" aria-live="polite">
         {KIND_ORDER.map((k) => (
@@ -76,10 +113,10 @@ export function Search({ index }: { index: SearchRecord[] }) {
         ))}
       </dl>
 
-      {terms.length > 0 && (
+      {terms.length > 0 && !pendingEmbed && (
         <p className="text-xs text-neutral-500">
           {matches.length === 0
-            ? "Nothing matched. Every word has to appear somewhere — try fewer."
+            ? mode === "meaning" ? "Nothing close enough. Try describing it differently." : "Nothing matched. Every word has to appear somewhere — try fewer."
             : matches.length > 40
               ? `Showing the top 40 of ${matches.length} matches.`
               : `${matches.length} match${matches.length === 1 ? "" : "es"}`}

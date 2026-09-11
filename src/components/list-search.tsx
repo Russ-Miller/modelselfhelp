@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { MATCH_FLOOR, cosine, embedQuery, unpackAttr } from "@/lib/embed-client";
+import { SearchModeToggle, type SearchMode } from "@/components/search-mode";
 
 /**
  * Type-to-filter for a server-rendered list. Rows carry a `data-search`
@@ -12,71 +14,116 @@ import { useEffect, useRef, useState } from "react";
  * The two compose without knowing about each other — a row hidden by either
  * rule stays hidden.
  *
- * Only the query is React state. The match count is written straight into a
- * span, because it is derived from the DOM the effect just touched, and
- * routing it back through setState is the cascading-render pattern React warns
- * about. An effect that updates an external system and reports what it did is
- * what effects are actually for.
+ * Meaning mode: rows also carry `data-vec`, a packed embedding. The query is
+ * embedded in the browser, rows below a similarity floor are hidden, and the
+ * rest are physically reordered by similarity (rows are <li> on some pages
+ * and <tr> on others, and CSS `order` does nothing in a table). The original
+ * order is remembered and restored on clear.
+ *
+ * Only the query and mode are React state. The match count and status are
+ * written straight into spans, because they are derived from the DOM the
+ * effect just touched, and routing them back through setState is the
+ * cascading-render pattern React warns about.
  */
 export function ListSearch({ noun = "rows", placeholder }: { noun?: string; placeholder?: string }) {
   const [q, setQ] = useState("");
+  const [mode, setMode] = useState<SearchMode>("keyword");
   const countRef = useRef<HTMLSpanElement>(null);
+  const statusRef = useRef<HTMLSpanElement>(null);
+  // DOM order as the server sent it, captured once, so meaning mode can undo its sorting.
+  const originalRef = useRef<HTMLElement[] | null>(null);
 
   useEffect(() => {
     // Rows live outside this component, so reach for them from the document.
-    const rows = document.querySelectorAll<HTMLElement>("[data-search]");
+    const rows = Array.from(document.querySelectorAll<HTMLElement>("[data-search]"));
+    if (!originalRef.current) originalRef.current = rows.slice();
+    const original = originalRef.current;
     const terms = q.toLowerCase().split(/\s+/).filter(Boolean);
+    const setStatus = (m: string) => { if (statusRef.current) statusRef.current.textContent = m; };
 
-    for (const r of rows) {
-      if (!terms.length) { r.removeAttribute("data-hit"); continue; }
-      const hay = r.dataset.search ?? "";
-      r.setAttribute("data-hit", terms.every((t) => hay.includes(t)) ? "1" : "0");
-    }
+    const restoreOrder = () => {
+      const parent = original[0]?.parentElement;
+      if (!parent) return;
+      if (original.every((r, i) => parent.children[i] === r)) return;
+      for (const r of original) parent.appendChild(r);
+    };
 
-    // Count what is actually on screen, not what matched the text. The filter
-    // bar hides rows too, and reporting "6 of 160" above an empty list is
-    // worse than reporting nothing.
-    report();
-
-    function report() {
+    const report = () => {
       let shown = 0;
       for (const r of rows) if (getComputedStyle(r).display !== "none") shown++;
       if (!countRef.current) return;
       countRef.current.textContent = !terms.length ? ""
         : shown === 0 ? `no ${noun} match`
         : `${shown} of ${rows.length}`;
+    };
+
+    let live = true;
+    let timer: ReturnType<typeof setTimeout> | undefined;
+
+    if (!terms.length) {
+      for (const r of rows) r.removeAttribute("data-hit");
+      restoreOrder();
+      setStatus("");
+      report();
+    } else if (mode === "keyword") {
+      restoreOrder();
+      setStatus("");
+      for (const r of rows) {
+        const hay = r.dataset.search ?? "";
+        r.setAttribute("data-hit", terms.every((t) => hay.includes(t)) ? "1" : "0");
+      }
+      report();
+    } else {
+      timer = setTimeout(async () => {
+        try {
+          const qv = await embedQuery(q.trim(), setStatus);
+          if (!live) return;
+          const scored = rows.map((r) => ({ r, s: (() => { const v = unpackAttr(r.dataset.vec); return v ? cosine(qv, v) : -1; })() }));
+          const parent = rows[0]?.parentElement;
+          const ranked = scored.filter((x) => x.s >= MATCH_FLOOR).sort((a, b) => b.s - a.s);
+          for (const x of scored) x.r.setAttribute("data-hit", x.s >= MATCH_FLOOR ? "1" : "0");
+          if (parent) for (const x of ranked) parent.appendChild(x.r);
+          setStatus("");
+          report();
+        } catch {
+          if (live) setStatus("meaning search unavailable (model failed to load)");
+        }
+      }, 250);
     }
 
     // The filter bar hides rows independently, so the count goes stale when a
     // filter changes and the query does not. Watch the wrapper's attribute and
     // recount.
     const wrapper = document.querySelector("[data-filter]");
-    if (!wrapper) return;
-    const obs = new MutationObserver(report);
-    obs.observe(wrapper, { attributes: true, attributeFilter: ["data-filter"] });
-    return () => obs.disconnect();
-  }, [q, noun]);
+    const obs = wrapper ? new MutationObserver(report) : null;
+    obs?.observe(wrapper!, { attributes: true, attributeFilter: ["data-filter"] });
+    return () => { live = false; if (timer) clearTimeout(timer); obs?.disconnect(); };
+  }, [q, mode, noun]);
 
   return (
-    <div className="flex flex-wrap items-center gap-2">
-      <input
-        type="search"
-        value={q}
-        onChange={(e) => setQ(e.target.value)}
-        placeholder={placeholder ?? `Filter ${noun}…`}
-        aria-label={`Filter ${noun} on this page`}
-        className="min-w-0 flex-1 rounded border border-neutral-300 bg-transparent px-3 py-1.5 text-sm dark:border-neutral-700"
-      />
-      <span ref={countRef} aria-live="polite" className="text-xs text-neutral-500" />
-      {q && (
-        <button
-          type="button"
-          onClick={() => setQ("")}
-          className="rounded-full border border-neutral-300 px-3 py-1 text-xs hover:border-neutral-500 dark:border-neutral-700"
-        >
-          Clear
-        </button>
-      )}
+    <div className="space-y-1">
+      <div className="flex flex-wrap items-center gap-2">
+        <input
+          type="search"
+          value={q}
+          onChange={(e) => setQ(e.target.value)}
+          placeholder={mode === "meaning" ? `Describe the ${noun} you want…` : placeholder ?? `Filter ${noun}…`}
+          aria-label={`Filter ${noun} on this page`}
+          className="min-w-0 flex-1 rounded border border-neutral-300 bg-transparent px-3 py-1.5 text-sm dark:border-neutral-700"
+        />
+        <SearchModeToggle mode={mode} onChange={setMode} />
+        <span ref={countRef} aria-live="polite" className="text-xs text-neutral-500" />
+        {q && (
+          <button
+            type="button"
+            onClick={() => setQ("")}
+            className="rounded-full border border-neutral-300 px-3 py-1 text-xs hover:border-neutral-500 dark:border-neutral-700"
+          >
+            Clear
+          </button>
+        )}
+      </div>
+      <span ref={statusRef} aria-live="polite" className="block text-xs text-neutral-500 empty:hidden" />
     </div>
   );
 }

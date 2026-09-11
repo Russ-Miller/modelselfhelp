@@ -5,6 +5,7 @@ import { claimActivity, getCapability, getClaim, getClaims, getModel, getSource,
 import type { SourceLink } from "@/lib/catalog";
 import { ContestedBadge, EvidenceSignal, KindBadge, PendingBadge, StanceBadge, StrengthBadge } from "@/components/badges";
 import { ChallengeLink } from "@/components/challenge";
+import { relatedClaims } from "@/lib/embeddings";
 
 function SourceItem({ link }: { link: SourceLink }) {
   const src = getSource(link.source);
@@ -130,6 +131,34 @@ export default async function ClaimPage({ params }: PageProps<"/claims/[id]">) {
           claim in this catalog were assembled by the same person, which is its weakest point.
         </p>
       </section>
+
+      {(() => {
+        const rel = relatedClaims("m", c.id);
+        if (!rel.length) return null;
+        return (
+          <section>
+            <h2 className="font-semibold mb-2">Related claims</h2>
+            {/* Nearest by meaning, computed at build time from the statement
+                and notes. Similarity picks the order; it is not shown, because
+                a number here would read as a verdict. */}
+            <ul className="space-y-2 text-sm">
+              {rel.map(({ claim: r }) => {
+                const rc = getCapability(r.capability);
+                return (
+                  <li key={r.id}>
+                    <Link href={`/claims/${r.id}`} className="hover:underline">{r.statement}</Link>
+                    <span className="ml-2 text-xs text-neutral-500">
+                      {rc?.label ?? r.capability}
+                      {r.contested && <> &middot; contested</>}
+                      {isPending(r) && <> &middot; unreviewed</>}
+                    </span>
+                  </li>
+                );
+              })}
+            </ul>
+          </section>
+        );
+      })()}
 
       {c.notes && (
         <section className="text-sm">

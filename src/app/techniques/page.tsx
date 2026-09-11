@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ListSearch } from "@/components/list-search";
+import { vecAttr } from "@/lib/embeddings";
 import { getTechniques, getCapability, openQuestions, techniqueTags } from "@/lib/catalog";
 import { FilterBar } from "@/components/filter-bar";
 
@@ -27,7 +28,7 @@ export default function TechniquesPage() {
       <ul className="space-y-3">
         {getTechniques().map((t) => (
           <li key={t.id} data-tags={techniqueTags(t)}
-            data-search={`${t.label} ${t.summary} ${t.id} ${t.kind} ${t.addresses.join(" ")}`.toLowerCase()} className="rounded border border-neutral-200 dark:border-neutral-800 p-3 text-sm">
+            data-vec={vecAttr("t", t.id)} data-search={`${t.label} ${t.summary} ${t.id} ${t.kind} ${t.addresses.join(" ")}`.toLowerCase()} className="rounded border border-neutral-200 dark:border-neutral-800 p-3 text-sm">
             <Link href={`/techniques/${t.id}`} className="font-medium hover:underline">{t.label}</Link>
             <span className="ml-2 text-xs text-neutral-500">{t.kind}{t.repos?.length ? " · has code" : ""}{t.status === "superseded" ? " · superseded" : ""}</span>
             <p className="text-neutral-600 dark:text-neutral-400">{t.summary}</p>
