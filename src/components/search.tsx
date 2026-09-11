@@ -4,12 +4,15 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 import type { SearchRecord } from "@/lib/search-index";
 
-const KIND: Record<SearchRecord["k"], { label: string; href: (id: string) => string }> = {
-  c: { label: "capability", href: (id) => `/capabilities/${id}` },
-  m: { label: "claim", href: (id) => `/claims/${id}` },
-  t: { label: "technique", href: (id) => `/techniques/${id}` },
-  s: { label: "source", href: (id) => `/sources/${id}` },
+const KIND: Record<SearchRecord["k"], { label: string; plural: string; section: string; href: (id: string) => string }> = {
+  c: { label: "capability", plural: "capabilities", section: "/capabilities", href: (id) => `/capabilities/${id}` },
+  m: { label: "claim", plural: "claims", section: "/claims", href: (id) => `/claims/${id}` },
+  t: { label: "technique", plural: "techniques", section: "/techniques", href: (id) => `/techniques/${id}` },
+  s: { label: "source", plural: "sources", section: "/sources", href: (id) => `/sources/${id}` },
 };
+
+/** Display order for the count line: matches the nav. */
+const KIND_ORDER: SearchRecord["k"][] = ["c", "m", "s", "t"];
 
 /**
  * Scoring, deliberately simple. Every query term must appear somewhere, then
@@ -33,14 +36,23 @@ export function Search({ index }: { index: SearchRecord[] }) {
   const [q, setQ] = useState("");
   const terms = useMemo(() => q.toLowerCase().split(/\s+/).filter(Boolean), [q]);
 
-  const results = useMemo(() => {
+  // All matches, unsliced, so the per-kind counts are true totals.
+  const matches = useMemo(() => {
     if (!terms.length) return [];
     return index
       .map((r) => ({ r, s: score(r, terms) }))
       .filter((x) => x.s > 0)
-      .sort((a, b) => b.s - a.s)
-      .slice(0, 40);
+      .sort((a, b) => b.s - a.s);
   }, [index, terms]);
+  const results = matches.slice(0, 40);
+
+  // With no query the line shows catalog totals; with one, matches per kind.
+  const counts = useMemo(() => {
+    const pool = terms.length ? matches.map((x) => x.r) : index;
+    const n: Record<SearchRecord["k"], number> = { c: 0, m: 0, t: 0, s: 0 };
+    for (const r of pool) n[r.k]++;
+    return n;
+  }, [index, matches, terms.length]);
 
   return (
     <div className="space-y-4">
@@ -53,11 +65,24 @@ export function Search({ index }: { index: SearchRecord[] }) {
         className="w-full rounded border border-neutral-300 bg-transparent px-3 py-2 text-sm dark:border-neutral-700"
       />
 
+      <dl className="flex flex-wrap gap-6 text-sm" aria-live="polite">
+        {KIND_ORDER.map((k) => (
+          <div key={k}>
+            <dt className="text-neutral-500">{terms.length ? `${KIND[k].plural} matched` : KIND[k].plural}</dt>
+            <dd className="text-xl font-medium">
+              <Link href={KIND[k].section} className="hover:underline">{counts[k]}</Link>
+            </dd>
+          </div>
+        ))}
+      </dl>
+
       {terms.length > 0 && (
         <p className="text-xs text-neutral-500">
-          {results.length === 0
+          {matches.length === 0
             ? "Nothing matched. Every word has to appear somewhere — try fewer."
-            : `${results.length}${results.length === 40 ? "+" : ""} result${results.length === 1 ? "" : "s"}`}
+            : matches.length > 40
+              ? `Showing the top 40 of ${matches.length} matches.`
+              : `${matches.length} match${matches.length === 1 ? "" : "es"}`}
         </p>
       )}
 
