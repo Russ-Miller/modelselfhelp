@@ -5,13 +5,13 @@
 // search dependency: the page ships the index and scores in the browser. That
 // keeps the site static, which is what makes it free to host and impossible to
 // break with a bad query.
-import { getCapabilities, getClaims, getSources, getTechniques, isPending } from "./catalog";
+import { getAdages, getCapabilities, getClaims, getSources, getTechniques, isPending } from "./catalog";
 import { packedFor } from "./embeddings";
 
 export interface SearchRecord {
   /** c = capability, m = claim, t = technique, s = source. Short because this
    *  ships to every visitor. */
-  k: "c" | "m" | "t" | "s";
+  k: "c" | "m" | "t" | "s" | "a";
   id: string;
   title: string;
   sub?: string;
@@ -46,6 +46,10 @@ export function buildSearchIndex(): SearchRecord[] {
   for (const s of getSources()) {
     out.push({ k: "s", id: s.id, title: s.title, ...vec("s", s.id), sub: s.authors?.[0] ? `${s.authors[0]}${s.authors.length > 1 ? " et al." : ""}${s.year ? `, ${s.year}` : ""}` : s.kind,
       text: [s.title, s.summary ?? "", ...(s.authors ?? []), s.arxiv_id ?? "", ...(s.tags ?? [])].join(" ").toLowerCase() });
+  }
+  for (const a of getAdages()) {
+    out.push({ k: "a", id: a.id, title: a.label, sub: a.statement, ...vec("a", a.id),
+      text: [a.id, a.label, a.statement, a.origin, a.transfer, ...(a.aliases ?? [])].join(" ").toLowerCase() });
   }
   return out;
 }

@@ -46,7 +46,13 @@ body {
 [data-filter="searched"] [data-tags]:not([data-tags~="searched"]),
 [data-filter="pending"] [data-tags]:not([data-tags~="pending"]),
 [data-filter="proposed"] [data-tags]:not([data-tags~="proposed"]),
-[data-filter="unsearched"] [data-tags]:not([data-tags~="unsearched"]) {
+[data-filter="unsearched"] [data-tags]:not([data-tags~="unsearched"]),
+[data-filter="untested"] [data-tags]:not([data-tags~="untested"]),
+[data-filter="holds"] [data-tags]:not([data-tags~="holds"]),
+[data-filter="narrowed"] [data-tags]:not([data-tags~="narrowed"]),
+[data-filter="breaks"] [data-tags]:not([data-tags~="breaks"]),
+[data-filter="mixed"] [data-tags]:not([data-tags~="mixed"]),
+[data-filter="any-break"] [data-tags]:not([data-tags~="any-break"]) {
   display: none;
 }
 

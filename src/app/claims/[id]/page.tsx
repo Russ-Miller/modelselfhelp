@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { notFound } from "next/navigation";
-import { claimActivity, getCapability, getClaim, getClaims, getModel, getSource, getTagLabel, isPending, isQuietSource } from "@/lib/catalog";
+import { adagesForClaim, claimActivity, getCapability, getClaim, getClaims, getModel, getSource, getTagLabel, isPending, isQuietSource } from "@/lib/catalog";
 import type { SourceLink } from "@/lib/catalog";
 import { ContestedBadge, EvidenceSignal, KindBadge, PendingBadge, StanceBadge, StrengthBadge } from "@/components/badges";
 import { ChallengeLink } from "@/components/challenge";
@@ -63,6 +63,20 @@ export default async function ClaimPage({ params }: PageProps<"/claims/[id]">) {
             excluded anywhere a claim would carry weight. Read the source before relying on it.
           </p>
         )}
+        {(() => {
+          const ad = adagesForClaim(c.id);
+          if (!ad.length) return null;
+          return (
+            <p className="text-sm text-neutral-500">
+              Evidence for: {ad.map(({ adage, verdict }, i) => (
+                <span key={adage.id}>{i > 0 && ", "}
+                  <Link href={`/adages/${adage.id}`} className="text-neutral-700 hover:underline dark:text-neutral-300">{adage.label}</Link>
+                  {" "}({verdict})
+                </span>
+              ))}
+            </p>
+          );
+        })()}
         <p className="text-sm text-neutral-500">
           Capability: <Link href={`/capabilities/${c.capability}`} className="hover:underline">{cap?.label ?? c.capability}</Link>
           {c.tags?.length ? <> &middot; {c.tags.map(getTagLabel).join(", ")}</> : null}

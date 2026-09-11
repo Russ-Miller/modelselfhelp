@@ -4,7 +4,7 @@ import Ajv2020 from "ajv/dist/2020.js";
 import addFormats from "ajv-formats";
 import { loadCatalog, loadSchema, KINDS } from "./catalog-lib.mjs";
 
-const SCHEMA_FOR = { capabilities: "capability", sources: "source", techniques: "technique", models: "model", claims: "claim" };
+const SCHEMA_FOR = { capabilities: "capability", sources: "source", techniques: "technique", models: "model", claims: "claim", adages: "adage" };
 const SLUG = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
 const ajv = new Ajv2020({ allErrors: true, strict: true });
@@ -77,6 +77,9 @@ for (const c of cat.claims) {
 }
 // technique back-links: a capability listing a technique must be in that technique's `addresses`
 for (const cap of cat.capabilities) for (const t of cap.data.techniques ?? []) if (addressedBy.has(t) && !addressedBy.get(t).has(cap.data.id)) problem(cap.file, `technique ${t} does not list ${cap.data.id} in addresses`);
+
+// adage evidence must point at claims that exist
+for (const a of cat.adages) for (const e of a.data.evidence ?? []) checkRef(a.file, ids.claims, e.claim, "claim");
 
 const counts = KINDS.map((k) => `${cat[k].length} ${k}`).join(", ");
 if (problems.length) {

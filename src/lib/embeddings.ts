@@ -5,7 +5,7 @@ import path from "node:path";
 import type { Claim } from "./catalog";
 import { getClaims } from "./catalog";
 
-export type Kind = "c" | "m" | "t" | "s";
+export type Kind = "c" | "m" | "t" | "s" | "a";
 export interface Packed { s: number; q: string }
 
 interface File { model: string; dim: number; records: Record<string, Packed & { h: string }> }

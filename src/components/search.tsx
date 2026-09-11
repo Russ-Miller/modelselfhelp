@@ -11,10 +11,11 @@ const KIND: Record<SearchRecord["k"], { label: string; plural: string; section: 
   m: { label: "claim", plural: "claims", section: "/claims", href: (id) => `/claims/${id}` },
   t: { label: "technique", plural: "techniques", section: "/techniques", href: (id) => `/techniques/${id}` },
   s: { label: "source", plural: "sources", section: "/sources", href: (id) => `/sources/${id}` },
+  a: { label: "adage", plural: "adages", section: "/adages", href: (id) => `/adages/${id}` },
 };
 
 /** Display order for the count line: matches the nav. */
-const KIND_ORDER: SearchRecord["k"][] = ["c", "m", "s", "t"];
+const KIND_ORDER: SearchRecord["k"][] = ["c", "m", "s", "t", "a"];
 
 /**
  * Scoring, deliberately simple. Every query term must appear somewhere, then
@@ -81,7 +82,7 @@ export function Search({ index }: { index: SearchRecord[] }) {
   // With no query the line shows catalog totals; with one, matches per kind.
   const counts = useMemo(() => {
     const pool = terms.length ? matches.map((x) => x.r) : index;
-    const n: Record<SearchRecord["k"], number> = { c: 0, m: 0, t: 0, s: 0 };
+    const n: Record<SearchRecord["k"], number> = { c: 0, m: 0, t: 0, s: 0, a: 0 };
     for (const r of pool) n[r.k]++;
     return n;
   }, [index, matches, terms.length]);

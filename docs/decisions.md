@@ -1365,3 +1365,24 @@ order on clear; CSS `order` was ruled out because two of the lists are tables.
 Next uses, not built: duplicate detection when filing drafts, contradiction
 candidates (high similarity, opposite stance), and a better first pass in the
 paper classifier than the term matcher.
+
+## 2026-09-11 — Adages: human laws, tested against models
+
+New catalog kind `adages` (`catalog/adages/*.yaml`, `adage.schema.json`): a
+law or rule of thumb from human systems, its origin, a **transfer** argument
+saying why it should or should not apply to models (the mechanism, not the
+analogy), and an **evidence** list of claims in this catalog, each with a
+verdict: `holds`, `breaks` or `narrows`.
+
+Standing (`adageStanding`) comes from reviewed claims only, same rule as
+techniques: untested / holds / narrowed / breaks / mixed. Pending claims are
+listed and marked but move nothing. The list page's first pill is "Breaks
+somewhere" because the breaks are the content nobody else collects: an adage
+that holds says what was already believed, one that breaks says how models
+differ from people. Detail pages list breaks before holds for the same
+reason.
+
+Seeded with six: Goodhart's law, Hashimoto's ratchet, no one should be judge
+in their own cause, two heads are better than one, first impressions last,
+practice makes perfect. The user has a longer list to follow. Claims that
+serve as evidence show "Evidence for: …" on their page.

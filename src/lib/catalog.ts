@@ -67,6 +67,15 @@ export interface NearestMiss { source?: string; title?: string; url?: string; wh
  *  means nobody has looked -- a different state from a documented dead end,
  *  and the whole point of the distinction. */
 export interface EvidenceSearch { searched_on: string; note: string; nearest_miss?: NearestMiss[] }
+export type AdageVerdict = "holds" | "breaks" | "narrows";
+export interface AdageEvidence { claim: string; verdict: AdageVerdict; note: string }
+export interface Adage {
+  id: string; label: string; aliases?: string[]; statement: string; origin: string; transfer: string;
+  evidence?: AdageEvidence[];
+  evidence_search?: { searched_on: string; note: string; nearest_miss?: string[] };
+  status: "active" | "retired"; submitted_by: string; notes?: string;
+}
+
 export interface Technique {
   id: string; label: string; summary: string; description: string; addresses: string[];
   kind: "prompting" | "retrieval" | "tooling" | "training" | "decoding" | "architecture" | "process";
@@ -84,6 +93,7 @@ export interface Taxonomy { groups: TaxonomyEntry[]; contexts: TaxonomyEntry[] }
 export interface Catalog {
   taxonomy: Taxonomy;
   capabilities: Capability[]; claims: Claim[]; sources: Source[]; techniques: Technique[]; models: Model[];
+  adages: Adage[];
 }
 
 const CATALOG_DIR = path.join(process.cwd(), "catalog");
@@ -108,6 +118,7 @@ export function loadCatalog(): Catalog {
     sources: readDir<Source>("sources"),
     techniques: readDir<Technique>("techniques"),
     models: readDir<Model>("models"),
+    adages: readDir<Adage>("adages"),
   };
   return cache;
 }
@@ -144,6 +155,8 @@ export const getSource = (id: string) => loadCatalog().sources.find((s) => s.id 
 export const getTechniques = () =>
   [...loadCatalog().techniques].sort((a, b) => a.label.localeCompare(b.label));
 export const getTechnique = (id: string) => loadCatalog().techniques.find((t) => t.id === id);
+export const getAdages = () => [...loadCatalog().adages].sort((a, b) => a.label.localeCompare(b.label));
+export const getAdage = (id: string) => loadCatalog().adages.find((a) => a.id === id);
 export const getModel = (id: string) => loadCatalog().models.find((m) => m.id === id);
 export const getTagLabel = (id: string) => {
   const t = loadCatalog().taxonomy;
@@ -319,6 +332,38 @@ export function capabilityTags(c: Capability): string {
   const u = unsolvedCapabilities().find((x) => x.capability.id === c.id);
   if (u) tags.push(u.kind);
   return tags.join(" ");
+}
+
+/**
+ * Where an adage stands against models, from reviewed claims only, same rule
+ * as technique standing: unreviewed evidence is shown on the page but moves
+ * nothing. "untested" is the research brief; "breaks" and "mixed" are where
+ * the catalog says something no essay on the adage says.
+ */
+export type AdageStanding = "untested" | "holds" | "narrowed" | "breaks" | "mixed";
+export const ADAGE_STANDING_LABEL: Record<AdageStanding, string> = {
+  untested: "Untested", holds: "Holds", narrowed: "Holds, narrowed", breaks: "Breaks", mixed: "Mixed",
+};
+export function adageStanding(a: Adage): AdageStanding {
+  const reviewed = new Set(reviewedClaims().map((c) => c.id));
+  const v = (a.evidence ?? []).filter((e) => reviewed.has(e.claim)).map((e) => e.verdict);
+  if (!v.length) return "untested";
+  const holds = v.includes("holds"), breaks = v.includes("breaks"), narrows = v.includes("narrows");
+  if (holds && breaks) return "mixed";
+  if (breaks) return "breaks";
+  if (narrows) return "narrowed";
+  return "holds";
+}
+export function adageTags(a: Adage): string {
+  const tags: string[] = [adageStanding(a)];
+  if ((a.evidence ?? []).some((e) => e.verdict === "breaks")) tags.push("any-break");
+  return tags.join(" ");
+}
+/** Adages a claim serves as evidence for, with the verdict it carries. */
+export function adagesForClaim(claimId: string): { adage: Adage; verdict: AdageVerdict }[] {
+  const out: { adage: Adage; verdict: AdageVerdict }[] = [];
+  for (const a of loadCatalog().adages) for (const e of a.evidence ?? []) if (e.claim === claimId) out.push({ adage: a, verdict: e.verdict });
+  return out;
 }
 
 export function techniqueTags(t: Technique): string {
