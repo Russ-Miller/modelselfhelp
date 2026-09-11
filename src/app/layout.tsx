@@ -8,6 +8,7 @@ const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://rsiratchet.com"),
   title: { default: "RSI Ratchet", template: "%s · RSI Ratchet" },
   description: "Where AI models fall short, the evidence, and reproducible ways to fix it.",
 };
