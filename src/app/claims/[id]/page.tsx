@@ -3,7 +3,7 @@ import { Breadcrumbs } from "@/components/breadcrumbs";
 import { notFound } from "next/navigation";
 import { claimActivity, getCapability, getClaim, getClaims, getModel, getSource, getTagLabel, isPending, isQuietSource } from "@/lib/catalog";
 import type { SourceLink } from "@/lib/catalog";
-import { CitationSignal, ContestedBadge, EvidenceSignal, KindBadge, PendingBadge, StanceBadge, StrengthBadge } from "@/components/badges";
+import { ContestedBadge, EvidenceSignal, KindBadge, PendingBadge, StanceBadge, StrengthBadge } from "@/components/badges";
 import { ChallengeLink } from "@/components/challenge";
 
 function SourceItem({ link }: { link: SourceLink }) {
@@ -16,7 +16,6 @@ function SourceItem({ link }: { link: SourceLink }) {
           <a href={src.url ?? `#${src.id}`} target="_blank" rel="noopener noreferrer"
             className="font-medium hover:underline">{src.title}</a>
         ) : link.source}
-        {src && <CitationSignal source={src} />}
       </div>
       <div className="text-neutral-600 dark:text-neutral-400 ml-1">{link.note}</div>
     </li>
@@ -63,20 +62,6 @@ export default async function ClaimPage({ params }: PageProps<"/claims/[id]">) {
             excluded anywhere a claim would carry weight. Read the source before relying on it.
           </p>
         )}
-        <p className="text-sm text-neutral-500">
-          From{" "}
-          {c.sources.map((l, i) => {
-            const src = getSource(l.source);
-            return (
-              <span key={l.source}>
-                {i > 0 && (i === c.sources.length - 1 ? " and " : ", ")}
-                <Link href={`/sources/${l.source}`} className="text-neutral-700 hover:underline dark:text-neutral-300">
-                  {src?.title ?? l.source}
-                </Link>
-              </span>
-            );
-          })}
-        </p>
         <p className="text-sm text-neutral-500">
           Capability: <Link href={`/capabilities/${c.capability}`} className="hover:underline">{cap?.label ?? c.capability}</Link>
           {c.tags?.length ? <> &middot; {c.tags.map(getTagLabel).join(", ")}</> : null}
