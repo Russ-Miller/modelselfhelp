@@ -1356,7 +1356,7 @@ Two uses so far. **Related claims** on every claim page: nearest five by
 cosine, floor 0.45, order shown but the score is not, since a number would
 read as a verdict. **Meaning search** as a toggle beside every search box:
 the same model loads in the browser from a CDN on first use (~23 MB, cached),
-embeds the query, and ranks rows above a 0.4 floor. Keyword stays the default
+embeds the query, and ranks rows scoring at least 80% of the best hit (absolute floor 0.3). Keyword stays the default
 because it is exact and explainable.
 
 Ranked results on list pages reorder the DOM rows and restore the original

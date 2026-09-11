@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { SearchRecord } from "@/lib/search-index";
-import { MATCH_FLOOR, cosine, embedQuery, unpackAttr } from "@/lib/embed-client";
+import { cosine, embedQuery, matchCutoff, unpackAttr } from "@/lib/embed-client";
 import { SearchModeToggle, type SearchMode } from "@/components/search-mode";
 
 const KIND: Record<SearchRecord["k"], { label: string; plural: string; section: string; href: (id: string) => string }> = {
@@ -65,10 +65,9 @@ export function Search({ index }: { index: SearchRecord[] }) {
   const matches = useMemo(() => {
     if (mode === "meaning") {
       if (!q.trim() || !qvec || qvec.q !== q) return [];
-      return index
-        .map((r, i) => ({ r, s: vectors[i] ? cosine(qvec.v, vectors[i]!) : 0 }))
-        .filter((x) => x.s >= MATCH_FLOOR)
-        .sort((a, b) => b.s - a.s);
+      const scored = index.map((r, i) => ({ r, s: vectors[i] ? cosine(qvec.v, vectors[i]!) : 0 }));
+      const cut = matchCutoff(scored.map((x) => x.s));
+      return scored.filter((x) => x.s >= cut).sort((a, b) => b.s - a.s);
     }
     if (!terms.length) return [];
     return index
