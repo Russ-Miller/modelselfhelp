@@ -1,0 +1,37 @@
+id: masood-2026-agentic-harness-engineering
+kind: post
+title: "Agentic Harness Engineering: The Operating System for Machine Intelligence"
+authors:
+  - "Adnan Masood"
+year: 2026
+date: 2026-06-27
+url: https://medium.com/@adnanmasood/agentic-harness-engineering-the-operating-system-for-machine-intelligence-ce4fa48e9520
+content_url: https://medium.com/@adnanmasood/agentic-harness-engineering-the-operating-system-for-machine-intelligence-ce4fa48e9520
+retrieved_at: 2026-09-11
+venue: Medium
+tags: [forwarded, harness, agents]
+summary: >-
+  A 37-minute practitioner's map of agent harness design — boundary, loop,
+  context, tools, memory, verification, orchestration, reliability, safety,
+  economics, measurement, trajectory — drawn, by its own account, from the
+  public engineering record of Anthropic, OpenAI, Cursor, Cognition and
+  OpenHands. Its headline figure: hold the model fixed and swap only the
+  scaffolding, and an identical Claude Sonnet 4.5 moves from 30.91% to
+  74.55% on GAIA.
+notes: >-
+  Member-only story. Only the preview — the TL;DR and opening — is readable
+  without a Medium membership, and that is what is archived below. The
+  headline GAIA figure appears verbatim in the preview, so this record is a
+  genuine primary for the *statement* of that number; the methodology behind
+  it, and whether the author measured it or is relaying it from the "public
+  engineering record" the preview cites, is behind the paywall and not
+  visible. No content hash: medium.com returns 403 to non-browser fetchers.
+  Playbook reference [6].
+archived_text: |
+  Member-only story
+  Agentic Harness Engineering: The Operating System for Machine Intelligence
+  An agent isn't a model with a longer prompt. It's a model running inside a harness — a control plane that governs what the model sees, what it can do, and how its actions, memory, risk, and cost are managed.
+  Adnan Masood, PhD. · 37 min read · Jun 27, 2026
+  TL;DR: An agent is not a model with a longer prompt — it is a model running inside a harness: the control plane that decides what the model sees, what it may do, how its actions are verified, how its memory persists, and how its cost and risk are contained. Eighteen months ago, the claim that harness design moves agent outcomes by margins as large as model selection would have read as a provocation; today it is the consensus position of every major lab shipping agents. The evidence is empirical and hard to argue with: hold the model fixed and swap only the scaffolding, and an identical Claude Sonnet 4.5 swings from 30.91% to 74.55% on GAIA — a 43.64-point spread attributable entirely to the harness. What follows is a practitioner's map of that territory, walking the natural anatomy of a harness — boundary, loop, context, tools, memory, verification, orchestration, reliability, safety, economics, measurement, and trajectory — drawn from the public engineering record of Anthropic, OpenAI, Cursor, Cognition, OpenHands, and the research literature. The throughline is simple: the model supplies the intelligence, and increasingly it is the harness, not…
+  [PAYWALL — remainder of the 37-minute article is member-only and not captured.]
+ingested_at: 2026-09-11

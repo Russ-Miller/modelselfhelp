@@ -21,6 +21,15 @@ sources:
       the claim but not carry a measurement behind it. The structural point
       stands on its own: if the harness can move a score by 44 points, the
       score does not isolate the model.
+  - source: masood-2026-agentic-harness-engineering
+    stance: supports
+    note: >-
+      Primary for the statement of the GAIA figure — 30.91% to 74.55%, same
+      Claude Sonnet 4.5, harness only — which appears verbatim in the
+      article's preview. The article is member-only, so how that number was
+      obtained is not visible; the preview itself says the map is drawn from
+      other labs' public engineering record, so the figure may be relayed
+      rather than measured by this author.
   - source: langchain-2026-deep-agents-harness
     stance: supports
     note: >-
@@ -42,12 +51,10 @@ notes: >-
   Filed under evaluation-validity rather than tool-use because the durable
   part is what it says about measurement, not about agents.
 
-  The GAIA figure — 30.91% to 74.55%, same Claude Sonnet 4.5 — is Adnan
-  Masood's, in a Medium post of June 2026. It is NOT filed as a source:
-  medium.com returns 403 to every fetcher available here and the browser
-  extension's domain policy blocks it, and a post cannot be filed without
-  its text archived. Until it is, that number rests only on the playbook's
-  retelling, and this claim's backing stays mechanism-reasoning. Backing is
+  The GAIA figure is now sourced to Masood's post directly, but only its
+  preview is readable — the article is member-only — so the statement of
+  the number is primary and its provenance is not. Backing stays
+  mechanism-reasoning until someone with access reads how it was measured. Backing is
   mechanism-reasoning and should stay there until the underlying blog posts
   are filed as sources in their own right and checked. The falsifier is
   direct: a controlled comparison where harness variation moves an agentic
