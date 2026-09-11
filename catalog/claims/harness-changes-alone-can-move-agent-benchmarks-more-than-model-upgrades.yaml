@@ -10,8 +10,24 @@ statement: >-
   different harnesses are not comparisons of models.
 tags: [evaluation, agentic]
 kind: mechanism
-backing_strength: mechanism-reasoning
+backing_strength: single-paper
 sources:
+  - source: arxiv-2605-27922
+    stance: supports
+    note: >-
+      The measured primary. Harness-Bench runs representative harness
+      configurations across multiple model backends under shared tasks,
+      budgets and protocols — 5,194 trajectories — and finds substantial
+      variation in completion, process quality, efficiency and failure
+      behaviour across model-harness pairings. Its stated conclusion is this
+      claim: report capability at the model-harness configuration level, not
+      as a property of the base model.
+  - source: hal-gaia-leaderboard-2026
+    stance: supports
+    note: >-
+      The rows behind the 43.64-point figure, confirmed on the live page:
+      HAL Generalist Agent 74.55%, HF Open Deep Research 30.91%, both on
+      Claude Sonnet 4.5. One of the two harnesses is HAL's own.
   - source: synthesis-2026-harness-engineering-playbook
     stance: supports
     note: >-
@@ -24,12 +40,13 @@ sources:
   - source: masood-2026-agentic-harness-engineering
     stance: supports
     note: >-
-      Primary for the statement of the GAIA figure — 30.91% to 74.55%, same
-      Claude Sonnet 4.5, harness only — which appears verbatim in the
-      article's preview. The article is member-only, so how that number was
-      obtained is not visible; the preview itself says the map is drawn from
-      other labs' public engineering record, so the figure may be relayed
-      rather than measured by this author.
+      Read in full. The GAIA figure is relayed, not measured: the article
+      cites it to Princeton's HAL leaderboard, where 74.55% is HAL's own
+      Generalist Agent harness on Claude Sonnet 4.5 and 30.91% is Hugging
+      Face's Open Deep Research harness on the same model. The article's own
+      same-model table adds eight more within-model deltas from 2.8 to 34
+      points across GAIA, TAU-bench, Terminal-Bench and SWE-bench Verified,
+      each attributed to a tracker or leaderboard.
   - source: langchain-2026-deep-agents-harness
     stance: supports
     note: >-
@@ -51,10 +68,12 @@ notes: >-
   Filed under evaluation-validity rather than tool-use because the durable
   part is what it says about measurement, not about agents.
 
-  The GAIA figure is now sourced to Masood's post directly, but only its
-  preview is readable — the article is member-only — so the statement of
-  the number is primary and its provenance is not. Backing stays
-  mechanism-reasoning until someone with access reads how it was measured. Backing is
+  Backing moved from mechanism-reasoning to single-paper on 2026-09-11 when
+  Harness-Bench was filed: a controlled, multi-model measurement of exactly
+  this effect, reaching exactly this conclusion. The GAIA rows are filed
+  from the HAL leaderboard directly rather than via Masood's retelling. Not
+  replicated in the catalogue's sense — the other figures are leaderboard
+  and vendor reports, not independent experiments. Backing is
   mechanism-reasoning and should stay there until the underlying blog posts
   are filed as sources in their own right and checked. The falsifier is
   direct: a controlled comparison where harness variation moves an agentic

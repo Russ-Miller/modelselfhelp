@@ -32,6 +32,12 @@ contested: false
 status: pending-review
 last_checked_at: 2026-09-11
 notes: >-
+  Read alongside
+  repository-context-files-do-not-raise-task-success-on-benchmark-coding:
+  the measured evidence is that a context file per se does not lift task
+  success, so whatever compounds here is the specific failure-derived rule,
+  not the presence of a file.
+
   This is the claim closest to the project's own ambition of improving
   itself. docs/ambitions.md now uses this document's vocabulary to describe
   what that loop would be.

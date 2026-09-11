@@ -1,0 +1,31 @@
+id: hal-gaia-leaderboard-2026
+kind: post
+title: "HAL GAIA Leaderboard (Holistic Agent Leaderboard, Princeton)"
+authors:
+  - "Princeton HAL team"
+year: 2026
+url: https://hal.cs.princeton.edu/gaia
+content_url: https://hal.cs.princeton.edu/gaia
+retrieved_at: 2026-09-11
+venue: hal.cs.princeton.edu
+tags: [forwarded, leaderboard, harness, evaluation]
+summary: >-
+  Princeton's Holistic Agent Leaderboard for GAIA, reporting accuracy per
+  agent-plus-model pairing with the harness named. The rows that matter
+  here: on Claude Sonnet 4.5, HAL's own Generalist Agent scores 74.55% and
+  Hugging Face's Open Deep Research scores 30.91% — the same-model,
+  different-harness comparison that Masood's article and the harness
+  engineering playbook both relay as their headline number.
+notes: >-
+  A live leaderboard, so it changes without notice and shows no last-updated
+  date; the two rows below were confirmed on 2026-09-11 and the drift check
+  runs against them. Filed as a post because the schema has no better kind
+  for a data page. Worth knowing when reading the 43.64-point spread: one of
+  the two harnesses is HAL's own. Whether the leaderboard runs are
+  reproducible and what "verified" means on that page are not captured here.
+archived_text: |
+  HAL GAIA Leaderboard. Rows for model Claude Sonnet 4.5 (September 2025), confirmed 2026-09-11:
+  HAL Generalist Agent — 74.55% accuracy.
+  HF Open Deep Research — 30.91% accuracy.
+  The page shows model release dates but no publication or last-updated date of its own.
+ingested_at: 2026-09-11

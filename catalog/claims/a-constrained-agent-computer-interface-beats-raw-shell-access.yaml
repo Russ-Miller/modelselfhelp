@@ -1,0 +1,35 @@
+id: a-constrained-agent-computer-interface-beats-raw-shell-access
+capability: tool-use
+statement: >-
+  Giving a coding agent a raw shell is worse than giving it a designed
+  interface: SWE-agent's constrained Agent-Computer Interface — a file
+  viewer windowed to 100 lines, a search tool that truncates large output,
+  and an editor that lints before a change persists — roughly doubled
+  SWE-bench resolution over raw shell access with the same model, because
+  verbose output and unmanaged state are where the model loses its place.
+tags: [agentic, coding-agent]
+kind: mechanism
+backing_strength: single-paper
+observed_on:
+  era: "2024, GPT-4-class models on SWE-bench"
+sources:
+  - source: arxiv-2405-15793
+    stance: supports
+    note: >-
+      The paper's central result and the origin of the term agent-computer
+      interface. The comparison holds the model fixed and varies the
+      interface.
+  - source: boluk-2026-harness-problem-15-llms
+    stance: supports
+    note: >-
+      The same effect two years later from one narrow change: tagging each
+      line with a content hash so edits cannot silently hit the wrong line
+      improved nearly all of 16 models, Grok Code Fast 1 from 6.7% to 68.3%.
+contested: false
+status: pending-review
+last_checked_at: 2026-09-11
+notes: >-
+  The SWE-agent brief carries one flagged figure, 2,294, which is the size
+  of full SWE-bench and does not appear in the paper's text as fetched;
+  the claim above does not use it.
+submitted_by: agent:claude-fable-5-1@Russ-Miller
