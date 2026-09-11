@@ -2,6 +2,8 @@ import Link from "next/link";
 import { loadCatalog, capabilitiesByGroup, claimsByRecency, getCapability, isPending } from "@/lib/catalog";
 import { KindBadge, StrengthBadge, ContestedBadge, PendingBadge } from "@/components/badges";
 import { getTil } from "@/lib/til";
+import { buildSearchIndex } from "@/lib/search-index";
+import { Search } from "@/components/search";
 
 export default function Home() {
   const cat = loadCatalog();
@@ -9,6 +11,7 @@ export default function Home() {
   const recent = claimsByRecency().slice(0, 6);
   const pending = cat.claims.filter(isPending).length;
   const til = getTil();
+  const index = buildSearchIndex();
   return (
     <div className="space-y-10">
       <section className="space-y-3">
@@ -34,6 +37,12 @@ export default function Home() {
             <div key={k}><dt className="text-neutral-500">{k}</dt><dd className="text-xl font-medium">{n}</dd></div>
           ))}
         </dl>
+        <div className="max-w-2xl pt-2">
+          <Search index={index} />
+          <p className="mt-1 text-xs text-neutral-500">
+            Searches all {index.length} records: capabilities, claims, techniques and sources. Runs in your browser.
+          </p>
+        </div>
       </section>
 
       {til && (
