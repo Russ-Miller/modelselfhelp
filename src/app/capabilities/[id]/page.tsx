@@ -3,7 +3,6 @@ import { Breadcrumbs } from "@/components/breadcrumbs";
 import { notFound } from "next/navigation";
 import { claimsFor, getCapabilities, getCapability, techniquesFor } from "@/lib/catalog";
 import { CapabilityChallengeLink } from "@/components/challenge";
-import { ProposedBadge } from "@/components/badges";
 import { ContestedBadge, KindBadge, StrengthBadge } from "@/components/badges";
 
 export function generateStaticParams() {
