@@ -1,5 +1,6 @@
 {
   "redirects": [
+    { "source": "/search", "destination": "/", "permanent": true },
     { "source": "/:path*", "has": [{ "type": "host", "value": "www.rsiratchet.com" }], "destination": "https://rsiratchet.com/:path*", "permanent": true },
     { "source": "/:path*", "has": [{ "type": "host", "value": "modelselfhelp.vercel.app" }], "destination": "https://rsiratchet.com/:path*", "permanent": false }
   ]
