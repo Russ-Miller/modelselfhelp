@@ -23,7 +23,7 @@ export default async function SourcePage({ params }: PageProps<"/sources/[id]">)
       <Breadcrumbs trail={[
         { href: "/", label: "Home" },
         { href: "/sources", label: "Sources" },
-        { label: s.title.length > 60 ? `${s.title.slice(0, 60)}…` : s.title },
+        { label: "This source" },
       ]} />
       <header className="space-y-2">
         <div className="text-sm text-neutral-500"><code className="font-mono">{s.id}</code> &middot; {s.kind}</div>

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { BackButton } from "./back-button";
 
 export interface Crumb { href?: string; label: string }
 
@@ -9,8 +10,11 @@ export interface Crumb { href?: string; label: string }
  * The last crumb is the current page and is not a link.
  */
 export function Breadcrumbs({ trail }: { trail: Crumb[] }) {
+  // The back button falls back to the nearest linked ancestor.
+  const parent = [...trail].reverse().find((c) => c.href)?.href ?? "/";
   return (
-    <nav aria-label="Breadcrumb" className="text-sm text-neutral-500">
+    <nav aria-label="Breadcrumb" className="flex items-center gap-3 text-sm text-neutral-500">
+      <BackButton fallbackHref={parent} />
       <ol className="flex flex-wrap items-center gap-x-1.5 gap-y-0.5">
         {trail.map((c, i) => {
           const last = i === trail.length - 1;

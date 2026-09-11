@@ -45,7 +45,7 @@ export default async function ClaimPage({ params }: PageProps<"/claims/[id]">) {
         { href: "/", label: "Home" },
         { href: "/claims", label: "Claims" },
         { href: `/capabilities/${c.capability}`, label: cap?.label ?? c.capability },
-        { label: c.statement.length > 60 ? `${c.statement.slice(0, 60)}…` : c.statement },
+        { label: "This claim" },
       ]} />
       <header className="space-y-2">
         <div className="text-sm text-neutral-500"><code className="font-mono">{c.id}</code></div>

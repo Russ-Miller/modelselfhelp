@@ -26,7 +26,7 @@ export default async function CapabilityPage({ params }: PageProps<"/capabilitie
       <Breadcrumbs trail={[
         { href: "/", label: "Home" },
         { href: "/capabilities", label: "Capabilities" },
-        { label: c.label },
+        { label: "This capability" },
       ]} />
       <header className="space-y-2">
         <div className="text-sm text-neutral-500"><code className="font-mono">{c.id}</code> &middot; {c.status}</div>

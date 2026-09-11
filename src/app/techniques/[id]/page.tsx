@@ -22,7 +22,7 @@ export default async function TechniquePage({ params }: PageProps<"/techniques/[
       <Breadcrumbs trail={[
         { href: "/", label: "Home" },
         { href: "/techniques", label: "Techniques" },
-        { label: t.label },
+        { label: "This technique" },
       ]} />
       <header className="space-y-2">
         <div className="text-sm text-neutral-500">{t.kind} · <code className="font-mono">{t.id}</code>{t.status === "superseded" ? " · superseded" : ""}</div>
