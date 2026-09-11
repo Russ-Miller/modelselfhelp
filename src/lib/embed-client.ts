@@ -63,5 +63,15 @@ export async function embedQuery(text: string, onStatus?: (s: string) => void): 
   return out.data instanceof Float32Array ? out.data : new Float32Array(out.data);
 }
 
-/** Similarity at or above this counts as a match; MiniLM's unrelated pairs sit near 0. */
-export const MATCH_FLOOR = 0.4;
+/**
+ * Which similarities count as a match. A fixed floor punishes short queries:
+ * one word embeds diffusely, so "math" scores 0.39 against the Arithmetic
+ * capability while a full sentence scores 0.6 against its nearest claim. The
+ * cutoff is therefore relative to the best hit, with an absolute floor so a
+ * query that matches nothing still returns nothing.
+ */
+export const ABS_FLOOR = 0.3;
+export function matchCutoff(scores: number[]): number {
+  const top = Math.max(-1, ...scores);
+  return Math.max(ABS_FLOOR, top * 0.8);
+}

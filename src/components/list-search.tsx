@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { MATCH_FLOOR, cosine, embedQuery, unpackAttr } from "@/lib/embed-client";
+import { cosine, embedQuery, matchCutoff, unpackAttr } from "@/lib/embed-client";
 import { SearchModeToggle, type SearchMode } from "@/components/search-mode";
 
 /**
@@ -80,8 +80,9 @@ export function ListSearch({ noun = "rows", placeholder }: { noun?: string; plac
           if (!live) return;
           const scored = rows.map((r) => ({ r, s: (() => { const v = unpackAttr(r.dataset.vec); return v ? cosine(qv, v) : -1; })() }));
           const parent = rows[0]?.parentElement;
-          const ranked = scored.filter((x) => x.s >= MATCH_FLOOR).sort((a, b) => b.s - a.s);
-          for (const x of scored) x.r.setAttribute("data-hit", x.s >= MATCH_FLOOR ? "1" : "0");
+          const cut = matchCutoff(scored.map((x) => x.s));
+          const ranked = scored.filter((x) => x.s >= cut).sort((a, b) => b.s - a.s);
+          for (const x of scored) x.r.setAttribute("data-hit", x.s >= cut ? "1" : "0");
           if (parent) for (const x of ranked) parent.appendChild(x.r);
           setStatus("");
           report();
