@@ -62,15 +62,23 @@ export default function Home() {
             <p className="text-sm leading-relaxed text-neutral-700 dark:text-neutral-300">{til.source.summary}</p>
           ) : null}
           {til.claims.length > 0 && (
-            <ul className="space-y-1 text-sm">
-              {til.claims.map((c) => (
-                <li key={c.id} className="flex flex-wrap items-baseline gap-2">
-                  {c.contested && <ContestedBadge />}
-                  {isPending(c) && <PendingBadge />}
-                  <Link href={`/claims/${c.id}`} className="hover:underline">{c.statement}</Link>
-                </li>
-              ))}
-            </ul>
+            <div className="space-y-2">
+              <h3 className="text-xs font-medium uppercase tracking-wide text-neutral-500">
+                Claims drawn from it
+              </h3>
+              {/* Badges are inline, at the head of the sentence, so they wrap
+                  with the text they describe. A badge on its own line between
+                  two paragraphs reads as belonging to either. */}
+              <ul className="space-y-2 text-sm">
+                {til.claims.map((c) => (
+                  <li key={c.id} className="leading-relaxed">
+                    {c.contested && <><ContestedBadge />{" "}</>}
+                    {isPending(c) && <><PendingBadge />{" "}</>}
+                    <Link href={`/claims/${c.id}`} className="hover:underline">{c.statement}</Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
           )}
           <p className="text-xs text-neutral-500">
             <Link href={`/sources/${til.source.id}`} className="hover:underline">the source in full</Link>
