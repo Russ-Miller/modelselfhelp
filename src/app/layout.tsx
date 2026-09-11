@@ -8,7 +8,7 @@ const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: { default: "modelselfhelp", template: "%s · modelselfhelp" },
+  title: { default: "RSI Ratchet", template: "%s · RSI Ratchet" },
   description: "Where AI models fall short, the evidence, and reproducible ways to fix it.",
 };
 
@@ -21,7 +21,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
               and a nav that pushes the page sideways breaks every screen, not
               just its own. gap-x/gap-y differ so wrapped rows stay compact. */}
           <nav className="mx-auto flex max-w-5xl flex-wrap items-center gap-x-6 gap-y-2 px-4 py-3 text-sm">
-            <Link href="/" className="font-semibold tracking-tight">modelselfhelp</Link>
+            <Link href="/" className="font-semibold tracking-tight">RSI Ratchet</Link>
             <NavLinks />
             <a href="https://github.com/Russ-Miller/modelselfhelp" target="_blank" rel="noopener noreferrer" className="hover:underline sm:ml-auto">GitHub</a>
           </nav>

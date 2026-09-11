@@ -1335,3 +1335,11 @@ record now says so.
 The playbook's own ratchet, applied to the playbook: two of its four
 claims got their real primaries, one got contested, and the vocabulary
 survived intact.
+
+## 2026-09-11 — Name: RSI Ratchet
+
+The site is named **RSI Ratchet** (domains rsiratchet.com and rsiratchet.ai).
+The name says what the catalog is for: each filed claim, technique standing and
+backtest result is a pawl — a step that should not slip back — in a recursive
+self-improvement loop (see ambitions.md). "modelselfhelp" stays as the repo,
+package and Vercel slug until the domains are attached.

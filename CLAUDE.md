@@ -1,4 +1,4 @@
-# modelselfhelp — working rules for Claude
+# RSI Ratchet — working rules for Claude
 
 ## The sign on the wall
 
