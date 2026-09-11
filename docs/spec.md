@@ -1,4 +1,4 @@
-# modelselfhelp — product and data specification
+# RSI Ratchet — product and data specification
 
 Version 0.3, 2026-09-03. This document is the source of truth. Change it in
 the same pull request as the code that changes behavior.
