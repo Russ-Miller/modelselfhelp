@@ -1,4 +1,4 @@
-import type { Capability, Claim } from "@/lib/catalog";
+import type { Adage, Capability, Claim } from "@/lib/catalog";
 
 const REPO = "https://github.com/Russ-Miller/RSIratchet";
 
@@ -63,6 +63,35 @@ ${capability.summary.replace(/\s+/g, " ").trim()}
     <a href={url} target="_blank" rel="noopener noreferrer"
       className="inline-flex items-center gap-1.5 rounded border border-neutral-300 px-3 py-1.5 text-xs text-neutral-700 hover:border-neutral-500 dark:border-neutral-700 dark:text-neutral-300 dark:hover:border-neutral-500">
       <span aria-hidden>&#8646;</span> Suggest a change
+    </a>
+  );
+}
+
+/**
+ * For an adage the useful challenge is evidence either way: a case where it
+ * held, a case where it broke, or a reason the transfer argument is wrong.
+ * Breaks are the ones worth the most, so the template asks for them first.
+ */
+export function AdageChallengeLink({ adage }: { adage: Adage }) {
+  const body = `Adage: ${adage.id}
+${adage.statement.replace(/\s+/g, " ").trim()}
+
+**What do you have?** (delete what does not apply)
+- A case where it breaks for models — what happened, and under what conditions:
+- A case where it holds — measured, not just plausible:
+- The transfer argument is wrong — the mechanism given does not apply because:
+- It holds only under a condition the entry does not state:
+
+**Evidence** (a link, a paper, or something you ran yourself — an observation
+with the setup written down counts):
+
+**Who you are** (optional, for attribution if this gets filed):
+`;
+  const url = `${REPO}/issues/new?title=${encodeURIComponent(`Adage: ${adage.id}`)}&body=${encodeURIComponent(body)}&labels=challenge`;
+  return (
+    <a href={url} target="_blank" rel="noopener noreferrer"
+      className="inline-flex items-center gap-1.5 rounded border border-neutral-300 px-3 py-1.5 text-xs text-neutral-700 hover:border-neutral-500 dark:border-neutral-700 dark:text-neutral-300 dark:hover:border-neutral-500">
+      <span aria-hidden>&darr;</span> Add a case where it holds or breaks
     </a>
   );
 }
