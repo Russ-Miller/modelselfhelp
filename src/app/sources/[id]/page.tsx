@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Breadcrumbs } from "@/components/breadcrumbs";
 import { notFound } from "next/navigation";
 import { claimsCiting, getSource, getSources } from "@/lib/catalog";
 import { CitationSignal, StanceBadge } from "@/components/badges";
@@ -19,6 +20,11 @@ export default async function SourcePage({ params }: PageProps<"/sources/[id]">)
   const citing = claimsCiting(s.id);
   return (
     <article className="space-y-6 max-w-2xl">
+      <Breadcrumbs trail={[
+        { href: "/", label: "Home" },
+        { href: "/sources", label: "Sources" },
+        { label: s.title.length > 60 ? `${s.title.slice(0, 60)}…` : s.title },
+      ]} />
       <header className="space-y-2">
         <div className="text-sm text-neutral-500"><code className="font-mono">{s.id}</code> &middot; {s.kind}</div>
         <h1 className="text-2xl font-semibold tracking-tight">{s.title}</h1>

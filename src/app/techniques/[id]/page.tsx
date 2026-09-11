@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Breadcrumbs } from "@/components/breadcrumbs";
 import { notFound } from "next/navigation";
 import { claimsAboutTechnique, getSource, getTagLabel, getTechnique, getTechniques, getCapability, techniqueStanding, STANDING_LABEL } from "@/lib/catalog";
 import { ContestedBadge, KindBadge, StrengthBadge } from "@/components/badges";
@@ -18,6 +19,11 @@ export default async function TechniquePage({ params }: PageProps<"/techniques/[
   if (!t) notFound();
   return (
     <article className="space-y-6">
+      <Breadcrumbs trail={[
+        { href: "/", label: "Home" },
+        { href: "/techniques", label: "Techniques" },
+        { label: t.label },
+      ]} />
       <header className="space-y-2">
         <div className="text-sm text-neutral-500">{t.kind} · <code className="font-mono">{t.id}</code>{t.status === "superseded" ? " · superseded" : ""}</div>
         <h1 className="text-3xl font-semibold tracking-tight">{t.label}</h1>

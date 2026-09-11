@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Breadcrumbs } from "@/components/breadcrumbs";
 import { notFound } from "next/navigation";
 import { claimsFor, getCapabilities, getCapability, techniquesFor } from "@/lib/catalog";
 import { CapabilityChallengeLink } from "@/components/challenge";
@@ -22,6 +23,11 @@ export default async function CapabilityPage({ params }: PageProps<"/capabilitie
   const techniques = techniquesFor(c.id);
   return (
     <article className="space-y-8">
+      <Breadcrumbs trail={[
+        { href: "/", label: "Home" },
+        { href: "/capabilities", label: "Capabilities" },
+        { label: c.label },
+      ]} />
       <header className="space-y-2">
         <div className="text-sm text-neutral-500"><code className="font-mono">{c.id}</code> &middot; {c.status}</div>
         <h1 className="text-3xl font-semibold tracking-tight">{c.label}</h1>
