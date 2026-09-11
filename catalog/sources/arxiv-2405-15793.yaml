@@ -1,0 +1,70 @@
+id: arxiv-2405-15793
+kind: paper
+title: "SWE-agent: Agent-Computer Interfaces Enable Automated Software Engineering"
+authors:
+  - John Yang
+  - Carlos E. Jimenez
+  - Alexander Wettig
+  - Kilian Lieret
+  - Shunyu Yao
+  - Karthik Narasimhan
+  - Ofir Press
+year: 2024
+date: 2024-05-06
+arxiv_id: "2405.15793"
+url: https://arxiv.org/abs/2405.15793
+tags:
+  - forwarded
+summary: "Language model (LM) agents are increasingly being used to automate
+  complicated tasks in digital environments. Just as humans benefit from
+  powerful software applications, such as integrated development environments,
+  for complex tasks like software engineering, we posit that LM agents
+  represent a new category of end users with their own needs and abilities,
+  and would benefit from specially-built interfaces to the software they use.
+  We investigate how interface design affects the performance of language
+  model agents. As a result of this exploration, we introduce SWE-agent: a
+  system that facilitates LM agents to autonomously use computers to solve
+  software engineering tasks. SWE-agent's custom a"
+notes: "SWE-agent: a constrained agent-computer interface roughly doubled
+  SWE-bench performance over raw shell. Masood [32]."
+ingested_at: 2026-09-11
+brief: >-
+  Redesigning the tool interface around a language model's limitations,
+  without touching weights, moves repository-level bug fixing more than the
+  choice of base model does. SWE-agent wraps GPT-4 Turbo in an agent-computer
+  interface (ACI) with a 100-line file viewer, a single-command line-range
+  editor with a linter guardrail, summarized search commands capped at 50
+  results, and history collapsing of all but the last 5 observations.
+
+
+  On the full SWE-bench test set (2,294 instances from 12 Python repositories)
+  it resolves 12.47%, against 1.31% for BM25 retrieval-augmented GPT-4 Turbo
+  and 3.79% for RAG with Claude 3 Opus. On SWE-bench Lite (300 instances) it
+  reaches 18.00% versus 11.00% for the same model given only a Linux shell, a
+  64% relative gain. HumanEvalFix pass@1 is 87.7 Python / 89.7 JS / 87.9 Java.
+
+
+  The ACI components were ablated individually on Lite: removing the editor
+  costs 7.7 points, removing linting 3.0, iterative search 6.0, full-file
+  viewing 5.3, full history 3.0. Design choices were selected by grid search
+  and qualitative inspection on a development split, so the ablation numbers
+  are partly in-sample. Portability was tested on 1 other model: Claude 3 Opus
+  reaches 10.46%. Llama 3 and DeepSeek Coder were unusable, mainly on context
+  length.
+
+
+  Failures are not budget-limited: 93.0% of resolved instances submit before
+  exhausting the $4 cap, and 52.0% of unresolved Lite trajectories are labeled
+  incorrect or overly specific implementations by a GPT-4o classifier that
+  matched authors on 87% of a hand-labeled set. Editing stays fragile, with
+  51.7% of trajectories containing a failed edit and recovery odds dropping
+  from 90.5% to 57.2% after 1 failure.
+
+
+  If you are tuning an agent, the interface is a larger lever than you likely
+  assume.
+brief_generated_at: 2026-09-11
+brief_model: claude-opus-5
+brief_source: full-text
+brief_unverified_figures:
+  - 2,294

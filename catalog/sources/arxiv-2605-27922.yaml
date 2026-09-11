@@ -1,0 +1,64 @@
+id: arxiv-2605-27922
+kind: paper
+title: "Harness-Bench: Measuring Harness Effects across Models in Realistic
+  Agent Workflows"
+authors:
+  - Yilun Yao
+  - Xinyu Tan
+  - Chao-Hsuan Liu
+  - Yaoming Li
+  - Zhengyang Wang
+  - Wenhan Yu
+  - Zhewen Tan
+  - Yuxuan Tian
+year: 2026
+date: 2026-05-27
+arxiv_id: "2605.27922"
+url: https://arxiv.org/abs/2605.27922
+tags:
+  - forwarded
+summary: "LLM agents are increasingly deployed as executable systems that use
+  tools, modify workspaces, and produce concrete artifacts. In such workflows,
+  performance depends not only on the base model, but also on the harness: the
+  system layer that manages context, tools, state, constraints, permissions,
+  tracing, and recovery. However, existing benchmarks typically abstract away
+  execution, compare complete agent systems, or hold the harness fixed, making
+  execution-layer variation difficult to study. We introduce Harness-Bench, a
+  diagnostic benchmark for evaluating configuration-level harness effects in
+  realistic agent workflows. Harness-Bench evaluates representative harness
+  configurations across mul"
+notes: Harness-Bench. Primary for reporting agent capability per model-harness
+  configuration; 5,194 trajectories. Masood [1], playbook indirectly.
+ingested_at: 2026-09-11
+brief: >-
+  The scaffolding around a model moves agent scores as much as the model
+  choice does, so a single number attributed to a base model is
+  underspecified. Harness-Bench holds the task prompt, initial sandbox state,
+  budget, timeout and evaluator fixed while swapping 6 configurable harnesses
+  (OpenClaw, NanoBot, Hermes, ZeroClaw, NullClaw, Moltis) over 8 API model
+  backends on 106 sandboxed offline tasks spanning 8 workflow categories, from
+  codebase maintenance to DevOps. Scores multiply completion, a binary
+  security gate, and an LLM-judged process rubric for robustness, tool use and
+  consistency.
+
+
+  Across 5,088 trajectories in the factorial matrix, aggregate score ranges
+  from 76.2 (NanoBot) to 52.4 (OpenClaw), a 23.8-point gap on the same tasks
+  and backend pool. NanoBot used 68.7K tokens against Hermes's 139.7K and
+  NullClaw's 175.1K, so longer trajectories did not buy performance. Stronger
+  backends showed higher means and lower cross-harness variance. Among 5,194
+  total trajectories, failed runs most often broke output contracts (36.4%) or
+  failed to recover from tool errors (24.6%).
+
+
+  The variation is measured under a controlled external protocol, but
+  harnesses run with native prompting and state policy, so no individual
+  mechanism is isolated; process scores depend on claude-sonnet-4.6 as judge,
+  and Codex (80.4) is a reference point, not an ablation. Everything is
+  offline and sandboxed, with no live services or drifting state.
+
+
+  Report the harness alongside the model when citing agent numbers.
+brief_generated_at: 2026-09-11
+brief_model: claude-opus-5
+brief_source: full-text

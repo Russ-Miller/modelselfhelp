@@ -127,7 +127,9 @@ describe("catalog loader", () => {
       const ids = new Set(techniqueStanding(t.id).claims.map((c) => c.id));
       for (const p of pending) expect(ids.has(p.id), `${t.id} counted pending ${p.id}`).toBe(false);
     }
-    // ...nor appear as contested evidence.
-    for (const p of pending) expect(p.contested).toBe(false);
+    // A pending claim MAY be contested -- that is a structural fact about its
+    // sources, and "visible everywhere" means it shows in the contested view,
+    // badged. What it may not do is carry weight: standing and the backtest
+    // read reviewedClaims() only, asserted above.
   });
 });

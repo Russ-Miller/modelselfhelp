@@ -1,0 +1,68 @@
+id: arxiv-2602-11988
+kind: paper
+title: "Evaluating AGENTS.md: Are Repository-Level Context Files Helpful for
+  Coding Agents?"
+authors:
+  - Thibaud Gloaguen
+  - Niels Mündler
+  - Mark Müller
+  - Veselin Raychev
+  - Martin Vechev
+year: 2026
+date: 2026-02-12
+arxiv_id: "2602.11988"
+url: https://arxiv.org/abs/2602.11988
+tags:
+  - forwarded
+summary: "A widespread practice in software development is to tailor coding
+  agents to repositories using context files, such as AGENTS.md. Although this
+  practice is strongly encouraged by agent developers, there is currently no
+  rigorous investigation into whether such context files are actually
+  effective for real-world tasks. In this work, we study this question and
+  evaluate coding agents' task completion performance in two complementary
+  settings: established SWE-bench tasks from popular repositories, with
+  LLM-generated context files, and a novel collection of issues from
+  repositories containing developer-committed context files. Surprisingly, we
+  find that providing context files does not generally im"
+notes: "ETH Zurich / LogicStar on AGENTS.md context files: no general
+  improvement in task success, over 20% more inference cost, across LLMs,
+  agents, and both LLM-generated and developer-committed files. Contests
+  guide-file. Masood [27]."
+ingested_at: 2026-09-11
+brief: >-
+  Repository-level context files like AGENTS.md do not raise coding agent
+  success rates, and LLM-generated ones cost more for nothing.
+  Instruction-following is not the bottleneck: agents obey the files, which is
+  why they spend more.
+
+
+  The setup pairs 4 agents with models (Claude Code with Sonnet-4.5, Codex
+  with GPT-5.2 and GPT-5.1 mini, Qwen Code with Qwen3-30b-coder) against
+  SWE-bench Lite (300 tasks, 11 repositories, no developer context files) and
+  CTXbench, a new set of 138 Python bug-fix and feature tasks from 12 niche
+  repositories that do commit context files. 3 conditions: none,
+  agent-generated via each harness's own init command, and developer-written.
+
+
+  LLM-generated files hurt in 5 of 8 settings, by 0.5% on SWE-bench and 2% on
+  CTXbench, with Cochran-Mantel-Haenszel p-values of 0.87 and 0.37. Cost rose
+  20% and 23%, steps by 2.45 and 3.92. Developer files gained 2.4% on average
+  (p=21%) and beat LLM files (p=3.8%). Reasoning tokens rose 22% for GPT-5.2
+  on SWE-bench. Time to first touch a gold-patch file did not drop, so
+  overviews do not help navigation. Tools named in context files were used
+  1.6x vs under 0.01 times per instance when unnamed.
+
+
+  Evidence is measured, with significance tests, matched-instance reasoning
+  comparisons, and ablations over generating model, prompt, length, and
+  section category. 1 sample per instance, temperature 0 for 3 models, and
+  LLM-as-judge (GPT-OSS-120b) for trace labels. Python only; security and
+  efficiency untested; benchmark tasks and tests are LLM-generated then
+  hand-reviewed.
+
+
+  Stop auto-generating context files expecting throughput, and evaluate any
+  handwritten ones before rollout.
+brief_generated_at: 2026-09-11
+brief_model: claude-opus-5
+brief_source: full-text

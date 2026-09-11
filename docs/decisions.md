@@ -1296,3 +1296,42 @@ document focus and clicking to get it froze the renderer. Script results
 are capped near a thousand characters regardless of what is returned. And
 a domain allowlist in the extension is a policy, not an auth failure —
 Russ asked how to allow medium.com, which is the right question.
+
+## 2026-09-11 — Masood in full, and what its references did to today's filings
+Russ logged into Medium and the extension read the whole article: 66,770
+characters, 98 references. Two things came out of it, and both cut against
+work filed earlier the same day, which is the right direction for a
+catalogue to be surprised in.
+
+**The GAIA figure was never Masood's.** He cites it to Princeton's HAL
+leaderboard, where 74.55% is HAL's own Generalist Agent on Claude Sonnet
+4.5 and 30.91% is Hugging Face's Open Deep Research on the same model —
+confirmed on the live page. So the playbook relayed Masood, and Masood
+relayed HAL. The leaderboard is now filed as the primary, and one of the
+two harnesses being HAL's own is recorded where a reader will see it.
+
+**Three arXiv papers he cites are the primaries the playbook lacked.**
+Harness-Bench (2605.27922) is a controlled measurement of harness effects
+across models — 5,194 trajectories — concluding that capability should be
+reported per model-harness configuration. That is the evaluation-validity
+claim's thesis, measured, and the claim moved from mechanism-reasoning to
+single-paper on its strength: the first claim from this thread to earn
+that. SWE-agent (2405.15793) grounds a tool-use claim that a designed
+interface roughly doubles performance over raw shell.
+
+**And ETH Zurich's AGENTS.md study (2602.11988) contests the guide-file
+technique filed this morning.** Four agents, two benchmarks, three
+conditions: context files do not raise task success, cost about 20% more,
+and agent-generated ones hurt slightly in five of eight settings. The
+agents obey the files — that is why they spend more — so the files simply
+do not carry success-relevant information. Masood's retelling was rosier
+than the paper. Filed as an incumbent-plus-contest claim with a guessed
+axis: the study measures success on unseen tasks with generic or generated
+files, while the practitioner claim is about recurrence of one team's
+specific past failures in one repository. If that holds, the technique's
+value is in what goes in the file, not in having one — and the technique
+record now says so.
+
+The playbook's own ratchet, applied to the playbook: two of its four
+claims got their real primaries, one got contested, and the vocabulary
+survived intact.
