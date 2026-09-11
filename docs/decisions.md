@@ -1207,3 +1207,52 @@ describes the claim. It describes one source. Both citation cards now name
 what they are about — "This source: <title>" and "How much the field cites
 the sources under this claim". The information was right and the referent
 was missing, which is the kind of thing only a reader notices.
+
+## 2026-09-11 — Harness engineering: a vocabulary for the ratchet
+Russ forwarded a nine-page synthesis, "Harness Engineering — Agent = Model
++ Harness", for two reasons: to catalog, and because it suggests a
+vocabulary and an approach for the recursive-self-improvement ambition.
+Both held up, with one thing to be straight about first.
+
+**Provenance.** The document looks like a paper — IEEE layout, a Google
+wordmark on every page — and says in its own front matter that it is
+"independently compiled … not affiliated with Google, OpenAI, Anthropic,
+or HashiCorp — and not endorsed." No author is named. Every number in it
+is cited to a blog post, a Medium article or a company engineering post.
+So it is filed as `kind: post`, archived and hash-pinned, and every claim
+drawn from it is `mechanism-reasoning`, pending review, with a note that
+the figures are secondhand. The framework is the value; the numbers are
+someone else's until their sources are filed directly.
+
+**Catalogued.** Five techniques the index lacked and the playbook names
+cleanly: guide-file, computational-sensors-first, independent-verifier,
+capability-budget, file-checkpoint. Four claims, two of which reinforce
+the held claim that self-repair needs an external signal — from the
+sensor side (deterministic checks are that signal) and the multi-agent
+side (the producer is a biased judge). One claim under
+evaluation-validity that an agentic benchmark score reported for "a model"
+is a score for a model-plus-harness, if harness-only changes really can
+move it 44 points.
+
+**The vocabulary.** This is what Russ saw, and it is right. The six layers
+— guides, sensors, loop, memory, permissions, observability — map onto
+machinery this catalog already has, and the mapping is written into
+docs/ambitions.md as a table. Two distinctions were worth adopting
+outright: computational versus inferential sensors, which names the
+ordering the backtest and the classifier had already fallen into; and the
+ratchet, whose six steps describe what most entries in this log have been
+doing without a name for it. A fabricated title became verify-papers. A
+misread figure became a lookbehind. A hand-copied matcher became a shared
+module. Failures converted into infrastructure rather than remembered —
+that is the ratchet, and this document gave it a word.
+
+What it makes precise: "the system improves itself" now means the system
+runs the ratchet on its own failures, and the outcome to watch is the
+playbook's real metric — completed work needing no manual intervention that
+still produced acceptable evidence — never tokens or calls. Wu's blue
+arrow, from the other direction.
+
+Its own caution carries over: the harness does not fix bad objectives. A
+good loop around the wrong target produces reliable garbage and the sensors
+validate it. Goodhart, fourth appearance. The held-out set stays small,
+external and unoptimised for exactly this reason.

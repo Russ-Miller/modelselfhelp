@@ -1,0 +1,32 @@
+id: the-producing-agent-should-not-be-sole-judge-of-its-output
+capability: self-repair
+technique: independent-verifier
+statement: >-
+  The agent that produced an artifact is a biased judge of it — it holds the
+  context and the incentives that skew its assessment — so verification
+  belongs with a deterministic sensor or a separate verifier that reports
+  failures back rather than rewriting the output, and in a multi-agent
+  system the verifier is the one component no agent may override.
+tags: [agentic]
+kind: mechanism
+backing_strength: mechanism-reasoning
+sources:
+  - source: synthesis-2026-harness-engineering-playbook
+    stance: supports
+    note: >-
+      Section XVII.C, stated as a principle with the reasoning but no
+      measurement.
+  - source: arxiv-2310-01798
+    stance: supports
+    note: >-
+      The measured version of the same point on a single model: self-review
+      without an external signal does not improve reasoning. Producer bias is
+      the mechanism this catalog already holds for why.
+contested: false
+status: pending-review
+last_checked_at: 2026-09-11
+notes: >-
+  Supports external-feedback-repair-works-only-with-real-grounding from the
+  multi-agent side. Filed separately because "who verifies" is a design
+  decision in its own right, distinct from "does reflection help".
+submitted_by: agent:claude-fable-5-1@Russ-Miller
