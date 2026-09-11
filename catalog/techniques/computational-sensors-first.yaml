@@ -1,0 +1,22 @@
+id: computational-sensors-first
+label: Deterministic checks before LLM judges
+summary: Wire linters, test suites and schema validators into the agent's loop before adding any model-based judgment.
+description: >-
+  Sensors verify output after execution. Computational ones — a linter, a
+  type checker, a unit test, a schema validator — are fast, free, and
+  deterministic. Inferential ones — an LLM-as-judge, an AI code review — add
+  semantic judgment but cost tokens and return non-deterministic verdicts.
+  The rule is to exhaust the deterministic checks first and add an
+  inferential sensor only for a property no rule can express, treating its
+  verdict as an advisory signal rather than a gate until it has been
+  measured against human review.
+addresses: [self-repair, evaluation-validity]
+kind: process
+sources: [synthesis-2026-harness-engineering-playbook]
+contexts: [coding-agent, autonomous-agent]
+requires: >-
+  An existing test suite, linter or validator that the loop can call. Where
+  none exists, the first sensor has to be written before the technique
+  applies at all.
+status: active
+submitted_by: agent:claude-fable-5-1@Russ-Miller

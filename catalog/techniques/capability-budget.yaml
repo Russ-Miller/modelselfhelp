@@ -1,0 +1,23 @@
+id: capability-budget
+label: Bound what the agent may do, not just what it may not
+summary: An explicit allow/ask/deny policy plus rate, cost and time ceilings, enforced by the harness rather than requested of the model.
+description: >-
+  Four dimensions govern every action: scope (which files, tools, accounts),
+  rate (writes or calls per interval), reversibility (irreversible actions
+  need a human), and visibility (who is told, what evidence is kept). A
+  capability budget encodes all four before the first unattended run, and
+  the harness enforces them — the model cannot restrict itself, and a
+  permission is a harness property, not a model property. Generalises the
+  narrower irreversible-action gate to include ceilings on cost, rate and
+  duration, which are the bounds that stop a runaway loop rather than a
+  single bad call.
+addresses: [goal-conflict-safety, tool-use, prompt-injection]
+kind: process
+sources: [synthesis-2026-harness-engineering-playbook]
+contexts: [autonomous-agent, coding-agent, customer-support]
+requires: >-
+  Classifying tools and targets by reversibility up front, and a runtime
+  that actually mediates every call — a budget the agent can bypass is a
+  suggestion.
+status: active
+submitted_by: agent:claude-fable-5-1@Russ-Miller

@@ -155,6 +155,68 @@ single-paper experimental claim. The weak backing was a consequence of
 asking the system to describe itself, and instrumentation removes the
 need to ask.
 
+### A vocabulary for the loop, borrowed from harness engineering
+
+A synthesis Russ forwarded on 2026-09-11
+(`catalog/sources/synthesis-2026-harness-engineering-playbook.yaml`) supplies
+something this document had been missing: names for the parts. Its formula
+is *agent = model + harness*, its harness has six layers, and its organising
+principle is the **ratchet** — every failure becomes a permanent fix in the
+harness, never a patch to a prompt. Read with this catalog in mind, the
+mapping is close enough to be uncomfortable:
+
+| Harness layer | What it is | What this catalog already has |
+|---|---|---|
+| **Guides** — feedforward instruction, each line a past failure | AGENTS.md, CLAUDE.md | `CLAUDE.md`, `docs/decisions.md`, and the catalog itself: an index of known failures read before acting |
+| **Sensors** — feedback checks after execution | linters, tests, LLM-as-judge | the backtest; figure-grounding on briefs; `verify-papers`; `check-sources`; the stage-2 classifier (an *inferential* sensor, at 35–57% false positives) |
+| **Agentic loop** — plan, execute, verify, fix, bounded retries, escalate | | the nightly pipeline, with pacing and continue-on-error; drafts that fail checks escalate to a flag rather than being filed |
+| **Memory** — state that survives the session | checkpoint files, decision logs | `pipeline/` on its own branch; the seen-ledger; `decisions.md` |
+| **Permissions and budgets** — what the agent may do, enforced outside it | allow / ask / deny | `pending-review` and `proposed` — unreviewed content is visible everywhere and authoritative nowhere; `--limit` on every paid stage; branch protection that will not let a bot write to main |
+| **Observability** — trace, cost, trip wires | | per-run logs on `pipeline-state`; cost per paper reported by every script; `check-sources` firing on drift is a trip wire |
+
+Two distinctions from the playbook are worth adopting as vocabulary here.
+
+**Computational versus inferential sensors.** A test or a hash check is
+free, fast and returns the same verdict every time. An LLM judgment costs
+per run and does not. The rule — exhaust the deterministic checks first,
+treat the model's verdict as advisory until it has been measured against a
+human — is exactly the ordering this catalog arrived at by accident: the
+backtest and the figure check are computational, the classifier is
+inferential, and when they disagree the computational one wins.
+
+**The ratchet.** Six steps: reproduce the failure with the same input,
+classify its root cause, choose the strongest layer that would prevent it,
+implement there, verify on the original failing case, run the regression
+suite. Then a diagnostic: a young harness adds five rules a day, a mature one
+adds one a week, and the *declining* rate is the sign it is working.
+
+Read `docs/decisions.md` as a ratchet log and most entries fit the shape.
+Fabricated citation titles → `verify-papers` (a sensor). `GPT-3.` read as
+the figure `3` → a lookbehind in the extractor (a sensor fix at the strongest
+layer). A hand-reimplemented matcher reporting a blind spot that did not
+exist → one shared `match-lib.mjs` (a structural fix, not a prompt). Every
+one of those was a failure converted into infrastructure rather than
+remembered.
+
+**What the mapping makes precise about ambition 1.** "The system improves
+itself" was vague. In this vocabulary it is: the system runs the six-step
+ratchet on its own failures, and the outcome variable is the one the
+playbook insists on — *completed tasks requiring no manual intervention that
+still produced acceptable evidence*, never model calls or tokens. That is
+Wu's blue arrow and the playbook's "real metric" said the same way from two
+directions. For us the task is "a filed claim that survives", and the
+counts to watch are the rework rate (drafts a human had to correct), the
+escalation rate (flags per run), and the growth rate of new sensor rules —
+which should fall.
+
+The playbook's own caution applies with full force: *the harness does not
+fix bad objectives.* A well-engineered loop around the wrong target
+produces reliable garbage, and the sensors will validate it. That is
+narrow-versus-broad capability from the RSI economics paper, and Goodhart
+for the fourth time. The held-out set is the only thing here that is not
+downstream of our own objective, which is why it must stay small, external
+and unoptimised.
+
 ### The smallest experiment that tests this
 
 One capability the pipeline depends on, one technique with a supported

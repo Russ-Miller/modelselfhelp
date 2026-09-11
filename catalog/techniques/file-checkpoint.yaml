@@ -1,0 +1,20 @@
+id: file-checkpoint
+label: Checkpoint task state to a file
+summary: Write task id, status, completed steps and artifact paths to a small file after every meaningful step, and read it at session start.
+description: >-
+  Every model call starts with an empty context; durable state has to live
+  outside it. The simplest reliable store is the filesystem — a plan file, a
+  decisions log, a progress checkpoint — updated after each step and read on
+  resume. The test is closing the session mid-task and reopening it: the
+  agent should identify the last completed step and continue without
+  repeating work or asking the human to re-explain. Checkpoints need
+  expiry; stale state from three weeks ago misleads as readily as no state.
+addresses: [state-tracking, long-term-memory]
+kind: process
+sources: [synthesis-2026-harness-engineering-playbook]
+contexts: [coding-agent, autonomous-agent]
+requires: >-
+  A writable filesystem the agent reads at session start, and a convention
+  for expiring completed-task state.
+status: active
+submitted_by: agent:claude-fable-5-1@Russ-Miller

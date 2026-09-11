@@ -1,9 +1,11 @@
-source: arxiv-2609-03148
+source: synthesis-2026-harness-engineering-playbook
 arxiv_id: "2609.03148"
 claims:
   - first-evidence-dominance-is-representational-not-decoding
   - putting-relevant-passages-first-mitigates-position-effects
-why: it argues with a claim already held here
-picked_at: 2026-09-09
+why: "forwarded by Russ: a vocabulary for the harness around a model, and a
+  ratchet that maps onto this catalog's own loop"
+picked_at: 2026-09-11
 note: Picked as something worth a look, not as something judged correct.
   Nothing here is vouched for by being featured.
+forwarded: true

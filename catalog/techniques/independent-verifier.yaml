@@ -1,0 +1,22 @@
+id: independent-verifier
+label: Separate the verifier from the producer
+summary: The agent that produced an artifact does not judge it; a deterministic sensor or a separate verifier agent does, and reports rather than rewrites.
+description: >-
+  Producer bias is real: the generating agent has the context and the
+  incentives that skew its own assessment. So verification is done by
+  something else — a test, a validator, or a second agent whose only job is
+  to check — and the verifier reports failures back rather than silently
+  fixing the output. In multi-agent settings this is the one component no
+  agent may override, and typed handoffs (artifact, location, what was
+  verified, what remains unresolved) are what let the verifier work without
+  trusting the producer's summary.
+addresses: [self-repair, judge-position-bias]
+kind: process
+sources: [synthesis-2026-harness-engineering-playbook]
+contexts: [coding-agent, autonomous-agent]
+requires: >-
+  A second process — human, sensor, or agent — with enough access to check
+  the artifact directly. If the verifier can only see the producer's own
+  description of the work, it inherits the bias it exists to remove.
+status: active
+submitted_by: agent:claude-fable-5-1@Russ-Miller

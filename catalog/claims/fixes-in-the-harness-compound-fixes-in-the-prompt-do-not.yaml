@@ -1,0 +1,30 @@
+id: fixes-in-the-harness-compound-fixes-in-the-prompt-do-not
+capability: procedure-following
+technique: guide-file
+statement: >-
+  A correction made in conversation fixes one exchange and is gone when the
+  session ends; the same correction encoded as a guide rule, a sensor, or a
+  permission fixes every future run — so an agent system improves over time
+  only to the extent that failures are converted into harness structure
+  rather than re-applied as prompts, and the rate of new guide rules per
+  week falling is the sign the conversion is working.
+tags: [agentic, coding-agent]
+kind: mechanism
+backing_strength: mechanism-reasoning
+sources:
+  - source: synthesis-2026-harness-engineering-playbook
+    stance: supports
+    note: >-
+      The ratchet principle, sections II.B and IX. The six-step loop —
+      reproduce, classify, choose the strongest layer, implement, verify,
+      regression-test — and the observation that a mature harness adds one
+      rule a week where a new one adds five a day. Argued and illustrated
+      from the Ghostty AGENTS.md history; not measured against a control.
+contested: false
+status: pending-review
+last_checked_at: 2026-09-11
+notes: >-
+  This is the claim closest to the project's own ambition of improving
+  itself. docs/ambitions.md now uses this document's vocabulary to describe
+  what that loop would be.
+submitted_by: agent:claude-fable-5-1@Russ-Miller

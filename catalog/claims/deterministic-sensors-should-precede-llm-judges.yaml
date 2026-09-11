@@ -1,0 +1,35 @@
+id: deterministic-sensors-should-precede-llm-judges
+capability: self-repair
+technique: computational-sensors-first
+statement: >-
+  In an agent's verify-and-fix loop, deterministic checks — tests, linters,
+  schema validators — should be exhausted before any model-based judge is
+  added, because they are free, fast and give the same verdict every time,
+  while an LLM-as-judge costs tokens per run, returns non-deterministic
+  verdicts, and so belongs only on properties no rule can express, and even
+  then as an advisory signal until measured against human review.
+tags: [agentic, coding-agent]
+kind: mechanism
+backing_strength: mechanism-reasoning
+sources:
+  - source: synthesis-2026-harness-engineering-playbook
+    stance: supports
+    note: >-
+      Table III sets out the cost and determinism contrast and the design
+      rule that follows from it. Argued from the properties of the two sensor
+      kinds, with a worked cost example, not measured.
+  - source: arxiv-2310-01798
+    stance: supports
+    note: >-
+      The adjacent finding: with no external signal, a model's own review
+      does not improve reasoning and often degrades it. A deterministic
+      sensor is the external signal; an LLM judge without grounding is
+      closer to self-review.
+contested: false
+status: pending-review
+last_checked_at: 2026-09-11
+notes: >-
+  Sits beside external-feedback-repair-works-only-with-real-grounding and
+  says why: the grounding that makes reflect-and-retry work is exactly what
+  a computational sensor provides and an inferential one does not.
+submitted_by: agent:claude-fable-5-1@Russ-Miller

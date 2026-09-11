@@ -87,6 +87,10 @@
     "summary": {
       "type": "string"
     },
+    "notes": {
+      "type": "string",
+      "description": "Anything a reader should know about the source itself rather than its content -- provenance, authorship doubts, why it is filed as the kind it is. Distinct from summary, which describes what the source says."
+    },
     "brief": {
       "type": "string",
       "minLength": 120,

@@ -1,0 +1,21 @@
+id: guide-file
+label: Keep a guide file of past failures
+summary: A versioned instruction file the agent reads before acting, where every line is a past failure converted into a permanent rule.
+description: >-
+  An AGENTS.md, CLAUDE.md or equivalent: project name, exact build, test and
+  lint commands, and a short list of rules and anti-patterns, each traceable
+  to a specific past error. It is feedforward control — it shapes behaviour
+  before execution — and it is organisational memory: corrections that would
+  otherwise die with a conversation survive in the file. Guides must be
+  pruned. Without maintenance they become contradictory and stale, and a rule
+  that a sensor now enforces automatically should be deleted from the guide.
+addresses: [procedure-following, context-hygiene]
+kind: process
+sources: [synthesis-2026-harness-engineering-playbook]
+contexts: [coding-agent, autonomous-agent]
+requires: >-
+  Someone has to convert each failure into a rule and, separately, prune
+  rules that sensors have made redundant. A guide with two hundred undated
+  lines is technical debt, not a harness.
+status: active
+submitted_by: agent:claude-fable-5-1@Russ-Miller
