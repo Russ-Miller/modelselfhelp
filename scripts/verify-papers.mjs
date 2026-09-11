@@ -46,7 +46,7 @@ async function fetchSemanticScholar(batch) {
 const norm = (s) => s.toLowerCase().replace(/[^a-z0-9]/g, ""); // ignore punctuation, hyphens, spacing
 const papers = loadCatalog().sources.filter((p) => p.data.arxiv_id);
 const CHUNK = 5; // arXiv rate-limits aggressively; keep batches small
-const UA = "modelselfhelp-verify/0.1 (+https://github.com/Russ-Miller/modelselfhelp)";
+const UA = "modelselfhelp-verify/0.1 (+https://github.com/Russ-Miller/RSIratchet)";
 let failures = 0;
 let unverified = 0;
 for (let i = 0; i < papers.length; i += CHUNK) {

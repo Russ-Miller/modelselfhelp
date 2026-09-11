@@ -1,6 +1,6 @@
 import type { Capability, Claim } from "@/lib/catalog";
 
-const REPO = "https://github.com/Russ-Miller/modelselfhelp";
+const REPO = "https://github.com/Russ-Miller/RSIratchet";
 
 /**
  * The only route by which anyone but the author can tell this catalog it is
