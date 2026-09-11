@@ -29,18 +29,10 @@ export default function Home() {
           presented with more confidence than it has.{" "}
           <Link href="/how-this-works" className="underline">How this is collected</Link>.
         </p>
-        <dl className="flex flex-wrap gap-6 text-sm">
-          {[
-            ["capabilities", cat.capabilities.length], ["claims", cat.claims.length],
-            ["sources", cat.sources.length], ["techniques", cat.techniques.length],
-          ].map(([k, n]) => (
-            <div key={k}><dt className="text-neutral-500">{k}</dt><dd className="text-xl font-medium">{n}</dd></div>
-          ))}
-        </dl>
         <div className="max-w-2xl pt-2">
           <Search index={index} />
-          <p className="mt-1 text-xs text-neutral-500">
-            Searches all {index.length} records: capabilities, claims, techniques and sources. Runs in your browser.
+          <p className="mt-2 text-xs text-neutral-500">
+            Searches everything in the catalog. Runs in your browser.
           </p>
         </div>
       </section>
