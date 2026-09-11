@@ -21,12 +21,33 @@ sources:
       the claim but not carry a measurement behind it. The structural point
       stands on its own: if the harness can move a score by 44 points, the
       score does not isolate the model.
+  - source: langchain-2026-deep-agents-harness
+    stance: supports
+    note: >-
+      Primary for the Terminal Bench figure, and more modest than the
+      playbook's retelling: 52.8 to 66.5, a 13.7-point gain, rank roughly 30
+      to 5, from verification middleware, context injection, loop detection
+      and where thinking is concentrated. Vendor account of its own agent.
+  - source: boluk-2026-harness-problem-15-llms
+    stance: supports
+    note: >-
+      Sixteen models, one afternoon, only the edit format changed — each line
+      tagged with a content hash so edits cannot silently target the wrong
+      line. Nearly all improved; Grok Code Fast 1 from 6.7% to 68.3%. The
+      cleanest single demonstration that a score moves with the harness.
 contested: false
 status: pending-review
 last_checked_at: 2026-09-11
 notes: >-
   Filed under evaluation-validity rather than tool-use because the durable
-  part is what it says about measurement, not about agents. Backing is
+  part is what it says about measurement, not about agents.
+
+  The GAIA figure — 30.91% to 74.55%, same Claude Sonnet 4.5 — is Adnan
+  Masood's, in a Medium post of June 2026. It is NOT filed as a source:
+  medium.com returns 403 to every fetcher available here and the browser
+  extension's domain policy blocks it, and a post cannot be filed without
+  its text archived. Until it is, that number rests only on the playbook's
+  retelling, and this claim's backing stays mechanism-reasoning. Backing is
   mechanism-reasoning and should stay there until the underlying blog posts
   are filed as sources in their own right and checked. The falsifier is
   direct: a controlled comparison where harness variation moves an agentic

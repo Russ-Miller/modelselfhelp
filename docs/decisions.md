@@ -1256,3 +1256,43 @@ Its own caution carries over: the harness does not fix bad objectives. A
 good loop around the wrong target produces reliable garbage and the sensors
 validate it. Goodhart, fourth appearance. The held-out set stays small,
 external and unoptimised for exactly this reason.
+
+## 2026-09-11 — The playbook's references: seven verified, six archived, one unreachable
+Russ asked whether the harness-engineering synthesis, not being a real
+paper, had citations worth cataloguing. It had fifteen, all blog posts and
+company engineering pages, and the ones carrying its numbers are exactly
+what its claims needed — every figure in the playbook is secondhand until
+its source is filed.
+
+Seven checked out with real URLs, verified by search before anything was
+written; after last week's two fabricated titles, nothing goes in
+unverified. Six are archived: Hashimoto's origin of the ratchet, the OpenAI
+post that coined the term, Böckeler's guides-and-sensors piece plus her
+follow-up on sensors, LangChain's Terminal Bench account, and Bölük's
+sixteen-models-one-afternoon result. The four playbook claims now cite
+their primaries, and one figure got smaller in the process: LangChain's own
+post says 52.8 to 66.5, +13.7 points, where the playbook's retelling led
+with the rank change. Primaries are more modest than summaries of them.
+
+Two are not archived, for reasons worth recording. openai.com refuses every
+non-browser fetcher, and the browser extension returns long pages in
+truncated chunks, so that record carries a partial verbatim archive with
+the gap declared and no content hash. medium.com refuses every fetcher and
+the extension's domain policy blocks it outright, so Masood's post — the
+source of the 44-point GAIA figure — is not filed at all. A post cannot be
+filed without its text, and the claim that leans on that number says so
+rather than borrowing the figure from the playbook.
+
+The search also surfaced two arXiv papers the playbook did not cite, and
+one is the first ambition already built: Self-Harness, a fixed model
+improving its own scaffolding under a regression gate, all nine pairs
+improving. Its authors name their own weakness — the gate reads the
+held-out split — and it is the closed-loop trap this project's ambitions
+document describes. Filed with a claim and a technique, and written into
+docs/ambitions.md as prior art.
+
+Three things the browser tools taught, for next time. Clipboard writes need
+document focus and clicking to get it froze the renderer. Script results
+are capped near a thousand characters regardless of what is returned. And
+a domain allowlist in the extension is a policy, not an auth failure —
+Russ asked how to allow medium.com, which is the right question.

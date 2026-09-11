@@ -22,6 +22,12 @@ sources:
       The measured version of the same point on a single model: self-review
       without an external signal does not improve reasoning. Producer bias is
       the mechanism this catalog already holds for why.
+  - source: boeckeler-2026-harness-engineering-fowler
+    stance: supports
+    note: >-
+      Frames sensors as the checks that catch what the agent's own judgment
+      will not, and argues for self-correction loops that run before human
+      eyes precisely because the agent cannot be trusted to grade itself.
 contested: false
 status: pending-review
 last_checked_at: 2026-09-11

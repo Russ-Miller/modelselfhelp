@@ -20,6 +20,14 @@ sources:
       regression-test — and the observation that a mature harness adds one
       rule a week where a new one adds five a day. Argued and illustrated
       from the Ghostty AGENTS.md history; not measured against a control.
+  - source: hashimoto-2026-ai-adoption-journey
+    stance: supports
+    note: >-
+      The primary. Hashimoto's rule for the Ghostty AGENTS.md — "anytime you
+      find an agent makes a mistake, you take the time to engineer a solution
+      such that the agent never makes that mistake again" — and the file
+      growing one line per failure over months. Practitioner account, no
+      control, but first-hand rather than secondhand.
 contested: false
 status: pending-review
 last_checked_at: 2026-09-11
