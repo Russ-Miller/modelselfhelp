@@ -5,7 +5,7 @@
 import fs from "node:fs";
 import { loadCatalog } from "./catalog-lib.mjs";
 
-const UA = "modelselfhelp-citations/0.1 (+https://github.com/Russ-Miller/modelselfhelp)";
+const UA = "modelselfhelp-citations/0.1 (+https://github.com/Russ-Miller/RSIratchet)";
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const TODAY = new Date();
 const oneYearAgo = new Date(TODAY);

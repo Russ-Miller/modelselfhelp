@@ -181,7 +181,7 @@ export default function HowThisWorksPage() {
         <p className="text-neutral-600 dark:text-neutral-400">
           Everything is plain YAML in a public git repository, so the history of any entry &mdash;
           when it was filed, what changed, and why &mdash; is readable.{" "}
-          <a href="https://github.com/Russ-Miller/modelselfhelp" target="_blank" rel="noopener noreferrer" className="underline">See the repository</a>.
+          <a href="https://github.com/Russ-Miller/RSIratchet" target="_blank" rel="noopener noreferrer" className="underline">See the repository</a>.
         </p>
       </section>
     </div>

@@ -24,7 +24,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <nav className="mx-auto flex max-w-5xl flex-wrap items-center gap-x-6 gap-y-2 px-4 py-3 text-sm">
             <Link href="/" className="font-semibold tracking-tight">RSI Ratchet</Link>
             <NavLinks />
-            <a href="https://github.com/Russ-Miller/modelselfhelp" target="_blank" rel="noopener noreferrer" className="hover:underline sm:ml-auto">GitHub</a>
+            <a href="https://github.com/Russ-Miller/RSIratchet" target="_blank" rel="noopener noreferrer" className="hover:underline sm:ml-auto">GitHub</a>
           </nav>
         </header>
         <main className="mx-auto w-full max-w-5xl px-4 py-8 flex-1">{children}</main>
