@@ -217,6 +217,29 @@ for the fourth time. The held-out set is the only thing here that is not
 downstream of our own objective, which is why it must stay small, external
 and unoptimised.
 
+### Prior art, found while checking references
+
+Verifying the playbook's citations surfaced two arXiv papers it did not
+cite, and one of them is this ambition already built.
+
+**Self-Harness** (`arxiv-2606-09498`, filed with a claim and a technique)
+runs the loop: a fixed model clusters its own failed traces, proposes K
+minimal harness edits, and promotes only edits that improve one split
+without degrading another. All nine model-by-benchmark pairs improved, by
+up to 40.6 points, and weak models gained most. Then the authors say the
+thing this document had already worried about: the promotion gate reads
+the held-out split, so the held-out gain is not clean generalisation. That
+is the closed loop, in a published result. The rule in force here — the
+backtest set is external, small, and never touched by anything being tuned
+— is exactly the piece they name as missing, which is either reassuring or
+a warning about how easy the mistake is to make, and probably both.
+
+**Code as Agent Harness** (`arxiv-2605-18747`) is a survey, and reads as a
+map: it names *regression-free harness improvement* and *verification under
+incomplete feedback* as open problems, which are the two halves of the
+attack list above. No measurements; useful as a reading list for attacks 1
+through 3.
+
 ### The smallest experiment that tests this
 
 One capability the pipeline depends on, one technique with a supported

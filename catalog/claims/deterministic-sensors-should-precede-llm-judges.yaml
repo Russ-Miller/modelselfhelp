@@ -25,6 +25,12 @@ sources:
       does not improve reasoning and often degrades it. A deterministic
       sensor is the external signal; an LLM judge without grounding is
       closer to self-review.
+  - source: boeckeler-2026-maintainability-sensors
+    stance: supports
+    note: >-
+      A follow-up devoted to sensors for coding agents, with the same
+      ordering: mechanical checks first, model-based judgment where rules
+      run out.
 contested: false
 status: pending-review
 last_checked_at: 2026-09-11

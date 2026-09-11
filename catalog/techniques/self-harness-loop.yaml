@@ -1,0 +1,23 @@
+id: self-harness-loop
+label: Let the agent revise its own harness, gated by a held-out split
+summary: Cluster failed traces into signatures, have the same fixed model propose a few minimal harness edits, and promote only edits that improve one split without degrading another.
+description: >-
+  Three stages, model weights untouched. Failed execution traces are grouped
+  into verifier-grounded failure signatures. For each signature the same base
+  model proposes K minimal, distinct edits to prompts, tools or runtime
+  policy. Each edit is evaluated on two splits and promoted only if it
+  improves one without degrading the other. The loop is the harness-level
+  version of a ratchet: failures become permanent structure, and nothing is
+  kept that a check did not pass. Its known weakness is that the promotion
+  gate reads the held-out split, so that split stops being a clean test of
+  generalisation — a truly external held-out set the loop never touches is
+  the missing piece.
+addresses: [self-repair]
+kind: process
+sources: [arxiv-2606-09498]
+contexts: [coding-agent, autonomous-agent]
+requires: >-
+  A verifier that can label a trace as failed, a benchmark that can be split,
+  and the budget for many full re-evaluations per promoted edit.
+status: active
+submitted_by: agent:claude-fable-5-1@Russ-Miller

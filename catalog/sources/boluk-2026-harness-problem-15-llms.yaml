@@ -1,0 +1,47 @@
+id: boluk-2026-harness-problem-15-llms
+kind: post
+title: "I Improved 15 LLMs at Coding in One Afternoon. Only the Harness Changed."
+authors:
+  - "Can Bölük"
+author_handle: "@_can1357"
+year: 2026
+date: 2026-02-12
+url: https://can.ac/2026/02/12/the-harness-problem/
+content_url: https://can.ac/2026/02/12/the-harness-problem/
+retrieved_at: 2026-09-11
+content_checked_at: 2026-09-11
+content_sha256: c37bfdd0ff684ee7476d46083b2c166a73232a0771bbe60cd67b5bed5d77b891
+tags: [forwarded]
+summary: >-
+  Security research, reverse engineering & low-level systems Snapcompact:
+  SoTA Compaction — Instant, Local, Free. Pick 3 I Improved 15 LLMs at
+  Coding in One Afternoon. Only the Harness Changed.
+notes: >-
+  16 models on a coding benchmark, only the edit format changed (hashline:
+  each line tagged with a content hash). Nearly all improved; Grok Code Fast
+  1 from 6.7% to 68.3%. Playbook [9].
+archived_text: |
+  Security research, reverse engineering & low-level systems
+  Snapcompact: SoTA Compaction — Instant, Local, Free. Pick 3
+  I Improved 15 LLMs at Coding in One Afternoon. Only the Harness Changed.
+  Optimizing Bracha's Reliable Broadcast: Shaving Rounds off a 37-Year-Old Algorithm
+  Reverse Engineering Hyperliquid ft. SetYesterdayUserVlm
+  Speculating the entire x86-64 Instruction Set In Seconds with This One Weird Trick
+  Writing an optimizing IL compiler, for dummies, by a dummy: 0x1 Symbolic Expressions
+  ByePg: Defeating Patchguard using Exception-hooking
+  Arbitrary Code Execution at Ring 0 using CVE-2018-8897
+  Making the Perfect Injector: Abusing Windows Address Sanitization and CoW
+  Escaping SMEP Hell: Exploiting Capcom Driver In a Safe Manner
+  Splitting Data from Code, Forgotten x86 Feature: Segmentation
+  Snapcompact: SoTA Compaction — Instant, Local, Free. Pick 3
+  I Improved 15 LLMs at Coding in One Afternoon. Only the Harness Changed.
+  Optimizing Bracha's Reliable Broadcast: Shaving Rounds off a 37-Year-Old Algorithm
+  Reverse Engineering Hyperliquid ft. SetYesterdayUserVlm
+  Speculating the entire x86-64 Instruction Set In Seconds with This One Weird Trick
+  Writing an optimizing IL compiler, for dummies, by a dummy: 0x1 Symbolic Expressions
+  ByePg: Defeating Patchguard using Exception-hooking
+  Arbitrary Code Execution at Ring 0 using CVE-2018-8897
+  Making the Perfect Injector: Abusing Windows Address Sanitization and CoW
+  Escaping SMEP Hell: Exploiting Capcom Driver In a Safe Manner
+  Splitting Data from Code, Forgotten x86 Feature: Segmentation
+ingested_at: 2026-09-11

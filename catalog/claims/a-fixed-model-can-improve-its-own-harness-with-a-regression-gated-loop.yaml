@@ -1,0 +1,36 @@
+id: a-fixed-model-can-improve-its-own-harness-with-a-regression-gated-loop
+capability: self-repair
+technique: self-harness-loop
+statement: >-
+  With weights frozen and no stronger model in the loop, an agent can raise
+  its own pass rate by rewriting the scaffolding it runs inside — clustering
+  its failures, proposing minimal edits to prompts, tools and policy, and
+  keeping only edits that improve one split without degrading another: all 9
+  of 9 model-by-benchmark pairs improved, by up to 40.6 percentage points
+  (GLM-5 on AppWorld, 44.4% to 85.0%), with weak models gaining most; but
+  the promotion gate reads the held-out split, so the reported held-out gain
+  is not clean generalisation, and there is no matched-compute baseline.
+tags: [agentic, coding-agent]
+kind: observation
+backing_strength: single-paper
+observed_on:
+  era: "2026, MiniMax M2.5 / Qwen3.5-35B-A3B / GLM-5 on Terminal-Bench 2.0, SWE-bench Verified, AppWorld"
+sources:
+  - source: arxiv-2606-09498
+    stance: supports
+    note: >-
+      Model, tools, budget, evaluator and splits held fixed, so the harness
+      is isolated as the cause. Largest relative gain 132%, weakest 52.0% to
+      55.5%. Two repeated attempts per score; no comparison to a
+      human-engineered harness; edits may be benchmark-specific. The authors
+      state the held-out caveat themselves.
+contested: false
+status: pending-review
+last_checked_at: 2026-09-11
+notes: >-
+  The closest existing implementation of this project's own first ambition,
+  and its stated weakness is the one docs/ambitions.md names: a loop that
+  grades its own edits on the split it will be scored on has closed the
+  circle. The fix it lacks — a held-out set the loop never sees and cannot
+  grow — is the rule already in force for the backtest here.
+submitted_by: agent:claude-fable-5-1@Russ-Miller

@@ -1,0 +1,66 @@
+id: arxiv-2606-09498
+kind: paper
+title: "Self-Harness: Harnesses That Improve Themselves"
+authors:
+  - Hangfan Zhang
+  - Shao Zhang
+  - Kangcong Li
+  - Chen Zhang
+  - Yang Chen
+  - Yiqun Zhang
+  - Lei Bai
+  - Shuyue Hu
+year: 2026
+date: 2026-06-08
+arxiv_id: "2606.09498"
+url: https://arxiv.org/abs/2606.09498
+tags:
+  - forwarded
+summary: "The performance of LLM-based agents is jointly shaped by their base
+  models and the harnesses that mediate their interaction with the
+  environment. Because different models exhibit distinct behaviors, effective
+  harness design is inherently model-specific. Yet agent harnesses are still
+  largely engineered by human experts, a paradigm that scales poorly as modern
+  LLMs become increasingly diverse and rapidly evolving. In this paper, we
+  introduce Self-Harness, a new paradigm in which an LLM-based agent improves
+  its own operating harness, without relying on human engineers or stronger
+  external agents. We operationalize Self-Harness as an iterative loop with
+  three stages: Weakness Mining, which ident"
+notes: Surfaced while verifying the harness-engineering playbook's references;
+  bears directly on the self-improvement ambition.
+ingested_at: 2026-09-11
+brief: >-
+  An agent can rewrite the scaffolding it runs inside, using only its own base
+  model, and get large pass-rate gains without any stronger external model or
+  human engineer. The improvement comes from bounded, evidence-grounded edits
+  to prompts, tools, and runtime policy rather than weight changes.
+
+
+  Self-Harness runs a 3-stage loop: cluster failed execution traces into
+  verifier-grounded failure signatures, propose K minimal distinct harness
+  edits with the same fixed model, then promote only edits that improve 1
+  split without degrading the other. Tested on Terminal-Bench-2.0 (64-case
+  subset), SWE-bench Verified (100 cases, 67 held-in / 33 held-out), and
+  AppWorld (180 examples), with MiniMax M2.5, Qwen3.5-35B-A3B, and GLM-5,
+  starting from a minimal DeepAgent harness.
+
+
+  All 9 model-benchmark pairs improve on both splits. Largest relative gain
+  132% (Qwen3.5-35B-A3B, AppWorld); largest absolute gain 40.6 percentage
+  points for GLM-5 on AppWorld, 44.4% to 85.0%. Weakest gain: GLM-5 on
+  SWE-bench Verified, 52.0% to 55.5%. Weak models gain most.
+
+
+  Model, tools, budget, evaluator, and split assignments are held fixed, so
+  the harness is isolated as the cause, and the held-out split was never shown
+  to the proposer. But the promotion gate itself uses held-out pass counts, so
+  held-out is not clean generalization; scores come from 2 repeated attempts;
+  no comparison against Meta-Harness or a human-engineered harness; no matched
+  compute baseline; benchmarks are fixed and edits may be benchmark-specific.
+
+
+  If you tune harnesses by hand per model, this suggests the loop can be
+  automated, at the cost of many full benchmark re-evaluations.
+brief_generated_at: 2026-09-11
+brief_model: claude-opus-5
+brief_source: full-text

@@ -1,0 +1,69 @@
+id: arxiv-2605-18747
+kind: paper
+title: Code as Agent Harness
+authors:
+  - Xuying Ning
+  - Katherine Tieu
+  - Dongqi Fu
+  - Tianxin Wei
+  - Zihao Li
+  - Yuanchen Bei
+  - Jiaru Zou
+  - Mengting Ai
+year: 2026
+date: 2026-05-18
+arxiv_id: "2605.18747"
+url: https://arxiv.org/abs/2605.18747
+tags:
+  - forwarded
+summary: "Recent large language models (LLMs) have demonstrated strong
+  capabilities in understanding and generating code, from competitive
+  programming to repository-level software engineering. In emerging agentic
+  systems, code is no longer only a target output. It increasingly serves as
+  an operational substrate for agent reasoning, acting, environment modeling,
+  and execution-based verification. We frame this shift through the lens of
+  agent harnesses and introduce code as agent harness: a unified view that
+  centers code as the basis for agent infrastructure. To systematically study
+  this perspective, we organize the survey around three connected layers.
+  First, we study the harness interface, where code c"
+notes: Surfaced while verifying the harness-engineering playbook's references;
+  bears directly on the self-improvement ambition.
+ingested_at: 2026-09-11
+brief: >-
+  A survey, not an experiment: code is reframed as the harness layer of agent
+  systems rather than only a generated artifact. The claim is that executable,
+  inspectable, and stateful programs are the medium through which agents
+  reason, act, model environments, and verify progress.
+
+
+  The organizing structure has 3 layers. Harness interface covers code for
+  reasoning (PoT, PAL, SATLM, Lean-based provers such as DeepSeek-Prover-V2
+  and Goedel-Prover-V2, iterative loops like NExT, CodePRM, RLEF), code for
+  acting (SayCan, Code as Policies, Voyager, AutoHarness), and code for
+  environment modeling (WorldCoder, Code World Model, SWE-bench, AgentBench,
+  CRUXEval, SWE-smith). Harness mechanisms cover planning, memory, tool use, a
+  Plan-Execute-Verify control loop, and harness self-improvement. Scaling
+  covers multi-agent roles such as manager, planner, coder, reviewer, tester.
+
+
+  No experiments, no benchmark numbers, no comparisons are reported. Claims
+  about code being more reliable than natural-language reasoning are argued
+  conceptually and attributed to cited primary work, not measured here.
+  Coverage is literature up to 2026, drawn from 5 application domains
+  including coding assistance, GUI/OS automation, scientific discovery,
+  personalization, and embodied control.
+
+
+  The distinction it draws that may be useful: model-internal capability
+  versus system-provided harness infrastructure versus agent-initiated code
+  artifacts, with the last named as underexplored. Open problems listed
+  include evaluation beyond final task success, verification under incomplete
+  feedback, regression-free harness improvement, shared state across agents,
+  and human oversight.
+
+
+  Read it as a map and a reading list, not as evidence about what models can
+  do.
+brief_generated_at: 2026-09-11
+brief_model: claude-opus-5
+brief_source: full-text
