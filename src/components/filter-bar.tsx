@@ -83,7 +83,10 @@ export function FilterBar({
             >
               {o.label}
               {o.value !== "all" && (
-                <span className={isActive ? "ml-1.5 opacity-70" : "ml-1.5 text-neutral-500"}>{o.count}</span>
+                // data-count-for lets the list search overwrite the number
+                // with how many of this cut match the current query, and
+                // restore it from data-count when the query clears.
+                <span data-count-for={o.value} data-count={o.count} className={isActive ? "ml-1.5 opacity-70" : "ml-1.5 text-neutral-500"}>{o.count}</span>
               )}
             </button>
           );

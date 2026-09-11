@@ -48,7 +48,24 @@ export function ListSearch({ noun = "rows", placeholder }: { noun?: string; plac
       for (const r of original) parent.appendChild(r);
     };
 
+    // The filter pills carry static totals. While a query is active, rewrite
+    // each pill's number to how many rows of that cut match the query, so the
+    // pills read as "what kinds of thing matched". Cleared query: totals back.
+    const updatePills = () => {
+      for (const pill of document.querySelectorAll<HTMLElement>("[data-count-for]")) {
+        const tag = pill.dataset.countFor ?? "";
+        if (!terms.length) { pill.textContent = pill.dataset.count ?? ""; continue; }
+        let n = 0;
+        for (const r of rows) {
+          if (r.getAttribute("data-hit") !== "1") continue;
+          if ((r.dataset.tags ?? "").split(/\s+/).includes(tag)) n++;
+        }
+        pill.textContent = String(n);
+      }
+    };
+
     const report = () => {
+      updatePills();
       let shown = 0;
       for (const r of rows) if (getComputedStyle(r).display !== "none") shown++;
       if (!countRef.current) return;
