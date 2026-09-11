@@ -50,3 +50,6 @@ __pycache__/
 # The ingestion queue and seen-ledger are both committed: the queue is
 # rendered at /queue for review, and the ledger keeps dedup working across
 # machines.
+
+# local model cache for scripts/embed.mjs
+/.cache/

@@ -149,6 +149,17 @@ jobs:
       - name: Validate
         run: npm run validate
 
+      # Newly filed claims need vectors for meaning search and related claims.
+      # Incremental: only records whose text changed are embedded. The model
+      # runs locally in the job; no API and no key.
+      - name: Embed new records
+        run: |
+          echo '## Embeddings' >> "$RUN_LOG"
+          echo '```' >> "$RUN_LOG"
+          npm run embed 2>&1 | tee -a "$RUN_LOG"
+          npm run check-embeddings 2>&1 | tee -a "$RUN_LOG"
+          echo '```' >> "$RUN_LOG"
+
       # Vercel's GitHub integration never linked for this repo, so a push does
       # not trigger a build. Deploy explicitly with the CLI instead, which
       # uploads the directory and needs no git connection.

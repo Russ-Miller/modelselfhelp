@@ -1343,3 +1343,25 @@ The name says what the catalog is for: each filed claim, technique standing and
 backtest result is a pawl — a step that should not slip back — in a recursive
 self-improvement loop (see ambitions.md). "modelselfhelp" stays as the repo,
 package and Vercel slug until the domains are attached.
+
+## 2026-09-11 — Embeddings: local model, vectors in the catalog
+
+Every record gets a 384-dimension vector from `Xenova/all-MiniLM-L6-v2`, run
+locally by `scripts/embed.mjs` (no API, no key, no token cost) and committed
+as `catalog/embeddings.json` (int8, ~220 KB). `npm run check-embeddings` fails
+the test suite when a vector is missing or stale; the nightly job re-embeds
+before deploying.
+
+Two uses so far. **Related claims** on every claim page: nearest five by
+cosine, floor 0.45, order shown but the score is not, since a number would
+read as a verdict. **Meaning search** as a toggle beside every search box:
+the same model loads in the browser from a CDN on first use (~23 MB, cached),
+embeds the query, and ranks rows above a 0.4 floor. Keyword stays the default
+because it is exact and explainable.
+
+Ranked results on list pages reorder the DOM rows and restore the original
+order on clear; CSS `order` was ruled out because two of the lists are tables.
+
+Next uses, not built: duplicate detection when filing drafts, contradiction
+candidates (high similarity, opposite stance), and a better first pass in the
+paper classifier than the term matcher.
