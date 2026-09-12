@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { loadCatalog, capabilitiesByGroup, claimsByRecency, getCapability, isPending } from "@/lib/catalog";
-import { KindBadge, StrengthBadge, ContestedBadge, PendingBadge } from "@/components/badges";
+import { KindBadge, StrengthBadge, ContestedBadge, ReviewBadge } from "@/components/badges";
 import { getTil } from "@/lib/til";
 import { buildSearchIndex } from "@/lib/search-index";
 import { Search } from "@/components/search";
@@ -24,9 +24,9 @@ export default function Home() {
             whole proposition is that you can judge an entry yourself, which only
             works if you know what you are looking at. */}
         <p className="max-w-2xl text-sm text-neutral-500">
-          Incomplete, and partly unreviewed &mdash; {pending} of {cat.claims.length} claims are
-          drafted from a paper and not yet checked by a person, and are marked as such. Nothing is
-          presented with more confidence than it has.{" "}
+          Every claim says who has read it: {pending} of {cat.claims.length} were reviewed by AI,
+          the rest by AI and a person. A person&rsquo;s review is what lets a claim count toward a
+          technique&rsquo;s standing.{" "}
           <Link href="/how-this-works" className="underline">How this is collected</Link>.
         </p>
         <div className="max-w-2xl pt-2">
@@ -74,7 +74,7 @@ export default function Home() {
                 {til.claims.map((c) => (
                   <li key={c.id} className="leading-relaxed">
                     {c.contested && <><ContestedBadge />{" "}</>}
-                    {isPending(c) && <><PendingBadge />{" "}</>}
+                    <ReviewBadge claim={c} />{" "}
                     <Link href={`/claims/${c.id}`} className="hover:underline">{c.statement}</Link>
                   </li>
                 ))}

@@ -1,9 +1,9 @@
 import Link from "next/link";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { notFound } from "next/navigation";
-import { adagesForClaim, claimActivity, getCapability, getClaim, getClaims, getModel, getSource, getTagLabel, isPending, isQuietSource } from "@/lib/catalog";
+import { adagesForClaim, claimActivity, getCapability, getClaim, getClaims, getModel, getSource, getTagLabel, isPending, isQuietSource, displayName, reviewLabel, reviewers } from "@/lib/catalog";
 import type { SourceLink } from "@/lib/catalog";
-import { ContestedBadge, EvidenceSignal, KindBadge, PendingBadge, StanceBadge, StrengthBadge } from "@/components/badges";
+import { ContestedBadge, EvidenceSignal, KindBadge, ReviewBadge, StanceBadge, StrengthBadge } from "@/components/badges";
 import { ChallengeLink } from "@/components/challenge";
 import { relatedClaims } from "@/lib/embeddings";
 
@@ -53,16 +53,9 @@ export default async function ClaimPage({ params }: PageProps<"/claims/[id]">) {
           <KindBadge kind={c.kind} />
           <StrengthBadge strength={c.backing_strength} />
           {c.contested && <ContestedBadge />}
-          {isPending(c) && <PendingBadge />}
+          <ReviewBadge claim={c} />
         </div>
         <h1 className="text-2xl font-semibold tracking-tight">{c.statement}</h1>
-        {isPending(c) && (
-          <p className="rounded border border-sky-300 bg-sky-50 p-3 text-sm text-sky-900 dark:border-sky-800 dark:bg-sky-950/30 dark:text-sky-200">
-            Ingested from a paper but not yet reviewed by a human. It is deliberately inert: it does
-            not move any technique&rsquo;s standing, does not count toward the backtest, and is
-            excluded anywhere a claim would carry weight. Read the source before relying on it.
-          </p>
-        )}
         {(() => {
           const ad = adagesForClaim(c.id);
           if (!ad.length) return null;
@@ -123,7 +116,8 @@ export default async function ClaimPage({ params }: PageProps<"/claims/[id]">) {
       )}
 
       <section className="text-sm text-neutral-500 flex flex-wrap items-center gap-x-6 gap-y-1">
-        <span>Status: {c.status}</span>
+        <span>{reviewLabel(c)}{reviewers(c).agents.length ? ` (${reviewers(c).agents.map(displayName).join(", ")})` : ""}</span>
+        {c.status !== "active" && c.status !== "pending-review" && <span>Status: {c.status}</span>}
         <span>Last checked: {c.last_checked_at}</span>
         {(() => {
           const a = claimActivity(c);
@@ -164,7 +158,7 @@ export default async function ClaimPage({ params }: PageProps<"/claims/[id]">) {
                     <span className="ml-2 text-xs text-neutral-500">
                       {rc?.label ?? r.capability}
                       {r.contested && <> &middot; contested</>}
-                      {isPending(r) && <> &middot; unreviewed</>}
+                      {isPending(r) && <> &middot; reviewed by AI</>}
                     </span>
                   </li>
                 );

@@ -60,6 +60,7 @@ export interface Claim {
   sources: SourceLink[]; contested: boolean; disagreement_axis?: DisagreementAxis;
   status: ClaimStatus; superseded_by?: string;
   last_checked_at: string; last_new_evidence_at?: string; notes?: string; submitted_by: string;
+  reviewed_by?: string[];
 }
 export interface Repo { url: string; note: string; verified_on?: string }
 export interface NearestMiss { source?: string; title?: string; url?: string; why_it_does_not_fit: string }
@@ -133,6 +134,32 @@ export const isProposed = (c: Capability) => c.status === "proposed";
 export const getClaims = () => loadCatalog().claims;
 /** Ingested but not yet endorsed by a human. */
 export const isPending = (c: Claim) => c.status === "pending-review";
+/** "human:Russ-Miller" -> "Russ Miller"; "agent:claude-opus-5@x" -> "Claude Opus 5". */
+export function displayName(prov: string): string {
+  const [kind, rest] = prov.split(":", 2);
+  const name = (rest ?? prov).split("@")[0].replace(/-/g, " ");
+  return kind === "agent" ? name.replace(/\b\w/g, (ch) => ch.toUpperCase()) : name;
+}
+
+/**
+ * Who has read a claim. Explicit `reviewed_by` wins; otherwise it is derived:
+ * every claim was drafted or checked by a model, and a human submitter has
+ * by definition reviewed what they submitted. The label describes who has
+ * read it, not a deficiency -- a claim reviewed by AI alone is complete and
+ * consumable; a person reading it is what adds it to standings.
+ */
+export function reviewers(c: Claim): { humans: string[]; agents: string[] } {
+  const list = c.reviewed_by ?? [c.submitted_by];
+  return {
+    humans: list.filter((p) => p.startsWith("human:")),
+    agents: list.filter((p) => p.startsWith("agent:")),
+  };
+}
+export function reviewLabel(c: Claim): string {
+  const { humans } = reviewers(c);
+  return humans.length ? `Reviewed by AI and ${humans.map(displayName).join(", ")}` : "Reviewed by AI";
+}
+
 /**
  * Claims that carry authority. The line is: unreviewed claims are VISIBLE
  * EVERYWHERE and AUTHORITATIVE NOWHERE.
@@ -374,7 +401,7 @@ export function techniqueTags(t: Technique): string {
 
 export function claimTags(c: Claim): string {
   const tags: string[] = [];
-  if (isPending(c)) tags.push("pending");
+  if (isPending(c)) tags.push("pending"); else tags.push("human");
   if (c.contested) tags.push("contested");
   if (c.backing_strength === "mechanism-reasoning") tags.push("argued");
   return tags.join(" ");
