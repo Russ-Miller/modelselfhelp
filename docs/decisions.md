@@ -1434,3 +1434,18 @@ absent, it is derived from `submitted_by` (a human submitter has reviewed
 what they submitted; an agent submitter means AI review only), which matches
 every claim in the catalog today. Claims list gets a second pill, "Reviewed
 by AI and a person", beside "Reviewed by AI".
+
+## 2026-09-12 — MCP server, local first
+
+`scripts/mcp-server.mts` serves the catalog over stdio to Claude Code or any
+MCP client on the same machine, reading the checkout directly and reusing
+`src/lib` for standings, related claims and the search index, so it can
+never disagree with the site. Six tools: `search` (keyword and meaning
+merged, same cutoff as the site), `get`, `technique_standing`,
+`related_claims`, `list`, `open_questions`. No key; the meaning model runs
+locally. Registered at user scope so it works from any directory.
+
+The remote version (rsiratchet.com/mcp, for Claude.ai and other people's
+agents) waits on a decision about query embedding: run the model in a
+serverless function and accept cold starts, or call an embedding API with a
+server key. Keyword-only remote would work today.

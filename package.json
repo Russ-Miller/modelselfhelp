@@ -13,6 +13,7 @@
     "validate": "node scripts/validate.mjs",
     "embed": "node scripts/embed.mjs",
     "check-embeddings": "node scripts/check-embeddings.mjs",
+    "mcp": "tsx scripts/mcp-server.mts",
     "verify-papers": "node scripts/verify-papers.mjs",
     "check-sources": "node scripts/check-sources.mjs",
     "backtest": "node scripts/backtest.mjs",
@@ -25,6 +26,7 @@
   "dependencies": {
     "@anthropic-ai/sdk": "^0.123.0",
     "@huggingface/transformers": "^4.2.0",
+    "@modelcontextprotocol/sdk": "^1.30.0",
     "next": "16.3.4",
     "react": "19.2.8",
     "react-dom": "19.2.8",
