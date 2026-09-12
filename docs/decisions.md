@@ -1465,3 +1465,23 @@ MCP `advise` tool aggregate them from human-reviewed claims only.
 
 The rule for filling one: nothing goes in that the claim does not state or
 clearly imply. The point is to make scope filterable, not to add opinions.
+
+## 2026-09-12 — `advise` in the MCP server
+
+Situation in, techniques out. It finds the capabilities a situation is
+about (meaning search leads, because surface words like "docs" otherwise
+crowd out the failure the sentence describes), gathers every technique that
+addresses them, and reports each with its standing, aggregated conditions
+from human-reviewed claims, a fit check against what the caller's
+environment has and can afford, the evidence with its failure conditions,
+the counter-evidence, and any AI-reviewed evidence separately. Ordering is
+categorical: usable first, then by state of evidence. There is no score,
+for the reason the second-opinion critique itself gave: whether a technique
+helps is a function of task, model and environment, not a property of the
+technique.
+
+Known limit: the small local embedding model does not map idioms
+("makes things up") to the capability; plain descriptions of the failure
+do. The tool description tells callers to name the failure plainly and to
+put model and environment in the structured fields. Capability embeddings
+now include aliases and the discriminator, which helps the site search too.

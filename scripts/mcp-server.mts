@@ -57,7 +57,10 @@ function keywordScore(text: string, title: string, terms: string[]): number {
 const index = buildSearchIndex();
 const vectors = index.map((r) => (r.v ? emb.unpack({ s: Number(r.v.split("|")[0]), q: r.v.split("|")[1] }) : undefined));
 
-async function search(query: string, kinds: K[] | undefined, limit: number) {
+// lead: "keyword" for a search box (exact hits first); "meaning" for a
+// situation description, where surface words like "docs" would otherwise
+// crowd out the capability the sentence is actually about.
+async function search(query: string, kinds: K[] | undefined, limit: number, lead: "keyword" | "meaning" = "keyword") {
   const terms = query.toLowerCase().split(/\s+/).filter(Boolean);
   const pool = index.map((r, i) => ({ r, i })).filter(({ r }) => !kinds || kinds.includes(r.k as K));
   const kw = pool
@@ -71,11 +74,14 @@ async function search(query: string, kinds: K[] | undefined, limit: number) {
     const scored = pool.map(({ r, i }) => ({ r, i, s: vectors[i] ? emb.cosine(qv, vectors[i]!) : -1, via: "meaning" as const }));
     const top = Math.max(-1, ...scored.map((x) => x.s));
     const cut = Math.max(0.3, top * 0.8);
-    extra = scored.filter((x) => x.s >= cut && !seen.has(x.i)).sort((a, b) => b.s - a.s);
+    extra = scored.filter((x) => x.s >= cut && (lead === "meaning" || !seen.has(x.i))).sort((a, b) => b.s - a.s);
   } catch (e) {
     process.stderr.write(`meaning search unavailable: ${(e as Error).message}\n`);
   }
-  return [...kw, ...extra].slice(0, limit).map(({ r, via, s }) => ({
+  const merged = lead === "meaning" && extra.length
+    ? [...extra, ...kw.filter((x) => !extra.some((e) => e.i === x.i))]
+    : [...kw, ...extra];
+  return merged.slice(0, limit).map(({ r, via, s }) => ({
     kind: KIND[r.k as K], id: r.id, title: r.title, context: r.sub, via,
     ...(via === "meaning" ? { similarity: Number(s.toFixed(2)) } : {}),
     reviewed: r.k === "m" ? (r.pending ? "AI" : "AI and a person") : undefined,
@@ -144,6 +150,95 @@ server.registerTool("search", {
   const ks = kinds?.map((k) => (Object.entries(KIND).find(([, v]) => v === k)![0]) as K);
   return text(await search(query, ks, limit));
 });
+
+// ---- advise: situation in, techniques out, ranked categorically, never scored.
+const NEEDS = ["external-signal", "executable-environment", "retrieval-corpus", "fine-tuning-access", "separate-model", "evaluation-split", "complete-mediation", "raw-history"] as const;
+const COST_RANK = { low: 0, moderate: 1, high: 2 } as const;
+const STANDING_RANK = { supported: 0, narrowed: 1, contested: 2, argued: 3, unmeasured: 4 } as const;
+
+async function advise(input: { situation: string; capability?: string; model_tier: "weaker" | "stronger" | "unknown"; available?: string[]; budget: "low" | "moderate" | "high" }) {
+  // 1. Which capabilities the situation is about.
+  let caps: Capability[] = [];
+  if (input.capability) {
+    const c = cat.getCapability(input.capability);
+    if (!c) return { error: `no capability ${input.capability}` };
+    caps = [c];
+  } else {
+    const hits = await search(input.situation, ["c", "m"], 12, "meaning");
+    const ids: string[] = [];
+    for (const h of hits) {
+      const id = h.kind === "capability" ? h.id : cat.getClaim(h.id)?.capability;
+      if (id && !ids.includes(id)) ids.push(id);
+    }
+    caps = ids.slice(0, 4).map((id) => cat.getCapability(id)!).filter(Boolean);
+  }
+  if (!caps.length) return { situation: input.situation, capabilities: [], techniques: [], reading: "Nothing in the catalog matched the situation by words or meaning. Try naming the failure you see rather than the fix you want." };
+
+  // 2. Every technique that addresses one of them.
+  const techIds = new Set<string>();
+  for (const c of caps) {
+    for (const t of c.techniques ?? []) techIds.add(t);
+    for (const t of cat.getTechniques()) if (t.addresses.includes(c.id)) techIds.add(t.id);
+  }
+
+  // 3. Fit each against the situation, from human-reviewed conditions only.
+  const rows = [...techIds].map((id) => {
+    const t = cat.getTechnique(id)!;
+    const st = cat.techniqueStanding(id);
+    const k = cat.techniqueConditions(id);
+    const blocked_by = input.available ? k.needs.filter((n) => !input.available!.includes(n)) : [];
+    const over_budget = k.costs.some((c) => COST_RANK[c] > COST_RANK[input.budget]);
+    const model_note =
+      input.model_tier === "stronger" && k.helps_most.includes("weaker-models") && !k.helps_most.includes("stronger-models") ? "Evidence of benefit comes from weaker models; whether it helps a strong one is not covered." :
+      input.model_tier === "weaker" && k.helps_most.includes("stronger-models") ? "Evidence of benefit comes from stronger models." :
+      k.helps_most.includes("independent") ? "Effect does not track model strength in the evidence." : undefined;
+    const against = k.effects.filter((e) => e.effect === "no-effect" || e.effect === "hurts");
+    const usable = blocked_by.length === 0 && !over_budget;
+    return {
+      id, label: t.label, summary: t.summary, url: url("t", id),
+      addresses: t.addresses.filter((a) => caps.some((c) => c.id === a)).map((a) => cat.getCapability(a)?.label ?? a),
+      standing: { value: st.standing, label: cat.STANDING_LABEL[st.standing], supporting_sources: st.supporting, contesting_sources: st.contesting },
+      fit: { usable, blocked_by, over_budget, model_note },
+      needs: k.needs, cost: k.costs, helps_most: k.helps_most,
+      evidence: k.effects.map((e) => ({ effect: e.effect, statement: e.claim.statement, fails_when: e.fails_when, contested: e.claim.contested, url: url("m", e.claim.id) })),
+      counter_evidence: against.map((e) => ({ effect: e.effect, statement: e.claim.statement, url: url("m", e.claim.id) })),
+      unreviewed_evidence: k.unreviewed.map((e) => ({ effect: e.effect, statement: e.claim.statement, fails_when: e.fails_when, reviewed_by: "AI", url: url("m", e.claim.id) })),
+      evidence_search: t.evidence_search,
+      adages: cat.getAdages().flatMap((a) => (a.evidence ?? []).filter((e) => [...k.effects, ...k.unreviewed].some((x) => x.claim.id === e.claim)).map((e) => ({ id: a.id, label: a.label, verdict: e.verdict, url: url("a", a.id) }))),
+      _rank: [usable ? 0 : 1, STANDING_RANK[st.standing], -st.supporting] as const,
+    };
+  });
+  rows.sort((a, b) => a._rank[0] - b._rank[0] || a._rank[1] - b._rank[1] || a._rank[2] - b._rank[2]);
+  const usable = rows.filter((r) => r.fit.usable);
+  const measured = usable.filter((r) => r.standing.value === "supported" || r.standing.value === "narrowed");
+  const contested = usable.filter((r) => r.standing.value === "contested");
+  const reading = [
+    `${rows.length} technique${rows.length === 1 ? "" : "s"} address ${caps.map((c) => c.label).join(", ")}.`,
+    input.available ? `${usable.length} fit the environment and budget you described.` : "No environment given, so nothing is marked blocked; pass `available` to filter on what the technique needs.",
+    measured.length ? `${measured.length} of those carry human-reviewed measured evidence in their favour.` : "None of the usable ones has uncontested measured evidence in its favour.",
+    contested.length ? `${contested.length} ${contested.length === 1 ? "is" : "are"} contested: measured evidence on both sides, with the disagreement axis on the claim page.` : "",
+    usable.length - measured.length - contested.length > 0 ? `${usable.length - measured.length - contested.length} ${usable.length - measured.length - contested.length === 1 ? "is" : "are"} argued or unmeasured, which is a research brief, not a recommendation.` : "",
+    "Order is categorical: usable first, then by the state of the evidence. There is no score, because whether a technique helps depends on the conditions listed, not on the technique.",
+  ].filter(Boolean).join(" ");
+  return {
+    situation: input.situation,
+    capabilities: caps.map((c) => ({ id: c.id, label: c.label, summary: c.summary, url: url("c", c.id) })),
+    techniques: rows.map((r) => { const { _rank, ...rest } = r; void _rank; return rest; }),
+    reading,
+  };
+}
+
+server.registerTool("advise", {
+  title: "Which techniques fit a situation",
+  description: "Describe a situation (the task, the failure you see, the model, what your environment has) and get the techniques that address it, each with its evidence standing, the conditions it needs, what it costs, when it fails, and the counter-evidence. Ranked categorically (usable first, then by state of evidence), never scored. Pass `available` to mark techniques whose needs your environment lacks, `budget` to cap cost, `model_tier` to get notes on whether the evidence covers your model.",
+  inputSchema: {
+    situation: z.string().describe("Plain description of the failure you see and the task, e.g. 'answers confidently with false information about internal documentation'. Name the failure rather than the fix, and put model and environment facts in the structured fields, where they filter, rather than in this text, where they dilute the search."),
+    capability: z.string().optional().describe("Skip the search and advise on this capability id."),
+    model_tier: z.enum(["weaker", "stronger", "unknown"]).default("unknown"),
+    available: z.array(z.enum(NEEDS)).optional().describe("What the environment provides. Omit to skip fit checks."),
+    budget: z.enum(["low", "moderate", "high"]).default("high").describe("Highest acceptable cost relative to one unaided attempt."),
+  },
+}, async (input) => text(await advise(input)));
 
 server.registerTool("get", {
   title: "Get one catalog entry in full",

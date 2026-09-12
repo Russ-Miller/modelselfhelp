@@ -25,6 +25,8 @@ server that reads this checkout directly:
 claude mcp add -s user rsiratchet -- npx --prefix /path/to/repo tsx /path/to/repo/scripts/mcp-server.mts
 ```
 
-Tools: `search` (words and meaning, merged), `get`, `technique_standing`,
+Tools: `search` (words and meaning, merged), `advise` (situation in,
+techniques out with conditions, cost, failure modes and counter-evidence,
+ranked categorically, never scored), `get`, `technique_standing`,
 `related_claims`, `list`, `open_questions`. No API key; meaning search runs
 the same local model as the site.
