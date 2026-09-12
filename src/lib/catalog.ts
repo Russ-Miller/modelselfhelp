@@ -137,7 +137,8 @@ export const isPending = (c: Claim) => c.status === "pending-review";
 /** "human:Russ-Miller" -> "Russ Miller"; "agent:claude-opus-5@x" -> "Claude Opus 5". */
 export function displayName(prov: string): string {
   const [kind, rest] = prov.split(":", 2);
-  const name = (rest ?? prov).split("@")[0].replace(/-/g, " ");
+  // "claude-fable-5-1" -> "claude fable 5.1": a hyphen between digits is a version dot.
+  const name = (rest ?? prov).split("@")[0].replace(/(\d)-(?=\d)/g, "$1.").replace(/-/g, " ");
   return kind === "agent" ? name.replace(/\b\w/g, (ch) => ch.toUpperCase()) : name;
 }
 
