@@ -82,3 +82,8 @@ body {
   border-color: var(--color-amber-800, #92400e);
   background-color: color-mix(in oklab, var(--color-amber-950, #451a03) 20%, transparent);
 }
+
+/* Rows the search matched on meaning rather than on the words typed. */
+[data-search][data-via="meaning"] {
+  box-shadow: inset 3px 0 0 var(--color-neutral-400);
+}
