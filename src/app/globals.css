@@ -87,3 +87,8 @@ body {
 [data-search][data-via="meaning"] {
   box-shadow: inset 3px 0 0 var(--color-neutral-400);
 }
+
+/* Home page while a search is active: the results are the page. */
+html[data-searching="1"] [data-browse] {
+  display: none;
+}

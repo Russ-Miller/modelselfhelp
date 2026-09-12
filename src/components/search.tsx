@@ -41,6 +41,15 @@ export function Search({ index }: { index: SearchRecord[] }) {
   const statusRef = useRef<HTMLSpanElement>(null);
   const terms = useMemo(() => q.toLowerCase().split(/\s+/).filter(Boolean), [q]);
 
+  // While a query is active the results are the page: a flag on the root
+  // element lets globals.css hide the browse sections below the search,
+  // which on a phone would otherwise sit right under the results.
+  useEffect(() => {
+    const root = document.documentElement;
+    if (q.trim()) root.setAttribute("data-searching", "1"); else root.removeAttribute("data-searching");
+    return () => root.removeAttribute("data-searching");
+  }, [q]);
+
   // Catalog vectors, decoded once. Cheap: a few hundred short arrays.
   const vectors = useMemo(() => index.map((r) => unpackAttr(r.v)), [index]);
 
@@ -116,13 +125,15 @@ export function Search({ index }: { index: SearchRecord[] }) {
       </div>
       <span ref={statusRef} aria-live="polite" className="block text-xs text-neutral-500 empty:hidden" />
 
-      <dl className="flex flex-wrap gap-6 text-sm" aria-live="polite">
+      {/* One compact line on every screen size: "34 capabilities · 167 claims …".
+          Five stacked tiles took a third of a phone screen. */}
+      <dl className="flex flex-wrap gap-x-4 gap-y-1 text-sm" aria-live="polite">
         {KIND_ORDER.map((k) => (
-          <div key={k}>
-            <dt className="text-neutral-500">{terms.length ? `${KIND[k].plural} matched` : KIND[k].plural}</dt>
-            <dd className="text-xl font-medium">
+          <div key={k} className="flex items-baseline gap-1">
+            <dd className="font-medium">
               <Link href={KIND[k].section} className="hover:underline">{counts[k]}</Link>
             </dd>
+            <dt className="text-neutral-500">{KIND[k].plural}{terms.length ? " matched" : ""}</dt>
           </div>
         ))}
       </dl>

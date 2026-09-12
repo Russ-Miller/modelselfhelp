@@ -31,14 +31,14 @@ export default function Home() {
         </p>
         <div className="max-w-2xl pt-2">
           <Search index={index} />
-          <p className="mt-2 text-xs text-neutral-500">
+          <p data-browse className="mt-2 text-xs text-neutral-500">
             Searches everything in the catalog. Runs in your browser.
           </p>
         </div>
       </section>
 
       {til && (
-        <section className="space-y-3 rounded border border-neutral-200 p-4 dark:border-neutral-800">
+        <section data-browse className="space-y-3 rounded border border-neutral-200 p-4 dark:border-neutral-800">
           <div className="flex flex-wrap items-baseline gap-2">
             <h2 className="text-lg font-semibold">Worth a look</h2>
             <span className="text-xs text-neutral-500">
@@ -89,7 +89,7 @@ export default function Home() {
         </section>
       )}
 
-      <section className="space-y-2">
+      <section data-browse className="space-y-2">
         <h2 className="text-lg font-semibold">Most recently checked claims</h2>
         <ul className="space-y-2">
           {recent.map((c) => (
@@ -111,7 +111,7 @@ export default function Home() {
       </section>
 
       {groups.map(({ group, capabilities }) => (
-        <section key={group.id} className="space-y-2">
+        <section key={group.id} data-browse className="space-y-2">
           <h2 className="text-lg font-semibold">{group.label}</h2>
           <p className="text-sm text-neutral-500">{group.description}</p>
           <ul className="grid gap-2 sm:grid-cols-2">
