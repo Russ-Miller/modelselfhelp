@@ -1,4 +1,5 @@
-import type { BackingStrength, ClaimActivity, ClaimKind, Source, Stance } from "@/lib/catalog";
+import type { BackingStrength, Claim, ClaimActivity, ClaimKind, Source, Stance } from "@/lib/catalog";
+import { reviewLabel, reviewers } from "@/lib/catalog";
 
 const base = "inline-flex items-center gap-1 rounded px-1.5 py-0.5 text-xs font-medium";
 
@@ -33,10 +34,12 @@ export function StrengthBadge({ strength }: { strength: BackingStrength }) {
   return <span className={`${base} bg-neutral-100 text-neutral-700 dark:bg-neutral-800 dark:text-neutral-300`}>{STRENGTH_LABEL[strength]}</span>;
 }
 
-export function PendingBadge() {
+export function ReviewBadge({ claim }: { claim: Claim }) {
+  const human = reviewers(claim).humans.length > 0;
   return (
-    <span className={`${base} bg-sky-100 text-sky-900 dark:bg-sky-900/40 dark:text-sky-200`} title="Ingested but not yet reviewed. Does not count anywhere.">
-      pending review
+    <span className={`${base} bg-neutral-100 text-neutral-700 dark:bg-neutral-800 dark:text-neutral-300`}
+      title={human ? "Drafted or checked by a model and read by a person against its sources." : "Drafted by a model from the source. A person reading it adds it to technique standings and the backtest."}>
+      {reviewLabel(claim)}
     </span>
   );
 }

@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { notFound } from "next/navigation";
-import { ADAGE_STANDING_LABEL, adageStanding, getAdage, getAdages, getCapability, getClaim, isPending, type AdageVerdict } from "@/lib/catalog";
-import { ContestedBadge, PendingBadge } from "@/components/badges";
+import { ADAGE_STANDING_LABEL, adageStanding, getAdage, getAdages, getCapability, getClaim, type AdageVerdict } from "@/lib/catalog";
+import { ContestedBadge, ReviewBadge } from "@/components/badges";
 import { AdageChallengeLink } from "@/components/challenge";
 
 export function generateStaticParams() {
@@ -56,7 +56,7 @@ export default async function AdagePage({ params }: PageProps<"/adages/[id]">) {
       <section className="text-sm">
         <h2 className="mb-1 font-semibold">Standing: {ADAGE_STANDING_LABEL[standing]}</h2>
         <p className="text-xs text-neutral-500">
-          From reviewed claims only. Unreviewed claims are listed below and marked, and move nothing.
+          Standing counts claims a person has reviewed. Claims reviewed by AI alone are listed and marked, and do not move it.
         </p>
       </section>
 
@@ -94,7 +94,7 @@ export default async function AdagePage({ params }: PageProps<"/adages/[id]">) {
                     <div className="mt-0.5 flex flex-wrap items-center gap-1.5 text-xs text-neutral-500">
                       <span>{cap?.label ?? c.capability}</span>
                       {c.contested && <ContestedBadge />}
-                      {isPending(c) && <PendingBadge />}
+                      <ReviewBadge claim={c} />
                     </div>
                     <p className="mt-1 text-neutral-600 dark:text-neutral-400">{e.note}</p>
                   </li>

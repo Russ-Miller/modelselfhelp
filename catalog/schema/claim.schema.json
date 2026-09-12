@@ -89,6 +89,14 @@
     },
     "submitted_by": {
       "$ref": "common.schema.json#/$defs/provenance"
+    },
+    "reviewed_by": {
+      "type": "array",
+      "description": "Who has read this claim against its sources: agent:... for a model, human:... for a person. Absent means derived from submitted_by: a human submitter has reviewed it; an agent submitter means AI review only.",
+      "items": {
+        "$ref": "common.schema.json#/$defs/provenance"
+      },
+      "uniqueItems": true
     }
   }
 }

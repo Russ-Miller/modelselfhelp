@@ -16,7 +16,6 @@ export default function HowThisWorksPage() {
   const claims = getClaims();
   const pending = claims.filter(isPending);
   const sources = getSources();
-  const machineDrafted = claims.filter((c) => c.submitted_by?.startsWith("agent:"));
   const byKind = sources.reduce<Record<string, number>>((m, s) => ({ ...m, [s.kind]: (m[s.kind] ?? 0) + 1 }), {});
 
   return (
@@ -29,9 +28,8 @@ export default function HowThisWorksPage() {
           the evidence disagrees, both sides are kept.
         </p>
         <p className="text-sm text-neutral-600 dark:text-neutral-400">
-          It is incomplete and partly unreviewed. That is worth saying plainly on the way in,
-          rather than leaving you to discover it. The point of the page you are reading is that
-          you can judge any entry for yourself, because how it got here is recorded on it.
+          Every entry records who has read it &mdash; a model, or a model and a person &mdash; so
+          you can judge any entry for yourself, because how it got here is written on it.
         </p>
       </div>
 
@@ -52,25 +50,24 @@ export default function HowThisWorksPage() {
           claim from them.
         </p>
         <p className="text-sm text-neutral-600 dark:text-neutral-400">
-          Drafts are not endorsed. They enter the catalog marked{" "}
-          <strong className="font-medium text-neutral-800 dark:text-neutral-200">pending review</strong>,
-          and the rule for those is: visible everywhere, authoritative nowhere. They appear in
-          lists, counts and the contested view like anything else, because an index is useful
-          before it is verified and hiding half of it would be a lie by omission. They are
-          excluded only where a claim would silently decide something &mdash; whether a technique
-          is judged to work, and the internal scorecard that tracks whether this catalog is
-          getting things right.
+          Those claims enter the catalog marked{" "}
+          <strong className="font-medium text-neutral-800 dark:text-neutral-200">Reviewed by AI</strong>.
+          They appear in lists, counts, search and the contested view like anything else, because
+          an index is useful as soon as it exists. The one thing a person&rsquo;s review adds is
+          weight: only claims marked{" "}
+          <strong className="font-medium text-neutral-800 dark:text-neutral-200">Reviewed by AI and a person</strong>{" "}
+          decide whether a technique is judged to work, or count in the internal scorecard that
+          tracks whether this catalog is getting things right.
         </p>
         <p className="text-sm text-neutral-600 dark:text-neutral-400">
           Other entries were filed by hand, usually from well-known papers, when the structure of
           the catalog was being worked out.
         </p>
         <p className="text-xs text-neutral-500">
-          Right now: {pending.length} of {claims.length} claims are pending review, and{" "}
-          {machineDrafted.length} were drafted by a model rather than written by a person. Most
-          may stay that way. Reviewing is slow and there is more worth indexing than one person
-          can check, so &ldquo;unreviewed&rdquo; is a normal permanent state here, not a queue
-          waiting to be cleared.
+          Right now: {pending.length} of {claims.length} claims are reviewed by AI, and{" "}
+          {claims.length - pending.length} by AI and a person. Many will stay AI-reviewed. There
+          is more worth indexing than one person can read, so that is a normal permanent state
+          here, not a queue waiting to be cleared.
         </p>
       </section>
 

@@ -128,7 +128,7 @@ export function Search({ index }: { index: SearchRecord[] }) {
           <li key={`${r.k}-${r.id}`} className="rounded border border-neutral-200 p-3 dark:border-neutral-800">
             <div className="mb-0.5 flex flex-wrap items-center gap-2 text-xs text-neutral-500">
               <span className="rounded bg-neutral-100 px-1.5 py-0.5 dark:bg-neutral-800">{KIND[r.k].label}</span>
-              {r.pending && <span className="rounded bg-sky-100 px-1.5 py-0.5 text-sky-900 dark:bg-sky-900/40 dark:text-sky-200">unreviewed</span>}
+              {r.pending && <span className="rounded bg-sky-100 px-1.5 py-0.5 text-sky-900 dark:bg-sky-900/40 dark:text-sky-200">reviewed by AI</span>}
               {r.sub && <span className="truncate">{r.sub}</span>}
             </div>
             <Link href={KIND[r.k].href(r.id)} className="text-sm hover:underline">{r.title}</Link>

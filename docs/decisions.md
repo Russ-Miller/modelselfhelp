@@ -1415,3 +1415,22 @@ Sturgeon); Knuth and Wirth, whose model-side reading duplicates Lehman and
 the catalog's own measure-first rule; the analogies and paradoxes (Ship of
 Theseus, Ellsberg, Simpson's, principle of charity, fundamental theorem),
 which are not claims about behaviour.
+
+## 2026-09-12 — "Reviewed by AI", not "unreviewed"
+
+The review label now says who has read a claim rather than what it lacks.
+A claim drafted from a source by a model shows **Reviewed by AI**; one a
+person has also read shows **Reviewed by AI and Russ Miller**. The words
+"unreviewed", "pending review" and "not yet checked" are gone from the site,
+along with the blue warning box on AI-reviewed claims. Everything was already
+visible; the framing made it sound unfinished, and it is not: an AI-reviewed
+claim is complete and consumable.
+
+Nothing changes in what counts. The internal status is still
+`pending-review` / `active`, and only human-reviewed claims move technique
+standing, adage standing and the backtest. The claim schema gains an optional
+`reviewed_by` list of provenance strings for recording reviewers explicitly;
+absent, it is derived from `submitted_by` (a human submitter has reviewed
+what they submitted; an agent submitter means AI review only), which matches
+every claim in the catalog today. Claims list gets a second pill, "Reviewed
+by AI and a person", beside "Reviewed by AI".
