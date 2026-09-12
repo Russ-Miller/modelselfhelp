@@ -51,3 +51,9 @@ notes: >-
   converge on grounding being the active ingredient from opposite
   directions, not because any single result was rerun.
 submitted_by: human:Russ-Miller
+conditions:
+  effect: helps
+  needs:
+    - external-signal
+  fails_when: The feedback in the loop is the model's own unaided critique
+    rather than a test result, compiler error or environment outcome.

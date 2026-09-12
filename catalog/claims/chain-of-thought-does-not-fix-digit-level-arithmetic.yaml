@@ -51,3 +51,8 @@ notes: >-
   elsewhere here — independent papers converging from different
   directions — not a rerun of any single experiment.
 submitted_by: human:Russ-Miller
+conditions:
+  effect: narrows
+  fails_when: The error is inside a step's arithmetic rather than in the
+    decomposition. More steps do not fix it; the computation has to leave the
+    text.

@@ -78,6 +78,9 @@ for (const c of cat.claims) {
 // technique back-links: a capability listing a technique must be in that technique's `addresses`
 for (const cap of cat.capabilities) for (const t of cap.data.techniques ?? []) if (addressedBy.has(t) && !addressedBy.get(t).has(cap.data.id)) problem(cap.file, `technique ${t} does not list ${cap.data.id} in addresses`);
 
+// applicability conditions describe a technique, so they need one
+for (const c of cat.claims) if (c.data.conditions && !c.data.technique) problem(c.file, "conditions set on a claim with no technique");
+
 // adage evidence must point at claims that exist
 for (const a of cat.adages) for (const e of a.data.evidence ?? []) checkRef(a.file, ids.claims, e.claim, "claim");
 

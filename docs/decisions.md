@@ -1449,3 +1449,19 @@ The remote version (rsiratchet.com/mcp, for Claude.ai and other people's
 agents) waits on a decision about query embedding: run the model in a
 serverless function and accept cold starts, or call an embedding API with a
 server key. Keyword-only remote would work today.
+
+## 2026-09-12 — Applicability conditions on efficacy claims
+
+Efficacy claims (those naming a technique) gain an optional `conditions`
+block: `effect` (helps / narrows / no-effect / hurts), `needs` (a
+controlled list: external signal, executable environment, retrieval
+corpus, fine-tuning access, separate model, evaluation split, complete
+mediation, raw history), `helps_most` (weaker / stronger / independent),
+`cost` (low / moderate / high) and `fails_when` (the stated failure
+condition). All 26 efficacy claims filled from their own statements; a
+field is absent when the claim does not say. Conditions live on the claim,
+not the technique, because they are evidence: the technique page and the
+MCP `advise` tool aggregate them from human-reviewed claims only.
+
+The rule for filling one: nothing goes in that the claim does not state or
+clearly imply. The point is to make scope filterable, not to add opinions.

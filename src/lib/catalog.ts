@@ -52,10 +52,30 @@ export interface Source {
    *  means the digest is suspect and must be read before it is trusted. */
   brief_unverified_figures?: string[];
 }
+export type Effect = "helps" | "narrows" | "no-effect" | "hurts";
+export type Need = "external-signal" | "executable-environment" | "retrieval-corpus" | "fine-tuning-access" | "separate-model" | "evaluation-split" | "complete-mediation" | "raw-history";
+export type HelpsMost = "weaker-models" | "stronger-models" | "independent";
+export type Cost = "low" | "moderate" | "high";
+/** Applicability of a technique as one efficacy claim states it. See claim.schema.json. */
+export interface Conditions { effect: Effect; needs?: Need[]; helps_most?: HelpsMost; cost?: Cost; fails_when: string }
+
+export const NEED_LABEL: Record<Need, string> = {
+  "external-signal": "an external signal (a test, a compiler, an environment outcome)",
+  "executable-environment": "an environment where code can run",
+  "retrieval-corpus": "documents or an index to retrieve from",
+  "fine-tuning-access": "access to train the weights",
+  "separate-model": "a second model with its own context",
+  "evaluation-split": "a held-out evaluation set",
+  "complete-mediation": "a harness that sees every side effect",
+  "raw-history": "the unsummarised record kept retrievable",
+};
+export const EFFECT_LABEL: Record<Effect, string> = { helps: "helps", narrows: "helps, narrowly", "no-effect": "no effect", hurts: "hurts" };
+
 export interface Claim {
   id: string; capability: string; statement: string; tags?: string[];
   /** Set when this claim asserts a technique moves the capability, and under what conditions. */
   technique?: string;
+  conditions?: Conditions;
   kind: ClaimKind; backing_strength: BackingStrength; observed_on?: ObservedOn;
   sources: SourceLink[]; contested: boolean; disagreement_axis?: DisagreementAxis;
   status: ClaimStatus; superseded_by?: string;
@@ -447,6 +467,35 @@ export function techniqueStanding(techniqueId: string): TechniqueStanding {
             : "supported";
 
   return { standing, claims, supporting, contesting, lastMoved };
+}
+
+/**
+ * What the reviewed efficacy claims say about when a technique applies,
+ * aggregated for the technique page and the advise tool. Union of needs,
+ * the range of stated costs, every stated failure condition with its claim.
+ * Unreviewed claims are returned separately so a caller can show them
+ * without letting them decide anything.
+ */
+export interface TechniqueConditions {
+  needs: Need[];
+  costs: Cost[];
+  helps_most: HelpsMost[];
+  effects: { claim: Claim; effect: Effect; fails_when: string }[];
+  unreviewed: { claim: Claim; effect: Effect; fails_when: string }[];
+}
+export function techniqueConditions(techniqueId: string): TechniqueConditions {
+  const all = loadCatalog().claims.filter((c) => c.technique === techniqueId && c.conditions);
+  const out: TechniqueConditions = { needs: [], costs: [], helps_most: [], effects: [], unreviewed: [] };
+  for (const c of all) {
+    const k = c.conditions!;
+    const row = { claim: c, effect: k.effect, fails_when: k.fails_when };
+    if (isPending(c)) { out.unreviewed.push(row); continue; }
+    out.effects.push(row);
+    for (const n of k.needs ?? []) if (!out.needs.includes(n)) out.needs.push(n);
+    if (k.cost && !out.costs.includes(k.cost)) out.costs.push(k.cost);
+    if (k.helps_most && !out.helps_most.includes(k.helps_most)) out.helps_most.push(k.helps_most);
+  }
+  return out;
 }
 
 export const STANDING_LABEL: Record<Standing, string> = {

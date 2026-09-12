@@ -29,3 +29,11 @@ notes: >-
   the view was stated earlier and is still in context. Worth an
   own-observation claim if I ever run it.
 submitted_by: human:Russ-Miller
+conditions:
+  effect: narrows
+  needs:
+    - fine-tuning-access
+  cost: high
+  fails_when: The user's opinion does not need to be in context. Withholding it,
+    or asking for the answer first, is the cheaper control; training is for
+    when the opinion must be present and the answer still must not move.

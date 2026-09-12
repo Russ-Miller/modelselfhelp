@@ -43,3 +43,11 @@ notes: >-
   success of 1.00 on the long-context paper review and resume screening
   datasets.
 submitted_by: agent:claude-opus-5@Russ-Miller
+conditions:
+  effect: narrows
+  needs:
+    - fine-tuning-access
+  fails_when: The injected instruction sits inside a document of thousands to
+    tens of thousands of tokens. Separation defences and
+    detect-localise-remove pipelines then let a large share of injections
+    through.

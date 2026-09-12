@@ -41,3 +41,10 @@ notes: >-
   technique, not catalogued: verification-supervised tool self-correction
   training.
 submitted_by: agent:claude-opus-5@Russ-Miller
+conditions:
+  effect: narrows
+  needs:
+    - fine-tuning-access
+  cost: high
+  fails_when: "The benchmark is knowledge-heavy rather than perception-heavy:
+    accuracy slightly falls, and the gains do not transfer to MMMU."

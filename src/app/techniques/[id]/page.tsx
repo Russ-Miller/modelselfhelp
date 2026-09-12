@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { notFound } from "next/navigation";
-import { claimsAboutTechnique, getSource, getTagLabel, getTechnique, getTechniques, getCapability, techniqueStanding, STANDING_LABEL } from "@/lib/catalog";
+import { EFFECT_LABEL, NEED_LABEL, techniqueConditions, claimsAboutTechnique, getSource, getTagLabel, getTechnique, getTechniques, getCapability, techniqueStanding, STANDING_LABEL } from "@/lib/catalog";
 import { ContestedBadge, KindBadge, StrengthBadge } from "@/components/badges";
 
 export function generateStaticParams() {
@@ -63,6 +63,31 @@ export default async function TechniquePage({ params }: PageProps<"/techniques/[
           Efficacy claims &mdash; what this technique actually moves, under which conditions, and
           whether that has been contested.
         </p>
+        {(() => {
+          const k = techniqueConditions(t.id);
+          if (!k.effects.length && !k.unreviewed.length) return null;
+          return (
+            <div className="mb-3 space-y-1 text-sm text-neutral-700 dark:text-neutral-300">
+              {k.needs.length > 0 && <p><span className="text-neutral-500">Needs: </span>{k.needs.map((n) => NEED_LABEL[n]).join("; ")}</p>}
+              {k.costs.length > 0 && <p><span className="text-neutral-500">Cost: </span>{k.costs.join(" to ")}</p>}
+              {k.helps_most.length > 0 && <p><span className="text-neutral-500">Helps most: </span>{k.helps_most.map((h) => h.replace("-", " ")).join(", ")}</p>}
+              {k.effects.length > 0 && (
+                <div>
+                  <p className="text-neutral-500">Fails when:</p>
+                  <ul className="ml-4 list-disc space-y-0.5">
+                    {k.effects.map((e) => <li key={e.claim.id}>{e.fails_when} <span className="text-xs text-neutral-500">({EFFECT_LABEL[e.effect]})</span></li>)}
+                  </ul>
+                </div>
+              )}
+              {k.unreviewed.length > 0 && (
+                <p className="text-xs text-neutral-500">
+                  {k.unreviewed.length} more condition{k.unreviewed.length === 1 ? "" : "s"} from claims reviewed by AI, listed with the claims below.
+                </p>
+              )}
+            </div>
+          );
+        })()}
+
         {(() => {
           const efficacy = claimsAboutTechnique(t.id);
           return efficacy.length === 0 ? (

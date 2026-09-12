@@ -39,3 +39,11 @@ notes: >-
   than from retrieval doing the work. Proposed technique, not catalogued:
   provenance-locked multi-store agent memory.
 submitted_by: agent:claude-opus-5@Russ-Miller
+conditions:
+  effect: helps
+  needs:
+    - retrieval-corpus
+  helps_most: independent
+  fails_when: The memory and retrieval design is weak. Swapping the backbone
+    moves accuracy by a few points while per-query cost varies tenfold, so the
+    model cannot compensate for the substrate.

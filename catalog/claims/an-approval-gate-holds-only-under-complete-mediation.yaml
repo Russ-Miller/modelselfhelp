@@ -34,3 +34,10 @@ notes: >-
   frameworks reimplemented gates without it. The framework counts are
   perishable; the mediation requirement is not.
 submitted_by: human:Russ-Miller
+conditions:
+  effect: narrows
+  needs:
+    - complete-mediation
+  fails_when: The harness suspends only the branch awaiting approval while a
+    sibling's side effect executes. Shipped frameworks have this gap, so the
+    gate reads as a barrier and is not one.

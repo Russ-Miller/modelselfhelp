@@ -38,3 +38,10 @@ notes: >-
   repair. Proposed technique, not catalogued: claim-level repair of
   unsupported content (delete, replace with source, rewrite).
 submitted_by: agent:claude-opus-5@Russ-Miller
+conditions:
+  effect: helps
+  needs:
+    - retrieval-corpus
+  fails_when: "Grounding trades against preservation: deleting unsupported
+    claims removes the most unsupported content but keeps the least original
+    text, and rewriting keeps the most text while removing the least."

@@ -36,3 +36,11 @@ notes: >-
   check has to compare against what the code actually imports rather than
   only against the registry.
 submitted_by: human:Russ-Miller
+conditions:
+  effect: narrows
+  needs:
+    - executable-environment
+  cost: low
+  fails_when: The missing package is one the agent never declared. Existence
+    checks catch invented packages, not omitted ones, so the project still
+    fails in a clean environment.

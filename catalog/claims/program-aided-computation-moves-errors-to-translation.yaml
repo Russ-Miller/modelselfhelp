@@ -28,3 +28,9 @@ notes: >-
   rate is, or whether it grows with problem complexity. Worth revisiting
   if a paper measures that directly.
 submitted_by: human:Russ-Miller
+conditions:
+  effect: narrows
+  needs:
+    - executable-environment
+  fails_when: The error is in translating the problem into a program, which is
+    now the only thing the model does. Verification has to move there with it.

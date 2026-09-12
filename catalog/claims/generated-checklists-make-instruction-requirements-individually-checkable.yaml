@@ -33,3 +33,8 @@ notes: >-
   the judging result. Scope condition worth keeping in mind before quoting
   the numbers at a coding agent.
 submitted_by: human:Russ-Miller
+conditions:
+  effect: helps
+  fails_when: The instruction carries a single constraint. The gain comes from
+    making several requirements separately checkable, so it is smallest when
+    there is only one.

@@ -30,3 +30,11 @@ notes: >-
   ablates starting strength directly, this claim should be tightened or
   replaced.
 submitted_by: human:Russ-Miller
+conditions:
+  effect: helps
+  needs:
+    - fine-tuning-access
+  helps_most: weaker-models
+  cost: high
+  fails_when: The model is already good at tool use. The evidence comes from
+    small open models starting far behind and does not cover that case.

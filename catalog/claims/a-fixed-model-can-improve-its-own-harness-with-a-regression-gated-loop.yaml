@@ -34,3 +34,13 @@ notes: >-
   circle. The fix it lacks — a held-out set the loop never sees and cannot
   grow — is the rule already in force for the backtest here.
 submitted_by: agent:claude-fable-5-1@Russ-Miller
+conditions:
+  effect: helps
+  needs:
+    - evaluation-split
+    - external-signal
+  helps_most: weaker-models
+  cost: high
+  fails_when: The promotion gate reads the held-out split, so the reported gain
+    is not clean generalisation, and there is no matched-compute baseline to
+    say the same evaluations spent otherwise would not have done as well.
