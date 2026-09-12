@@ -13,6 +13,8 @@ const KIND: Record<SearchRecord["k"], { label: string; plural: string; section: 
   a: { label: "adage", plural: "adages", section: "/adages", href: (id) => `/adages/${id}` },
 };
 
+const EXAMPLES = ["hallucination", "self-correction", "prompt injection", "long context", "agent harness", "sycophancy"];
+
 /** Display order for the count line: matches the nav. */
 const KIND_ORDER: SearchRecord["k"][] = ["c", "m", "s", "t", "a"];
 
@@ -124,6 +126,23 @@ export function Search({ index }: { index: SearchRecord[] }) {
         )}
       </div>
       <span ref={statusRef} aria-live="polite" className="block text-xs text-neutral-500 empty:hidden" />
+      {/* Empty-state examples: each is a query that returns a useful mix of
+          kinds, checked against the index. They vanish once there is a query. */}
+      {!q && (
+        <div className="flex flex-wrap items-center gap-1.5 text-xs">
+          <span className="text-neutral-500">Try:</span>
+          {EXAMPLES.map((e) => (
+            <button
+              key={e}
+              type="button"
+              onClick={() => setQ(e)}
+              className="rounded-full border border-neutral-300 px-2.5 py-1 text-neutral-700 hover:border-neutral-500 dark:border-neutral-700 dark:text-neutral-300 dark:hover:border-neutral-500"
+            >
+              {e}
+            </button>
+          ))}
+        </div>
+      )}
 
       {/* One compact line on every screen size: "34 capabilities · 167 claims …".
           Five stacked tiles took a third of a phone screen. */}
