@@ -39,3 +39,10 @@ notes: >-
   says why: the grounding that makes reflect-and-retry work is exactly what
   a computational sensor provides and an inferential one does not.
 submitted_by: agent:claude-fable-5-1@Russ-Miller
+conditions:
+  effect: helps
+  needs:
+    - executable-environment
+  cost: low
+  fails_when: The property has no deterministic check. A model judge is then an
+    advisory signal only, until it has been measured against human review.

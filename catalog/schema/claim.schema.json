@@ -25,6 +25,68 @@
     "technique": {
       "$ref": "common.schema.json#/$defs/slug"
     },
+    "conditions": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Applicability of the technique this claim is about, in a small controlled vocabulary an agent can filter on. Only on claims that set `technique`. Every value must be stated or clearly implied by the claim itself; absent fields mean the claim does not say.",
+      "required": [
+        "effect",
+        "fails_when"
+      ],
+      "properties": {
+        "effect": {
+          "type": "string",
+          "enum": [
+            "helps",
+            "narrows",
+            "no-effect",
+            "hurts"
+          ],
+          "description": "What this claim says the technique does to the capability: helps; narrows (helps only under the stated condition, or shifts rather than removes the failure); no-effect; hurts."
+        },
+        "needs": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "enum": [
+              "external-signal",
+              "executable-environment",
+              "retrieval-corpus",
+              "fine-tuning-access",
+              "separate-model",
+              "evaluation-split",
+              "complete-mediation",
+              "raw-history"
+            ]
+          },
+          "description": "What must be present for the technique to do its job. external-signal: a test result, compiler error, verifier output or environment outcome. executable-environment: code can be run. retrieval-corpus: documents or an index to retrieve from. fine-tuning-access: the weights can be trained. separate-model: a second model with different context. evaluation-split: a held-out set to gate changes. complete-mediation: the harness sees every side effect. raw-history: the unsummarised record stays retrievable."
+        },
+        "helps_most": {
+          "type": "string",
+          "enum": [
+            "weaker-models",
+            "stronger-models",
+            "independent"
+          ],
+          "description": "Which models gain most, where the claim compares. independent: the effect does not track model strength."
+        },
+        "cost": {
+          "type": "string",
+          "enum": [
+            "low",
+            "moderate",
+            "high"
+          ],
+          "description": "Tokens, latency or training relative to one unaided attempt, where the claim says."
+        },
+        "fails_when": {
+          "type": "string",
+          "minLength": 20,
+          "description": "The condition under which the technique stops helping or does harm, as the claim states it."
+        }
+      }
+    },
     "statement": {
       "type": "string",
       "minLength": 30

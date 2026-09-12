@@ -41,3 +41,11 @@ notes: >-
   among tasks entering the loop. Proposed technique, not catalogued:
   reference-free instruction-following judge critique as repair signal.
 submitted_by: agent:claude-opus-5@Russ-Miller
+conditions:
+  effect: narrows
+  needs:
+    - separate-model
+  cost: moderate
+  fails_when: The task already passed on the first attempt, or the judge's own
+    score declines across iterations and no earlier iteration is restored; a
+    minority of looped tasks get worse.

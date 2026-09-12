@@ -37,3 +37,11 @@ notes: >-
   of detail" is not something I have a source for. Filed from the
   technique-efficacy backlog with that gap stated rather than papered over.
 submitted_by: human:Russ-Miller
+conditions:
+  effect: narrows
+  needs:
+    - raw-history
+  cost: low
+  fails_when: The need is exact recall of a specific earlier turn. The summary
+    is lossy by construction, so the raw turns must stay retrievable alongside
+    it.

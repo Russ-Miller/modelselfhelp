@@ -39,3 +39,11 @@ notes: >-
   (training-based, partial) and marks the untrained variant as unmeasured
   rather than assuming it inherits the result.
 submitted_by: human:Russ-Miller
+conditions:
+  effect: narrows
+  needs:
+    - fine-tuning-access
+  cost: high
+  fails_when: It is used prompt-only, without training, where it has no measured
+    efficacy. Even trained, it reduces rather than eliminates injection, so it
+    is one layer of defence in depth.

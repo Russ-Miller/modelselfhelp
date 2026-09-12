@@ -36,3 +36,9 @@ notes: >-
   multi-agent side. Filed separately because "who verifies" is a design
   decision in its own right, distinct from "does reflection help".
 submitted_by: agent:claude-fable-5-1@Russ-Miller
+conditions:
+  effect: helps
+  needs:
+    - separate-model
+  fails_when: The verifier shares the producer's context and incentives, or any
+    agent in the system can override it.

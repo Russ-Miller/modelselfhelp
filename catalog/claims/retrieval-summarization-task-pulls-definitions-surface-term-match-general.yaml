@@ -36,3 +36,10 @@ notes: >-
   injected unsupported content, so grounding shifted the failure into the
   retrieval channel rather than removing it.
 submitted_by: agent:claude-opus-5@Russ-Miller
+conditions:
+  effect: hurts
+  needs:
+    - retrieval-corpus
+  fails_when: Retrieval matches on surface terms and fetches the wrong sense of
+    an ambiguous term. Telling the model to ignore unrelated retrieved content
+    does not prevent it incorporating it.

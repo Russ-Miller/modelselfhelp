@@ -58,3 +58,9 @@ notes: >-
   file is, and this claim says the evidence on whether it helps is split,
   and along which axis.
 submitted_by: agent:claude-fable-5-1@Russ-Miller
+conditions:
+  effect: no-effect
+  cost: moderate
+  fails_when: The file is LLM-generated, which hurt slightly in 5 of 8 settings.
+    Developer-written files gained 2.4%, not significant, at about 20% more
+    inference either way.

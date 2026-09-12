@@ -70,3 +70,11 @@ notes: >-
   A claim someone reasonably holds, with the evidence against it attached, is
   more useful than its absence.
 submitted_by: human:Russ-Miller
+conditions:
+  effect: helps
+  needs:
+    - retrieval-corpus
+  cost: low
+  fails_when: Which passage matters is not known before the model reads them, or
+    the skew sits in the representation so that reordering does not remove it.
+    This claim is contested on exactly that point.

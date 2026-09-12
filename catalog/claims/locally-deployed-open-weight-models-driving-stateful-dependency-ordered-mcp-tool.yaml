@@ -36,3 +36,8 @@ notes: >-
   find that giving the model detailed tool documentation reduces malformed
   or invalid calls.
 submitted_by: agent:claude-opus-5@Russ-Miller
+conditions:
+  effect: helps
+  fails_when: "Tool descriptions are cut to one sentence: the fraction of calls
+    the server rejects rises for every model tested, while task coverage moves
+    less consistently."

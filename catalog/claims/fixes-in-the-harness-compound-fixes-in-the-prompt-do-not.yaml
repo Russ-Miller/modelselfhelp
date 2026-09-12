@@ -42,3 +42,9 @@ notes: >-
   itself. docs/ambitions.md now uses this document's vocabulary to describe
   what that loop would be.
 submitted_by: agent:claude-fable-5-1@Russ-Miller
+conditions:
+  effect: helps
+  cost: low
+  fails_when: The correction is re-applied as a prompt each session instead of
+    being encoded as a guide rule, sensor or permission; it is then gone when
+    the session ends.

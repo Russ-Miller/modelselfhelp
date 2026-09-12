@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { notFound } from "next/navigation";
-import { adagesForClaim, claimActivity, getCapability, getClaim, getClaims, getModel, getSource, getTagLabel, isPending, isQuietSource, displayName, reviewLabel, reviewers } from "@/lib/catalog";
+import { EFFECT_LABEL, NEED_LABEL, adagesForClaim, claimActivity, getCapability, getClaim, getClaims, getModel, getSource, getTagLabel, isPending, isQuietSource, displayName, reviewLabel, reviewers } from "@/lib/catalog";
 import type { SourceLink } from "@/lib/catalog";
 import { ContestedBadge, EvidenceSignal, KindBadge, ReviewBadge, StanceBadge, StrengthBadge } from "@/components/badges";
 import { ChallengeLink } from "@/components/challenge";
@@ -84,6 +84,21 @@ export default async function ClaimPage({ params }: PageProps<"/claims/[id]">) {
             {c.observed_on.era && <>{c.observed_on.era}. </>}
             {c.observed_on.task_type && <>{getTagLabel(c.observed_on.task_type)}.</>}
           </p>
+        </section>
+      )}
+
+      {c.conditions && (
+        <section className="text-sm">
+          <h2 className="font-semibold mb-1">Applies when</h2>
+          {/* The same scope the statement carries in prose, in fields an agent
+              can filter on. Nothing here goes beyond what the claim says. */}
+          <dl className="space-y-1 text-neutral-700 dark:text-neutral-300">
+            <div><dt className="inline text-neutral-500">Effect on the capability: </dt><dd className="inline">{EFFECT_LABEL[c.conditions.effect]}</dd></div>
+            {c.conditions.needs?.length ? <div><dt className="inline text-neutral-500">Needs: </dt><dd className="inline">{c.conditions.needs.map((n) => NEED_LABEL[n]).join("; ")}</dd></div> : null}
+            {c.conditions.helps_most && <div><dt className="inline text-neutral-500">Helps most: </dt><dd className="inline">{c.conditions.helps_most.replace("-", " ")}</dd></div>}
+            {c.conditions.cost && <div><dt className="inline text-neutral-500">Cost: </dt><dd className="inline">{c.conditions.cost}</dd></div>}
+            <div><dt className="inline text-neutral-500">Fails when: </dt><dd className="inline">{c.conditions.fails_when}</dd></div>
+          </dl>
         </section>
       )}
 

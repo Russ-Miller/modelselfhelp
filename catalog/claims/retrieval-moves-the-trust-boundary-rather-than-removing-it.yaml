@@ -35,3 +35,10 @@ notes: >-
   not in the generation step. Replicated in the sense of two independent
   papers reaching the same mechanism from different failure modes.
 submitted_by: human:Russ-Miller
+conditions:
+  effect: narrows
+  needs:
+    - retrieval-corpus
+  fails_when: Retrieved content carries planted instructions, or the wrong
+    account is better represented among conflicting sources. Whatever lands in
+    context is treated as reliable.

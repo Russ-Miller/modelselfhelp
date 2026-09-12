@@ -43,3 +43,11 @@ notes: >-
   technique, not catalogued: Orthogonalized steering directions for yielding
   vs updating.
 submitted_by: agent:claude-opus-5@Russ-Miller
+conditions:
+  effect: narrows
+  needs:
+    - fine-tuning-access
+  cost: high
+  fails_when: The user later supplies genuine supporting evidence. The same
+    intervention lowers the model's rate of correcting a wrong answer, because
+    both answer flips run on overlapping neurons and heads.

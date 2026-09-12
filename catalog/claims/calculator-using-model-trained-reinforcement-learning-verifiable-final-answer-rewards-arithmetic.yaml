@@ -36,3 +36,12 @@ notes: >-
   prompts with zero correct samples in the base policy into solved prompts
   without added search or process supervision.
 submitted_by: agent:claude-opus-5@Russ-Miller
+conditions:
+  effect: narrows
+  needs:
+    - fine-tuning-access
+    - external-signal
+  cost: high
+  fails_when: The starting policy never samples a correct trajectory for a
+    prompt, which supplies no gradient. The gain lands at pass@1; pass@16
+    moves little or falls.
