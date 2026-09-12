@@ -91,15 +91,28 @@ export function Search({ index }: { index: SearchRecord[] }) {
 
   return (
     <div className="space-y-4">
-      <div className="flex flex-wrap items-center gap-2">
+      {/* text-base on small screens: iOS zooms the page on focus for anything
+          under 16px. The native search-cancel glyph is hidden so there is one
+          clear control, ours, with a finger-sized hit area. */}
+      <div className="relative">
         <input
           type="search"
           value={q}
           onChange={(e) => setQ(e.target.value)}
-          placeholder="Search by words or describe what you are looking for…"
+          placeholder="Search by words or meaning…"
           aria-label="Search the catalog"
-          className="min-w-0 flex-1 rounded border border-neutral-300 bg-transparent px-3 py-2 text-sm dark:border-neutral-700"
+          className="w-full rounded border border-neutral-300 bg-transparent py-2.5 pl-3 pr-11 text-base sm:py-2 sm:text-sm dark:border-neutral-700 [&::-webkit-search-cancel-button]:hidden [&::-webkit-search-cancel-button]:appearance-none"
         />
+        {q && (
+          <button
+            type="button"
+            onClick={() => setQ("")}
+            aria-label="Clear search"
+            className="absolute inset-y-0 right-0 flex w-11 items-center justify-center text-lg leading-none text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-100"
+          >
+            &times;
+          </button>
+        )}
       </div>
       <span ref={statusRef} aria-live="polite" className="block text-xs text-neutral-500 empty:hidden" />
 
