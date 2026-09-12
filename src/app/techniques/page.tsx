@@ -23,7 +23,7 @@ export default function TechniquesPage() {
         <Link href="/open-questions" className="hover:underline">open questions</Link>: which of
         these nothing has measured, and whether anyone has looked.
       </p>
-      <ListSearch noun="techniques" placeholder="Filter techniques…" />
+      <ListSearch noun="techniques" />
       <FilterBar options={options}>
       <ul className="space-y-3">
         {getTechniques().map((t) => (

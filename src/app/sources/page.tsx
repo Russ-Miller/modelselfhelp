@@ -20,7 +20,7 @@ export default function SourcesPage() {
         the other direction: which claims <em>in this catalog</em> draw on the source, and whether
         they lean on it as support or as a counterpoint.
       </p>
-      <ListSearch noun="sources" placeholder="Filter sources…" />
+      <ListSearch noun="sources" />
       <table className="w-full text-sm">
         <thead className="text-left text-neutral-500">
           <tr>

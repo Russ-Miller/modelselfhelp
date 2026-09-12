@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import { cosine, embedQuery, matchCutoff, unpackAttr } from "@/lib/embed-client";
-import { SearchModeToggle, type SearchMode } from "@/components/search-mode";
 
 /**
  * Type-to-filter for a server-rendered list. Rows carry a `data-search`
@@ -14,23 +13,24 @@ import { SearchModeToggle, type SearchMode } from "@/components/search-mode";
  * The two compose without knowing about each other — a row hidden by either
  * rule stays hidden.
  *
- * Meaning mode: rows also carry `data-vec`, a packed embedding. The query is
- * embedded in the browser, rows below a similarity floor are hidden, and the
- * rest are physically reordered by similarity (rows are <li> on some pages
- * and <tr> on others, and CSS `order` does nothing in a table). The original
- * order is remembered and restored on clear.
+ * Both searches run on every query. Keyword hits show at once, in their
+ * original order. Rows also carry `data-vec`, a packed embedding: the query
+ * is embedded in the browser, and rows keyword missed but meaning caught are
+ * appended after the keyword hits in similarity order, marked `data-via`
+ * so a rule in globals.css can show they matched on meaning. Rows are moved
+ * physically because some lists are tables, where CSS `order` does nothing;
+ * the original order is remembered and restored on clear.
  *
- * Only the query and mode are React state. The match count and status are
+ * Only the query is React state. The match count and status are
  * written straight into spans, because they are derived from the DOM the
  * effect just touched, and routing them back through setState is the
  * cascading-render pattern React warns about.
  */
 export function ListSearch({ noun = "rows", placeholder }: { noun?: string; placeholder?: string }) {
   const [q, setQ] = useState("");
-  const [mode, setMode] = useState<SearchMode>("keyword");
   const countRef = useRef<HTMLSpanElement>(null);
   const statusRef = useRef<HTMLSpanElement>(null);
-  // DOM order as the server sent it, captured once, so meaning mode can undo its sorting.
+  // DOM order as the server sent it, captured once, so the meaning pass can undo its reordering.
   const originalRef = useRef<HTMLElement[] | null>(null);
 
   useEffect(() => {
@@ -77,34 +77,41 @@ export function ListSearch({ noun = "rows", placeholder }: { noun?: string; plac
     let live = true;
     let timer: ReturnType<typeof setTimeout> | undefined;
 
+    for (const r of rows) r.removeAttribute("data-via");
     if (!terms.length) {
       for (const r of rows) r.removeAttribute("data-hit");
       restoreOrder();
       setStatus("");
       report();
-    } else if (mode === "keyword") {
+    } else {
       restoreOrder();
-      setStatus("");
+      const kw = new Set<HTMLElement>();
       for (const r of rows) {
         const hay = r.dataset.search ?? "";
-        r.setAttribute("data-hit", terms.every((t) => hay.includes(t)) ? "1" : "0");
+        const hit = terms.every((t) => hay.includes(t));
+        r.setAttribute("data-hit", hit ? "1" : "0");
+        if (hit) kw.add(r);
       }
       report();
-    } else {
+      // Meaning pass, appended once the vector is ready. Keyword hits keep
+      // their place; meaning-only hits go after them in similarity order.
       timer = setTimeout(async () => {
         try {
           const qv = await embedQuery(q.trim(), setStatus);
           if (!live) return;
           const scored = rows.map((r) => ({ r, s: (() => { const v = unpackAttr(r.dataset.vec); return v ? cosine(qv, v) : -1; })() }));
-          const parent = rows[0]?.parentElement;
           const cut = matchCutoff(scored.map((x) => x.s));
-          const ranked = scored.filter((x) => x.s >= cut).sort((a, b) => b.s - a.s);
-          for (const x of scored) x.r.setAttribute("data-hit", x.s >= cut ? "1" : "0");
-          if (parent) for (const x of ranked) parent.appendChild(x.r);
+          const extra = scored.filter((x) => x.s >= cut && !kw.has(x.r)).sort((a, b) => b.s - a.s);
+          const parent = rows[0]?.parentElement;
+          for (const x of extra) {
+            x.r.setAttribute("data-hit", "1");
+            x.r.setAttribute("data-via", "meaning");
+            parent?.appendChild(x.r);
+          }
           setStatus("");
           report();
         } catch {
-          if (live) setStatus("meaning search unavailable (model failed to load)");
+          if (live) setStatus("keyword matches only (meaning model failed to load)");
         }
       }, 250);
     }
@@ -116,7 +123,7 @@ export function ListSearch({ noun = "rows", placeholder }: { noun?: string; plac
     const obs = wrapper ? new MutationObserver(report) : null;
     obs?.observe(wrapper!, { attributes: true, attributeFilter: ["data-filter"] });
     return () => { live = false; if (timer) clearTimeout(timer); obs?.disconnect(); };
-  }, [q, mode, noun]);
+  }, [q, noun]);
 
   return (
     <div className="space-y-1">
@@ -125,11 +132,10 @@ export function ListSearch({ noun = "rows", placeholder }: { noun?: string; plac
           type="search"
           value={q}
           onChange={(e) => setQ(e.target.value)}
-          placeholder={mode === "meaning" ? `Describe the ${noun} you want…` : placeholder ?? `Filter ${noun}…`}
+          placeholder={placeholder ?? `Filter ${noun} by words or meaning…`}
           aria-label={`Filter ${noun} on this page`}
           className="min-w-0 flex-1 rounded border border-neutral-300 bg-transparent px-3 py-1.5 text-sm dark:border-neutral-700"
         />
-        <SearchModeToggle mode={mode} onChange={setMode} />
         <span ref={countRef} aria-live="polite" className="text-xs text-neutral-500" />
         {q && (
           <button

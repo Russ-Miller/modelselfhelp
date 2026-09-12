@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { SearchRecord } from "@/lib/search-index";
 import { cosine, embedQuery, matchCutoff, unpackAttr } from "@/lib/embed-client";
-import { SearchModeToggle, type SearchMode } from "@/components/search-mode";
 
 const KIND: Record<SearchRecord["k"], { label: string; plural: string; section: string; href: (id: string) => string }> = {
   c: { label: "capability", plural: "capabilities", section: "/capabilities", href: (id) => `/capabilities/${id}` },
@@ -37,8 +36,7 @@ function score(rec: SearchRecord, terms: string[]): number {
 
 export function Search({ index }: { index: SearchRecord[] }) {
   const [q, setQ] = useState("");
-  const [mode, setMode] = useState<SearchMode>("keyword");
-  // Meaning mode: the embedded query, and which text it was embedded from.
+  // The embedded query, and which text it was embedded from.
   const [qvec, setQvec] = useState<{ q: string; v: Float32Array } | null>(null);
   const statusRef = useRef<HTMLSpanElement>(null);
   const terms = useMemo(() => q.toLowerCase().split(/\s+/).filter(Boolean), [q]);
@@ -48,36 +46,40 @@ export function Search({ index }: { index: SearchRecord[] }) {
 
   // Embed the query after a short pause in typing. The model loads on the
   // first call; status text goes straight to a span rather than state.
+  // Keyword results never wait on this: they render immediately and the
+  // meaning results append when the vector arrives.
   useEffect(() => {
-    if (mode !== "meaning" || !q.trim()) return;
+    if (!q.trim()) return;
     let live = true;
     const t = setTimeout(async () => {
       try {
         const v = await embedQuery(q.trim(), (m) => { if (statusRef.current) statusRef.current.textContent = m; });
         if (live) setQvec({ q, v });
       } catch {
-        if (statusRef.current) statusRef.current.textContent = "meaning search unavailable (model failed to load)";
+        if (statusRef.current) statusRef.current.textContent = "showing keyword matches only (meaning model failed to load)";
       }
     }, 250);
     return () => { live = false; clearTimeout(t); };
-  }, [mode, q]);
+  }, [q]);
 
-  // All matches, unsliced, so the per-kind counts are true totals.
+  // Keyword matches first, because they are exact; then whatever the meaning
+  // search adds that keyword missed, in similarity order and marked as such.
+  // Unsliced, so the per-kind counts are true totals.
   const matches = useMemo(() => {
-    if (mode === "meaning") {
-      if (!q.trim() || !qvec || qvec.q !== q) return [];
-      const scored = index.map((r, i) => ({ r, s: vectors[i] ? cosine(qvec.v, vectors[i]!) : 0 }));
-      const cut = matchCutoff(scored.map((x) => x.s));
-      return scored.filter((x) => x.s >= cut).sort((a, b) => b.s - a.s);
-    }
     if (!terms.length) return [];
-    return index
-      .map((r) => ({ r, s: score(r, terms) }))
+    const kw = index
+      .map((r) => ({ r, s: score(r, terms), via: "keyword" as const }))
       .filter((x) => x.s > 0)
       .sort((a, b) => b.s - a.s);
-  }, [index, vectors, terms, mode, q, qvec]);
+    if (!qvec || qvec.q !== q) return kw;
+    const seen = new Set(kw.map((x) => `${x.r.k}:${x.r.id}`));
+    const scored = index.map((r, i) => ({ r, s: vectors[i] ? cosine(qvec.v, vectors[i]!) : 0, via: "meaning" as const }));
+    const cut = matchCutoff(scored.map((x) => x.s));
+    const extra = scored.filter((x) => x.s >= cut && !seen.has(`${x.r.k}:${x.r.id}`)).sort((a, b) => b.s - a.s);
+    return [...kw, ...extra];
+  }, [index, vectors, terms, q, qvec]);
   const results = matches.slice(0, 40);
-  const pendingEmbed = mode === "meaning" && !!q.trim() && (!qvec || qvec.q !== q);
+  const pendingEmbed = !!q.trim() && (!qvec || qvec.q !== q);
 
   // With no query the line shows catalog totals; with one, matches per kind.
   const counts = useMemo(() => {
@@ -94,11 +96,10 @@ export function Search({ index }: { index: SearchRecord[] }) {
           type="search"
           value={q}
           onChange={(e) => setQ(e.target.value)}
-          placeholder={mode === "meaning" ? "Describe what you are looking for…" : "Search claims, capabilities, techniques, sources…"}
+          placeholder="Search by words or describe what you are looking for…"
           aria-label="Search the catalog"
           className="min-w-0 flex-1 rounded border border-neutral-300 bg-transparent px-3 py-2 text-sm dark:border-neutral-700"
         />
-        <SearchModeToggle mode={mode} onChange={setMode} />
       </div>
       <span ref={statusRef} aria-live="polite" className="block text-xs text-neutral-500 empty:hidden" />
 
@@ -116,7 +117,7 @@ export function Search({ index }: { index: SearchRecord[] }) {
       {terms.length > 0 && !pendingEmbed && (
         <p className="text-xs text-neutral-500">
           {matches.length === 0
-            ? mode === "meaning" ? "Nothing close enough. Try describing it differently." : "Nothing matched. Every word has to appear somewhere — try fewer."
+            ? "Nothing matched by words or by meaning. Try describing it differently."
             : matches.length > 40
               ? `Showing the top 40 of ${matches.length} matches.`
               : `${matches.length} match${matches.length === 1 ? "" : "es"}`}
@@ -124,11 +125,12 @@ export function Search({ index }: { index: SearchRecord[] }) {
       )}
 
       <ul className="space-y-2">
-        {results.map(({ r }) => (
+        {results.map(({ r, via }) => (
           <li key={`${r.k}-${r.id}`} className="rounded border border-neutral-200 p-3 dark:border-neutral-800">
             <div className="mb-0.5 flex flex-wrap items-center gap-2 text-xs text-neutral-500">
               <span className="rounded bg-neutral-100 px-1.5 py-0.5 dark:bg-neutral-800">{KIND[r.k].label}</span>
-              {r.pending && <span className="rounded bg-sky-100 px-1.5 py-0.5 text-sky-900 dark:bg-sky-900/40 dark:text-sky-200">reviewed by AI</span>}
+              {r.pending && <span className="rounded bg-neutral-100 px-1.5 py-0.5 dark:bg-neutral-800">reviewed by AI</span>}
+              {via === "meaning" && <span className="rounded border border-neutral-300 px-1.5 py-0.5 dark:border-neutral-700" title="Did not contain your words; matched on meaning.">by meaning</span>}
               {r.sub && <span className="truncate">{r.sub}</span>}
             </div>
             <Link href={KIND[r.k].href(r.id)} className="text-sm hover:underline">{r.title}</Link>

@@ -26,7 +26,7 @@ export default function CapabilitiesPage() {
         the ingestion pipeline found several papers converging on the same competence and added
         it, without anyone deciding it belongs. Those are here to be argued with.
       </p>
-      <ListSearch noun="capabilities" placeholder="Filter capabilities…" />
+      <ListSearch noun="capabilities" />
       <FilterBar options={options}>
       <div className="overflow-x-auto">
       <table className="w-full text-sm">

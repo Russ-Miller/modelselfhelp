@@ -43,7 +43,7 @@ export default function ClaimsPage() {
         {contestedCount} of {claims.length} are contested, sorted first &mdash;{" "}
         <Link href="/claims?filter=contested" className="hover:underline">see them with incoming challenges</Link>.
       </p>
-      <ListSearch noun="claims" placeholder="Filter claims…" />
+      <ListSearch noun="claims" />
       <FilterBar options={options}>
       <ul className="space-y-4">
         {claims.map((c) => {

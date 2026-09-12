@@ -25,7 +25,7 @@ export default function AdagesPage() {
         holding or breaking. The breaks are the point: an adage that holds tells you what you
         already believed, and one that breaks tells you how models differ from people.
       </p>
-      <ListSearch noun="adages" placeholder="Filter adages…" />
+      <ListSearch noun="adages" />
       <FilterBar options={options}>
       <ul className="space-y-3">
         {adages.map((a) => {
