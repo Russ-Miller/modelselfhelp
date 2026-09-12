@@ -15,7 +15,7 @@ export default function Home() {
   return (
     <div className="space-y-10">
       <section className="space-y-3">
-        <h1 className="text-3xl font-semibold tracking-tight">A personal study of what LLMs are actually good and bad at</h1>
+        <h1 className="text-3xl font-semibold tracking-tight">A study of what LLMs are actually good and bad at</h1>
         <p className="max-w-2xl text-neutral-600 dark:text-neutral-400">
           Not a scoreboard &mdash; a set of directional, scoped claims, each tied to the sources that
           support or contest it. Capabilities are topics; claims are the actual findings.
