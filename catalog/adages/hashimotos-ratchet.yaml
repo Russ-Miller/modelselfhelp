@@ -6,7 +6,9 @@ origin: >-
   Mitchell Hashimoto's practice as described in "My AI Adoption Journey"
   (February 2026) and named the ratchet by the Harness Engineering playbook.
   From software operations, where the older form is the blameless post-mortem
-  whose output is a permanent fix, not a reminder.
+  whose output is a permanent fix, not a reminder; David Parnas's version is
+  that systems do not work well until they have been used and have failed
+  repeatedly in real applications.
 transfer: >-
   The mechanism is that a fix placed in structure (a guide rule, a sensor, a
   permission) is applied on every future run without anyone remembering it,

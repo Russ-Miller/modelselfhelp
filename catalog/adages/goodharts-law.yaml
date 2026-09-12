@@ -1,10 +1,13 @@
 id: goodharts-law
 label: Goodhart's law
+aliases: ["Campbell's law", "Cobra effect"]
 statement: When a measure becomes a target, it ceases to be a good measure.
 origin: >-
   Charles Goodhart, 1975, on monetary policy targets; the common phrasing is
-  Marilyn Strathern's (1997). From economics and public administration, about
-  people and institutions gaming the metric they are judged by.
+  Marilyn Strathern's (1997). Campbell's law (Donald T. Campbell, 1976) is
+  the same observation from social science: a metric used for decision-making
+  corrupts the process it measures. From economics and public administration,
+  about people and institutions gaming the metric they are judged by.
 transfer: >-
   It should transfer, and for a cleaner reason than with people. A model is
   the output of an optimiser pointed at a proxy — a reward model, a preference

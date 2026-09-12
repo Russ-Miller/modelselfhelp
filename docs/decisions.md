@@ -1386,3 +1386,32 @@ Seeded with six: Goodhart's law, Hashimoto's ratchet, no one should be judge
 in their own cause, two heads are better than one, first impressions last,
 practice makes perfect. The user has a longer list to follow. Claims that
 serve as evidence show "Evidence for: …" on their page.
+
+## 2026-09-12 — Adages: the software-laws list, triaged
+
+Nineteen entries added from Russ's software adages list (Obsidian, mirrored
+from the 2013 Blogger post), on top of the six seeds. Candidate claims for
+each were found with the catalog's own embeddings, then read and assigned a
+verdict by hand; no claim was filed or altered to fit an adage.
+
+Selection rule: an adage is filed if a mechanism can be stated for why it
+should or should not transfer to models, whether or not evidence exists yet.
+Filed with evidence: Brandolini, Postel (breaks, all pending), Boyd, Ashby's
+requisite variety, good regulator theorem, Ashby's law of experience, Simon,
+Lehman, Thomas theorem, Humphrey (with Ziv as alias), Hanlon, law of
+triviality (splits by role: holds for model-as-judge, breaks for
+model-as-producer), Braess, Linus. Filed untested with a research brief:
+Hyrum, Conway, Parkinson, Kerckhoffs (Shannon's maxim as alias), Amdahl.
+Folded as aliases: Campbell's law and the cobra effect into Goodhart; Parnas
+into Hashimoto's ratchet; law of requisite complexity into Ashby.
+
+Skipped, with the reason, so the list can be overruled: hardware and
+economics laws with no behavioural content (Bell, Kryder, Moore-family,
+Landauer, Shannon's channel law, universal scalability, Zipf, Littlewood,
+Stein, CAP, Rice, Demeter, Helland); organisational jokes and observations
+whose subject is people in institutions rather than any system (Al's law,
+Larman, Acheson, Benchley, Norman, AviD, Krulak, Atwood, Hofstadter,
+Sturgeon); Knuth and Wirth, whose model-side reading duplicates Lehman and
+the catalog's own measure-first rule; the analogies and paradoxes (Ship of
+Theseus, Ellsberg, Simpson's, principle of charity, fundamental theorem),
+which are not claims about behaviour.
