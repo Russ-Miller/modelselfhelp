@@ -13,7 +13,10 @@ export function recordTexts(cat) {
   // loader returns the record itself. Accept both.
   const rows = (xs) => xs.map((x) => (x && "data" in x && x.data ? x.data : x));
   const out = [];
-  for (const c of rows(cat.capabilities)) out.push({ key: `c:${c.id}`, text: [c.label, c.summary, c.description].filter(Boolean).join(". ") });
+  // Aliases and the discriminator carry the everyday phrasings ("making
+  // things up") that label and summary do not; without them a colloquial
+  // description of a failure lands on the wrong capability.
+  for (const c of rows(cat.capabilities)) out.push({ key: `c:${c.id}`, text: [c.label, ...(c.aliases ?? []), c.summary, c.discriminator, c.description].filter(Boolean).join(". ") });
   for (const t of rows(cat.techniques)) out.push({ key: `t:${t.id}`, text: [t.label, t.summary, t.description].filter(Boolean).join(". ") });
   for (const m of rows(cat.claims)) out.push({ key: `m:${m.id}`, text: [m.statement, m.notes].filter(Boolean).join(". ") });
   for (const s of rows(cat.sources)) out.push({ key: `s:${s.id}`, text: [s.title, s.summary].filter(Boolean).join(". ") });
