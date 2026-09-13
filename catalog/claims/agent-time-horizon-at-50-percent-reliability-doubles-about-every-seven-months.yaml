@@ -1,0 +1,36 @@
+id: agent-time-horizon-at-50-percent-reliability-doubles-about-every-seven-months
+capability: long-horizon-execution
+statement: >-
+  On 170 software and research tasks timed with human domain experts, the
+  length of task that frontier agents complete at 50% reliability, measured
+  in human time, has doubled roughly every seven months since 2019 and was
+  around 110 minutes for o3 in mid-2025 — but the horizon at 80% reliability
+  follows the same trend at roughly five times shorter, and success drops as
+  tasks carry more of the 16 "messiness" factors that separate benchmark
+  tasks from real work, so the headline horizon overstates what an agent can
+  be relied on to finish.
+kind: observation
+backing_strength: single-paper
+observed_on:
+  era: "2019–2025 frontier models (GPT-2 through o3 and Claude 3.7), on HCAST, RE-Bench and SWAA tasks with human baselines"
+  task_type: coding-agent
+sources:
+  - source: arxiv-2503-14499
+    stance: supports
+    note: >-
+      Figure 1 and Section 3: 50% time horizon doubling approximately every 7
+      months over 6 years, possibly faster since 2024; Figure 17 for the 80%
+      horizon being roughly 5x shorter; Section 2.1 for the 170 tasks and the
+      messiness factors. Fitted trend with bootstrapped confidence intervals,
+      not a controlled experiment.
+contested: false
+status: pending-review
+last_checked_at: "2026-09-12"
+notes: >-
+  Filed the day Russ forwarded it, as the anchor for the long-horizon
+  execution capability. The interesting number is not the doubling time but
+  the ratio between the 50% and 80% horizons: reliability, not capability,
+  is what limits handing an agent a long task. The extrapolation to
+  month-long tasks is the authors' and rests on the trend continuing;
+  treat it as a forecast, not a finding.
+submitted_by: agent:claude-opus-5@Russ-Miller

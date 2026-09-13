@@ -22,5 +22,5 @@ discriminator: >-
   single-step tool use, for planning without execution, or for
   long-context comprehension where the input is long but the task is one
   step.
-status: proposed
+status: active
 submitted_by: human:Russ-Miller

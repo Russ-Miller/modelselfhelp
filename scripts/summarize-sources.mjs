@@ -138,8 +138,17 @@ for (let i = 0; i < batch.length; i += CHUNK) {
   }
   if (i + CHUNK < batch.length) await new Promise((r) => setTimeout(r, delayMs));
 }
-console.log(`fetched ${abstracts.size} abstract(s) for ${batch.length} source(s)\n`);
-if (!abstracts.size) { console.log("arXiv returned nothing at all -- try again later."); process.exit(0); }
+// The source record already carries the abstract in `summary`. When the
+// API is down or rate-limiting, that is a perfectly good fallback: the
+// full text comes from arxiv.org/html, a different host, and the abstract
+// only seeds the figure check when the full text is unavailable.
+let fellBack = 0;
+for (const b of batch) {
+  const id = bare(b.data.arxiv_id);
+  if (!abstracts.has(id) && b.data.summary && b.data.summary.length > 200) { abstracts.set(id, b.data.summary); fellBack++; }
+}
+console.log(`fetched ${abstracts.size - fellBack} abstract(s) for ${batch.length} source(s)${fellBack ? `, ${fellBack} from the stored summary` : ""}\n`);
+if (!abstracts.size) { console.log("arXiv returned nothing at all and no stored summaries -- try again later."); process.exit(0); }
 
 if (dryRun) {
   const { data } = batch[0];
