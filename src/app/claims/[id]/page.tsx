@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { notFound } from "next/navigation";
-import { EFFECT_LABEL, NEED_LABEL, adagesForClaim, claimActivity, getCapability, getClaim, getClaims, getModel, getSource, getTagLabel, isPending, isQuietSource, displayName, reviewLabel, reviewers } from "@/lib/catalog";
+import { EFFECT_LABEL, NEED_LABEL, adagesForClaim, cardsNamedIn, claimActivity, getCapability, getClaim, getClaims, getModel, getSource, getTagLabel, isPending, isQuietSource, displayName, reviewLabel, reviewers } from "@/lib/catalog";
 import type { SourceLink } from "@/lib/catalog";
 import { ContestedBadge, EvidenceSignal, KindBadge, ReviewBadge, StanceBadge, StrengthBadge } from "@/components/badges";
 import { ChallengeLink } from "@/components/challenge";
@@ -80,10 +80,24 @@ export default async function ClaimPage({ params }: PageProps<"/claims/[id]">) {
         <section className="text-sm">
           <h2 className="font-semibold mb-1">Observed on</h2>
           <p className="text-neutral-700 dark:text-neutral-300">
-            {modelObj && <>{modelObj.label}. </>}
+            {modelObj && (modelObj.url
+              ? <><a href={modelObj.url} target="_blank" rel="noopener noreferrer" className="hover:underline">{modelObj.label}</a>. </>
+              : <>{modelObj.label}. </>)}
             {c.observed_on.era && <>{c.observed_on.era}. </>}
             {c.observed_on.task_type && <>{getTagLabel(c.observed_on.task_type)}.</>}
           </p>
+          {(() => {
+            const cards = cardsNamedIn(c.observed_on.era);
+            if (!cards.length) return null;
+            return (
+              <p className="mt-1 text-xs text-neutral-500">
+                Model cards:{" "}
+                {cards.map((v, i) => (
+                  <span key={v.id}>{i > 0 && " · "}<a href={v.card} target="_blank" rel="noopener noreferrer" className="hover:underline">{v.label}</a></span>
+                ))}
+              </p>
+            );
+          })()}
         </section>
       )}
 
