@@ -9,6 +9,7 @@ versions:
   - id: claude-3-opus
     label: Claude 3 Opus
     released: 2024-03-04
+    card: https://www.anthropic.com/claude-3-model-card
   - id: claude-3-5-sonnet
     label: Claude 3.5 Sonnet
     released: 2024-06-20

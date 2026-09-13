@@ -3,23 +3,51 @@
   "$id": "https://modelselfhelp.dev/schema/model.schema.json",
   "type": "object",
   "additionalProperties": false,
-  "required": ["id", "label", "vendor", "versions"],
+  "required": [
+    "id",
+    "label",
+    "vendor",
+    "versions"
+  ],
   "properties": {
-    "id": { "$ref": "common.schema.json#/$defs/slug" },
-    "label": { "type": "string" },
-    "vendor": { "type": "string" },
-    "url": { "type": "string", "format": "uri" },
+    "id": {
+      "$ref": "common.schema.json#/$defs/slug"
+    },
+    "label": {
+      "type": "string"
+    },
+    "vendor": {
+      "type": "string"
+    },
+    "url": {
+      "type": "string",
+      "format": "uri"
+    },
     "versions": {
       "type": "array",
       "minItems": 1,
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": ["id", "label"],
+        "required": [
+          "id",
+          "label"
+        ],
         "properties": {
-          "id": { "$ref": "common.schema.json#/$defs/slug" },
-          "label": { "type": "string" },
-          "released": { "$ref": "common.schema.json#/$defs/date" }
+          "id": {
+            "$ref": "common.schema.json#/$defs/slug"
+          },
+          "label": {
+            "type": "string"
+          },
+          "released": {
+            "$ref": "common.schema.json#/$defs/date"
+          },
+          "card": {
+            "type": "string",
+            "format": "uri",
+            "description": "The model card or system card for this version, from the vendor or the hub. Verified to resolve when filed; never typed from memory."
+          }
         }
       }
     }

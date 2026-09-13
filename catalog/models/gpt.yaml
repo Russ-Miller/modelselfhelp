@@ -9,9 +9,12 @@ versions:
   - id: gpt-4
     label: GPT-4
     released: 2023-03-14
+    card: https://arxiv.org/abs/2303.08774
   - id: gpt-4o
     label: GPT-4o
     released: 2024-05-13
+    card: https://arxiv.org/abs/2410.21276
   - id: o1
     label: o1
     released: 2024-12-05
+    card: https://arxiv.org/abs/2412.16720

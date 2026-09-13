@@ -108,9 +108,22 @@ export interface Technique {
   evidence_search?: EvidenceSearch;
   status: TechniqueStatus; submitted_by: string;
 }
-export interface ModelVersion { id: string; label: string; released?: string }
+export interface ModelVersion { id: string; label: string; released?: string; card?: string }
 export interface Model { id: string; label: string; vendor: string; url?: string; versions: ModelVersion[] }
 export interface TaxonomyEntry { id: string; label: string; description: string }
+
+/**
+ * Model versions named in a piece of prose (usually a claim's observed_on.era)
+ * that have a card on file. Matching on the version label is deliberately
+ * dumb: the era field is free text, and a link to the wrong card would be
+ * worse than none, so only an exact label match counts.
+ */
+export function cardsNamedIn(text: string | undefined): ModelVersion[] {
+  if (!text) return [];
+  const out: ModelVersion[] = [];
+  for (const m of loadCatalog().models) for (const v of m.versions) if (v.card && text.includes(v.label)) out.push(v);
+  return out;
+}
 export interface Taxonomy { groups: TaxonomyEntry[]; contexts: TaxonomyEntry[] }
 
 export interface Catalog {
