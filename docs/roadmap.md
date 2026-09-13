@@ -30,3 +30,13 @@ External prerequisites, when each phase is actually picked up:
 - Accounts/writes: GitHub OAuth app, database, secrets in `.env`.
 - Automated pipeline: Anthropic API key in `.env` and as a GitHub Actions
   secret.
+
+## To revisit (ideas with a reason to wait, and what would end the wait)
+
+| idea | why it fits | why wait | revisit when |
+|---|---|---|---|
+| Tasks as a join to capabilities, seeded from Epoch's "O*NET for AI R&D" (https://epoch.ai/gradient-updates/toward-an-onet-for-ai-rnd, 2026-09) | Their taxonomy is the task side of O*NET without the abilities layer; our capabilities are that layer with evidence. A task entry with `requires: [capability ids]` turns their subjective 0–5 automation rating into a derived, contestable claim with a named bottleneck, and inverts into "which tasks does this unsolved capability block". Our nightly pipeline already performs several of their tasks, so we could rate it on their scale as own-observation claims. | Their list is a first draft with an open feedback round and, by their own account, may not survive AI progressing by non-human routes. Treat it as a source, not a schema. | Their taxonomy stabilises after feedback, or we want the economic view of "what to improve next". Pilot first: map the dozen tasks the pipeline touches. |
+| Contradiction candidates from embeddings | High-similarity claim pairs with opposing direction are the "file the incumbent, then contest it" cases nobody will find by reading 167 claims. | Nothing blocks it; it is next in line. | Now, unless redirected. |
+| Duplicate detection when filing drafts | Same vectors; stops the AI-reviewed pile growing with restatements. | Prevents future noise rather than surfacing findings. | After contradiction candidates. |
+| Remote MCP at rsiratchet.com/mcp | Lets Claude.ai and other people's agents use the catalog. | Query embedding needs either the model in a serverless function (cold starts) or an embedding API key. Keyword-only would work today. | When someone other than Russ wants it. |
+| Summarizer figure fixes | Extractor drops appendices after "References"; JSON escapes written literally; flags are inert; sensor has no tests. Three of four current flags trace to this. | Not blocked; proposal written 2026-09-12 in conversation, evidence via `advise`. | Next pipeline session. |
