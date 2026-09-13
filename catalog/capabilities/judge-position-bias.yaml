@@ -4,6 +4,7 @@ summary: "A model used as a judge favors whichever answer is shown first, longer
 description: >-
   When scoring or ranking candidate answers, a capable judge gives the same verdict regardless of the order of candidates, their length, or which model produced them, and agrees with careful human raters.
 tags: [evaluation, llm-as-judge]
+group: verification
 aliases: ["LLM-as-judge bias", "position bias", "verbosity bias", "self-enhancement bias"]
 techniques: [position-swap-judging]
 related: [sycophancy]

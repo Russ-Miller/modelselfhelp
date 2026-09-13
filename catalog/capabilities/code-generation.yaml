@@ -11,6 +11,7 @@ description: >-
   training data over time, which is why contamination-resistant,
   continuously-updated benchmarks matter here more than in most areas.
 tags: [reasoning, agentic]
+group: coding
 related: [secure-coding, self-repair]
 match_terms: ["code generation", "code synthesis", "program synthesis", "code editing", "unit test generation", "repository-level"]
 modality: [text]

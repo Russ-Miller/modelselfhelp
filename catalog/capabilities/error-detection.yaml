@@ -1,0 +1,24 @@
+id: error-detection
+label: "Spotting an error in a given artifact"
+summary: >-
+  Whether a model can find the mistake in something put in front of it — a
+  proof, a program, an argument, a table — when told there may be one;
+  distinct from fixing it, and from judging overall quality.
+description: >-
+  Filed from Russ's capability map (2026-09-12). Fixing its own mistakes
+  and the independent-verifier technique both depend on this: a verifier
+  is only as good as its detection. Neighbours: critique is the fuller
+  judgement of quality; fact verification is detection against external
+  evidence; this is detection of internal errors in an artifact, with or
+  without a reference.
+tags: [evaluation, llm-as-judge]
+group: verification
+match_terms: ["error detection", "bug detection", "mistake detection", "verifier", "process reward", "step verification"]
+discriminator: >-
+  In scope when the paper measures whether a model finds planted or
+  natural errors in artifacts it did not produce, or the precision and
+  recall of a model used as a verifier. NOT in scope for repair (self
+  repair, debugging), for checking claims against sources (fact
+  verification), or for grading quality without a defined error.
+status: proposed
+submitted_by: human:Russ-Miller

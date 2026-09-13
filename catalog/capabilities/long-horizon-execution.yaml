@@ -1,0 +1,26 @@
+id: long-horizon-execution
+label: "Completing tasks that take many steps or many hours"
+summary: >-
+  Whether an agent can carry a task through a long sequence of actions
+  without losing the thread, compounding small errors, or stopping early;
+  measured by how long a task, in human time or in steps, a model can
+  finish reliably.
+description: >-
+  Filed from Russ's capability map (2026-09-12), with the METR time-horizon
+  measurement as its anchor source: the length of task an agent completes
+  at a given reliability, tracked over model generations. Several existing
+  claims touch this (long-horizon tool calling, interactive environments,
+  agent benchmarks) under the capability each paper exercised; this entry
+  is for findings whose subject is horizon length itself and what limits
+  it.
+tags: [agentic, autonomous-agent, coding-agent]
+group: agentic
+match_terms: ["long-horizon", "time horizon", "long-running", "multi-step tasks", "task length", "horizon length"]
+discriminator: >-
+  In scope when the paper varies task length or step count and measures
+  completion, or reports a time-horizon metric. NOT in scope for
+  single-step tool use, for planning without execution, or for
+  long-context comprehension where the input is long but the task is one
+  step.
+status: proposed
+submitted_by: human:Russ-Miller

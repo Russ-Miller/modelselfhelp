@@ -7,6 +7,7 @@ description: >-
   completed. This capability is about the temporal dimension specifically —
   grounding an answer in a span of time rather than a moment.
 tags: [reasoning, context]
+group: perception
 modality: [video]
 discriminator: >-
   In scope when the difficulty is temporal: event ordering, tracking across

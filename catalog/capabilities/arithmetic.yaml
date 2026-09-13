@@ -4,6 +4,7 @@ summary: "Multi-digit arithmetic, counting, and symbol manipulation fail in ways
 description: >-
   A capable model performs multi-digit addition and multiplication, counts characters and items, and manipulates digits reliably regardless of how the numbers happen to be tokenized or how often they appeared in training.
 tags: [data-analysis, general, math, reasoning]
+group: reasoning
 aliases: ["numerical reasoning", "token-level math"]
 techniques: [program-aided-computation, chain-of-thought, digit-position-embeddings]
 related: [state-tracking]

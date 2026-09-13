@@ -1,0 +1,24 @@
+id: critique
+label: "Giving a useful assessment of someone else's work"
+summary: >-
+  Whether a model's evaluation of an artifact agrees with careful human
+  judgement and says something actionable; the failures are bias toward
+  surface features, agreement with the author, and critique that sounds
+  specific but is not.
+description: >-
+  Filed from Russ's capability map (2026-09-12). The catalog's judge
+  position-bias entry is one specific failure of this competence and stays
+  separate. This entry is the general one: LLM-as-judge agreement with
+  humans, the biases that move it (verbosity, position, self-preference),
+  and whether a critique improves the work when acted on. Evaluation
+  validity, by contrast, is about whether the benchmark measures anything.
+tags: [evaluation, llm-as-judge]
+group: verification
+match_terms: ["LLM-as-a-judge", "critique", "model evaluation of outputs", "judge agreement", "pairwise judging", "reward model"]
+discriminator: >-
+  In scope when the paper measures a model's judgements of outputs against
+  human judgements, or the effect of model critique on subsequent quality.
+  NOT in scope for detecting a defined error (error detection) or for
+  benchmark design (evaluation validity).
+status: proposed
+submitted_by: human:Russ-Miller

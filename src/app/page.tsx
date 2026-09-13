@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { loadCatalog, capabilitiesByGroup, claimsByRecency, getCapability, isPending } from "@/lib/catalog";
-import { KindBadge, StrengthBadge, ContestedBadge, ReviewBadge } from "@/components/badges";
+import { loadCatalog, capabilitiesByGroup, claimsByRecency, getCapability, isPending, isProposed } from "@/lib/catalog";
+import { KindBadge, StrengthBadge, ContestedBadge, ReviewBadge, ProposedBadge } from "@/components/badges";
 import { getTil } from "@/lib/til";
 import { buildSearchIndex } from "@/lib/search-index";
 import { Search } from "@/components/search";
@@ -118,6 +118,7 @@ export default function Home() {
             {capabilities.map((c) => (
               <li key={c.id} className="rounded border border-neutral-200 dark:border-neutral-800 p-3">
                 <Link href={`/capabilities/${c.id}`} className="font-medium hover:underline">{c.label}</Link>
+                {isProposed(c) && <> <ProposedBadge /></>}
                 <p className="text-sm text-neutral-600 dark:text-neutral-400">{c.summary}</p>
               </li>
             ))}

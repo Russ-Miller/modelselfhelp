@@ -1,0 +1,24 @@
+id: multi-step-reasoning
+label: "Carrying a chain of inference through to its conclusion"
+summary: >-
+  Whether a model can hold several dependent inference steps and reach the
+  conclusion they entail, as opposed to pattern-matching the answer;
+  failures show as correct steps with a wrong join, or shortcuts.
+description: >-
+  Filed from Russ's capability map (2026-09-12). Neighbours: digit-level
+  arithmetic is the special case where the step is a calculation; logical
+  deduction robustness is the special case of formal deduction under
+  distractors; this is the general competence of chaining. Claims that
+  chain-of-thought helps or does not help a task are efficacy claims that
+  sit under whichever capability the task exercises.
+tags: [reasoning, general]
+group: reasoning
+match_terms: ["multi-step reasoning", "multi-hop", "compositional reasoning", "reasoning chain"]
+discriminator: >-
+  In scope when the paper isolates the number of dependent steps as the
+  variable and shows accuracy falling with it, or shows a model reaching
+  the right answer by a route that skips required steps. NOT in scope for
+  papers about a single reasoning domain's content (maths, logic) without
+  the step-count variable.
+status: proposed
+submitted_by: human:Russ-Miller

@@ -7,6 +7,7 @@ description: >-
   irreversibility — a knocked-over object stays knocked over. Covers robotic
   manipulation, navigation, and vision-language-action models.
 tags: [agentic, reasoning]
+group: agentic
 modality: [action, image]
 related: [tool-use, state-tracking]
 discriminator: >-

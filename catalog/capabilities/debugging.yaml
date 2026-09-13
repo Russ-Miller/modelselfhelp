@@ -1,0 +1,21 @@
+id: debugging
+label: "Finding and fixing a fault in existing code"
+summary: >-
+  Whether a model can localise the cause of a failing behaviour in code it
+  did not just write and repair it without breaking something else;
+  distinct from generating code and from self-repair of its own output.
+description: >-
+  Filed from Russ's capability map (2026-09-12). Fixing its own mistakes
+  covers a model correcting its own fresh output with or without feedback.
+  Debugging is the harder, more common case in practice: a fault in an
+  unfamiliar codebase, a failing test, a bug report. Repository-level
+  issue-fixing benchmarks measure this together with repository navigation.
+tags: [coding-agent, agentic]
+group: coding
+match_terms: ["debugging", "bug localization", "fault localization", "program repair", "bug fixing"]
+discriminator: >-
+  In scope when the paper measures fault localisation or repair on code the
+  model did not author in the same session. NOT in scope for self-repair of
+  the model's own draft, or for code generation from a specification.
+status: proposed
+submitted_by: human:Russ-Miller

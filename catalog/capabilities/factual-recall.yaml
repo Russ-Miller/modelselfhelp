@@ -1,0 +1,23 @@
+id: factual-recall
+label: "Recalling facts it was trained on"
+summary: >-
+  Whether a model retrieves a fact from its weights when asked, especially
+  long-tail facts; the failure is a wrong or missing answer, measured
+  against ground truth, not the confidence of a made-up one.
+description: >-
+  Filed from Russ's capability map (2026-09-12). The neighbour is stating
+  false facts confidently, which is about fabrication under uncertainty;
+  this is about whether the fact is there to be recalled at all, which
+  scales with how often it appeared in pretraining. The reversal curse is a
+  specific recall asymmetry and stays its own entry.
+tags: [knowledge, general]
+group: knowledge
+match_terms: ["factual recall", "knowledge recall", "long-tail knowledge", "closed-book QA", "parametric knowledge"]
+discriminator: >-
+  In scope when the paper measures recall accuracy against ground truth as
+  a function of fact frequency, entity popularity, or model size. NOT in
+  scope when the finding is about confident fabrication or calibration
+  (hallucination, uncertainty), or about facts supplied in context
+  (retrieval utilization).
+status: proposed
+submitted_by: human:Russ-Miller

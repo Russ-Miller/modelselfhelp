@@ -14,6 +14,7 @@ description: >-
   Complements prompt-injection and goal-conflict-safety without
   duplicating them, with three supporting papers.
 tags: [general]
+group: security
 discriminator: >-
   Covers maintaining refusal when harmful intent is wrapped in roleplay or
   encodings, harm that emerges only from combined segments, and unsafe

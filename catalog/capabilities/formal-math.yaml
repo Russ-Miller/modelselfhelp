@@ -13,6 +13,7 @@ description: >-
   framing. Coherent, verifiable capability with four converging proposals
   and no existing coverage.
 tags: [general]
+group: reasoning
 discriminator: >-
   Covers autoformalization into a solver-checkable language, producing
   proof-assistant-verified proofs, and localizing the first flawed step in

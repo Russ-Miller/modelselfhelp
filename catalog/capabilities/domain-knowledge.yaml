@@ -1,0 +1,23 @@
+id: domain-knowledge
+label: "Competence in a specialist domain"
+summary: >-
+  Whether a general model performs like a practitioner in a specific field
+  (medicine, law, hardware design, a scientific subfield), and where the
+  general-purpose competence stops.
+description: >-
+  Filed from Russ's capability map (2026-09-12). The catalog has claims
+  that touch this (hardware description code, radiology summaries, medical
+  imaging pipelines) filed under the capability each paper exercised. This
+  entry is for findings whose subject is the domain gap itself: general
+  models against domain experts or domain-tuned models, and which kinds of
+  domain knowledge transfer.
+tags: [knowledge]
+group: knowledge
+match_terms: ["domain expertise", "domain-specific", "expert-level", "specialist knowledge", "medical LLM", "legal LLM"]
+discriminator: >-
+  In scope when the paper compares a general model to domain experts or a
+  domain-adapted model and attributes the gap to domain knowledge. NOT in
+  scope when a domain is only the setting for a finding about another
+  capability (a coding result that happens to be in medicine).
+status: proposed
+submitted_by: human:Russ-Miller

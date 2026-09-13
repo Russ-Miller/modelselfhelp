@@ -155,6 +155,7 @@ not to render a verdict.
 | summary | string | one sentence — what this topic is about |
 | description | string | a paragraph of context; what's interesting about this area |
 | tags | slug[] | soft, freely re-assignable labels — see §7. Not a single required parent group. |
+| group | slug? | primary home among the taxonomy groups, for the map (§7). Tags may still name other groups. |
 | modality | enum[]? | `text` / `image` / `audio` / `video` / `action`. Only where the capability is genuinely modality-bound; omit when it cuts across modalities. |
 | match_terms | string[]? | phrases the ingestion keyword matcher looks for — see §6 |
 | discriminator | string? | in-scope / out-of-scope boundary, written for the stage-2 classifier and for me |
@@ -162,8 +163,16 @@ not to render a verdict.
 | aliases | string[]? | other names used in the literature |
 | techniques | slug[]? | techniques relevant to this capability |
 | related | slug[]? | other capabilities |
-| status | enum | `active` (currently tracked) or `parked` (noted, not being actively studied) |
+| status | enum | `proposed` (filed as a leaf of the map or by the pipeline, not yet endorsed), `active` (currently tracked) or `parked` (noted, not being actively studied) |
 | submitted_by | string | provenance, see §8 |
+
+**The list is open-ended by design.** A stated goal of the catalog
+(2026-09-12) is to curate what is, in the limit, an unbounded list of
+things a model has to be able to do. The taxonomy groups are the map; a
+capability with no claims is a research brief, visibly marked `proposed`,
+not a mistake to be tidied. Filing a leaf before there is evidence for it
+is encouraged, because the pipeline can only match papers to capabilities
+that exist, and because an empty entry advertises the gap.
 
 ### Claim  (`catalog/claims/<id>.yaml`)
 The primary content unit: a directional, scoped statement, not a data
@@ -417,11 +426,14 @@ backoff each). Not building this now.
 
 ## 7. Taxonomy as a view
 
-`catalog/taxonomy.yaml` still holds a starter vocabulary (groups like
-reasoning/knowledge/context/behavior/agentic/security/evaluation, and
-contexts like coding-agent/math/chat-assistant), but it's now a *soft*,
-freely re-assignable set of tags, not a rigid single-parent group a
-capability or claim must belong to. Expect to re-carve this at least
+`catalog/taxonomy.yaml` holds ten groups (reasoning, knowledge, coding,
+agentic, context, verification, behavior, security, evaluation,
+perception; the first six from Russ's 2026-09-12 capability map) and a set
+of contexts (coding-agent, math, chat-assistant, …). Each capability names
+one group as its primary home, which is what the map on the home page
+draws; tags remain a *soft*, freely re-assignable set, so a capability can
+still be cross-listed and a claim can carry contexts. No claim must belong
+to a group. Expect to re-carve this at least
 twice as real content accumulates; because claims (and capabilities) are
 the primary objects and tags are just labels on them, re-carving is a
 re-tagging exercise, not a migration.

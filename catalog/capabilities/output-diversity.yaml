@@ -12,6 +12,7 @@ description: >-
   and not one author's framing. Three papers converge on collapse of
   exploration as a measurable failure distinct from accuracy.
 tags: [general]
+group: behavior
 discriminator: >-
   Covers mode collapse, entropy decline, and repeated attempts retreading
   the same strategy after sampling, fine-tuning, or RL; excludes single-

@@ -1,0 +1,26 @@
+id: planning
+label: "Planning a sequence of actions before acting"
+summary: >-
+  Whether a model can lay out an ordered set of steps toward a goal, with
+  the dependencies right, before or instead of executing them; distinct
+  from carrying the plan out.
+description: >-
+  Filed from Russ's capability map (2026-09-12) as a leaf the catalog did
+  not have. Planning is the model producing a plan: decomposing a goal into
+  ordered steps whose preconditions and effects are consistent, in a domain
+  where a wrong order or a missing step can be checked (classical planning
+  benchmarks, travel and scheduling tasks, multi-step tool workflows). Claims
+  about executing a plan over many steps belong under long-horizon
+  execution; claims about splitting a task into parts without ordering
+  belong under decomposition.
+tags: [reasoning, autonomous-agent]
+group: reasoning
+match_terms: ["planning", "planner", "plan generation", "PDDL", "PlanBench"]
+discriminator: >-
+  In scope when the paper measures the validity or optimality of plans a
+  model produces, or the model's ability to revise a plan on new
+  constraints. NOT in scope for papers that only run an agent loop and
+  report task success (long-horizon execution), or that use "planning" to
+  mean any chain-of-thought.
+status: proposed
+submitted_by: human:Russ-Miller

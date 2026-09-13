@@ -38,6 +38,8 @@ export interface Capability {
    *  about this capability, and useful to a human reviewer for the same call. */
   discriminator?: string;
   status: CapabilityStatus; submitted_by: string;
+  /** Primary home among taxonomy groups; tags may name others. */
+  group?: string;
 }
 export interface Source {
   id: string; kind: SourceKind; title: string; authors?: string[]; year?: number; date?: string;
@@ -231,8 +233,11 @@ export function claimsCiting(sourceId: string): { claim: Claim; stance: Stance }
 export function capabilitiesByGroup(): { group: TaxonomyEntry; capabilities: Capability[] }[] {
   const { taxonomy, capabilities } = loadCatalog();
   const sorted = [...capabilities].sort((a, b) => a.label.localeCompare(b.label));
+  // One primary home per capability so the map has no duplicates; a
+  // capability with no `group` falls back to its first group-valued tag.
+  const home = (c: Capability) => c.group ?? c.tags?.find((t) => taxonomy.groups.some((g) => g.id === t));
   return taxonomy.groups
-    .map((group) => ({ group, capabilities: sorted.filter((c) => c.tags?.includes(group.id)) }))
+    .map((group) => ({ group, capabilities: sorted.filter((c) => home(c) === group.id) }))
     .filter((g) => g.capabilities.length > 0);
 }
 

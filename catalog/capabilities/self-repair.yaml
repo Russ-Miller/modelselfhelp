@@ -10,6 +10,7 @@ description: >-
   behave very differently, which is exactly the kind of thing a bare
   "capability score" would have hidden.
 tags: [agentic, coding-agent, math]
+group: agentic
 techniques: [external-feedback-repair]
 related: [tool-use, state-tracking, code-generation]
 match_terms: ["self-correction", "self-correct", "self-critique", "self-refine", "iterative refinement", "reflect and retry"]

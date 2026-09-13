@@ -11,6 +11,7 @@ description: >-
   for it. Knowing a model is bad at deception is reassuring context for
   the safety question — the two are worth reading together.
 tags: [behavior]
+group: behavior
 related: [goal-conflict-safety]
 match_terms: ["deception", "deceptive", "social deduction", "bluffing", "false beliefs"]
 status: active
