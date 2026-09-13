@@ -13,6 +13,7 @@ description: >-
   stable, widely measured axis of failure with three independent
   proposals.
 tags: [general]
+group: behavior
 discriminator: >-
   Covers gaps between high- and low-resource languages on identical tasks,
   including uneven parametric knowledge coverage by region; excludes

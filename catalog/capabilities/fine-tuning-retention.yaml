@@ -14,6 +14,7 @@ description: >-
   (capability forgetting and safety erosion) and is not covered by any
   existing entry.
 tags: [general]
+group: behavior
 discriminator: >-
   Covers loss of general capability, out-of-domain skill, or refusal
   behavior caused by domain, multimodal, or alignment fine-tuning;

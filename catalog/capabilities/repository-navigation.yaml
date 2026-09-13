@@ -1,0 +1,22 @@
+id: repository-navigation
+label: "Finding what matters in a large codebase"
+summary: >-
+  Whether an agent can locate the files, symbols and call paths relevant to
+  a task in a repository too large to read, and avoid editing the wrong
+  place; the failure is a plausible patch in the wrong file.
+description: >-
+  Filed from Russ's capability map (2026-09-12). The SWE-agent and
+  SWE-bench findings in the catalog show that interface design changes
+  agent success, and part of what the interface changes is navigation.
+  This entry isolates the navigation competence: retrieval over code,
+  search strategy, and knowing when enough context has been gathered.
+tags: [coding-agent, context]
+group: coding
+match_terms: ["repository navigation", "code search", "codebase understanding", "repository-level", "file localization"]
+discriminator: >-
+  In scope when the paper measures whether the agent finds the right
+  locations in a repository, or ablates the navigation tools. NOT in scope
+  when repository-level success is reported without isolating navigation
+  from editing.
+status: proposed
+submitted_by: human:Russ-Miller

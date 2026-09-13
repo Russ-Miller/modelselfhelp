@@ -1,0 +1,24 @@
+id: software-architecture
+label: "Making design decisions that hold up as a system grows"
+summary: >-
+  Whether a model can choose structure — module boundaries, interfaces,
+  data flow — that stays maintainable, as opposed to code that passes the
+  tests today; the failure is locally correct code that raises the cost of
+  every later change.
+description: >-
+  Filed from Russ's capability map (2026-09-12). Almost every coding
+  benchmark measures whether tests pass, which says nothing about whether
+  the change was made in the right place or made the next change harder.
+  Lehman's law, filed as an adage, predicts the cost. Evidence here is
+  scarce because the property is slow to measure; that is the research
+  brief.
+tags: [coding-agent]
+group: coding
+match_terms: ["software architecture", "software design", "maintainability", "technical debt", "code quality", "design decisions"]
+discriminator: >-
+  In scope when the paper measures maintainability, structural quality or
+  the cost of later changes in model-written code, or compares model
+  design choices to expert ones. NOT in scope for test-pass rates alone or
+  for style and formatting.
+status: proposed
+submitted_by: human:Russ-Miller

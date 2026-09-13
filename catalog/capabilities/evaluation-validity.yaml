@@ -11,6 +11,7 @@ description: >-
   measurement, so it is the one capability whose failures propagate
   everywhere.
 tags: [evaluation]
+group: evaluation
 match_terms: ["emergent abilities", "metric choice", "benchmark contamination", "evaluation artifact", "measurement validity", "construct validity", "scaling law fit"]
 discriminator: >-
   In scope when the paper's finding is about the measurement rather than the

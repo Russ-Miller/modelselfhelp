@@ -1485,3 +1485,26 @@ Known limit: the small local embedding model does not map idioms
 do. The tool description tells callers to name the failure plainly and to
 put model and environment in the structured fields. Capability embeddings
 now include aliases and the discriminator, which helps the site search too.
+
+## 2026-09-12 — The capability map, and an open-ended list as a stated goal
+
+Russ's tree of what a model has to be able to do (reasoning, knowledge,
+coding, agentic, context, verification; 22 leaves) becomes the map. Ten
+groups in `taxonomy.yaml`: his six plus behavior, security, evaluation and
+perception, which hold 14 existing capabilities the tree did not cover.
+Each capability now names one `group` as its primary home, so the map on
+the home page has no duplicates; tags stay soft for cross-listing.
+
+Thirteen leaves had no entry and are filed as `proposed`, each with a
+discriminator separating it from its nearest neighbour (planning from
+long-horizon execution; error detection from critique from fact
+verification; debugging from self-repair; factual recall from
+hallucination). The point of filing before evidence: the pipeline can only
+match papers to capabilities that exist, and an empty entry advertises the
+gap. The spec now says the list is open-ended by design.
+
+Where the map and the content model rub: "verification" as a capability
+the model has (error detection, critique, calibration) sits beside
+verification as what the harness does to the model (sensors, verifiers).
+The discriminators keep LLM-as-judge papers under critique and
+harness-design papers under the technique they describe.

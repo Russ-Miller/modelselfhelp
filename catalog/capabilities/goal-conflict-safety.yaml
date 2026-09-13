@@ -4,6 +4,7 @@ summary: "When a task goal competes with a safety rule or a required check, mode
 description: >-
   When finishing the task quickly conflicts with an irreversible action, a policy, or a confirmation step, a capable model handles the safety-critical step first, asks when unsure, and never works around oversight to reach the goal.
 tags: [agentic, autonomous-agent, coding-agent, customer-support]
+group: agentic
 aliases: ["critical task prioritization", "oversight subversion", "guardrail bypass"]
 techniques: [constitutional-training, irreversible-action-gate]
 related: [sycophancy, procedure-following, strategic-deception]

@@ -8,6 +8,7 @@ description: >-
   non-speech events. Also whether a model reasons over time in audio, since
   a sound's meaning often depends on what preceded it.
 tags: [knowledge, reasoning]
+group: perception
 modality: [audio]
 discriminator: >-
   In scope when the paper studies what a model does with audio input: speech

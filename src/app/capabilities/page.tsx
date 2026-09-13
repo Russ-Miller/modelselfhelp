@@ -21,10 +21,12 @@ export default function CapabilitiesPage() {
     <div className="space-y-4">
       <h1 className="text-2xl font-semibold">Capabilities</h1>
       <p className="max-w-3xl text-sm text-neutral-500">
-        Topics, not scores &mdash; each lists the claims filed under it. Some are marked{" "}
+        Topics, not scores &mdash; each lists the claims filed under it. The list is open-ended
+        by design: ten groups map what a model has to be able to do, and a capability with no
+        claims yet is a research brief, not an error. Some are marked{" "}
         <strong className="font-medium text-neutral-600 dark:text-neutral-400">proposed</strong>:
-        the ingestion pipeline found several papers converging on the same competence and added
-        it, without anyone deciding it belongs. Those are here to be argued with.
+        added from the map or by the ingestion pipeline, without anyone yet deciding it belongs.
+        Those are here to be argued with.
       </p>
       <ListSearch noun="capabilities" />
       <FilterBar options={options}>
@@ -33,7 +35,7 @@ export default function CapabilitiesPage() {
         <thead className="text-left text-neutral-500">
           <tr>
             <th className="py-1 pr-6">Capability</th>
-            <th className="py-1 pr-6">Tags</th>
+            <th className="py-1 pr-6">Group</th>
             <th className="py-1 pr-6 whitespace-nowrap">Claims</th>
             <th className="py-1 pr-6 whitespace-nowrap">Contested</th>
             <th className="py-1 whitespace-nowrap">Status</th>
@@ -45,7 +47,7 @@ export default function CapabilitiesPage() {
               data-vec={vecAttr("c", c.id)} data-search={`${c.label} ${c.summary} ${c.id} ${(c.tags ?? []).join(" ")} ${(c.aliases ?? []).join(" ")}`.toLowerCase()} className="border-t border-neutral-200 dark:border-neutral-800 align-top">
               <td className="py-2 pr-6"><Link href={`/capabilities/${c.id}`} className="font-medium hover:underline">{c.label}</Link>
                 <div className="text-neutral-600 dark:text-neutral-400">{c.summary}</div></td>
-              <td className="py-2 pr-6">{(c.tags ?? []).join(", ")}</td>
+              <td className="py-2 pr-6">{c.group ?? ""}<div className="text-xs text-neutral-500">{(c.tags ?? []).filter((t) => t !== c.group).join(", ")}</div></td>
               <td className="py-2 pr-6">
                 {(() => {
                   const n = claimsFor(c.id).length;

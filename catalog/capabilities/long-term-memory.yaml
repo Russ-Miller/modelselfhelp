@@ -4,6 +4,7 @@ summary: "Assistants fail to recall and apply facts, preferences, and decisions 
 description: >-
   A capable assistant carries forward what a user told it and what was decided, notices when a stored fact has changed, and reasons over information spread across many past interactions.
 tags: [autonomous-agent, chat-assistant, context, customer-support]
+group: context
 aliases: ["persistent memory", "cross-session memory", "personalization"]
 techniques: [hierarchical-memory, recursive-summarization]
 related: [context-hygiene, state-tracking]

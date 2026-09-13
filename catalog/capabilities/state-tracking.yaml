@@ -4,6 +4,7 @@ summary: "Models lose track of the current state of entities, files, or an envir
 description: >-
   A capable model maintains an accurate picture of the current state of what it is working on, updating it after every action, so that later decisions rest on what is true now rather than what was true earlier.
 tags: [autonomous-agent, coding-agent, context, data-analysis]
+group: context
 aliases: ["entity tracking", "world-model consistency", "stale state"]
 techniques: [reread-before-edit]
 related: [self-repair, long-context-degradation]

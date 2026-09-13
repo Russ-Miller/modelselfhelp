@@ -13,6 +13,7 @@ description: >-
   on validity and robustness of deduction, which arithmetic and fact-
   verification do not cover.
 tags: [general]
+group: reasoning
 discriminator: >-
   Covers strict rule-based deduction, stability under label-preserving
   rephrasings, and retracting conclusions when evidence changes; excludes

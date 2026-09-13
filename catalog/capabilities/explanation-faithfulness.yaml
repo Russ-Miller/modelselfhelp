@@ -9,6 +9,7 @@ description: >-
   used as evidence — debugging an agent, auditing a decision, or filing a
   claim from a paper's reported reasoning.
 tags: [behavior, evaluation]
+group: behavior
 modality: [text]
 related: [self-repair, hallucination]
 match_terms: ["faithfulness", "unfaithful", "chain-of-thought faithfulness", "explanation faithfulness", "post-hoc rationalization", "self-explanation"]

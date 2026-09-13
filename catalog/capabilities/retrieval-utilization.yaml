@@ -1,0 +1,24 @@
+id: retrieval-utilization
+label: "Using what was retrieved, and only that"
+summary: >-
+  Given relevant passages in context, whether a model actually uses them,
+  prefers them over its own prior when they conflict, and ignores the
+  irrelevant ones; the failure is an answer the passages do not support.
+description: >-
+  Filed from Russ's capability map (2026-09-12). Retrieval-augmented
+  generation is filed as a technique, and its efficacy claims say it moves
+  the trust boundary rather than removing it. This capability is what
+  those claims are about on the model side: the competence of reading
+  retrieved evidence correctly, separate from whether retrieval fetched
+  the right thing. Checking facts against evidence sits under fact
+  verification; this is about generation from evidence.
+tags: [context, rag-qa]
+group: context
+match_terms: ["retrieval utilization", "context utilization", "faithfulness to context", "grounded generation", "knowledge conflict", "context-faithful"]
+discriminator: >-
+  In scope when the paper holds retrieval fixed and measures whether the
+  model's output follows the retrieved passages, including conflicts with
+  parametric knowledge. NOT in scope for retrieval quality itself, or for
+  the position-in-context effect (long-context degradation).
+status: proposed
+submitted_by: human:Russ-Miller
