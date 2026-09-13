@@ -1,0 +1,88 @@
+id: arxiv-2503-14499
+kind: paper
+title: Measuring AI Ability to Complete Long Software Tasks
+authors:
+  - Thomas Kwa
+  - Ben West
+  - Joel Becker
+  - Amy Deng
+  - Katharyn Garcia
+  - Max Hasin
+  - Sami Jawhar
+  - Megan Kinniment
+  - Nate Rush
+  - Sydney Von Arx
+  - Ryan Bloom
+  - Thomas Broadley
+  - Haoxing Du
+  - Brian Goodrich
+  - Nikola Jurkovic
+  - Luke Harold Miles
+  - Seraphina Nix
+  - Tao Lin
+  - Chris Painter
+  - Neev Parikh
+  - David Rein
+  - Lucas Jun Koba Sato
+  - Hjalmar Wijk
+  - Daniel M. Ziegler
+  - Elizabeth Barnes
+  - Lawrence Chan
+year: 2025
+date: 2025-03-18
+arxiv_id: "2503.14499"
+url: https://arxiv.org/abs/2503.14499
+tags:
+  - forwarded
+summary: "Despite rapid progress on AI benchmarks, the real-world meaning of
+  benchmark performance remains unclear. To quantify the capabilities of AI
+  systems in terms of human capabilities, we propose a new metric:
+  50%-task-completion time horizon. This is the time humans typically take to
+  complete tasks that AI models can complete with 50% success rate. We first
+  timed humans with relevant domain expertise on a combination of RE-Bench,
+  HCAST, and 66 novel shorter tasks. On these tasks, current frontier AI
+  models such as Claude 3.7 Sonnet have a 50% time horizon of around 50
+  minutes. Furthermore, frontier AI time horizon has been doubling
+  approximately every seven months since 2019, though the trend may have
+  accelerated in 2024. The increase in AI models&#39; time horizons seems to
+  be primarily driven by greater reliability and ability to adapt to mistakes,
+  combined with better logical reasoning a…"
+notes: "Forwarded by Russ 2026-09-12: the cleanest measurement of long-horizon
+  agentic execution, and the time-horizon trend the ratchet ambition has to
+  reckon with. Filed by hand because the arXiv export API was not answering;
+  metadata from the abstract page."
+ingested_at: 2026-09-12
+brief: >-
+  The length of software task an AI agent can finish at 50% reliability has
+  doubled roughly every 7 months since 2019, giving a single scale on which
+  GPT-2 and o3 can be compared. METR timed skilled human baseliners on 170
+  tasks spanning 1 second to 30 hours, combining HCAST (97 tasks), RE-Bench (7
+  eight-hour ML research tasks), and 66 new single-step Software Atomic
+  Actions, then ran 12 frontier models with 8 attempts per agent/task pair and
+  fit a logistic curve to recover the 50% success duration.
+
+
+  GPT-2 sits at 2 seconds, o3 at about 110 minutes, with a doubling time of
+  207 days (95% CI 166-240 days). The 80% time horizon follows a similar slope
+  (204 days) but sits 4-6x shorter, so moderate-length tasks are not reliably
+  completed. o3 lies above the long-run line (p = 0.006).
+
+
+  Errors come from a 3-level hierarchical bootstrap over families, tasks and
+  runs, plus sensitivity checks over weighting and regularization; the slope
+  is better identified than any single model's horizon. Replication on
+  SWE-bench Verified holds the exponential but at ~70 days, which the authors
+  attribute to annotator time estimates.
+
+
+  Scope: software and ML research only, automatically scored tasks, and
+  performance drops on higher-"messiness" tasks. Internal PR tests show
+  contractors take 5-18x longer than maintainers, so horizon depends heavily
+  on which humans you compare against.
+
+
+  Treat time horizon as a comparable capability axis, but not yet as a
+  real-world job-automation forecast.
+brief_generated_at: 2026-09-13
+brief_model: claude-opus-5
+brief_source: full-text
